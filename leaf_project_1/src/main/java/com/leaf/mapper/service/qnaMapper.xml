@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="service.qna.model.QnaDAO">
+<!-- 	 <select id="qnaSelect" resultType="service.qna.model.QnaDTO"> select 
+		* from qna order by qna_id desc </select>  -->
+<!-- String sql = " select * from  (select seq, name , passwd, "
+                              + "                        title, content, filename, regdate, "
+                              + "                        readcount, reply, reply_step, "
+                              + "                        reply_level , rownum r "
+                              + "                   from board "
+                              + "                  order by reply desc , reply_step asc)";   -->
+ 	<select id="qnaSelect" resultType="service.qna.model.QnaDTO"> 
+<!-- 	select * from (select qna_id, member_id , qna_title, qna_content, qna_writedate, qna_modifydate, 
+	 qna_level, qna_ref, qna_step, rownum r from qna order by qna_ref desc, qna_step asc) 
+ -->
+select * from
+		(SELECT ROWNUM NUM, m.* FROM
+		( select qna_id, member_id , qna_title, qna_content, qna_writedate, qna_modifydate, 
+	 qna_level, qna_ref, qna_step, rownum r from qna order by qna_ref desc, qna_step asc) m)
+		where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
+		
+	</select>  
+		
+		
+	<select id="qnaSelectId" parameterType="int"
+		resultType="service.qna.model.QnaDTO">
+		select * from qna where qna_id = #{qna_id}
+	</select>
+
+	<insert id="qnaInsert" parameterType="service.qna.model.QnaDTO">
+		<selectKey resultType="int" keyProperty="qna_id" order="BEFORE">
+			select NVL(max(qna_id),0)+1 from qna
+		</selectKey>
+		insert into qna( qna_id, member_id, qna_title, qna_content,
+		qna_writedate, qna_level, qna_ref, qna_step, enabled)
+		values(
+		#{qna_id}, #{member_id}, #{qna_title}, #{qna_content},
+		#{qna_writedate}, 0, #{qna_ref}, 0, 1)
+	</insert>
+
+	<delete id="qnaDelete" parameterType="service.qna.model.QnaDTO">
+		delete from qna where
+		qna_id=#{qna_id}
+	</delete>
+
+	<update id="qnaUpdate" parameterType="service.qna.model.QnaDTO">
+		update qna set member_id =
+		#{member_id}, qna_title = #{qna_title}, qna_content = #{qna_content},
+		qna_modifydate = #{qna_modifydate} where qna_id = #{qna_id}
+	</update>
+
+	<delete id="multiqnaDelete">
+		delete from qna where qna_id in
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+<!-- where ${column} like '%' || #{keyvalue} || '%' -->
+	<select id="searchSelect" parameterType="hashMap"
+		resultType="service.qna.model.QnaDTO">
+<!-- 		<![CDATA[select count(*) from qna where qna_id>0 ]]>
+		<include refid="searchsql" />
+		<![CDATA[ order by qna_ref desc, qna_step asc limit #{startPage}, #{page}]]>
+		 -->
+<!-- 		select * from (SELECT ROWNUM NUM, m.* FROM
+		( select qna_id, member_id , qna_title, qna_content, qna_writedate, qna_modifydate, 
+	 qna_level, qna_ref, qna_step, rownum r from qna where ${column} like '%' || #{keyvalue} || '%' order by qna_ref desc, qna_step asc) m)
+		where NUM between ((#{page}-1)*5)+1 and (#{page}*5) -->
+		select * from (SELECT ROWNUM NUM, m.* FROM
+		( select qna_id, member_id , qna_title, qna_content, qna_writedate, qna_modifydate, 
+	 qna_level, qna_ref, qna_step, rownum r from qna where ${column} like '%' || #{keyvalue} || '%' order by qna_ref desc, qna_step asc) m)
+		where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
+		
+		
+<!-- 		select * from
+		(SELECT ROWNUM NUM, m.* FROM
+		( select qna_id, member_id , qna_title, qna_content, qna_writedate, qna_modifydate, 
+	 qna_level, qna_ref, qna_step, rownum r from qna order by qna_ref desc, qna_step asc) m)
+		where NUM between ((#{page}-1)*5)+1 and (#{page}*5) -->
+	</select>
+
+	<sql id="searchsql">
+	and ${column} like '%' || #{keyvalue} || '%'
+	</sql>
+ <!--  	<select id="qnaSelect" parameterType="Integer" resultType="service.qna.model.QnaDTO">
+		select * from
+		(SELECT ROWNUM NUM, m.* FROM
+		( SELECT * FROM qna ORDER BY qna_id DESC) m)
+		where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
+
+	</select> -->
+
+	<select id="getCount2" parameterType="hashMap" resultType="Integer">
+		select count(*) from qna where ${column} like '%' || #{keyvalue} || '%'
+	</select>
+	
+		<select id="getCount" parameterType="Integer" resultType="Integer">
+		select count(*) from qna
+	</select>
+	
+	<!-- 답글달기 -->
+	
+	<!-- 현재 답변의 단 게시물 보다 더 높은 스텝의 게시물이 있다면 스탭을 하나씩 상승시킴 -->
+	<update id="replyBoardStep" parameterType="Integer" >
+		 <!-- update qna 
+		   set qna_step = qna_step+1 
+		   where qna_ref = #{qna_ref} 
+		     and qna_step > qna_step  -->
+		    <!--  SELECT NVL(MAX(qna_ref)+1,'1') AS qna_ref FROM qna -->
+		  <!--   <![CDATA[update qna set qna_step = #{qna_step}+1 where qna_step > qna_step]]> -->
+<!-- 		    <![CDATA[update qna 
+		   set qna_step = qna_step+1 
+		   where qna_ref = #{qna_ref} 
+		     and qna_step > qna_step]]> -->
+		    update qna set qna_step = qna_step + 1 where qna_ref = #{qna_ref} and qna_step > #{qna_step}
+	</update>
+	
+	<!-- reply_step과 reply_level을 1씩 증가 시킨 후 내용을 저장  -->
+	<insert id="replyBoard" parameterType="service.qna.model.QnaDTO">
+		<selectKey resultType="int" keyProperty="qna_id" order="BEFORE">
+			select NVL(max(qna_id),0)+1 from qna
+		</selectKey>
+		insert into qna( qna_id, member_id, qna_title, qna_content,
+		qna_writedate, qna_level, qna_ref, qna_step, enabled)
+		values(
+		#{qna_id}, #{member_id}, #{qna_title}, #{qna_content},
+		#{qna_writedate}, #{qna_level}+1, #{qna_ref}, #{qna_step}+1, 1)                         
+	</insert> 
+	
+	<select id="selectAllQna" resultType="service.qna.model.QnaDTO">
+		select * from qna
+	</select>
+	
+	<update id="insertQna_ref" parameterType="int">
+		update qna set qna_ref = #{qna_id} where qna_id = #{qna_id}
+	</update>
+</mapper>	
