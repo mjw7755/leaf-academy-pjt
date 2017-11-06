@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.leaf.model.book.BookDAO">
+
+	<select id="getBookList" parameterType="integer" resultType="com.leaf.model.book.BookDTO">
+	select * from
+      (SELECT ROWNUM NUM, m.* FROM 
+                     ( SELECT * FROM book ORDER BY book_id DESC)   m)
+      where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
+	</select>
+
+	<select id="getCount" parameterType="Integer" resultType="Integer">
+    select count(*) from book
+    </select>
+    
+    <select id="getBookById" parameterType="Integer" resultType="com.leaf.model.book.BookDTO">
+	select * from book where book_id=#{book_id}
+	</select>
+
+	<insert id="insertBook" parameterType="com.leaf.model.book.BookDTO">
+	insert into book(book_id, member_id, book_title, book_writer, book_cost, enabled) values(#{book_id}, #{member_id}, #{book_title}, #{book_writer}, #{book_cost}, 1)
+	</insert>
+	
+	<update id="updateBook" parameterType="com.leaf.model.book.BookDTO">
+	update book set book_title=#{book_title}, book_writer=#{book_writer}, book_cost=#{book_cost} where book_id=#{book_id}
+	</update>
+	
+	<delete id="deleteBook" parameterType="com.leaf.model.book.BookDTO">
+	update book set enabled=0 where book_id=#{book_id}
+	<!-- delete from Member where member_id=#{member_id} -->
+	</delete>
+	
+	<delete id="multideleteBook" parameterType="com.leaf.model.book.BookDTO">
+		update book set enabled=0 where book_id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<delete id="deletecancleBook" parameterType="com.leaf.model.book.BookDTO">
+	update book set enabled=1 where book_id=#{book_id}
+	<!-- delete from Member where member_id=#{member_id} -->
+	</delete>
+	
+	<select id="searchBook" parameterType="hashMap" resultType="com.leaf.model.book.BookDTO">
+	select * from book
+	<where>
+		<if test="book_title != null">
+		or book_title like '%' || #{keyvalue} || '%'
+		</if>
+		<if test="book_writer != null">
+		or book_writer like '%' || #{keyvalue} || '%'
+		</if>
+	</where>
+	order by book_id desc
+	</select>
+	
+</mapper>

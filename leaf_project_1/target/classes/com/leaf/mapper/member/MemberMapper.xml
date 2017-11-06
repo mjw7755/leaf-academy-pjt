@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- parameterType : 조건과 같이 입력받아야 할 데이터
+resultType : 쿼리 수행 후 결과를 보내주기 위한 데이터 -->
+
+<mapper namespace="com.leaf.model.member.MemberDAO">
+	<select id="getMemberList" parameterType="Integer" resultType="com.leaf.model.member.MemberDTO">
+   	select * from
+      (SELECT ROWNUM NUM, m.* FROM 
+                     ( SELECT * FROM Member ORDER BY member_id DESC)   m)
+      where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
+    </select>
+	
+	<select id="getCount" parameterType="Integer" resultType="Integer">
+    select count(*) from Member
+    </select>
+   
+	<select id="getMemberById" parameterType="String" resultType="com.leaf.model.member.MemberDTO">
+	select member_id, member_name, member_pwd, member_tel, member_email from Member where member_id=#{member_id}
+	</select>
+
+	<insert id="insertMember" parameterType="com.leaf.model.member.MemberDTO">
+	insert into Member(member_id, member_name, member_pwd, member_tel, member_email, member_level, enabled) 
+	values(#{member_id}, #{member_name}, #{member_pwd}, #{member_tel}, #{member_email}, 1, 1)
+	</insert>
+	
+	<update id="updateMember" parameterType="com.leaf.model.member.MemberDTO">
+	update Member set member_pwd=#{member_pwd}, member_tel=#{member_tel}, member_email=#{member_email} where member_id=#{member_id}
+	</update>
+	
+	<delete id="deleteMember" parameterType="com.leaf.model.member.MemberDTO">
+	update Member set enabled=0 where member_id=#{member_id}
+	<!-- delete from Member where member_id=#{member_id} -->
+	</delete>
+	
+	<delete id="multideleteMember" parameterType="com.leaf.model.member.MemberDTO">
+		update Member set enabled=0 where member_id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		<!-- delete from Member where member_id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach> -->
+	</delete>
+	
+	<update id="upMember" parameterType="com.leaf.model.member.MemberDTO">
+	update Member set enabled=1 where member_id=#{member_id}
+	</update>
+	
+	<update id="multiupMember" parameterType="com.leaf.model.member.MemberDTO">
+		update Member set enabled=1 where member_id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+	<update id="levelupMember" parameterType="com.leaf.model.member.MemberDTO">
+	update Member set member_level=(CASE WHEN member_level IS NULL OR member_level='' THEN 0 ELSE member_level END)+1
+	where member_id=#{member_id}
+	</update>
+	
+	<update id="multilevelupMember" parameterType="com.leaf.model.member.MemberDTO">
+		update Member set member_level=(CASE WHEN member_level IS NULL OR member_level='' THEN 0 ELSE member_level END)+1 where member_id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+	<update id="leveldownMember" parameterType="com.leaf.model.member.MemberDTO">
+	update Member set member_level=(CASE WHEN member_level IS NULL OR member_level='' THEN 0 ELSE member_level END)-1
+	where member_id=#{member_id}
+	</update>
+	
+	<update id="multileveldownMember" parameterType="com.leaf.model.member.MemberDTO">
+		update Member set member_level=(CASE WHEN member_level IS NULL OR member_level='' THEN 0 ELSE member_level END)-1 where member_id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	<select id="searchMemberList" parameterType="hashMap" resultType="com.leaf.model.member.MemberDTO">
+	select * from Member
+	<where>
+		<if test="member_id != null">
+		or member_id like '%' || #{keyvalue} || '%'
+		</if>
+		<if test="member_name != null">
+		or member_name like '%' || #{keyvalue} || '%'
+		</if>
+		<if test="member_level != null">
+		or member_level like '%' || #{keyvalue} || '%'
+		</if>
+	</where>
+	<!-- (SELECT ROWNUM NUM, m.* FROM 
+                     ( SELECT * FROM Member ORDER BY member_id DESC)   m)
+      where NUM between ((#{page}-1)*5)+1 and (#{page}*5) -->
+	order by member_id desc
+	</select>
+	
+</mapper>
