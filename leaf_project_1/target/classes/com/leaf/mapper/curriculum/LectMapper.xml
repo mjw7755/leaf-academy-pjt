@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- deptMapper.xml -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.leaf.model.lecture.LectDAO">
+	<select id="getLectList" resultType="project.leaf.model.lecture.LectDTO">
+		 select * from
+      (SELECT ROWNUM NUM, m.* FROM 
+                     ( SELECT * FROM lecture ORDER BY lect_id DESC)   m)
+      where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
+	</select>
+
+	<select id="getLectByLect_id" parameterType="int"
+		resultType="project.leaf.model.lecture.LectDTO">
+		select*from lecture where lect_id = #{lect_id}
+	</select>
+
+	<select id="searchLectList" parameterType="hashMap"
+		resultType="project.leaf.model.lecture.LectDTO">
+		select*From lecture
+		<where>
+			<if test="lect_person_num !=null">
+				or lect_person_num like '%'|| #{keyvalue} ||'%'
+			</if>
+			<if test="lect_start_day !=null">
+				or lect_start_day like '%'|| #{keyvalue} ||'%'
+			</if>
+			<if test="lect_name !=null">
+				or lect_name like '%'|| #{keyvalue} ||'%'
+			</if>
+			<!-- <if test="curri_subject !=null"> or lect_name like '%'|| #{keyvalue} 
+				||'%' </if> -->
+
+		</where>
+		order by lect_id asc
+	</select>
+
+
+	<insert id="insertLect" parameterType="project.leaf.model.lecture.LectDTO">
+		 <selectKey resultType="int" keyProperty="lect_id" order="BEFORE">
+			select NVL(max(lect_id),0)+1 from lecture
+		</selectKey> 
+		
+		insert into
+		lecture(lect_id,lect_name,lect_person_num,lect_start_day,lect_end_day,
+				lect_start_time,lect_end_time,lect_write_time)
+		values(#{lect_id}, #{lect_name}, #{lect_person_num}, #{lect_start_day},
+				#{lect_end_day}, #{lect_start_time}, #{lect_end_time}, 
+				 #{lect_write_time})
+		
+	</insert>
+
+	<delete id="deleteLect" parameterType="int">
+		delete from lecture where lect_id=#{lect_id}
+	</delete>
+
+ 	<update id="updateLect" parameterType="project.leaf.model.lecture.LectDTO"> 
+		update lecture set lect_name=#{lect_name}, lect_person_num=#{lect_person_num}, 
+		lect_start_day=#{lect_start_day}, lect_end_day=#{lect_end_day}, 
+		lect_start_time=#{lect_start_time}, lect_end_time=#{lect_end_time}, 
+		lect_modify_time=#{lect_modify_time} where lect_id=#{lect_id} 
+	</update>
+	
+	<select id="getCount" parameterType="Integer" resultType="Integer">
+		select count(*) from lecture ORDER BY lect_id DESC
+	</select>
+	
+	<select id="getSearchCount" parameterType="hashMap" resultType="Integer">
+		select count(*) from lecture  
+		<where> 
+			 <if test="lect_person_num !=null">
+				or lect_person_num like '%'|| #{keyvalue} ||'%'
+			</if> 
+			<if test="lect_start_day !=null">
+				or lect_start_day like '%'|| #{keyvalue} ||'%'
+			</if>
+			<if test="lect_name !=null">
+				or lect_name like '%'|| #{keyvalue} ||'%'
+			</if>
+		</where>
+		ORDER BY lect_id DESC
+	</select>
+<!-- 	
+	   <select id="getCount2" parameterType="hashMap" resultType="Integer">
+      select count(*) from qna where ${column} like '%' || #{keyvalue} || '%'
+   </select> -->
+	
+	
+	<delete id = "multiLectDelete">
+		delete from lecture where lect_id in <foreach item = "item" 
+		index="index" collection="list"  open="(" separator = "," close=")">
+		#{item}
+		</foreach>
+	</delete>
+</mapper>
+	
+	

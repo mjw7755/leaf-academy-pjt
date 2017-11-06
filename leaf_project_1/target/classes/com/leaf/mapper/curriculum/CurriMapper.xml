@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- deptMapper.xml -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="project.leaf.model.curriculum.CurriDAO">
+	<select id="getCurriList" parameterType="Integer"
+		resultType="project.leaf.model.curriculum.CurriDTO">
+		
+		 select * from
+      (SELECT ROWNUM NUM, m.* FROM 
+                     ( SELECT * FROM curriculum ORDER BY curri_id DESC)   m)
+      where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
+	</select>
+	<select id="getCurriByCurri_id" parameterType="int"
+		resultType="project.leaf.model.curriculum.CurriDTO">
+		select*from curriculum where curri_id = #{curri_id}
+	</select>
+
+	<insert id="insertCurri" parameterType="project.leaf.model.curriculum.CurriDTO">
+		<selectKey resultType="int" keyProperty="curri_id" order="BEFORE">
+			select NVL(max(curri_id),0)+1 from curriculum
+		</selectKey>
+
+		insert into
+		curriculum(curri_id, curri_level, curri_subject,
+		curri_content, curri_write_time)
+		values(#{curri_id}, #{curri_level},
+		#{curri_subject}, #{curri_content},
+		#{curri_write_time})
+
+	</insert>
+
+	<delete id="deleteCurri" parameterType="int">
+		delete from curriculum
+		where
+		curri_id=#{curri_id}
+	</delete>
+
+	<update id="updateCurri" parameterType="project.leaf.model.curriculum.CurriDTO">
+		update curriculum set curri_level=#{curri_level},
+		curri_subject=#{curri_subject}, curri_content=#{curri_content},
+		curri_modify_time=#{curri_modify_time} where curri_id=#{curri_id}
+	</update>
+
+	<select id="getCount" parameterType="Integer" resultType="Integer">
+		select count(*) from curriculum
+	</select>
+</mapper>
+	
+	
