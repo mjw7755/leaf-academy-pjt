@@ -60,7 +60,7 @@ function multiDelete(){
 </head>
 <body>
 	<form action="book_search.lcs" method="post">
-         검색어 입력 : <input size="30" type="search"  name="keyvalue" placeholder="키워드 검색 가능합니다." list="booklist"> 
+         검색어 입력 : <input size="30" type="search"  name="keyvalue" placeholder="제목, 저자 검색 가능합니다." list="booklist"> 
                 <input type="submit" value="검색">
     </form>
 	<datalist  id="booklist">
@@ -104,15 +104,33 @@ function multiDelete(){
    
    <div align="center">
       <c:if test="${param.page>5}">
+      <c:if test="${flag == 'list' }">
          <a class="button btn-prev" href="book_list.lcs?page=${startPage-1}">이전</a>
       </c:if>
-      <c:forEach var="i" begin="0" end="4" varStatus="status">
+      
+      <c:if test="${flag == 'search' }">
+         <a class="button btn-prev" href="book_search.do?page=${startPage-1}&keyvalue=${keyvalue}">이전</a>
+      </c:if>
+      </c:if>
+      
+   <c:forEach var="i" begin="0" end="4" varStatus="status">
       <c:if test="${countPage>=startPage+i}">
+      <c:if test="${flag == 'list' }">
          <a class="strong" href="book_list.lcs?page=${startPage+i}">${startPage+i}</a>
       </c:if>
+      <c:if test="${flag == 'search' }">
+      	 <a class="strong" href="book_search.lcs?page=${startPage+i}&keyvalue=${keyvalue}">${startPage+i}</a>
+      </c:if>
+      </c:if>      
    </c:forEach>
+   
       <c:if test="${countPage>=startPage+5}">
+      <c:if test="${flag == 'list' }">
          <a class="strong" href="book_list.lcs?page=${startPage+5}">다음</a>
+      </c:if>
+      <c:if test="${flag == 'search' }">
+         <a class="strong" href="book_search.lcs?page=${startPage+5}&column=${column}&keyvalue=${keyvalue}">다음</a>
+      </c:if>
       </c:if>
    </div>
    

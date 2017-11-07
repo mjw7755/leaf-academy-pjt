@@ -7,9 +7,10 @@ public interface JageokDAO {
 
 	public List<JageokDTO> getJageokList(int page); // select All
 	public int getCount(); //paging
-	
+	public int search_getCount(Map<String, Object> map); //paging
+
 	public void insertJageok(JageokDTO dto); // insert
-	public List<JageokDTO> Jageoksearch(Map map); // search
+	public List<JageokDTO> Jageoksearch(Map<String, Object> map); // search
 	
 	public JageokDTO getJageokById(int Jageok_id); // Jageok_id로 선택
 	public void updateJageok(JageokDTO dto); // Jageok_id에 대한 데이터 가져와서 update

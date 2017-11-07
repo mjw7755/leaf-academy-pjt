@@ -3,10 +3,14 @@ package com.leaf.model.member;
 import java.util.List;
 import java.util.Map;
 
+import com.leaf.member.model.MemberDTO;
+
 public interface MemberDAO {
 
 	public List<MemberDTO> getMemberList(int page); // selectAll
 	public void insertMember(MemberDTO dto); // insert
+	public int search_getCount(Map<String, Object> map); //paging
+
 	public MemberDTO getMemberById(String member_id); // member_id으로 선택
 	public void updateMember(MemberDTO dto); // member_id 에 대한 데이터 가져와서 update
 	
@@ -22,6 +26,6 @@ public interface MemberDAO {
 	public void leveldownMember(MemberDTO dto); // level 내려주기
 	public void multileveldownMember(List<String> leveldownTarget); // 다중 level 내려주기
 	
-	public List<MemberDTO> searchMemberList(Map map); // search
+	public List<MemberDTO> searchMemberList(Map<String, Object> map); // search
 	public int getCount(); //selectAll
 }

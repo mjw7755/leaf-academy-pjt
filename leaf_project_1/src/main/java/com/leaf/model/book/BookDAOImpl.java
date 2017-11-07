@@ -62,7 +62,13 @@ public class BookDAOImpl implements BookDAO {
 	}
 	
 	@Override
-	public List<BookDTO> searchBook(Map<?, ?> map) {
+	public int search_getCount(Map<String, Object> map) {
+		BookDAO dao = sqlsession.getMapper(BookDAO.class);
+		return dao.search_getCount(map);
+	}
+	
+	@Override
+	public List<BookDTO> searchBook(Map<String, Object> map) {
 		BookDAO dao = sqlsession.getMapper(BookDAO.class);
 		return dao.searchBook(map);
 	}

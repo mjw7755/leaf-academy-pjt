@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,7 @@ public class MemberController {
 	@RequestMapping("/member_list.lcs")
 	public String list(Model model, HttpServletRequest request) {
 		String strPage = request.getParameter("page");
+		String flag = "list";
 		int page;
 		if (strPage == null) {page = 1;} 
 		else {page = Integer.parseInt(request.getParameter("page"));}
@@ -36,6 +38,7 @@ public class MemberController {
 		model.addAttribute("countPage", countPage);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("list", list);
+		model.addAttribute("flag", flag);
 		return "member_list";
 	}
 
@@ -164,26 +167,33 @@ public class MemberController {
 		return mav;
 	}
 	@RequestMapping("/search_member.lcs")
-	public ModelAndView search(HttpServletRequest request) throws Exception {
-		ModelAndView mav = new ModelAndView();
+	public String search(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
 		String keyvalue = request.getParameter("keyvalue");
+		String strPage = request.getParameter("page");
+		String flag = "search";
 		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("member_id", "member_id");
-		map.put("member_name", "member_name");
-		map.put("member_pwd", "member_pwd");
-		map.put("member_tel", "member_tel");
-		map.put("member_email", "member_email");
-		map.put("member_level", "member_level");
-		map.put("enable", "enable");
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyvalue", keyvalue);
 
+		int page;
+        if (strPage == null) {page = 1;} 
+        else {page = Integer.parseInt(request.getParameter("page"));}
+        map.put("page", page);
+        int count = memberdao.search_getCount(map);
+        
 		List<MemberDTO> searchList = memberdao.searchMemberList(map);
-		System.out.println("검색된 결과 : " + searchList.toString());
+		//System.out.println("검색된 결과 : " + searchList.toString());
 
-		mav.addObject("list", searchList);
-		mav.setViewName("member_list");
-		return mav;
+		int countPage = (int) Math.ceil((float) count / 5);
+        int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
+        model.addAttribute("count", count);
+        model.addAttribute("countPage", countPage);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("keyvalue", keyvalue);
+        
+        model.addAttribute("list", searchList);
+		model.addAttribute("flag",flag);
+		return "member_list";
 	}
 }

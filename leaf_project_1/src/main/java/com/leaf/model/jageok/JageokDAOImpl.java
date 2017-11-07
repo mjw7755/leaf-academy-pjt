@@ -32,12 +32,6 @@ public class JageokDAOImpl implements JageokDAO {
 	}
 
 	@Override
-	public List<JageokDTO> Jageoksearch(Map map) {
-		JageokDAO dao = sqlsession.getMapper(JageokDAO.class);
-		return dao.Jageoksearch(map);
-	}
-
-	@Override
 	public JageokDTO getJageokById(int Jageok_id) {
 		JageokDAO dao = sqlsession.getMapper(JageokDAO.class);
 		return dao.getJageokById(Jageok_id);
@@ -65,6 +59,18 @@ public class JageokDAOImpl implements JageokDAO {
 	public void deletecancle(JageokDTO dto) {
 		JageokDAO dao = sqlsession.getMapper(JageokDAO.class);
 		dao.deletecancle(dto);
+	}
+
+	@Override
+	public int search_getCount(Map<String, Object> map) {
+		JageokDAO dao = sqlsession.getMapper(JageokDAO.class);
+		return dao.search_getCount(map);
+	}
+
+	@Override
+	public List<JageokDTO> Jageoksearch(Map<String, Object> map) {
+		JageokDAO dao = sqlsession.getMapper(JageokDAO.class);
+		return dao.Jageoksearch(map);
 	}
 
 }

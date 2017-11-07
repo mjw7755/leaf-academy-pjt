@@ -103,15 +103,32 @@ function multiDelete(){
    
    <div align="center">
       <c:if test="${param.page>5}">
+      <c:if test="${flag == 'list' }">
          <a class="button btn-prev" href="jageok_list.lcs?page=${startPage-1}">이전</a>
       </c:if>
-      <c:forEach var="i" begin="0" end="4" varStatus="status">
+      <c:if test="${flag == 'search' }">
+         <a class="button btn-prev" href="jageok_search.lcs?page=${startPage-1}&keyvalue=${keyvalue}">이전</a>
+      </c:if>
+      </c:if>
+      
+   <c:forEach var="i" begin="0" end="4" varStatus="status">
       <c:if test="${countPage>=startPage+i}">
-         <a class="strong" href="jageok_list.lcs?page=${startPage+i}">${startPage+i}</a></li>
+      <c:if test="${flag == 'list' }">
+         <a class="strong" href="jageok_list.lcs?page=${startPage+i}">${startPage+i}</a>
+      </c:if>
+      <c:if test="${flag == 'search' }">
+         <a class="strong" href="jageok_search.lcs?page=${startPage+i}&keyvalue=${keyvalue}">${startPage+i}</a>
+      </c:if>
       </c:if>
    </c:forEach>
+   
       <c:if test="${countPage>=startPage+5}">
-         <a class="strong" href="jageok_list.lcs?page=${startPage+5}">다음</a></li>
+      <c:if test="${flag == 'list' }">
+         <a class="strong" href="jageok_list.lcs?page=${startPage+5}">다음</a>
+      </c:if>
+      <c:if test="${flag == 'search' }">
+         <a class="strong" href="jageok_search.lcs?page=${startPage+5}&keyvalue=${keyvalue}">다음</a>
+      </c:if>
       </c:if>
    </div>
    

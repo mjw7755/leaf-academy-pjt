@@ -7,6 +7,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.leaf.member.model.MemberDAO;
+import com.leaf.member.model.MemberDTO;
+
 @Component
 public class MemberDAOImpl implements MemberDAO {
 
@@ -90,6 +93,11 @@ public class MemberDAOImpl implements MemberDAO {
 	public void multileveldownMember(List<String> leveldownTarget) {
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		dao.multileveldownMember(leveldownTarget);
+	}
+	@Override
+	public int search_getCount(Map<String, Object> map) {
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		return dao.search_getCount(map);
 	}
 
 }

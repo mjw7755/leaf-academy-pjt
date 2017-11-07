@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,7 @@ public class JageokController {
 	@RequestMapping("/jageok_list.lcs")
 	public String List(Model model, HttpServletRequest request) {
 		String strPage = request.getParameter("page");
+		String flag = "list";
 		int page;
 		if (strPage == null) { page =1; }
 		else { page = Integer.parseInt(strPage); }
@@ -36,12 +38,13 @@ public class JageokController {
 		model.addAttribute("countPage", countPage);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("list", list);
+		model.addAttribute("flag", flag);
 		return "jageok_list";		
 	}
 	
 	@RequestMapping("/jageok_writeform.lcs")
 	public String writeform() {
-		return "writeform";
+		return "jageok_writeform";
 	}
 	
 	@RequestMapping("/jageok_write.lcs")
@@ -99,21 +102,33 @@ public class JageokController {
 	}
 	
 	@RequestMapping("/jageok_search.lcs")
-	public ModelAndView search(HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView();
+	public String search(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
 		String keyvalue = request.getParameter("keyvalue");
+		String strPage = request.getParameter("page");
+		String flag = "search";
 		
-		Map<String, String> map = new HashMap<String, String>();
-		
-		map.put("jageok_id", "jageok_id");
-		map.put("member_id", "member_id");
-		map.put("jageok_title", "jageok_title");
-		map.put("keyvalue", keyvalue);
+		Map<String, Object> map = new HashMap<String, Object>();
+        map.put("keyvalue", keyvalue); //keyvalue
+        
+		int page;
+        if (strPage == null) {page = 1;} 
+        else {page = Integer.parseInt(request.getParameter("page"));}
+        map.put("page", page);
+        int count = jageokdao.search_getCount(map);
 		
 		List<JageokDTO> searchList = jageokdao.Jageoksearch(map);
-		mav.addObject("list", searchList);
-		mav.setViewName("jageok_list");
-		return mav;
+		
+		int countPage = (int) Math.ceil((float) count / 5);
+        int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
+        model.addAttribute("count", count);
+        model.addAttribute("countPage", countPage);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("keyvalue", keyvalue);
+        
+        model.addAttribute("list", searchList);
+		model.addAttribute("flag",flag);
+		return "jageok_list";
 	}
 	
 	@RequestMapping("/jageok_detail.lcs")

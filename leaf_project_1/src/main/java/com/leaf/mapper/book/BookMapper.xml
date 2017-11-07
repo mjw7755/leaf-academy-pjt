@@ -44,18 +44,22 @@
 	update book set enabled=1 where book_id=#{book_id}
 	<!-- delete from Member where member_id=#{member_id} -->
 	</delete>
-	
-	<select id="searchBook" parameterType="hashMap" resultType="com.leaf.model.book.BookDTO">
-	select * from book
-	<where>
-		<if test="book_title != null">
-		or book_title like '%' || #{keyvalue} || '%'
-		</if>
-		<if test="book_writer != null">
+    
+    <select id="search_getCount" parameterType="hashMap" resultType="Integer">
+    select count(*) from book 
+   		where book_title like '%' || #{keyvalue} || '%'
 		or book_writer like '%' || #{keyvalue} || '%'
-		</if>
-	</where>
-	order by book_id desc
+	<!-- where ${column} like '%' || #{keyvalue} || '%' -->
+    </select>
+	
+	<select id="searchBook" parameterType="hashMap" resultType="com.leaf.book.model.BookDTO">
+	select * from
+		(SELECT ROWNUM NUM, b.* FROM 
+			( SELECT * FROM book
+				where book_title like '%' || #{keyvalue} || '%'
+				or book_writer like '%' || #{keyvalue} || '%'
+		ORDER BY book_id DESC)   b)
+	where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
 	</select>
 	
 </mapper>

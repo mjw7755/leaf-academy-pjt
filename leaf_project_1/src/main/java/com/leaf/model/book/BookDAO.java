@@ -7,15 +7,16 @@ public interface  BookDAO {
 	
 	public List<BookDTO> getBookList(int page); //select All
 	public int getCount(); //paging
+	public int search_getCount(Map<String, Object> map); //paging
 	
 	public void insertBook(BookDTO dto); // insert
-	public List<BookDTO> searchBook(Map<?, ?> map); // search
+	public List<BookDTO> searchBook(Map<String, Object> map); // search
 	
-	public BookDTO getBookById(int Book_id); // Book_id濡? ?꽑?깮
-	public void updateBook(BookDTO dto); // Book_id?뿉 ???븳 ?뜲?씠?꽣 媛??졇???꽌 update
+	public BookDTO getBookById(int Book_id); // Book_id로 선택
+	public void updateBook(BookDTO dto); // Book_id에 대한 데이터 가져와서 update
 	
-	public void deleteBook(BookDTO dto); // Book_id?뿉 ???븳 ?뜲?씠?꽣 ?궘?젣
-	public void multideleteBook(List<String> deleteTarget); // ?떎以묒궘?젣
-	public void deletecancleBook(BookDTO dto); // Book_id?뿉 ???븳 ?뜲?씠?꽣 ?궘?젣痍⑥냼
+	public void deleteBook(BookDTO dto); // Book_id에 대한 데이터 삭제
+	public void multideleteBook(List<String> deleteTarget); // 다중삭제
+	public void deletecancleBook(BookDTO dto); // Book_id에 대한 데이터 삭제취소
 	
 }

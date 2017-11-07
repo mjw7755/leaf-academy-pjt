@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.leaf.model.book.BookDAO;
 import com.leaf.model.book.BookDTO;
+
 
 @Controller
 public class BookController {
@@ -25,6 +27,7 @@ public class BookController {
 	@RequestMapping("/book_list.lcs")
 	public String list(Model model, HttpServletRequest request) {
 		String strPage = request.getParameter("page");
+		String flag = "list";
 		int page;
 		if (strPage == null) {page = 1;} 
 		else {page = Integer.parseInt(request.getParameter("page"));}
@@ -36,6 +39,7 @@ public class BookController {
 		model.addAttribute("countPage", countPage);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("list", list);
+		model.addAttribute("flag", flag);
 		return "book_list";
 	}
 
@@ -100,25 +104,33 @@ public class BookController {
 	}
 	
 	@RequestMapping("/book_search.lcs")
-	public ModelAndView search(HttpServletRequest request) throws Exception {
-		ModelAndView mav = new ModelAndView();
+	public String search(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
 		String keyvalue = request.getParameter("keyvalue");
+		String strPage = request.getParameter("page");
+		String flag = "search";
 		
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("book_id", "book_id");
-		map.put("member_id", "member_id");
-		map.put("book_title", "book_title");
-		map.put("book_writer", "book_writer");
-		map.put("book_cost", "book_cost");
-		map.put("enable", "enable");
-		map.put("keyvalue", keyvalue);
+		Map<String, Object> map = new HashMap<String, Object>();
+        map.put("keyvalue", keyvalue); //keyvalue
+        
+		int page;
+        if (strPage == null) {page = 1;} 
+        else {page = Integer.parseInt(request.getParameter("page"));}
+        map.put("page", page);
+        int count = bookdao.search_getCount(map);
 
 		List<BookDTO> searchList = bookdao.searchBook(map);
 
-		mav.addObject("list", searchList);
-		mav.setViewName("book_list");
-		return mav;
+		int countPage = (int) Math.ceil((float) count / 5);
+        int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
+        model.addAttribute("count", count);
+        model.addAttribute("countPage", countPage);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("keyvalue", keyvalue);
+        
+		model.addAttribute("list", searchList);
+		model.addAttribute("flag",flag);
+		return "book_list";
 	}
 	
 	@RequestMapping("/book_detail.lcs")
