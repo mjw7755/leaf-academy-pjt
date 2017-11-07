@@ -18,11 +18,11 @@
 	회원아이디 : ${dto.member_id} <br> 
 	제목 : ${dto.r_headline} <br>
 	내용 : ${dto.r_content }
-	<input type="button" value="목록보기" onclick="window.location.href='review_list.co?teacher_id=${dto.teacher_id}' ">
-	<a href="review_updateform.co?review_id=${dto.review_id }">
+	<input type="button" value="목록보기" onclick="window.location.href='review_list.do?teacher_id=${dto.teacher_id}' ">
+	<a href="review_updateform.do?review_id=${dto.review_id }">
 	<button	id="edit">수 정</button> </a>
 	
-	<a href="review_delete.co?review_id=${dto.review_id}&teacher_id=${ dto2.teacher_id }">
+	<a href="review_delete.do?review_id=${dto.review_id}&teacher_id=${ dto2.teacher_id }">
 	<button id="delete" onclick="hide()">삭 제</button> </a>
 	<br>
 </body>

@@ -80,6 +80,16 @@ public class ReviewDAOImpl implements ReviewDAO {
 		return dao.review_content(review_id);
 	}
 
+	@Override
+	public List<ReviewDTO> searchSelect(Map<String, Object> map) {
+		ReviewDAO dao = sqlSession.getMapper(ReviewDAO.class);
+		return dao.searchSelect(map);
+	}
 
+	@Override
+	public int getCount2(Map<String, Object> map) {
+		ReviewDAO dao = sqlSession.getMapper(ReviewDAO.class);
+		return dao.getCount2(map);
+	}
 
 }

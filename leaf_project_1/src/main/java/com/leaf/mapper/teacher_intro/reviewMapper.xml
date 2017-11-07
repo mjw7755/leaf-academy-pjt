@@ -4,7 +4,11 @@
 
 <mapper namespace="kr.co.academy.model.ReviewDAO">
 	<select id="getCount" parameterType="Integer" resultType="Integer">
-      select count(*) from review
+      select count(*) from review 
+   </select>
+
+  <select id="getCount2" parameterType="hashMap" resultType="Integer">
+      select count(*) from review where ${column} like '%' || #{keyvalue} || '%'
    </select>
 
 	<!--게시글 출력  -->
@@ -19,7 +23,7 @@
    <![CDATA[
    select * from
       (SELECT ROWNUM NUM, r.* FROM 
-                     (select r_headline from review where teacher_id = #{teacher_id} order by r_write_time desc) r)
+                     (select r_headline, review_id from review where teacher_id = #{teacher_id} order by r_write_time desc) r)
       where NUM<=5
    ]]>
    </select>
@@ -58,16 +62,10 @@
    
    <!-- 게시글 검색 -->
    <select id="searchReviewList" parameterType="hashMap" resultType="kr.co.academy.model.ReviewDTO">
-		select * from review
-		<where>
-			<if test="member_id != null">
-					or member_id like '%' || #{keyvalue} || '%'
-			</if>
-			<if test="r_headline != null">
-					or r_headline like '%' || #{keyvalue} || '%'
-			</if>
-		</where>
-			order by review_id asc
+			select * from (SELECT ROWNUM NUM, r.* FROM
+		( select * from review where ${column} like '%' || #{keyvalue} || '%'
+			order by review_id desc) r)
+		where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
 	</select>
 
 
@@ -75,4 +73,5 @@
 	<select id="review_content" resultType="kr.co.academy.model.ReviewDTO">
 		SELECT * FROM review WHERE review_id = #{review_id}
 	</select>
+
    </mapper>

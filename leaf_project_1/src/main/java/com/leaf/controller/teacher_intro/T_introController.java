@@ -10,6 +10,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,9 +31,10 @@ public class T_introController {
    @Resource
    private ReviewDAO reviewDAO;
    
-   @RequestMapping("/list.co")
+   @RequestMapping("/t_intro_list.do")
       public String list(Model model, HttpServletRequest request) {
          String strPage = request.getParameter("page");
+        
          int page;
          if (strPage == null) {page = 1;} 
          else {page = Integer.parseInt(request.getParameter("page"));}
@@ -43,51 +46,52 @@ public class T_introController {
          model.addAttribute("countPage", countPage);
          model.addAttribute("startPage", startPage);
          model.addAttribute("list", list);
-         return "list";
+
+         return "t_intro_list";
       }
    
-   @RequestMapping("/writeform.co")
+   @RequestMapping("/t_intro_writeform.do")
    public String writeForm() {
-      return "writeform";
+      return "t_intro_writeform";
    }
    
-   @RequestMapping("/write.co")
+   @RequestMapping("/t_intro_write.do")
    public ModelAndView write(T_introDTO dto) throws Exception{
       ModelAndView mav = new ModelAndView();
       t_introDAO.insertT_intro(dto);
-      mav.setViewName("redirect:list.co");
+      mav.setViewName("redirect:t_intro_list.do");
       return mav;
    }
    
-   @RequestMapping("/updateform.co")
+   @RequestMapping("/t_intro_updateform.do")
    public ModelAndView updateForm(HttpServletRequest request) throws Exception{
       ModelAndView mav = new ModelAndView();
       int teacher_id = new Integer(request.getParameter("teacher_id"));
       T_introDTO dto = t_introDAO.getT_introByteacher_id(teacher_id);
       mav.addObject("dto", dto);
-      mav.setViewName("updateform");
+      mav.setViewName("t_intro_updateform");
       return mav;
    }
    
-   @RequestMapping("/update.co")
+   @RequestMapping("/t_intro_update.do")
    public ModelAndView update(T_introDTO dto) throws Exception{
       ModelAndView mav = new ModelAndView();
       t_introDAO.updateT_intro(dto);
-      mav.setViewName("redirect:list.co");
+      mav.setViewName("redirect:t_intro_list.do");
       return mav;
    }
    
-   @RequestMapping("/delete.co")
+   @RequestMapping("/t_intro_delete.do")
    public ModelAndView delete(HttpServletRequest request) throws Exception{
       ModelAndView mav = new ModelAndView();
       int teacher_id = new Integer(request.getParameter("teacher_id"));
       t_introDAO.deleteT_intro(teacher_id);
       mav.addObject("message", teacher_id +"가 삭제되었습니다.");
-      mav.setViewName("redirect:list.co");
+      mav.setViewName("redirect:t_intro_list.do");
       return mav;
    }
    
-   @RequestMapping("/multidelete.co")
+   @RequestMapping("/t_intro_multidelete.do")
       public ModelAndView multidelete(HttpServletRequest request) throws Exception {
          ModelAndView mav = new ModelAndView();
          List deleteTarget = new ArrayList();
@@ -96,11 +100,11 @@ public class T_introController {
          }
          System.out.println("multidelete 한당~ : "+deleteTarget.toString());
          t_introDAO.multideleteT_intro(deleteTarget);
-         mav.setViewName("redirect:list.co");
+         mav.setViewName("redirect:t_intro_list.do");
          return mav;
       }
    
-   @RequestMapping("/search.co")
+   @RequestMapping("/t_intro_search.do")
    public ModelAndView search(HttpServletRequest request) throws Exception {
       ModelAndView mav = new ModelAndView();
       request.setCharacterEncoding("UTF-8");
@@ -115,12 +119,12 @@ public class T_introController {
       System.out.println("검색된 결과 : " + searchedList.toString());
       
       mav.addObject("list", searchedList);
-      mav.setViewName("list");
+      mav.setViewName("t_intro_list");
       
       return mav;
    }
    
-   @RequestMapping("/content.co")
+   @RequestMapping("/t_intro_content.do")
    public ModelAndView content(HttpServletRequest request) throws Exception{
       ModelAndView mav = new ModelAndView();
       
@@ -128,9 +132,9 @@ public class T_introController {
       System.out.println("content.teacher_id : " + teacher_id);
       T_introDTO dto = t_introDAO.getT_introByteacher_id(Integer.parseInt(teacher_id));
       
-      String review_id = request.getParameter("review_id");
+/*      String review_id = request.getParameter("review_id");
       System.out.println("content.review_id : " + review_id);
-      ReviewDTO dto2 = reviewDAO.getReviewByreview_id(Integer.parseInt(review_id));
+      ReviewDTO dto2 = reviewDAO.getReviewByreview_id(Integer.parseInt(review_id));*/
 
       List<ReviewDTO> list =reviewDAO.get_headline(teacher_id);
       System.out.println(list.size());
@@ -140,20 +144,20 @@ public class T_introController {
       /*mav.addObject("dto2", dto2);*/
       mav.addObject("list", list);
       
-      mav.setViewName("content");
+      mav.setViewName("t_intro_content");
       
       return mav;
    }
 
-      @RequestMapping("/review_list.co")
+      @RequestMapping("/review_list.do")
       public String reviewlist(Model model, HttpServletRequest request) {
-            String strPage = request.getParameter("page");
-            int page;
+      	   String strPage = request.getParameter("page");
+      	   String flag = "list";
+       	   int page;
+       	   if (strPage == null) {page = 1;} 
+       	   else {page = Integer.parseInt(request.getParameter("page"));}
             String teacher_id = request.getParameter("teacher_id");
           
-            if (strPage == null) {page = 1;} 
-            else {page = Integer.parseInt(request.getParameter("page"));}
-           
             T_introDTO dto = t_introDAO.getT_introByteacher_id(Integer.parseInt(teacher_id));
             System.out.println("list teacher_id : " + teacher_id);
             List<ReviewDTO> list = reviewDAO.getReviewList(page, teacher_id);
@@ -166,15 +170,17 @@ public class T_introController {
             model.addAttribute("startPage", startPage);
             model.addAttribute("list", list);
             model.addAttribute("dto", dto);
+            model.addAttribute("flag", flag);
+            
             return "review_list";
       }
-
-   @RequestMapping("/review_writeform.co")
+ 
+   @RequestMapping("/review_writeform.do")
    public String review_writeForm() {
       return "review_writeform";
    }
    
-   @RequestMapping("/review_write.co")
+   @RequestMapping("/review_write.do")
    public ModelAndView review_write(ReviewDTO dto, HttpServletRequest request) throws Exception{
 
       /*SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");*/
@@ -193,11 +199,11 @@ public class T_introController {
       reviewDAO.insertReivew(dto);
 
       mav.addObject("dto2", dto2);
-      mav.setViewName("redirect:review_list.co?teacher_id="+teacher_id);
+      mav.setViewName("redirect:review_list.do?teacher_id="+teacher_id);
       return mav;
    }
    
-   @RequestMapping("/review_updateform.co")
+   @RequestMapping("/review_updateform.do")
    public ModelAndView review_updateForm(HttpServletRequest request) throws Exception{
 	      ModelAndView mav = new ModelAndView();
 	      int review_id = new Integer(request.getParameter("review_id"));
@@ -207,7 +213,7 @@ public class T_introController {
       return mav;
    }
    
-   @RequestMapping("/review_update.co")
+   @RequestMapping("/review_update.do")
    public ModelAndView review_update(ReviewDTO dto,HttpServletRequest request) throws Exception{
 	   SimpleDateFormat dateFormat =new SimpleDateFormat("yyyy년 MM월 dd일 hh시mm분ss초");
 	   Date date = new Date();
@@ -222,12 +228,12 @@ public class T_introController {
       T_introDTO dto2 = t_introDAO.getT_introByteacher_id(Integer.parseInt(teacher_id));
       
       /*mav.addObject("dto2", dto2);*/
-      mav.setViewName("redirect:review_list.co?teacher_id="+teacher_id);
+      mav.setViewName("redirect:review_list.do?teacher_id="+teacher_id);
       return mav;
    }
    
    
-   @RequestMapping("/review_delete.co")
+   @RequestMapping("/review_delete.do")
    public ModelAndView review_delete(HttpServletRequest request) throws Exception{
       ModelAndView mav = new ModelAndView();
       int review_id = new Integer(request.getParameter("review_id"));
@@ -237,11 +243,11 @@ public class T_introController {
       System.out.println("delete teacher_id : " + teacher_id);
       T_introDTO dto2 = t_introDAO.getT_introByteacher_id(Integer.parseInt(teacher_id));
       
-      mav.setViewName("redirect:review_list.co?teacher_id="+teacher_id);
+      mav.setViewName("redirect:review_list.do?teacher_id="+teacher_id);
       return mav;
    }
    
-   @RequestMapping("/review_multidelete.co")
+   @RequestMapping("/review_multidelete.do")
       public ModelAndView review_multidelete(HttpServletRequest request) throws Exception {
          ModelAndView mav = new ModelAndView();
          List deleteTarget = new ArrayList();
@@ -255,11 +261,11 @@ public class T_introController {
          
          System.out.println("multidelete 한당~ : "+deleteTarget.toString());
          reviewDAO.multideleteReview(deleteTarget);
-         mav.setViewName("redirect:review_list.co?teacher_id="+teacher_id);
+         mav.setViewName("redirect:review_list.do?teacher_id="+teacher_id);
          return mav;
       }
    
-   @RequestMapping("/review_search.co")
+/*   @RequestMapping("/review_search.do")
    public ModelAndView review_search(HttpServletRequest request) throws Exception {
       ModelAndView mav = new ModelAndView();
       request.setCharacterEncoding("UTF-8");
@@ -278,10 +284,53 @@ public class T_introController {
       mav.setViewName("list");
       
       return mav;
+   }*/
+   @RequestMapping("/review_search.do")
+   public String search(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+      String flag = "search";
+      request.setCharacterEncoding("UTF-8");
+      //컬럼명
+         String column =request.getParameter("column");
+         String keyvalue = request.getParameter("keyvalue");
+         System.out.println(column + " / " + keyvalue);
+         
+         Map<String, Object> map = new HashMap<String, Object>(); //collection
+         map.put("column",column ); //column : name or email or home
+         map.put("keyvalue", keyvalue); //keyvalue 
+        
+         String strPage = request.getParameter("page");
+         System.out.println("page" + strPage);
+         int page;
+         if (strPage == null) {page = 1;} 
+         else {page = Integer.parseInt(strPage);}
+         //List<MemberDTO> list = memberdao.getMemberList(page);
+         map.put("page", page);
+         int count = reviewDAO.getCount2(map);
+         List<ReviewDTO> list = reviewDAO.searchReviewList(map);
+         
+         //count = page;
+         int countPage = (int) Math.ceil((float) count / 5);
+         int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
+        
+         model.addAttribute("count", count);
+         model.addAttribute("countPage", countPage);
+         model.addAttribute("startPage", startPage);
+         model.addAttribute("column", column);
+         model.addAttribute("keyvalue", keyvalue);
+         map.put("column",column ); //column : name or email or home
+         map.put("keyvalue", keyvalue); //keyvalue 
+         System.out.println(list.get(0).getMember_id());
+         System.out.println(count);
+         System.out.println(countPage);
+         System.out.println(startPage);
+         System.out.println(column);
+         System.out.println(keyvalue);
+      model.addAttribute("list", list);
+      model.addAttribute("flag",flag);
+      return "review_list";
    }
-   
 
-   @RequestMapping("/review_content.co")
+   @RequestMapping("/review_content.do")
    public ModelAndView review_content(HttpServletRequest request) throws Exception{
       ModelAndView mav = new ModelAndView();
       
@@ -299,4 +348,5 @@ public class T_introController {
       
       return mav;
    }
+
 }

@@ -8,7 +8,7 @@
 <title></title>
 </head>
 <body>
-<form action="review_update.co">
+<form action="review_update.do">
 	<input type="text" name="teacher_id" value="${dto.teacher_id}">
 	review_id : <input readonly="readonly" type="text" name="review_id" value="${dto.review_id}"><br>
 	제목 : <input type="text" name="r_headline" value="${dto.r_headline}"><br>

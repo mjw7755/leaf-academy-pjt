@@ -7,7 +7,9 @@ import org.apache.ibatis.annotations.Param;
 
 public interface ReviewDAO {
 	public int getCount();//게시글 갯수
-
+	
+	public int getCount2(Map<String, Object> map);
+	
 	public List<ReviewDTO> getReviewList(@Param("page")int page, @Param("teacher_id")String teacher_id); //select(all)
 	
 	public List<ReviewDTO> get_headline(String teacher_id); //select(headline)
@@ -25,5 +27,7 @@ public interface ReviewDAO {
 	public List<ReviewDTO> searchReviewList(Map map);//검색
 	
 	public ReviewDTO review_content(int review_id) throws Exception;
+	
+	public List<ReviewDTO> searchSelect(Map<String, Object> map); // search
 	
 }
