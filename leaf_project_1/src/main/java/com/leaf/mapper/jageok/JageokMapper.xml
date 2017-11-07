@@ -20,8 +20,11 @@
 	select * from jageok where jageok_id=#{jageok_id}
 	</select>
 	
-	<insert id="insertJageok" parameterType="com.leaf.model.jageok.JageokDTO">
-	insert into jageok (jageok_id, member_id, jageok_title, jageok_date, jageok_cost, enabled)
+	<insert id="insertJageok" parameterType="com.leaf.jageok.model.JageokDTO">
+	<selectKey resultType="int" keyProperty="jageok_id" order="BEFORE">
+         select NVL(max(jageok_id),0)+1 from jageok
+    </selectKey>
+    insert into jageok (jageok_id, member_id, jageok_title, jageok_date, jageok_cost, enabled)
 	values(#{jageok_id}, #{member_id}, #{jageok_title}, #{jageok_date}, #{jageok_cost}, 1)
 	</insert>
 	

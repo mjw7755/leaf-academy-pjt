@@ -10,11 +10,11 @@
 <body>
    <form action="jageok_write.lcs" >
    <table>
-      <tr>
+      <%-- <tr>
          <td>NO</td>
          <td>:</td>
-         <td><input type="text" name="jageok_id" required="required" value="${ jageok_id }"></td><%-- value="${ jageok_id }" --%>
-      </tr>
+         <td><input type="text" name="jageok_id" required="required" value="${ jageok_id }"></td>value="${ jageok_id }"
+      </tr> --%>
       
       <tr>
          <td>member_id</td>

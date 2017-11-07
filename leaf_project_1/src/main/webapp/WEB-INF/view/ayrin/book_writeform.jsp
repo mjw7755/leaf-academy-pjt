@@ -10,11 +10,11 @@
 <body>
    <form action="book_write.lcs" >
    <table>
-      <tr>
+      <%-- <tr>
          <td>NO</td>
          <td>:</td>
-         <td><input type="text" name="book_id" required="required" value="${ book_id }"></td><%-- value="${ book_id }" --%>
-      </tr>
+         <td><input type="text" name="book_id" required="required" value="${ book_id }"></td>value="${ book_id }"
+      </tr> --%>
       
       <tr>
          <td>member_id</td>

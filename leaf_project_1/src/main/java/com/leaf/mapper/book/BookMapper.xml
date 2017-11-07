@@ -20,8 +20,11 @@
 	select * from book where book_id=#{book_id}
 	</select>
 
-	<insert id="insertBook" parameterType="com.leaf.model.book.BookDTO">
-	insert into book(book_id, member_id, book_title, book_writer, book_cost, enabled) values(#{book_id}, #{member_id}, #{book_title}, #{book_writer}, #{book_cost}, 1)
+	<insert id="insertBook" parameterType="com.leaf.book.model.BookDTO">
+	<selectKey resultType="int" keyProperty="book_id" order="BEFORE">
+         select NVL(max(book_id),0)+1 from book
+    </selectKey>
+    insert into book(book_id, member_id, book_title, book_writer, book_cost, enabled) values(#{book_id}, #{member_id}, #{book_title}, #{book_writer}, #{book_cost}, 1)
 	</insert>
 	
 	<update id="updateBook" parameterType="com.leaf.model.book.BookDTO">
