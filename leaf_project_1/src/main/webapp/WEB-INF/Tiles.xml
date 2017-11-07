@@ -4,6 +4,35 @@
        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
        
 <tiles-definitions>
+	<definition name="qna.*" template="/WEB-INF/view/main/subViews/baseLayout.jsp">
+		<put-attribute name="title" value="/WEB-INF/view/hansu/qna/subViews/title.jsp"/>
+		<put-attribute name="header" value="/WEB-INF/view/main/subViews/header.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/view/main/subViews/footer.jsp"/>
+		<put-attribute name="aside" value="/WEB-INF/view/main/subViews/leftMenu.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/view/hansu/qna/{1}.jsp"/>
+		<put-attribute name="css" value="/WEB-INF/view/hansu/qna/css/{1}.css"/>
+		<put-attribute name="js" value="/WEB-INF/view/hansu/qna/js/{1}.js"/>
+	</definition>
+	
+	<definition name="notice.*" template="/WEB-INF/view/main/subViews/baseLayout.jsp">
+		<put-attribute name="title" value="/WEB-INF/view/hansu/notice/subViews/title.jsp"/>
+		<put-attribute name="header" value="/WEB-INF/view/main/subViews/header.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/view/main/subViews/footer.jsp"/>
+		<put-attribute name="aside" value="/WEB-INF/view/main/subViews/leftMenu.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/view/hansu/notice/{1}.jsp"/>
+		<put-attribute name="css" value="/WEB-INF/view/hansu/notice/css/{1}.css"/>
+		<put-attribute name="js" value="/WEB-INF/view/hansu/notice/js/{1}.js"/>
+	</definition>
+	
+	<definition name="faq.*" template="/WEB-INF/view/main/subViews/baseLayout.jsp">
+		<put-attribute name="title" value="/WEB-INF/view/hansu/faq/subViews/title.jsp"/>
+		<put-attribute name="header" value="/WEB-INF/view/main/subViews/header.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/view/main/subViews/footer.jsp"/>
+		<put-attribute name="aside" value="/WEB-INF/view/main/subViews/leftMenu.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/view/hansu/faq/{1}.jsp"/>
+		<put-attribute name="css" value="/WEB-INF/view/hansu/faq/css/{1}.css"/>
+		<put-attribute name="js" value="/WEB-INF/view/hansu/faq/js/{1}.js"/>
+	</definition>
 	<definition name="*.*" template="/WEB-INF/view/main/subViews/baseLayout.jsp">
 		<put-attribute name="title" value="/WEB-INF/view/{1}/subViews/title.jsp"/>
 		<put-attribute name="header" value="/WEB-INF/view/main/subViews/header.jsp"/>
@@ -12,14 +41,5 @@
 		<put-attribute name="content" value="/WEB-INF/view/{1}/{2}.jsp"/>
 		<put-attribute name="css" value="/WEB-INF/view/{1}/css/{2}.css"/>
 		<put-attribute name="js" value="/WEB-INF/view/{1}/js/{2}.js"/>
-	</definition>
-	<definition name="*.*.*">
-		<put-attribute name="title" value="/WEB-INF/view/{1}/subViews/title.jsp"/>
-		<put-attribute name="header" value="/WEB-INF/view/{1}/subViews/header.jsp"/>
-		<put-attribute name="footer" value="/WEB-INF/view/{1}/subViews/footer.jsp"/>
-		<put-attribute name="aside" value="/WEB-INF/view/{1}/subViews/leftMenu.jsp"/>
-		<put-attribute name="content" value="/WEB-INF/view/{1}/{2}/{3}.jsp"/>
-		<put-attribute name="css" value="/WEB-INF/view/{1}/css/{3}.css"/>
-		<put-attribute name="js" value="/WEB-INF/view/{1}/js/{3}.js"/>
 	</definition>
 </tiles-definitions>

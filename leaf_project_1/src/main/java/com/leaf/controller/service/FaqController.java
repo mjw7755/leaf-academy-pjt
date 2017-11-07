@@ -34,12 +34,12 @@ public class FaqController {
 	    List<FaqDTO> list = faqDAO.faqSelect();
 
 		model.addAttribute("list", list);
-		return "faq/faq_list";
+		return "faq.faq_list";
 	}
 	
 	@RequestMapping("/faq_writeform.do")
 	public String write() {
-		return "faq/writeform";
+		return "faq.writeform";
 	}
 	
 	@RequestMapping("faq_write.do")
@@ -75,7 +75,7 @@ public class FaqController {
 		dto.setFaq_content(faq_content);
 		//mav.addObject("faq_content", faq_content);
 		mav.addObject("dto", dto);
-		mav.setViewName("faq/updateform");
+		mav.setViewName("faq.updateform");
 		return mav;
 	}
 	
@@ -85,7 +85,7 @@ public class FaqController {
 		int faq_id = new Integer(request.getParameter("faq_id"));
 		FaqDTO dto = faqDAO.faqSelectId(faq_id);
 		mav.addObject("dto", dto);
-		mav.setViewName("faq/detail");
+		mav.setViewName("faq.detail");
 		return mav;
 	}
 	
@@ -125,7 +125,7 @@ public class FaqController {
 		
 		List<FaqDTO> list = faqDAO.searchSelect(map);
 		model.addAttribute("list", list);
-		return "faq/list";
+		return "faq.list";
 	}
 	
 }

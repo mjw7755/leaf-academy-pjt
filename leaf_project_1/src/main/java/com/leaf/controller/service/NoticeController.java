@@ -42,12 +42,12 @@ public class NoticeController {
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("list", list);
 		
-		return "notice/list";
+		return "notice.list";
 	}
 	
 	@RequestMapping("/notice_writeform.do")
 	public String writeForm() {
-		return "notice/writeform";
+		return "notice.writeform";
 	}
 	
 	
@@ -80,7 +80,7 @@ public class NoticeController {
 		int notice_id = new Integer(request.getParameter("notice_id"));
 		NoticeDTO dto = noticeDAO.noticeSelectId(notice_id);
 		mav.addObject("dto", dto);
-		mav.setViewName("notice/updateform");
+		mav.setViewName("notice.updateform");
 		return mav;
 	}
 	
@@ -103,7 +103,7 @@ public class NoticeController {
 		int notice_id = new Integer(request.getParameter("notice_id"));
 		NoticeDTO dto = noticeDAO.noticeSelectId(notice_id);
 		mav.addObject("dto", dto);
-		mav.setViewName("notice/detail");
+		mav.setViewName("notice.detail");
 		return mav;
 	}
 	
@@ -133,6 +133,6 @@ public class NoticeController {
 		
 		List<NoticeDTO> list = noticeDAO.searchSelect(map);
 		model.addAttribute("list", list);
-		return "notice/list";
+		return "notice.list";
 	}
 }

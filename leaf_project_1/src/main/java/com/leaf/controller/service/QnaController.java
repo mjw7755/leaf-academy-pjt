@@ -52,12 +52,12 @@ public class QnaController {
 	      model.addAttribute("startPage", startPage);
 		model.addAttribute("list", list);
 		model.addAttribute("flag",flag);
-		return "hansu/qna/list";
+		return "qna.list";
 	}
 	
 	@RequestMapping("/qna_writeform.do")
 	public String writeForm(HttpServletRequest request) {
-		return "hansu/qna/writeform";
+		return "qna.writeform";
 	}
 	
 	
@@ -98,7 +98,7 @@ public class QnaController {
 		int qna_id = new Integer(request.getParameter("qna_id"));
 		QnaDTO dto = qnaDAO.qnaSelectId(qna_id);
 		mav.addObject("dto", dto);
-		mav.setViewName("hansu/qna/updateform");
+		mav.setViewName("qna.updateform");
 		return mav;
 	}
 	
@@ -108,7 +108,7 @@ public class QnaController {
 		int qna_id = new Integer(request.getParameter("qna_id"));
 		QnaDTO dto = qnaDAO.qnaSelectId(qna_id);
 		mav.addObject("dto", dto);
-		mav.setViewName("hansu/qna/detail");
+		mav.setViewName("qna.detail");
 		return mav;
 	}
 	
@@ -189,7 +189,7 @@ public class QnaController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("flag",flag);
-		return "hansu/qna/list";
+		return "qna.list";
 	}
 	
 	@RequestMapping("/reply.do")
@@ -205,7 +205,7 @@ public class QnaController {
 		
 		model.addAttribute("dto", dto);
 		
-		return "hansu/qna/reply";
+		return "qna.reply";
 	}
 	
 	@RequestMapping("/replyok.do")
