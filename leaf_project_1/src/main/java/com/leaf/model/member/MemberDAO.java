@@ -3,8 +3,6 @@ package com.leaf.model.member;
 import java.util.List;
 import java.util.Map;
 
-import com.leaf.member.model.MemberDTO;
-
 public interface MemberDAO {
 
 	public List<MemberDTO> getMemberList(int page); // selectAll

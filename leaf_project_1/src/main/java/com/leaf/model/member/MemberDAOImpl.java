@@ -7,9 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.leaf.member.model.MemberDAO;
-import com.leaf.member.model.MemberDTO;
-
 @Component
 public class MemberDAOImpl implements MemberDAO {
 
