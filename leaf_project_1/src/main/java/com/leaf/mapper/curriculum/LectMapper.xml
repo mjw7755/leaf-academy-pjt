@@ -3,8 +3,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="project.leaf.model.lecture.LectDAO">
-	<select id="getLectList" resultType="project.leaf.model.lecture.LectDTO">
+<mapper namespace="com.leaf.model.curriculum.LectDAO">
+	<select id="getLectList" resultType="com.leaf.model.curriculum.LectDTO">
 		 select * from
       (SELECT ROWNUM NUM, m.* FROM 
                      ( SELECT * FROM lecture ORDER BY lect_id DESC)   m)
@@ -12,12 +12,12 @@
 	</select>
 
 	<select id="getLectByLect_id" parameterType="int"
-		resultType="project.leaf.model.lecture.LectDTO">
+		resultType="com.leaf.model.curriculum.LectDTO">
 		select*from lecture where lect_id = #{lect_id}
 	</select>
 
 	<select id="searchLectList" parameterType="hashMap"
-		resultType="project.leaf.model.lecture.LectDTO">
+		resultType="com.leaf.model.curriculum.LectDTO">
 		select*From lecture
 		<where>
 			<if test="lect_person_num !=null">
@@ -37,7 +37,7 @@
 	</select>
 
 
-	<insert id="insertLect" parameterType="project.leaf.model.lecture.LectDTO">
+	<insert id="insertLect" parameterType="com.leaf.model.curriculum.LectDTO">
 		 <selectKey resultType="int" keyProperty="lect_id" order="BEFORE">
 			select NVL(max(lect_id),0)+1 from lecture
 		</selectKey> 
@@ -55,7 +55,7 @@
 		delete from lecture where lect_id=#{lect_id}
 	</delete>
 
- 	<update id="updateLect" parameterType="project.leaf.model.lecture.LectDTO"> 
+ 	<update id="updateLect" parameterType="com.leaf.model.curriculum.LectDTO"> 
 		update lecture set lect_name=#{lect_name}, lect_person_num=#{lect_person_num}, 
 		lect_start_day=#{lect_start_day}, lect_end_day=#{lect_end_day}, 
 		lect_start_time=#{lect_start_time}, lect_end_time=#{lect_end_time}, 

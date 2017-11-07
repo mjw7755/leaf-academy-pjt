@@ -20,7 +20,7 @@
 	select * from book where book_id=#{book_id}
 	</select>
 
-	<insert id="insertBook" parameterType="com.leaf.book.model.BookDTO">
+	<insert id="insertBook" parameterType="com.leaf.model.book.BookDTO">
 	<selectKey resultType="int" keyProperty="book_id" order="BEFORE">
          select NVL(max(book_id),0)+1 from book
     </selectKey>
@@ -55,7 +55,7 @@
 	<!-- where ${column} like '%' || #{keyvalue} || '%' -->
     </select>
 	
-	<select id="searchBook" parameterType="hashMap" resultType="com.leaf.book.model.BookDTO">
+	<select id="searchBook" parameterType="hashMap" resultType="com.leaf.model.book.BookDTO">
 	select * from
 		(SELECT ROWNUM NUM, b.* FROM 
 			( SELECT * FROM book

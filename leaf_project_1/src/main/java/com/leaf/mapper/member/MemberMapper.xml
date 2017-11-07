@@ -94,7 +94,7 @@ resultType : 쿼리 수행 후 결과를 보내주기 위한 데이터 -->
     <!-- where ${column} like '%' || #{keyvalue} || '%' -->
     </select>
     
-	<select id="searchMemberList" parameterType="hashMap" resultType="com.leaf.member.model.MemberDTO">
+	<select id="searchMemberList" parameterType="hashMap" resultType="com.leaf.model.member.MemberDTO">
 	select * from
 		(SELECT ROWNUM NUM, j.* FROM 
 			( SELECT * FROM Member 

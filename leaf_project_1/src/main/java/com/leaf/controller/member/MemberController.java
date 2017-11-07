@@ -40,12 +40,12 @@ public class MemberController {
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("list", list);
 		model.addAttribute("flag", flag);
-		return "member_list";
+		return "ayrin.member_list";
 	}
 
 	@RequestMapping("/member_writeform.lcs")
 	public String writeform() {
-		return "writeform";
+		return "ayrin.member_writeform";
 	}
 
 	@RequestMapping("/member_write.lcs")
@@ -195,7 +195,12 @@ public class MemberController {
         
         model.addAttribute("list", searchList);
 		model.addAttribute("flag",flag);
-		return "member_list";
+		return "ayrin.member_list";
+	}
+	
+	@RequestMapping("/loginForm.do")
+	public String loginForm() {
+		return "ayrin.member_loginform";
 	}
 	
 	@RequestMapping("/login.do")
@@ -209,10 +214,10 @@ public class MemberController {
 		if(sessionid != null) {
 			
 			session.setAttribute("sessionid", sessionid);	
-			return "main/mainPage";
+			return "main.mainPage";
 		}
 		
-		return "ayrin/member_loginform";
+		return "ayrin.member_loginform";
 		
 	}
 	
@@ -220,6 +225,6 @@ public class MemberController {
 	public String logout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.removeAttribute("sessionid");
-		return "main/mainPage";
+		return "main.mainPage";
 	}
 }

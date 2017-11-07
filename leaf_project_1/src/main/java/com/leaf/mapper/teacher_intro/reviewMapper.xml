@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.co.academy.model.ReviewDAO">
+<mapper namespace="com.leaf.model.teacher_intro.ReviewDAO">
 	<select id="getCount" parameterType="Integer" resultType="Integer">
       select count(*) from review 
    </select>
@@ -12,14 +12,14 @@
    </select>
 
 	<!--게시글 출력  -->
-   <select id="getReviewList" resultType="kr.co.academy.model.ReviewDTO">
+   <select id="getReviewList" resultType="com.leaf.model.teacher_intro.ReviewDTO">
       select * from
       (SELECT ROWNUM NUM, r.* FROM 
                      (select * from review where teacher_id = #{teacher_id} order by r_write_time desc) r)
       where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
    </select>
    
-   <select id="get_headline" parameterType="String"  resultType="kr.co.academy.model.ReviewDTO">
+   <select id="get_headline" parameterType="String"  resultType="com.leaf.model.teacher_intro.ReviewDTO">
    <![CDATA[
    select * from
       (SELECT ROWNUM NUM, r.* FROM 
@@ -29,26 +29,26 @@
    </select>
    
    	<!-- 게시글 추가 -->
-	<insert id="insertReivew" parameterType="kr.co.academy.model.ReviewDTO">
+	<insert id="insertReivew" parameterType="com.leaf.model.teacher_intro.ReviewDTO">
     <!-- 게시글 번호를 서브쿼리로 생성 -->
     INSERT INTO review (
      review_id, member_id, r_headline, r_content, enabled, r_write_time, teacher_id, r_modify_time) 
       VALUES ((SELECT NVL(MAX(review_id)+1, 1)FROM review), #{member_id}, #{r_headline}, #{r_content}, 1, #{r_write_time}, #{teacher_id},0)
 	</insert>
 
-	<select id="getReviewByreview_id" parameterType="Integer" resultType="kr.co.academy.model.ReviewDTO">
+	<select id="getReviewByreview_id" parameterType="Integer" resultType="com.leaf.model.teacher_intro.ReviewDTO">
 		select * from review where review_id = #{review_id}
 	</select>
 	
 	<!-- 게시글 수정 -->
-	<update id="updateReview" parameterType="kr.co.academy.model.ReviewDTO">
+	<update id="updateReview" parameterType="com.leaf.model.teacher_intro.ReviewDTO">
 		update review set r_headline=#{r_headline}, r_content=#{r_content}, r_modify_time=#{r_modify_time}
 		where review_id = #{review_id}
 	</update>
 	
 
 	<!-- 게시글 삭제 -->
-	<delete id="deleteReview" parameterType="kr.co.academy.model.ReviewDTO">
+	<delete id="deleteReview" parameterType="com.leaf.model.teacher_intro.ReviewDTO">
 		delete from review where review_id=#{review_id}
 	</delete>
 	
@@ -61,7 +61,7 @@
    </delete>
    
    <!-- 게시글 검색 -->
-   <select id="searchReviewList" parameterType="hashMap" resultType="kr.co.academy.model.ReviewDTO">
+   <select id="searchReviewList" parameterType="hashMap" resultType="com.leaf.model.teacher_intro.ReviewDTO">
 			select * from (SELECT ROWNUM NUM, r.* FROM
 		( select * from review where ${column} like '%' || #{keyvalue} || '%'
 			order by review_id desc) r)
@@ -70,7 +70,7 @@
 
 
 	<!-- 게시글 조회 -->
-	<select id="review_content" resultType="kr.co.academy.model.ReviewDTO">
+	<select id="review_content" resultType="com.leaf.model.teacher_intro.ReviewDTO">
 		SELECT * FROM review WHERE review_id = #{review_id}
 	</select>
 

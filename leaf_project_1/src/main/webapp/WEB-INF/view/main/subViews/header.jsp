@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -112,8 +113,9 @@ clear:left;
 			<td>고객센터</td>
 		</tr> -->
 		<div class="login">
-		<button onclick="javascript:window.location.href='login.do'">로그인</button>
+		<button onclick="javascript:window.location.href='loginForm.do'">로그인</button>
 		<button onclick="javascript:window.location.href='logout.do'">로그아웃</button>
+		<span>${sessionScope.sessionid }</span>
 		</div>
 		<div class="menubar">
 			<ul>

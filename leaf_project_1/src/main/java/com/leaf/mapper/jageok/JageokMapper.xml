@@ -20,7 +20,7 @@
 	select * from jageok where jageok_id=#{jageok_id}
 	</select>
 	
-	<insert id="insertJageok" parameterType="com.leaf.jageok.model.JageokDTO">
+	<insert id="insertJageok" parameterType="com.leaf.model.jageok.JageokDTO">
 	<selectKey resultType="int" keyProperty="jageok_id" order="BEFORE">
          select NVL(max(jageok_id),0)+1 from jageok
     </selectKey>
@@ -54,7 +54,7 @@
     <!-- where ${column} like '%' || #{keyvalue} || '%' -->
     </select>
     
-	<select id="Jageoksearch" parameterType="hashmap" resultType="com.leaf.jageok.model.JageokDTO">
+	<select id="Jageoksearch" parameterType="hashmap" resultType="com.leaf.model.jageok.JageokDTO">
 	select * from
 		(SELECT ROWNUM NUM, j.* FROM 
 			( SELECT * FROM jageok 
