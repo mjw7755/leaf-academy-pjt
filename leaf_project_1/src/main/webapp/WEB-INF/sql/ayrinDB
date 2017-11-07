@@ -1,0 +1,44 @@
+--회원 아이디, 회원 패스워드, 회원 이름, 회원 번호, 회원 이메일, 회원 레벨, enabled
+create table Member (
+	member_id varchar2(20) NOT NULL,
+    member_pwd VARCHAR2(20) NOT NULL,
+    member_name VARCHAR2(20),
+    member_tel VARCHAR2(20),
+    member_email VARCHAR2(30),
+    member_level number(5),
+    enabled number(5),
+    PRIMARY KEY(member_id)
+);
+
+--도서 아이디, 회원 아이디, 도서 제목, 도서 저자, 도서 가격, enabled
+create table Book (
+	book_id number,
+    member_id varchar2(20) NOT NULL,
+    book_title VARCHAR2(20),
+    book_writer VARCHAR2(20),
+    book_cost VARCHAR2(20),
+    enabled number(1),
+    PRIMARY KEY(book_id)
+);
+--자격증 아이디, 회원 아이디, 자격증 제목, 자격증 일자, 자격증 가격, enabled
+create table JaGeok (
+	JaGeok_id number,
+    member_id varchar2(20) NOT NULL,
+    JaGeok_title VARCHAR2(20),
+    JaGeok_date VARCHAR2(20),
+    JaGeok_cost VARCHAR2(20),
+    enabled number(1),
+    PRIMARY KEY(JaGeok_id)
+);
+
+commit;
+create sequence Member_seq;
+drop table book;
+select * from Member;
+insert into Member values('a', 'a', 'a', 'a', 'a', 'a', 0);
+update Member set enabled=0 where member_id='d';
+create sequence Book_seq;
+select * from Book;
+insert into Book values(1, 'member_id1', 'book_title1', 'book_writer1', 'book_cost1', 1); 
+insert into Book values(2, 'member_id2', 'book_title2', 'book_writer2', 'book_cost2', 1); 
+insert into Book values(3, 'member_id3', 'book_title3', 'book_writer3', 'book_cost3', 1); 
