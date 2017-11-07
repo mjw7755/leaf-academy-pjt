@@ -1,29 +1,35 @@
 create table company(
-com_id number primary key,--회사 소개 아이디
-com_content varchar2(4000),--회사 소개 내용
+com_id number primary key,--�쉶�궗 �냼媛� �븘�씠�뵒
+com_content varchar2(4000),--�쉶�궗 �냼媛� �궡�슜
 enabled number(1));
 
 create table teacher_intro(
-teacher_id number primary key, --강사소개 아이디
-member_id varchar2(20), --회원 아이디
-teacher_introduce varchar2(500), -- 강사소개 내용
-enabled number(1));
+teacher_id number primary key, --媛뺤궗�냼媛� �븘�씠�뵒
+member_id varchar2(20), --�쉶�썝 �븘�씠�뵒
+teacher_introduce varchar2(500), -- 媛뺤궗�냼媛� �궡�슜
+enabled number(1),
+foreign Key (member_id) REFERENCES Member (member_id)
+);
 
 select r_headline from review where teacher_id = 2;
+
 create table review(
-review_id number primary key, --후기 아이디
-member_id varchar2(20), -- 회원 아이디
-teacher_id varchar2(20), -- 강사소개 아이디
-r_headline varchar2(100), -- 후기 제목
-r_content varchar2(3000), -- 후기 내용
-r_write_time varchar2(50), --후기 작성시간
-r_modify_time varchar2(50), --후기 수정시간
-enabled number(1));
+review_id number primary key, --�썑湲� �븘�씠�뵒
+member_id varchar2(20), -- �쉶�썝 �븘�씠�뵒
+teacher_id number, -- 媛뺤궗�냼媛� �븘�씠�뵒
+r_headline varchar2(100), -- �썑湲� �젣紐�
+r_content varchar2(3000), -- �썑湲� �궡�슜
+r_write_time varchar2(50), --�썑湲� �옉�꽦�떆媛�
+r_modify_time varchar2(50), --�썑湲� �닔�젙�떆媛�
+enabled number(1),
+foreign Key (member_id) REFERENCES Member (member_id),
+foreign Key (teacher_id) REFERENCES teacher_intro (teacher_id)
+);
 
 create sequence review_id;
 
 insert into review(review_id, member_id, teacher_id, r_headline,r_content, r_write_time, r_modify_time, enabled)
-values(1,'kim','1','park','제목','2017-11-04','2017-11-05',1);
+values(1,'kim','1','park','�젣紐�','2017-11-04','2017-11-05',1);
 drop table teacher_intro;
 drop table review;
 drop table company;

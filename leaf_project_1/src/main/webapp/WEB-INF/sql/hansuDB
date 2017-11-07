@@ -1,56 +1,67 @@
--- qna 게시판
+-- qna 寃뚯떆�뙋
 create table qna(
-qna_id number primary key, 			-- num qna_id 번호
-member_id varchar2(20) NOT NULL, 		-- member_id 아이디
-qna_title varchar2(50) NOT NULL, 	--  qna_title 제목
-qna_content clob NOT NULL,			--  qna_content 내용
-qna_writedate varchar2(50) not null,		-- qna_writedate 게시판 만든 날짜
-qna_modifydate varchar2(50),	-- qna_modifydate 게시판 수정 날짜
-qna_level number  not null,	-- qna_level 그룹 레벨
-qna_ref number  not null,		-- qna_ref 그룹( 글에 대한...)
-qna_step number  not null,  -- qna_step 그룹 스텝
-enabled number(1)           -- enabled
+qna_id number primary key, 			-- num qna_id 踰덊샇
+member_id varchar2(20) NOT NULL, 		-- member_id �븘�씠�뵒
+qna_title varchar2(50) NOT NULL, 	--  qna_title �젣紐�
+qna_content clob NOT NULL,			--  qna_content �궡�슜
+qna_writedate varchar2(50) not null,		-- qna_writedate 寃뚯떆�뙋 留뚮뱺 �궇吏�
+qna_modifydate varchar2(50),	-- qna_modifydate 寃뚯떆�뙋 �닔�젙 �궇吏�
+qna_level number  not null,	-- qna_level 洹몃９ �젅踰�
+qna_ref number  not null,		-- qna_ref 洹몃９( 湲��뿉 ���븳...)
+qna_step number  not null,  -- qna_step 洹몃９ �뒪�뀦
+enabled number(1),           -- enabled
+foreign Key (member_id) REFERENCES Member (member_id)
 );				
 
- create sequence qna_seq -- [시퀀스명]
-    start with 1 --시작 숫자
-    increment by 1 --1씩 증가
-    maxvalue 10000 --최대값
+ create sequence qna_seq -- [�떆���뒪紐�]
+    start with 1 --�떆�옉 �닽�옄
+    increment by 1 --1�뵫 利앷�
+    maxvalue 10000 --理쒕�媛�
+ 
+ 
+create sequence faq_seq
+start with 1
+maxvalue 9999
+minvalue 1
+increment by 1
+cycle
+nocache;
  
 
 select * from qna;
 
--- faq 자주 묻는 질문
+-- faq �옄二� 臾삳뒗 吏덈Ц
 create table faq(
-faq_id number primary key, 			-- num faq_id 번호
-faq_title varchar2(50) NOT NULL, 	--  qna_title 제목
-faq_content clob NOT NULL,			--  qna_content 내용
+faq_id number primary key, 			-- num faq_id 踰덊샇
+faq_title varchar2(50) NOT NULL, 	--  qna_title �젣紐�
+faq_content clob NOT NULL,			--  qna_content �궡�슜
 enabled number(1)           -- enabled
 );	
 
- create sequence faq_seq -- [시퀀스명]
-    start with 1 --시작 숫자
-    increment by 1 --1씩 증가
-    maxvalue 10000 --최대값
+ create sequence faq_seq -- [�떆���뒪紐�]
+    start with 1 --�떆�옉 �닽�옄
+    increment by 1 --1�뵫 利앷�
+    maxvalue 10000 --理쒕�媛�
 
 select * from faq;
 
 
--- notice 공지사항
+-- notice 怨듭��궗�빆
 create table notice(
-notice_id number primary key, 			-- num notice_id 번호
-member_id varchar2(20) NOT NULL, 		-- member_id 아이디
-notice_title varchar2(50) NOT NULL, 	--  notice_title 제목
-notice_content clob NOT NULL,			--  notice_content 내용
-notice_writedate varchar2(50) not null,		-- notice_writedate 게시판 만든 날짜
-notice_modifydate varchar2(50),	-- notice_modifydate 게시판 수정 날짜
-enabled number(1)           -- enabled
+notice_id number primary key, 			-- num notice_id 踰덊샇
+member_id varchar2(20) NOT NULL, 		-- member_id �븘�씠�뵒
+notice_title varchar2(50) NOT NULL, 	--  notice_title �젣紐�
+notice_content clob NOT NULL,			--  notice_content �궡�슜
+notice_writedate varchar2(50) not null,		-- notice_writedate 寃뚯떆�뙋 留뚮뱺 �궇吏�
+notice_modifydate varchar2(50),	-- notice_modifydate 寃뚯떆�뙋 �닔�젙 �궇吏�
+enabled number(1),           -- enabled
+foreign Key (member_id) REFERENCES Member (member_id)
 );			
 
- create sequence notice_seq -- [시퀀스명]
-    start with 1 --시작 숫자
-    increment by 1 --1씩 증가
-    maxvalue 10000 --최대값
+ create sequence notice_seq -- [�떆���뒪紐�]
+    start with 1 --�떆�옉 �닽�옄
+    increment by 1 --1�뵫 利앷�
+    maxvalue 10000 --理쒕�媛�
     
 
 select * from notice;

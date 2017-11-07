@@ -8,10 +8,22 @@ create table curriculum (
     curri_modify_time varchar2(30),
     
     curri_accept number(1),
-    enabled number(1) 
+    enabled number(1) ,
+    foreign Key (member_id) REFERENCES Member (member_id)
 );
-create sequence curri_seq;
+
+
+create sequence curri_seq
+start with 1
+maxvalue 9999
+minvalue 1
+increment by 1
+cycle
+nocache;
+
+
 drop table curriculum;
+
 insert into curriculum(curri_id, member_id, curri_level, curri_subject, curri_content, 
                         curri_write_time, curri_modify_time, curri_accept, enabled) 
       values (1,'1', '»ó', '¾Æ¾Ó', '±â¸ð¶ç','12','12',1,1);
@@ -31,11 +43,23 @@ create table lecture(
     lect_modify_time varchar2(30),
     
     lect_accept number(1),
-    enabled number(1)
+    enabled number(1),
+    foreign Key (curri_id) REFERENCES curriculum (curri_id)
 );
-create sequence lect_seq;
+
+
+create sequence lect_seq
+start with 1
+maxvalue 9999
+minvalue 1
+increment by 1
+cycle
+nocache;
+
+
 
 drop table lecture;
+
 insert into lecture( lect_id, curri_id, lect_name, lect_person_num, lect_start_day,
 			lect_end_day, lect_start_time,
 			lect_end_time, lect_write_time,
