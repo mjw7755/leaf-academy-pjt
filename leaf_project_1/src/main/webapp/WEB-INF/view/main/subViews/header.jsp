@@ -111,12 +111,19 @@ clear:left;
 		<div class="menubar">
 			<ul>
 				<li><a href="#">소개</a></li>
-				<li><a href="#">강의</a>
-				<li><a href="book_list.lcs">자료실</a></li>
+				<li><a href="list_curri.do">교육과정</a>
+				<ul>
+						<li><a href="list_curri.do">커리큘럼</a></li>
+						<li><a href="list_lect.do">수강신청</a></li>
+				</ul>
+				</li>
+				<li><a href="book_list.lcs">자료실</a>
 				<ul>
 						<li><a href="book_list.lcs">도서</a></li>
 						<li><a href="jageok_list.lcs">자격증</a></li>
 				</ul>
+				</li>
+				
 				<li><a href="#">놀이</a></li>
 				<li><a href="service">고객센터</a>
 					<ul>
