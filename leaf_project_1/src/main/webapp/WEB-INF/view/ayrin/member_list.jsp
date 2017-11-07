@@ -54,7 +54,7 @@ function multiDelete(){
 			j=j+1;
 		}
 	}
-	window.location.href="member_multidelete.lcs?member_id="+sum;
+	window.location.href="member_multidelete.do?member_id="+sum;
 }
 
 function multiUp(){
@@ -67,7 +67,7 @@ function multiUp(){
 			j=j+1;
 		}
 	}
-	window.location.href="member_multiup.lcs?member_id="+sum;
+	window.location.href="member_multiup.do?member_id="+sum;
 }
 function multiLevelUp(){
 	var t= document.getElementsByName("member_id");
@@ -79,7 +79,7 @@ function multiLevelUp(){
 			j=j+1;
 		}
 	}
-	window.location.href="member_multilevelup.lcs?member_id="+sum;
+	window.location.href="member_multilevelup.do?member_id="+sum;
 }
 function multiLevelDown(){
 	var t= document.getElementsByName("member_id");
@@ -91,12 +91,12 @@ function multiLevelDown(){
 			j=j+1;
 		}
 	}
-	window.location.href="member_multileveldown.lcs?member_id="+sum;
+	window.location.href="member_multileveldown.do?member_id="+sum;
 }
 </script>
 </head>
 <body>
-	<form action="search_member.lcs" method="post">
+	<form action="search_member.do" method="post">
          검색어 입력 : <input size="30" type="search"  name="keyvalue" 
                 placeholder="키워드 검색 가능합니다." list="memlist"> 
                 <input type="submit" value="검색">
@@ -118,7 +118,7 @@ function multiLevelDown(){
          <th>EMAIL</th>
          <th>LEVEL</th>
          <th>ENABLED</th>
-         <th colspan="2"><a href="member_writeform.lcs"><button>추가</button></a></th>
+         <th colspan="2"><a href="member_writeform.do"><button>추가</button></a></th>
          <th colspan="1"><a href="#"><button id="multi" onclick="multiLevelUp()">레벨업</button></a>&nbsp;<a href="#"><button id="multi" onclick="multiLevelDown()">레벨다운</button></a></th>
          <th colspan="1"><a href="#"><button id="multi" onclick="multiUp()">다중권한</button></a>&nbsp;<a href="#"><button id="multi" onclick="multiDelete()">다중삭제</button></a></th>
       </tr>
@@ -131,15 +131,15 @@ function multiLevelDown(){
             <td>${list.member_email}</td>
             <td>${list.member_level}</td>
             <td>${list.enabled}</td>
-            <td><a href="member_updateform.lcs?member_id=${ list.member_id }">
+            <td><a href="member_updateform.do?member_id=${ list.member_id }">
             <button id="edit">수 정</button> </a></td>
             <td id="multi"><input type="checkbox" style="width: 30px;" name="member_id" value="${ list.member_id }"></td>
             <td>
-            <a href="member_levelup.lcs?member_id=${ list.member_id }"><button id="up" >랩업</button></a>
-            <a href="member_leveldown.lcs?member_id=${ list.member_id }"><button id="delete" >랩다운</button> </a></td> 
+            <a href="member_levelup.do?member_id=${ list.member_id }"><button id="up" >랩업</button></a>
+            <a href="member_leveldown.do?member_id=${ list.member_id }"><button id="delete" >랩다운</button> </a></td> 
             <td>
-            <a href="member_up.lcs?member_id=${ list.member_id }"><button id="up" >권 한</button></a>
-            <a href="member_delete.lcs?member_id=${ list.member_id }"><button id="delete" >삭 제</button> </a></td>   
+            <a href="member_up.do?member_id=${ list.member_id }"><button id="up" >권 한</button></a>
+            <a href="member_delete.do?member_id=${ list.member_id }"><button id="delete" >삭 제</button> </a></td>   
          </tr>
       </c:forEach>
    </table>
@@ -147,30 +147,30 @@ function multiLevelDown(){
    <div align="center">
       <c:if test="${param.page>5}">
       <c:if test="${flag == 'list' }">
-         <a class="button btn-prev" href="member_list.lcs?page=${startPage-1}">이전</a>
+         <a class="button btn-prev" href="member_list.do?page=${startPage-1}">이전</a>
       </c:if>
       <c:if test="${flag == 'search' }">
-         <a class="button btn-prev" href="search_member.lcs?page=${startPage-1}&keyvalue=${keyvalue}">이전</a>
+         <a class="button btn-prev" href="search_member.do?page=${startPage-1}&keyvalue=${keyvalue}">이전</a>
       </c:if>
       </c:if>
       
       <c:forEach var="i" begin="0" end="4" varStatus="status">
       <c:if test="${countPage>=startPage+i}">
       <c:if test="${flag == 'list' }">
-         <a class="strong" href="member_list.lcs?page=${startPage+i}">${startPage+i}</a>
+         <a class="strong" href="member_list.do?page=${startPage+i}">${startPage+i}</a>
       </c:if>
       <c:if test="${flag == 'search' }">
-         <a class="strong" href="search_member.lcs?page=${startPage+i}&keyvalue=${keyvalue}">${startPage+i}</a>
+         <a class="strong" href="search_member.do?page=${startPage+i}&keyvalue=${keyvalue}">${startPage+i}</a>
       </c:if>
       </c:if>
    </c:forEach>
    
       <c:if test="${countPage>=startPage+5}">
       <c:if test="${flag == 'list' }">
-         <a class="strong" href="member_list.lcs?page=${startPage+5}">다음</a>
+         <a class="strong" href="member_list.do?page=${startPage+5}">다음</a>
       </c:if>
       <c:if test="${flag == 'search' }">
-         <a class="strong" href="search_member.lcs?page=${startPage+5}&keyvalue=${keyvalue}">다음</a>
+         <a class="strong" href="search_member.do?page=${startPage+5}&keyvalue=${keyvalue}">다음</a>
       </c:if>
       </c:if>
    </div>

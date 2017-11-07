@@ -8,7 +8,7 @@
 <title></title>
 </head>
 <body>
-   <form action="member_write.lcs" >
+   <form action="member_write.do" >
    <table>
       <tr>
          <td>ID</td>
@@ -45,7 +45,7 @@
             <tr>
                <td>
                   <input type="button" value="취소" style="width: 100%;" 
-                                        onclick="window.location.href='member_list.lcs' ">
+                                        onclick="window.location.href='member_list.do' ">
                </td>
                <td>   <input type="reset" value="초기화" style="width: 100%"></td>
                <td>   <input type="submit" value="추가" style="width: 100%"></td>

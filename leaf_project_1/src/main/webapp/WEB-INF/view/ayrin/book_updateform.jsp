@@ -8,7 +8,7 @@
 <title></title>
 </head>
 <body>
-<form action="book_update.lcs">
+<form action="book_update.do">
          NO. : <input readonly="readonly" type="text" name="book_id" value="${dto.book_id}"><br>
          member_id : <input readonly="readonly" name="member_id" value="${dto.member_id}"><br>
          TITLE : <input type="text" name="book_title" value="${dto.book_title}"><br>

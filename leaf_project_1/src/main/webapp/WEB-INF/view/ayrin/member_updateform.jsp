@@ -8,7 +8,7 @@
 <title></title>
 </head>
 <body>
-<form action="member_update.lcs">
+<form action="member_update.do">
          ID : <input readonly="readonly" type="text" name="member_id" value="${dto.member_id}"><br>
          NAME : <input type="readonly" name="member_name" value="${dto.member_name}"><br>
          PWD : <input type="text" name="member_pwd" value="${dto.member_pwd}"><br>

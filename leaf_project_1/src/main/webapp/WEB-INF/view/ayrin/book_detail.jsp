@@ -14,13 +14,13 @@
          WRITER : <input type="text" name="book_writer" value="${dto.book_writer}"><br>
          COST : <input type="text" name="book_cost" value="${dto.book_cost}"><br>
         
-	<a href="book_updateform.lcs?book_id=${ dto.book_id }"><button>수정</button></a>
-	<a href="book_list.lcs"><button>목록</button></a>
+	<a href="book_updateform.do?book_id=${ dto.book_id }"><button>수정</button></a>
+	<a href="book_list.do"><button>목록</button></a>
 	
 
 
 <%-- 	<table width="700" cellpadding="0" cellspacing="0" border="1">
-		<form action="book_updateform.lcs?book_id=${ list.book_id }" method="post">
+		<form action="book_updateform.do?book_id=${ list.book_id }" method="post">
 			<input type="hidden" name="book_id" value="${list.book_id}">
 			<tr>
 				<td>번호</td>
@@ -49,7 +49,7 @@
 			<tr>
 				<td colspan="2"><input type="submit" value="수정">&nbsp;&nbsp;
 					<a href="list">목록보기</a>
-					<a href="book_delete.lcs?book_id=${ list.book_id }">글삭제</a>
+					<a href="book_delete.do?book_id=${ list.book_id }">글삭제</a>
 					<a href="reply_view?bId=${ detail.bId }">답변</a>
 				</td>
 			</tr>

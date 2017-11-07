@@ -126,10 +126,10 @@ clear:left;
 						<li><a href="list_lect.do">수강신청</a></li>
 				</ul>
 				</li>
-				<li><a href="book_list.lcs">자료실</a>
+				<li><a href="book_list.do">자료실</a>
 				<ul>
-						<li><a href="book_list.lcs">도서</a></li>
-						<li><a href="jageok_list.lcs">자격증</a></li>
+						<li><a href="book_list.do">도서</a></li>
+						<li><a href="jageok_list.do">자격증</a></li>
 				</ul>
 				</li>
 				

@@ -8,7 +8,7 @@
 <title></title>
 </head>
 <body>
-<form action="jageok_update.lcs">
+<form action="jageok_update.do">
          NO. : <input readonly="readonly" type="text" name="jageok_id" value="${dto.jageok_id}"><br>
          member_id : <input type="readonly" name="member_id" value="${dto.member_id}"><br>
          TITLE : <input type="text" name="jageok_title" value="${dto.jageok_title}"><br>

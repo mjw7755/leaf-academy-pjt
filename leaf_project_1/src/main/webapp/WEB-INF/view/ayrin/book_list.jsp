@@ -54,12 +54,12 @@ function multiDelete(){
 			j=j+1;
 		}
 	}
-	window.location.href="book_multidelete.lcs?book_id="+sum;
+	window.location.href="book_multidelete.do?book_id="+sum;
 }
 </script>
 </head>
 <body>
-	<form action="book_search.lcs" method="post">
+	<form action="book_search.do" method="post">
          검색어 입력 : <input size="30" type="search"  name="keyvalue" placeholder="제목, 저자 검색 가능합니다." list="booklist"> 
                 <input type="submit" value="검색">
     </form>
@@ -77,7 +77,7 @@ function multiDelete(){
          <th>WRITER</th>
          <th>COST</th>
          <th>ENABLED</th>
-         <th colspan="1"><a href="book_writeform.lcs"><button>추가</button></a></th>
+         <th colspan="1"><a href="book_writeform.do"><button>추가</button></a></th>
       	 <th><a href="#"><button id="multi" onclick="multiDelete()">다중삭제</button></a></th>
       </tr>
       <c:forEach items="${ list }" var="list" varStatus="status">
@@ -88,16 +88,16 @@ function multiDelete(){
             	<%-- <c:forEach begin="1" end="${list. book_reply}">
             	&nbsp;&nbsp; -
             	</c:forEach> --%>
-            	<a href="book_detail.lcs?book_id=${ list.book_id }">${list.book_title }</a>
+            	<a href="book_detail.do?book_id=${ list.book_id }">${list.book_title }</a>
             </td>
             <td>${list.book_writer}</td>
             <td>${list.book_cost}</td>
             <td>${list.enabled}</td>
-            <td><a href="book_updateform.lcs?book_id=${ list.book_id }">
+            <td><a href="book_updateform.do?book_id=${ list.book_id }">
             <button id="edit">수 정</button> </a></td>
             <td id="multi"><input type="checkbox" style="width: 30px;" name="book_id" value="${ list.book_id }"></td>
-            <td><a href="book_delete.lcs?book_id=${ list.book_id }"><button id="delete" >삭 제</button> </a></td>
-            <td><a href="book_deletecancle.lcs?book_id=${ list.book_id }"><button id="deletecancle" >삭제취소</button> </a></td>
+            <td><a href="book_delete.do?book_id=${ list.book_id }"><button id="delete" >삭 제</button> </a></td>
+            <td><a href="book_deletecancle.do?book_id=${ list.book_id }"><button id="deletecancle" >삭제취소</button> </a></td>
          </tr>
       </c:forEach>
    </table>
@@ -105,7 +105,7 @@ function multiDelete(){
    <div align="center">
       <c:if test="${param.page>5}">
       <c:if test="${flag == 'list' }">
-         <a class="button btn-prev" href="book_list.lcs?page=${startPage-1}">이전</a>
+         <a class="button btn-prev" href="book_list.do?page=${startPage-1}">이전</a>
       </c:if>
       
       <c:if test="${flag == 'search' }">
@@ -116,20 +116,20 @@ function multiDelete(){
    <c:forEach var="i" begin="0" end="4" varStatus="status">
       <c:if test="${countPage>=startPage+i}">
       <c:if test="${flag == 'list' }">
-         <a class="strong" href="book_list.lcs?page=${startPage+i}">${startPage+i}</a>
+         <a class="strong" href="book_list.do?page=${startPage+i}">${startPage+i}</a>
       </c:if>
       <c:if test="${flag == 'search' }">
-      	 <a class="strong" href="book_search.lcs?page=${startPage+i}&keyvalue=${keyvalue}">${startPage+i}</a>
+      	 <a class="strong" href="book_search.do?page=${startPage+i}&keyvalue=${keyvalue}">${startPage+i}</a>
       </c:if>
       </c:if>      
    </c:forEach>
    
       <c:if test="${countPage>=startPage+5}">
       <c:if test="${flag == 'list' }">
-         <a class="strong" href="book_list.lcs?page=${startPage+5}">다음</a>
+         <a class="strong" href="book_list.do?page=${startPage+5}">다음</a>
       </c:if>
       <c:if test="${flag == 'search' }">
-         <a class="strong" href="book_search.lcs?page=${startPage+5}&column=${column}&keyvalue=${keyvalue}">다음</a>
+         <a class="strong" href="book_search.do?page=${startPage+5}&column=${column}&keyvalue=${keyvalue}">다음</a>
       </c:if>
       </c:if>
    </div>

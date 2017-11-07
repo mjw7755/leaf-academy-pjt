@@ -14,13 +14,13 @@
          DATE : <input type="text" name="jageok_date" value="${dto.jageok_date}"><br>
          COST : <input type="text" name="jageok_cost" value="${dto.jageok_cost}"><br>
         
-	<a href="jageok_updateform.lcs?jageok_id=${ dto.jageok_id }"><button>수정</button></a>
-	<a href="jageok_list.lcs"><button>목록</button></a>
+	<a href="jageok_updateform.do?jageok_id=${ dto.jageok_id }"><button>수정</button></a>
+	<a href="jageok_list.do"><button>목록</button></a>
 	
 
 
 <%-- 	<table width="700" cellpadding="0" cellspacing="0" border="1">
-		<form action="jageok_updateform.lcs?jageok_id=${ list.jageok_id }" method="post">
+		<form action="jageok_updateform.do?jageok_id=${ list.jageok_id }" method="post">
 			<input type="hidden" name="jageok_id" value="${list.jageok_id}">
 			<tr>
 				<td>번호</td>
@@ -49,7 +49,7 @@
 			<tr>
 				<td colspan="2"><input type="submit" value="수정">&nbsp;&nbsp;
 					<a href="list">목록보기</a>
-					<a href="jageok_delete.lcs?jageok_id=${ list.jageok_id }">글삭제</a>
+					<a href="jageok_delete.do?jageok_id=${ list.jageok_id }">글삭제</a>
 					<a href="reply_view?bId=${ detail.bId }">답변</a>
 				</td>
 			</tr>

@@ -24,7 +24,7 @@ public class BookController {
 	@Resource
 	private BookDAO bookdao;
 	
-	@RequestMapping("/book_list.lcs")
+	@RequestMapping("/book_list.do")
 	public String list(Model model, HttpServletRequest request) {
 		String strPage = request.getParameter("page");
 		String flag = "list";
@@ -40,49 +40,49 @@ public class BookController {
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("list", list);
 		model.addAttribute("flag", flag);
-		return "book_list";
+		return "ayrin.book_list";
 	}
 
-	@RequestMapping("/book_writeform.lcs")
+	@RequestMapping("/book_writeform.do")
 	public String writeform() {
-		return "book_writeform";
+		return "ayrin.book_writeform";
 	}
 	
-	@RequestMapping("/book_write.lcs")
+	@RequestMapping("/book_write.do")
 	public ModelAndView write(BookDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		bookdao.insertBook(dto);
-		mav.setViewName("redirect:book_list.lcs");
+		mav.setViewName("redirect:book_list.do");
 		return mav;
 	}
 	
-	@RequestMapping("/book_updateform.lcs")
+	@RequestMapping("/book_updateform.do")
 	public ModelAndView updateform(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		int book_id = Integer.parseInt(request.getParameter("book_id"));
 		BookDTO dto = bookdao.getBookById(book_id);
 		mav.addObject("dto", dto);
-		mav.setViewName("book_updateform");
+		mav.setViewName("ayrin.book_updateform");
 		return mav;
 	}
 
-	@RequestMapping("/book_update.lcs")
+	@RequestMapping("/book_update.do")
 	public ModelAndView update(BookDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		bookdao.updateBook(dto);
-		mav.setViewName("redirect:book_list.lcs");
+		mav.setViewName("redirect:book_list.do");
 		return mav;
 	}
 
-	@RequestMapping("/book_delete.lcs")
+	@RequestMapping("/book_delete.do")
 	public ModelAndView delete(BookDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		bookdao.deleteBook(dto);
-		mav.setViewName("redirect:book_list.lcs");
+		mav.setViewName("redirect:book_list.do");
 		return mav;
 	}
 
-	@RequestMapping("/book_multidelete.lcs")
+	@RequestMapping("/book_multidelete.do")
 	public ModelAndView multidelete(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		List<String> deleteTarget = new ArrayList<String>();
@@ -91,19 +91,19 @@ public class BookController {
 		}
 		bookdao.multideleteBook(deleteTarget);
 		// String deleteID = bookdao.multideleteMember(deleteTarget);
-		mav.setViewName("redirect:book_list.lcs");
+		mav.setViewName("redirect:book_list.do");
 		return mav;
 	}
 	
-	@RequestMapping("/book_deletecancle.lcs")
+	@RequestMapping("/book_deletecancle.do")
 	public ModelAndView deletecancle(BookDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		bookdao.deletecancleBook(dto);
-		mav.setViewName("redirect:book_list.lcs");
+		mav.setViewName("redirect:book_list.do");
 		return mav;
 	}
 	
-	@RequestMapping("/book_search.lcs")
+	@RequestMapping("/book_search.do")
 	public String search(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("UTF-8");
 		String keyvalue = request.getParameter("keyvalue");
@@ -130,16 +130,16 @@ public class BookController {
         
 		model.addAttribute("list", searchList);
 		model.addAttribute("flag",flag);
-		return "book_list";
+		return "ayrin.book_list";
 	}
 	
-	@RequestMapping("/book_detail.lcs")
+	@RequestMapping("/book_detail.do")
 	public ModelAndView detail(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		int book_id = Integer.parseInt(request.getParameter("book_id"));
 		BookDTO dto = bookdao.getBookById(book_id);
 		mav.addObject("dto", dto);
-		mav.setViewName("book_detail");
+		mav.setViewName("ayrin.book_detail");
 		return mav;
 	}
 }
