@@ -47,12 +47,12 @@ public class T_introController {
          model.addAttribute("startPage", startPage);
          model.addAttribute("list", list);
 
-         return "t_intro_list";
+         return "ram.t_intro_list";
       }
    
    @RequestMapping("/t_intro_writeform.do")
    public String writeForm() {
-      return "t_intro_writeform";
+      return "ram.t_intro_writeform";
    }
    
    @RequestMapping("/t_intro_write.do")
@@ -69,7 +69,7 @@ public class T_introController {
       int teacher_id = new Integer(request.getParameter("teacher_id"));
       T_introDTO dto = t_introDAO.getT_introByteacher_id(teacher_id);
       mav.addObject("dto", dto);
-      mav.setViewName("t_intro_updateform");
+      mav.setViewName("ram.t_intro_updateform");
       return mav;
    }
    
@@ -119,7 +119,7 @@ public class T_introController {
       System.out.println("검색된 결과 : " + searchedList.toString());
       
       mav.addObject("list", searchedList);
-      mav.setViewName("t_intro_list");
+      mav.setViewName("ram.t_intro_list");
       
       return mav;
    }
@@ -144,7 +144,7 @@ public class T_introController {
       /*mav.addObject("dto2", dto2);*/
       mav.addObject("list", list);
       
-      mav.setViewName("t_intro_content");
+      mav.setViewName("ram.t_intro_content");
       
       return mav;
    }
@@ -172,7 +172,7 @@ public class T_introController {
             model.addAttribute("dto", dto);
             model.addAttribute("flag", flag);
             
-            return "review_list";
+            return "ram.review_list";
       }
  
    @RequestMapping("/review_writeform.do")
@@ -209,7 +209,7 @@ public class T_introController {
 	      int review_id = new Integer(request.getParameter("review_id"));
 	      ReviewDTO dto = reviewDAO.getReviewByreview_id(review_id);
 	      mav.addObject("dto", dto);
-	      mav.setViewName("review_updateform");
+	      mav.setViewName("ram.review_updateform");
       return mav;
    }
    
@@ -327,7 +327,7 @@ public class T_introController {
          System.out.println(keyvalue);
       model.addAttribute("list", list);
       model.addAttribute("flag",flag);
-      return "review_list";
+      return "ram.review_list";
    }
 
    @RequestMapping("/review_content.do")
@@ -344,7 +344,7 @@ public class T_introController {
       
       mav.addObject("dto", dto);
       mav.addObject("dto2", dto2);
-      mav.setViewName("review_content");
+      mav.setViewName("ram.review_content");
       
       return mav;
    }
