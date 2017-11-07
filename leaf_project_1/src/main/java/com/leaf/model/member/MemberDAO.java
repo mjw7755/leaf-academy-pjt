@@ -26,4 +26,6 @@ public interface MemberDAO {
 	
 	public List<MemberDTO> searchMemberList(Map<String, Object> map); // search
 	public int getCount(); //selectAll
+	
+	public String getSessionCheck(MemberDTO dto); // 로그인 비밀번호 확인
 }

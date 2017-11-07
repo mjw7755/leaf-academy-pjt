@@ -7,6 +7,10 @@
 resultType : 쿼리 수행 후 결과를 보내주기 위한 데이터 -->
 
 <mapper namespace="com.leaf.model.member.MemberDAO">
+	<select id="getSessionCheck" parameterType="com.leaf.model.member.MemberDTO" resultType="String">
+		select member_pwd from member where member_id=#{member_id}
+	</select>
+
 	<select id="getMemberList" parameterType="Integer" resultType="com.leaf.model.member.MemberDTO">
    	select * from
       (SELECT ROWNUM NUM, m.* FROM 

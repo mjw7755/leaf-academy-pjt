@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -195,5 +196,30 @@ public class MemberController {
         model.addAttribute("list", searchList);
 		model.addAttribute("flag",flag);
 		return "member_list";
+	}
+	
+	@RequestMapping("/login.do")
+	public String login(MemberDTO dto, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String sessionid = "";
+		
+		
+		sessionid = memberdao.getSessionCheck(dto);
+		
+		if(sessionid != null) {
+			
+			session.setAttribute("sessionid", sessionid);	
+			return "main/mainPage";
+		}
+		
+		return "ayrin/member_loginform";
+		
+	}
+	
+	@RequestMapping("/logout.do")
+	public String logout(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.removeAttribute("sessionid");
+		return "main/mainPage";
 	}
 }
