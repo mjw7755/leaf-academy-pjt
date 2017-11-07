@@ -1,0 +1,56 @@
+-- qna 게시판
+create table qna(
+qna_id number primary key, 			-- num qna_id 번호
+member_id varchar2(20) NOT NULL, 		-- member_id 아이디
+qna_title varchar2(50) NOT NULL, 	--  qna_title 제목
+qna_content clob NOT NULL,			--  qna_content 내용
+qna_writedate varchar2(50) not null,		-- qna_writedate 게시판 만든 날짜
+qna_modifydate varchar2(50),	-- qna_modifydate 게시판 수정 날짜
+qna_level number  not null,	-- qna_level 그룹 레벨
+qna_ref number  not null,		-- qna_ref 그룹( 글에 대한...)
+qna_step number  not null,  -- qna_step 그룹 스텝
+enabled number(1)           -- enabled
+);				
+
+ create sequence qna_seq -- [시퀀스명]
+    start with 1 --시작 숫자
+    increment by 1 --1씩 증가
+    maxvalue 10000 --최대값
+ 
+
+select * from qna;
+
+-- faq 자주 묻는 질문
+create table faq(
+faq_id number primary key, 			-- num faq_id 번호
+faq_title varchar2(50) NOT NULL, 	--  qna_title 제목
+faq_content clob NOT NULL,			--  qna_content 내용
+enabled number(1)           -- enabled
+);	
+
+ create sequence faq_seq -- [시퀀스명]
+    start with 1 --시작 숫자
+    increment by 1 --1씩 증가
+    maxvalue 10000 --최대값
+
+select * from faq;
+
+
+-- notice 공지사항
+create table notice(
+notice_id number primary key, 			-- num notice_id 번호
+member_id varchar2(20) NOT NULL, 		-- member_id 아이디
+notice_title varchar2(50) NOT NULL, 	--  notice_title 제목
+notice_content clob NOT NULL,			--  notice_content 내용
+notice_writedate varchar2(50) not null,		-- notice_writedate 게시판 만든 날짜
+notice_modifydate varchar2(50),	-- notice_modifydate 게시판 수정 날짜
+enabled number(1)           -- enabled
+);			
+
+ create sequence notice_seq -- [시퀀스명]
+    start with 1 --시작 숫자
+    increment by 1 --1씩 증가
+    maxvalue 10000 --최대값
+    
+
+select * from notice;

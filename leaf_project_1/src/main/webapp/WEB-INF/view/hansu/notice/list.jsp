@@ -105,16 +105,33 @@ function hide(){
 
    </table>
          <div>
-      <c:if test="${param.page>5}">
+    <c:if test="${param.page>5}">
+      	<c:if test="${flag == 'list' }">
          <a class="button btn-prev" href="notice_list.do?page=${startPage-1}">이전</a>
+         </c:if>
+         <c:if test="${flag == 'search' }">
+         <a class="button btn-prev" href="notice_search.do?page=${startPage-1}&column=${column}&keyvalue=${keyvalue}">이전</a>
+         </c:if>
       </c:if>
       <c:forEach var="i" begin="0" end="4" varStatus="status">
       <c:if test="${countPage>=startPage+i}">
+      <c:if test="${flag == 'list' }">
          <a class="strong" href="notice_list.do?page=${startPage+i}">${startPage+i}</a></li>
+         </c:if>
+         <c:if test="${flag == 'search' }">
+          <a class="strong" href="notice_search.do?page=${startPage+i}&column=${column}&keyvalue=${keyvalue}">${startPage+i}</a></li>
+         </c:if>
+        
       </c:if>
    </c:forEach>
       <c:if test="${countPage>=startPage+5}">
+       	 <c:if test="${flag == 'list' }">
          <a class="strong" href="notice_list.do?page=${startPage+5}">다음</a></li>
+         </c:if>
+         <c:if test="${flag == 'search' }">
+         <a class="strong" href="notice_search.do?page=${startPage+5}&column=${column}&keyvalue=${keyvalue}">다음</a></li>
+         </c:if>
+         
       </c:if>
    </div>
       	<form action="notice_search.do" method="post">

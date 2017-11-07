@@ -13,6 +13,8 @@
 			member_id : <input type="text" name="member_id" value="${dto.member_id}"><br>
 			notice_title : <input type="text" name="notice_title" value="${dto.notice_title}"><br>
 			notice_content : <input type="text" name="notice_content" value="${dto.notice_content}"><br>
+						<input type="button" value="취소"
+													 onclick="window.location.href='notice_list.do' ">
 			<input type="submit" value="수정하기">
 </form>
 </body>

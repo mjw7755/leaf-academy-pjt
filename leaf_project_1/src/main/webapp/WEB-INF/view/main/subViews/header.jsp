@@ -125,11 +125,11 @@ clear:left;
 				</li>
 				
 				<li><a href="#">놀이</a></li>
-				<li><a href="service">고객센터</a>
+				<li><a href="notice_list.do">고객센터</a>
 					<ul>
-						<li><a href="#">공지사항</a></li>
-						<li><a href="#">FAQ</a></li>
-						<li><a href="#">QNA</a></li>
+						<li><a href="notice_list.do">공지사항</a></li>
+						<li><a href="faq_list.do">FAQ</a></li>
+						<li><a href="qna_list.do">QNA</a></li>
 						<li><a href="#">쪽지</a></li>				
 					</ul>	
 				</li>	
