@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<h3>Leaf Coding School</h3>
 </body>
 </html>
