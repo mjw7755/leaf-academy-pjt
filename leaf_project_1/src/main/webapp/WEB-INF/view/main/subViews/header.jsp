@@ -98,6 +98,9 @@ text-decoration:none;
 .menubar p{
 clear:left;
 }
+.login{
+	float: right;
+}
 </style>
 </head>
 <body>
@@ -108,6 +111,10 @@ clear:left;
 			<td>놀이</td>
 			<td>고객센터</td>
 		</tr> -->
+		<div class="login">
+		<button onclick="javascript:window.location.href='login.do'">로그인</button>
+		<button onclick="javascript:window.location.href='logout.do'">로그아웃</button>
+		</div>
 		<div class="menubar">
 			<ul>
 				<li><a href="t_intro_list">소개</a></li>
