@@ -9,8 +9,8 @@
 </head>
 <body>
 <form action="review_update.do">
-	<input type="text" name="teacher_id" value="${dto.teacher_id}">
-	review_id : <input readonly="readonly" type="text" name="review_id" value="${dto.review_id}"><br>
+	<input type="hidden" readonly="readonly" name="teacher_id" value="${dto.teacher_id}">
+	<input readonly="readonly" type="hidden" name="review_id" value="${dto.review_id}"><br>
 	제목 : <input type="text" name="r_headline" value="${dto.r_headline}"><br>
 	내용 : <input type="text" name="r_content" value="${dto.r_content}"><br>
 	<input type="submit" value="수정하기">

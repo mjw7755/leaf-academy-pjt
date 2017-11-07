@@ -177,7 +177,7 @@ public class T_introController {
  
    @RequestMapping("/review_writeform.do")
    public String review_writeForm() {
-      return "review_writeform";
+      return "ram.review_writeform";
    }
    
    @RequestMapping("/review_write.do")

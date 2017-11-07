@@ -9,7 +9,7 @@
 </head>
 <body>
 <form action="t_intro_update.do">
-			teacher_id : <input readonly="readonly" type="text" name="teacher_id" value="${dto.teacher_id}"><br>
+			<input readonly="readonly" type="hidden" name="teacher_id" value="${dto.teacher_id}"><br>
 			강사명 : <input type="text" name="member_id" value="${dto.member_id}"><br>
 			약력 : <input type="text" name="teacher_introduce" value="${dto.teacher_introduce}"><br>
 			<input type="submit" value="수정하기">
