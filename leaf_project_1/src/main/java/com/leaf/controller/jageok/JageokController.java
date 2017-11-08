@@ -48,8 +48,9 @@ public class JageokController {
 	}
 	
 	@RequestMapping("/jageok_write.do")
-	public ModelAndView write(JageokDTO dto) throws Exception {
+	public ModelAndView write(JageokDTO dto, HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		dto.setMember_id((String)request.getSession().getAttribute("sessionid"));
 		jageokdao.insertJageok(dto);
 		mav.setViewName("redirect:jageok_list.do");
 		return mav;

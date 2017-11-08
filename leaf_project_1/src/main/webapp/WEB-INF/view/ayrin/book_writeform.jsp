@@ -14,28 +14,28 @@
          <td>NO</td>
          <td>:</td>
          <td><input type="text" name="book_id" required="required" value="${ book_id }"></td>value="${ book_id }"
-      </tr> --%>
+      </tr> 
       
       <tr>
          <td>member_id</td>
          <td>:</td>
          <td><input type="text" name="member_id" required="required" ></td>
-      </tr>
+      </tr> --%>
       
       <tr>
-         <td>TITLE</td>
+         <td>제목</td>
          <td>:</td>
          <td><input type="text" name="book_title" ></td>
       </tr>
       
       <tr>
-         <td>WRITER</td>
+         <td>저자</td>
          <td>:</td>
          <td><input type="text" name="book_writer"></td>
       </tr>
       
       <tr>
-         <td>COST</td>
+         <td>가격</td>
          <td>:</td>
          <td><input type="text" name="book_cost"></td>
       </tr>

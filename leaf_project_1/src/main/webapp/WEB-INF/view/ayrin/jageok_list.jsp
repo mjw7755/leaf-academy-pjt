@@ -20,15 +20,15 @@ table th{
 table tr:nth-child(even) {
    background-color: lightgray;
 }
-table tr:HOVER {
+/* table tr:HOVER {
    color: white;
    background-color: black;
-}
+} 
 table tr:ACTIVE{
    color: black;
    font-weight:bold;
    background-color: lightyellow;
-}
+}*/
 ul {
     list-style:none;
     margin:0;
@@ -74,10 +74,10 @@ function multiDelete(){
    <table>
       <tr>
          <th>NO.</th>
-         <th>member_id</th>
-         <th>TITLE</th>
-         <th>DATE</th>
-         <th>COST</th>
+         <th>작성자</th>
+         <th>자격증</th>
+         <th>시험일</th>
+         <th>비용</th>
          <th>ENABLED</th>
          <th colspan="1"><a href="jageok_writeform.do"><button>추가</button></a></th>
       	 <th><a href="#"><button id="multi" onclick="multiDelete()">다중삭제</button></a></th>

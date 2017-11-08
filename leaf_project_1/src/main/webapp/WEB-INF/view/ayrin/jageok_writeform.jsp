@@ -14,28 +14,28 @@
          <td>NO</td>
          <td>:</td>
          <td><input type="text" name="jageok_id" required="required" value="${ jageok_id }"></td>value="${ jageok_id }"
-      </tr> --%>
+      </tr> 
       
       <tr>
          <td>member_id</td>
          <td>:</td>
          <td><input type="text" name="member_id" required="required" ></td>
-      </tr>
+      </tr> --%>
       
       <tr>
-         <td>TITLE</td>
+         <td>자격증</td>
          <td>:</td>
          <td><input type="text" name="jageok_title" ></td>
       </tr>
       
       <tr>
-         <td>DATE</td>
+         <td>시험일</td>
          <td>:</td>
          <td><input type="text" name="jageok_date"></td>
       </tr>
       
       <tr>
-         <td>COST</td>
+         <td>비용</td>
          <td>:</td>
          <td><input type="text" name="jageok_cost"></td>
       </tr>

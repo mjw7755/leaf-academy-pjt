@@ -49,13 +49,13 @@ public class BookController {
 	}
 	
 	@RequestMapping("/book_write.do")
-	public ModelAndView write(BookDTO dto) throws Exception {
+	public ModelAndView write(BookDTO dto, HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		dto.setMember_id((String)request.getSession().getAttribute("sessionid"));
 		bookdao.insertBook(dto);
 		mav.setViewName("redirect:book_list.do");
 		return mav;
 	}
-	
 	@RequestMapping("/book_updateform.do")
 	public ModelAndView updateform(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();

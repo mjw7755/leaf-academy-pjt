@@ -9,12 +9,13 @@
 </head>
 <body>
 
-         NO. : <input readonly="readonly" type="text" name="book_id" value="${dto.book_id}"><br>
-         TITLE : <input type="text" name="book_title" value="${dto.book_title}"><br>
-         WRITER : <input type="text" name="book_writer" value="${dto.book_writer}"><br>
-         COST : <input type="text" name="book_cost" value="${dto.book_cost}"><br>
-        
-	<a href="book_updateform.do?book_id=${ dto.book_id }"><button>수정</button></a>
+         NO. : <span>${dto.book_id}</span><br>
+                    작성자 : <span>${dto.member_id}</span><br>
+                    제목 : <span>${dto.book_title}</span><br>
+                    저자 : <span>${dto.book_writer}</span><br>
+                    가격 : <span>${dto.book_cost}</span><br>
+    <br><br><br>
+	<a href="book_updateform.do?book_id=${ dto.book_id }"><button>수정하기</button></a>
 	<a href="book_list.do"><button>목록</button></a>
 	
 

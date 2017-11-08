@@ -9,12 +9,13 @@
 </head>
 <body>
 
-         NO. : <input readonly="readonly" type="text" name="jageok_id" value="${dto.jageok_id}"><br>
-         TITLE : <input type="text" name="jageok_title" value="${dto.jageok_title}"><br>
-         DATE : <input type="text" name="jageok_date" value="${dto.jageok_date}"><br>
-         COST : <input type="text" name="jageok_cost" value="${dto.jageok_cost}"><br>
-        
-	<a href="jageok_updateform.do?jageok_id=${ dto.jageok_id }"><button>수정</button></a>
+         NO. : <span>${dto.jageok_id}</span><br>
+                    작성자 : <span>${dto.member_id}</span><br>
+                    자격증 : <span>${dto.jageok_title}</span><br>
+                    시험일 : <span>${dto.jageok_date}</span><br>
+                    비용 : <span>${dto.jageok_cost}</span><br>
+    <br><br><br>    
+	<a href="jageok_updateform.do?jageok_id=${ dto.jageok_id }"><button>수정하기</button></a>
 	<a href="jageok_list.do"><button>목록</button></a>
 	
 

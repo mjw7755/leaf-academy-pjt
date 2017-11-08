@@ -16,8 +16,8 @@ commit;
 create table Book (
 	book_id number,
     member_id varchar2(20) NOT NULL,
-    book_title VARCHAR2(20),
-    book_writer VARCHAR2(20),
+    book_title VARCHAR2(500),
+    book_writer VARCHAR2(50),
     book_cost VARCHAR2(20),
     enabled number(1),
     PRIMARY KEY(book_id),
@@ -27,7 +27,7 @@ create table Book (
 create table JaGeok (
 	JaGeok_id number,
     member_id varchar2(20) NOT NULL,
-    JaGeok_title VARCHAR2(20),
+    JaGeok_title VARCHAR2(500),
     JaGeok_date VARCHAR2(20),
     JaGeok_cost VARCHAR2(20),
     enabled number(1),

@@ -10,12 +10,12 @@
 <body>
 <form action="jageok_update.do">
          NO. : <input readonly="readonly" type="text" name="jageok_id" value="${dto.jageok_id}"><br>
-         member_id : <input type="readonly" name="member_id" value="${dto.member_id}"><br>
+         member_id : <input readonly="readonly" name="member_id" value="${dto.member_id}"><br>
          TITLE : <input type="text" name="jageok_title" value="${dto.jageok_title}"><br>
          DATE : <input type="text" name="jageok_date" value="${dto.jageok_date}"><br>
          COST : <input type="text" name="jageok_cost" value="${dto.jageok_cost}"><br>
         
-	<input type="submit" value="수정">  
+	<input type="submit" value="수정완료">  
 	<input type="reset" value="초기화" >
 </form>
 	

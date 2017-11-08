@@ -15,7 +15,7 @@
          WRITER : <input type="text" name="book_writer" value="${dto.book_writer}"><br>
          COST : <input type="text" name="book_cost" value="${dto.book_cost}"><br>
         
-	<input type="submit" value="수정">  
+	<input type="submit" value="수정완료">  
 	<input type="reset" value="초기화" >
 </form>
 	
