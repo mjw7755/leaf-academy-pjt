@@ -13,10 +13,7 @@
 <table>
 
 			<tr>
-				<td>member_id</td>
-				<td>:</td>
-				<td><input type="text" name="member_id" required="required"
-					value="${member_id}"></td>
+				<td colspan="3">${list.member_id }</td>
 			</tr>
 
 			<tr>

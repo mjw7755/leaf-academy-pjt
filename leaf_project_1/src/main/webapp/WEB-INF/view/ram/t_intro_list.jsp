@@ -48,18 +48,25 @@
          <th>강사 이름</th>
          <th>강사 연혁</th>
          <th><a href="t_intro_writeform.do"><button>추가</button></a></th>
-         <th colspan="2"><a href="#"><button id="multi" onclick="multiDelete()">다중삭제</button></a></th>
+        <c:if test="${sessionScope.sessionid == '관리자'}">
+         <th><a href="#"><button id="multi" onclick="multiDelete()">다중삭제</button></a></th>
+         </c:if>
       </tr>
       <c:forEach items="${ list }" var="list">
          <tr>
             <td>${list.teacher_id}</td>
             <td><a href="t_intro_content.do?teacher_id=${ list.teacher_id }">${list.member_id}</a></td>
+            
             <td>${list.teacher_introduce}</td>
+            <c:if test="${sessionScope.sessionid == list.member_id or sessionScope.sessionid == '관리자'}">
             <td><a href="t_intro_updateform.do?teacher_id=${ list.teacher_id }">
             <button id="edit">수 정</button> </a></td>
             <td><a href="t_intro_delete.do?teacher_id=${ list.teacher_id }">
             <button id="delete" onclick="hide()">삭 제</button> </a></td>
-            <td id="multi"><input type="checkbox" style="width: 30px;" name="teacher_id" value="${ list.teacher_id }"></td>         
+            </c:if>
+            <c:if test="${ sessionScope.sessionid == '관리자'}">
+            <td id="multi"><input type="checkbox" style="width: 30px;" name="teacher_id" value="${ list.teacher_id }"></td>
+            </c:if>         
          </tr>
       </c:forEach>
    </table>

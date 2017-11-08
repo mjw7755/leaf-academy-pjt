@@ -70,6 +70,7 @@ public class T_introDAOImpl implements T_introDAO {
 		T_introDAO dao = sqlSession.getMapper(T_introDAO.class);
 		return dao.content(teacher_id);
 	}
+
 	}
 
 	/*@Override

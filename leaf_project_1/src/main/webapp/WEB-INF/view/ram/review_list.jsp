@@ -36,21 +36,28 @@
 			<tr>
 				<th>제목</th>
 				<th>등록자</th>
+				<c:if test="${ sessionScope.sessionid == '관리자'}">
 				<th><a href="#"><button id="multi" onclick="multiDelete()">다중삭제</button></a></th>
+				</c:if>
 			</tr>
 			<c:forEach items="${ list }" var="list">
 				<tr>
 					<td><a
 						href="review_content.do?review_id=${ list.review_id }&teacher_id=${list.teacher_id}">${list.r_headline}</a></td>
 					<td>${list.member_id }</td>
+					
+					<c:if test="${sessionScope.sessionid == list.member_id or sessionScope.sessionid == '관리자'}">
 					<td><a
 						href="review_updateform.do?review_id=${ list.review_id }"">수정</a></td>
 					<td><a
 						href="review_delete.do?review_id=${ list.review_id }&teacher_id=${param.teacher_id}">
 							<button id="delete" onclick="hide()">삭 제</button>
 					</a></td>
+					</c:if>
+					<c:if test="${ sessionScope.sessionid == '관리자'}">
 					<td id="multi"><input type="checkbox" style="width: 30px;"
 						name="review_id" value="${ list.review_id }"></td>
+					</c:if>
 				</tr>
 			</c:forEach>
 		</table>

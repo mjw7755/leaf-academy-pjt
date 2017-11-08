@@ -34,7 +34,7 @@ public class T_introController {
    @RequestMapping("/t_intro_list.do")
       public String list(Model model, HttpServletRequest request) {
          String strPage = request.getParameter("page");
-        
+       
          int page;
          if (strPage == null) {page = 1;} 
          else {page = Integer.parseInt(request.getParameter("page"));}
@@ -56,9 +56,11 @@ public class T_introController {
    }
    
    @RequestMapping("/t_intro_write.do")
-   public ModelAndView write(T_introDTO dto) throws Exception{
+   public ModelAndView write(T_introDTO dto,HttpServletRequest request) throws Exception{
       ModelAndView mav = new ModelAndView();
+      dto.setMember_id((String)request.getSession().getAttribute("sessionid"));
       t_introDAO.insertT_intro(dto);
+
       mav.setViewName("redirect:t_intro_list.do");
       return mav;
    }
@@ -86,7 +88,7 @@ public class T_introController {
       ModelAndView mav = new ModelAndView();
       int teacher_id = new Integer(request.getParameter("teacher_id"));
       t_introDAO.deleteT_intro(teacher_id);
-      mav.addObject("message", teacher_id +"가 삭제되었습니다.");
+      
       mav.setViewName("redirect:t_intro_list.do");
       return mav;
    }
@@ -185,17 +187,19 @@ public class T_introController {
 
       /*SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");*/
         SimpleDateFormat dateFormat =new SimpleDateFormat("yyyy년 MM월 dd일 hh시mm분ss초");
-         Date date = new Date();
+         dto.setMember_id((String)request.getSession().getAttribute("sessionid")); 
+        Date date = new Date();
          String r_write_time = dateFormat.format(date);
          dto.setR_write_time(r_write_time);
-
-         String teacher_id = request.getParameter("teacher_id");
+         System.out.println(dto.getR_headline());
+         
+         int teacher_id = Integer.parseInt(request.getParameter("teacher_id"));
          System.out.println("teacher_id"+teacher_id);
-         Integer.parseInt(teacher_id);
          
-         T_introDTO dto2 = t_introDAO.getT_introByteacher_id(Integer.parseInt(teacher_id));
-         
+         T_introDTO dto2 = t_introDAO.getT_introByteacher_id(teacher_id);
+         System.out.println(dto.getTeacher_id());
       ModelAndView mav = new ModelAndView();
+      dto.setTeacher_id(teacher_id);
       reviewDAO.insertReivew(dto);
 
       mav.addObject("dto2", dto2);

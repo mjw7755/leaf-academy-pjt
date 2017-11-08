@@ -14,15 +14,18 @@
 </script>
 </head>
 <body>
-	teacher_id : ${dto.teacher_id} <br> 
+	<input type="hidden" value="${dto.teacher_id}"> <br> 
 	강사명 : ${dto.member_id} <br> 
 	약력 : ${dto.teacher_introduce} <br>
 	<input type="button" value="목록보기" onclick="window.location.href='t_intro_list.do' ">
+	
+	<c:if test="${sessionScope.sessionid == dto.member_id or sessionScope.sessionid == '관리자'}">
 	<a href="t_intro_updateform.do?teacher_id=${dto.teacher_id }">
 	<button	id="edit">수 정</button> </a>
 	
 	<a href="t_intro_delete.do?teacher_id=${ dto.teacher_id }">
 	<button id="delete" onclick="hide()">삭 제</button> </a>
+	</c:if>
 	<br>
 	<hr>
 	<table>

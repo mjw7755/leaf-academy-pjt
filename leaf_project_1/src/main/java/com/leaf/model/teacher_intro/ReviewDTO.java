@@ -1,8 +1,8 @@
 package com.leaf.model.teacher_intro;
 
 public class ReviewDTO {
-	private String member_id, teacher_id, r_headline, r_content, r_write_time, r_modify_time;
-	private int review_id, enabled;
+	private String member_id, r_headline, r_content, r_write_time, r_modify_time;
+	private int review_id, enabled, teacher_id;
 	
 	
 	
@@ -12,10 +12,10 @@ public class ReviewDTO {
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
 	}
-	public String getTeacher_id() {
+	public int getTeacher_id() {
 		return teacher_id;
 	}
-	public void setTeacher_id(String teacher_id) {
+	public void setTeacher_id(int teacher_id) {
 		this.teacher_id = teacher_id;
 	}
 	public String getR_headline() {
@@ -56,7 +56,7 @@ public class ReviewDTO {
 	}
 	
 	public ReviewDTO() {}
-	public ReviewDTO(String member_id, String teacher_id, String r_headline, String r_content, String r_write_time,
+	public ReviewDTO(String member_id, int teacher_id, String r_headline, String r_content, String r_write_time,
 			String r_modify_time, int review_id, int enabled) {
 		super();
 		this.member_id = member_id;
