@@ -53,11 +53,11 @@ dd {
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 <body>
-<table>
+<table style="width: 1000px">
 		<th><b>자주 묻는 질문(FAQ)</b></th><br> 
 			<c:forEach items="${ list }" var="list">
 				<tr>
-					<td>번호:</td><td>${list.faq_id }</td>
+					<td>번호:${list.faq_id }</td>
 				</tr>
 				<tr>
 					<td><dt>${list.faq_title}</dt>
@@ -65,11 +65,11 @@ dd {
 					</td>
 				</tr>	
 				<tr>	
-					<td><a href="faq_updateform.do?faq_id=${ list.faq_id }"><button>수 정</button></a></td>
-      	 		    <td><a href="faq_delete.do?faq_id=${ list.faq_id }"><button>삭 제</button></a></td> 
+					<td><a href="faq_updateform.do?faq_id=${ list.faq_id }"><button>수 정</button></a>
+					<a href="faq_delete.do?faq_id=${ list.faq_id }"><button>삭 제</button></a></td> 
 				</tr>		
 			</c:forEach>
-			</table>
+</table>
 
 <a href="faq_writeform.do"><button>추 가</button></a>
 

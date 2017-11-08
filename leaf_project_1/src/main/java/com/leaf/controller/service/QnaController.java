@@ -200,7 +200,7 @@ public class QnaController {
 			model.addAttribute("replyForm", new QnaDTO());
 		}
 		QnaDTO dto = qnaDAO.qnaSelectId(qna_id);
-	
+		
 		//qnaDAO.replyBoardStep(dto);
 		
 		model.addAttribute("dto", dto);
@@ -210,7 +210,7 @@ public class QnaController {
 	
 	@RequestMapping("/replyok.do")
 	public ModelAndView replyok(@ModelAttribute("replyForm")  QnaDTO dto,
-            BindingResult result) {
+            BindingResult result, HttpServletRequest request) {
 		//if (result.hasErrors()) return new ModelAndView("reply");
 		qnaDAO.replyBoardStep(dto);
 		
@@ -218,7 +218,7 @@ public class QnaController {
 		Date date = new Date();
 		String qna_writedate = df.format(date);
 		dto.setQna_writedate(qna_writedate);
-		
+		dto.setMember_id((String)request.getSession().getAttribute("sessionid")); 
 		qnaDAO.replyBoard(dto);
 		
 		
