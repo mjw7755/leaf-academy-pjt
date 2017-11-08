@@ -68,7 +68,7 @@ public class QnaController {
 		Date date = new Date();
 		String qna_writedate = df.format(date);
 		dto.setQna_writedate(qna_writedate);
-		
+		dto.setMember_id((String)request.getSession().getAttribute("sessionid")); 
 		int qna_id;
 		qnaDAO.qnaInsert(dto);
 		

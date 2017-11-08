@@ -9,8 +9,6 @@
 </head>
 <body>
 <form action="notice_update.do">
-			notice_id : <input readonly="readonly" type="text" name="notice_id" value="${dto.notice_id}"><br>
-			member_id : <input type="text" name="member_id" value="${dto.member_id}"><br>
 			notice_title : <input type="text" name="notice_title" value="${dto.notice_title}"><br>
 			notice_content : <input type="text" name="notice_content" value="${dto.notice_content}"><br>
 						<input type="button" value="취소"

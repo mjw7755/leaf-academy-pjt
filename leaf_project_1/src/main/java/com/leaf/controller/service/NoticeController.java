@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,13 +53,13 @@ public class NoticeController {
 	
 	
 	@RequestMapping("/notice_write.do")
-	public ModelAndView write(NoticeDTO dto) throws Exception {
+	public ModelAndView write(NoticeDTO dto, HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		SimpleDateFormat df =new SimpleDateFormat("yyyy년 MM월 dd일 hh시mm분ss초");
 		Date date = new Date();
 		String notice_writedate = df.format(date);
 		dto.setNotice_writedate(notice_writedate);
-		
+		dto.setMember_id((String)request.getSession().getAttribute("sessionid"));
 		noticeDAO.noticeInsert(dto);
 		mav.setViewName("redirect:notice_list.do");
 		return mav;
