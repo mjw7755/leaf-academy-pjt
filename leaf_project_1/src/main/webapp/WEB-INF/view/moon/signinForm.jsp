@@ -14,11 +14,11 @@
 		</tr>
 		
 		<tr>
-			<td>비밀번호 : </td><td><input type="text" name="member_pwd"></td>
+			<td>비밀번호 : </td><td><input type="password" name="member_pwd"></td>
 		</tr>
 			
 		<tr>
-			<td>비밀번호 확인 : </td><td><input type="text" name="member_pwd_confirm"></td>
+			<td>비밀번호 확인 : </td><td><input type="password" name="member_pwd_confirm"></td>
 		</tr>
 		
 		<tr>
