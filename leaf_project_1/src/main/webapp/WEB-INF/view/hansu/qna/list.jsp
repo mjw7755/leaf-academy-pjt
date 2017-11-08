@@ -58,7 +58,7 @@ table th{
 table tr:nth-child(even) {
    background-color: lightgray;
 }
-table tr:HOVER {
+/* table tr:HOVER {
    color: white;
    background-color: black;
 }
@@ -66,7 +66,7 @@ table tr:ACTIVE{
    color: black;
    font-weight:bold;
    background-color: lightyellow;
-}
+} */
 </style>
 <!-- <script type="text/javascript">
 

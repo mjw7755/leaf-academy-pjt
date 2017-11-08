@@ -63,7 +63,7 @@ table th{
 table tr:nth-child(even) {
    background-color: lightgray;
 }
-table tr:HOVER {
+/* table tr:HOVER {
    color: white;
    background-color: black;
 }
@@ -71,7 +71,7 @@ table tr:ACTIVE{
    color: black;
    font-weight:bold;
    background-color: lightyellow;
-}
+} */
 </style>
 <!-- <script type="text/javascript">
 
@@ -91,6 +91,7 @@ function hide(){
   		 <th>notice_writedate</th>
   		 <c:if test="${sessionScope.sessionid == '관리자'}">
   		 <th><a href="notice_writeform.do"><button>추가</button></a></th>
+  		 </c:if>
  		 <c:if test="${sessionScope.sessionid == '관리자'}">
  		 <th colspan="2"><a href="#"><button id="multi" onclick="multiDelete()">다중삭제</button></a></th>     
       	</c:if>
