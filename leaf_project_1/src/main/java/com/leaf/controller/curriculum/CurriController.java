@@ -7,7 +7,9 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.leaf.model.curriculum.PhotoDTO;
 import com.leaf.model.curriculum.CurriDAO;
 import com.leaf.model.curriculum.CurriDTO;
 
@@ -32,46 +33,48 @@ public class CurriController {
 	@Autowired
 	private CurriDAO curriDAO;
 
-	@RequestMapping("/curri_list.do")
-	public String list(Model model, HttpServletRequest request) {
+	@RequestMapping("/list_curri.do")
+	public String list(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String flag = "list";
 
-		 String strPage = request.getParameter("page");
-	      int page;
-	      if (strPage == null) {page = 1;} 
-	      else {page = Integer.parseInt(request.getParameter("page"));}
-		List<CurriDTO> list = curriDAO.getCurriList(page);
-
-		int count = curriDAO.getCount();
-		int countPage = (int) Math.ceil((float) count / 5);
-		int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
-		model.addAttribute("count", count);
-		model.addAttribute("countPage", countPage);
-		model.addAttribute("startPage", startPage);
-		model.addAttribute("list", list);
-
-		return "curriculum/list";
+	    String strPage = request.getParameter("page");
+	       int page;
+	       if (strPage == null) {page = 1;} 
+	       else {page = Integer.parseInt(request.getParameter("page"));}
+	       //List<MemberDTO> list = memberdao.getMemberList(page);
+	       List<CurriDTO> list = curriDAO.listCurri(page);
+	       int count = curriDAO.getCount();
+	       int countPage = (int) Math.ceil((float) count / 5);
+	       int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
+	       model.addAttribute("count", count);
+	       model.addAttribute("countPage", countPage);
+	       model.addAttribute("startPage", startPage);
+	    model.addAttribute("list", list);
+	    model.addAttribute("flag",flag);
+		return "curriculum.list";
 	}
 
 	@RequestMapping("/writeform_curri.do")
 	public String writeForm() {
-		return "curriculum/writeForm";
+		
+		return "curriculum.writeForm";
 	}
 
 	@RequestMapping(value = "/write_curri.do", method = RequestMethod.POST)
-	public ModelAndView write(CurriDTO dto) throws Exception {
+	public ModelAndView write(CurriDTO dto, HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
-
+		dto.setMember_id((String)request.getSession().getAttribute("sessionid"));
+		System.out.println("session" + dto.getMember_id());
 		SimpleDateFormat sdf_t = new SimpleDateFormat("yy-MM-dd / kk:mm:ss");
 		Date date = new Date();
-		System.out.println("1"+ dto.getCurri_content());
+		System.out.println(dto);
 		String curri_write_time = sdf_t.format(date);
-		System.out.println("4"+ dto.getCurri_content());
 		dto.setCurri_write_time(curri_write_time);
-		System.out.println("5"+ dto.getCurri_content());
+		System.out.println("asd:"+dto.getCurri_content());
 		
 		curriDAO.insertCurri(dto);
 		System.out.println("2"+ dto.getCurri_content());
-		mav.setViewName("redirect:curri_list.do");
+		mav.setViewName("redirect:list_curri.do");
 		System.out.println("3"+ dto.getCurri_content());
 		
 		return mav;
@@ -81,7 +84,7 @@ public class CurriController {
 	public ModelAndView delete(@RequestParam("curri_id") int curri_id) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		curriDAO.deleteCurri(curri_id);
-		mav.setViewName("redirect:curri_list.do");
+		mav.setViewName("redirect:list_curri.do");
 		return mav;
 	}
 
@@ -96,7 +99,7 @@ public class CurriController {
 		String curri_modify_time = sdf_t.format(date);
 		dto.setCurri_modify_time(curri_modify_time);
 		curriDAO.updateCurri(dto);
-		mav.setViewName("redirect:curri_list.do");
+		mav.setViewName("redirect:list_curri.do");
 		return mav;
 	}
 
@@ -105,22 +108,22 @@ public class CurriController {
 		ModelAndView mav = new ModelAndView();
 		CurriDTO dto = curriDAO.updateFormCurri(curri_id);
 		mav.addObject("dto", dto);
-		mav.setViewName("curriculum/updateForm");
+		mav.setViewName("curriculum.updateForm");
 		return mav;
 	}
 
 	@RequestMapping("/detail_curri.do")
 
-	public ModelAndView curriDetail(@RequestParam int curri_id) throws Exception {
+	public ModelAndView detailCurri(@RequestParam int curri_id) throws Exception {
 		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName("curriculum/detail");
+		mav.setViewName("curriculum.detail");
 		mav.addObject("dto", curriDAO.updateFormCurri(curri_id));
 		return mav;
 
 	}
 	
-	//?ã®?ùº?åå?ùº?óÖÎ°úÎìú
+	/*//?ã®?ùº?åå?ùº?óÖÎ°úÎìú
 	@RequestMapping("/photoUpload")
 	public String photoUpload(HttpServletRequest request, PhotoDTO dto){
 	    String callback = dto.getCallback();
@@ -210,8 +213,50 @@ public class CurriController {
 	    } catch (Exception e) {
 	        e.printStackTrace();
 	    }
-	}
+	}*/
 
+	@RequestMapping("/search_curri.do")
+	public String search(Model model, HttpServletRequest request) throws Exception{
+
+
+		   String flag = "search";
+		      //Ïª¨ÎüºÎ™?
+		         String column =request.getParameter("column");
+		         String keyvalue = request.getParameter("keyvalue");
+		         System.out.println(column + " / " + keyvalue);
+		         
+		         Map<String, Object> map = new HashMap<String, Object>(); //colcurriion
+		         map.put("column",column ); //column : name or email or home
+		         map.put("keyvalue", keyvalue); //keyvalue 
+		        
+		         String strPage = request.getParameter("page");
+		         int page;
+		         if (strPage == null) {page = 1;} 
+		         else {page = Integer.parseInt(request.getParameter("page"));}
+		         //List<MemberDTO> list = memberdao.getMemberList(page);
+		         map.put("page", page);
+		         int count = curriDAO.getSearchCount(map);
+		         //count = page;
+		         int countPage = (int) Math.ceil((float) count / 5);
+		         int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
+		        System.out.println(count);
+		         model.addAttribute("count", count);
+		         model.addAttribute("countPage", countPage);
+		         model.addAttribute("startPage", startPage);
+		         model.addAttribute("column", column);
+		         model.addAttribute("keyvalue", keyvalue);
+
+		         map.put("column",column ); //column : name or email or home
+		         map.put("keyvalue", keyvalue); //keyvalue 
+		         map.put("page", String.valueOf(page));
+		      
+		         List<CurriDTO> list = curriDAO.searchCurri(map);
+		      
+		      
+		      model.addAttribute("list", list);
+		      model.addAttribute("flag",flag);
+		      return "curriculum.list";
+		   }
 
 }
 

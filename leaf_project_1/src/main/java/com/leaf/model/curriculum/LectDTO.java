@@ -5,16 +5,11 @@ public class LectDTO {
 			lect_end_day, lect_start_time,
 			lect_end_time, lect_write_time,
 			lect_modify_time;
+	private int lect_id, curri_id, enabled, lect_accept, lect_person_num;
 	
-	public String getLect_name() {
-		return lect_name;
-	}
+	
 
-	public void setLect_name(String lect_name) {
-		this.lect_name = lect_name;
-	}
-
-	private int lect_id, curri_id, enable, lect_accept, lect_person_num;
+	
 
 	public LectDTO() {}
 
@@ -90,12 +85,12 @@ public class LectDTO {
 		this.curri_id = curri_id;
 	}
 
-	public int getEnable() {
-		return enable;
+	public int getEnabled() {
+		return enabled;
 	}
 
-	public void setEnable(int enable) {
-		this.enable = enable;
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
 	}
 
 	public int getLect_accept() {
@@ -114,9 +109,16 @@ public class LectDTO {
 		this.lect_person_num = lect_person_num;
 	}
 
+	public String getLect_name() {
+		return lect_name;
+	}
+
+	public void setLect_name(String lect_name) {
+		this.lect_name = lect_name;
+	}
 	public LectDTO(String lect_name, String lect_start_day, String lect_end_day, String lect_start_time,
 			String lect_end_time, String lect_week, String lect_write_time, String lect_modify_time, int lect_id,
-			int curri_id, int enable, int lect_accept, int lect_person_num) {
+			int curri_id, int enabled, int lect_accept, int lect_person_num) {
 		super();
 		this.lect_name = lect_name;
 		this.lect_start_day = lect_start_day;
@@ -127,7 +129,7 @@ public class LectDTO {
 		this.lect_modify_time = lect_modify_time;
 		this.lect_id = lect_id;
 		this.curri_id = curri_id;
-		this.enable = enable;
+		this.enabled = enabled;
 		this.lect_accept = lect_accept;
 		this.lect_person_num = lect_person_num;
 	}
@@ -137,7 +139,7 @@ public class LectDTO {
 		return "LectDTO [lect_name=" + lect_name + ", lect_start_day=" + lect_start_day + ", lect_end_day="
 				+ lect_end_day + ", lect_start_time=" + lect_start_time + ", lect_end_time=" + lect_end_time
 				+ ", lect_week=" + ", lect_write_time=" + lect_write_time + ", lect_modify_time="
-				+ lect_modify_time + ", lect_id=" + lect_id + ", curri_id=" + curri_id + ", enable=" + enable
+				+ lect_modify_time + ", lect_id=" + lect_id + ", curri_id=" + curri_id + ", enabled=" + enabled
 				+ ", lect_accept=" + lect_accept + ", lect_person_num=" + lect_person_num + "]";
 	}
 	

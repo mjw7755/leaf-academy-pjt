@@ -6,7 +6,28 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+<style type="text/css">
+   textarea { 
+   resize: none; 
+   overflow: visible;
+   }
+   
+   table {
+	text-align: center;
+	font-size: 20px;
+    margin-left: auto;
+    margin-right: auto;
+	}
+	legend {
+	align-content: center;
+	}
+</style>
+
 <body>
+	<fieldset>
+	<legend>
+			<h3>강좌수정</h3>
+		</legend>
 	<form action="update_curri.do">
 		<table style="text-align: center;">
 			<input type="hidden" name="curri_id" value="${dto.curri_id }">
@@ -20,8 +41,10 @@
 			<tr>
 				<td>강좌레벨</td>
 				<td>:</td>
-				<td><select name="curri_level" value="${curri_level }">
-						<option value="레벨" selected="selected"> ${dto.curri_level }</option>
+				<td><select name="curri_level" value="${dto.curri_level }">
+						
+							<option value="${dto.curri_level }" > ${dto.curri_level }</option>
+						
 						<option value="초급"> 초급 </option>
 						<option value="중급"> 중급 </option>
 						<option value="고급"> 고급 </option>
@@ -31,14 +54,20 @@
 			<tr>
 				<td>강좌내용</td>
 				<td>:</td>
-				<td><input type="textarea" name="curri_content" required="required"
-					value="${dto.curri_content}"></td>
+				<td>
+				<textarea rows=30 cols=50 id="curri_content" name="curri_content" class="curri_content" required="required"
+					value="${dto.curri_content}">${dto.curri_content}
+				</textarea>
+				</td>
 			</tr>
 
 			<tr>
-				<td><input type="button" value="취소"
-					onclick="window.location.href='curri_list.do' "></td>
-				<td><input type="submit" value="수정하기"></td>
+				<td colspan="3">
+					<input type="button" value="취소"
+						onclick="window.location.href='list_curri.do' ">
+					
+					<input type="submit" value="수정하기">
+				</td>
 			</tr>
 
 
@@ -46,5 +75,6 @@
 
 
 	</form>
+	</fieldset>
 </body>
 </html>

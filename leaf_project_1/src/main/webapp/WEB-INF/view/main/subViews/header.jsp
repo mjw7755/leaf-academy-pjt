@@ -125,10 +125,10 @@ clear:left;
 		<div class="menubar">
 			<ul>
 				<li><a href="t_intro_list.do">소개</a></li>
-				<li><a href="list_curri.do">교육과정</a>
+				<li><a href="list_lect.do">교육과정</a>
 				<ul>
 						<li><a href="list_curri.do">커리큘럼</a></li>
-						<li><a href="list_lect.do">수강신청</a></li>
+						<li><a href="list_lect.do">교육과정</a></li>
 				</ul>
 				</li>
 				<li><a href="book_list.do">자료실</a>

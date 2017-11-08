@@ -18,12 +18,12 @@
 		</legend>
 		<form action="write_lect.do" method="post">
 			<table style="text-align: center;">
-				<tr>
+				<%-- <tr>
 					<td>강좌명</td>
 					<td>:</td>
 					<td><input type="text" name="lect_id" required="required"
 						value="${lect_id}"></td>
-				</tr>
+				</tr> --%>
 
 				<tr>
 					<td>클래스명</td>
@@ -83,7 +83,7 @@
 
 				<tr>
 					<td><input type="button" value="취소" style="width: 100%;"
-						onclick="window.location.href='lect_list.do' "></td>
+						onclick="window.location.href='list_lect.do' "></td>
 					<td><input type="submit" value="추가" style="width: 100%"></td>
 				</tr>
 			</table>

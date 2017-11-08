@@ -72,7 +72,7 @@
 					
 				</tr>
 				<tr>
-					<td><input type="button" value="취소"  onclick="window.location.href='lect_list.do' "></td>
+					<td><input type="button" value="취소"  onclick="window.location.href='list_lect.do' "></td>
 					<td><input type ="submit" value ="수정하기"></td>
 				</tr>
 

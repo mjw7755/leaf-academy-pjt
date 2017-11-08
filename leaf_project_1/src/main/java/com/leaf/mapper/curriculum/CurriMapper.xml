@@ -4,7 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.leaf.model.curriculum.CurriDAO">
-	<select id="getCurriList" parameterType="Integer"
+	<select id="listCurri" parameterType="Integer"
 		resultType="com.leaf.model.curriculum.CurriDTO">
 		
 		 select * from
@@ -23,9 +23,9 @@
 		</selectKey>
 
 		insert into
-		curriculum(curri_id, curri_level, curri_subject,
+		curriculum(curri_id, member_id, curri_level, curri_subject,
 		curri_content, curri_write_time)
-		values(#{curri_id}, #{curri_level},
+		values(#{curri_id}, #{member_id}, #{curri_level},
 		#{curri_subject}, #{curri_content},
 		#{curri_write_time})
 
@@ -46,6 +46,22 @@
 	<select id="getCount" parameterType="Integer" resultType="Integer">
 		select count(*) from curriculum
 	</select>
+	
+	<select id="searchCurri" parameterType="hashMap"
+		resultType="com.leaf.model.curriculum.CurriDTO">
+		
+      select * from (SELECT ROWNUM NUM, m.* FROM
+      ( select curri_id ,member_id, curri_level, curri_subject, curri_content, curri_write_time, curri_modify_time, curri_accept, enabled, 
+       rownum r from curriculum where ${column} like '%' || #{keyvalue} || '%' order by curri_id desc) m)
+      where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
+      
+ 
+	</select>
+	
+	 <select id="getSearchCount" parameterType="hashMap" resultType="Integer">
+      select count(*) from curriculum where ${column} like '%' || #{keyvalue} || '%'
+   </select>
+	
 </mapper>
 	
 	

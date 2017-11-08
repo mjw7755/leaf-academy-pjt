@@ -8,6 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.leaf.model.curriculum.LectDAO;
+
 
 
 @Component
@@ -18,9 +20,9 @@ public class CurriDAOImpl implements CurriDAO {
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<CurriDTO> getCurriList() {
+	public List<CurriDTO> listCurri() {
 		CurriDAO dao = sqlSession.getMapper(CurriDAO.class);
-		return dao.getCurriList();
+		return dao.listCurri();
 	}
 
 	@Override
@@ -54,19 +56,19 @@ public class CurriDAOImpl implements CurriDAO {
 	}
 
 	@Override
-	public List<CurriDTO> searchCurriList(Map<String, String> map) {
+	public List<CurriDTO> searchCurri(Map<String, Object> map) {
 		CurriDAO dao = sqlSession.getMapper(CurriDAO.class);
-		return dao.searchCurriList(map);
+		return dao.searchCurri(map);
 	}
 
 	
 	 @Override
-	 public int curriDetail(int curri_id ) throws ClassNotFoundException, SQLException{
+	 public int detailCurri(int curri_id ) throws ClassNotFoundException, SQLException{
 		 
 		
 		CurriDAO dao =  sqlSession.getMapper(CurriDAO.class);
 				
-		 return dao.curriDetail(curri_id);
+		 return dao.detailCurri(curri_id);
 	 }
 
 	@Override
@@ -76,8 +78,14 @@ public class CurriDAOImpl implements CurriDAO {
 	}
 
 	@Override
-	public List<CurriDTO> getCurriList(int page) {
+	public List<CurriDTO> listCurri(int page) {
 		CurriDAO dao =  sqlSession.getMapper(CurriDAO.class);
-		return dao.getCurriList(page);
+		return dao.listCurri(page);
+	}
+
+	@Override
+	public int getSearchCount(Map<String, Object> map) {
+		 CurriDAO dao = sqlSession.getMapper(CurriDAO.class);
+		return dao.getSearchCount(map);
 	}
 }

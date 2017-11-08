@@ -21,10 +21,10 @@ table th {
 }
 
 table tr:nth-child(even) {
-	background-color: lightgray;
+	background-color: white;
 }
 
-table tr:HOVER {
+/* table tr:HOVER {
 	color: white;
 	background-color: black;
 }
@@ -33,11 +33,11 @@ table tr:ACTIVE {
 	color: black;
 	font-weight: bold;
 	background-color: lightyellow;
-}
+} */
 
 #delete {
-	background-color: pink;
-	color: red;
+	background-color: white;
+	color: black;
 }
 
 #edit {
@@ -63,7 +63,7 @@ button {
 		alert(message);
 
 	function listChange(params) {
-		var url = params.value + "_list.do";
+		var url = "list_"+params.value+".do";
 		window.location.href = url;
 	}
 
@@ -107,7 +107,7 @@ button {
 
 <body>
 	
-	<table>
+	<!-- <table>
 		<tr>
 			<td><input type="button" value="1월"></td><td><input type="button" value="2월"></td><td><input type="button" value="3월"></td>
 			<td><input type="button" value="4월"></td><td><input type="button" value="5월"></td><td><input type="button" value="6월"></td>
@@ -116,27 +116,10 @@ button {
 			<td><input type="button" value="7월"></td><td><input type="button" value="8월"></td><td><input type="button" value="9월"></td>
 			<td><input type="button" value="10월"></td><td><input type="button" value="11월"></td><td><input type="button" value="12월"></td>
 		</tr>
-	</table>
+	</table> -->
 	
 	<h3>
-		<%-- <select	style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;"
-					onchange="listChange(this);">
-					<option value="all" selected="selected" <c:out value="${mapl.s }"></c:out> 클래스명 </option>
-					<option value="lect_person_num" >인원 </option>
-					<option value="lect_name" >클래스명 </option>
-
-<option value="all" <c:out value="${map.searchOption == 'all'?'selected':''}"/> >제목+이름+제목</option>
-            <option value="writer" <c:out value="${map.searchOption == 'writer'?'selected':''}"/> >이름</option>
-            <option value="content" <c:out value="${map.searchOption == 'content'?'selected':''}"/> >내용</option>
-            <option value="title" <c:out value="${map.searchOption == 'title'?'selected':''}"/> >제목</option>
-		</select> --%>
-		<form action="search_lect.do" method="post">
-			검색어 입력 : <input size="30" type="search" id="keyvalue" name="keyvalue"
-				placeholder="키워드 검색 가능합니다." list="lectlist"> 
-				<input type="submit" id="searchbtn" name="" value="검색">&nbsp;
-				<a href="lect_list.do"></a>
-				
-		</form>
+	
 
 	
 	<datalist id="lectlist">
@@ -159,48 +142,91 @@ button {
 			</legend>
 
 			<table cellpadding="5" style="text-align: center;">
-				<th colspan="2"><b>날짜</b></th>
-				<th><b>강좌명</b></th>
-				<th><b>클래스명</b></th>
-				<th><b>수강인원</b></th>
-				<th colspan="2"><b>수강시간</b></th>
-
-				<th id="multi"><b></b></th>
-
+				<tr>
+					<th colspan="2"><b>날짜</b></th>
+					<!-- <th><b>강좌명</b></th> -->
+					<th><b>클래스명</b></th>
+					<th><b>수강인원</b></th>
+					<th colspan="2"><b>수강시간</b></th>
+				<!-- 	<th colspan ="2"><a href="#"><button id = "multi" onclick="multiDelete()">다중삭제</button></a></th> -->
+					<th><b>허용여부</b></th>
+					<th><b>삭제여부</b></th>
+				</tr>
 				<c:forEach items="${list }" var="list" varStatus="status">
 					<tr onclick="test(this)">
 						<td colspan="2">${list.lect_start_day} ~ ${list.lect_end_day }</td>
 
-						<td>${list.lect_id}</td>
+						<%-- <td>${list.lect_id}</td> --%>
 						<td>${list.lect_name}</td>
+						
 						<td>${list.lect_person_num}</td>
 						<td colspan="2">${list.lect_start_time}~ ${list.lect_end_time }</td>
-
+						<td>${list.lect_accept}</td>
+						<td>${list.enabled}</td>
 						<td><a href="delete_lect.do?lect_id=${list.lect_id}">
-							<button	id="delete">삭제</button></a></td>
+							<button	id="delete">삭제</button></a>
+						</td>
 						<td><a href="updateForm_lect.do?lect_id=${list.lect_id}">
-							<button	id="update">수정</button></a></td>
-						<td id="multi"><input type="checkbox" style="width: 30px;"
-							name="lect_id" value="${list.lect_id}"></td>
+							<button	id="update">수정</button></a>
+						</td>
+						<td id="multi">
+							<input type="checkbox" style="width: 30px;"
+							name="lect_id" value="${list.lect_id}">
+						</td>
 					</tr>
 				</c:forEach>
 
 			</table>
 
-			<c:if test="${param.page>5}">
-				<a class="button btn-prev" href="lect_list.do?page=${startPage-1}">이전</a>
-			</c:if>
-			<c:forEach var="i" begin="0" end="4" varStatus="status">
-				<c:if test="${countPage>=startPage+i}">
-					<a class="strong" href="lect_list.do?page=${startPage+i}">${startPage+i}</a>
-				</c:if>
-			</c:forEach>
-			<c:if test="${countPage>=startPage+5}">
-				<a class="strong" href="lect_list.do?page=${startPage+5}">다음</a>
-			</c:if>
+     <div>
+      <c:if test="${param.page>5}">
+         <c:if test="${flag == 'list' }">
+         <a class="button btn-prev" href="list_lect.do?page=${startPage-1}">이전</a>
+         </c:if>
+         <c:if test="${flag == 'search' }">
+         <a class="button btn-prev" href="search_lect.do?page=${startPage-1}&column=${column}&keyvalue=${keyvalue}">이전</a>
+         </c:if>
+      </c:if>
+      <c:forEach var="i" begin="0" end="4" varStatus="status">
+      <c:if test="${countPage>=startPage+i}">
+      <c:if test="${flag == 'list' }">
+         <a class="strong" href="list_lect.do?page=${startPage+i}">${startPage+i}</a></li>
+         </c:if>
+         <c:if test="${flag == 'search' }">
+          <a class="strong" href="search_lect.do?page=${startPage+i}&column=${column}&keyvalue=${keyvalue}">${startPage+i}</a></li>
+         </c:if>
+        
+      </c:if>
+   </c:forEach>
+      <c:if test="${countPage>=startPage+5}">
+           <c:if test="${flag == 'list' }">
+         <a class="strong" href="list_lect.do?page=${startPage+5}">다음</a></li>
+         </c:if>
+         <c:if test="${flag == 'search' }">
+         <a class="strong" href="search_lect.do?page=${startPage+5}&column=${column}&keyvalue=${keyvalue}">다음</a></li>
+         </c:if>
+         
+      </c:if>
+   </div>
+
+
 
 		</fieldset>
 	</div>
+	
+		<form action="search_lect.do" method="post">
+			<select name="column">	
+				<option value="lect_name">클래스명</option>
+      		    <option value="lect_start_day">시작일</option>
+         		<option value="lect_person_num">수강생수</option>
+			</select>		
+				<input size="30" type="text" id="keyvalue" name="keyvalue"
+					placeholder="키워드 검색 가능합니다." > 
+				<input type="submit" id="searchbtn" value="검색">&nbsp;
+				
+		</form>
+	
+	
 	
 
 </body>

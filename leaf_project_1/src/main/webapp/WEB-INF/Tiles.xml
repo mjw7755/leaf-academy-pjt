@@ -4,6 +4,26 @@
        "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
        
 <tiles-definitions>
+	<definition name="lecture.*" template="/WEB-INF/view/main/subViews/baseLayout.jsp">
+		<put-attribute name="title" value="/WEB-INF/view/heok/lecture/subViews/title.jsp"/>
+		<put-attribute name="header" value="/WEB-INF/view/main/subViews/header.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/view/main/subViews/footer.jsp"/>
+		<put-attribute name="aside" value="/WEB-INF/view/main/subViews/leftMenu.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/view/heok/lecture/{1}.jsp"/>
+		<put-attribute name="css" value="/WEB-INF/view/heok/lecture/css/{1}.css"/>
+		<put-attribute name="js" value="/WEB-INF/view/heok/lecture/js/{1}.js"/>
+	</definition>  
+	   
+	<definition name="curriculum.*" template="/WEB-INF/view/main/subViews/baseLayout.jsp">
+		<put-attribute name="title" value="/WEB-INF/view/heok/curriculum/subViews/title.jsp"/>
+		<put-attribute name="header" value="/WEB-INF/view/main/subViews/header.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/view/main/subViews/footer.jsp"/>
+		<put-attribute name="aside" value="/WEB-INF/view/main/subViews/leftMenu.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/view/heok/curriculum/{1}.jsp"/>
+		<put-attribute name="css" value="/WEB-INF/view/heok/curriculum/css/{1}.css"/>
+		<put-attribute name="js" value="/WEB-INF/view/heok/curriculum/js/{1}.js"/>
+	</definition>  	  
+       
 	<definition name="qna.*" template="/WEB-INF/view/main/subViews/baseLayout.jsp">
 		<put-attribute name="title" value="/WEB-INF/view/hansu/qna/subViews/title.jsp"/>
 		<put-attribute name="header" value="/WEB-INF/view/main/subViews/header.jsp"/>

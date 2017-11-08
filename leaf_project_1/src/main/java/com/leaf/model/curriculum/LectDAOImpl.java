@@ -8,8 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.leaf.model.curriculum.CurriDAO;
-import com.leaf.model.curriculum.CurriDTO;
+import com.leaf.model.curriculum.LectDAO;
+import com.leaf.model.curriculum.LectDTO;
 
 
 @Component
@@ -46,9 +46,9 @@ public class LectDAOImpl implements LectDAO {
 	}
 
 	@Override
-	public List<LectDTO> searchLectList(Map<String, Object> map) {
+	public List<LectDTO> searchLect(Map<String, Object> map) {
 		LectDAO dao =sqlSession.getMapper(LectDAO.class);
-		return dao.searchLectList(map);
+		return dao.searchLect(map);
 	}
 
 	@Override
@@ -58,9 +58,9 @@ public class LectDAOImpl implements LectDAO {
 	}
 
 	@Override
-	public List<LectDTO> getLectList(int page) {
+	public List<LectDTO> listLect(int page) {
 		LectDAO dao = sqlSession.getMapper(LectDAO.class);
-		return dao.getLectList(page);
+		return dao.listLect(page);
 	}
 
 	@Override
@@ -70,9 +70,9 @@ public class LectDAOImpl implements LectDAO {
 	}
 
 	@Override
-	public int multiLectDelete(List deleteTargets) {
+	public int multiDeleteLect(List deleteTargets) {
 		LectDAO dao = sqlSession.getMapper(LectDAO.class);
-		return dao.multiLectDelete(deleteTargets);
+		return dao.multiDeleteLect(deleteTargets);
 	}
 
 

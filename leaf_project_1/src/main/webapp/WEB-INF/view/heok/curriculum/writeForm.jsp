@@ -14,6 +14,22 @@
 <script type="text/javascript" src="./resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
  
 </head>
+<style type="text/css">
+   textarea { 
+   resize: none; 
+   overflow: visible;
+   }
+   
+   table {
+	text-align: center;
+	font-size: 20px;
+    margin-left: auto;
+    margin-right: auto;
+	}
+	legend {
+	align-content: center;
+}
+</style>
 <script type="text/javascript">
     $(function(){
         //전역변수
@@ -45,16 +61,15 @@
 <body>
 	<fieldset>
 		<legend>
-			<h3>강좌추가 입니다.</h3>
+			<h3>강좌추가</h3>
 		</legend>
-		<form action="write_curri.do" method="post" id="writeForm" enctype = "multipart/form-data">
+		<form action="write_curri.do" method="post" id="writeForm" >
 			<table style="text-align: center;">
 				<tr>
 					<td>강좌명</td>
 					<td>:</td>
 					<td>
-						<input type="text" name="curri_subject" required="required"
-						value="${curri_subject }">
+						<input type="text" name="curri_subject" required="required">
 					</td>
 				</tr>
 
@@ -62,7 +77,7 @@
 					<td>강좌레벨</td>
 					<td>:</td>
 					<td>
-						<select name="curri_level" value="${curri_level }">
+						<select name="curri_level">
 						<option value="레벨" selected="selected"> 레벨을 선택하세요 </option>
 						<option value="초급" > 초급 </option>
 						<option value="중급" > 중급 </option>
@@ -74,14 +89,22 @@
 					<td>강좌내용</td>
 					<td>:</td>
 					<td colspan ='4'>
-						 <textarea name="editor" id="editor" style="width: 700px; height: 400px;" value="${curri_content }"></textarea>
+							<textarea  rows=30 cols=50 id="curri_content" name="curri_content" class="curri_content" 
+								required="required"></textarea>
+					
+						<%--  <textarea name="editor" id="editor" style="width: 700px; height: 400px;" value="${curri_content }"></textarea> --%>
 					</td>
 				</tr>
-				
+				<tr >
+					<td colspan="3">
+						<input type="button" value="취소" 
+							onclick="window.location.href='list_curri.do' ">
+					
+						<input type="submit" id="savebutton"value="추가">
+					</td>
+				</tr>
 			</table>
-					<input type="button" value="취소" style="width: 100%;"
-						onclick="window.location.href='curri_list.do' ">
-					<input type="submit" id="savebutton"value="추가" style="width: 100%">
+					
        
     </form>
 

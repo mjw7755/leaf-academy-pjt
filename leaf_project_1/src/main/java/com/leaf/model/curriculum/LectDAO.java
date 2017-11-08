@@ -6,7 +6,7 @@ import java.util.Map;
 
 public interface LectDAO {
 
-	public List<LectDTO> getLectList(int page);
+	public List<LectDTO> listLect(int page);
 	
 	public void insertLect(LectDTO dto);
 
@@ -18,13 +18,13 @@ public interface LectDAO {
 
 	public LectDTO getLectByLect_id(int lect_id);
 
-	public List<LectDTO> searchLectList(Map<String, Object> map);
+	public List<LectDTO> searchLect(Map<String, Object> map);
 
 	public int getCount();
 
 	public int getSearchCount(Map<String, Object> map);
 	
-	public int multiLectDelete(List deleteTargets);
+	public int multiDeleteLect(List deleteTargets);
 
 	
 	
