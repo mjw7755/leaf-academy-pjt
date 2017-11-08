@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<jsp:scriptlet>
+    pageContext.setAttribute("cr", "\r");
+    pageContext.setAttribute("lf", "\n");
+    pageContext.setAttribute("crlf", "\r\n");
+</jsp:scriptlet>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,6 +25,15 @@ div {
 		<legend>
 			<h3>강좌</h3>
 		</legend>
+		<!-- <table>
+			<th></th><th></th><th></th>
+			<tr>
+				<td>
+				
+				</td>
+			</tr>
+		</table> -->
+		
 	<input type="hidden" name="curri_id" value="${dto.curri_id }">
 	<h1>
 		<div style="font-style: italic;color :gold; font-size: 80px;">${dto.curri_subject}</div>
@@ -26,7 +41,7 @@ div {
 	<div id="curri_detail" class="curri_detail margin-large">
 		
 		<dl class="curri_detail_row">
-			<dd class="curri_detail_data">${dto.curri_content}</dd>
+			<dd class="curri_detail_data">${fn:replace(dto.curri_content,crlf,'</br>')}</dd>
 		</dl>
 	
 	</div>
