@@ -101,7 +101,7 @@ function hide(){
             <td>${list.qna_writedate}</td>
             </c:if>
             <c:if test="${list.qna_modifydate != null}">
-            <td>${list.qna_modifydate}</td
+            <td>${list.qna_modifydate}</td>
             </c:if> 
             <c:if test="${sessionScope.sessionid == list.member_id or sessionScope.sessionid == '관리자'}">
             <td><a href="qna_updateform.do?qna_id=${ list.qna_id }"><button id="edit">수 정</button> </a></td>
