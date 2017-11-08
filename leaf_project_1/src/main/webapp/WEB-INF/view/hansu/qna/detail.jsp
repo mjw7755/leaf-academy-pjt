@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<jsp:scriptlet>
+    pageContext.setAttribute("cr", "\r");
+    pageContext.setAttribute("lf", "\n");
+    pageContext.setAttribute("crlf", "\r\n");
+</jsp:scriptlet>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -29,7 +35,7 @@
 		</tr>
 		<tr>
 			<td>내용</td>
-			<td>${dto.qna_content}</td>
+			<td>${fn:replace(dto.qna_content,crlf,'</br>')}</td>
 		</tr>
 		
 		<tr>
@@ -41,10 +47,15 @@
 			<td>${dto.qna_modifydate}</td>
 		</tr>
 		<tr>
-			<td colspan="2" align="center"><input type="button" value="수정하기" onClick="location.href='qna_updateform.do?qna_id=${ dto.qna_id }'"> 
+			<td colspan="2" align="center">
+			<c:if test="${sessionScope.sessionid == dto.member_id or sessionScope.sessionid == '관리자'}">
+			<input type="button" value="수정하기" onClick="location.href='qna_updateform.do?qna_id=${ dto.qna_id }'"> 
 				<input type="button" value="삭제하기" onClick="location.href='qna_delete.do?qna_id=${ dto.qna_id }'"> 
+			</c:if>	
 				<input type="button" value="목록보기" onClick="location.href='qna_list.do'">
+				<c:if test="${sessionScope.sessionid != null}">
 				<input type="button" value="답글" onClick="location.href='reply.do?qna_id=${ dto.qna_id }'">
+				</c:if>
 			</td>
 		</tr>
 	</table>

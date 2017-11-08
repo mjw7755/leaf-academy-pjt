@@ -87,6 +87,7 @@ public class NoticeController {
 	
 	@RequestMapping("/notice_update.do")
 	public ModelAndView update(NoticeDTO dto) throws Exception {
+		System.out.println("dddd");
 		ModelAndView mav = new ModelAndView();
 		
 		SimpleDateFormat df =new SimpleDateFormat("yyyy년 MM월 dd일 hh시mm분ss초");

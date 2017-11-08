@@ -65,13 +65,15 @@ dd {
 					</td>
 				</tr>	
 				<tr>	
+				<c:if test="${sessionScope.sessionid == '관리자'}">
 					<td><a href="faq_updateform.do?faq_id=${ list.faq_id }"><button>수 정</button></a>
 					<a href="faq_delete.do?faq_id=${ list.faq_id }"><button>삭 제</button></a></td> 
+				</c:if>
 				</tr>		
 			</c:forEach>
 </table>
-
+<c:if test="${sessionScope.sessionid == '관리자'}">
 <a href="faq_writeform.do"><button>추 가</button></a>
-
+</c:if>
 </body>
 </html>

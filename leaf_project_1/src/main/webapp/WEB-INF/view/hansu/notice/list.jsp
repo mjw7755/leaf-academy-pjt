@@ -1,6 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<jsp:scriptlet>
+    pageContext.setAttribute("cr", "\r");
+    pageContext.setAttribute("lf", "\n");
+    pageContext.setAttribute("crlf", "\r\n");
+</jsp:scriptlet>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -83,8 +89,11 @@ function hide(){
          <th>member_id</th>
          <th>notice_title</th>
   		 <th>notice_writedate</th>
+  		 <c:if test="${sessionScope.sessionid == '관리자'}">
   		 <th><a href="notice_writeform.do"><button>추가</button></a></th>
+ 		 <c:if test="${sessionScope.sessionid == '관리자'}">
  		 <th colspan="2"><a href="#"><button id="multi" onclick="multiDelete()">다중삭제</button></a></th>     
+      	</c:if>
       </tr>
       <c:forEach items="${ list }" var="list">
          <tr>
@@ -97,9 +106,12 @@ function hide(){
             <c:if test="${list.notice_modifydate != null}">
             <td>${list.notice_modifydate}</td>
             </c:if> 
+            <c:if test="${sessionScope.sessionid == '관리자'}">
             <td><a href="notice_updateform.do?notice_id=${ list.notice_id }"><button id="edit">수 정</button> </a></td>
             <td><a href="notice_delete.do?notice_id=${ list.notice_id }"><button id="delete">삭제</button></a></td>
+            
              <td id="multi"><input type="checkbox" style="width: 30px;" name="notice_id" value="${ list.notice_id }"></td>
+        	 </c:if>
          </tr>
       </c:forEach>
 

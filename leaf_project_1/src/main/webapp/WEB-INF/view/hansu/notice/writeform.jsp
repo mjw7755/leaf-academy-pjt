@@ -20,7 +20,7 @@
 		<tr>
 			<td>notice_content</td>
 			<td>:</td>
-			<td><input type="text" name="notice_content"></td>
+			<td><textarea rows="10" cols="50" name="notice_content" ></textarea></td>
 		</tr>
 		
 		<tr><td colspan="3"><hr> </td> </tr>

@@ -22,8 +22,12 @@
 		</tr>
   <tr>
     <td>&nbsp;</td>
-    <td><input type="submit" value="답변"> | 
+    
+    <td>
+    <c:if test="${sessionScope.sessionid == dto.member_id or sessionScope.sessionid == '관리자'}">
+    <input type="submit" value="답변"> | 
         <input type="reset" value="취소">
+    </c:if>    
         <input type="button" onClick="location.href='qna_list.do'" value="목록">
      </td>
   </tr>

@@ -84,8 +84,13 @@ function hide(){
          <th>member_id</th>
          <th>qna_title</th>
   		 <th>qna_date</th>
-  		 <th><a href="qna_writeform.do"><button>추가</button></a></th>
+  		 <c:if test="${sessionScope.sessionid != null}">
+  		 <th>
+  		 <a href="qna_writeform.do"><button>추가</button></a></th>
+  		 </c:if>
+ 		 <c:if test="${sessionScope.sessionid eq '관리자'}">
  		 <th colspan="2"><a href="#"><button id="multi" onclick="multiDelete()">다중삭제</button></a></th>     
+      	</c:if>
       </tr>
       <c:forEach items="${ list }" var="list">
          <tr>
@@ -96,11 +101,14 @@ function hide(){
             <td>${list.qna_writedate}</td>
             </c:if>
             <c:if test="${list.qna_modifydate != null}">
-            <td>${list.qna_modifydate}</td>
+            <td>${list.qna_modifydate}</td
             </c:if> 
+            <c:if test="${sessionScope.sessionid == list.member_id or sessionScope.sessionid == '관리자'}">
             <td><a href="qna_updateform.do?qna_id=${ list.qna_id }"><button id="edit">수 정</button> </a></td>
             <td><a href="qna_delete.do?qna_id=${ list.qna_id }"><button id="delete">삭제</button></a></td>
+            
              <td id="multi"><input type="checkbox" style="width: 30px;" name="qna_id" value="${ list.qna_id }"></td>
+			</c:if>         
          </tr>
       </c:forEach>
 

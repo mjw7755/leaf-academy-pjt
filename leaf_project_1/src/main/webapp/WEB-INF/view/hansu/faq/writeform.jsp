@@ -31,8 +31,11 @@
 						<input type="button" value="취소" style="width: 100%;" 
 													 onclick="window.location.href='faq_list.do' ">
 					</td>
-					<td>	<input type="reset" value="초기화" style="width: 100%"></td>
-					<td>	<input type="submit" value="추가" ></td>
+					<c:if test="${sessionScope.sessionid eq '관리자'}">
+						<td>	<input type="reset" value="초기화" style="width: 100%"></td>
+						<td>	<input type="submit" value="추가" ></td>
+					</c:if>
+					
 				</tr>
 	</table>
 	</form>
