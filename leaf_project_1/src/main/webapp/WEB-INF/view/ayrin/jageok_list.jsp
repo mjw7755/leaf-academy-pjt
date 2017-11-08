@@ -79,8 +79,10 @@ function multiDelete(){
          <th>시험일</th>
          <th>비용</th>
          <th>ENABLED</th>
+         <c:if test="${sessionScope.sessionid=='관리자' or sessionScope.sessionid=='강사1'}">
          <th colspan="1"><a href="jageok_writeform.do"><button>추가</button></a></th>
       	 <th><a href="#"><button id="multi" onclick="multiDelete()">다중삭제</button></a></th>
+      	 </c:if>
       </tr>
       <c:forEach items="${ list }" var="list" varStatus="status">
          <tr onclick="test(this)">
@@ -92,11 +94,13 @@ function multiDelete(){
             <td>${list.jageok_date}</td>
             <td>${list.jageok_cost}</td>
             <td>${list.enabled}</td>
+         	<c:if test="${sessionScope.sessionid=='관리자' or sessionScope.sessionid=='강사1'}">
             <td><a href="jageok_updateform.do?jageok_id=${ list.jageok_id }">
             <button id="edit">수 정</button> </a></td>
             <td id="multi"><input type="checkbox" style="width: 30px;" name="jageok_id" value="${ list.jageok_id }"></td>
             <td><a href="jageok_delete.do?jageok_id=${ list.jageok_id }"><button id="delete" >삭 제</button> </a></td>
             <td><a href="jageok_deletecancle.do?jageok_id=${ list.jageok_id }"><button id="deletecancle" >삭제취소</button> </a></td>
+            </c:if>
          </tr>
       </c:forEach>
    </table>

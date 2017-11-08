@@ -25,6 +25,9 @@ public class JageokController {
 	
 	@RequestMapping("/jageok_list.do")
 	public String List(Model model, HttpServletRequest request) {
+		if(request.getSession().getAttribute("sessionid") == null) {
+			return "ayrin.member_loginform";
+		}
 		String strPage = request.getParameter("page");
 		String flag = "list";
 		int page;

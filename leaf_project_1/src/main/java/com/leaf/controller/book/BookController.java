@@ -26,6 +26,9 @@ public class BookController {
 	
 	@RequestMapping("/book_list.do")
 	public String list(Model model, HttpServletRequest request) {
+		if(request.getSession().getAttribute("sessionid") == null) {
+			return "ayrin.member_loginform";
+		}
 		String strPage = request.getParameter("page");
 		String flag = "list";
 		int page;

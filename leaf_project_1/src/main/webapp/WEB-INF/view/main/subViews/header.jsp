@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>header</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <style type="text/css">
 .menubar{
 border:none;
@@ -16,7 +17,6 @@ font: 67.5% "Lucida Sans Unicode", "Bitstream Vera Sans", "Trebuchet Unicode MS"
 font-size:14px;
 font-weight:bold;
 }
-
 .menubar ul{
 background: rgb(109,109,109);
 height:50px;
@@ -24,12 +24,10 @@ list-style:none;
 margin:0;
 padding:0;
 }
-
 .menubar li{
 float:left;
 padding:0px;
 }
-
 .menubar li a{
 background: rgb(109,109,109);
 color:#cccccc;
@@ -41,13 +39,11 @@ padding:0px 25px;
 text-align:center;
 text-decoration:none;
 }
-
 .menubar li a:hover, .menubar ul li:hover a{
 background: rgb(71,71,71);
 color:#FFFFFF;
 text-decoration:none;
 }
-
 .menubar li ul{
 background: rgb(109,109,109);
 display:none; /* 평상시에는 드랍메뉴가 안보이게 하기 */
@@ -61,11 +57,9 @@ z-index:200;
 /*top:1em;
 /*left:0;*/
 }
-
 .menubar li:hover ul{
 display:block; /* 마우스 커서 올리면 드랍메뉴 보이게 하기 */
 }
-
 .menubar li li {
 background: rgb(109,109,109);
 display:block;
@@ -74,11 +68,9 @@ margin:0px;
 padding:0px;
 width:200px;
 }
-
 .menubar li:hover li a{
 background:none;
 }
-
 .menubar li ul a{
 display:block;
 height:50px;
@@ -88,14 +80,12 @@ margin:0px;
 padding:0px 10px 0px 15px;
 text-align:left;
 }
-
 .menubar li ul a:hover, .menubar li ul li:hover a{
 background: rgb(71,71,71);
 border:0px;
 color:#ffffff;
 text-decoration:none;
 }
-
 .menubar p{
 clear:left;
 }
@@ -103,6 +93,7 @@ clear:left;
 	float: right;
 }
 </style>
+
 </head>
 <body>
 <!-- 		<tr>
