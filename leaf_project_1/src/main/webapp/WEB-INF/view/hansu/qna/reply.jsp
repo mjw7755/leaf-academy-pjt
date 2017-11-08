@@ -18,7 +18,7 @@
 		<tr>
 			<td>qna_content</td>
 			<td>:</td>
-			<td><input type="text" name="qna_content" ></td>
+			<td><textarea rows="10" cols="50" name="qna_content" ></textarea></td>
 		</tr>
   <tr>
     <td>&nbsp;</td>

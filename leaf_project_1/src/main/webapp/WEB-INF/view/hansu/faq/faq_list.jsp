@@ -57,7 +57,7 @@ dd {
 		<th><b>자주 묻는 질문(FAQ)</b></th><br> 
 			<c:forEach items="${ list }" var="list">
 				<tr>
-					<td>번호:${list.faq_id }</td>
+					<td><br>번호:${list.faq_id }</td>
 				</tr>
 				<tr>
 					<td><dt>${list.faq_title}</dt>
