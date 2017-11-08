@@ -115,6 +115,7 @@ clear:left;
 		<div class="login">
 		<c:if test="${sessionScope.sessionid == null}">
 		<button onclick="javascript:window.location.href='loginForm.do'">로그인</button>
+		<button onclick="javascript:window.location.href='signinForm.do'">회원가입</button>
 		</c:if>
 		<c:if test="${sessionScope.sessionid != null}">
 		<button onclick="javascript:window.location.href='logout.do'">로그아웃</button>
