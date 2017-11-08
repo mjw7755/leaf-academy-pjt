@@ -79,7 +79,6 @@ button {
 			
 			<table cellpadding="5" style="text-align: center;">
 				<th><b>강좌명</b></th>
-				<th><b>강사명</b></th>
 				<th><b>강좌레벨</b></th>
 				<th><b>강사</b></th>
 				<th><b>허용여부</b></th>
@@ -90,7 +89,6 @@ button {
 				<c:forEach items="${list }" var="list" varStatus="status" >
 					<tr onclick="test(this)">
 						<td><a href="detail_curri.do?curri_id=${list.curri_id}">${list.curri_subject}</a></td>
-						<td>${list.member_id}</td>
 						<td>${list.curri_level}</td>
 						<td>${list.member_id}</td>
 						<td>${list.curri_accept}</td>
