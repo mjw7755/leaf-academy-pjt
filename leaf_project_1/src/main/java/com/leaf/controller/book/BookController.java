@@ -1,6 +1,7 @@
 package com.leaf.controller.book;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,11 +69,11 @@ public class BookController {
 			String book_image = uploadfile.getOriginalFilename(); 
 			dto.setBook_image(book_image);
 			try { 
-				// 1. FileOutputStream »ç¿ë 
+				// 1. FileOutputStream ï¿½ï¿½ï¿½ 
 				// byte[] fileData = file.getBytes(); 
 				// FileOutputStream output = new FileOutputStream("C:/images/" + book_image); // output.write(fileData); 
 				
-				// 2. File »ç¿ë
+				// 2. File ï¿½ï¿½ï¿½
 				File file = new File("C:/Users/kimssung/git/leaf-academy-pjt/leaf_project_1/src/main/webapp/resources/" + book_image); 
 				uploadfile.transferTo(file); 
 				
@@ -80,35 +81,12 @@ public class BookController {
 					e.printStackTrace(); 
 				} // try - catch 
 			} // if 
-		  // µ¥ÀÌÅÍ º£ÀÌ½º Ã³¸®¸¦ ÇöÀç À§Ä¡¿¡¼­ Ã³¸® 
+		  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ 
 		
 		System.out.println(dto.getBook_image());
 		bookdao.insertBook(dto);
 		mav.setViewName("redirect:book_list.do");
 		return mav;
-		
-		/*String root = request.getSession().getServletContext().getRealPath("/");
-		//String root = "C:\\Users\\kimssung\\git\\leaf-academy-pjt\\leaf_project_1\\src\\main\\webapp\\WEB-INF\\view\\ayrin\\image";
-        String pathname = root + "image"; //Æú´õ¸í image¿¡ ÀúÀå.
-        File f = new File(pathname);
-        if (!f.exists()) { // Æú´õ°¡ Á¸ÀçÇÏÁö ¾ÊÀ¸¸é Æú´õ »ý¼º
-            f.mkdirs();
-        }
-        int maxFilesize = 5 * 1024 * 1024;
-
-        // MultipartRequest(request, ÀúÀå°æ·Î[, ÃÖ´ëÇã¿ëÅ©±â, ÀÎÄÚµùÄÉ¸¯ÅÍ¼Â, µ¿ÀÏÇÑ ÆÄÀÏ¸í º¸È£ ¿©ºÎ])
-        MultipartRequest multi = new MultipartRequest(request, pathname, maxFilesize, "UTF-8", new DefaultFileRenamePolicy());
-
-        File book_image = multi.getFile("book_image");
-        System.out.println(book_image); // Ã·ºÎµÈ ÆÄÀÏÀÇ ÀüÃ¼°æ·Î
-        dto.setBook_image(book_image.getName());
-        System.out.println(dto.getBook_id());
-        System.out.println(dto.getBook_cost());
-        System.out.println(dto.getBook_image());
-        System.out.println(dto.getBook_title());
-        System.out.println(dto.getBook_writer());
-        System.out.println(dto.getEnabled());*/
-        
 	}
 	
 	@RequestMapping("/book_updateform.do")
@@ -130,11 +108,11 @@ public class BookController {
 			String book_image = uploadfile.getOriginalFilename(); 
 			dto.setBook_image(book_image);
 			try { 
-				// 1. FileOutputStream »ç¿ë 
+				// 1. FileOutputStream ï¿½ï¿½ï¿½ 
 				// byte[] fileData = file.getBytes(); 
 				// FileOutputStream output = new FileOutputStream("C:/images/" + book_image); // output.write(fileData); 
 				
-				// 2. File »ç¿ë
+				// 2. File ï¿½ï¿½ï¿½
 				File file = new File("C:/Users/kimssung/git/leaf-academy-pjt/leaf_project_1/src/main/webapp/resources/" + book_image); 
 				uploadfile.transferTo(file); 
 				
@@ -142,7 +120,7 @@ public class BookController {
 					e.printStackTrace(); 
 				} // try - catch 
 			} // if 
-		  // µ¥ÀÌÅÍ º£ÀÌ½º Ã³¸®¸¦ ÇöÀç À§Ä¡¿¡¼­ Ã³¸® 
+		  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ 
 		System.out.println(dto.getBook_image());
 		bookdao.updateBook(dto);
 		mav.setViewName("redirect:book_list.do");
