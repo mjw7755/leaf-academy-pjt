@@ -2,13 +2,13 @@ package com.leaf.model.member;
 
 public class MemberDTO {
 
-	private String member_id, member_pwd, member_name, member_tel, member_email, member_level;
+	private String member_id, member_pwd, member_name, member_tel, member_email, member_level,member_address;
 	private int enabled;
 	
 	public MemberDTO() {	}
 	
 	public MemberDTO(String member_id, String member_pwd, String member_name, String member_tel, String member_email,
-			String member_level, int enabled) {
+			String member_level,String member_address, int enabled) {
 		super();
 		this.member_id = member_id;
 		this.member_pwd = member_pwd;
@@ -16,7 +16,17 @@ public class MemberDTO {
 		this.member_tel = member_tel;
 		this.member_email = member_email;
 		this.member_level = member_level;
+		this.member_address = member_address;
 		this.enabled = enabled;
+	}
+
+	
+	public String getMember_address() {
+		return member_address;
+	}
+
+	public void setMember_address(String member_address) {
+		this.member_address = member_address;
 	}
 
 	public String getMember_id() {

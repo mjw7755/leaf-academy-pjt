@@ -9,23 +9,24 @@ public interface MemberDAO {
 	public void insertMember(MemberDTO dto); // insert
 	public int search_getCount(Map<String, Object> map); //paging
 
-	public MemberDTO getMemberById(String member_id); // member_idÀ¸·Î ¼±ÅÃ
-	public void updateMember(MemberDTO dto); // member_id ¿¡ ´ëÇÑ µ¥ÀÌÅÍ °¡Á®¿Í¼­ update
+	public MemberDTO getMemberById(String member_id); // member_idï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+	public void updateMember(MemberDTO dto); // member_id ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ update
 	
-	public void deleteMember(MemberDTO dto); // member_id ¿¡ ´ëÇÑ µ¥ÀÌÅÍ delete
-	public void multideleteMember(List<String> deleteTarget); // ´ÙÁß »èÁ¦
+	public void deleteMember(MemberDTO dto); // member_id ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ delete
+	public void multideleteMember(List<String> deleteTarget); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	
-	public void upMember(MemberDTO dto); // ±ÇÇÑÁÖ±â
-	public void multiupMember(List<String> upTarget); // ´ÙÁß ±ÇÇÑ ÁÖ±â
+	public void upMember(MemberDTO dto); // ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
+	public void multiupMember(List<String> upTarget); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö±ï¿½
 	
-	public void levelupMember(MemberDTO dto); // level ¿Ã·ÁÁÖ±â
-	public void multilevelupMember(List<String> levelupTarget); // ´ÙÁß level ¿Ã·ÁÁÖ±â
+	public void levelupMember(MemberDTO dto); // level ï¿½Ã·ï¿½ï¿½Ö±ï¿½
+	public void multilevelupMember(List<String> levelupTarget); // ï¿½ï¿½ï¿½ï¿½ level ï¿½Ã·ï¿½ï¿½Ö±ï¿½
 	
-	public void leveldownMember(MemberDTO dto); // level ³»·ÁÁÖ±â
-	public void multileveldownMember(List<String> leveldownTarget); // ´ÙÁß level ³»·ÁÁÖ±â
+	public void leveldownMember(MemberDTO dto); // level ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
+	public void multileveldownMember(List<String> leveldownTarget); // ï¿½ï¿½ï¿½ï¿½ level ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
 	
 	public List<MemberDTO> searchMemberList(Map<String, Object> map); // search
 	public int getCount(); //selectAll
 	
-	public String getSessionCheck(MemberDTO dto); // ·Î±×ÀÎ ºñ¹Ð¹øÈ£ È®ÀÎ
+	public String getSessionCheck(MemberDTO dto); // ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½Ð¹ï¿½È£ È®ï¿½ï¿½
+	
 }

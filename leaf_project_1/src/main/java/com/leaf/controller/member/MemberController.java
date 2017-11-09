@@ -51,7 +51,7 @@ public class MemberController {
 	@RequestMapping("/member_write.do")
 	public ModelAndView write(MemberDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("write ÇÑ´ç~ : " + dto.toString());
+		System.out.println("write ï¿½Ñ´ï¿½~ : " + dto.toString());
 		memberdao.insertMember(dto);
 		mav.setViewName("redirect:member_list.do");
 		return mav;
@@ -70,7 +70,7 @@ public class MemberController {
 	@RequestMapping("/member_update.do")
 	public ModelAndView update(MemberDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("update ÇÑ´ç~ : " + dto.toString());
+		System.out.println("update ï¿½Ñ´ï¿½~ : " + dto.toString());
 		memberdao.updateMember(dto);
 		mav.setViewName("redirect:member_list.do");
 		return mav;
@@ -79,7 +79,7 @@ public class MemberController {
 	@RequestMapping("/member_delete.do")
 	public ModelAndView delete(MemberDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("±ÇÇÑ–P±â ÇÑ´ç ! : " + dto.getMember_id());
+		System.out.println("ï¿½ï¿½ï¿½Ñ–Pï¿½ï¿½ ï¿½Ñ´ï¿½ ! : " + dto.getMember_id());
 		memberdao.deleteMember(dto);
 		mav.setViewName("redirect:member_list.do");
 		return mav;
@@ -92,7 +92,7 @@ public class MemberController {
 		for (String item : request.getParameter("member_id").split(",")) {
 			deleteTarget.add(item);
 		}
-		System.out.println("¸ÖÆ¼ ±ÇÇÑ–P±â ÇÑ´ç~ : " + deleteTarget.toString());
+		System.out.println("ï¿½ï¿½Æ¼ ï¿½ï¿½ï¿½Ñ–Pï¿½ï¿½ ï¿½Ñ´ï¿½~ : " + deleteTarget.toString());
 		memberdao.multideleteMember(deleteTarget);
 		// String deleteID = memberdao.multideleteMember(deleteTarget);
 		mav.setViewName("redirect:member_list.do");
@@ -102,7 +102,7 @@ public class MemberController {
 	@RequestMapping("/member_up.do")
 	public ModelAndView up(MemberDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("±ÇÇÑÁÖ±â ÇÑ´ç ! : " + dto.getMember_id());
+		System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ ï¿½Ñ´ï¿½ ! : " + dto.getMember_id());
 		memberdao.upMember(dto);
 		mav.setViewName("redirect:member_list.do");
 		return mav;
@@ -115,7 +115,7 @@ public class MemberController {
 		for (String item : request.getParameter("member_id").split(",")) {
 			upTarget.add(item);
 		}
-		System.out.println("¸ÖÆ¼ ±ÇÇÑÁÖ±â ÇÑ´ç~ : " + upTarget.toString());
+		System.out.println("ï¿½ï¿½Æ¼ ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ ï¿½Ñ´ï¿½~ : " + upTarget.toString());
 		memberdao.multiupMember(upTarget);
 		// String deleteID = memberdao.multideleteMember(deleteTarget);
 		mav.setViewName("redirect:member_list.do");
@@ -125,7 +125,7 @@ public class MemberController {
 	@RequestMapping("/member_levelup.do")
 	public ModelAndView levelup(MemberDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("levelup ÇÑ´ç ! : " + dto.getMember_id());
+		System.out.println("levelup ï¿½Ñ´ï¿½ ! : " + dto.getMember_id());
 		memberdao.levelupMember(dto);
 		mav.setViewName("redirect:member_list.do");
 		return mav;
@@ -138,7 +138,7 @@ public class MemberController {
 		for (String item : request.getParameter("member_id").split(",")) {
 			upTarget.add(item);
 		}
-		System.out.println("multilevelup ÇÑ´ç~ : " + upTarget.toString());
+		System.out.println("multilevelup ï¿½Ñ´ï¿½~ : " + upTarget.toString());
 		memberdao.multilevelupMember(upTarget);
 		// String deleteID = memberdao.multideleteMember(deleteTarget);
 		mav.setViewName("redirect:member_list.do");
@@ -148,7 +148,7 @@ public class MemberController {
 	@RequestMapping("/member_leveldown.do")
 	public ModelAndView leveldown(MemberDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("leveldown ÇÑ´ç ! : " + dto.getMember_id());
+		System.out.println("leveldown ï¿½Ñ´ï¿½ ! : " + dto.getMember_id());
 		memberdao.leveldownMember(dto);
 		mav.setViewName("redirect:member_list.do");
 		return mav;
@@ -161,7 +161,7 @@ public class MemberController {
 		for (String item : request.getParameter("member_id").split(",")) {
 			upTarget.add(item);
 		}
-		System.out.println("member_multileveldown ÇÑ´ç~ : " + upTarget.toString());
+		System.out.println("member_multileveldown ï¿½Ñ´ï¿½~ : " + upTarget.toString());
 		memberdao.multileveldownMember(upTarget);
 		// String deleteID = memberdao.multideleteMember(deleteTarget);
 		mav.setViewName("redirect:member_list.do");
@@ -184,7 +184,7 @@ public class MemberController {
         int count = memberdao.search_getCount(map);
         
 		List<MemberDTO> searchList = memberdao.searchMemberList(map);
-		//System.out.println("°Ë»öµÈ °á°ú : " + searchList.toString());
+		//System.out.println("ï¿½Ë»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ : " + searchList.toString());
 
 		int countPage = (int) Math.ceil((float) count / 5);
         int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
@@ -225,6 +225,18 @@ public class MemberController {
 	public String logout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.removeAttribute("sessionid");
+		return "main.mainPage";
+	}
+	
+	@RequestMapping("/signupForm.do")
+	public String signupForm(HttpServletRequest request) {
+		
+		return "moon.signupForm";
+	}
+	@RequestMapping("/signup.do")
+	public String signup(MemberDTO dto,HttpServletRequest request) {
+		memberdao.insertMember(dto);
+		
 		return "main.mainPage";
 	}
 }

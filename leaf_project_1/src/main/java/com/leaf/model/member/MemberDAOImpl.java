@@ -101,5 +101,7 @@ public class MemberDAOImpl implements MemberDAO {
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		return dao.getSessionCheck(dto);
 	}
+	
+	
 
 }
