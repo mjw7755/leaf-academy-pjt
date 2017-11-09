@@ -8,12 +8,10 @@
 <title><tiles:getAsString name="title" /></title>
 
 <!-- css 영역 -->
-<link href='<tiles:getAsString name="css"/>' type="text/css"
-	rel="stylesheet">
+<link href='<tiles:getAsString name="css"/>' type="text/css" rel="stylesheet">
 
 <!-- js 영역 -->
-<link href='<tiles:getAsString name="js"/>' type="text/css"
-	rel="stylesheet">
+<link href='<tiles:getAsString name="js"/>' type="text/css"	rel="stylesheet">
 <style type="text/css">
 body{
 	margin: 0;

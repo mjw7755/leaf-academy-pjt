@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -16,14 +15,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.leaf.model.book.BookDAO;
 import com.leaf.model.book.BookDTO;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-
 
 @Controller
 public class BookController {
@@ -86,29 +81,6 @@ public class BookController {
 		bookdao.insertBook(dto);
 		mav.setViewName("redirect:book_list.do");
 		return mav;
-		
-		/*String root = request.getSession().getServletContext().getRealPath("/");
-		//String root = "C:\\Users\\kimssung\\git\\leaf-academy-pjt\\leaf_project_1\\src\\main\\webapp\\WEB-INF\\view\\ayrin\\image";
-        String pathname = root + "image"; //폴더명 image에 저장.
-        File f = new File(pathname);
-        if (!f.exists()) { // 폴더가 존재하지 않으면 폴더 생성
-            f.mkdirs();
-        }
-        int maxFilesize = 5 * 1024 * 1024;
-
-        // MultipartRequest(request, 저장경로[, 최대허용크기, 인코딩케릭터셋, 동일한 파일명 보호 여부])
-        MultipartRequest multi = new MultipartRequest(request, pathname, maxFilesize, "UTF-8", new DefaultFileRenamePolicy());
-
-        File book_image = multi.getFile("book_image");
-        System.out.println(book_image); // 첨부된 파일의 전체경로
-        dto.setBook_image(book_image.getName());
-        System.out.println(dto.getBook_id());
-        System.out.println(dto.getBook_cost());
-        System.out.println(dto.getBook_image());
-        System.out.println(dto.getBook_title());
-        System.out.println(dto.getBook_writer());
-        System.out.println(dto.getEnabled());*/
-        
 	}
 	
 	@RequestMapping("/book_updateform.do")

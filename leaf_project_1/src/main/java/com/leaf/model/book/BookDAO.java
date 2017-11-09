@@ -3,8 +3,6 @@ package com.leaf.model.book;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
 public interface  BookDAO {
 	
 	public List<BookDTO> getBookList(int page); //select All

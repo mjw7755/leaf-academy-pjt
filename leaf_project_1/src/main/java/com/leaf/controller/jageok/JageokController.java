@@ -144,4 +144,9 @@ public class JageokController {
 		mav.setViewName("ayrin.jageok_detail");
 		return mav;		
 	}
+	
+	@RequestMapping("/jageok_calendar.do")
+	public String calendar() {
+		return "ayrin.calendar";
+	}
 }

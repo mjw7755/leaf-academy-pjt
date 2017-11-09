@@ -11,9 +11,10 @@
 <form action="book_update.do" enctype="multipart/form-data" method="post">
          NO. : <input readonly="readonly" type="text" name="book_id" value="${dto.book_id}"><br>
          member_id : <input readonly="readonly" name="member_id" value="${dto.member_id}"><br>
-         TITLE : <input type="text" name="book_title" value="${dto.book_title}"><br>
-         WRITER : <input type="text" name="book_writer" value="${dto.book_writer}"><br>
-         COST : <input type="text" name="book_cost" value="${dto.book_cost}"><br>
+                    제목 : <input type="text" name="book_title" value="${dto.book_title}"><br>
+                    이미지 : <img src="resources/${dto.book_image}" style="width: 120px; height: 140px"><br>
+                    저자 : <input type="text" name="book_writer" value="${dto.book_writer}"><br>
+                    가격 : <input type="text" name="book_cost" value="${dto.book_cost}"><br>
     <input type="file" name="uploadfile"  id="image"><br><br>
 	<input type="submit" value="수정완료">  
 	<input type="reset" value="초기화" >
