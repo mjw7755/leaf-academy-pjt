@@ -8,10 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-
          NO. : <span>${dto.book_id}</span><br>
+         
                     작성자 : <span>${dto.member_id}</span><br>
                     제목 : <span>${dto.book_title}</span><br>
+                    이미지 : <span><img src="resources/${dto.book_image}" style="width: 120px; height: 140px"></span><br>
                     저자 : <span>${dto.book_writer}</span><br>
                     가격 : <span>${dto.book_cost}</span><br>
     <br><br><br>

@@ -41,9 +41,6 @@ li {
     float: left;
 </style>
 <script type="text/javascript">
-function hide(){
-   alert("해당내용이 삭제됩니다");
-}
 function multiDelete(){
 	var t= document.getElementsByName("book_id");
 	var sum = new Array();
@@ -57,6 +54,13 @@ function multiDelete(){
 	window.location.href="book_multidelete.do?book_id="+sum;
 }
 </script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script type="text/javascript" src="http://www.blueb.co.kr/data/201010/IJ12882511794405/jquery.tablesorter.js"></script> 
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#booklistTable").tablesorter(); 
+}); 
+</script>
 </head>
 <body>
 	<form action="book_search.do" method="post">
@@ -69,10 +73,12 @@ function multiDelete(){
 	</c:forEach>
 	</datalist>
 	<hr>
-   <table>
+   <table id="booklistTable">
+   <thead>
       <tr>
-         <th>NO.</th>
-         <th>작성자</th>
+         <!-- <th>NO.</th>
+         <th>작성자</th> -->
+         <th>이미지</th>
          <th>제목</th>
          <th>저자</th>
          <th>가격</th>
@@ -82,10 +88,13 @@ function multiDelete(){
       	 <th><a href="#"><button id="multi" onclick="multiDelete()">다중삭제</button></a></th>
       	 </c:if>
       </tr>
+   </thead>
+   <tbody>
       <c:forEach items="${ list }" var="list" varStatus="status">
          <tr onclick="test(this)">
-            <td>${list.book_id}</td>
-            <td>${list.member_id}</td>
+            <%-- <td>${list.book_id}</td>
+            <td>${list.member_id}</td> --%>
+            <td><img src="resources/${list.book_image}" style="width: 120px; height: 140px"></td>
             <td>
             	<%-- <c:forEach begin="1" end="${list. book_reply}">
             	&nbsp;&nbsp; -
@@ -104,6 +113,7 @@ function multiDelete(){
             </c:if>
          </tr>
       </c:forEach>
+   </tbody>
    </table>
    
    <div align="center">

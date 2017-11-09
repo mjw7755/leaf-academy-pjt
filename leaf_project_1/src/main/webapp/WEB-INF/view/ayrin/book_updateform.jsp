@@ -8,17 +8,77 @@
 <title></title>
 </head>
 <body>
-<form action="book_update.do">
+<form action="book_update.do" enctype="multipart/form-data" method="post">
          NO. : <input readonly="readonly" type="text" name="book_id" value="${dto.book_id}"><br>
          member_id : <input readonly="readonly" name="member_id" value="${dto.member_id}"><br>
          TITLE : <input type="text" name="book_title" value="${dto.book_title}"><br>
          WRITER : <input type="text" name="book_writer" value="${dto.book_writer}"><br>
          COST : <input type="text" name="book_cost" value="${dto.book_cost}"><br>
-        
+    <input type="file" name="uploadfile"  id="image"><br><br>
 	<input type="submit" value="수정완료">  
 	<input type="reset" value="초기화" >
+	<br><br>
 </form>
-	
+	<div id="image_preview">
+        <img src="#" />
+        <br />
+        <a href="#">Remove</a>
+    </div>
+
+
+    <script type="text/javascript">
+
+
+    /** 
+    onchange event handler for the file input field.
+    It emplements very basic validation using the file extension.
+    If the filename passes validation it will show the image using it's blob URL  
+    and will hide the input field and show a delete button to allow the user to remove the image
+    */
+
+    $('#image').on('change', function() {
+        
+        ext = $(this).val().split('.').pop().toLowerCase(); //확장자
+        
+        //배열에 추출한 확장자가 존재하는지 체크
+        if($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+            resetFormElement($(this)); //폼 초기화
+            window.alert('이미지 파일이 아닙니다! (gif, png, jpg, jpeg 만 업로드 가능)');
+        } else {
+            file = $('#image').prop("files")[0];
+            blobURL = window.URL.createObjectURL(file);
+            $('#image_preview img').attr('src', blobURL);
+            $('#image_preview').slideDown(); //업로드한 이미지 미리보기 
+            $(this).slideUp(); //파일 양식 감춤
+        }
+    });
+
+    /**
+    onclick event handler for the delete button.
+    It removes the image, clears and unhides the file input field.
+    */
+    $('#image_preview a').bind('click', function() {
+        resetFormElement($('#image')); //전달한 양식 초기화
+        $('#image').slideDown(); //파일 양식 보여줌
+        $(this).parent().slideUp(); //미리 보기 영역 감춤
+        return false; //기본 이벤트 막음
+    });
+        
+
+    /** 
+    * 폼요소 초기화 
+    * Reset form element
+    * 
+    * @param e jQuery object
+    */
+    function resetFormElement(e) {
+        e.wrap('<form>').closest('form').get(0).reset(); 
+        //리셋하려는 폼양식 요소를 폼(<form>) 으로 감싸고 (wrap()) , 
+        //요소를 감싸고 있는 가장 가까운 폼( closest('form')) 에서 Dom요소를 반환받고 ( get(0) ),
+        //DOM에서 제공하는 초기화 메서드 reset()을 호출
+        e.unwrap(); //감싼 <form> 태그를 제거
+    }
+    </script>
 </body>
 </html>
 <%-- ENABLED : <input type="readonly" name="member_enabled" value="${dto.member_enabled}"><br>  --%>
