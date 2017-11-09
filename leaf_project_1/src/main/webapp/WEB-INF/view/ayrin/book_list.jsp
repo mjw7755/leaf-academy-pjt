@@ -65,8 +65,10 @@ $(document).ready(function(){
 <body>
 	<form action="book_search.do" method="post">
          검색어 입력 : <input size="30" type="search"  name="keyvalue" placeholder="제목, 저자 검색 가능합니다." list="booklist"> 
-                <input type="submit" value="검색">
+             <input type="submit" value="검색">
     </form>
+    <a href="book_writeform.do"><button>추가</button></a>
+    <button id="multi" onclick="multiDelete()">다중삭제</button>
 	<datalist  id="booklist">
 	<c:forEach items="${ list }" var="list">
 		<option value="${ list.book_title }"> ${ list.book_title } | ${ list.book_writer } | ${ list.book_cost }</option>
@@ -84,8 +86,8 @@ $(document).ready(function(){
          <th>가격</th>
          <th>ENABLED</th>
          <c:if test="${sessionScope.sessionid=='관리자' or sessionScope.sessionid=='강사1'}">
-         <th colspan="1"><a href="book_writeform.do"><button>추가</button></a></th>
-      	 <th><a href="#"><button id="multi" onclick="multiDelete()">다중삭제</button></a></th>
+         <!-- <th colspan="1"><a href="book_writeform.do"><button>추가</button></a></th>
+      	 <th><a href="#"><button id="multi" onclick="multiDelete()">다중삭제</button></a></th> -->
       	 </c:if>
       </tr>
    </thead>

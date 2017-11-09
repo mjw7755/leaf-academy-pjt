@@ -41,9 +41,6 @@ li {
     float: left;
 </style>
 <script type="text/javascript">
-function hide(){
-   alert("해당내용이 삭제됩니다");
-}
 function multiDelete(){
 	var t= document.getElementsByName("jageok_id");
 	var sum = new Array();
@@ -59,18 +56,18 @@ function multiDelete(){
 </script>
 </head>
 <body>
+    <a href="jageok_calendar.do"><button id="calendar_btn" >달력으로 보기</button></a>
 	<form action="jageok_search.do" method="post">
          검색어 입력 : <input size="30" type="search"  name="keyvalue" placeholder="키워드 검색 가능합니다." list="jageoklist"> 
                 <input type="submit" value="검색">
     </form>
-    </h3>
+   
 	<datalist  id="jageoklist">
 	<c:forEach items="${ list }" var="list">
 		<option value="${ list.jageok_title }"> ${ list.jageok_title } | ${ list.jageok_date } | ${ list.jageok_cost }</option>
 	</c:forEach>
 	</datalist>
 	<hr>
-	<fieldset>
    <table>
       <tr>
          <th>NO.</th>
@@ -135,6 +132,5 @@ function multiDelete(){
       </c:if>
       </c:if>
    </div>
-   
 </body>
 </html>

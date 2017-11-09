@@ -57,12 +57,10 @@
         <img src="#" />
         <br />
         <a href="#">Remove</a>
-    </div>
+   </div>
 
 
     <script type="text/javascript">
-
-
     /** 
     onchange event handler for the file input field.
     It emplements very basic validation using the file extension.
@@ -97,8 +95,7 @@
         $(this).parent().slideUp(); //미리 보기 영역 감춤
         return false; //기본 이벤트 막음
     });
-        
-
+    
     /** 
     * 폼요소 초기화 
     * Reset form element

@@ -28,7 +28,7 @@ public class BookDTO {
 	}
 
 	public BookDTO(String member_id, String book_title, String book_writer, String book_cost, int book_id,
-			int enabled) {
+			int enabled, String book_image) {
 		super();
 		this.member_id = member_id;
 		this.book_title = book_title;
