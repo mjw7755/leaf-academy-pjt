@@ -14,11 +14,17 @@
 <!-- js 영역 -->
 <link href='<tiles:getAsString name="js"/>' type="text/css"
 	rel="stylesheet">
+<style type="text/css">
+body{
+	margin: 0;
+	padding: 0;
+}
+</style>
 
 </head>
 <body>
 	<div class="wrapper">
-	<table border="1" cellpadding="1" cellspacing="1" width="100%">
+	<table width="100%">
 	
 		<tr height="100">
 			<!-- header 영역 -->

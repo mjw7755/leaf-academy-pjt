@@ -8,9 +8,39 @@
 <title>header</title>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <style type="text/css">
+/* .header{
+	height: 
+} */
+.login{
+	height: 40px;
+	width: 100%;
+	margin:0px;
+	padding:0px;
+	background-color: #2b2b2b;
+}
+.login ul{
+	margin:0px 0px 0px 300px;
+	padding:0px;
+}
+.login li{
+	list-style:none;
+	float:left;
+	line-height:40px;
+	color : #999999;
+}
+.login li a{
+color : #999999;
+display:block;
+font-weight:normal;
+/* margin:0px; */
+padding:0px 10px;
+text-align:center;
+text-decoration:none;
+font-size: 10px;
+font-weight:bold;
+}
+
 .menubar{
-border:none;
-border:0px;
 margin:0px;
 padding:0px;
 font: 67.5% "Lucida Sans Unicode", "Bitstream Vera Sans", "Trebuchet Unicode MS", "Lucida Grande", Verdana, Helvetica, sans-serif;
@@ -18,10 +48,9 @@ font-size:14px;
 font-weight:bold;
 }
 .menubar ul{
-background: rgb(109,109,109);
-height:50px;
+height:60px;
 list-style:none;
-margin:0;
+margin:0px 0px 0px 305px;
 padding:0;
 }
 .menubar li{
@@ -29,8 +58,7 @@ float:left;
 padding:0px;
 }
 .menubar li a{
-background: rgb(109,109,109);
-color:#cccccc;
+color:#000;
 display:block;
 font-weight:normal;
 line-height:50px;
@@ -89,9 +117,6 @@ text-decoration:none;
 .menubar p{
 clear:left;
 }
-.login{
-	float: right;
-}
 </style>
 
 </head>
@@ -103,18 +128,26 @@ clear:left;
 			<td>놀이</td>
 			<td>고객센터</td>
 		</tr> -->
+	<div class="header">
 		<div class="login">
-		<c:if test="${sessionScope.sessionid == null}">
-		<button onclick="javascript:window.location.href='loginForm.do'">로그인</button>
-		<button onclick="javascript:window.location.href='signinForm.do'">회원가입</button>
-		</c:if>
-		<c:if test="${sessionScope.sessionid != null}">
-		<button onclick="javascript:window.location.href='logout.do'">로그아웃</button>
-		</c:if>
-		<span></span>
+			<c:if test="${sessionScope.sessionid == null}">
+				<ul>
+					<li><a href="loginForm.do">로그인</a></li>
+					<li>|</li>
+					<li><a href="signupForm.do">회원가입</a></li>
+					<!-- <button onclick="javascript:window.location.href='loginForm.do'">로그인</button>
+					 	<button onclick="javascript:window.location.href='signinForm.do'">회원가입</button> -->
+				</ul>
+			</c:if>
+			<c:if test="${sessionScope.sessionid != null}">
+				<button onclick="javascript:window.location.href='logout.do'">로그아웃</button>
+			</c:if>
+			<span></span>
 		</div>
+
 		<div class="menubar">
 			<ul>
+				<li><img src="resources/logo.png"></li>
 				<li><a href="t_intro_list.do">소개</a></li>
 				<li><a href="list_lect.do">교육과정</a>
 				<ul>
@@ -140,6 +173,6 @@ clear:left;
 				</li>	
 			</ul>
 		</div>
-
+	</div>
 </body>
 </html>
