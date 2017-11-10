@@ -1,5 +1,7 @@
 package com.leaf.controller.teacher_intro;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.leaf.model.teacher_intro.ReviewDAO;
@@ -40,8 +43,9 @@ public class T_introController {
          else {page = Integer.parseInt(request.getParameter("page"));}
          List<T_introDTO> list = t_introDAO.getT_introList(page);
          int count = t_introDAO.getCount();
-         int countPage = (int) Math.ceil((float) count / 5);
-         int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
+         int countPage = (int) Math.ceil((float) count / 9);
+         int startPage = (int) ((Math.ceil((float) page / 9) - 1) * 9) + 1;
+         System.out.println(countPage);
          model.addAttribute("count", count);
          model.addAttribute("countPage", countPage);
          model.addAttribute("startPage", startPage);
@@ -59,6 +63,25 @@ public class T_introController {
    public ModelAndView write(T_introDTO dto,HttpServletRequest request) throws Exception{
       ModelAndView mav = new ModelAndView();
       dto.setMember_id((String)request.getSession().getAttribute("sessionid"));
+      
+      MultipartFile uploadfile = dto.getUploadfile();
+      if (uploadfile != null) { 
+         String teacher_image = uploadfile.getOriginalFilename(); 
+         dto.setTeacher_image(teacher_image);
+         try { 
+            // 1. FileOutputStream 사용 
+            // byte[] fileData = file.getBytes(); 
+            // FileOutputStream output = new FileOutputStream("C:/images/" + book_image); // output.write(fileData); 
+            
+            // 2. File 사용
+            File file = new File("C://Users/LeeRam/git/leaf-academy-pjt/leaf_project_1/src/main/webapp/resources/" + teacher_image); 
+            uploadfile.transferTo(file); 
+            System.out.println(teacher_image);
+            } catch (IOException e) { 
+               e.printStackTrace(); 
+            } // try - catch 
+         } // if 
+        // 데이터 베이스 처리를 현재 위치에서 처리 
       t_introDAO.insertT_intro(dto);
 
       mav.setViewName("redirect:t_intro_list.do");
@@ -78,7 +101,27 @@ public class T_introController {
    @RequestMapping("/t_intro_update.do")
    public ModelAndView update(T_introDTO dto) throws Exception{
       ModelAndView mav = new ModelAndView();
+      MultipartFile uploadfile = dto.getUploadfile();
+      if (uploadfile != null) { 
+         String teacher_image = uploadfile.getOriginalFilename(); 
+         dto.setTeacher_image(teacher_image);
+         try { 
+            // 1. FileOutputStream 사용 
+            // byte[] fileData = file.getBytes(); 
+            // FileOutputStream output = new FileOutputStream("C:/images/" + book_image); // output.write(fileData); 
+            
+            // 2. File 사용
+            File file = new File("C://Users/LeeRam/git/leaf-academy-pjt/leaf_project_1/src/main/webapp/resources/" + teacher_image); 
+            uploadfile.transferTo(file); 
+            
+            } catch (IOException e) { 
+               e.printStackTrace(); 
+            } // try - catch 
+         } // if 
+        // 데이터 베이스 처리를 현재 위치에서 처리 
+      
       t_introDAO.updateT_intro(dto);
+      
       mav.setViewName("redirect:t_intro_list.do");
       return mav;
    }
@@ -127,27 +170,55 @@ public class T_introController {
    }
    
    @RequestMapping("/t_intro_content.do")
-   public ModelAndView content(HttpServletRequest request) throws Exception{
+   public ModelAndView content(ReviewDTO dto3, HttpServletRequest request) throws Exception{
       ModelAndView mav = new ModelAndView();
       
       String teacher_id = request.getParameter("teacher_id");
       System.out.println("content.teacher_id : " + teacher_id);
-      T_introDTO dto = t_introDAO.getT_introByteacher_id(Integer.parseInt(teacher_id));
+      T_introDTO dto1 = t_introDAO.getT_introByteacher_id(Integer.parseInt(teacher_id));
       
 /*      String review_id = request.getParameter("review_id");
       System.out.println("content.review_id : " + review_id);
       ReviewDTO dto2 = reviewDAO.getReviewByreview_id(Integer.parseInt(review_id));*/
 
-      List<ReviewDTO> list =reviewDAO.get_headline(teacher_id);
-      System.out.println(list.size());
+      List<ReviewDTO> list1 =reviewDAO.get_headline(teacher_id);
+      System.out.println(list1.size());
       
       
-      mav.addObject("dto", dto);
+      mav.addObject("dto", dto1);
       /*mav.addObject("dto2", dto2);*/
-      mav.addObject("list", list);
+      mav.addObject("list1", list1);
       
       mav.setViewName("ram.t_intro_content");
       
+      
+      
+      
+      /*sdfsdf*/
+      String strPage = request.getParameter("page");
+ 	   String flag = "list";
+  	   int page;
+  	   if (strPage == null) {page = 1;} 
+  	   else {page = Integer.parseInt(request.getParameter("page"));}
+     
+       T_introDTO dto = t_introDAO.getT_introByteacher_id(Integer.parseInt(teacher_id));
+       System.out.println("list teacher_id : " + teacher_id);
+       List<ReviewDTO> list2 = reviewDAO.getReviewList(page, teacher_id);
+       
+       int count = reviewDAO.getCount();
+       int countPage = (int) Math.ceil((float) count / 5);
+       int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
+       mav.addObject("count", count);
+       mav.addObject("countPage", countPage);
+       mav.addObject("startPage", startPage);
+       mav.addObject("list2", list2);
+       mav.addObject("dto", dto);
+       mav.addObject("flag", flag);
+      
+       String r_headline = request.getParameter("r_headline");
+	   String r_content = request.getParameter("r_content");
+      
+       
       return mav;
    }
 
@@ -179,12 +250,16 @@ public class T_introController {
  
    @RequestMapping("/review_writeform.do")
    public String review_writeForm() {
+	   
       return "ram.review_writeform";
    }
    
    @RequestMapping("/review_write.do")
    public ModelAndView review_write(ReviewDTO dto, HttpServletRequest request) throws Exception{
-
+	   String r_headline = request.getParameter("r_headline");
+	   String r_content = request.getParameter("r_content");
+	   
+	   System.out.println(r_headline+","+r_content);
       /*SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");*/
         SimpleDateFormat dateFormat =new SimpleDateFormat("yyyy년 MM월 dd일 hh시mm분ss초");
          dto.setMember_id((String)request.getSession().getAttribute("sessionid")); 
