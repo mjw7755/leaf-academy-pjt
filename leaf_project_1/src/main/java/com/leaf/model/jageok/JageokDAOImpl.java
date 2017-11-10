@@ -72,5 +72,4 @@ public class JageokDAOImpl implements JageokDAO {
 		JageokDAO dao = sqlsession.getMapper(JageokDAO.class);
 		return dao.Jageoksearch(map);
 	}
-
 }
