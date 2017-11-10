@@ -17,14 +17,13 @@ $(document).ready(function() {
 	var d = date.getDate();
 	var m = date.getMonth();
 	var y = date.getFullYear();
-	alert('나와라');
 	var calendar = $('#calendar').fullCalendar({
 		header: {
-			left: 'prev,next today',
-			center: 'title',
-			right: 'month,agendaWeek,agendaDay'
+			left: 'prev, next today', //왼쪽버튼 순서 : 이전달(prev), 다음달(), 오늘(이번달)로 이동하는 기능
+			center: 'title', //가운데 타이틀 : 현재 출력된 월(title)
+			right: 'month,agendaWeek,agendaDay' //오른쪽 버튼 순서 : 날짜를 보는 기간(월,주,일)을 지정
 		},
-		
+			
 		selectable: true,
 		selectHelper: true,
 		select: function(start, end, allDay) {
@@ -42,8 +41,7 @@ $(document).ready(function() {
 					true // make the event "stick"
 				);
 			}
-			calendar.fullCalendar('unselect');
-			
+			calendar.fullCalendar('unselect');			
 		},
 		editable: true,
 		events: [
@@ -59,37 +57,14 @@ $(document).ready(function() {
 			{
 				id: 999,
 				title: '03 Repeating Event',
-				start: new Date(y, m, d-3, 16, 0),
+				start: new Date(y, m, d-3, 18, 0),
 				allDay: false
 			},
 			{
 				id: 999,
 				title: '04 Repeating Event',
-				start: new Date(y, m, d+4, 16, 0),
-				allDay: false
-			},
-			{
-				title: '05 Meeting',
-				start: new Date(y, m, d, 10, 30),
-				allDay: false
-			},
-			{
-				title: '06 Lunch',
-				start: new Date(y, m, d, 12, 0),
-				end: new Date(y, m, d, 14, 0),
-				allDay: false
-			},
-			{
-				title: '07 Birthday Party',
-				start: new Date(y, m, d+1, 19, 0),
-				end: new Date(y, m, d+1, 22, 30),
-				allDay: false // 주간의 나타남, true 나타나지않음
-			},
-			{
-				title: '08 Click for Google',
-				start: new Date(y, m, 28),
-				end: new Date(y, m, 29),
-				url: 'http://google.com/'
+				start: new Date(y, m, d+4, 19, 0),
+				allDay: true
 			}
 		]
 	});	

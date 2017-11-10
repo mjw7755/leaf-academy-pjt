@@ -12,7 +12,7 @@
       select * from
       (SELECT ROWNUM NUM, t.* FROM 
                      (select * from teacher_intro order by teacher_id desc) t)
-      where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
+      where NUM between ((#{page}-1)*9)+1 and (#{page}*9)
    </select>
 
 	<select id="getT_introByteacher_id" parameterType="Integer" resultType="com.leaf.model.teacher_intro.T_introDTO">
@@ -23,8 +23,8 @@
 <insert id="insertT_intro" parameterType="com.leaf.model.teacher_intro.T_introDTO">
     <!-- 게시글 번호를 서브쿼리로 생성 -->
     INSERT INTO teacher_intro (
-      teacher_id, member_id, teacher_introduce, enabled) 
-      VALUES ((SELECT NVL(MAX(teacher_id)+1, 1)FROM teacher_intro), #{member_id}, #{teacher_introduce}, 1)
+      teacher_id, member_id, teacher_introduce, enabled, teacher_image) 
+      VALUES ((SELECT NVL(MAX(teacher_id)+1, 1)FROM teacher_intro), #{member_id}, #{teacher_introduce}, 1, #{teacher_image})
 </insert>
 
 <!--    <insert id="insertT_intro" parameterType="kr.co.academy.model.T_introDTO">
@@ -37,7 +37,7 @@
 
 <!-- 게시글 수정 -->
 	<update id="updateT_intro" parameterType="com.leaf.model.teacher_intro.T_introDTO">
-		update teacher_intro set member_id=#{member_id}, teacher_introduce=#{teacher_introduce}
+		update teacher_intro set member_id=#{member_id}, teacher_introduce=#{teacher_introduce}, teacher_image=#{teacher_image}
 		where teacher_id = #{teacher_id}
 	</update>
 	

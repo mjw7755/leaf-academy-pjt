@@ -2,16 +2,32 @@ package com.leaf.model.teacher_intro;
 
 import java.util.Arrays;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class T_introDTO {
 	private int teacher_id, enabled;
-	private String member_id, teacher_introduce;
+	private String member_id, teacher_introduce, teacher_image;
 	private String[] files;
+	private MultipartFile uploadfile;
 	
 	public int getTeacher_id() {
 		return teacher_id;
 	}
 	public void setTeacher_id(int teacher_id) {
 		this.teacher_id = teacher_id;
+	}
+
+	public String getTeacher_image() {
+		return teacher_image;
+	}
+	public void setTeacher_image(String teacher_image) {
+		this.teacher_image = teacher_image;
+	}
+	public MultipartFile getUploadfile() {
+		return uploadfile;
+	}
+	public void setUploadfile(MultipartFile uploadfile) {
+		this.uploadfile = uploadfile;
 	}
 	public int getEnabled() {
 		return enabled;

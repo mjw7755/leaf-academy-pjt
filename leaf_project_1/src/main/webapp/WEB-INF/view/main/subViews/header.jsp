@@ -11,15 +11,17 @@
 /* .header{
 	height: 
 } */
-.login{
-	height: 40px;
+.login_bar{
 	width: 100%;
-	margin:0px;
-	padding:0px;
 	background-color: #2b2b2b;
 }
+.login{
+	height: 40px;
+	width: 800px;
+	margin-left: 25%;
+}
 .login ul{
-	margin:0px 0px 0px 300px;
+	margin:0px;
 	padding:0px;
 }
 .login li{
@@ -39,41 +41,46 @@ text-decoration:none;
 font-size: 10px;
 font-weight:bold;
 }
-
 .menubar{
-margin:0px;
+width: 100%;
+} 
+.menu{
+margin-left:25%;
 padding:0px;
-font: 67.5% "Lucida Sans Unicode", "Bitstream Vera Sans", "Trebuchet Unicode MS", "Lucida Grande", Verdana, Helvetica, sans-serif;
 font-size:14px;
 font-weight:bold;
 }
-.menubar ul{
+.menu ul{
 height:60px;
 list-style:none;
-margin:0px 0px 0px 305px;
+margin:0px;
 padding:0;
 }
-.menubar li{
+.menu li{
 float:left;
 padding:0px;
 }
-.menubar li a{
+.menu li a{
 color:#000;
 display:block;
-font-weight:normal;
+font-weight:bold;
 line-height:50px;
 margin:0px;
-padding:0px 25px;
+/* padding:0px 25px; */
 text-align:center;
 text-decoration:none;
 }
-.menubar li a:hover, .menubar ul li:hover a{
-background: rgb(71,71,71);
-color:#FFFFFF;
+.menu li a:hover {
+/* background: rgb(71,71,71); */
+color:#1b7817;
 text-decoration:none;
+font-weight:bold;
 }
-.menubar li ul{
-background: rgb(109,109,109);
+/* .menu ul li:hover a{
+color:#fff;
+} */
+.menu li ul{
+/* background: rgb(109,109,109); */
 display:none; /* 평상시에는 드랍메뉴가 안보이게 하기 */
 height:auto;
 padding:0px;
@@ -85,10 +92,10 @@ z-index:200;
 /*top:1em;
 /*left:0;*/
 }
-.menubar li:hover ul{
+.menu li:hover ul{
 display:block; /* 마우스 커서 올리면 드랍메뉴 보이게 하기 */
 }
-.menubar li li {
+.menu li li {
 background: rgb(109,109,109);
 display:block;
 float:none;
@@ -96,10 +103,10 @@ margin:0px;
 padding:0px;
 width:200px;
 }
-.menubar li:hover li a{
+.menu li:hover li a{
 background:none;
 }
-.menubar li ul a{
+.menu li ul a{
 display:block;
 height:50px;
 font-size:12px;
@@ -108,14 +115,17 @@ margin:0px;
 padding:0px 10px 0px 15px;
 text-align:left;
 }
-.menubar li ul a:hover, .menubar li ul li:hover a{
-background: rgb(71,71,71);
+.menu li ul a:hover, .menu li ul li:hover a{
+background: #044074;
 border:0px;
 color:#ffffff;
 text-decoration:none;
 }
-.menubar p{
+.menu p{
 clear:left;
+}
+#a_tag{
+	padding:0px 25px; 
 }
 </style>
 
@@ -129,7 +139,8 @@ clear:left;
 			<td>고객센터</td>
 		</tr> -->
 	<div class="header">
-		<div class="login">
+		<div class="login_bar">
+		<div class="login" >
 			<c:if test="${sessionScope.sessionid == null}">
 				<ul>
 					<li><a href="loginForm.do">로그인</a></li>
@@ -142,28 +153,29 @@ clear:left;
 			<c:if test="${sessionScope.sessionid != null}">
 				<button onclick="javascript:window.location.href='logout.do'">로그아웃</button>
 			</c:if>
-			<span></span>
 		</div>
-
+		</div>
+		
 		<div class="menubar">
+			<div class="menu"> 
 			<ul>
-				<li><img src="resources/logo.png"></li>
-				<li><a href="t_intro_list.do">소개</a></li>
-				<li><a href="list_lect.do">교육과정</a>
+				<li id="img"><a href="main.do"><img src="resources/logo.png"></a></li>
+				<li id="a_tag"><a href="t_intro_list.do">소개</a></li>
+				<li id="a_tag"><a href="list_lect.do">교육과정</a>
 				<ul>
 						<li><a href="list_curri.do">커리큘럼</a></li>
 						<li><a href="list_lect.do">교육과정</a></li>
 				</ul>
 				</li>
-				<li><a href="book_list.do">자료실</a>
+				<li id="a_tag"><a href="book_list.do">자료실</a>
 				<ul>
 						<li><a href="book_list.do">도서</a></li>
 						<li><a href="jageok_list.do">자격증</a></li>
 				</ul>
 				</li>
 				
-				<li><a href="#">놀이</a></li>
-				<li><a href="notice_list.do">고객센터</a>
+				<li id="a_tag"><a href="#">놀이</a></li>
+				<li id="a_tag"><a href="notice_list.do">고객센터</a>
 					<ul>
 						<li><a href="notice_list.do">공지사항</a></li>
 						<li><a href="faq_list.do">FAQ</a></li>
@@ -172,6 +184,7 @@ clear:left;
 					</ul>	
 				</li>	
 			</ul>
+		</div>
 		</div>
 	</div>
 </body>
