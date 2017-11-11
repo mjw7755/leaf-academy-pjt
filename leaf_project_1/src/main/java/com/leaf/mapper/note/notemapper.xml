@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.leaf.model.note.NoteDAO">
+	<insert id="writeNote" parameterType="com.leaf.model.note.NoteDTO">
+		insert into note(n_id,n_content,n_title,n_send_id,n_recv_id,n_send_del_yn,n_recv_del_yn,n_write_date) values(n_id_seq.nextval,#{n_content},#{n_title},#{n_send_id},#{n_recv_id},'n','n',sysdate)
+	</insert>
+	
+	<select id="getTeacherId" parameterType="String" resultType="String">
+		select member_id from curriculum where curri_id = (select curri_id from lecture where lect_id = (select lect_id from student where member_id = #{member_id}))
+	</select>
+</mapper>

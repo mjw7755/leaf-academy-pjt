@@ -212,10 +212,11 @@ public class MemberController {
 		sessionid = memberdao.getSessionCheck(dto);
 		
 		if(sessionid != null) {
-			
 			session.setAttribute("sessionid", sessionid);	
 			return "main.mainPage";
 		}
+		
+		
 		
 		return "ayrin.member_loginform";
 		

@@ -2,7 +2,7 @@ package com.leaf.model.member;
 
 public class MemberDTO {
 
-	private String member_id, member_pwd, member_name, member_tel, member_email, member_level,member_address;
+	private String member_id, member_pwd, member_name, member_tel, member_email, member_level,member_address,sel_value;
 	private int enabled;
 	
 	public MemberDTO() {	}
@@ -21,6 +21,14 @@ public class MemberDTO {
 	}
 
 	
+	public String getSel_value() {
+		return sel_value;
+	}
+
+	public void setSel_value(String sel_value) {
+		this.sel_value = sel_value;
+	}
+
 	public String getMember_address() {
 		return member_address;
 	}

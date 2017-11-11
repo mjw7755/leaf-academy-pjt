@@ -70,6 +70,14 @@
 		#{item}
 		</foreach>
 	</delete>
+	
+	<select id="getCheckDate" parameterType="String" resultType="com.leaf.model.curriculum.LectDTO">
+		select lect_start_day, lect_end_day from lecture where curri_id = (select curri_id from curriculum where member_id=#{member_id})
+	</select>
+	
+	<select id="getCheckMember" resultType="com.leaf.model.curriculum.LectDTO">
+		
+	</select>
 </mapper>
 	
 	
