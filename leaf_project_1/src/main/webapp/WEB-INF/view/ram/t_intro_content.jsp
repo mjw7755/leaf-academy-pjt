@@ -17,7 +17,7 @@
 		var writeDIV = document.getElementById("writeDIV");
 		$("#writeDIV").hide();
 		$("#moreReview").hide();
-		$("#moreReview2").hide();
+		
 		$("#modalButton").button();
 		$("#moreReview").dialog({
 			autoOpen : false,
@@ -43,6 +43,18 @@
 		$("#modalButton").click(function(e) {
 			$("#moreReview").dialog("open");
 			e.preventDefault();
+			
+			$.ajax({
+				url:"review_list.do",
+				data:{
+					"r_headline" : r_headline,
+					"r_content" : r_content	
+				},
+				success:function(data){
+					alert(data);
+				}
+				
+			})
 		});
 
 		$("#writeButton").on('click',function() {
@@ -214,12 +226,12 @@
 					<tr>
 						<td>제목</td>
 						<td>:</td>
-						<td><input type="text" class="ab" name="r_headline" id="r_headline"/></td>
+						<td><input type="text" class="write_input" name="r_headline" id="r_headline"/></td>
 					</tr>
 					<tr>
 						<td>내용</td>
 						<td>:</td>
-						<td><input type="text" class="ab" id="r_content"/></td>
+						<td><input type="text" class="write_input" id="r_content"/></td>
 					</tr>
 					<tr>
 						<td colspan="3"><hr></td>
@@ -227,98 +239,11 @@
 					
 					<tr>
 						<td><a href="t_intro_content.do?teacher_id=${param.teacher_id}" style="width: 100%;">취소</a></td>
-						<td><a id="aa">add</a></td> 
+						<td><input id="aa" type="button" value="add"/></td> 
 					</tr>
 				</table>
 			</form>
 		</div>
-		</div>
-		
-		<div id="moreReview2">
-			수강후기
-			<h3>
-
-				<table>
-					<tr>
-						<th>제목</th>
-						<th>등록자</th>
-						<c:if test="${ sessionScope.sessionid == '관리자'}">
-							<th><a href="#"><button id="multi"
-										onclick="multiDelete()">다중삭제</button></a></th>
-						</c:if>
-					</tr>
-					<c:forEach items="${ list }" var="list">
-						<tr>
-							<td><a
-								href="review_content.do?review_id=${ list.review_id }&teacher_id=${list.teacher_id}">${list.r_headline}</a></td>
-							<td>${list.member_id }</td>
-
-							<c:if
-								test="${sessionScope.sessionid == list.member_id or sessionScope.sessionid == '관리자'}">
-								<td><a
-									href="review_updateform.do?review_id=${ list.review_id }"">수정</a></td>
-								<td><a
-									href="review_delete.do?review_id=${ list.review_id }&teacher_id=${param.teacher_id}">
-										<button id="delete" onclick="hide()">삭 제</button>
-								</a></td>
-							</c:if>
-							<c:if test="${ sessionScope.sessionid == '관리자'}">
-								<td id="multi"><input type="checkbox" style="width: 30px;"
-									name="review_id" value="${ list.review_id }"></td>
-							</c:if>
-						</tr>
-					</c:forEach>
-				</table>
- 
-				<a href="#" id="writeButton2">글쓰기</a>
-
-				<div>
-					<c:if test="${param.page>5}">
-						<c:if test="${flag == 'list' }">
-							<a class="button btn-prev"
-								href="review_list.do?page=${startPage-1}&teacher_id=${dto.teacher_id}">이전</a>
-						</c:if>
-						<c:if test="${flag == 'search' }">
-							<a class="button btn-prev"
-								href="review_search.do?page=${startPage-1}&column=${column}&keyvalue=${keyvalue}&teacher_id=${dto.teacher_id}">이전</a>
-						</c:if>
-					</c:if>
-					<c:forEach var="i" begin="0" end="4" varStatus="status">
-						<c:if test="${countPage>=startPage+i}">
-							<c:if test="${flag == 'list' }">
-								<a class="strong"
-									href="review_list.do?page=${startPage+i}&teacher_id=${dto.teacher_id}">${startPage+i}</a>
-								</li>
-							</c:if>
-							<c:if test="${flag == 'search' }">
-								<a class="strong"
-									href="review_search.do?page=${startPage+i}&column=${column}&keyvalue=${keyvalue}&teacher_id=${dto.teacher_id}">${startPage+i}</a>
-								</li>
-							</c:if>
-
-						</c:if>
-					</c:forEach>
-					<c:if test="${countPage>=startPage+5}">
-						<c:if test="${flag == 'list' }">
-							<a class="strong"
-								href="review_list.do?page=${startPage+5}&teacher_id=${dto.teacher_id}">다음</a>
-							</li>
-						</c:if>
-						<c:if test="${flag == 'search' }">
-							<a class="strong"
-								href="review_search.do?page=${startPage+5}&column=${column}&keyvalue=${keyvalue}&teacher_id=${dto.teacher_id}">다음</a>
-							</li>
-						</c:if>
-
-					</c:if>
-				</div>
-				<form action="review_search.do" method="post">
-					<select name="column">
-						<option value="member_id">작성자</option>
-						<option value="r_headline">제목</option>
-					</select> <input type="text" name="keyvalue"> <input type="submit"
-						value="검색">
-				</form>
 		</div>
 
 		
@@ -328,16 +253,11 @@
 
 <script>
 $(document).on('click','#aa',function(){
-	var arr = Array();
-	$(".ab").each(function(arr,index){
+		$("#writeDIV").hide();
+		$("#aaa").show();
 		
-		arr = $(this).val();
-		alert(arr);
-		/* alert(arr); */
-		
-	});
 	
-	$.ajax({
+	/* $.ajax({
 			url:"review_write.do",
 			data:{"r_headline" : r_headline,
 				"r_content" : r_content	
@@ -346,7 +266,7 @@ $(document).on('click','#aa',function(){
 				alert(data);
 			}
 			
-		})
+		}) */
 });
 
 
