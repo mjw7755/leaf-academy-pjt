@@ -33,6 +33,7 @@ public class WebSocketHandler implements org.springframework.web.socket.WebSocke
 	@Override
 	public void afterConnectionClosed(WebSocketSession arg0, CloseStatus arg1) throws Exception {
 		// TODO Auto-generated method stub
+		userList.remove(socketList.indexOf(arg0));
 		socketList.remove(arg0);
 	}
 	
@@ -72,7 +73,7 @@ public class WebSocketHandler implements org.springframework.web.socket.WebSocke
 			if(recv_user_num > -1) {
 				WebSocketSession recv_session = socketList.get(recv_user_num);
 				recv_session.sendMessage(new TextMessage(message));
-				
+				System.out.println("해당유저에 메세지 전달 완료");
 			}else {
 				System.out.println("해당 유저 없음");
 			}
@@ -82,9 +83,13 @@ public class WebSocketHandler implements org.springframework.web.socket.WebSocke
 		if(data.get("n_type").equals("logout")) {
 			socketList.remove(arg0);
 			userList.remove((String)data.get("n_name"));
+			System.out.println("소켓은 지워졌니?"+socketList.remove(arg0));
+			System.out.println("유저는 지워졌니?"+userList.remove((String)data.get("n_name")));
+			System.out.println("클라이언트가 지워졌어요(로그아웃함)");
 		}
 		
 		System.out.println("셋팅 완료");
+		System.out.println("첫번쨰 유저 지워졌는가? "+userList.get(0).toString());
 	}
 
 	@Override
