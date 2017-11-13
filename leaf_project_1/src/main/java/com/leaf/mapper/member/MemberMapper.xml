@@ -27,7 +27,7 @@ resultType : 쿼리 수행 후 결과를 보내주기 위한 데이터 -->
 	</select>
 
 	<insert id="insertMember" parameterType="com.leaf.model.member.MemberDTO">
-	insert into Member(member_id, member_name, member_pwd, member_tel, member_email, member_level,member_address, enabled) 
+	insert into Member(member_id, member_name, member_pwd, member_tel, member_email, member_address,member_level, enabled) 
 	values(#{member_id}, #{member_name}, #{member_pwd}, #{member_tel}, #{member_email},#{member_address}, 1, 1)
 	</insert>
 	
