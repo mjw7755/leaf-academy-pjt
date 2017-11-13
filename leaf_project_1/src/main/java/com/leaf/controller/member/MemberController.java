@@ -24,6 +24,13 @@ public class MemberController {
 	@Resource
 	private MemberDAO memberdao;
 
+	@RequestMapping("/myclass.do")
+	public String myclass(MemberDTO dto, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.getAttribute("sessionid");
+		return "ayrin.myclass";
+	}
+	
 	@RequestMapping("/member_list.do")
 	public String list(Model model, HttpServletRequest request) {
 		String strPage = request.getParameter("page");
@@ -51,7 +58,7 @@ public class MemberController {
 	@RequestMapping("/member_write.do")
 	public ModelAndView write(MemberDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("write �Ѵ�~ : " + dto.toString());
+		System.out.println("write 占싼댐옙~ : " + dto.toString());
 		memberdao.insertMember(dto);
 		mav.setViewName("redirect:member_list.do");
 		return mav;
@@ -70,7 +77,7 @@ public class MemberController {
 	@RequestMapping("/member_update.do")
 	public ModelAndView update(MemberDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("update �Ѵ�~ : " + dto.toString());
+		System.out.println("update 占싼댐옙~ : " + dto.toString());
 		memberdao.updateMember(dto);
 		mav.setViewName("redirect:member_list.do");
 		return mav;
@@ -79,7 +86,7 @@ public class MemberController {
 	@RequestMapping("/member_delete.do")
 	public ModelAndView delete(MemberDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("���іP�� �Ѵ� ! : " + dto.getMember_id());
+		System.out.println("占쏙옙占싼뻇占쏙옙 占싼댐옙 ! : " + dto.getMember_id());
 		memberdao.deleteMember(dto);
 		mav.setViewName("redirect:member_list.do");
 		return mav;
@@ -92,7 +99,7 @@ public class MemberController {
 		for (String item : request.getParameter("member_id").split(",")) {
 			deleteTarget.add(item);
 		}
-		System.out.println("��Ƽ ���іP�� �Ѵ�~ : " + deleteTarget.toString());
+		System.out.println("占쏙옙티 占쏙옙占싼뻇占쏙옙 占싼댐옙~ : " + deleteTarget.toString());
 		memberdao.multideleteMember(deleteTarget);
 		// String deleteID = memberdao.multideleteMember(deleteTarget);
 		mav.setViewName("redirect:member_list.do");
@@ -102,7 +109,7 @@ public class MemberController {
 	@RequestMapping("/member_up.do")
 	public ModelAndView up(MemberDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("�����ֱ� �Ѵ� ! : " + dto.getMember_id());
+		System.out.println("占쏙옙占쏙옙占쌍깍옙 占싼댐옙 ! : " + dto.getMember_id());
 		memberdao.upMember(dto);
 		mav.setViewName("redirect:member_list.do");
 		return mav;
@@ -115,7 +122,7 @@ public class MemberController {
 		for (String item : request.getParameter("member_id").split(",")) {
 			upTarget.add(item);
 		}
-		System.out.println("��Ƽ �����ֱ� �Ѵ�~ : " + upTarget.toString());
+		System.out.println("占쏙옙티 占쏙옙占쏙옙占쌍깍옙 占싼댐옙~ : " + upTarget.toString());
 		memberdao.multiupMember(upTarget);
 		// String deleteID = memberdao.multideleteMember(deleteTarget);
 		mav.setViewName("redirect:member_list.do");
@@ -125,7 +132,7 @@ public class MemberController {
 	@RequestMapping("/member_levelup.do")
 	public ModelAndView levelup(MemberDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("levelup �Ѵ� ! : " + dto.getMember_id());
+		System.out.println("levelup 占싼댐옙 ! : " + dto.getMember_id());
 		memberdao.levelupMember(dto);
 		mav.setViewName("redirect:member_list.do");
 		return mav;
@@ -138,7 +145,7 @@ public class MemberController {
 		for (String item : request.getParameter("member_id").split(",")) {
 			upTarget.add(item);
 		}
-		System.out.println("multilevelup �Ѵ�~ : " + upTarget.toString());
+		System.out.println("multilevelup 占싼댐옙~ : " + upTarget.toString());
 		memberdao.multilevelupMember(upTarget);
 		// String deleteID = memberdao.multideleteMember(deleteTarget);
 		mav.setViewName("redirect:member_list.do");
@@ -148,7 +155,7 @@ public class MemberController {
 	@RequestMapping("/member_leveldown.do")
 	public ModelAndView leveldown(MemberDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("leveldown �Ѵ� ! : " + dto.getMember_id());
+		System.out.println("leveldown 占싼댐옙 ! : " + dto.getMember_id());
 		memberdao.leveldownMember(dto);
 		mav.setViewName("redirect:member_list.do");
 		return mav;
@@ -161,7 +168,7 @@ public class MemberController {
 		for (String item : request.getParameter("member_id").split(",")) {
 			upTarget.add(item);
 		}
-		System.out.println("member_multileveldown �Ѵ�~ : " + upTarget.toString());
+		System.out.println("member_multileveldown 占싼댐옙~ : " + upTarget.toString());
 		memberdao.multileveldownMember(upTarget);
 		// String deleteID = memberdao.multideleteMember(deleteTarget);
 		mav.setViewName("redirect:member_list.do");
@@ -184,7 +191,7 @@ public class MemberController {
         int count = memberdao.search_getCount(map);
         
 		List<MemberDTO> searchList = memberdao.searchMemberList(map);
-		//System.out.println("�˻��� ��� : " + searchList.toString());
+		//System.out.println("占싯삼옙占쏙옙 占쏙옙占� : " + searchList.toString());
 
 		int countPage = (int) Math.ceil((float) count / 5);
         int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
@@ -207,19 +214,12 @@ public class MemberController {
 	public String login(MemberDTO dto, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String sessionid = "";
-		
-		
-		sessionid = memberdao.getSessionCheck(dto);
-		
+		sessionid = memberdao.getSessionCheck(dto);		
 		if(sessionid != null) {
 			session.setAttribute("sessionid", sessionid);	
 			return "main.mainPage";
 		}
-		
-		
-		
-		return "ayrin.member_loginform";
-		
+		return "ayrin.member_loginform";		
 	}
 	
 	@RequestMapping("/logout.do")
@@ -230,14 +230,12 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/signupForm.do")
-	public String signupForm(HttpServletRequest request) {
-		
+	public String signupForm(HttpServletRequest request) {		
 		return "moon.signupForm";
 	}
 	@RequestMapping("/signup.do")
 	public String signup(MemberDTO dto,HttpServletRequest request) {
-		memberdao.insertMember(dto);
-		
+		memberdao.insertMember(dto);		
 		return "main.mainPage";
 	}
 }

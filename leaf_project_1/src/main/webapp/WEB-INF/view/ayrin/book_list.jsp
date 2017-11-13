@@ -12,12 +12,13 @@
    width: 800px;
    text-align: center;
 }
-#booklistTable th{
-   width: 50px;
-}
-#book{
+.bookline {
 	border-bottom: 1px solid;
 } 
+#booktd {
+   width: 300px;
+   height: 50px;
+}
 </style>
 <script type="text/javascript">
 function multiDelete(){
@@ -60,19 +61,19 @@ $(document).ready(function(){
       <c:forEach items="${ list }" var="list" varStatus="status">
             <c:if test="${sessionScope.sessionid!='관리자' and sessionScope.sessionid!='강사1'}">
          <tr>
-            <td rowspan="4" id="book"><a href="book_detail.do?book_id=${ list.book_id }">
+            <td rowspan="4" class="bookline"><a href="book_detail.do?book_id=${ list.book_id }">
             <img src="resources/${list.book_image}" style="width: 120px; height: 140px"></a></td>
          </tr>
           <tr>
-            <td>
+            <td id="booktd">
             	<a href="book_detail.do?book_id=${ list.book_id }">${list.book_title }</a>
             </td>
           </tr>
           <tr>
-            <td>${list.book_writer}</td>
+            <td id="booktd">${list.book_writer}</td>
           </tr>
           <tr>
-            <td id="book">${list.book_cost}</td>
+            <td id="booktd" class="bookline">${list.book_cost}</td>
           </tr>
           </c:if>
       </c:forEach>   
@@ -82,29 +83,24 @@ $(document).ready(function(){
       <c:forEach items="${ list }" var="list" varStatus="status">
       <c:if test="${sessionScope.sessionid=='관리자' or sessionScope.sessionid=='강사1'}">
          <tr>
-         	<td  rowspan="4"><input id="multi" type="checkbox" style="width: 30px;" name="book_id" value="${ list.book_id }"></td>
+         	<td rowspan="4"><input id="multi" type="checkbox" style="width: 30px;" name="book_id" value="${ list.book_id }"></td>
+            <td rowspan="4" class="bookline"><a href="book_detail.do?book_id=${ list.book_id }">
+            <img src="resources/${list.book_image}" style="width: 120px; height: 140px"></a></td>
          </tr>
          <tr>
-            <td rowspan="4" id="book"><img src="resources/${list.book_image}" style="width: 120px; height: 140px"></td>
+            <td id="booktd"><a href="book_detail.do?book_id=${ list.book_id }"> ${list.book_title }</a></td>
+            <td><a href="book_updateform.do?book_id=${ list.book_id }"><button id="edit">수 정</button></a></td>
          </tr>
-          <tr>
-            <td>
-            	<a href="book_detail.do?book_id=${ list.book_id }">${list.book_title }</a>
-            </td>
-          </tr>
-          <tr>
-            <td>${list.book_writer}</td>
-          </tr>
-          <tr>
-            <td>${list.book_cost}</td>
-          </tr>
+         <tr>
+            <td id="booktd">${list.book_writer}</td>
+            <td><a href="book_delete.do?book_id=${ list.book_id }"><button id="delete" >삭 제</button></a></td>
+         </tr>
+         <tr>
+            <td id="booktd" class="bookline">${list.book_cost}</td>
+            <td><a href="book_deletecancle.do?book_id=${ list.book_id }"><button id="deletecancle" >삭제취소</button></a></td>
+         </tr>
             <%-- <td>${list.enabled}</td> --%>
-       	  <tr>
-          	<td><a href="book_updateform.do?book_id=${ list.book_id }"><button id="edit">수 정</button></a></td>
-          	<td><a href="book_delete.do?book_id=${ list.book_id }"><button id="delete" >삭 제</button></a></td>
-          	<td><a href="book_deletecancle.do?book_id=${ list.book_id }"><button id="deletecancle" >삭제취소</button></a></td>
-          </tr>
-          </c:if>
+         </c:if>
       </c:forEach>
    </table>
    
