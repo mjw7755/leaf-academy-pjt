@@ -13,7 +13,7 @@
 	<!-- Root Context: defines shared resources visible to all other web components -->
 		<bean id="driverManagerDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<property name="url" value="jdbc:oracle:thin:@192.168.0.126:1521:xe"/>
+		<property name="url" value="jdbc:oracle:thin:@192.168.43.23:1521:xe"/>
 		<property name="username" value="leaf"/>
 		<property name="password" value="leaf"/>
 	</bean>
