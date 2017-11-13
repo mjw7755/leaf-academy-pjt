@@ -17,7 +17,7 @@
 } */
 .login_bar{
    width: 100%;
-   background-color: #2b2b2b;
+   background-color: #fff;
 }
 .login{
    height: 40px;
@@ -32,10 +32,10 @@
    list-style:none;
    float:left;
    line-height:40px;
-   color : #999999;
+   color:#1b7817;
 }
 .login li a{
-color:#d7d7d7;
+color:#1b7817;
 display:block;
 font-weight:normal;
 /* margin:0px; */
@@ -101,7 +101,7 @@ z-index:200;
 display:block; /* 마우스 커서 올리면 드랍메뉴 보이게 하기 */
 }
 .menu li li {
-background: #56a049;
+background: #629261;
 display:block;
 float:none;
 margin:0px;

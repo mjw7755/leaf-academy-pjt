@@ -2,6 +2,7 @@ package com.leaf.controller.teacher_intro;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.leaf.model.teacher_intro.ReviewDAO;
 import com.leaf.model.teacher_intro.ReviewDTO;
 import com.leaf.model.teacher_intro.T_introDAO;
@@ -222,31 +225,43 @@ public class T_introController {
       return mav;
    }
 
-      @RequestMapping("/review_list.do")
-      public String reviewlist(Model model, HttpServletRequest request) {
-      	   String strPage = request.getParameter("page");
-      	   String flag = "list";
-       	   int page;
-       	   if (strPage == null) {page = 1;} 
-       	   else {page = Integer.parseInt(request.getParameter("page"));}
-            String teacher_id = request.getParameter("teacher_id");
+   @RequestMapping(value="/review_list.do", produces="text/plain;charset=UTF-8")
+   public void reviewlist(HttpServletRequest request, HttpServletResponse response) throws IOException {
+         request.setCharacterEncoding("utf-8");
+         response.setCharacterEncoding("utf-8");
+      
+      String strPage = request.getParameter("page");
+         String flag = "list";
+          int page;
           
-            T_introDTO dto = t_introDAO.getT_introByteacher_id(Integer.parseInt(teacher_id));
-            System.out.println("list teacher_id : " + teacher_id);
-            List<ReviewDTO> list = reviewDAO.getReviewList(page, teacher_id);
-            
-            int count = reviewDAO.getCount();
-            int countPage = (int) Math.ceil((float) count / 5);
-            int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
-            model.addAttribute("count", count);
-            model.addAttribute("countPage", countPage);
-            model.addAttribute("startPage", startPage);
-            model.addAttribute("list", list);
-            model.addAttribute("dto", dto);
-            model.addAttribute("flag", flag);
-            
-            return "ram.review_list";
-      }
+          if (strPage == null) {page = 1;} 
+          else {page = Integer.parseInt(request.getParameter("page"));}
+         String teacher_id = request.getParameter("teacher_id");
+       
+         T_introDTO dto = t_introDAO.getT_introByteacher_id(Integer.parseInt(teacher_id));
+         System.out.println("list teacher_id : " + teacher_id);
+         List<ReviewDTO> list = reviewDAO.getReviewList(page, teacher_id);
+         
+         int count = reviewDAO.getCount();
+         int countPage = (int) Math.ceil((float) count / 5);
+         int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
+         
+         Gson gson = new Gson();
+         JsonObject json = new JsonObject();
+         
+         System.out.println(countPage);
+         json.addProperty("count", count);
+         json.addProperty("countPage", countPage);
+         json.addProperty("startPage", startPage);
+         json.addProperty("list", gson.toJson(list));
+         json.addProperty("dto", gson.toJson(dto));
+         json.addProperty("flag", flag);
+         json.addProperty("page", page);
+         Writer writer =  response.getWriter();
+         writer.write(json.toString());
+         writer.close();
+         
+   }
  
    @RequestMapping("/review_writeform.do")
    public String review_writeForm() {

@@ -9,6 +9,7 @@
 <style type="text/css">
 .footer{
 	width: 100%;
+	margin-top: 50px;
 }
 #foot{
 	width:800px;
@@ -16,16 +17,12 @@
 	font-size: 9px;
 	font-weight: bold;
 	color: #ababab;
-	padding-top: 20px;
-	
+	float: left;
 }
-#message{
-position: fixed;
-top: 70%;
-left:75%;
+.alert_div{
 font-size: 13px;
+display: none;
 }
-
 
 /*  */
 
@@ -39,7 +36,7 @@ font-size: 13px;
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 } */
 .buttons {
-  margin-top: 50px;
+  margin-top: 100px;
   text-align: center;
 }
 .blob-btn {
@@ -49,7 +46,7 @@ font-size: 13px;
   margin-bottom: 30px;
   text-align: center;
   text-transform: uppercase;
-  color: #0fe0f5;
+  color: #1b7817;/* 쪽지도착 글씨색 */
   font-size: 16px;
   font-weight: bold;
   background-color: transparent;
@@ -66,21 +63,21 @@ font-size: 13px;
   top: 0;
   width: 100%;
   height: 100%;
-  border: 6px solid #0fe0f5;
+  border: 6px solid #1b7817;
 }
 .blob-btn:after {
   content: "";
   z-index: -2;
   position: absolute;
-  left: 9px;
-  top: 9px;
+  left: 6px;
+  top: 6px;
   width: 100%;
   height: 100%;
-  border: 6px solid #222;
+  border: 6px solid #629261;
   transition: all 0.3s 0.2s;
 }
 .blob-btn:hover {
-  color: #222;
+  color: #fff;
 }
 .blob-btn:hover:after {
   transition: all 0.3s;
@@ -107,7 +104,7 @@ font-size: 13px;
   top: 6px;
   width: 25%;
   height: 100%;
-  background: #0fe0f5;
+  background: #1b7817;
   border-radius: 100%;
   transform: translate3d(0, 150%, 0) scale(1.7);
   transition: transform 0.45s;
@@ -157,9 +154,9 @@ font-size: 13px;
 				<td>ⓒ 2017 LeafCA Co.,Ltd All Rights Reserved.</td>
 			</tr>
 		</table>
-	</div>
+	
 
-	<div id="message">
+	<div class="alert_div">
 	<div class="buttons">
   <button class="blob-btn">
     쪽지가 도착했습니다
@@ -184,6 +181,8 @@ font-size: 13px;
     </filter>
   </defs>
 </svg> -->
+	</div>
+	
 	</div>
 </body>
 </html>
