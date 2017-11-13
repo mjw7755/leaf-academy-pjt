@@ -10,7 +10,7 @@
 <body>
 <form action="member_update.do">
          ID : <input readonly="readonly" type="text" name="member_id" value="${dto.member_id}"><br>
-         NAME : <input type="readonly" name="member_name" value="${dto.member_name}"><br>
+         NAME : <input readonly="readonly" name="member_name" value="${dto.member_name}"><br>
          PWD : <input type="text" name="member_pwd" value="${dto.member_pwd}"><br>
          TEL : <input type="text" name="member_tel" value="${dto.member_tel}"><br>
          EMAIL : <input type="text" name="member_email" value="${dto.member_email}"><br>

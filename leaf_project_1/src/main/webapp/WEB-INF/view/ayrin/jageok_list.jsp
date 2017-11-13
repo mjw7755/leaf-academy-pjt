@@ -33,7 +33,6 @@ function multiDelete(){
 </script>
 </head>
 <body>
-    <a href="jageok_calendar.do"><button id="calendar_btn" >달력으로 보기</button></a>
 	<form action="jageok_search.do" method="post">
          검색어 입력 : <input size="30" type="search"  name="keyvalue" placeholder="키워드 검색 가능합니다." list="jageoklist"> 
                 <input type="submit" value="검색">

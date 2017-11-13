@@ -8,37 +8,17 @@
 <title></title>
 
 <style type="text/css">
-table {
-   width: 100%;
+#memberlistTable {
+   width: 80%;
    text-align: center;
-   font-size: 20px;
+   border: 1px solid;
 }
-table th{
-   background-color: black;
-   color: white;
+#memberlistTable th{
+   border: 1px solid;
 }
-table tr:nth-child(even) {
-   background-color: lightgray;
+#memberlistTable td{
+   border: 1px solid;
 }
-table tr:HOVER {
-   color: white;
-   background-color: black;
-}
-table tr:ACTIVE{
-   color: black;
-   font-weight:bold;
-   background-color: lightyellow;
-}
-ul {
-    list-style:none;
-    margin:0;
-    padding:0;
-}
-li {
-    margin: 0 0 0 0;
-    padding: 0 0 0 0;
-    border : 0;
-    float: left;
 </style>
 <script type="text/javascript">
 function hide(){
@@ -101,15 +81,13 @@ function multiLevelDown(){
                 placeholder="키워드 검색 가능합니다." list="memlist"> 
                 <input type="submit" value="검색">
     </form>
-    </h3>
-	<datalist  id="memlist">
+	<datalist id="memlist">
 	<c:forEach items="${ list }" var="list">
 		<option value="${ list.member_id }"> ${ list.member_id } | ${ list.member_name } | ${ list.member_level }</option>
 	</c:forEach>
 	</datalist>
 	<hr>
-	<fieldset>
-   <table>
+   <table id="memberlistTable">
       <tr>
          <th>ID</th>
          <th>NAME</th>
