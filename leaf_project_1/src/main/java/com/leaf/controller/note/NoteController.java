@@ -42,7 +42,7 @@ public class NoteController {
 			mav.addObject("noteResult","failed");
 		}
 		
-		mav.setViewName("moon.noteWriteForm");
+		mav.setViewName("moon.myPage");
 		
 		return mav;
 	}

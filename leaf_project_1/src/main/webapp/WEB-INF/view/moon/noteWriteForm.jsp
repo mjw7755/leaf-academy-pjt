@@ -10,16 +10,15 @@
 	<table>
 	<form action="noteWrite.do">
 		<tr>
-			<td>(보낼사람 ID) : <input type="text" name="n_send_id" id="n_send_id" value="studentid"></td><td><a href="noteList.do">쪽지함으로</a></td>
-			
+			<td>(보낼사람 ID) : <input type="text" name="n_send_id" id="n_send_id" value="${sessionScope.sessionid}"></td><td><a href="noteList.do">쪽지함으로</a></td>
 		</tr>
 		
 		<tr>
-			<td>(받는사람 ID) : <input type="text" name="n_recv_id" id="n_recv_id" value="teacherid"></td>
+			<td>(받는사람 ID) : <input type="text" name="n_recv_id" id="n_recv_id" value=""></td>
 		</tr>
 		
 		<tr>
-			<td>제목 : <input type="text" name="n_title" style="width:500px;"></td>
+			<td>제목 : <input type="text" name="n_title" id="n_title" style="width:500px;"></td>
 		</tr>
 		
 		<tr>
@@ -27,7 +26,7 @@
 		</tr>
 		
 		<tr>
-			<td><input type="text" name="n_content" style="width:500px; height:200px"></td>
+			<td><input type="text" name="n_content" id="n_content" style="width:500px; height:200px"></td>
 		</tr>
 		
 		<tr>
@@ -35,7 +34,9 @@
 		</tr>
 		</form>
 	</table>
-	
+	<div class="alert_div" style="display:none;">
+		
+	</div>
 	<script>
 		//웹 소켓 객체를 저장할 변수를 선언
 		var conn;
@@ -53,8 +54,6 @@
 				conn.onclose = onClose;
 				conn.onerror = onError;
 			
-			
-			
 			//퇴장 버튼을 누를 때 이벤트 처리
 			/* $('#exitBtn').bind('click', function(){
 				//웹 소켓 연결 해제
@@ -64,24 +63,21 @@
 			//전송 버튼을 누를 때 이벤트 처리
 			$('#sendBtn').bind('click', function(){
 				
-				var studentname = $('#n_send_id').val();
-				var teachername = $('#n_recv_id').val();
+				var n_send_id = $('#n_send_id').val();
+				var n_recv_id = $('#n_recv_id').val();
 				var content = $('#n_content').val();
 				var title = $('#n_title').val();
-				console.log(studentname);
-				console.log(teachername);
+				console.log(n_send_id);
+				console.log(n_recv_id);
 				console.log(content);
 				console.log(title);
 				
 				send({
-		               type: "send",
-		               offer: offer,
-		               data:{"studentname" : studentname,
-		            		"teachername" : teachername,
-		            		"content" : content,
-		            		"title" : title
-		               		},
-				
+		               n_type: "message",
+		               n_sendid: n_send_id,
+		               n_recvid: n_recv_id,
+		               n_content: content,
+		               n_title: title,
 		            });
 				
 				//nickname 과 message에 입력된 내용을 서버에 전송
@@ -109,7 +105,7 @@
 		//WebSocket이 연결된 경우 호출되는 함수
 		function onOpen(evt){
 			console.log("웹 소켓에 연결 성공");
-			send({name : "", type : "login"});
+			send({n_type : "login", n_name : "" });
 		}
 		
 		//WebSocket이 연결 해제된 경우 호출되는 함수
@@ -128,17 +124,18 @@
 			//메시지를 출력
 			alert(data);
 			if(data != null){
-				$('#chatMessageArea').append("쪽지가 도착했습니다.");
-				$('#chatMessageArea').slideDown("fast");
+				$('.alert_div').append("쪽지가 도착했습니다.");
+				$('.alert_div').slideDown("fast");
 				setTimeout(function(){$('#chatMessageArea').slideUp("fast");},3000)
 			}
 		}
 		
 		function send(message) {
+			var sessionid = "${sessionScope.sessionid}";
 		      //attach the other peer username to our messages
-		      var sessionid = "${sessionScope.sessionid}";
+		      
 		      if (sessionid) {
-		         message.name = sessionid;
+		         message.n_name = sessionid;
 		      }
 		      conn.send(JSON.stringify(message));
 		   };
