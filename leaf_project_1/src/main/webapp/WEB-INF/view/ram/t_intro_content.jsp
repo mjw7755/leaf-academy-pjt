@@ -59,6 +59,13 @@
    }
    
    function reviewAdd() {
+	   $.ajax({
+		 url:"review_write.do?teacher_id=${dto.teacher_id}&r_headline="
+				 +document.getElementById("r_headline").value+"&r_content=" +document.getElementById("r_content").value,
+		  success:function(msg){
+			  alert("성공");
+		  }
+	   });
       $("#writeDIV").hide();
       $("#reviewList").show();
       $("#reviewList").removeChild();
