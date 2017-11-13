@@ -10,6 +10,8 @@ import org.springframework.stereotype.Component;
 
 import com.leaf.model.curriculum.LectDAO;
 import com.leaf.model.curriculum.LectDTO;
+import com.leaf.model.member.MemberDAO;
+import com.leaf.model.member.MemberDTO;
 
 
 @Component
@@ -81,6 +83,12 @@ public class LectDAOImpl implements LectDAO {
 	      LectDAO dao = sqlSession.getMapper(LectDAO.class);
 	      return dao.getSearchCount(map);
 	   }
+	  
+	  public LectDTO getCheckDate(String sessionid) {
+			LectDAO dao = sqlSession.getMapper(LectDAO.class);
+			return dao.getCheckDate(sessionid);
+	  }
+	  
 }
 
 
