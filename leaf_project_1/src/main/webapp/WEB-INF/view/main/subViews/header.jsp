@@ -8,30 +8,34 @@
 <title>header</title>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <style type="text/css">
-/* .header{
-	height: 
+#img{
+   padding-right: 10px;
+	margin:0px;
+}
+/* #img a{
+	
 } */
 .login_bar{
-	width: 100%;
-	background-color: #2b2b2b;
+   width: 100%;
+   background-color: #2b2b2b;
 }
 .login{
-	height: 40px;
-	width: 800px;
-	margin-left: 25%;
+   height: 40px;
+   width: 800px;
+   margin-left: 25%;
 }
 .login ul{
-	margin:0px;
-	padding:0px;
+   margin:0px;
+   padding:0px;
 }
 .login li{
-	list-style:none;
-	float:left;
-	line-height:40px;
-	color : #999999;
+   list-style:none;
+   float:left;
+   line-height:40px;
+   color : #999999;
 }
 .login li a{
-color : #999999;
+color:#d7d7d7;
 display:block;
 font-weight:normal;
 /* margin:0px; */
@@ -69,6 +73,7 @@ margin:0px;
 /* padding:0px 25px; */
 text-align:center;
 text-decoration:none;
+width:130px;
 }
 .menu li a:hover {
 /* background: rgb(71,71,71); */
@@ -87,7 +92,7 @@ padding:0px;
 margin:0px;
 border:0px;
 position:absolute;
-width:200px;
+/* width:200px; */
 z-index:200;
 /*top:1em;
 /*left:0;*/
@@ -96,15 +101,22 @@ z-index:200;
 display:block; /* 마우스 커서 올리면 드랍메뉴 보이게 하기 */
 }
 .menu li li {
-background: rgb(109,109,109);
+background: #56a049;
 display:block;
 float:none;
 margin:0px;
 padding:0px;
-width:200px;
+width:130px;
+border-bottom: 1px solid;
+border-bottom-color: #3b7f30;
+border-top:1px solid;
+border-top-color: #51b34d;
 }
 .menu li:hover li a{
 background:none;
+}
+.menu li ul li a{
+color:#fff;
 }
 .menu li ul a{
 display:block;
@@ -112,11 +124,10 @@ height:50px;
 font-size:12px;
 font-style:normal;
 margin:0px;
-padding:0px 10px 0px 15px;
-text-align:left;
+text-align:center;
 }
 .menu li ul a:hover, .menu li ul li:hover a{
-background: #044074;
+background: #1b7817;
 border:0px;
 color:#ffffff;
 text-decoration:none;
@@ -124,9 +135,7 @@ text-decoration:none;
 .menu p{
 clear:left;
 }
-#a_tag{
-	padding:0px 25px; 
-}
+
 </style>
 
 </head>

@@ -24,20 +24,20 @@ body{
 	<div class="wrapper">
 	<table width="100%">
 	
-		<tr height="100">
+		<tr height="10%">
 			<!-- header 영역 -->
 				<td><tiles:insertAttribute name="header" /></td>
 			
 		</tr>
 		
-		<tr height="670" align="center">
+		<tr height="80%" align="center">
 			<!-- content 영역 -->
 			<div class="container-div">
 				<td><tiles:insertAttribute name="content" /></td>
 			</div>
 		</tr>
 		
-		<tr>
+		<tr height="10%">
 			<!-- footer 영역 -->
 			<div class="footer-div">
 				<td><tiles:insertAttribute name="footer" /></td>
