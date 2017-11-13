@@ -53,7 +53,7 @@
 				conn.onmessage = onMessage;
 				conn.onclose = onClose;
 				conn.onerror = onError;
-			
+			  
 			//퇴장 버튼을 누를 때 이벤트 처리
 			/* $('#exitBtn').bind('click', function(){
 				//웹 소켓 연결 해제
