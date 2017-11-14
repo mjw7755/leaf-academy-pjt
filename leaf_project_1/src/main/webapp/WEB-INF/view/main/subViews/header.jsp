@@ -161,7 +161,7 @@ clear:left;
 			</c:if>
 			<c:if test="${sessionScope.sessionid != null}">
 				<ul>
-					<li><a href="#">마이페이지</a></li>
+					<li><a href="mypage.do">마이페이지</a></li>
 					<li>|</li>
 					<li><a href="myclass.do">내 강의실</a></li>
 					<li>|</li>
