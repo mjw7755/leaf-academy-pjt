@@ -210,6 +210,14 @@ public class MemberController {
 		return "ayrin.member_loginform";
 	}
 	
+	@RequestMapping("/loginDupl.do")
+	public void loginDupl(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String sessionid = (String) session.getAttribute("sessionid");
+		session.removeAttribute("sessionid");
+		session.setAttribute("sessionid", sessionid);
+	}
+	
 	@RequestMapping("/login.do")
 	public String login(MemberDTO dto, HttpServletRequest request) {
 		HttpSession session = request.getSession();

@@ -78,7 +78,12 @@ var conn;
 				//웹 소켓 연결 해제
 				websocket.close();
 			}); */
-			
+			$("#loginBtn").bind('click',function(){
+				send({
+		               n_type: "login",
+		               loginid : "${sessionScope.sessionid}",
+		            });
+			});
 			//전송 버튼을 누를 때 이벤트 처리
 			$('#sendBtn').bind('click', function(){
 				
@@ -143,6 +148,17 @@ var conn;
 			//메시지를 출력
 			alert(data);
 			if(data != null){
+				if(data == "dupl"){
+					$.ajax({
+						url:"loginDupl.do",
+						success: function(data){
+							if(data == 1){
+							alert("이미 접속중인 아이디입니다. 다시 접속합니다.");
+							}
+						}
+						
+					})
+				}
 				$('.alert_div').slideDown("fast");
 				setTimeout(function(){$('.alert_div').slideUp("fast");},3000);
 			}
