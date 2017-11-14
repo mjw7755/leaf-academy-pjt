@@ -38,7 +38,7 @@
 	
 	<default-servlet-handler/>
 	<beans:bean id="noteWebSocketHandler"
-	class="com.leaf.handler.websocketHandler.WebSocketHandler"/>
+	class="com.leaf.handler.websocketHandler.NoteHandler"/>
 	
 	<websocket:handlers>
 	     <websocket:mapping handler="noteWebSocketHandler" 
