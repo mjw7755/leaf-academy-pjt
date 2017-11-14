@@ -214,19 +214,12 @@ public class MemberController {
 	public String login(MemberDTO dto, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String sessionid = "";
-		
-		
-		sessionid = memberdao.getSessionCheck(dto);
-		
+		sessionid = memberdao.getSessionCheck(dto);		
 		if(sessionid != null) {
 			session.setAttribute("sessionid", sessionid);	
 			return "main.mainPage";
 		}
-		
-		
-		
-		return "ayrin.member_loginform";
-		
+		return "ayrin.member_loginform";		
 	}
 	
 	@RequestMapping("/logout.do")
@@ -234,6 +227,20 @@ public class MemberController {
 		HttpSession session = request.getSession();
 		session.removeAttribute("sessionid");
 		return "main.mainPage";
+	}
+	
+	@RequestMapping("/myclass.do")
+	public String myclass(MemberDTO dto, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.getAttribute("sessionid");
+		return "ayrin.myclass";
+	}
+	
+	@RequestMapping("/mypage.do")
+	public String mypage(MemberDTO dto, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.getAttribute("sessionid");
+		return "ayrin.mypage";
 	}
 	
 /*	
