@@ -47,6 +47,10 @@
 			<td><input type="text" name="book_cost" value="${dto.book_cost}" style="width: 100%;"></td>
 		</tr>
 		<tr>
+			<td>소개 : </td>
+			<td><textarea rows="" cols="" name="book_contents" style="width: 100%; height:300px"></textarea></td>
+		</tr>
+		<tr>
 			<td colspan="2"><input type="file" name="uploadfile"  id="image"><input type="submit" value="수정완료"><input type="reset" value="초기화" ></td>
 		</tr>
 	</table>

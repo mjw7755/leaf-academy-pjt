@@ -19,6 +19,46 @@
    width: 300px;
    height: 50px;
 }
+
+.btn {
+display: inline-block;
+border: none;
+border-radius: .3em;
+-webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 -0.25em 0 rgba(0, 0, 0, 0.25), 0 0.25em 0.25em rgba(0, 0, 0, 0.05);
+box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 -0.25em 0 rgba(0, 0, 0, 0.25), 0 0.25em 0.25em rgba(0, 0, 0, 0.05);
+color: #fff;
+cursor: pointer;
+font-family: 'Raleway', sans-serif;
+font-weight: 300;
+line-height: 1.5;
+letter-spacing: 1px;
+padding: .5em 1.5em .75em;
+position: relative;
+text-decoration: none;
+text-shadow: 0 1px 1px rgba(255, 255, 255, 0.25);
+vertical-align: middle;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none; 
+}
+.btn:active {
+-webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), inset 0 2px 0 rgba(255, 255, 255, 0.1), inset 0 0.25em 0.5em rgba(0, 0, 0, 0.05);
+box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), inset 0 2px 0 rgba(255, 255, 255, 0.1), inset 0 0.25em 0.5em rgba(0, 0, 0, 0.05);
+margin-top: .25em;
+padding-bottom: .5em; }
+.btn:active, .btn:focus {
+outline: none; }
+.btn--green {
+background-color: #1abc9c; }
+.btn--green {
+font-size: 1em; }
+.btn--sm {
+font-size: 0.75em; }
+
+#dnawlrdu {
+	/* float: right; */
+}
 </style>
 <script type="text/javascript">
 function multiDelete(){
@@ -45,15 +85,17 @@ $(document).ready(function(){
 <body>
 	<form action="book_search.do" method="post">
          검색어 입력 : <input size="30" type="search"  name="keyvalue" placeholder="제목, 저자 검색 가능합니다." list="booklist"> 
-             <input type="submit" value="검색">
+             <button type="submit" class="btn btn--sm btn--green">검색</button>
     </form>
     <c:if test="${sessionScope.sessionid=='관리자' or sessionScope.sessionid=='강사1'}">
-    <a href="book_writeform.do"><button>추가</button></a>
-    <button id="multi" onclick="multiDelete()">다중삭제</button>
+	    <div id="dnawlrdu">
+		    <a href="book_writeform.do"><button class="btn btn--sm btn--green">추가</button></a>
+		    <button id="multi" onclick="multiDelete()" class="btn btn--sm btn--green">다중삭제</button>
+	    </div>
 	<datalist  id="booklist">
-	<c:forEach items="${ list }" var="list">
-		<option value="${ list.book_title }"> ${ list.book_title } | ${ list.book_writer } | ${ list.book_cost }</option>
-	</c:forEach>
+		<c:forEach items="${ list }" var="list">
+			<option value="${ list.book_title }"> ${ list.book_title } | ${ list.book_writer } | ${ list.book_cost }</option>
+		</c:forEach>
 	</datalist>
 	</c:if>
 	<hr>
@@ -89,15 +131,15 @@ $(document).ready(function(){
          </tr>
          <tr>
             <td id="booktd"><a href="book_detail.do?book_id=${ list.book_id }"> ${list.book_title }</a></td>
-            <td><a href="book_updateform.do?book_id=${ list.book_id }"><button id="edit">수 정</button></a></td>
+            <td><a href="book_updateform.do?book_id=${ list.book_id }"><button id="edit" class="btn btn--sm btn--green">수 정</button></a></td>
          </tr>
          <tr>
             <td id="booktd">${list.book_writer}</td>
-            <td><a href="book_delete.do?book_id=${ list.book_id }"><button id="delete" >삭 제</button></a></td>
+            <td><a href="book_delete.do?book_id=${ list.book_id }"><button id="delete" class="btn btn--sm btn--green">삭 제</button></a></td>
          </tr>
          <tr>
             <td id="booktd" class="bookline">${list.book_cost}</td>
-            <td><a href="book_deletecancle.do?book_id=${ list.book_id }"><button id="deletecancle" >삭제취소</button></a></td>
+            <td><a href="book_deletecancle.do?book_id=${ list.book_id }"><button id="deletecancle" class="btn btn--sm btn--green">삭제취소</button></a></td>
          </tr>
             <%-- <td>${list.enabled}</td> --%>
          </c:if>

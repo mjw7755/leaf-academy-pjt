@@ -45,7 +45,11 @@
       <tr>
          <td id="whqrp">가격 : </td>
          <td><input type="text" name="book_cost" style="width: 100%;"></td>
-      </tr>      
+      </tr> 
+      <tr>
+         <td id="whqrp">소개 : </td>
+         <td><textarea rows="" cols="" name="book_contents" style="width: 100%; height:300px"></textarea></td>
+      </tr>     
       <tr>
       	<td colspan="2"> <input type="file" name="uploadfile" id="image"> </td> 
       </tr>

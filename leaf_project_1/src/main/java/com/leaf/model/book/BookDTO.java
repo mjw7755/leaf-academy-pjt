@@ -4,7 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class BookDTO {
 
-	private String member_id, book_title, book_writer, book_cost, book_image;
+	private String member_id, book_title, book_writer, book_cost, book_contents, book_image;
 	private int book_id, enabled;
 	private MultipartFile uploadfile;
 
@@ -27,13 +27,14 @@ public class BookDTO {
 		this.book_image = book_image;
 	}
 
-	public BookDTO(String member_id, String book_title, String book_writer, String book_cost, int book_id,
+	public BookDTO(String member_id, String book_title, String book_writer, String book_cost, String book_contents, int book_id, 
 			int enabled, String book_image) {
 		super();
 		this.member_id = member_id;
 		this.book_title = book_title;
 		this.book_writer = book_writer;
 		this.book_cost = book_cost;
+		this.book_contents = book_contents;
 		this.book_id = book_id;
 		this.book_image = book_image;
 		this.enabled = enabled;
@@ -92,6 +93,14 @@ public class BookDTO {
 		return "BookDTO [member_id=" + member_id + ", book_title=" + book_title + ", book_writer=" + book_writer
 				+ ", book_cost=" + book_cost + ", book_image=" + book_image + ", book_id=" + book_id + ", enabled="
 				+ enabled + "]";
+	}
+
+	public String getBook_contents() {
+		return book_contents;
+	}
+
+	public void setBook_contents(String book_contents) {
+		this.book_contents = book_contents;
 	}
 
 }
