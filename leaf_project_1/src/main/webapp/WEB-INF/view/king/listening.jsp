@@ -109,10 +109,6 @@
       switch(data.type) {
          case "login":
             handleLogin(data.success);
-            send({
-                type: "candidate",
-                candidate: event.candidate
-             });
             break;
          //when somebody wants to call us
          case "offer":
@@ -138,7 +134,7 @@
    };
 
    //alias for sending JSON encoded messages
-   function send(message) {
+   function videoSend(message) {
       //attach the other peer username to our messages
       if (connectedUser) {
          message.name = connectedUser;
@@ -172,7 +168,7 @@
       name = usernameInput.value;
 
       if (name.length > 0) {
-         send({
+    	  videoSend({
             type: "login",
             name: name
          });
@@ -217,7 +213,7 @@
             // Setup ice handling
             yourConn.onicecandidate = function (event) {
                if (event.candidate) {
-                  send({
+            	   videoSend({
                      type: "candidate",
                      candidate: event.candidate
                   });
@@ -241,7 +237,7 @@
 
          // create an offer
          yourConn.createOffer(function (offer) {
-            send({
+        	 videoSend({
                type: "offer",
                offer: offer
             });
@@ -263,7 +259,7 @@
       yourConn.createAnswer(function (answer) {
          yourConn.setLocalDescription(answer);
 
-         send({
+         videoSend({
             type: "answer",
             answer: answer
          });
@@ -286,7 +282,7 @@
    //hang up
    hangUpBtn.addEventListener("click", function () {
 
-      send({
+	   videoSend({
          type: "leave"
       });
 
@@ -378,7 +374,7 @@
 				var txtArea = document.getElementById('txtForm');
 				var txtValue = txtArea.value;
 				if(data[0]=="접속") {
-					websocket.send("전송````"+ data[1] + "````" + txtValue);
+					codingConn.send("전송````"+ data[1] + "````" + txtValue);
 				} else if(data[0]=="전송") {
 					txtArea.value = data[1];
 				} else {

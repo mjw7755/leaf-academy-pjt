@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>¿À¸ñ°ÔÀÓ</title>
+<title>ì˜¤ëª©ê²Œì„</title>
 
 <meta http-equiv="Content-Type" content="UTF-8">
 
@@ -40,7 +40,7 @@ jLastUserMove=0;
 
 function clk(iMove,jMove) {
  if (myTurn) return; 
- if (f[iMove][jMove]!=0) {alert('ÀÌ¹Ì ¼±ÅÃµÈ ÀÚ¸®ÀÔ´Ï´Ù. ´Ù¸¥°÷À» ¼±ÅÃÇØ ÁÖ¼¼¿ä.'); return; }
+ if (f[iMove][jMove]!=0) {alert('ì´ë¯¸ ì„ íƒëœ ìë¦¬ì…ë‹ˆë‹¤. ë‹¤ë¥¸ê³³ì„ ì„ íƒí•´ ì£¼ì„¸ìš”.'); return; }
  f[iMove][jMove]=userSq;
  drawSquare(iMove,jMove,userSq);
  myTurn=true;
@@ -51,7 +51,7 @@ function clk(iMove,jMove) {
 
  if (winningPos(iMove,jMove,userSq)==winningMove) setTimeout("alert('YOU WIN!');",dly);
  else setTimeout("machineMove(iLastUserMove,jLastUserMove);",dly);
-} // °ÔÀÓ¿¡¼­ ÀÌ±æ½Ã¿¡ ¼­¹ö·Î ³Ñ°ÜÁÖ°Ô µÇ´Â °æ¿ì ÀÌºÎºĞ¿¡¼­ Ã³¸®
+} // ê²Œì„ì—ì„œ ì´ê¸¸ì‹œì— ì„œë²„ë¡œ ë„˜ê²¨ì£¼ê²Œ ë˜ëŠ” ê²½ìš° ì´ë¶€ë¶„ì—ì„œ ì²˜ë¦¬
 
 function machineMove(iUser,jUser) {
  maxS=evaluatePos(s,userSq);
@@ -115,7 +115,7 @@ function hasNeighbors(i,j) {
 
 w=new Array(0, 100, 85, 77, 70, 50);
 //w= new Array(0,0,0,0,0);
-//w=new Array(0,5,4,3,2,1); // ÀÌ¾îÁø µ¹ÀÇ °¡ÁßÄ¡ 1¼ö 0 2¼ö 5
+//w=new Array(0,5,4,3,2,1); // ì´ì–´ì§„ ëŒì˜ ê°€ì¤‘ì¹˜ 1ìˆ˜ 0 2ìˆ˜ 5
 
 //w=new Array(0,20,17,15.4,14,10);
 //w=new Array;
@@ -130,9 +130,9 @@ function winningPos(i,j,mySq) {
  m=1; 
  while (j+m<boardSize  && f[i][j+m]==mySq) 
  {L++; m++}
- m1=m; // ¸î¼öÀÎÁö ÆÇ´Ü
+ m1=m; // ëª‡ìˆ˜ì¸ì§€ íŒë‹¨
  m=1; while (j-m>=0 && f[i][j-m]==mySq) {L++; m++} m2=m;   
- if (L>4) { return winningMove; } // Å½»öÈÄ 5µÇ¸é ÀÌ±ä´Ù 99999¸é ÀÌ±è
+ if (L>4) { return winningMove; } // íƒìƒ‰í›„ 5ë˜ë©´ ì´ê¸´ë‹¤ 99999ë©´ ì´ê¹€
  side1=(j+m1<boardSize && f[i][j+m1]==0); 
  side2=(j-m2>=0 && f[i][j-m2]==0);
 
@@ -202,7 +202,7 @@ function evaluatePos(a,mySq) {
    maxN=j+5; if (maxN>boardSize) maxN=boardSize;
 
    nPos[1]=1; A1=0;
-   m=1; while (j+m<maxN  && f[i][j+m]!=-mySq) {nPos[1]++; A1+=w[m]*f[i][j+m]; m++} //w ¾²ÀÌ´Â°÷
+   m=1; while (j+m<maxN  && f[i][j+m]!=-mySq) {nPos[1]++; A1+=w[m]*f[i][j+m]; m++} //w ì“°ì´ëŠ”ê³³
    if (j+m>=boardSize || f[i][j+m]==-mySq) A1-=(f[i][j+m-1]==mySq)?(w[5]*mySq):0;
    m=1; while (j-m>=minN && f[i][j-m]!=-mySq) {nPos[1]++; A1+=w[m]*f[i][j-m]; m++}   
    if (j-m<0 || f[i][j-m]==-mySq) A1-=(f[i][j-m+1]==mySq)?(w[5]*mySq):0;
@@ -313,8 +313,8 @@ function init() {
 
 <frameset cols="230,*" frameborder="no" framespacing="0" border="0"
 	onLoad="init()">
-	<frame name=f0 src="button.html" scrolling="no">
-	<frame name=f1 src="blank.html" scrolling="no">
+	<frame name=f0 src="button.htm" scrolling="no">
+	<frame name=f1 src="blank.htm" scrolling="no">
 </frameset>
 
 </html>

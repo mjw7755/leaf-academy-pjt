@@ -189,7 +189,10 @@ clear:left;
 				</ul>
 				</li>
 				
-				<li id="a_tag"><a href="#">놀이</a></li>
+				<li id="a_tag"><a href="five-ina-row.do">놀이</a></li>
+					<ul>
+						<li><a href="five-ina-row.do">오목</a></li>			
+					</ul>	
 				<li id="a_tag"><a href="notice_list.do">고객센터</a>
 					<ul>
 						<li><a href="notice_list.do">공지사항</a></li>
