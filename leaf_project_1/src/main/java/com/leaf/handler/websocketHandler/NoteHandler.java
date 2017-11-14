@@ -19,7 +19,7 @@ import com.leaf.model.note.NoteDAO;
 import com.leaf.model.note.NoteDTO;
 
 @Component
-public class WebSocketHandler implements org.springframework.web.socket.WebSocketHandler {
+public class NoteHandler implements org.springframework.web.socket.WebSocketHandler {
 
 	@Resource
 	NoteDAO noteDAO;
