@@ -32,7 +32,7 @@
 		<option value="class3">JAVA 기초 (하)</option>
 	</select>
 	<button onclick="#">쪽지</button>
-	<button onclick="#">강의 듣기</button><br>
+	<button onclick="listening.do">강의 듣기</button><br>
 	
 	<div style="width:1000px; margin:0 auto;">
 		<table>
