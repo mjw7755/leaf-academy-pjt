@@ -1,8 +1,45 @@
 package com.leaf.model.member;
 
-public class MemberDTO {
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
-	private String member_id, member_pwd, member_name, member_tel, member_email, member_level,member_address,sel_value;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
+
+public class MemberDTO {
+	
+	@Id    // 테이블의 primary key로 매핑됨
+	@Size(min=2, max=8, message="아이디는 2~8자리이어야 합니다.")
+	@NotEmpty(message="아이디는 필수로 입력해야 합니다.")
+	private String member_id;
+	
+	@Size(min=4, max=10, message="패스워드는 4~10자 이상이어야 합니다.")
+	@NotEmpty(message="비밀번호는 필수로 입력해야 합니다.")
+	private String member_pwd;
+	
+	@Size(min = 2, max = 6, message="이름은 2~6자리이어야 합니다.")
+	@NotEmpty(message="이름은 필수로 입력해야 합니다.")
+	private String member_name;
+	
+	@Size(min=10, max=12, message="번호는 10~12자리어야 합니다.")
+	@NotEmpty(message="전화번호는 필수로 입력해야 합니다.")
+	private String member_tel;
+	
+	@NotEmpty(message="이메일은 필수로 입력해야 합니다.")
+	private String member_email;
+	
+	private String member_level;
+	
+	@NotEmpty(message="주소를 입력해주세요")
+	private String member_address;
+
+	
+	private String sel_value;
 	private int enabled;
 	
 	public MemberDTO() {	}

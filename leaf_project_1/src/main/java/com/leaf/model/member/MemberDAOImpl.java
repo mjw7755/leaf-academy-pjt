@@ -1,11 +1,13 @@
 package com.leaf.model.member;
 
+import java.lang.reflect.Member;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.Errors;
 
 @Component
 public class MemberDAOImpl implements MemberDAO {
@@ -102,6 +104,15 @@ public class MemberDAOImpl implements MemberDAO {
 		return dao.getSessionCheck(dto);
 	}
 	
-	
+	@Override
+	public boolean supports(Class<?> clazz) {
+		return MemberDTO.class.isAssignableFrom(clazz);
+	}
+	@Override
+	public int chkDupId(MemberDTO dto) {
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		return dao.chkDupId(dto);		
+	}
+
 
 }

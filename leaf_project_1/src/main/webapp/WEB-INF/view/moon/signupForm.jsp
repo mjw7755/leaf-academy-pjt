@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="sf"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script> 
 <script>
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function sample4_execDaumPostcode() {
@@ -58,47 +60,187 @@
         }).open();
     }
 </script>
+<style type="text/css">
+.error {
+	color: red;
+}
+span{
+  font-size: 15px;
+}
+#checkMsg{
+	
+  font-size: 15px;
+}
+#checkPwd{
+  color : red;
+  font-size: 15px;
+}
+
+#member_id2{
+  color : red;
+  font-size: 15px;
+}
+
+</style>
+<script type="text/javascript">
+/* function checkfield(){
+	if(document.memberchk.member_pwd.value!=document.memberchk.member_pwd2.value){
+		 //비밀번호와 비밀번호확인의 값이 다를 경우
+		 
+		 alert("입력한 2개의 비밀번호가 일치하지 않습니다.");
+		 document.memberchk.member_pwd.focus();
+		 exit;
+		 
+		 }
+	
+} */
+function checkPwd(){
+	  var f1 = document.forms[0];
+	  var pw1 = f1.member_pwd.value;
+	  var pw2 = f1.pwd_check.value;
+	  if(pw1!=pw2){
+		  
+	   document.getElementById('checkPwd').style.color = "red";
+	   document.getElementById('checkPwd').innerHTML = "동일한 암호를 입력하세요."; 
+	   if(pw2 == ""){
+			  $("#checkPwd").empty();
+		  }
+	  }else{
+	   document.getElementById('checkPwd').style.color = "blue";
+	   document.getElementById('checkPwd').innerHTML = "암호가 확인 되었습니다."; 
+	   
+	  }
+	  
+	 }
+</script>
+<script type="text/javascript">
+function chkDupId(){
+	  var prmid = $('#member_id').val();
+	  
+	  if(prmid == ""){
+		  $("#member_id2").empty();
+	  }
+	 /*  if($("#member_id").val() == ''){
+		  alert('ID를 입력해주세요.'); 
+		  return;} */
+	  $.ajax({
+	     type : 'POST',  
+	     data:{"prmid" : prmid},
+	     url : 'chkDupId.do',
+	     success : function(data) {
+	      var chkRst = data;
+	      if(chkRst == 0){
+	       /* alert("등록 가능 합니다.");
+	      */
+	       
+	       document.getElementById('member_id2').style.color = "blue";
+	   	   document.getElementById('member_id2').innerHTML = "등록 가능 합니다.";
+	   	if(prmid == ""){
+			  $("#member_id2").empty();
+		  }
+	   	 $("#idChk").val('Y'); 
+	      }else{
+	       /* alert("중복 되어 있습니다.");*/
+	       
+	    	  document.getElementById('member_id2').style.color = "red";
+	   	   document.getElementById('member_id2').innerHTML =  "중복 되어 있습니다."; 
+	      }
+	      $("#idChk").val('N');
+	      
+	     },
+	     error : function(xhr, status, e) {  
+	      alert(e);
+	     }
+	  });  
+	 }
+</script>
+<script type="text/javascript"> 
+function insertChk(){
+	  
+	  var frm = document.companyForm; 
+	  
+	  if(!chkVal('member_id','아이디'))return false;
+	  if($("#idChk").val() == 'N'){alert('ID체크를 해주세요.'); return;}
+	  </script>	
+
 </head>
 <body>
-<form action="signup.do" method="post">
-   <table>
-      <tr>
-         <td>아이디 : </td><td><input type="text" name="member_id"></td><td><input type="button" value="중복확인"></td>
-      </tr>
-      
-      <tr>
-         <td>비밀번호 : </td><td><input type="password" name="member_pwd"></td>
-      </tr>
-         
-      <tr>
-         <td>비밀번호 확인 : </td><td><input type="password"></td>
-      </tr>
-      
-      <tr>
-         <td>이름 : </td><td><input type="text" name="member_name"></td>
-      </tr>
-      
-      <tr>
-         <td>전화번호(휴대폰) : </td><td><input type="text" name="member_tel"></td>
-      </tr>
-      
-      <tr>
-      <td>우편번호 : </td> <td>
-      <input type="text" id="sample4_postcode" name="member_address" placeholder="우편번호">
-      <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-      <input type="text" id="sample4_roadAddress" placeholder="도로명주소">
-      <input type="text" id="sample4_jibunAddress" placeholder="지번주소">
-      <span id="guide" style="color:#999"></span>
-      </td>
-      </tr>
-      <tr>
-         <td>이메일 : </td><td><input type="text" name="member_email"></td><td><input type="button" value="이메일 인증 받기"></td>
-      </tr>
-      
-      <tr>
-         <td><input type="submit" value="회원가입"></td><td><input type="button" value="취소"></td>
-      </tr>
-   </table>
-</form>
+	<sf:form method="post" action="signup.do" commandName="dto" name="memberchk">
+		<table>
+			<tr>
+				<td>아이디</td>
+<%-- 				<td><sf:input path="member_id"/><br/>
+				<sf:errors path="member_id" cssClass="error" />		
+				</td> --%>
+				<!-- <td><input type="hidden" id="idChk" value="N" />ID체크 했는지, 안했는지.
+				<input type="text" name="member_id" id="member_id" maxlength="30" /><input type="button" value="Id체크" onclick="javascript:chkDupId();" />
+				</td> -->
+				<!-- <td><input type="button" value="중복확인"></td> -->
+				<td><input type="hidden" id="idChk" value="N" />
+				<input name="member_id" id="member_id"  onkeyup="chkDupId()">
+				<div id="member_id2" />
+				</td>
+			</tr>
+
+<%-- 			<tr>
+				<td>비밀번호(Password)</td>
+				<td><sf:password path="member_pwd" id="member_pwd"/><br /> <sf:errors
+						path="member_pwd" cssClass="error" /></td>
+			</tr>
+			
+			<tr>
+				<td>비밀번호 확인</td>
+				<td><input name="member_pwd2" id="member_pwd2"></td>
+			</tr> --%>
+			 <tr>
+     <td><span>암호 </span></td>
+     <td><!-- <input type="password" name="member_pwd"></input> --><sf:password path="member_pwd" id="member_pwd"/><br /> <sf:errors
+						path="member_pwd" cssClass="error" /></td>
+  </tr>
+  <tr>
+    <td><span>암호확인</span>
+    </td>
+     <td>
+        <input type="password" name="pwd_check" onkeyup="checkPwd()"></input>
+        <div id="checkPwd" />
+     </td>
+  </tr>
+			
+			<tr>
+				<td>이름(Full Name)</td>
+				<td><sf:input path="member_name" /><br />
+					<sf:errors path="member_name" cssClass="error" /></td>
+			</tr>
+
+			<tr>
+				<td>전화번호(휴대폰)</td>
+				<td><sf:input path="member_tel" /><br /> <sf:errors
+						path="member_tel" cssClass="error" /></td>
+			</tr>
+
+			<tr>
+				<td>우편번호 :</td>
+				<td><sf:input path="member_address" id="sample4_postcode"/><br /> 
+				<!-- <input type="text" id="sample4_postcode"
+					name="member_address" placeholder="우편번호"> --><input
+					type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+					<input type="text" id="sample4_roadAddress" placeholder="도로명주소">
+					<input type="text" id="sample4_jibunAddress" placeholder="지번주소">
+					<span id="guide" style="color: #999"></span><br/>
+					<sf:errors
+						path="member_address" cssClass="error" /></td>
+			</tr>
+			<tr>
+				<td>이메일 :</td>
+				<td><sf:input path="member_email" /><br /> <sf:errors
+						path="member_email" cssClass="error" /></td>
+			</tr>
+
+			<tr>
+				<td><input type="submit" value="회원가입" onclick="checkfield();"></td>
+				<td><input type="button" value="취소"></td>
+			</tr>
+		</table>
+	</sf:form>
 </body>
 </html>

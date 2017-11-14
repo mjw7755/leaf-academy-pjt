@@ -28,5 +28,8 @@ public interface MemberDAO {
 	public int getCount(); //selectAll
 	
 	public String getSessionCheck(MemberDTO dto); // �α��� ��й�ȣ Ȯ��
+	boolean supports(Class<?> clazz);
+	
+	public int chkDupId(MemberDTO dto);
 	
 }
