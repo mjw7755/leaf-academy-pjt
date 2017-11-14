@@ -48,7 +48,7 @@
 	     <websocket:mapping handler="noteWebSocketHandler" 
 	     path="/note.do"/>
 	     <websocket:mapping handler="chatWebSocketHandler" 
-	     path="/chat-ws.do"/>
+	     path="/coding-ws.do"/>
 	     <websocket:mapping handler="VideoChatWebSocketHandler" 
 	     path="/videoChat-ws.do"/>
 	</websocket:handlers>

@@ -95,14 +95,14 @@
    var connectedUser;
 
    //connecting to our signaling server
-   var conn = new WebSocket('wss://www.leaf-academy.com:8443/leaf_project_1/videoChat-ws.do');
+   var videoConn = new WebSocket('wss://www.leaf-academy.com:8443/leaf_project_1/videoChat-ws.do');
 
-   conn.onopen = function () {
+   videoConn.onopen = function () {
       console.log("Connected to the signaling server");
    };
 
    //when we got a message from a signaling server
-   conn.onmessage = function (msg) {
+   videoConn.onmessage = function (msg) {
       console.log("Got message", msg.data);
       var data = JSON.parse(msg.data);
 
@@ -133,7 +133,7 @@
       }
    };
 
-   conn.onerror = function (err) {
+   videoConn.onerror = function (err) {
       console.log("Got error", err);
    };
 
@@ -143,7 +143,7 @@
       if (connectedUser) {
          message.name = connectedUser;
       }
-      conn.send(JSON.stringify(message));
+      videoConn.send(JSON.stringify(message));
    };
 
    //******
@@ -325,15 +325,15 @@
 
 		}
 		//웹 소켓 객체를 저장할 변수를 선언
-		var websocket;
+		var codingConn;
 		
 		$(function(){
-			websocket = new WebSocket(
-			"wss://www.leaf-academy.com:8443/leaf_project_1/chat-ws.do");
+			codingConn = new WebSocket(
+			"wss://www.leaf-academy.com:8443/leaf_project_1/coding-ws.do");
 			//웹 소켓 이벤트 처리
-			websocket.onopen = onOpen;
-			websocket.onmessage = onMessage;
-			websocket.onclose = onClose;
+			codingConn.onopen = onOpen;
+			codingConn.onmessage = onMessage;
+			codingConn.onclose = onClose;
 			//websocket.close();
 			
 			//message 창에서 Enter를 눌렀을 때도 메시지를 전송
@@ -370,43 +370,31 @@
 						|| keyCode==32 ) {
 					str = key;
 				}
-				websocket.set
-				websocket.send(selectionStart + "````" + str);
+				codingConn.send(selectionStart + "````" + str);
 			});
-		});
+			
+			codingConn.onmessage = function (msg) {
+				var data = msg.data.split("````");
+				var txtArea = document.getElementById('txtForm');
+				var txtValue = txtArea.value;
+				if(data[0]=="접속") {
+					websocket.send("전송````"+ data[1] + "````" + txtValue);
+				} else if(data[0]=="전송") {
+					txtArea.value = data[1];
+				} else {
+					var befor = data[0];
+					var after = data[0];
+					if(data[1] == "back") {
+						befor = data[0]-1;
+						data[1] = "";
+					}
+					var beforeTxt = txtValue.substring(0, befor);  // 기존텍스트 ~ 커서시작점 까지의 문자
+					var afterTxt = txtValue.substring(after, txtValue.length);   // 커서끝지점 ~ 기존텍스트 까지의 문자
 		
-		//WebSocket이 연결된 경우 호출되는 함수
-		function onOpen(evt){
-			console.log("웹 소켓에 연결 성공");
-		}
-		
-		//WebSocket이 연결 해제된 경우 호출되는 함수
-		function onClose(evt){
-			console.log("웹 소켓에 연결 해제");
-		}
-		
-		//서버에서 메시지가 왔을 때 호출되는 함수
-		function onMessage(evt){
-			var data = evt.data.split("````");
-			var txtArea = document.getElementById('txtForm');
-			var txtValue = txtArea.value;
-			if(data[0]=="접속") {
-				websocket.send("전송````"+ data[1] + "````" + txtValue);
-			} else if(data[0]=="전송") {
-				txtArea.value = data[1];
-			} else {
-				var befor = data[0];
-				var after = data[0];
-				if(data[1] == "back") {
-					befor = data[0]-1;
-					data[1] = "";
+					txtArea.value = beforeTxt + data[1] + afterTxt;
 				}
-				var beforeTxt = txtValue.substring(0, befor);  // 기존텍스트 ~ 커서시작점 까지의 문자
-				var afterTxt = txtValue.substring(after, txtValue.length);   // 커서끝지점 ~ 기존텍스트 까지의 문자
-	
-				txtArea.value = beforeTxt + data[1] + afterTxt;
-			}
-		}
+			};
+		});
 	</script>
    </body>
    
