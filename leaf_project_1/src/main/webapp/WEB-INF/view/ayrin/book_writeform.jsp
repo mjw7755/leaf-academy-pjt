@@ -6,10 +6,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title></title>
+<style type="text/css">
+#bookwriteTable {
+   width: 800px;
+   text-align: center;
+}
+#bookwriteTable td {
+   border: 1px solid;
+}
+#whqrp {
+	width: 200px;
+}
+</style>
 </head>
 <body>
    <form action="book_write.do" enctype="multipart/form-data" method="post">
-   <table>
+   <table id="bookwriteTable">
       <%-- <tr>
          <td>NO</td>
          <td>:</td>
@@ -23,32 +35,26 @@
       </tr> --%>
       
       <tr>
-         <td>제목</td>
-         <td>:</td>
-         <td><input type="text" name="book_title" ></td>
-      </tr>
-      
+         <td id="whqrp">제목 : </td>
+         <td><input type="text" name="book_title" style="width: 100%;"></td>
+      </tr>      
       <tr>
-         <td>저자</td>
-         <td>:</td>
-         <td><input type="text" name="book_writer"></td>
-      </tr>
-      
+         <td id="whqrp">저자 : </td>
+         <td><input type="text" name="book_writer" style="width: 100%;"></td>
+      </tr>      
       <tr>
-         <td>가격</td>
-         <td>:</td>
-         <td><input type="text" name="book_cost"></td>
-      </tr>
-      
-      <tr><td colspan="3"> <input type="file" name="uploadfile" id="image"> </td> </tr>
-      <tr><td colspan="3"><hr> </td> </tr>
-      
+         <td id="whqrp">가격 : </td>
+         <td><input type="text" name="book_cost" style="width: 100%;"></td>
+      </tr>      
       <tr>
-         <td> <input type="button" value="취소" style="width: 100%;" 
-               onclick="window.location.href='book_list.do' ">
+      	<td colspan="2"> <input type="file" name="uploadfile" id="image"> </td> 
+      </tr>
+      <tr>
+         <td colspan="2"> 
+         	<input type="button" value="취소" onclick="window.location.href='book_list.do' ">  
+         	<input type="reset" value="초기화"> 
+         	<input type="submit" value="추가"> 
          </td>
-         <td> <input type="reset" value="초기화" style="width: 100%"></td>
-         <td> <input type="submit" value="추가" style="width: 100%"></td>
       </tr>
    </table>
    </form>

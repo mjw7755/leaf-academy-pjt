@@ -6,19 +6,50 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title></title>
+<style type="text/css">
+#bookupdateTable {
+   width: 800px;
+   text-align: center;
+}
+#bookupdateTable td {
+   border: 1px solid;
+}
+#whqrp {
+	width: 200px;
+}
+</style>
 </head>
 <body>
 <form action="book_update.do" enctype="multipart/form-data" method="post">
-         NO. : <input readonly="readonly" type="text" name="book_id" value="${dto.book_id}"><br>
-         member_id : <input readonly="readonly" name="member_id" value="${dto.member_id}"><br>
-                    제목 : <input type="text" name="book_title" value="${dto.book_title}"><br>
-                    이미지 : <img src="resources/${dto.book_image}" style="width: 120px; height: 140px"><br>
-                    저자 : <input type="text" name="book_writer" value="${dto.book_writer}"><br>
-                    가격 : <input type="text" name="book_cost" value="${dto.book_cost}"><br>
-    <input type="file" name="uploadfile"  id="image"><br><br>
-	<input type="submit" value="수정완료">  
-	<input type="reset" value="초기화" >
-	<br><br>
+	<table id="bookupdateTable">
+		<tr>
+			<td id="whqrp">NO. : </td>
+			<td><input readonly="readonly" type="text" name="book_id" value="${dto.book_id}" style="width: 100%;"></td>
+		</tr>
+		<tr>
+			<td>member_id : </td>
+			<td><input readonly="readonly" name="member_id" value="${dto.member_id}" style="width: 100%;"></td>
+		</tr>
+		<tr>
+			<td>제목 : </td>
+			<td><input type="text" name="book_title" value="${dto.book_title}" style="width: 100%;"></td>
+		</tr>
+		<tr>
+			<td>이미지 : </td>
+			<td><img src="resources/${dto.book_image}" style="width: 120px; height: 140px" style="width: 100%;"></td>
+		</tr>
+		<tr>
+			<td>저자 : </td>
+			<td><input type="text" name="book_writer" value="${dto.book_writer}" style="width: 100%;"></td>
+		</tr>
+		<tr>
+			<td>가격 : </td>
+			<td><input type="text" name="book_cost" value="${dto.book_cost}" style="width: 100%;"></td>
+		</tr>
+		<tr>
+			<td colspan="2"><input type="file" name="uploadfile"  id="image"><input type="submit" value="수정완료"><input type="reset" value="초기화" ></td>
+		</tr>
+	</table>
 </form>
 	<div id="image_preview">
         <img src="#" />

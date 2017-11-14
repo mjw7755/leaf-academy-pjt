@@ -6,10 +6,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title></title>
+<style type="text/css">
+#jageokwriteTable {
+   width: 800px;
+   text-align: center;
+}
+#jageokwriteTable td {
+   border: 1px solid;
+}
+#whqrp {
+	width: 200px;
+}
+</style>
 </head>
 <body>
    <form action="jageok_write.do" >
-   <table>
+   <table id="jageokwriteTable">
       <%-- <tr>
          <td>NO</td>
          <td>:</td>
@@ -23,33 +35,25 @@
       </tr> --%>
       
       <tr>
-         <td>자격증</td>
-         <td>:</td>
-         <td><input type="text" name="jageok_title" ></td>
+         <td id="whqrp">자격증 : </td>
+         <td><input type="text" name="jageok_title" style="width: 100%;"></td>
       </tr>
       
       <tr>
-         <td>시험일</td>
-         <td>:</td>
-         <td><input type="text" name="jageok_date"></td>
+         <td id="whqrp">시험일 : </td>
+         <td><input type="text" name="jageok_date" style="width: 100%;"></td>
       </tr>
       
       <tr>
-         <td>비용</td>
-         <td>:</td>
-         <td><input type="text" name="jageok_cost"></td>
+         <td id="whqrp">비용 : </td>
+         <td><input type="text" name="jageok_cost" style="width: 100%;"></td>
       </tr>
-      
-      <tr><td colspan="3"><hr> </td> </tr>
-      
-            <tr>
-               <td>
-                  <input type="button" value="취소" style="width: 100%;" 
-                                        onclick="window.location.href='jageok_list.do' ">
-               </td>
-               <td>   <input type="reset" value="초기화" style="width: 100%"></td>
-               <td>   <input type="submit" value="추가" style="width: 100%"></td>
-            </tr>
+      <tr>
+		 <td colspan="2">
+		 <input type="button" value="취소" onclick="window.location.href='jageok_list.do' ">
+         <input type="reset" value="초기화">
+         <input type="submit" value="추가"></td>
+      </tr>
    </table>
    </form>
 </body>

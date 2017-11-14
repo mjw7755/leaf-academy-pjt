@@ -23,7 +23,14 @@ public class MemberController {
 
 	@Resource
 	private MemberDAO memberdao;
-
+	
+	@RequestMapping("/mypage.do")
+	public String mypage(MemberDTO dto, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.getAttribute("sessionid");
+		return "ayrin.mypage";
+	}
+	
 	@RequestMapping("/myclass.do")
 	public String myclass(MemberDTO dto, HttpServletRequest request) {
 		HttpSession session = request.getSession();
