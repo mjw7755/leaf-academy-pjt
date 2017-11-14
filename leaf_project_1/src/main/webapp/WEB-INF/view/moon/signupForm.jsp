@@ -220,12 +220,10 @@ function insertChk(){
 
 			<tr>
 				<td>우편번호 :</td>
-				<td><sf:input path="member_address" id="sample4_postcode"/><br /> 
-				<!-- <input type="text" id="sample4_postcode"
-					name="member_address" placeholder="우편번호"> --><input
-					type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-					<input type="text" id="sample4_roadAddress" placeholder="도로명주소">
-					<input type="text" id="sample4_jibunAddress" placeholder="지번주소">
+				<td><sf:input path="member_addnum" id="sample4_postcode" placeholder="우편번호" /><br/>
+					<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+					<sf:input path="member_address" id="sample4_roadAddress" placeholder="도로명주소"/>
+					<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소">
 					<span id="guide" style="color: #999"></span><br/>
 					<sf:errors
 						path="member_address" cssClass="error" /></td>

@@ -37,6 +37,9 @@ public class MemberDTO {
 	
 	@NotEmpty(message="주소를 입력해주세요")
 	private String member_address;
+	
+	@NotEmpty(message="우편번호를 입력해주세요")
+	private String member_addnum;
 
 	
 	private String sel_value;
@@ -45,7 +48,7 @@ public class MemberDTO {
 	public MemberDTO() {	}
 	
 	public MemberDTO(String member_id, String member_pwd, String member_name, String member_tel, String member_email,
-			String member_level,String member_address, int enabled) {
+			String member_level,String member_address, String member_addnum, int enabled) {
 		super();
 		this.member_id = member_id;
 		this.member_pwd = member_pwd;
@@ -54,10 +57,19 @@ public class MemberDTO {
 		this.member_email = member_email;
 		this.member_level = member_level;
 		this.member_address = member_address;
+		this.member_addnum = member_addnum;
 		this.enabled = enabled;
 	}
 
 	
+	public String getMember_addnum() {
+		return member_addnum;
+	}
+
+	public void setMember_addnum(String member_addnum) {
+		this.member_addnum = member_addnum;
+	}
+
 	public String getSel_value() {
 		return sel_value;
 	}
