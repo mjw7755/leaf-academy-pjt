@@ -39,10 +39,18 @@
 	<default-servlet-handler/>
 	<beans:bean id="noteWebSocketHandler"
 	class="com.leaf.handler.websocketHandler.NoteHandler"/>
-	
+	<beans:bean id="chatWebSocketHandler"
+		class="com.leaf.handler.websocketHandler.CodingWebSocketHandler"/>
+	<beans:bean id="VideoChatWebSocketHandler"
+		class="com.leaf.handler.websocketHandler.VideoChatWebSocketHandler"/>
+		
 	<websocket:handlers>
 	     <websocket:mapping handler="noteWebSocketHandler" 
 	     path="/note.do"/>
+	     <websocket:mapping handler="chatWebSocketHandler" 
+	     path="/chat-ws.do"/>
+	     <websocket:mapping handler="VideoChatWebSocketHandler" 
+	     path="/videoChat-ws.do"/>
 	</websocket:handlers>
 	
 	
