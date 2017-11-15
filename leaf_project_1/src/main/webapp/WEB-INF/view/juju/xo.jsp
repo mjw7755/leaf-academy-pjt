@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>오목게임</title>
+<title>�삤紐⑷쾶�엫</title>
 
 <meta http-equiv="Content-Type" content="UTF-8">
 
@@ -16,9 +16,9 @@ openFour   =8888888;
 twoThrees  =7777777;
 
 if (document.images) {
- uImg=new Image(16,16); uImg.src='s'+userSq+'.gif';
- mImg=new Image(16,16); mImg.src='s'+machSq+'.gif';
- bImg=new Image(16,16); bImg.src='s0.gif';
+ uImg=new Image(16,16); uImg.src='resources/s1.gif';
+ mImg=new Image(16,16); mImg.src='resources/s-1.gif';
+ bImg=new Image(16,16); bImg.src='resources/s0.gif';
 }
 
 f=new Array();
@@ -40,7 +40,7 @@ jLastUserMove=0;
 
 function clk(iMove,jMove) {
  if (myTurn) return; 
- if (f[iMove][jMove]!=0) {alert('이미 선택된 자리입니다. 다른곳을 선택해 주세요.'); return; }
+ if (f[iMove][jMove]!=0) {alert('이미 놓은 자리입니다.'); return; }
  f[iMove][jMove]=userSq;
  drawSquare(iMove,jMove,userSq);
  myTurn=true;
@@ -51,7 +51,7 @@ function clk(iMove,jMove) {
 
  if (winningPos(iMove,jMove,userSq)==winningMove) setTimeout("alert('YOU WIN!');",dly);
  else setTimeout("machineMove(iLastUserMove,jLastUserMove);",dly);
-} // 게임에서 이길시에 서버로 넘겨주게 되는 경우 이부분에서 처리
+} // 寃뚯엫�뿉�꽌 �씠湲몄떆�뿉 �꽌踰꾨줈 �꽆寃⑥＜寃� �릺�뒗 寃쎌슦 �씠遺�遺꾩뿉�꽌 泥섎━
 
 function machineMove(iUser,jUser) {
  maxS=evaluatePos(s,userSq);
@@ -115,7 +115,7 @@ function hasNeighbors(i,j) {
 
 w=new Array(0, 100, 85, 77, 70, 50);
 //w= new Array(0,0,0,0,0);
-//w=new Array(0,5,4,3,2,1); // 이어진 돌의 가중치 1수 0 2수 5
+//w=new Array(0,5,4,3,2,1); // �씠�뼱吏� �룎�쓽 媛�以묒튂 1�닔 0 2�닔 5
 
 //w=new Array(0,20,17,15.4,14,10);
 //w=new Array;
@@ -130,9 +130,9 @@ function winningPos(i,j,mySq) {
  m=1; 
  while (j+m<boardSize  && f[i][j+m]==mySq) 
  {L++; m++}
- m1=m; // 몇수인지 판단
+ m1=m; // 紐뉗닔�씤吏� �뙋�떒
  m=1; while (j-m>=0 && f[i][j-m]==mySq) {L++; m++} m2=m;   
- if (L>4) { return winningMove; } // 탐색후 5되면 이긴다 99999면 이김
+ if (L>4) { return winningMove; } // �깘�깋�썑 5�릺硫� �씠湲대떎 99999硫� �씠源�
  side1=(j+m1<boardSize && f[i][j+m1]==0); 
  side2=(j-m2>=0 && f[i][j-m2]==0);
 
@@ -202,7 +202,7 @@ function evaluatePos(a,mySq) {
    maxN=j+5; if (maxN>boardSize) maxN=boardSize;
 
    nPos[1]=1; A1=0;
-   m=1; while (j+m<maxN  && f[i][j+m]!=-mySq) {nPos[1]++; A1+=w[m]*f[i][j+m]; m++} //w 쓰이는곳
+   m=1; while (j+m<maxN  && f[i][j+m]!=-mySq) {nPos[1]++; A1+=w[m]*f[i][j+m]; m++} //w �벐�씠�뒗怨�
    if (j+m>=boardSize || f[i][j+m]==-mySq) A1-=(f[i][j+m-1]==mySq)?(w[5]*mySq):0;
    m=1; while (j-m>=minN && f[i][j-m]!=-mySq) {nPos[1]++; A1+=w[m]*f[i][j-m]; m++}   
    if (j-m<0 || f[i][j-m]==-mySq) A1-=(f[i][j-m+1]==mySq)?(w[5]*mySq):0;
@@ -255,7 +255,7 @@ function evaluatePos(a,mySq) {
 
 function drawSquare(par1,par2,par3) {
  if (document.images) {
-  eval('self.f1.document.s'+par1+'_'+par2+'.src="s'+par3+'.gif"');
+  eval('self.f1.document.s'+par1+'_'+par2+'.src="resources/s'+par3+'.gif"');
  }
  else setTimeout("writeBoard()",50);
 }
@@ -271,10 +271,10 @@ function writeBoard () {
   for (j=0;j<boardSize;j++) {
    buf+='\n><a href="#s" onClick="top.clk('+i+','+j+');if(top.ie4)this.blur();return false;" ><img name="s'+i+'_'+j+'" src="s'+f[i][j]+'.gif" width=16 height=16 border=0></a'; 
   }
-  buf+='\n><img src="g.gif" width=1 height=16><br';
+  buf+='\n><img src="resources/g.gif" width=1 height=16><br';
   if (buf.length>20000) {top.f1.document.writeln(buf); buf='';}
  }
- buf+='\n><img src="g.gif" width='+(boardSize*16+1)+' height=1></pre></center></body></html>';
+ buf+='\n><img src="resources/g.gif" width='+(boardSize*16+1)+' height=1></pre></center></body></html>';
  top.f1.document.writeln(buf);
  top.f1.document.close();
  buf='';
@@ -306,15 +306,15 @@ function init() {
 
 </script>
 
-<SCRIPT language="JavaScript1.2">	
+<SCRIPT language="JavaScript1.2">
 	onresize=function(){if(navigator.appName=="Netscape" && parseInt(navigator.appVersion)==4)setTimeout("writeBoard()",150);}
 </SCRIPT>
 </head>
 
 <frameset cols="230,*" frameborder="no" framespacing="0" border="0"
 	onLoad="init()">
-	<frame name=f0 src="button.htm" scrolling="no">
-	<frame name=f1 src="blank.htm" scrolling="no">
+	<frame name=f0 src="button.do" scrolling="no">
+	<frame name=f1 src="blank.do" scrolling="no">
 </frameset>
 
 </html>

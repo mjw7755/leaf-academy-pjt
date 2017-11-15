@@ -1,13 +1,14 @@
 <html>
 <head>
+<meta http-equiv="Content-Type" content="UTF-8">
+<a href="button.do">go</a>
 <script language="JavaScript">
 
 newSize=0;
 function init() {}
-function resetGame() {window.location="xo.htm"}
+function resetGame() {window.location="xo.html"}
 
 </script>
-<LINK REL="stylesheet" HREF="/stylesheet.css">
 </head>
 <body bgcolor="#FFFFFF">
 
@@ -27,17 +28,17 @@ function resetGame() {window.location="xo.htm"}
 <tr>
 <td>
 <font size=2 face="Arial,Helvetica,sans-serif">Size:</font>&nbsp;<select onChange="top.boardSize=parseInt(this.options[this.selectedIndex].value);top.init()">
-<option value=10>10
-<option value=11>11
-<option value=12>12
-<option value=13>13
-<option value=14>14
-<option value=15 selected>15
-<option value=16>16
-<option value=17>17
-<option value=18>18
-<option value=19>19
-<option value=20>20
+<option value=10>10</option>
+<option value=11>11</option>
+<option value=12>12</option>
+<option value=13>13</option>
+<option value=14>14</option>
+<option value=15 selected>15</option>
+<option value=16>16</option>
+<option value=17>17</option>
+<option value=18>18</option>
+<option value=19>19</option>
+<option value=20>20</option>
 </select>
 </td><td>
 <font size=2 face="Arial,Helvetica,sans-serif"><input type=button value=" New Game " onClick="setTimeout('top.resetGame()',100)"></font>

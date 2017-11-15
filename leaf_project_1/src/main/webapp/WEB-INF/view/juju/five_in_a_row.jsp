@@ -7,8 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <meta http-equiv="pics-label"
 	content='(pics-1.1 "http://www.icra.org/ratingsv02.html" l gen true for "http://www.jsmadeeasy.com" r (cb 1 lz 1 nz 1 oz 1 vz 1) "http://www.rsac.org/ratingsv01.html" l gen true for "http://www.jsmadeeasy.com" r (n 0 s 0 v 0 l 0))'>
-
-<TITLE>오목 게임</TITLE>
+<a href="fiveinarow.do">go</a>
+<TITLE>ì¤ëª© ê²ì</TITLE>
 <SCRIPT LANGUAGE="javascript" SRC="/jsexternal/foldernav.js"></SCRIPT>
 <STYLE>
 A:link {
@@ -425,7 +425,7 @@ function changeState(layerRef, state){
 								<br>
 								<form ID=Form1>
 									<input type=button value="Start Game" onClick=window.open(
-										"xo.htm","game","width=610,height=350,menubar=0,scrollbars=0,resizable=0
+										"xo.html","game","width=610,height=350,menubar=0,scrollbars=0,resizable=0
 										") ID=Button1>
 								</form>
 							</DIV>
