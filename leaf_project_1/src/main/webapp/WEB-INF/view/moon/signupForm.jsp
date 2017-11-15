@@ -95,7 +95,16 @@ span{
 	
 } */
 function checkfield(){
-	
+	var f1 = document.forms[0];
+	  var pw1 = f1.member_pwd.value;
+	  var pw2 = f1.pwd_check.value;
+	  var prmpw = $('#member_pwd').val();
+	  
+	if(pw1 != pw2){
+		alert("암호확인을 해주세요");
+		  return false;
+	}
+	document.memberchk.submit();
 }
 function checkPwd(){
 	  var f1 = document.forms[0];
@@ -129,9 +138,7 @@ function checkPwd(){
 function chkDupId(){
 	  var prmid = $('#member_id').val();
 	  
-	  if(prmid == ""){
-		  $("#member_id2").empty();
-	  }
+	
 
 	  $.ajax({
 	     type : 'POST',  
@@ -156,10 +163,8 @@ function chkDupId(){
 	   	 $("#idChk").val('Y'); 
 	      }else{
 	       /* alert("중복 되어 있습니다.");*/
-	       
 	    	document.getElementById('member_id2').style.color = "red";
 	   	    document.getElementById('member_id2').innerHTML =  "중복 되어 있습니다."; 
-	      
 	      }
 	      $("#idChk").val('N');
 	      
@@ -187,15 +192,8 @@ function insertChk(){
 		<table>
 			<tr>
 				<td>아이디</td>
-<%-- 				<td><sf:input path="member_id"/><br/>
-				<sf:errors path="member_id" cssClass="error" />		
-				</td> --%>
-				<!-- <td><input type="hidden" id="idChk" value="N" />ID체크 했는지, 안했는지.
-				<input type="text" name="member_id" id="member_id" maxlength="30" /><input type="button" value="Id체크" onclick="javascript:chkDupId();" />
-				</td> -->
-				<!-- <td><input type="button" value="중복확인"></td> -->
 				<td><input type="hidden" id="idChk" value="N" />
-				<sf:input path="member_id" id="member_id"  onkeyup="chkDupId()" />
+				<sf:input path="member_id" id="member_id"  onkeyup="chkDupId()"  placeholder="아이디 입력"/>
 				<sf:errors path="member_id" cssClass="error" /><div id="member_id3" />
 				<div id="member_id2" />
 				</td>
@@ -203,28 +201,28 @@ function insertChk(){
 
 		   <tr>
      			<td><span>암호 </span></td>
-    		    <td><!-- <input type="password" name="member_pwd"></input> --><sf:password path="member_pwd" id="member_pwd"/>
+    		    <td><!-- <input type="password" name="member_pwd"></input> --><sf:password path="member_pwd" id="member_pwd" placeholder="영어 숫자 특수문자를 조합"/>
      		    <sf:errors path="member_pwd" cssClass="error" /></td>
   		   </tr>
   <tr>
     <td><span>암호확인</span>
     </td>
      <td>
-        <input type="password" name="pwd_check" onkeyup="checkPwd()"></input>
+        <input type="password" name="pwd_check" onkeyup="checkPwd()"  placeholder="암호 확인"></input>
         <div id="checkPwd" />
      </td>
   </tr>
 			
 			<tr>
 				<td>이름(Full Name)</td>
-				<td><sf:input path="member_name" />
-					<sf:errors path="member_name" cssClass="error" /></td>
+				<td><sf:input path="member_name" placeholder="이름 입력"/>
+					<sf:errors path="member_name" cssClass="error"/></td>
 			</tr>
 
 			<tr>
 				<td>전화번호(휴대폰)</td>
-				<td><sf:input path="member_tel" />
-				<sf:errors path="member_tel" cssClass="error" /></td>
+				<td><sf:input path="member_tel" placeholder="숫자만 입력"/>
+				<sf:errors path="member_tel" cssClass="error"/></td>
 			</tr>
 
 			<tr>
@@ -239,12 +237,12 @@ function insertChk(){
 			</tr>
 			<tr>
 				<td>이메일 :</td>
-				<td><sf:input path="member_email" />
+				<td><sf:input path="member_email"  placeholder="이메일 입력"/>
 				 <sf:errors path="member_email" cssClass="error" /></td>
 			</tr>
 
 			<tr>
-				<td><input type="submit" value="회원가입" onclick="checkfield();"></td>
+				<td><input type="button" value="회원가입" onclick="checkfield();"></td>
 				<td><input type="button" value="취소"></td>
 			</tr>
 		</table>
