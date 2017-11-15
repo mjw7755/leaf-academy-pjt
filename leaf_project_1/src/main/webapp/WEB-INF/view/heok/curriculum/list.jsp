@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
@@ -78,8 +79,6 @@
 								for (var i = 0; i < resData.length; i++) {
 									$("#ajaxDataBody" + monthvalue).append(
 											"<tr id=\"tr"+monthvalue+"\"><td >"
-													+ resData[i][0].value
-													+ "</td><td>"
 													+ resData[i][1].value
 													+ "</a></td><td>"+"<a href ='detail_curri.do?curri_id="+resData[i][0].value+"''>"
 													+ resData[i][2].value
@@ -161,9 +160,7 @@
 
 			<table style="text-align: center;">
 				<thead>
-				<th>
-					curri_id
-				</th>
+				
 					<th>개강일</th>
 					<th><b>강좌명</b></th>
 					<th><b>강사</b></th>
@@ -182,17 +179,13 @@
 
 	<div id="content02" class="content">
 		<fieldset>
-			<legend>
+			
 				<span
 					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">2월</span>
 				
-			</legend>
 
 			<table style="text-align: center;">
 				<thead>
-				<th>
-					curri_id
-				</th>
 					<th>개강일</th>
 					<th><b>강좌명</b></th>
 					<th><b>강사</b></th>
@@ -220,9 +213,6 @@
 
 			<table style="text-align: center;">
 				<thead>
-				<th>
-					curri_id
-				</th>
 					<th>개강일</th>
 					<th><b>강좌명</b></th>
 					<th><b>강사</b></th>
@@ -250,9 +240,6 @@
 
 			<table style="text-align: center;">
 				<thead>
-				<th>
-					curri_id
-				</th>
 					<th>개강일</th>
 					<th><b>강좌명</b></th>
 					<th><b>강사</b></th>
@@ -280,9 +267,6 @@
 
 			<table style="text-align: center;">
 				<thead>
-				<th>
-					curri_id
-				</th>
 					<th>개강일</th>
 					<th><b>강좌명</b></th>
 					<th><b>강사</b></th>
@@ -310,9 +294,6 @@
 
 			<table style="text-align: center;">
 				<thead>
-				<th>
-					curri_id
-				</th>
 					<th>개강일</th>
 					<th><b>강좌명</b></th>
 					<th><b>강사</b></th>
@@ -340,9 +321,6 @@
 			<table style="text-align: center;">
 				<thead>
 				<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1' }">
-				<th>
-					curri_id
-				</th>
 				</c:if>
 					<th>개강일</th>
 					<th><b>강좌명</b></th>
@@ -370,9 +348,6 @@
 
 			<table style="text-align: center;">
 				<thead>
-				<th>
-					curri_id
-				</th>
 					<th>개강일</th>
 					<th><b>강좌명</b></th>
 					<th><b>강사</b></th>
@@ -400,9 +375,6 @@
 
 			<table style="text-align: center;">
 				<thead>
-				<th>
-					curri_id
-				</th>
 					<th>개강일</th>
 					<th><b>강좌명</b></th>
 					<th><b>강사</b></th>
@@ -430,9 +402,6 @@
 
 			<table style="text-align: center;">
 				<thead>
-				<th>
-					curri_id
-				</th>
 					<th>개강일</th>
 					<th><b>강좌명</b></th>
 					<th><b>강사</b></th>
@@ -459,9 +428,6 @@
 
 			<table style="text-align: center;">
 				<thead>
-				<th>
-					curri_id
-				</th>
 					<th>개강일</th>
 					<th><b>강좌명</b></th>
 					<th><b>강사</b></th>
@@ -489,9 +455,6 @@
 
 			<table style="text-align: center;">
 				<thead>
-				<th>
-					curri_id
-				</th>
 					<th>개강일</th>
 					<th><b>강좌명</b></th>
 					<th><b>강사</b></th>
@@ -508,8 +471,8 @@
 
 		</fieldset>
 	</div>
-	<hr>
-	 <div id="searchdiv2" name="searchdiv2" class="searchdiv2">
+	
+	 <div id="searchdiv" name="searchdiv" class="searchdiv">
 		<fieldset>
 			<legend>
 				<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">검색</span>

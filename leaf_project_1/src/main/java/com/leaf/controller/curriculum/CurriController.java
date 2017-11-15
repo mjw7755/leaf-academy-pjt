@@ -234,9 +234,10 @@ public class CurriController {
 		return "curriculum.list";
 	}
 
-	@RequestMapping("/monthlist_curri.do")
+	@RequestMapping(value="/monthlist_curri.do",produces = "application/text; charset=utf8")
 	public void monthlist(Model model, HttpServletResponse response, HttpServletRequest request, CurriDTO dto) throws IOException {
-		
+		request.setCharacterEncoding("utf-8");
+	       response.setCharacterEncoding("utf-8");
 		String monthvalue = request.getParameter("monthvalue");
 		String yearvalue= request.getParameter("yearvalue");
 		String start_day = "", end_day = "";
@@ -257,8 +258,8 @@ public class CurriController {
 		
 	Map<String,String> map = new HashMap();
 
-	start_day="2017-"+monthvalue+"-01";
-	end_day="2017-"+monthvalue+"-"+lastday;
+	start_day=yearvalue+monthvalue+"-01";
+	end_day=yearvalue+monthvalue+"-"+lastday;
 	System.out.println(start_day);
 	System.out.println(end_day);
 	map.put("start_day",start_day);

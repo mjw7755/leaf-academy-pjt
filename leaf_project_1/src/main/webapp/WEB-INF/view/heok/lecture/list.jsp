@@ -65,18 +65,14 @@
 	<hr>
 	<div>
 		<fieldset>
-			<legend>
-				<select	style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;"
-					onchange="listChange(this);">
-					<option value="lectutre" selected="selected"> Lecture </option>
-					<option value="curri" >Curriculum </option>
-
-				</select> 
+			
+				<span
+					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">개설강좌</span>
+				
 				<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1' }">
 				<a href="writeform_lect.do"><button>추가하기</button></a>&nbsp;&nbsp;&nbsp;
 				<a href="delete_lect.do" id="multi" onclick="multiDelete"><button>다중삭제</button></a>
 				</c:if>
-			</legend>
 
 			<table cellpadding="5" style="text-align: center;">
 				<tr>
