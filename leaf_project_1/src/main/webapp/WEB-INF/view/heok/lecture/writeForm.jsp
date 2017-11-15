@@ -18,23 +18,27 @@
 		</legend>
 		<form action="write_lect.do" method="post">
 			<table style="text-align: center;">
-				<%-- <tr>
+				<tr>
 					<td>강좌명</td>
 					<td>:</td>
-					<td><input type="text" name="lect_id" required="required"
-						value="${lect_id}"></td>
-				</tr> --%>
+					<td>
+					
+					<select name="curri_id">
+						<c:forEach items="${ list }" var="item">	
+							<option value="${item.curri_id}" >${item.curri_subject} </option>
+						</c:forEach>
+					</select>
+							
+						</td>
+				</tr> 
 
 				<tr>
 					<td>클래스명</td>
 					<td>:</td>
 					<td>
-						<select name="lect_name" value="${lect_name }">
-						<option value="클래스명" selected="selected"> 반을 선택하세요 </option>
-						<option value="160" > 160 </option>
-						<option value="161" > 161 </option>
-						<option value="162" > 162 </option>
-						</select>
+					<input type="text"
+						name="lect_name" required="required"
+						value="${lect_name }">
 					</td>
 				</tr>
 
@@ -42,7 +46,6 @@
 					<td>강좌 시작일</td>
 					<td>:</td>
 					<td>
-						
 						<input type="date" name="lect_start_day" value="${lect_start_day}"> 
 					</td>
 				</tr>

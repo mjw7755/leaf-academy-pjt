@@ -63,13 +63,14 @@
 		<legend>
 			<h3>강좌추가</h3>
 		</legend>
-		<form action="write_curri.do" method="post" id="writeForm" >
+		<form action="write_curri.do" method="post" id="writeForm" enctype = "multipart/form-data">
 			<table style="text-align: center;">
 				<tr>
 					<td>강좌명</td>
 					<td>:</td>
 					<td>
-						<input type="text" name="curri_subject" required="required">
+						<input type="text" name="curri_subject" required="required"
+						value="${curri_subject }">
 					</td>
 				</tr>
 
@@ -77,7 +78,7 @@
 					<td>강좌레벨</td>
 					<td>:</td>
 					<td>
-						<select name="curri_level">
+						<select name="curri_level" value="${curri_level }">
 						<option value="레벨" selected="selected"> 레벨을 선택하세요 </option>
 						<option value="초급" > 초급 </option>
 						<option value="중급" > 중급 </option>
@@ -90,7 +91,8 @@
 					<td>:</td>
 					<td colspan ='4'>
 							<textarea  rows=30 cols=50 id="curri_content" name="curri_content" class="curri_content" 
-								required="required"></textarea>
+								required="required"	></textarea>
+							
 					
 						<%--  <textarea name="editor" id="editor" style="width: 700px; height: 400px;" value="${curri_content }"></textarea> --%>
 					</td>
