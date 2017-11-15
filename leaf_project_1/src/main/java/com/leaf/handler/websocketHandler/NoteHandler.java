@@ -57,9 +57,9 @@ public class NoteHandler implements org.springframework.web.socket.WebSocketHand
 				int jungbok = userList.indexOf((String)data.get("n_name"));
 				WebSocketSession dupl = socketList.get(jungbok);
 				System.out.println("중복처리 시작");
-				userList.remove((String)data.get("n_name"));
-				socketList.remove(jungbok);				
 				dupl.sendMessage(new TextMessage("dupl"));
+				userList.remove((String)data.get("n_name"));
+				socketList.remove(dupl);				
 				userList.add((String)data.get("n_name"));
 				socketList.add(arg0);
 				System.out.println("중복처리 완료");

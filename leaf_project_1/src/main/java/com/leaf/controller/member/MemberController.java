@@ -214,6 +214,7 @@ public class MemberController {
 	
 	@RequestMapping("/loginDupl.do")
 	public void loginDupl(HttpServletRequest request) {
+		System.out.println("컨트롤러 세션 중복처리 시작");
 		HttpSession session = request.getSession();
 		String sessionid = (String) session.getAttribute("sessionid");
 		session.removeAttribute("sessionid");
