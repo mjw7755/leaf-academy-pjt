@@ -8,6 +8,7 @@
 <title></title>
 </head>
 <body>
+<br><br><br><br><br><br>
    <form action="member_write.do" >
    <table>
       <tr>
@@ -52,5 +53,6 @@
             </tr>
    </table>
    </form>
+<br><br><br><br><br><br>
 </body>
 </html>

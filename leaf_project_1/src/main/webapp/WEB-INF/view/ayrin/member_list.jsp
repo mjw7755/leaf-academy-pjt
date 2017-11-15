@@ -76,6 +76,7 @@ function multiLevelDown(){
 </script>
 </head>
 <body>
+<br><br><br><br><br><br>
 	<form action="search_member.do" method="post">
          검색어 입력 : <input size="30" type="search"  name="keyvalue" 
                 placeholder="키워드 검색 가능합니다." list="memlist"> 
@@ -152,6 +153,7 @@ function multiLevelDown(){
       </c:if>
       </c:if>
    </div>
+<br><br><br><br><br><br>
    
 </body>
 </html>
