@@ -18,17 +18,13 @@ dl {
 	height: 90%:
 	margin: 50px auto;
 }
-
 dt {
 	cursor: pointer;
 }
-
 dd {
 	display: none;
 	margin: 0;
 }
-
-
 </style>
 <script>
  $( function () {
@@ -39,41 +35,39 @@ dd {
 		   $('+dd',this).slideDown('fast');
 		  }else{
 			  $('dd').slideUp('fast'); 
-		  }
-		  
-
-		  
-		 });
-
+		  } 
+	});
 } );  
-
-    </script>
+</script>
 </head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 <body>
-<table style="width: 1000px">
-		<th><b>자주 묻는 질문(FAQ)</b></th><br> 
-			<c:forEach items="${ list }" var="list">
-				<tr>
-					<td><br>번호:${list.faq_id }</td>
-				</tr>
-				<tr>
-					<td><dt>${list.faq_title}</dt>
+<br><br>
+<table style="width: 700px">
+	<th><b>자주 묻는 질문(FAQ)</b><br></th>
+		<c:forEach items="${ list }" var="list">
+			<tr>
+				<td style="height:20px"><input type="hidden" value="번호:${list.faq_id}"></td>
+			</tr>
+			<tr>
+				<td>
+					<dt>${list.faq_title}</dt>
 					<dd>${fn:replace(list.faq_content,crlf,'</br>')}</dd>
-					</td>
-				</tr>	
-				<tr>	
-				<c:if test="${sessionScope.sessionid == '관리자'}">
-					<td><a href="faq_updateform.do?faq_id=${ list.faq_id }"><button>수 정</button></a>
-					<a href="faq_delete.do?faq_id=${ list.faq_id }"><button>삭 제</button></a></td> 
-				</c:if>
-				</tr>		
-			</c:forEach>
+				</td>
+			</tr>	
+			<tr>	
+			<c:if test="${sessionScope.sessionid == '관리자'}">
+				<td><a href="faq_updateform.do?faq_id=${ list.faq_id }"><button>수정</button></a>
+				<a href="faq_delete.do?faq_id=${ list.faq_id }"><button>삭제</button></a></td> 
+			</c:if>
+			</tr>		
+		</c:forEach>
 </table>
 <c:if test="${sessionScope.sessionid == '관리자'}">
-<a href="faq_writeform.do"><button>추 가</button></a>
+<a href="faq_writeform.do"><button>추가</button></a>
 </c:if>
+<br><br>
 </body>
 </html>
