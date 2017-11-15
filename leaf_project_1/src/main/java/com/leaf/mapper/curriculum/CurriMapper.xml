@@ -26,9 +26,9 @@
 		</selectKey>
 
 		insert into
-		curriculum(curri_id, curri_level, curri_subject,
+		curriculum(member_id, curri_id, curri_level, curri_subject,
 		curri_content, curri_write_time)
-		values(#{curri_id}, #{curri_level},
+		values(#{member_id}, #{curri_id}, #{curri_level},
 		#{curri_subject}, #{curri_content},
 		#{curri_write_time})
 
