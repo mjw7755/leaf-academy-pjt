@@ -12,44 +12,51 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>detail</title>
+<style type="text/css">
+#qnadetailTable {
+   width: 800px;
+}
+#qnadetailTable td {
+   border: 1px solid;
+}
+#whqrp {
+	width: 180px;
+}
+</style>
 </head>
 <body>
-	<table width="70%" border="1" cellpadding="0" cellspacing="0"
-		align="center">
+<br><br><br><br>
+	<table id="qnadetailTable">
 		<tr>
-			<td colspan="2" align="center"><h1>상세보기</h1>
-		</tr>
-		<tr>
-			<td>글번호</td>
+			<td id="whqrp">글번호</td>
 			<td>${dto.qna_id}</td>
 		</tr>
-
 		<tr>
 			<td>작성자</td>
 			<td>${dto.member_id}</td>
 		</tr>
-
 		<tr>
 			<td>제목</td>
 			<td>${dto.qna_title}</td>
 		</tr>
 		<tr>
 			<td>내용</td>
-			<td>${fn:replace(dto.qna_content,crlf,'</br>')}</td>
-		</tr>
-		
+			<td style="height:200px">${fn:replace(dto.qna_content,crlf,'</br>')}</td>
+		</tr>		
 		<tr>
 			<td>작성일</td>
 			<td>${dto.qna_writedate}</td>
 		</tr>
+		<c:if test="${dto.qna_modifydate!=null}">
 		<tr>
 			<td>작성수정날</td>
 			<td>${dto.qna_modifydate}</td>
 		</tr>
+		</c:if>
 		<tr>
 			<td colspan="2" align="center">
 			<c:if test="${sessionScope.sessionid == dto.member_id or sessionScope.sessionid == '관리자'}">
-			<input type="button" value="수정하기" onClick="location.href='qna_updateform.do?qna_id=${ dto.qna_id }'"> 
+				<input type="button" value="수정하기" onClick="location.href='qna_updateform.do?qna_id=${ dto.qna_id }'"> 
 				<input type="button" value="삭제하기" onClick="location.href='qna_delete.do?qna_id=${ dto.qna_id }'"> 
 			</c:if>	
 				<input type="button" value="목록보기" onClick="location.href='qna_list.do'">
@@ -59,5 +66,6 @@
 			</td>
 		</tr>
 	</table>
+<br><br><br><br>
 </body>
 </html>

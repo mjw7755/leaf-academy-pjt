@@ -7,7 +7,6 @@
 <style type="text/css">
 #bookdetailTable {
    width: 800px;
-   text-align: center;
 }
 #bookdetailTable td{
    border: 1px solid;

@@ -12,42 +12,48 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>detail</title>
+<style type="text/css">
+#noticedetailTable {
+   width: 800px;
+}
+#noticedetailTable td {
+   border: 1px solid;
+}
+#whqrp {
+	width: 180px;
+}
+</style>
 </head>
 <body>
-	<table width="70%" border="1" cellpadding="0" cellspacing="0"
-		align="center">
+<br><br><br><br><br>
+	<table id="noticedetailTable">
 		<tr>
-			<td colspan="2" align="center"><h1>상세보기</h1>
-		</tr>
-		<tr>
-			<td>글번호</td>
+			<td id="whqrp">글번호</td>
 			<td>${dto.notice_id}</td>
 		</tr>
-
 		<tr>
 			<td>작성자</td>
 			<td>${dto.member_id}</td>
 		</tr>
-
 		<tr>
 			<td>제목</td>
 			<td>${dto.notice_title}</td>
 		</tr>
 		<tr>
 			<td>내용</td>
-			<td>${fn:replace(dto.notice_content,crlf,'</br>')}</td>
+			<td style="height:200px">${fn:replace(dto.notice_content,crlf,'</br>')}</td>
 			
-		</tr>
-		
+		</tr>		
 		<tr>
 			<td>작성일</td>
 			<td>${dto.notice_writedate}</td>
 		</tr>
+		<c:if test="${dto.notice_modifydate!=null}">
 		<tr>
 			<td>작성수정날</td>
 			<td>${dto.notice_modifydate}</td>
 		</tr>
-		
+		</c:if>
 		<tr>
 			<td colspan="2" align="center">
 			<c:if test="${sessionScope.sessionid eq '관리자'}">

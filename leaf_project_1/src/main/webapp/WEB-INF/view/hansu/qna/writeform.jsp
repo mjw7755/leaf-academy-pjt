@@ -6,34 +6,40 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title></title>
+<style type="text/css">
+#qnawriteTable {
+   width: 800px;
+   text-align: center;
+}
+#qnawriteTable td {
+   border: 1px solid;
+}
+#whqrp {
+	width: 200px;
+}
+</style>
 </head>
 <body>
+<br><br><br><br><br>
 	<form action="qna_write.do" >
-	<table>
-		
-		<tr>
-			<td>qna_title</td>
-			<td>:</td>
-			<td><input type="text" name="qna_title" ></td>
-		</tr>
-		
-		<tr>
-			<td>qna_content</td>
-			<td>:</td>
-			<td><textarea rows="10" cols="50" name="qna_content" >${dto.qna_content}</textarea></td>
-		</tr>
-		
-		<tr><td colspan="3"><hr> </td> </tr>
-		
-				<tr>
-					<td>
-						<input type="button" value="취소" style="width: 100%;" 
-													 onclick="window.location.href='qna_list.do' ">
-					</td>
-					<td>	<input type="reset" value="초기화" style="width: 100%"></td>
-					<td>	<input type="submit" value="추가" style="width: 100%"></td>
-				</tr>
-	</table>
+		<table id="qnawriteTable">		
+			<tr>
+				<td id="whqrp">제목 : </td><!-- qna_title -->
+				<td><input type="text" name="qna_title" style="width: 100%;"></td>
+			</tr>		
+			<tr>
+				<td>내용 : </td><!-- qna_content -->
+				<td><textarea style="width: 100%; height:300px" name="qna_content" style="width: 100%;">${dto.qna_content}</textarea></td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<input type="button" value="취소" onclick="window.location.href='qna_list.do'">
+					<input type="reset" value="초기화">
+					<input type="submit" value="추가">
+				</td>
+			</tr>
+		</table>
 	</form>
+<br><br><br><br><br>
 </body>
 </html>

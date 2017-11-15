@@ -8,7 +8,6 @@
 <style type="text/css">
 #jageokdetailTable {
    width: 800px;
-   text-align: center;
 }
 #jageokdetailTable td{
    border: 1px solid;
