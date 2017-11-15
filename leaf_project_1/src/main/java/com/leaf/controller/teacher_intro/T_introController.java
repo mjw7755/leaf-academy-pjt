@@ -202,7 +202,7 @@ public class T_introController {
      
        T_introDTO dto = t_introDAO.getT_introByteacher_id(Integer.parseInt(teacher_id));
        System.out.println("list teacher_id : " + teacher_id);
-       List<ReviewDTO> list2 = reviewDAO.getReviewList(page, teacher_id);
+       List<ReviewDTO> list = reviewDAO.getReviewList(page, teacher_id);
        
        int count = reviewDAO.getCount();
        int countPage = (int) Math.ceil((float) count / 5);
@@ -210,19 +210,8 @@ public class T_introController {
        mav.addObject("count", count);
        mav.addObject("countPage", countPage);
        mav.addObject("startPage", startPage);
-       mav.addObject("list2", list2);
        mav.addObject("dto", dto);
        mav.addObject("flag", flag);
-      
-       String r_headline = request.getParameter("r_headline");
-	   String r_content = request.getParameter("r_content");
-	   String review_id = request.getParameter("review_id");
-	   System.out.println(review_id);
-	   mav.addObject("review_id", review_id);
-	   System.out.println("content.review_id : " + review_id);
-	   
-	   List<ReviewDTO> list = reviewDAO.getReviewList(page, teacher_id);
-	   
 	   mav.addObject("list", list);
 	   
       return mav;
@@ -433,7 +422,8 @@ public class T_introController {
 
    @RequestMapping("/review_content.do")
    public void review_content(HttpServletRequest request, HttpServletResponse response) throws Exception{
-      /*ModelAndView mav = new ModelAndView();*/
+	   request.setCharacterEncoding("utf-8");
+       response.setCharacterEncoding("utf-8");
       
       String review_id = request.getParameter("review_id");
       System.out.println("review_content.review_id : " + review_id);
@@ -447,7 +437,8 @@ public class T_introController {
       mav.addObject("dto2", dto2);
       mav.setViewName("ram.review_content");
       
-      return mav;*/  Gson gson = new Gson();
+      return mav;*/ 
+      Gson gson = new Gson();
       JsonObject json = new JsonObject();
       
       json.addProperty("dto", gson.toJson(dto));
