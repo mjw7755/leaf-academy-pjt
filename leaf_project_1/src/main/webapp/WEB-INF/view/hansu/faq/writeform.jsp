@@ -6,38 +6,40 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title></title>
+<style type="text/css">
+#faqwriteTable {
+   width: 800px;
+   text-align: center;
+}
+#faqwriteTable td {
+   border: 1px solid;
+}
+#whqrp {
+	width: 200px;
+}
+</style>
 </head>
 <body>
-	<form action="faq_write.do" >
-	<table>
-		<th><b> 자주 묻는 질문 </b></th>
+<br><br><br><br>
+<form action="faq_write.do" >
+	<table id="faqwriteTable">
 		<tr>
-			<td>faq_title</td>
-			<td>:</td>
-			<td><input type="text" name="faq_title" size="50"></td>
-		</tr>
-		
+			<td id="whqrp">제목 : </td><!-- faq_title -->
+			<td><input type="text" name="faq_title" style="width: 100%"></td>
+		</tr>		
 		<tr>
-			<td>faq_content</td>
-			<td>:</td>
-			<!-- <td><input type="text" name="faq_content"></td> -->
-			<td><textarea rows="10" cols="50" name="faq_content" ></textarea></td>
+			<td>내용 : </td><!-- faq_content -->
+			<td><textarea name="faq_content" style="width: 100%; height:300px"></textarea></td>
+		</tr>	
+		<tr>
+			<td colspan="2">
+				<input type="button" value="취소"  onclick="window.location.href='faq_list.do'">
+				<input type="reset" value="초기화" >
+				<input type="submit" value="추가" >
+			</td>
 		</tr>
-		
-		<tr><td colspan="3"><hr> </td> </tr>
-		
-				<tr>
-					<td>
-						<input type="button" value="취소" style="width: 100%;" 
-													 onclick="window.location.href='faq_list.do' ">
-					</td>
-					<c:if test="${sessionScope.sessionid eq '관리자'}">
-						<td>	<input type="reset" value="초기화" style="width: 100%"></td>
-						<td>	<input type="submit" value="추가" ></td>
-					</c:if>
-					
-				</tr>
 	</table>
-	</form>
+</form>
+<br><br><br><br>
 </body>
 </html>
