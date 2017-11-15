@@ -221,15 +221,24 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/login.do")
-	public String login(MemberDTO dto, HttpServletRequest request) {
+	public ModelAndView login(MemberDTO dto, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
-		String sessionid = "";
-		sessionid = memberdao.getSessionCheck(dto);		
-		if(sessionid != null) {
+		String sessionid = dto.getMember_id();
+		String recv_pwd = dto.getMember_pwd();
+		String chkpwd = memberdao.getSessionCheck(dto);	
+		int result = 0;
+		if(chkpwd.equals(recv_pwd)) {
+			result = 1;
+			mav.addObject("log_result", result);
+			mav.setViewName("main.mainPage");
 			session.setAttribute("sessionid", sessionid);	
-			return "main.mainPage";
+			return mav;
+		}else {
+			mav.addObject("log_result", result);
+			mav.setViewName("ayrin.member_loginform");
+			return mav;					
 		}
-		return "ayrin.member_loginform";		
 	}
 	
 	@RequestMapping("/logout.do")
