@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>오목 게임</title>
+<title>ì¤ëª© ê²ì</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
  <Style>
    A:Link{ Color: #000000; Text-decoration: underline}
@@ -17,7 +17,7 @@
 
  
  <h3><font face="sans-serif" color="#FF0000">
- 오목 게임
+ ì¤ëª© ê²ì
  </font></h3>
  <font face="sans-serif" color="#000099">
  <hr size=2 color="#808000">
@@ -26,7 +26,7 @@
    <tr>
      <td width="100%" height="115">
  
- 오목게임입니다. 컴퓨터와 진행하며 컴퓨터는 O
+오목게임입니다. 컴퓨터와 진행하며 컴퓨터는 O
  사용자는 X입니다. 머리를 쓰며 게임을 하기 때문에 
  게임의 기본 법칙을 이해하고, 사고에 도움이 될 것입니다.
  New Game을 누르면 새 게임이 셋팅 됩니다.
@@ -37,8 +37,9 @@
  <p>&nbsp;</p>
  
  <form>
+ <a href="gamestart.do">go</a>
  <input type=button value="Start Game" 
- onClick=window.open("xo.htm","game","width=610,height=350,menubar=0,scrollbars=0,resizable=0")> <!-- 온클릭이벤트 페이지내로 처리 하고싶으면 여기부분 바꾸면 됨 -->
+ onClick=window.open("xo.jsp","game","width=610,height=350,menubar=0,scrollbars=0,resizable=0")><!-- ì¨í´ë¦­ì´ë²¤í¸ íì´ì§ë´ë¡ ì²ë¦¬ íê³ ì¶ì¼ë©´ ì¬ê¸°ë¶ë¶ ë°ê¾¸ë©´ ë¨ -->
  </form>
 
 </body>
