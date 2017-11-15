@@ -53,7 +53,6 @@ public class T_introController {
          model.addAttribute("countPage", countPage);
          model.addAttribute("startPage", startPage);
          model.addAttribute("list", list);
-
          return "ram.t_intro_list";
       }
    
@@ -65,7 +64,7 @@ public class T_introController {
    @RequestMapping("/t_intro_write.do")
    public ModelAndView write(T_introDTO dto,HttpServletRequest request) throws Exception{
       ModelAndView mav = new ModelAndView();
-      dto.setMember_id((String)request.getSession().getAttribute("sessionid"));
+      /*dto.setMember_id((String)request.getSession().getAttribute("sessionid"));*/
       
       MultipartFile uploadfile = dto.getUploadfile();
       if (uploadfile != null) { 
@@ -178,7 +177,7 @@ public class T_introController {
       
       String teacher_id = request.getParameter("teacher_id");
       System.out.println("content.teacher_id : " + teacher_id);
-      T_introDTO dto1 = t_introDAO.getT_introByteacher_id(Integer.parseInt(teacher_id));
+     /* T_introDTO dto1 = t_introDAO.getT_introByteacher_id(Integer.parseInt(teacher_id));*/
       
 /*      String review_id = request.getParameter("review_id");
       System.out.println("content.review_id : " + review_id);
@@ -188,14 +187,11 @@ public class T_introController {
       System.out.println(list1.size());
       
       
-      mav.addObject("dto", dto1);
+      /*mav.addObject("dto", dto1);*/
       /*mav.addObject("dto2", dto2);*/
       mav.addObject("list1", list1);
       
       mav.setViewName("ram.t_intro_content");
-      
-      
-      
       
       /*sdfsdf*/
       String strPage = request.getParameter("page");
@@ -220,8 +216,15 @@ public class T_introController {
       
        String r_headline = request.getParameter("r_headline");
 	   String r_content = request.getParameter("r_content");
-      
-       
+	   String review_id = request.getParameter("review_id");
+	   System.out.println(review_id);
+	   mav.addObject("review_id", review_id);
+	   System.out.println("content.review_id : " + review_id);
+	   
+	   List<ReviewDTO> list = reviewDAO.getReviewList(page, teacher_id);
+	   
+	   mav.addObject("list", list);
+	   
       return mav;
    }
 
@@ -270,8 +273,8 @@ public class T_introController {
    }
    
    @RequestMapping("/review_write.do")
-   public void review_write(ReviewDTO dto, HttpServletRequest request) throws Exception{
-	   
+   public void review_write(ReviewDTO dto, HttpServletRequest request, HttpServletResponse response) throws Exception{
+      
       /*SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");*/
         SimpleDateFormat dateFormat =new SimpleDateFormat("yyyy년 MM월 dd일 hh시mm분ss초");
          dto.setMember_id((String)request.getSession().getAttribute("sessionid")); 
@@ -285,9 +288,10 @@ public class T_introController {
          
          System.out.println(dto.toString());
          
-      		reviewDAO.insertReivew(dto);
-
-     
+        reviewDAO.insertReivew(dto);
+        Writer writer = response.getWriter();
+        writer.write("");
+        writer.close();
    }
    
    @RequestMapping("/review_updateform.do")
@@ -301,28 +305,35 @@ public class T_introController {
    }
    
    @RequestMapping("/review_update.do")
-   public ModelAndView review_update(ReviewDTO dto,HttpServletRequest request) throws Exception{
+   public void review_update(ReviewDTO dto,HttpServletRequest request,HttpServletResponse response) throws Exception{
 	   SimpleDateFormat dateFormat =new SimpleDateFormat("yyyy년 MM월 dd일 hh시mm분ss초");
 	   Date date = new Date();
 	   String r_modify_time = dateFormat.format(date);
 	   dto.setR_modify_time(r_modify_time);
 	   
-      ModelAndView mav = new ModelAndView();
+     /* ModelAndView mav = new ModelAndView();*/
+	   System.out.println(dto.getR_content()+"ddddddddddddddddddddddd");
+	   System.out.println(dto.getR_headline());
+	   System.out.println(dto.getReview_id());
+	   System.out.println(dto.getTeacher_id());
       reviewDAO.updateReview(dto);
       
+      System.out.println("update review_id:"+ dto.getReview_id());
       String teacher_id = request.getParameter("teacher_id");
       System.out.println("update teacher_id : " + teacher_id);
       T_introDTO dto2 = t_introDAO.getT_introByteacher_id(Integer.parseInt(teacher_id));
-      
       /*mav.addObject("dto2", dto2);*/
-      mav.setViewName("redirect:review_list.do?teacher_id="+teacher_id);
-      return mav;
+      /*mav.setViewName("redirect:review_list.do?teacher_id="+teacher_id);
+      return mav;*/
+      Writer writer = response.getWriter();
+      writer.write("");
+      writer.close();
    }
    
    
    @RequestMapping("/review_delete.do")
-   public ModelAndView review_delete(HttpServletRequest request) throws Exception{
-      ModelAndView mav = new ModelAndView();
+   public void review_delete(HttpServletRequest request, HttpServletResponse response) throws Exception{
+      /*ModelAndView mav = new ModelAndView();*/
       int review_id = new Integer(request.getParameter("review_id"));
       reviewDAO.deleteReview(review_id);
       
@@ -330,8 +341,11 @@ public class T_introController {
       System.out.println("delete teacher_id : " + teacher_id);
       T_introDTO dto2 = t_introDAO.getT_introByteacher_id(Integer.parseInt(teacher_id));
       
-      mav.setViewName("redirect:review_list.do?teacher_id="+teacher_id);
-      return mav;
+     /* mav.setViewName("redirect:review_list.do?teacher_id="+teacher_id);
+      return mav;*/
+      Writer writer = response.getWriter();
+      writer.write("");
+      writer.close();
    }
    
    @RequestMapping("/review_multidelete.do")
@@ -418,22 +432,28 @@ public class T_introController {
    }
 
    @RequestMapping("/review_content.do")
-   public ModelAndView review_content(HttpServletRequest request) throws Exception{
-      ModelAndView mav = new ModelAndView();
+   public void review_content(HttpServletRequest request, HttpServletResponse response) throws Exception{
+      /*ModelAndView mav = new ModelAndView();*/
       
       String review_id = request.getParameter("review_id");
       System.out.println("review_content.review_id : " + review_id);
       ReviewDTO dto = reviewDAO.getReviewByreview_id(Integer.parseInt(review_id));
 
-      String teacher_id = request.getParameter("teacher_id");
+/*      String teacher_id = request.getParameter("teacher_id");
       System.out.println("review_content teacher_id : " + teacher_id);
-      T_introDTO dto2 = t_introDAO.getT_introByteacher_id(Integer.parseInt(teacher_id));
+      T_introDTO dto2 = t_introDAO.getT_introByteacher_id(Integer.parseInt(teacher_id));*/
       
-      mav.addObject("dto", dto);
+/*      mav.addObject("dto", dto);
       mav.addObject("dto2", dto2);
       mav.setViewName("ram.review_content");
       
-      return mav;
+      return mav;*/  Gson gson = new Gson();
+      JsonObject json = new JsonObject();
+      
+      json.addProperty("dto", gson.toJson(dto));
+      Writer writer =  response.getWriter();
+      writer.write(json.toString());
+      writer.close();
    }
 
 }

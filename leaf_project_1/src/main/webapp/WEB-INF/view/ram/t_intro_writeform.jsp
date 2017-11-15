@@ -23,8 +23,14 @@
 			</tr> --%>
 
 			<tr>
-				<td><input type="file" name="uploadfile" id="image"></td>
+				<td>강사 이름</td>
+				<td>:</td>
+				<td><input type="text" name="member_id"
+					required="required"></td>
+			</tr>
 			
+			<tr>
+				<td><input type="file" name="uploadfile" id="image"></td>
 			</tr>
 
 			<tr>
