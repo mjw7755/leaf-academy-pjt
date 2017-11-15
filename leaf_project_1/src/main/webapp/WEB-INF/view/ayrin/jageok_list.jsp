@@ -70,6 +70,7 @@ function multiDelete(){
 </script>
 </head>
 <body>
+<br><br><br><br><br>
 	<b>※ 모든 시험 접수일은 1~3개월 전부터 확인 해야합니다 ! ※</b><br>
 	
 	<form action="jageok_search.do" method="post">
@@ -147,5 +148,6 @@ function multiDelete(){
       </c:if>
       </c:if>
    </div>
+<br><br><br><br>
 </body>
 </html>
