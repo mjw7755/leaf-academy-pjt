@@ -64,8 +64,6 @@
        url:"review_write.do?teacher_id=${dto.teacher_id}&r_headline="
              +document.getElementById("r_headline").value+"&r_content=" +document.getElementById("r_content").value,
         success:function(){
-           alert("성공");
-           $("#reviewTable").remove();
            $("#writeDIV").hide();
             $("#reviewList").show();
             $("#r_headline").val("");
@@ -76,7 +74,9 @@
    }
    
    function reviewUpdate(ev) {
+	   
 	   var name = ev.target.name.split("_");
+	   alert(name[0]);
 	   $("#update_teacher_id").val(name[0]);
 	   $("#update_review_id").val(ev.target.id);
 	   $("#update_r_headline").val(name[1]);
@@ -87,16 +87,15 @@
    
    function reviewChange(aa){
 	 var teacher_id = document.getElementById("update_teacher_id").value;
+	 alert(teacher_id);
 	 var review_id = document.getElementById("update_review_id").value;
 	 var r_headline = document.getElementById("update_r_headline").value;
 	 var r_content = document.getElementById("update_r_content").value;
-	 alert(review_id);
 	   $.ajax({
 	         url:"review_update.do?teacher_id="+teacher_id+"&review_id="+review_id+"&r_headline="
 	               +r_headline+"&r_content=" +r_content,
 	         success:function(){
 	            alert("update");
-	             $("#reviewTable").remove();
 	                 $("#updateDIV").hide();
 	                  $("#reviewList").show();
 	                  $("#update_r_headline").val("");
@@ -112,36 +111,43 @@
 	          url:"review_delete.do?teacher_id=${dto.teacher_id}&review_id="+review_id,
 	           success:function(){
 	              alert("성공");
-	              $("#reviewTable").remove();
 	              reviewList();
 	           }
 	         });
 	   }
    /* --------------------------------- */
-   function reviewContent() {
-	   var name = ev.target.name.split("_");
-	      $("#reviewList").hide();
-	      $("#contentDIV").show();
-	   }
-   
    function reviewDetail(ev){
+	   var sessionid = "${sessionScope.sessionid}";
 	   var review_id = ev.target.id;
-	 alert(review_id);
 	   $.ajax({
 	         url:"review_content.do?review_id="+review_id,
-	         success:function(dto){
-			   	var data = JSON.parse(dto);
-	            alert(data);
-	             $("#reviewTable").remove();
-	                 $("#contentDIV").hide();
-	                  $("#reviewList").show();
-	                  $("#update_r_headline").val("");
-	                  $("#update_r_content").val("");
-	                  reviewList();
+	         dataType:"json",
+	         success:function(msg){
+	        	 var data = JSON.parse(msg.dto);
+	            $("#reviewList").hide();
+	                  
+                var strTag = "<div id=\"contentDIV\">"
+                			+ "회원아이디 : "+data.member_id+" <br> 제목 : "+data.r_headline+" <br>"
+                			+ "내용 : "+data.r_content+" <input type=\"button\" value=\"목록보기\""
+                			+ "onclick=\"reviewList()\">";
+                			if(sessionid == data.member_id || sessionid == '관리자') {
+                                strTag = strTag 
+                                +"<input type=\"button\" id=\""+data.review_id+"\""
+                                +"name=\""+data.teacher_id
+                                +"_" + data.r_headline
+                                +"_" + data.r_content
+                                +"\" onclick=\"reviewUpdate(event)\" value=\"수정\"/>"
+                                +"            <button id=\""+data.review_id+"\"" +"onclick=\"reviewDelete(event)\">삭 제</button>";
+                             }
+                strTag = strTag + "<br></div>";
+                $("#detail").append(strTag);
 	         }
 	      });
 	   }
    function reviewList() {
+	   $("#reviewTable").remove();
+       $("#contentDIV").remove();
+       $("#reviewList").show();
       $.ajax({
          url:"review_list.do?teacher_id=${dto.teacher_id}",
          dataType:"json",
@@ -149,6 +155,7 @@
             var sessionid = "${sessionScope.sessionid}";
             
             var data = JSON.parse(msg.list);
+            var dto = JSON.parse(msg.dto);
             var dataLength = data.length;
             var strTag = "<div id=\"reviewTable\"><table>"
             +"<tr>"
@@ -165,17 +172,17 @@
                +"      href=\"review_content.do?review_id="+data[i].review_id+"&teacher_id="+data[i].teacher_id
                +"\">"+data[i].r_headline+"</a></td>" */
                +"<td><div id=\""+data[i].review_id+"\""
-               +"name=\""+data[i].teacher_id
+               +"name=\""+dto.teacher_id
                +"_" + data[i].r_headline
                +"_" + data[i].r_content
-               +"\" onclick=\"reviewContent(event)\">"
+               +"\" onclick=\"reviewDetail(event)\">"
                +data[i].r_headline+"</div></td>" 
                +"   <td>"+data[i].member_id+"</td>";
                if(sessionid == data[i].member_id || sessionid == '관리자') {
                   strTag = strTag 
                   + "      <td>"
                   +"<input type=\"button\" id=\""+data[i].review_id+"\""
-                  +"name=\""+data[i].teacher_id
+                  +"name=\""+dto.teacher_id
                   +"_" + data[i].r_headline
                   +"_" + data[i].r_content
                   +"\" onclick=\"reviewUpdate(event)\" value=\"수정\"/>"+"</td>"
@@ -197,10 +204,10 @@
             if(msg.page>5) {
                if(msg.flag == 'list') {
                   strTag = strTag + "<a class=\"button btn-prev\""
-                  +"      href=\"review_list.do?page="+(msg.page-1)+"&teacher_id="+msg.dto.teacher_id+"\">이전</a>";
+                  +"      href=\"review_list.do?page="+(msg.page-1)+"&teacher_id="+dto.teacher_id+"\">이전</a>";
                } else if(msg.flag == 'search')  {
                   strTag = strTag + "   <a class=\"button btn-prev\""
-                  +"      href=\"review_search.do?page="+(msg.page-1)+"&column=${column}&keyvalue=${keyvalue}&teacher_id="+msg.dto.teacher_id+"\">이전</a>";
+                  +"      href=\"review_search.do?page="+(msg.page-1)+"&column=${column}&keyvalue=${keyvalue}&teacher_id="+dto.teacher_id+"\">이전</a>";
                }
             }
             
@@ -208,10 +215,10 @@
                if(msg.countPage>=msg.startPage+i) {
                   if(msg.flag == 'list') {
                      strTag = strTag + "<a class=\"strong\""
-                     +"   href=\"review_list.do?page="+(msg.startPage+i)+"&teacher_id="+msg.dto.teacher_id+"\">"+(msg.startPage+i)+"</a>";
+                     +"   href=\"review_list.do?page="+(msg.startPage+i)+"&teacher_id="+dto.teacher_id+"\">"+(msg.startPage+i)+"</a>";
                   } else if(msg.flag == 'search') {
                      strTag = strTag + "<a class=\"strong\""
-                     +"   href=\"review_search.do?page="+(msg.startPage+i)+"&column=${column}&keyvalue=${keyvalue}&teacher_id="+msg.dto.teacher_id+"\">"+(msg.startPage+i)+"</a>";
+                     +"   href=\"review_search.do?page="+(msg.startPage+i)+"&column=${column}&keyvalue=${keyvalue}&teacher_id="+dto.teacher_id+"\">"+(msg.startPage+i)+"</a>";
                   }
                }
             }
@@ -233,7 +240,6 @@
             +"</select> <input type=\"text\" name=\"keyvalue\"> <input type=\"submit\""
             +"value=\"검색\">"
             +"</form></div>";
-            
             
             $("#reviewList").append(strTag);
          }
@@ -356,24 +362,7 @@
 
 
 			<!-- content -->
-			<div id="contentDIV">
-				<input type="hidden" value="teacher_id : ${dto2.teacher_id }">
-				<input type="hidden" value="review_id : ${dto.review_id}">
-				회원아이디 : ${dto.member_id} <br> 제목 : ${dto.r_headline} <br>
-				내용 : ${dto.r_content } <input type="button" value="목록보기"
-					onclick="window.location.href='review_list.do?teacher_id=${dto.teacher_id}' ">
-				<c:if
-					test="${sessionScope.sessionid == dto.member_id or sessionScope.sessionid == '관리자'}">
-					<a href="review_updateform.do?review_id=${dto.review_id }">
-						<button id="edit">수 정</button>
-					</a>
-
-					<a href="review_delete.do?review_id=${dto.review_id}&teacher_id=${ dto2.teacher_id }">
-						<button id="delete" onclick="hide()">삭 제</button>
-					</a>
-				</c:if>
-				<br>
-			</div>
+			<div id="detail"></div>
 			<!-- content end -->
 
 		</div>
