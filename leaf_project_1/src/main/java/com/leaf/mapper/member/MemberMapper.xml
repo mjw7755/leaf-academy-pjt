@@ -14,7 +14,7 @@ resultType : 쿼리 수행 후 결과를 보내주기 위한 데이터 -->
 	<select id="getMemberList" parameterType="Integer" resultType="com.leaf.model.member.MemberDTO">
    	select * from
       (SELECT ROWNUM NUM, m.* FROM 
-                     ( SELECT * FROM Member ORDER BY member_id DESC)   m)
+                     ( SELECT * FROM Member ORDER BY member_id ASC)   m)
       where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
     </select>
 	
@@ -32,7 +32,7 @@ resultType : 쿼리 수행 후 결과를 보내주기 위한 데이터 -->
 	</insert>
 	
 	<update id="updateMember" parameterType="com.leaf.model.member.MemberDTO">
-	update Member set member_pwd=#{member_pwd}, member_tel=#{member_tel}, member_email=#{member_email} where member_id=#{member_id}
+	update Member set member_id=#{member_id}, member_name=#{member_name}, member_pwd=#{member_pwd}, member_tel=#{member_tel}, member_email=#{member_email} where member_id=#{member_id}
 	</update>
 	
 	<delete id="deleteMember" parameterType="com.leaf.model.member.MemberDTO">

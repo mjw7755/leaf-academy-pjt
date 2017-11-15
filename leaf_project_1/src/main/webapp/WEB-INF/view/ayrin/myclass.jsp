@@ -25,7 +25,7 @@
 </head>
 <body>
 <!-- member_level 학생일때 -->
-<c:if test="${sessionScope.sessionid!='관리자' and sessionScope.sessionid!='강사1'}">
+<c:if test="${sessionScope.sessionid!='관리자'}">
 	<select>
 		<option value="class1" selected="selected">JAVA 기초 (상)</option>
 		<option value="class2">JAVA 기초 (중)</option>
@@ -54,7 +54,7 @@
 </c:if>	
 
 <!-- member_level 강사일때 -->
-<c:if test="${sessionScope.sessionid=='관리자' or sessionScope.sessionid=='강사1'}">
+<c:if test="${sessionScope.sessionid=='관리자'}">
 	<select>
 		<option value="class1" selected="selected">JAVA 기초 (상)</option>
 		<option value="class2">JAVA 기초 (중)</option>

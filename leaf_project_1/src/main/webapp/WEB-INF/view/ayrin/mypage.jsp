@@ -105,14 +105,12 @@ $(function() {
 	font-weight: 700;
 	color: #949694;
 }
-#attendance :hover, #grade :hover, #lecture :hover, #notice :hover,
-	#student_care :hover {
+#attendance :hover, #grade :hover, #lecture :hover, #notice :hover,	#student_care :hover {
 	color: #1b7817;
 	font-weight: 900;
 	height: 38px;
 }
-#attendance_icon, #grade_icon, #lecture_icon, #notice_icon,
-	#student_care_icon {
+#attendance_icon, #grade_icon, #lecture_icon, #notice_icon,	#student_care_icon {
 	color: #1b7817;
 	font-weight: bold;
 	float: right;
@@ -127,6 +125,9 @@ $(function() {
 	   <tr id="my_page_text"><td colspan="2">MY PAGE</td></tr>
 	   <tr><td id="attendance"><a href="#" >개인정보</a><div id="attendance_icon">></div></td></tr>
 	   <tr><td id="grade"><a href="#" >내역조회</a><div id="grade_icon">></div></td></tr>
+	   <c:if test="${sessionScope.sessionid=='관리자'}">
+	   <tr><td id="student_care"><a href="member_list.do" >회원관리</a><div id="student_care_icon">></div></td></tr>
+	   </c:if>
 	</table>
 	
 	<div id="attendance_position1">

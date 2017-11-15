@@ -1,13 +1,11 @@
 package com.leaf.model.member;
 
-import java.lang.reflect.Member;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.validation.Errors;
 
 @Component
 public class MemberDAOImpl implements MemberDAO {
@@ -63,7 +61,7 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public List<MemberDTO> searchMemberList(Map map) {
+	public List<MemberDTO> searchMemberList(Map<String, Object> map) {
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		return dao.searchMemberList(map);
 	}
