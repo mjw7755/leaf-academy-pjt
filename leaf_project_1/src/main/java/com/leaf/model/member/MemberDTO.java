@@ -20,30 +20,32 @@ public class MemberDTO {
 	@Pattern(message="사용할 수 없는 문자가 있습니다.(영 소, 대문자 숫자만 사용 가능)", regexp="^[A-Za-z0-9]{4,12}$", groups={Group3.class})
 	private String member_id;
 	
-	@NotEmpty(message="비밀번호를 입력해주세요.", groups={Group1.class})
-	@Size(min=4, max=16, message="비밀번호는 4글자 이상 16글자 이하만 사용 가능 합니다.", groups= {Group2.class})
-	@Pattern(message="사용할 수 없는 문자가 있습니다.(영 소, 대문자 숫자만 사용 가능)", regexp="^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{4,16}$", groups={Group3.class})
+	@NotEmpty(message="비밀번호를 입력해주세요.", groups={Group4.class})
+	@Size(min=4, max=16, message="비밀번호는 4글자 이상 16글자 이하만 사용 가능 합니다.", groups= {Group5.class})
+	@Pattern(message="영문자 숫자 특수문자를 조합해주세요.", regexp="^((?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{4,16})$", groups={Group6.class})
 	private String member_pwd;
 	
-	@NotEmpty(message="이름을 입력해주세요.", groups={Group1.class})
-	@Size(min = 2, max = 6, message="이름은 2글자 이상 6글자 이하만 사용 가능 합니다.", groups= {Group2.class})
+	@NotEmpty(message="이름을 입력해주세요.", groups={Group7.class})
+	@Size(min = 2, max = 6, message="이름은 2글자 이상 6글자 이하만 사용 가능 합니다.", groups= {Group8.class})
 	private String member_name;
 	
-	@NotEmpty(message="전화번호를 입력해주세요.", groups={Group1.class})
-	@Size(min=10, max=12, message="번호는 10~12자리어야 합니다.", groups= {Group2.class})
-	@Pattern(message="사용할 수 없는 문자가 있습니다.(숫자만 사용 가능)", regexp="^[0-9]{10,12}$", groups={Group3.class})
+	@NotEmpty(message="전화번호를 입력해주세요.", groups={Group9.class})
+	@Size(min=10, max=12, message="번호는 10~12자리어야 합니다.", groups= {Group10.class})
+	@Pattern(message="사용할 수 없는 문자가 있습니다.(숫자만 사용 가능)", regexp="^[0-9]{10,12}$", groups={Group11.class})
 	private String member_tel;
 	
-	@NotEmpty(message="이메일을 입력해주세요.", groups={Group1.class})
+	@NotEmpty(message="이메일을 입력해주세요.", groups={Group12.class})
 	private String member_email;
 	
 	private String member_level;
 	
-	@NotEmpty(message="주소를 입력해주세요.", groups={Group1.class})
+	@NotEmpty(message="우편번호를 입력해주세요.", groups={Group13.class})
+	private String member_addnum;
+	
+	@NotEmpty(message="주소를 입력해주세요.", groups={Group14.class})
 	private String member_address;
 	
-	@NotEmpty(message="우편번호를 입력해주세요.", groups={Group1.class})
-	private String member_addnum;
+
 
 	
 	private String sel_value;
