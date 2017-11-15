@@ -125,6 +125,7 @@
 	         success:function(msg){
 	        	 var data = JSON.parse(msg.dto);
 	            $("#reviewList").hide();
+	            $("#contentDIV").remove();
 	                  
                 var strTag = "<div id=\"contentDIV\">"
                 			+ "회원아이디 : "+data.member_id+" <br> 제목 : "+data.r_headline+" <br>"

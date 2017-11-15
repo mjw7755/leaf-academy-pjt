@@ -41,7 +41,6 @@ public class VideoChatWebSocketHandler implements WebSocketHandler {
 			Map<String, Object> data = gson.fromJson((String)arg1.getPayload(),
 					new TypeToken <Map<String, Object>>() {}.getType());
 			
-			System.out.println(data.get("type")+" //// " + data.get("name"));
 			String name = (String)data.get("name");
 			if(data.get("type").equals("login")) {
 				if(names.indexOf(name)!=-1) {
