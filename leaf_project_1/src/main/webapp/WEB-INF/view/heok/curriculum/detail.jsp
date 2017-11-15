@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+     <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:scriptlet>
     pageContext.setAttribute("cr", "\r");
     pageContext.setAttribute("lf", "\n");
@@ -18,6 +18,7 @@ div {
 	text-align: center;
 	font-size: 20px;
 }
+
 </style>
 
 <body>
@@ -25,19 +26,33 @@ div {
 		<legend>
 			<h3>강좌</h3>
 		</legend>
-		<!-- <table>
-			<th></th><th></th><th></th>
-			<tr>
-				<td>
-				
-				</td>
-			</tr>
-		</table> -->
 		
 	<input type="hidden" name="curri_id" value="${dto.curri_id }">
 	<h1>
 		<div style="font-style: italic;color :gold; font-size: 80px;">${dto.curri_subject}</div>
 	</h1>
+	<table style="border: thin;text-align: center; margin: auto;">
+		<tr>
+			<th colspan="2">수강기간</th>
+				<td colspan="2">${dto.lect_start_day } ~ ${dto.lect_end_day}</td>
+			<th>클래스명</th>
+				<td>${dto.lect_name }</td>
+			<th colspan="2">수강시간</th>
+				<td colspan="2">${dto.lect_start_time } ~ ${dto.lect_end_time}</td>
+				<td></td>
+		</tr>
+		<tr>
+			<th>강사명<th>
+				<td>${dto.member_id }</td>
+				<td></td>
+			<th>강의레벨</th>
+				<td>${dto.curri_level}</td>
+				<td></td>
+			<th>수강인원</th>
+				<td>${dto.lect_person_num }</td>
+				<td></td>
+		</tr>
+	</table>
 	<div id="curri_detail" class="curri_detail margin-large">
 		
 		<dl class="curri_detail_row">

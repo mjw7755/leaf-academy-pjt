@@ -8,10 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.leaf.model.curriculum.LectDAO;
-import com.leaf.model.curriculum.LectDTO;
-import com.leaf.model.member.MemberDAO;
-import com.leaf.model.member.MemberDTO;
+import com.leaf.model.curriculum.CurriDAO;
+import com.leaf.model.curriculum.CurriDTO;
 
 
 @Component
@@ -83,12 +81,18 @@ public class LectDAOImpl implements LectDAO {
 	      LectDAO dao = sqlSession.getMapper(LectDAO.class);
 	      return dao.getSearchCount(map);
 	   }
-	  
+
+	@Override
+	public List<CurriDTO> subjectcurri(String member_id) {
+		LectDAO dao = sqlSession.getMapper(LectDAO.class);
+		
+		return dao.subjectcurri(member_id);
+	}
+	
 	  public LectDTO getCheckDate(String sessionid) {
-			LectDAO dao = sqlSession.getMapper(LectDAO.class);
-			return dao.getCheckDate(sessionid);
-	  }
-	  
+	         LectDAO dao = sqlSession.getMapper(LectDAO.class);
+	         return dao.getCheckDate(sessionid);
+	     }
 }
 
 

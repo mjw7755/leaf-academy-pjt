@@ -2,14 +2,70 @@ package com.leaf.model.curriculum;
 
 public class LectDTO {
 	private String  lect_name, lect_start_day,
-			lect_end_day, lect_start_time,
-			lect_end_time, lect_write_time,
-			lect_modify_time;
-	private int lect_id, curri_id, enabled, lect_accept, lect_person_num;
-	
-	
+	lect_end_day, lect_start_time,
+	lect_end_time, lect_write_time,
+	lect_modify_time;
+private int lect_id, curri_id, enabled, lect_accept, lect_person_num;
+private String  member_id, curri_level, curri_subject, curri_content;
+
+
 
 	
+
+	public LectDTO(String lect_name, String lect_start_day, String lect_end_day, String lect_start_time,
+		String lect_end_time, String lect_write_time, String lect_modify_time, int lect_id, int curri_id, int enabled,
+		int lect_accept, int lect_person_num, String member_id, String curri_level, String curri_subject,
+		String curri_content) {
+	super();
+	this.lect_name = lect_name;
+	this.lect_start_day = lect_start_day;
+	this.lect_end_day = lect_end_day;
+	this.lect_start_time = lect_start_time;
+	this.lect_end_time = lect_end_time;
+	this.lect_write_time = lect_write_time;
+	this.lect_modify_time = lect_modify_time;
+	this.lect_id = lect_id;
+	this.curri_id = curri_id;
+	this.enabled = enabled;
+	this.lect_accept = lect_accept;
+	this.lect_person_num = lect_person_num;
+	this.member_id = member_id;
+	this.curri_level = curri_level;
+	this.curri_subject = curri_subject;
+	this.curri_content = curri_content;
+}
+
+	public String getMember_id() {
+	return member_id;
+}
+
+public void setMember_id(String member_id) {
+	this.member_id = member_id;
+}
+
+public String getCurri_level() {
+	return curri_level;
+}
+
+public void setCurri_level(String curri_level) {
+	this.curri_level = curri_level;
+}
+
+public String getCurri_subject() {
+	return curri_subject;
+}
+
+public void setCurri_subject(String curri_subject) {
+	this.curri_subject = curri_subject;
+}
+
+public String getCurri_content() {
+	return curri_content;
+}
+
+public void setCurri_content(String curri_content) {
+	this.curri_content = curri_content;
+}
 
 	public LectDTO() {}
 
@@ -138,9 +194,10 @@ public class LectDTO {
 	public String toString() {
 		return "LectDTO [lect_name=" + lect_name + ", lect_start_day=" + lect_start_day + ", lect_end_day="
 				+ lect_end_day + ", lect_start_time=" + lect_start_time + ", lect_end_time=" + lect_end_time
-				+ ", lect_week=" + ", lect_write_time=" + lect_write_time + ", lect_modify_time="
-				+ lect_modify_time + ", lect_id=" + lect_id + ", curri_id=" + curri_id + ", enabled=" + enabled
-				+ ", lect_accept=" + lect_accept + ", lect_person_num=" + lect_person_num + "]";
+				+ ", lect_write_time=" + lect_write_time + ", lect_modify_time=" + lect_modify_time + ", lect_id="
+				+ lect_id + ", curri_id=" + curri_id + ", enabled=" + enabled + ", lect_accept=" + lect_accept
+				+ ", lect_person_num=" + lect_person_num + ", member_id=" + member_id + ", curri_level=" + curri_level
+				+ ", curri_subject=" + curri_subject + ", curri_content=" + curri_content + "]";
 	}
 	
 }

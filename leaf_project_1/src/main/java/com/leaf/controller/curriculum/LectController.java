@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.leaf.model.curriculum.CurriDTO;
 import com.leaf.model.curriculum.LectDAO;
 import com.leaf.model.curriculum.LectDTO;
 @Controller
@@ -50,22 +51,25 @@ public class LectController {
  }
 	
 	@RequestMapping("/writeform_lect.do")
-	public String writeForm() {
-		return "lecture.writeForm";    //   /WEB-INF/views/writeform.jsp
+	public String writeForm(Model model, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		String member_id=(String) request.getSession().getAttribute("sessionid");
+		List<CurriDTO> list = lectDAO.subjectcurri(member_id);
+		model.addAttribute("list",list);
+	    return "lecture.writeForm";
 	}
 	
 	@RequestMapping(value = "/write_lect.do", method = RequestMethod.POST)
 	public ModelAndView write(@ModelAttribute LectDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		System.out.println(dto.getCurri_id());
 		
 		SimpleDateFormat sdf_t = new SimpleDateFormat("yy-MM-dd / kk:mm:ss");
 		Date date = new Date();
-		System.out.println(dto.getLect_name());
 		String lect_write_time= sdf_t.format(date);
 		dto.setLect_write_time(lect_write_time);
 		
 		lectDAO.insertLect(dto);
-		System.out.println(dto.getLect_name());
 		mav.setViewName("redirect:list_lect.do");
 		return mav;
 	}
@@ -107,7 +111,7 @@ public class LectController {
 
 
 		   String flag = "search";
-		      //ì»¬ëŸ¼ëª?
+		      //ÄÃ·³¸í
 		         String column =request.getParameter("column");
 		         String keyvalue = request.getParameter("keyvalue");
 		         System.out.println(column + " / " + keyvalue);

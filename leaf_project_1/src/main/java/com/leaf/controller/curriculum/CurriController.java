@@ -1,20 +1,16 @@
 package com.leaf.controller.curriculum;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,50 +29,56 @@ public class CurriController {
 	@Autowired
 	private CurriDAO curriDAO;
 
+	 @Autowired
+	 private SqlSession sqlSession;
+	 
 	@RequestMapping("/list_curri.do")
-	public String list(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public String list(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String flag = "list";
 
-	    String strPage = request.getParameter("page");
-	       int page;
-	       if (strPage == null) {page = 1;} 
-	       else {page = Integer.parseInt(request.getParameter("page"));}
-	       //List<MemberDTO> list = memberdao.getMemberList(page);
-	       List<CurriDTO> list = curriDAO.listCurri(page);
-	       int count = curriDAO.getCount();
-	       int countPage = (int) Math.ceil((float) count / 5);
-	       int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
-	       model.addAttribute("count", count);
-	       model.addAttribute("countPage", countPage);
-	       model.addAttribute("startPage", startPage);
-	    model.addAttribute("list", list);
-	    model.addAttribute("flag",flag);
+		String strPage = request.getParameter("page");
+		int page;
+		if (strPage == null) {
+			page = 1;
+		} else {
+			page = Integer.parseInt(request.getParameter("page"));
+		}
+		// List<MemberDTO> list = memberdao.getMemberList(page);
+		List<CurriDTO> list = curriDAO.listCurri(page);
+		int count = curriDAO.getCount();
+		int countPage = (int) Math.ceil((float) count / 5);
+		int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
+		model.addAttribute("count", count);
+		model.addAttribute("countPage", countPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("list", list);
+		model.addAttribute("flag", flag);
+
 		return "curriculum.list";
 	}
 
 	@RequestMapping("/writeform_curri.do")
 	public String writeForm() {
-		
 		return "curriculum.writeForm";
 	}
 
 	@RequestMapping(value = "/write_curri.do", method = RequestMethod.POST)
-	public ModelAndView write(CurriDTO dto, HttpServletRequest request) throws Exception {
+	public ModelAndView write(CurriDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		dto.setMember_id((String)request.getSession().getAttribute("sessionid"));
-		System.out.println("session" + dto.getMember_id());
+
 		SimpleDateFormat sdf_t = new SimpleDateFormat("yy-MM-dd / kk:mm:ss");
 		Date date = new Date();
-		System.out.println(dto);
+		System.out.println("1" + dto.getCurri_content());
 		String curri_write_time = sdf_t.format(date);
+		System.out.println("4" + dto.getCurri_content());
 		dto.setCurri_write_time(curri_write_time);
-		System.out.println("asd:"+dto.getCurri_content());
-		
+		System.out.println("5" + dto.getCurri_content());
+
 		curriDAO.insertCurri(dto);
-		System.out.println("2"+ dto.getCurri_content());
+		System.out.println("2" + dto.getCurri_content());
 		mav.setViewName("redirect:list_curri.do");
-		System.out.println("3"+ dto.getCurri_content());
-		
+		System.out.println("3" + dto.getCurri_content());
+
 		return mav;
 	}
 
@@ -112,151 +114,172 @@ public class CurriController {
 		return mav;
 	}
 
+/*	@RequestMapping("/detail_curri.do")
+
+	public String detailCurri(Model model,@RequestParam int curri_id) throws Exception {
+		CurriDAO curriDAO = sqlSession.getMapper(CurriDAO.class);
+		
+		 curri_id = curriDAO.detailCurri(curri_id);
+		 model.addAttribute("curri_id", curri_id);
+		return  "curriculum/detail";
+
+	}*/
+
 	@RequestMapping("/detail_curri.do")
 
 	public ModelAndView detailCurri(@RequestParam int curri_id) throws Exception {
 		ModelAndView mav = new ModelAndView();
 
 		mav.setViewName("curriculum.detail");
-		mav.addObject("dto", curriDAO.updateFormCurri(curri_id));
+		mav.addObject("dto", curriDAO.detailCurri(curri_id));
 		return mav;
 
 	}
 	
-	/*//?‹¨?¼?ŒŒ?¼?—…ë¡œë“œ
-	@RequestMapping("/photoUpload")
-	public String photoUpload(HttpServletRequest request, PhotoDTO dto){
-	    String callback = dto.getCallback();
-	    String callback_func = dto.getCallback_func();
-	    String file_result = "";
-	    try {
-	        if(dto.getFiledata() != null && dto.getFiledata().getOriginalFilename() != null && !dto.getFiledata().getOriginalFilename().equals("")){
-	            //?ŒŒ?¼?´ ì¡´ì¬?•˜ë©?
-	            String original_name = dto.getFiledata().getOriginalFilename();
-	            String ext = original_name.substring(original_name.lastIndexOf(".")+1);
-	            //?ŒŒ?¼ ê¸°ë³¸ê²½ë¡œ
-	            String defaultPath = request.getSession().getServletContext().getRealPath("/");
-	            //?ŒŒ?¼ ê¸°ë³¸ê²½ë¡œ _ ?ƒ?„¸ê²½ë¡œ
-	            String path = defaultPath + "resource" + File.separator + "photo_upload" + File.separator;             
-	            File file = new File(path);
-	            System.out.println("path:"+path);
-	            //?””? ‰?† ë¦? ì¡´ì¬?•˜ì§? ?•Š?„ê²½ìš° ?””? ‰?† ë¦? ?ƒ?„±
-	            if(!file.exists()) {
-	                file.mkdirs();
-	            }
-	            //?„œë²„ì— ?—…ë¡œë“œ ?•  ?ŒŒ?¼ëª?(?•œê¸?ë¬¸ì œë¡? ?¸?•´ ?›ë³¸íŒŒ?¼?? ?˜¬ë¦¬ì? ?•Š?Š”ê²ƒì´ ì¢‹ìŒ)
-	            String realname = UUID.randomUUID().toString() + "." + ext;
-	        ///////////////// ?„œë²„ì— ?ŒŒ?¼?“°ê¸? /////////////////
-	            dto.getFiledata().transferTo(new File(path+realname));
-	            file_result += "&bNewLine=true&sFileName="+original_name+"&sFileURL=/resource/photo_upload/"+realname;
-	        } else {
-	            file_result += "&errstr=error";
-	        }
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-	    return "redirect:" + callback + "?callback_func="+callback_func+file_result;
-	}
-	@RequestMapping("/submit")
-	public void submit(HttpServletRequest request){
-	    System.out.println("?—?””?„° ì»¨í…ì¸ ê°’:"+request.getParameter("editor"));
-	}
-
-	//?‹¤ì¤‘íŒŒ?¼?—…ë¡œë“œ
-	@RequestMapping("/multiplePhotoUpload")
-	public void multiplePhotoUpload(HttpServletRequest request, HttpServletResponse response){
-	    try {
-	         //?ŒŒ?¼? •ë³?
-	         String sFileInfo = "";
-	         //?ŒŒ?¼ëª…ì„ ë°›ëŠ”?‹¤ - ?¼ë°? ?›ë³¸íŒŒ?¼ëª?
-	         String filename = request.getHeader("file-name");
-	         //?ŒŒ?¼ ?™•?¥?
-	         String filename_ext = filename.substring(filename.lastIndexOf(".")+1);
-	         //?™•?¥?ë¥¼ì†Œë¬¸ìë¡? ë³?ê²?
-	         filename_ext = filename_ext.toLowerCase();
-	         //?ŒŒ?¼ ê¸°ë³¸ê²½ë¡œ
-	         String dftFilePath = request.getSession().getServletContext().getRealPath("/");
-	         //?ŒŒ?¼ ê¸°ë³¸ê²½ë¡œ _ ?ƒ?„¸ê²½ë¡œ
-	         String filePath = dftFilePath + "resource" + File.separator + "photo_upload" + File.separator;
-	         File file = new File(filePath);
-	         if(!file.exists()) {
-	            file.mkdirs();
-	         }
-	         String realFileNm = "";
-	         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
-	         String today= formatter.format(new java.util.Date());
-	         realFileNm = today+UUID.randomUUID().toString() + filename.substring(filename.lastIndexOf("."));
-	         String rlFileNm = filePath + realFileNm;
-	         ///////////////// ?„œë²„ì— ?ŒŒ?¼?“°ê¸? /////////////////
-	         InputStream is = request.getInputStream();
-	         OutputStream os=new FileOutputStream(rlFileNm);
-	         int numRead;
-	         byte b[] = new byte[Integer.parseInt(request.getHeader("file-size"))];
-	         while((numRead = is.read(b,0,b.length)) != -1){
-	            os.write(b,0,numRead);
-	         }
-	         if(is != null) {
-	            is.close();
-	         }
-	         os.flush();
-	         os.close();
-	         ///////////////// ?„œë²„ì— ?ŒŒ?¼?“°ê¸? /////////////////
-	         // ? •ë³? ì¶œë ¥
-	         sFileInfo += "&bNewLine=true";
-	         // img ?ƒœê·¸ì˜ title ?†?„±?„ ?›ë³¸íŒŒ?¼ëª…ìœ¼ë¡? ? ?š©?‹œì¼œì£¼ê¸? ?œ„?•¨
-	         sFileInfo += "&sFileName="+ filename;;
-	         sFileInfo += "&sFileURL="+"/resource/photo_upload/"+realFileNm;
-	         PrintWriter print = response.getWriter();
-	         print.print(sFileInfo);
-	         print.flush();
-	         print.close();
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    }
-	}*/
+	/*
+	 * //´ÜÀÏÆÄÀÏ¾÷·Îµå
+	 * 
+	 * @RequestMapping("/photoUpload") public String photoUpload(HttpServletRequest
+	 * request, PhotoDTO dto){ String callback = dto.getCallback(); String
+	 * callback_func = dto.getCallback_func(); String file_result = ""; try {
+	 * if(dto.getFiledata() != null && dto.getFiledata().getOriginalFilename() !=
+	 * null && !dto.getFiledata().getOriginalFilename().equals("")){ //ÆÄÀÏÀÌ Á¸ÀçÇÏ¸é
+	 * String original_name = dto.getFiledata().getOriginalFilename(); String ext =
+	 * original_name.substring(original_name.lastIndexOf(".")+1); //ÆÄÀÏ ±âº»°æ·Î String
+	 * defaultPath = request.getSession().getServletContext().getRealPath("/"); //ÆÄÀÏ
+	 * ±âº»°æ·Î _ »ó¼¼°æ·Î String path = defaultPath + "resource" + File.separator +
+	 * "photo_upload" + File.separator; File file = new File(path);
+	 * System.out.println("path:"+path); //µğ·ºÅä¸® Á¸ÀçÇÏÁö ¾ÊÀ»°æ¿ì µğ·ºÅä¸® »ı¼º if(!file.exists())
+	 * { file.mkdirs(); } //¼­¹ö¿¡ ¾÷·Îµå ÇÒ ÆÄÀÏ¸í(ÇÑ±Û¹®Á¦·Î ÀÎÇØ ¿øº»ÆÄÀÏÀº ¿Ã¸®Áö ¾Ê´Â°ÍÀÌ ÁÁÀ½) String
+	 * realname = UUID.randomUUID().toString() + "." + ext; ///////////////// ¼­¹ö¿¡
+	 * ÆÄÀÏ¾²±â ///////////////// dto.getFiledata().transferTo(new File(path+realname));
+	 * file_result +=
+	 * "&bNewLine=true&sFileName="+original_name+"&sFileURL=/resource/photo_upload/"
+	 * +realname; } else { file_result += "&errstr=error"; } } catch (Exception e) {
+	 * e.printStackTrace(); } return "redirect:" + callback +
+	 * "?callback_func="+callback_func+file_result; }
+	 * 
+	 * @RequestMapping("/submit") public void submit(HttpServletRequest request){
+	 * System.out.println("¿¡µğÅÍ ÄÁÅÙÃ÷°ª:"+request.getParameter("editor")); }
+	 * 
+	 * //´ÙÁßÆÄÀÏ¾÷·Îµå
+	 * 
+	 * @RequestMapping("/multiplePhotoUpload") public void
+	 * multiplePhotoUpload(HttpServletRequest request, HttpServletResponse
+	 * response){ try { //ÆÄÀÏÁ¤º¸ String sFileInfo = ""; //ÆÄÀÏ¸íÀ» ¹Ş´Â´Ù - ÀÏ¹İ ¿øº»ÆÄÀÏ¸í String
+	 * filename = request.getHeader("file-name"); //ÆÄÀÏ È®ÀåÀÚ String filename_ext =
+	 * filename.substring(filename.lastIndexOf(".")+1); //È®ÀåÀÚ¸¦¼Ò¹®ÀÚ·Î º¯°æ filename_ext =
+	 * filename_ext.toLowerCase(); //ÆÄÀÏ ±âº»°æ·Î String dftFilePath =
+	 * request.getSession().getServletContext().getRealPath("/"); //ÆÄÀÏ ±âº»°æ·Î _ »ó¼¼°æ·Î
+	 * String filePath = dftFilePath + "resource" + File.separator + "photo_upload"
+	 * + File.separator; File file = new File(filePath); if(!file.exists()) {
+	 * file.mkdirs(); } String realFileNm = ""; SimpleDateFormat formatter = new
+	 * SimpleDateFormat("yyyyMMddHHmmss"); String today= formatter.format(new
+	 * java.util.Date()); realFileNm = today+UUID.randomUUID().toString() +
+	 * filename.substring(filename.lastIndexOf(".")); String rlFileNm = filePath +
+	 * realFileNm; ///////////////// ¼­¹ö¿¡ ÆÄÀÏ¾²±â ///////////////// InputStream is =
+	 * request.getInputStream(); OutputStream os=new FileOutputStream(rlFileNm); int
+	 * numRead; byte b[] = new
+	 * byte[Integer.parseInt(request.getHeader("file-size"))]; while((numRead =
+	 * is.read(b,0,b.length)) != -1){ os.write(b,0,numRead); } if(is != null) {
+	 * is.close(); } os.flush(); os.close(); ///////////////// ¼­¹ö¿¡ ÆÄÀÏ¾²±â
+	 * ///////////////// // Á¤º¸ Ãâ·Â sFileInfo += "&bNewLine=true"; // img ÅÂ±×ÀÇ title
+	 * ¼Ó¼ºÀ» ¿øº»ÆÄÀÏ¸íÀ¸·Î Àû¿ë½ÃÄÑÁÖ±â À§ÇÔ sFileInfo += "&sFileName="+ filename;; sFileInfo +=
+	 * "&sFileURL="+"/resource/photo_upload/"+realFileNm; PrintWriter print =
+	 * response.getWriter(); print.print(sFileInfo); print.flush(); print.close(); }
+	 * catch (Exception e) { e.printStackTrace(); } }
+	 */
 
 	@RequestMapping("/search_curri.do")
-	public String search(Model model, HttpServletRequest request) throws Exception{
+	public String search(Model model, HttpServletRequest request) throws Exception {
 
+		String flag = "search";
+		// ÄÃ·³¸í
+		String column = request.getParameter("column");
+		String keyvalue = request.getParameter("keyvalue");
+		System.out.println(column + " / " + keyvalue);
 
-		   String flag = "search";
-		      //ì»¬ëŸ¼ëª?
-		         String column =request.getParameter("column");
-		         String keyvalue = request.getParameter("keyvalue");
-		         System.out.println(column + " / " + keyvalue);
-		         
-		         Map<String, Object> map = new HashMap<String, Object>(); //colcurriion
-		         map.put("column",column ); //column : name or email or home
-		         map.put("keyvalue", keyvalue); //keyvalue 
-		        
-		         String strPage = request.getParameter("page");
-		         int page;
-		         if (strPage == null) {page = 1;} 
-		         else {page = Integer.parseInt(request.getParameter("page"));}
-		         //List<MemberDTO> list = memberdao.getMemberList(page);
-		         map.put("page", page);
-		         int count = curriDAO.getSearchCount(map);
-		         //count = page;
-		         int countPage = (int) Math.ceil((float) count / 5);
-		         int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
-		        System.out.println(count);
-		         model.addAttribute("count", count);
-		         model.addAttribute("countPage", countPage);
-		         model.addAttribute("startPage", startPage);
-		         model.addAttribute("column", column);
-		         model.addAttribute("keyvalue", keyvalue);
+		Map<String, Object> map = new HashMap<String, Object>(); // colcurriion
+		map.put("column", column); // column : name or email or home
+		map.put("keyvalue", keyvalue); // keyvalue
 
-		         map.put("column",column ); //column : name or email or home
-		         map.put("keyvalue", keyvalue); //keyvalue 
-		         map.put("page", String.valueOf(page));
-		      
-		         List<CurriDTO> list = curriDAO.searchCurri(map);
-		      
-		      
-		      model.addAttribute("list", list);
-		      model.addAttribute("flag",flag);
-		      return "curriculum.list";
-		   }
+		String strPage = request.getParameter("page");
+		int page;
+		if (strPage == null) {
+			page = 1;
+		} else {
+			page = Integer.parseInt(request.getParameter("page"));
+		}
+		// List<MemberDTO> list = memberdao.getMemberList(page);
+		map.put("page", page);
+		int count = curriDAO.getSearchCount(map);
+		// count = page;
+		int countPage = (int) Math.ceil((float) count / 5);
+		int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
+		System.out.println(count);
+		model.addAttribute("count", count);
+		model.addAttribute("countPage", countPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("column", column);
+		model.addAttribute("keyvalue", keyvalue);
 
+		map.put("column", column); // column : name or email or home
+		map.put("keyvalue", keyvalue); // keyvalue
+		map.put("page", String.valueOf(page));
+
+		List<CurriDTO> list = curriDAO.searchCurri(map);
+
+		model.addAttribute("list", list);
+		model.addAttribute("flag", flag);
+		return "curriculum.list";
+	}
+
+	@RequestMapping("/monthlist_curri.do")
+	public void monthlist(Model model, HttpServletResponse response, HttpServletRequest request, CurriDTO dto) throws IOException {
+		
+		String monthvalue = request.getParameter("monthvalue");
+		String yearvalue= request.getParameter("yearvalue");
+		String start_day = "", end_day = "";
+		int y = Integer.parseInt(yearvalue), m =Integer.parseInt(monthvalue), lastday;
+		
+		if (m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12)
+			lastday = 31;
+		else if (m == 2) {
+			if ((y % 4 == 0) && ((y % 100 != 0) || (y % 400 == 0)))
+				lastday = 29;
+			else
+				lastday = 28;
+		} else {
+			lastday = 30;
+		}
+		System.out.println(y);
+
+		
+	Map<String,String> map = new HashMap();
+
+	start_day="2017-"+monthvalue+"-01";
+	end_day="2017-"+monthvalue+"-"+lastday;
+	System.out.println(start_day);
+	System.out.println(end_day);
+	map.put("start_day",start_day);
+	map.put("end_day",end_day);
+
+	List<CurriDTO> list = curriDAO.monthlistCurri(map);
+
+	StringBuffer sb = new StringBuffer("");System.out.println(list.size());sb.append("{ \"result\" : [");for(
+	int i = 0;i<list.size();i++)
+	{
+		sb.append("[{\"value\" : \"" + list.get(i).getCurri_id() + "\"},");
+		sb.append("{\"value\" : \"" + list.get(i).getLect_start_day() + "\"},");
+		sb.append("{\"value\" : \"" + list.get(i).getCurri_subject() + "\"},");
+		sb.append("{\"value\" : \"" + list.get(i).getMember_id() + "\"},");
+		sb.append("{\"value\" : \"" + list.get(i).getCurri_level() + "\"},");
+		sb.append("{\"value\" : \"" + list.get(i).getLect_name() + "\"},");
+		sb.append("{\"value\" : \"" + list.get(i).getLect_person_num() + "\"}],");
+	}
+	sb.append("]}");
+	response.getWriter().write(sb.toString());
+	model.addAttribute("monthvalue",monthvalue);
 }
 
+}
