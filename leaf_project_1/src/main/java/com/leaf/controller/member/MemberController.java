@@ -1,5 +1,6 @@
 package com.leaf.controller.member;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -213,12 +214,16 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/loginDupl.do")
-	public void loginDupl(HttpServletRequest request) {
+	public void loginDupl(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("컨트롤러 세션 중복처리 시작");
 		HttpSession session = request.getSession();
-		String sessionid = (String) session.getAttribute("sessionid");
 		session.removeAttribute("sessionid");
-		session.setAttribute("sessionid", sessionid);
+		try {
+			response.getWriter().write("1");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@RequestMapping("/login.do")

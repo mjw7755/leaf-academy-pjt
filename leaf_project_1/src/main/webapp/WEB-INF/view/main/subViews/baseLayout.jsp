@@ -143,22 +143,24 @@ var conn;
 			//서버가 전송한 메시지 가져오기
 			var data = evt.data;
 			//메시지를 출력
-			alert(data);
 			if(data != null){
 				if(data == "dupl"){
+					alert(data);
 					$.ajax({
 						url:"loginDupl.do",
 						success: function(data){
-							if(data == 1){
 							alert("다른곳에서 로그인되었습니다. 접속을 종료합니다.");
 							window.location.reload(true);
-							}
+						},
+						error:function(e){
+							alert(e);
 						}
 						
 					})
+				}else {
+					$('.alert_div').slideDown("fast");
+					setTimeout(function(){$('.alert_div').slideUp("fast");},3000);					
 				}
-				$('.alert_div').slideDown("fast");
-				setTimeout(function(){$('.alert_div').slideUp("fast");},3000);
 			}
 		}
 		
