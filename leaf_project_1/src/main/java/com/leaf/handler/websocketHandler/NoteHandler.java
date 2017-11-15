@@ -60,8 +60,6 @@ public class NoteHandler implements org.springframework.web.socket.WebSocketHand
 				dupl.sendMessage(new TextMessage("dupl"));
 				userList.remove((String)data.get("n_name"));
 				socketList.remove(dupl);				
-				userList.add((String)data.get("n_name"));
-				socketList.add(arg0);
 				System.out.println("중복처리 완료");
 			}else {
 				userList.add((String)data.get("n_name"));
