@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
-import com.leaf.model.curriculum.CurriDTO;
+import com.leaf.model.curriculum.LectDTO;
 
 
 
@@ -23,7 +23,7 @@ public List<CurriDTO> listCurri();
 	public void insertCurri(CurriDTO dto);
 
 
-	public int detailCurri(int curri_id) throws ClassNotFoundException, SQLException;
+	public CurriDTO detailCurri(int curri_id) throws ClassNotFoundException, SQLException;
 
 
 	public CurriDTO getCurriByCurri_id(int curri_id);
@@ -37,4 +37,9 @@ public List<CurriDTO> listCurri();
 	public int getSearchCount(Map<String, Object> map);
 
 	public List<CurriDTO> listCurri(int page);
+
+
+
+
+	public List<CurriDTO> monthlistCurri(Map map);
 }

@@ -1,10 +1,9 @@
 package com.leaf.model.curriculum;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.leaf.model.member.MemberDTO;
+import com.leaf.model.curriculum.CurriDTO;
 
 public interface LectDAO {
 
@@ -27,7 +26,10 @@ public interface LectDAO {
 	public int getSearchCount(Map<String, Object> map);
 	
 	public int multiDeleteLect(List deleteTargets);
+
+	public List<CurriDTO> subjectcurri(String member_id);
+
 	public LectDTO getCheckDate(String sessionid);
-	
+
 	
 }

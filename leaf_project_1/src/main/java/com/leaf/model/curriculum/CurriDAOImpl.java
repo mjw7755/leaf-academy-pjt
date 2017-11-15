@@ -63,11 +63,8 @@ public class CurriDAOImpl implements CurriDAO {
 
 	
 	 @Override
-	 public int detailCurri(int curri_id ) throws ClassNotFoundException, SQLException{
-		 
-		
+	 public CurriDTO detailCurri(int curri_id ) throws ClassNotFoundException, SQLException{
 		CurriDAO dao =  sqlSession.getMapper(CurriDAO.class);
-				
 		 return dao.detailCurri(curri_id);
 	 }
 
@@ -87,5 +84,11 @@ public class CurriDAOImpl implements CurriDAO {
 	public int getSearchCount(Map<String, Object> map) {
 		 CurriDAO dao = sqlSession.getMapper(CurriDAO.class);
 		return dao.getSearchCount(map);
+	}
+
+	@Override
+	public List<CurriDTO> monthlistCurri(Map map) {
+		 CurriDAO dao = sqlSession.getMapper(CurriDAO.class);
+		return dao.monthlistCurri(map);
 	}
 }
