@@ -71,8 +71,11 @@
 					<option value="lectutre" selected="selected"> Lecture </option>
 					<option value="curri" >Curriculum </option>
 
-				</select> <a href="writeform_lect.do"><button>추가하기</button></a>&nbsp;&nbsp;&nbsp;
+				</select> 
+				<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1' }">
+				<a href="writeform_lect.do"><button>추가하기</button></a>&nbsp;&nbsp;&nbsp;
 				<a href="delete_lect.do" id="multi" onclick="multiDelete"><button>다중삭제</button></a>
+				</c:if>
 			</legend>
 
 			<table cellpadding="5" style="text-align: center;">
@@ -84,8 +87,10 @@
 					<th><b>강사명</b></th>
 					<th><b>레벨</b></th>
 					<th colspan="2"><b>수강시간</b></th>
-					<th><b>삭제여부</b></th>
-					<th><b>수정여부</b></th>
+					<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1' }">
+						<th><b>삭제여부</b></th>
+						<th><b>수정여부</b></th>
+					</c:if>
 				</tr>
 				<c:forEach items="${list }" var="list" varStatus="status">
 					<tr onclick="test(this)">
@@ -95,17 +100,21 @@
 						<td>${list.lect_person_num}</td>
 						<td>${list.member_id }</td>
 						<td>${list.curri_level }</td>
+						
 						<td colspan="2">${list.lect_start_time}~ ${list.lect_end_time }</td>
+							<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1' }">
 						<td><a href="delete_lect.do?lect_id=${list.lect_id}">
 							<button	id="delete">삭제</button></a>
 						</td>
 						<td><a href="updateForm_lect.do?lect_id=${list.lect_id}">
 							<button	id="update">수정</button></a>
 						</td>
+						
 						<td id="multi">
 							<input type="checkbox" style="width: 30px;"
 							name="lect_id" value="${list.lect_id}">
 						</td>
+						</c:if>
 					</tr>
 				</c:forEach>
 
