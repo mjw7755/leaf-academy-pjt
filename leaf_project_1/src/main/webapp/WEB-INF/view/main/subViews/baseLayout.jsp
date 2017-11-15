@@ -79,9 +79,9 @@ var conn;
 				websocket.close();
 			}); */
 			$("#loginBtn").bind('click',function(){
+				var login_member_id = $("#login_member_id").val();
 				send({
 		               n_type: "login",
-		               loginid : "${sessionScope.sessionid}",
 		            });
 			});
 			//전송 버튼을 누를 때 이벤트 처리
@@ -114,12 +114,9 @@ var conn;
 				var keycode = 
 					event.keyCode?event.keyCode:event.whice;
 				if(keycode == 13){
-					//nickname 과 message에 입력된 내용을 서버에 전송
-					var nick = $('#nickname').val();
-					var msg = $('#message').val();
-					//메시지 전송
-					websocket.send(nick + ":" + msg);
-					//메시지 입력창 초기화
+					send({
+			               n_type: "login",
+			            });
 				}
 			});
 		});
@@ -153,7 +150,8 @@ var conn;
 						url:"loginDupl.do",
 						success: function(data){
 							if(data == 1){
-							alert("이미 접속중인 아이디입니다. 다시 접속합니다.");
+							alert("다른곳에서 로그인되었습니다. 접속을 종료합니다.");
+							window.location.reload(true);
 							}
 						}
 						
