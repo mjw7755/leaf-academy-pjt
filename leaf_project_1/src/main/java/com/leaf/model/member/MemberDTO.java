@@ -1,5 +1,7 @@
 package com.leaf.model.member;
 
+import java.security.acl.Group;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
@@ -12,33 +14,35 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class MemberDTO {
-	
-	@Id    // 테이블의 primary key로 매핑됨
-	@Size(min=2, max=8, message="아이디는 2~8자리이어야 합니다.")
-	@NotEmpty(message="아이디는 필수로 입력해야 합니다.")
+
+	@NotEmpty(message="아이디를 입력해주세요.", groups={Group1.class})
+	@Size(min=4, max=12, message="아이디는 4글자 이상 12글자 이하만 사용 가능 합니다.", groups= {Group2.class})
+	@Pattern(message="사용할 수 없는 문자가 있습니다.(영 소, 대문자 숫자만 사용 가능)", regexp="^[A-Za-z0-9]{4,12}$", groups={Group3.class})
 	private String member_id;
 	
-	@Size(min=4, max=10, message="패스워드는 4~10자 이상이어야 합니다.")
-	@NotEmpty(message="비밀번호는 필수로 입력해야 합니다.")
+	@NotEmpty(message="비밀번호를 입력해주세요.", groups={Group1.class})
+	@Size(min=4, max=16, message="비밀번호는 4글자 이상 16글자 이하만 사용 가능 합니다.", groups= {Group2.class})
+	@Pattern(message="사용할 수 없는 문자가 있습니다.(영 소, 대문자 숫자만 사용 가능)", regexp="^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{4,16}$", groups={Group3.class})
 	private String member_pwd;
 	
-	@Size(min = 2, max = 6, message="이름은 2~6자리이어야 합니다.")
-	@NotEmpty(message="이름은 필수로 입력해야 합니다.")
+	@NotEmpty(message="이름을 입력해주세요.", groups={Group1.class})
+	@Size(min = 2, max = 6, message="이름은 2글자 이상 6글자 이하만 사용 가능 합니다.", groups= {Group2.class})
 	private String member_name;
 	
-	@Size(min=10, max=12, message="번호는 10~12자리어야 합니다.")
-	@NotEmpty(message="전화번호는 필수로 입력해야 합니다.")
+	@NotEmpty(message="전화번호를 입력해주세요.", groups={Group1.class})
+	@Size(min=10, max=12, message="번호는 10~12자리어야 합니다.", groups= {Group2.class})
+	@Pattern(message="사용할 수 없는 문자가 있습니다.(숫자만 사용 가능)", regexp="^[0-9]{10,12}$", groups={Group3.class})
 	private String member_tel;
 	
-	@NotEmpty(message="이메일은 필수로 입력해야 합니다.")
+	@NotEmpty(message="이메일을 입력해주세요.", groups={Group1.class})
 	private String member_email;
 	
 	private String member_level;
 	
-	@NotEmpty(message="주소를 입력해주세요")
+	@NotEmpty(message="주소를 입력해주세요.", groups={Group1.class})
 	private String member_address;
 	
-	@NotEmpty(message="우편번호를 입력해주세요")
+	@NotEmpty(message="우편번호를 입력해주세요.", groups={Group1.class})
 	private String member_addnum;
 
 	
