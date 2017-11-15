@@ -8,59 +8,7 @@
 <title>LectureList Page</title>
 </head>
 
-<style type="text/css">
-table {
-	width: 100%;
-	text-align: center;
-	font-size: 20px;
-}
-
-table th {
-	background-color: black;
-	color: white;
-}
-
-table tr:nth-child(even) {
-	background-color: white;
-}
-
-/* table tr:HOVER {
-	color: white;
-	background-color: black;
-}
-
-table tr:ACTIVE {
-	color: black;
-	font-weight: bold;
-	background-color: lightyellow;
-} */
-
-#delete {
-	background-color: white;
-	color: black;
-}
-
-#edit {
-	background-color: #87cefa;
-	color: blue;
-}
-
-button {
-	font-size: 20px;
-	font-weight: bold;
-	width: 100px;
-	height: 90%;
-}
-
-#multi {
-	/* visibility: hidden; */
-	display: none;
-}
-</style>
 <script type="text/javascript">
-	var message = '${message}';
-	if (message)
-		alert(message);
 
 	function listChange(params) {
 		var url = "list_"+params.value+".do";
@@ -106,21 +54,7 @@ button {
 </script>
 
 <body>
-	
-	<!-- <table>
-		<tr>
-			<td><input type="button" value="1월"></td><td><input type="button" value="2월"></td><td><input type="button" value="3월"></td>
-			<td><input type="button" value="4월"></td><td><input type="button" value="5월"></td><td><input type="button" value="6월"></td>
-		</tr>
-		<tr>
-			<td><input type="button" value="7월"></td><td><input type="button" value="8월"></td><td><input type="button" value="9월"></td>
-			<td><input type="button" value="10월"></td><td><input type="button" value="11월"></td><td><input type="button" value="12월"></td>
-		</tr>
-	</table> -->
-	
-	<h3>
-	
-
+	<input type="hidden" name="lect_id" value="${dto.lect_id }">
 	
 	<datalist id="lectlist">
 		<c:forEach items="${ list }" var="item">
@@ -144,25 +78,24 @@ button {
 			<table cellpadding="5" style="text-align: center;">
 				<tr>
 					<th colspan="2"><b>날짜</b></th>
-					<!-- <th><b>강좌명</b></th> -->
+					<th><b>강좌명</b></th>
 					<th><b>클래스명</b></th>
 					<th><b>수강인원</b></th>
+					<th><b>강사명</b></th>
+					<th><b>레벨</b></th>
 					<th colspan="2"><b>수강시간</b></th>
-				<!-- 	<th colspan ="2"><a href="#"><button id = "multi" onclick="multiDelete()">다중삭제</button></a></th> -->
-					<th><b>허용여부</b></th>
 					<th><b>삭제여부</b></th>
+					<th><b>수정여부</b></th>
 				</tr>
 				<c:forEach items="${list }" var="list" varStatus="status">
 					<tr onclick="test(this)">
 						<td colspan="2">${list.lect_start_day} ~ ${list.lect_end_day }</td>
-
-						<%-- <td>${list.lect_id}</td> --%>
+						<td>${list.curri_subject}</td> 
 						<td>${list.lect_name}</td>
-						
 						<td>${list.lect_person_num}</td>
+						<td>${list.member_id }</td>
+						<td>${list.curri_level }</td>
 						<td colspan="2">${list.lect_start_time}~ ${list.lect_end_time }</td>
-						<td>${list.lect_accept}</td>
-						<td>${list.enabled}</td>
 						<td><a href="delete_lect.do?lect_id=${list.lect_id}">
 							<button	id="delete">삭제</button></a>
 						</td>
