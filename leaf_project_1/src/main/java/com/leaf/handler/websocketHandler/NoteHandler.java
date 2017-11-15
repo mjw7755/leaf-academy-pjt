@@ -1,13 +1,11 @@
 package com.leaf.handler.websocketHandler;
 
 import java.util.ArrayList;
-import java.util.Enumeration;
+
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
@@ -29,8 +27,8 @@ public class NoteHandler implements org.springframework.web.socket.WebSocketHand
 	
 	Gson gson = new Gson();
 	NoteClientVO vo = new NoteClientVO();
-	List<WebSocketSession> socketList = new ArrayList();
-	List<String> userList = new ArrayList();
+	List<WebSocketSession> socketList = new ArrayList<WebSocketSession>();
+	List<String> userList = new ArrayList<String>();
 	
 	
 	@Override
@@ -53,22 +51,23 @@ public class NoteHandler implements org.springframework.web.socket.WebSocketHand
 		System.out.println("접속자 어레이 번호"+arg0.getId());
 		System.out.println("json데이터 : "+(String)arg1.getPayload());
 		Map<String,Object> data = gson.fromJson((String)arg1.getPayload(), new TypeToken<Map<String,Object>>(){}.getType());
-		System.out.println("타입이 뭐야? "+data.get("n_type"));
 		
 		if(data.get("n_type").equals("login")) {
-			if(userList.indexOf((String)data.get("loginid")) > -1) {
-				int jungbok = userList.indexOf((String)data.get("loginid"));
+			if(userList.indexOf((String)data.get("n_name")) > -1) {
+				int jungbok = userList.indexOf((String)data.get("n_name"));
 				WebSocketSession dupl = socketList.get(jungbok);
 				System.out.println("중복처리 시작");
-				userList.remove((String)data.get("loginid"));
+				userList.remove((String)data.get("n_name"));
 				socketList.remove(jungbok);				
 				dupl.sendMessage(new TextMessage("dupl"));
-				userList.add((String)data.get("loginid"));
+				userList.add((String)data.get("n_name"));
 				socketList.add(arg0);
+				System.out.println("중복처리 완료");
+			}else {
+				userList.add((String)data.get("n_name"));
+				System.out.println("로그인 완료");	
 			}
 			
-			userList.add((String)data.get("n_name"));
-			System.out.println("로그인 완료");
 		}
 		
 		if(data.get("n_type").equals("message")) {
