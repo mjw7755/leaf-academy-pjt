@@ -1,6 +1,5 @@
 package com.leaf.controller.member;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
@@ -18,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.leaf.model.member.MemberDAO;
 import com.leaf.model.member.MemberDTO;
+import com.leaf.model.member.ValidGroupOrder;
 
 @Controller
 public class MemberController {
@@ -212,12 +213,11 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/loginDupl.do")
-	public void loginDupl(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void loginDupl(HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		String sessionid = (String) session.getAttribute("sessionid");
 		session.removeAttribute("sessionid");
 		session.setAttribute("sessionid", sessionid);
-		response.getWriter().write(1);
 	}
 	
 	@RequestMapping("/login.do")
@@ -304,7 +304,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/signup.do", method=RequestMethod.POST)
-	public String signup(@ModelAttribute("dto") @Valid MemberDTO memberdto, BindingResult bindingResult) {
+	public String signup(@Validated(ValidGroupOrder.class) @ModelAttribute("dto") @Valid MemberDTO memberdto, BindingResult bindingResult) {
 		
 		//유효성 검사
 	    if (bindingResult.hasErrors()) { //검증에 실패한 빈은 BindingResult에 담겨 뷰에 전달된다.
