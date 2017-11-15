@@ -25,70 +25,29 @@
 	      if(t[i].checked){
 	         sum[j] = t[i].value;
 	         j=j+1;
-	         /* alert(t[i].value); */
 	      }
 	   }
-	   /* alert("test.do?gno="+sum); */
 	   window.location.href="notice_multidelete.do?notice_id="+sum;
 	}
-
-	<!--
-	function hide(){
-	   var el = document.querySelectorAll('#multi');
-	   for (var i =0 ; i<el.length; i++){
-	      if(el[i].style.display !='table-cell' )
-	         el[i].style.display = 'table-cell';
-	      else 
-	         el[i].style.display = 'none';
-	   }
-	}
-
-	function test(params){
-	   var dname = params.innerHTML.split('<td>')[2].split('</td>')[0];
-	   document.getElementsByName('keyvalue')[0].value=dname;
-	}
-	//-->
 </script>
 <style type="text/css">
-table {
-   width: 100%;
+#noticelistTable {
+   width: 800px;
    text-align: center;
-   font-size: 20px;
-   
 }
-table th{
-   background-color: black;
-   color: white;
+#noticelistTable td{
+   	border: 1px solid;
 }
-table tr:nth-child(even) {
-   background-color: lightgray;
-}
-/* table tr:HOVER {
-   color: white;
-   background-color: black;
-}
-table tr:ACTIVE{
-   color: black;
-   font-weight:bold;
-   background-color: lightyellow;
-} */
 </style>
-<!-- <script type="text/javascript">
-
-function hide(){
-   alert("해당 내용이 삭제됩니다.");
-}
-
-
-</script> -->
 </head>
 <body>
-   <table>
+<br><br><br><br><br>
+   <table id="noticelistTable">
       <tr>
-         <th>notice_id</th>
-         <th>member_id</th>
-         <th>notice_title</th>
-  		 <th>notice_writedate</th>
+         <th>글번호</th><!-- notice_id -->
+         <th>작성자</th><!-- member_id -->
+         <th>제목</th><!-- notice_title -->
+  		 <th>작성일</th><!-- notice_writedate -->
   		 <c:if test="${sessionScope.sessionid == '관리자'}">
   		 <th><a href="notice_writeform.do"><button>추가</button></a></th>
   		 </c:if>
@@ -108,7 +67,7 @@ function hide(){
             <td>${list.notice_modifydate}</td>
             </c:if> 
             <c:if test="${sessionScope.sessionid == '관리자'}">
-            <td><a href="notice_updateform.do?notice_id=${ list.notice_id }"><button id="edit">수 정</button> </a></td>
+            <td><a href="notice_updateform.do?notice_id=${ list.notice_id }"><button id="edit">수정</button> </a></td>
             <td><a href="notice_delete.do?notice_id=${ list.notice_id }"><button id="delete">삭제</button></a></td>
             
              <td id="multi"><input type="checkbox" style="width: 30px;" name="notice_id" value="${ list.notice_id }"></td>
@@ -156,5 +115,6 @@ function hide(){
 		<input type="text" name="keyvalue">
 		<input type="submit" value="검색">
 	</form>
+<br><br><br><br><br>
 </body>
 </html>

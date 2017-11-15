@@ -48,7 +48,7 @@
 		</tr>
 		<tr>
 			<td>소개 : </td>
-			<td><textarea rows="" cols="" name="book_contents" style="width: 100%; height:300px"></textarea></td>
+			<td><textarea rows="" cols="" name="book_contents" style="width: 100%; height:300px">${dto.book_contents}</textarea></td>
 		</tr>
 		<tr>
 			<td colspan="2"><input type="file" name="uploadfile"  id="image"><input type="submit" value="수정완료"><input type="reset" value="초기화" ></td>
@@ -63,8 +63,6 @@
 
 
     <script type="text/javascript">
-
-
     /** 
     onchange event handler for the file input field.
     It emplements very basic validation using the file extension.
