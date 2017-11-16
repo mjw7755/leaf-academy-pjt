@@ -1,5 +1,6 @@
 package com.leaf.model.member;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -110,6 +111,27 @@ public class MemberDAOImpl implements MemberDAO {
 	public int chkDupId(MemberDTO dto) {
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		return dao.chkDupId(dto);		
+	}
+	@Override
+	public void memberbye(MemberDTO dto) {
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		dao.memberbye(dto);
+	}
+	@Override
+	public boolean checkPw(String member_id, String member_pwd) {
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+/*		boolean result = false;
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("member_id", member_id);
+        map.put("member_pwd", member_pwd);
+        int count = sqlsession.selectOne("member.checkPw", map);
+        if(count == 1) result= true;*/
+        return dao.checkPw(member_id, member_pwd);
+	}
+	@Override
+	public void updateMember2(MemberDTO dto) {
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		dao.updateMember2(dto);
 	}
 
 
