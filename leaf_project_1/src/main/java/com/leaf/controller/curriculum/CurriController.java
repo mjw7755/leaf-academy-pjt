@@ -65,19 +65,14 @@ public class CurriController {
 	@RequestMapping(value = "/write_curri.do", method = RequestMethod.POST)
 	public ModelAndView write(CurriDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
-
+		System.out.println(dto.getMember_id());
 		SimpleDateFormat sdf_t = new SimpleDateFormat("yy-MM-dd / kk:mm:ss");
 		Date date = new Date();
-		System.out.println("1" + dto.getCurri_content());
 		String curri_write_time = sdf_t.format(date);
-		System.out.println("4" + dto.getCurri_content());
 		dto.setCurri_write_time(curri_write_time);
-		System.out.println("5" + dto.getCurri_content());
 
 		curriDAO.insertCurri(dto);
-		System.out.println("2" + dto.getCurri_content());
 		mav.setViewName("redirect:list_curri.do");
-		System.out.println("3" + dto.getCurri_content());
 
 		return mav;
 	}
@@ -137,22 +132,22 @@ public class CurriController {
 	}
 	
 	/*
-	 * //´ÜÀÏÆÄÀÏ¾÷·Îµå
+	 * //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¾ï¿½ï¿½Îµï¿½
 	 * 
 	 * @RequestMapping("/photoUpload") public String photoUpload(HttpServletRequest
 	 * request, PhotoDTO dto){ String callback = dto.getCallback(); String
 	 * callback_func = dto.getCallback_func(); String file_result = ""; try {
 	 * if(dto.getFiledata() != null && dto.getFiledata().getOriginalFilename() !=
-	 * null && !dto.getFiledata().getOriginalFilename().equals("")){ //ÆÄÀÏÀÌ Á¸ÀçÇÏ¸é
+	 * null && !dto.getFiledata().getOriginalFilename().equals("")){ //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½
 	 * String original_name = dto.getFiledata().getOriginalFilename(); String ext =
-	 * original_name.substring(original_name.lastIndexOf(".")+1); //ÆÄÀÏ ±âº»°æ·Î String
-	 * defaultPath = request.getSession().getServletContext().getRealPath("/"); //ÆÄÀÏ
-	 * ±âº»°æ·Î _ »ó¼¼°æ·Î String path = defaultPath + "resource" + File.separator +
+	 * original_name.substring(original_name.lastIndexOf(".")+1); //ï¿½ï¿½ï¿½ï¿½ ï¿½âº»ï¿½ï¿½ï¿½ String
+	 * defaultPath = request.getSession().getServletContext().getRealPath("/"); //ï¿½ï¿½ï¿½ï¿½
+	 * ï¿½âº»ï¿½ï¿½ï¿½ _ ï¿½ó¼¼°ï¿½ï¿½ String path = defaultPath + "resource" + File.separator +
 	 * "photo_upload" + File.separator; File file = new File(path);
-	 * System.out.println("path:"+path); //µð·ºÅä¸® Á¸ÀçÇÏÁö ¾ÊÀ»°æ¿ì µð·ºÅä¸® »ý¼º if(!file.exists())
-	 * { file.mkdirs(); } //¼­¹ö¿¡ ¾÷·Îµå ÇÒ ÆÄÀÏ¸í(ÇÑ±Û¹®Á¦·Î ÀÎÇØ ¿øº»ÆÄÀÏÀº ¿Ã¸®Áö ¾Ê´Â°ÍÀÌ ÁÁÀ½) String
-	 * realname = UUID.randomUUID().toString() + "." + ext; ///////////////// ¼­¹ö¿¡
-	 * ÆÄÀÏ¾²±â ///////////////// dto.getFiledata().transferTo(new File(path+realname));
+	 * System.out.println("path:"+path); //ï¿½ï¿½ï¿½ä¸® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ä¸® ï¿½ï¿½ï¿½ï¿½ if(!file.exists())
+	 * { file.mkdirs(); } //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Îµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½(ï¿½Ñ±Û¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã¸ï¿½ï¿½ï¿½ ï¿½Ê´Â°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½) String
+	 * realname = UUID.randomUUID().toString() + "." + ext; ///////////////// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * ï¿½ï¿½ï¿½Ï¾ï¿½ï¿½ï¿½ ///////////////// dto.getFiledata().transferTo(new File(path+realname));
 	 * file_result +=
 	 * "&bNewLine=true&sFileName="+original_name+"&sFileURL=/resource/photo_upload/"
 	 * +realname; } else { file_result += "&errstr=error"; } } catch (Exception e) {
@@ -160,31 +155,31 @@ public class CurriController {
 	 * "?callback_func="+callback_func+file_result; }
 	 * 
 	 * @RequestMapping("/submit") public void submit(HttpServletRequest request){
-	 * System.out.println("¿¡µðÅÍ ÄÁÅÙÃ÷°ª:"+request.getParameter("editor")); }
+	 * System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½:"+request.getParameter("editor")); }
 	 * 
-	 * //´ÙÁßÆÄÀÏ¾÷·Îµå
+	 * //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¾ï¿½ï¿½Îµï¿½
 	 * 
 	 * @RequestMapping("/multiplePhotoUpload") public void
 	 * multiplePhotoUpload(HttpServletRequest request, HttpServletResponse
-	 * response){ try { //ÆÄÀÏÁ¤º¸ String sFileInfo = ""; //ÆÄÀÏ¸íÀ» ¹Þ´Â´Ù - ÀÏ¹Ý ¿øº»ÆÄÀÏ¸í String
-	 * filename = request.getHeader("file-name"); //ÆÄÀÏ È®ÀåÀÚ String filename_ext =
-	 * filename.substring(filename.lastIndexOf(".")+1); //È®ÀåÀÚ¸¦¼Ò¹®ÀÚ·Î º¯°æ filename_ext =
-	 * filename_ext.toLowerCase(); //ÆÄÀÏ ±âº»°æ·Î String dftFilePath =
-	 * request.getSession().getServletContext().getRealPath("/"); //ÆÄÀÏ ±âº»°æ·Î _ »ó¼¼°æ·Î
+	 * response){ try { //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ String sFileInfo = ""; //ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ ï¿½Þ´Â´ï¿½ - ï¿½Ï¹ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ String
+	 * filename = request.getHeader("file-name"); //ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½ï¿½ String filename_ext =
+	 * filename.substring(filename.lastIndexOf(".")+1); //È®ï¿½ï¿½ï¿½Ú¸ï¿½ï¿½Ò¹ï¿½ï¿½Ú·ï¿½ ï¿½ï¿½ï¿½ï¿½ filename_ext =
+	 * filename_ext.toLowerCase(); //ï¿½ï¿½ï¿½ï¿½ ï¿½âº»ï¿½ï¿½ï¿½ String dftFilePath =
+	 * request.getSession().getServletContext().getRealPath("/"); //ï¿½ï¿½ï¿½ï¿½ ï¿½âº»ï¿½ï¿½ï¿½ _ ï¿½ó¼¼°ï¿½ï¿½
 	 * String filePath = dftFilePath + "resource" + File.separator + "photo_upload"
 	 * + File.separator; File file = new File(filePath); if(!file.exists()) {
 	 * file.mkdirs(); } String realFileNm = ""; SimpleDateFormat formatter = new
 	 * SimpleDateFormat("yyyyMMddHHmmss"); String today= formatter.format(new
 	 * java.util.Date()); realFileNm = today+UUID.randomUUID().toString() +
 	 * filename.substring(filename.lastIndexOf(".")); String rlFileNm = filePath +
-	 * realFileNm; ///////////////// ¼­¹ö¿¡ ÆÄÀÏ¾²±â ///////////////// InputStream is =
+	 * realFileNm; ///////////////// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¾ï¿½ï¿½ï¿½ ///////////////// InputStream is =
 	 * request.getInputStream(); OutputStream os=new FileOutputStream(rlFileNm); int
 	 * numRead; byte b[] = new
 	 * byte[Integer.parseInt(request.getHeader("file-size"))]; while((numRead =
 	 * is.read(b,0,b.length)) != -1){ os.write(b,0,numRead); } if(is != null) {
-	 * is.close(); } os.flush(); os.close(); ///////////////// ¼­¹ö¿¡ ÆÄÀÏ¾²±â
-	 * ///////////////// // Á¤º¸ Ãâ·Â sFileInfo += "&bNewLine=true"; // img ÅÂ±×ÀÇ title
-	 * ¼Ó¼ºÀ» ¿øº»ÆÄÀÏ¸íÀ¸·Î Àû¿ë½ÃÄÑÁÖ±â À§ÇÔ sFileInfo += "&sFileName="+ filename;; sFileInfo +=
+	 * is.close(); } os.flush(); os.close(); ///////////////// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¾ï¿½ï¿½ï¿½
+	 * ///////////////// // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ sFileInfo += "&bNewLine=true"; // img ï¿½Â±ï¿½ï¿½ï¿½ title
+	 * ï¿½Ó¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ ï¿½ï¿½ï¿½ï¿½ sFileInfo += "&sFileName="+ filename;; sFileInfo +=
 	 * "&sFileURL="+"/resource/photo_upload/"+realFileNm; PrintWriter print =
 	 * response.getWriter(); print.print(sFileInfo); print.flush(); print.close(); }
 	 * catch (Exception e) { e.printStackTrace(); } }
@@ -194,7 +189,7 @@ public class CurriController {
 	public String search(Model model, HttpServletRequest request) throws Exception {
 
 		String flag = "search";
-		// ÄÃ·³¸í
+		// ï¿½Ã·ï¿½ï¿½ï¿½
 		String column = request.getParameter("column");
 		String keyvalue = request.getParameter("keyvalue");
 		System.out.println(column + " / " + keyvalue);
@@ -234,9 +229,10 @@ public class CurriController {
 		return "curriculum.list";
 	}
 
-	@RequestMapping("/monthlist_curri.do")
+	@RequestMapping(value="/monthlist_curri.do",produces = "application/text; charset=utf8")
 	public void monthlist(Model model, HttpServletResponse response, HttpServletRequest request, CurriDTO dto) throws IOException {
-		
+		request.setCharacterEncoding("utf-8");
+	       response.setCharacterEncoding("utf-8");
 		String monthvalue = request.getParameter("monthvalue");
 		String yearvalue= request.getParameter("yearvalue");
 		String start_day = "", end_day = "";
@@ -257,8 +253,8 @@ public class CurriController {
 		
 	Map<String,String> map = new HashMap();
 
-	start_day="2017-"+monthvalue+"-01";
-	end_day="2017-"+monthvalue+"-"+lastday;
+	start_day=yearvalue+monthvalue+"-01";
+	end_day=yearvalue+monthvalue+"-"+lastday;
 	System.out.println(start_day);
 	System.out.println(end_day);
 	map.put("start_day",start_day);

@@ -66,6 +66,15 @@
 		<form action="write_curri.do" method="post" id="writeForm" enctype = "multipart/form-data">
 			<table style="text-align: center;">
 				<tr>
+				
+				<td>강사명</td>
+				<td> : </td>
+				<td>
+					<input type="text" name="member_id" id="member_id" value="${sessionScope.sessionid}" readonly="readonly">
+				</td>
+				</tr>
+				<tr>
+				
 					<td>강좌명</td>
 					<td>:</td>
 					<td>
