@@ -9,7 +9,7 @@
 
 <style type="text/css">
 #booklistTable {
-   width: 800px;
+   width: 700px;
    text-align: center;
 }
 .bookline {
@@ -18,6 +18,7 @@
 #booktd {
    width: 300px;
    height: 50px;
+   text-align: left;
 }
 
 .btn {
@@ -83,6 +84,7 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
+<br>
 	<form action="book_search.do" method="post">
          검색어 입력 : <input size="30" type="search"  name="keyvalue" placeholder="제목, 저자 검색 가능합니다." list="booklist"> 
              <button type="submit" class="btn btn--sm btn--green">검색</button>
@@ -98,13 +100,13 @@ $(document).ready(function(){
 		</c:forEach>
 	</datalist>
 	</c:if>
-	<hr>
+	<br><hr><br>
    <table id="booklistTable">
       <c:forEach items="${ list }" var="list" varStatus="status">
             <c:if test="${sessionScope.sessionid!='관리자' and sessionScope.sessionid!='강사1'}">
          <tr>
-            <td rowspan="4" class="bookline"><a href="book_detail.do?book_id=${ list.book_id }">
-            <img src="resources/${list.book_image}" style="width: 120px; height: 140px"></a></td>
+            <td rowspan="4" class="bookline" style="width:100px"><a href="book_detail.do?book_id=${ list.book_id }">
+            <img src="resources/${list.book_image}" style="width: 100px; height: 120px"></a></td>
          </tr>
           <tr>
             <td id="booktd">

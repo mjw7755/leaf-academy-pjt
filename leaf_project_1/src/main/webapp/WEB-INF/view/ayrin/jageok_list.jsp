@@ -14,6 +14,7 @@
 }
 #jageoklistTable td{
    border: 1px solid;
+   height: 30px;
 }
 
 .btn {
@@ -83,7 +84,7 @@ function multiDelete(){
 			<option value="${ list.jageok_title }"> ${ list.jageok_title } | ${ list.jageok_date } | ${ list.jageok_cost }</option>
 		</c:forEach>
 	</datalist>
-	<hr>
+	<br><hr><br>
    <table id="jageoklistTable">
       <tr>
          <!-- <th>NO.</th>
@@ -109,7 +110,7 @@ function multiDelete(){
             <%-- <td>${list.enabled}</td> --%>
          	<c:if test="${sessionScope.sessionid=='관리자' or sessionScope.sessionid=='강사1'}">
             <td><a href="jageok_updateform.do?jageok_id=${ list.jageok_id }">
-            <button id="edit" class="btn btn--sm btn--green">수 정</button> </a></td>
+            <button id="edit" class="btn btn--sm btn--green">수정</button> </a></td>
             <td id="multi"><input type="checkbox" style="width: 30px;" name="jageok_id" value="${ list.jageok_id }"></td>
             <td><a href="jageok_delete.do?jageok_id=${ list.jageok_id }"><button id="delete" class="btn btn--sm btn--green">삭 제</button> </a></td>
             <td><a href="jageok_deletecancle.do?jageok_id=${ list.jageok_id }"><button id="deletecancle" class="btn btn--sm btn--green">삭제취소</button> </a></td>
@@ -117,7 +118,7 @@ function multiDelete(){
          </tr>
       </c:forEach>
    </table>
-   
+   <br><br>
    <div align="center">
       <c:if test="${param.page>5}">
       <c:if test="${flag == 'list' }">

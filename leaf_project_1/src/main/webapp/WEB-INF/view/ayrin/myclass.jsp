@@ -1,8 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+
 <!DOCTYPE html>
 <html>
 <head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="js/ayrin/jquery-ui.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>myclass</title>
 <style type="text/css">
@@ -22,6 +27,28 @@
 	border: 1px solid;
 }
 </style>
+<script type="text/javascript">
+$(function() {
+	$("#noticeDetail").hide();
+	$("#noticeModal").button();
+	$("#noticeDetail").dialog({
+        autoOpen : false,
+        width : 600,
+        modal : true,
+        buttons : [ {
+           text : "ok",
+           click : function() {
+              $(this).dialog("close");
+              window.location.replace("notice_detail.do?notice_id=${param.notice_id}");
+           }
+        }
+        ]
+     });
+	$("#noticeModal").click(function(e) {
+	    $("#noticeDetail").dialog("open");
+	});
+});
+</script>
 </head>
 <body>
 <!-- member_level 학생일때 -->
@@ -31,14 +58,22 @@
 		<option value="class2">JAVA 기초 (중)</option>
 		<option value="class3">JAVA 기초 (하)</option>
 	</select>
-	<button onclick="#">쪽지</button>
+	<button >쪽지</button>
 	<button onclick="window.location.href='listening.do'">강의 듣기</button><br>
 	
 	<div style="width:1000px; margin:0 auto;">
 		<table>
 			<tr>
 				<td>
-					<div id="notice">공지사항 게시판</div>
+					<div id="notice">
+						<table>
+						<c:forEach items="${list}" var="list">
+							<tr>
+								<td><a id="noticeModal">${list.notice_title}</a></td>
+							</tr>
+						</c:forEach>
+						</table>
+					</div>
 				</td>
 				<td>
 					<div id="chulcheck">출결 현황 (달력으로?)</div>
@@ -53,6 +88,8 @@
 	</div>
 </c:if>	
 
+		<div id="noticeDetail"></div>
+
 <!-- member_level 강사일때 -->
 <c:if test="${sessionScope.sessionid=='관리자'}">
 	<select>
@@ -60,7 +97,7 @@
 		<option value="class2">JAVA 기초 (중)</option>
 		<option value="class3">JAVA 기초 (하)</option>
 	</select>
-	<button onclick="#">쪽지</button>
+	<button >쪽지</button>
 	<button onclick="window.location.href='listening.do'">강의 듣기</button><br>
 	
 	<div style="width:1000px; margin:0 auto;">
