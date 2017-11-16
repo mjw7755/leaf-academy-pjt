@@ -150,13 +150,13 @@
 	</form>	
 	</div>	
 	<div id="content01" class="content">
-		<fieldset>
-			<legend>
+		
+			
 				<span
 					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">1월</span>
 
 				
-			</legend>
+			
 
 			<table style="text-align: center;">
 				<thead>
@@ -173,12 +173,12 @@
 
 				</tbody>
 			</table>
-		</fieldset>
+		
 	</div>
 
 
 	<div id="content02" class="content">
-		<fieldset>
+		
 			
 				<span
 					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">2월</span>
@@ -201,15 +201,15 @@
 
 			</table>
 
-		</fieldset>
+		
 	</div>
 	<div id="content03" class="content">
-		<fieldset>
-			<legend>
+		
+			
 				<span
 					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">3월</span>
 				
-			</legend>
+			
 
 			<table style="text-align: center;">
 				<thead>
@@ -227,16 +227,16 @@
 
 			</table>
 
-		</fieldset>
+		
 	</div>
 
 	<div id="content04" class="content">
-		<fieldset>
-			<legend>
+		
+			
 				<span
 					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">4월</span>
 				
-			</legend>
+			
 
 			<table style="text-align: center;">
 				<thead>
@@ -254,16 +254,16 @@
 
 			</table>
 
-		</fieldset>
+		
 	</div>
 
 	<div id="content05" class="content">
-		<fieldset>
-			<legend>
+		
+			
 				<span
 					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">5월</span>
 				
-			</legend>
+			
 
 			<table style="text-align: center;">
 				<thead>
@@ -281,16 +281,16 @@
 
 			</table>
 
-		</fieldset>
+		
 	</div>
 
 	<div id="content06" class="content">
-		<fieldset>
-			<legend>
+		
+			
 				<span
 					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">6월</span>
 				
-			</legend>
+			
 
 			<table style="text-align: center;">
 				<thead>
@@ -308,15 +308,15 @@
 
 			</table>
 
-		</fieldset>
+		
 	</div>
 	<div id="content07" class="content">
-		<fieldset>
-			<legend>
+		
+			
 				<span
 					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">7월</span>
 				
-			</legend>
+			
 
 			<table style="text-align: center;">
 				<thead>
@@ -335,16 +335,16 @@
 				</tbody>
 
 			</table>
-		</fieldset>
+		
 	</div>
 
 	<div id="content08" class="content">
-		<fieldset>
-			<legend>
+		
+			
 				<span
 					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">8월</span>
 				
-			</legend>
+			
 
 			<table style="text-align: center;">
 				<thead>
@@ -362,16 +362,16 @@
 
 			</table>
 
-		</fieldset>
+		
 	</div>
 
 	<div id="content09" class="content">
-		<fieldset>
-			<legend>
+		
+			
 				<span
 					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">9월</span>
 				
-			</legend>
+			
 
 			<table style="text-align: center;">
 				<thead>
@@ -389,16 +389,16 @@
 
 			</table>
 
-		</fieldset>
+		
 	</div>
 
 	<div id="content10" class="content">
-		<fieldset>
-			<legend>
+		
+			
 				<span
 					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">10월</span>
 				
-			</legend>
+			
 
 			<table style="text-align: center;">
 				<thead>
@@ -416,15 +416,15 @@
 
 			</table>
 
-		</fieldset>
+		
 	</div>
 
 	<div id="content11" class="content">
-		<fieldset>
-			<legend>
+		
+			
 				<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">11월</span>
 				
-			</legend>
+			
 
 			<table style="text-align: center;">
 				<thead>
@@ -442,16 +442,15 @@
 
 			</table>
 
-		</fieldset>
+		
 	</div>
 
 	<div id="content12" class="content">
-		<fieldset>
-			<legend>
+			
 				<span
 					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">12월</span>
 				
-			</legend>
+			
 
 			<table style="text-align: center;">
 				<thead>
@@ -469,15 +468,14 @@
 
 			</table>
 
-		</fieldset>
 	</div>
 	
 	 <div id="searchdiv" name="searchdiv" class="searchdiv">
-		<fieldset>
-			<legend>
+		
+			
 				<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">검색</span>
 				
-			</legend>
+			
 			
 			<table cellpadding="5" style="text-align: center;">
 					<th colspan="2">개강일</th>
@@ -507,7 +505,7 @@
 				
 			</table>
 			
-		</fieldset>
+		
 	 
 	 <div>
       <c:if test="${param.page>5}">
