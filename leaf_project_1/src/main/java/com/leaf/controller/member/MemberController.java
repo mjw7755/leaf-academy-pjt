@@ -315,6 +315,47 @@ public class MemberController {
 	    }
 	}
 	
+	@RequestMapping(value="/member_byeform.do", method = RequestMethod.GET)
+	public ModelAndView memberbyeForm(HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String member_id = (String) request.getSession().getAttribute("sessionid");
+		MemberDTO dto = memberdao.getMemberById(member_id);
+		mav.addObject("dto", dto);
+		mav.setViewName("ayrin.member_byeform");
+		return mav;
+		
+	}
+	
+	@RequestMapping(value="/member_bye.do", method=RequestMethod.POST)
+	public ModelAndView memberbye(@ModelAttribute("dto") @Valid MemberDTO memberdto, BindingResult bindingResult, HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		HttpSession session = request.getSession();
+		String sessionid = memberdto.getMember_id();
+		String recv_pwd = memberdto.getMember_pwd();
+		String chkpwd = memberdao.getSessionCheck(memberdto);	
+		int result = 0;
+		if(chkpwd.equals(recv_pwd)) {
+			result = 1;
+			mav.addObject("log_result", result);
+			mav.setViewName("main.mainPage");
+			session.setAttribute("sessionid", sessionid);	
+			memberdao.memberbye(memberdto);
+			return mav;
+		}else {
+			mav.addObject("log_result", result);
+			mav.setViewName("ayrin.member_byeform");
+			return mav;					
+		}
+		
+	    	//return "main.mainPage";
+
+	    
+		//memberdao.memberbye(memberdto);
+		//memberdao.deleteMember(dto);
+		
+	}
+	
 	 @RequestMapping("/chkDupId.do")
 	 public void checkId(HttpServletRequest req, HttpServletResponse res,
 	   ModelMap model) throws Exception {

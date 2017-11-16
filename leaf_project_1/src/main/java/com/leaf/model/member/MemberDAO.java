@@ -31,5 +31,8 @@ public interface MemberDAO {
 	boolean supports(Class<?> clazz);
 	
 	public int chkDupId(MemberDTO dto);
+	public void memberbye(MemberDTO dto);
+	public boolean checkPw(String member_id, String member_pwd);
+	public void updateMember2(MemberDTO dto);
 	
 }
