@@ -111,7 +111,7 @@ function multiLevelDown(){
             <td>${list.member_level}</td>
             <td>${list.enabled}</td>
             <td><a href="member_updateform.do?member_id=${ list.member_id }">
-            <button id="edit">수 정</button> </a></td>
+            <button id="edit">수정</button> </a></td>
             <td id="multi"><input type="checkbox" style="width: 30px;" name="member_id" value="${ list.member_id }"></td>
             <td>
             <a href="member_levelup.do?member_id=${ list.member_id }"><button id="up" >랩업</button></a>

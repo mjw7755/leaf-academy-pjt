@@ -123,8 +123,9 @@ $(function() {
 <div class="my_page">
 	<table id="menu">
 	   <tr id="my_page_text"><td colspan="2">MY PAGE</td></tr>
-	   <tr><td id="attendance"><a href="#" >개인정보</a><div id="attendance_icon">></div></td></tr>
+	   <tr><td id="attendance"><a href="member_modifyform.do" >개인정보</a><div id="attendance_icon">></div></td></tr>
 	   <tr><td id="grade"><a href="#" >내역조회</a><div id="grade_icon">></div></td></tr>
+	   <tr><td id="grade"><a href="member_byeform.do" >탈퇴</a><div id="grade_icon">></div></td></tr>
 	   <c:if test="${sessionScope.sessionid=='관리자'}">
 	   <tr><td id="student_care"><a href="member_list.do" >회원관리</a><div id="student_care_icon">></div></td></tr>
 	   </c:if>
