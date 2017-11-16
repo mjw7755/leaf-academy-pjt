@@ -111,7 +111,8 @@
 	line-height: 35px;
 }
 #login{
-	height: 80px;
+	margin-right: 20px;
+	margin-left: 65px;
 }
 h1{
 	margin-bottom: 10px;
@@ -129,8 +130,8 @@ h1{
         <div class="loginform">
 			<h1>로그인</h1>
 			<hr>
-          <form role="form" action="login.do" method="post">
 			<table>
+			 <form role="form" action="login.do" method="post">
 				<tr>
 					<td>
 						<div class="form-group">
@@ -139,12 +140,7 @@ h1{
 					<td><input type="text" class="form-control" name="member_id"
 						placeholder="ID를 입력해 주세요">
 						</div></td>
-					<td rowspan="2">
-                   <div class="form-group text-center">
-             <button type="submit" class="btn btn-info" id="login">로그인</button>
-
-            </div>
-            </td>
+					
             </tr>
 
 				<tr>
@@ -155,12 +151,24 @@ h1{
 					<td><input type="password" class="form-control"
 						name="member_pwd" placeholder="비밀번호">
 						</div></td>
+						
+				
 				</tr>
 			</table>
-		</form>
+
 		<table>
 				<!-- <form role="form" action="signupForm.do" method="post"> -->
 				<tr>
+
+						<td rowspan="2">
+         
+                   <div class="form-group text-center">
+             <button type="submit" class="btn btn-info" id="login">로그인</button>
+
+            </div>
+
+		</form>				
+            </td>
 					<td colspan="3">
 						<div class="form-group text-center">
 							<a href="signupForm.do">
@@ -168,6 +176,8 @@ h1{
 							</a>
 						</div>
 					</td>
+					
+					
 				</tr>
 				<!-- </form> -->
 		</table>		
