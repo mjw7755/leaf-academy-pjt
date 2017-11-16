@@ -67,7 +67,7 @@ public class MemberController {
 		return mav;
 	}
 
-	@RequestMapping("/member_updateform.do")
+	/*@RequestMapping("/member_updateform.do")
 	public ModelAndView updateform(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		String member_id = request.getParameter("member_id");
@@ -84,7 +84,7 @@ public class MemberController {
 		memberdao.updateMember(dto);
 		mav.setViewName("redirect:member_list.do");
 		return mav;
-	}
+	}*/
 
 	@RequestMapping("/member_delete.do")
 	public ModelAndView delete(MemberDTO dto) throws Exception {
@@ -267,50 +267,7 @@ public class MemberController {
 		session.getAttribute("sessionid");
 		return "ayrin.mypage";
 	}
-	
-/*	
-	@RequestMapping("/signupForm.do")
-	public String signupForm(MemberDTO dto, HttpServletRequest request) {
-		
-		return "moon.signupForm";
-	}*/
-	
-/*	@RequestMapping(value="/signupForm.do", method = RequestMethod.GET)
-	public String signupForm(Model model) {
-		MemberDTO dto = new MemberDTO();
-		model.addAttribute("dto", dto);
-		return "moon.signupForm";
-	}
-	*/
-	
-/*	@ModelAttribute("MemberDTO")
-	public MemberDTO initMember() {
-		return new MemberDTO();
-	}*/
-	
-/*	@RequestMapping(value="/signup.do", method=RequestMethod.GET)
-	public String signup(Model model) {
-		MemberDTO dto = new MemberDTO();
-		model.addAttribute("dto", dto);
-		 return "main.mainPage";
-		//return "main.mainPage";
-	}	*/
-	
-/*	@RequestMapping(value="/signup.do", method=RequestMethod.POST)
-	public String signup(@ModelAttribute("dto") @Valid MemberDTO dto, BindingResult bindingResult, Model model) {
-		
-		
-		//유효성 검사
-	    if (bindingResult.hasErrors()) { //검증에 실패한 빈은 BindingResult에 담겨 뷰에 전달된다.
-	    	model.addAttribute("dto", dto);
-	    	return "moon.signupForm";
-	    }
-	    
-		memberdao.insertMember(dto);
-		 return "main.mainPage";
-		//return "main.mainPage";
-	}
-	*/
+
 	@RequestMapping(value="/signupForm.do", method = RequestMethod.GET)
 	public String signupForm(Model model) {
 		MemberDTO dto = new MemberDTO();
@@ -331,6 +288,31 @@ public class MemberController {
 	    
 	    
 		//return "main.mainPage";
+	}
+	
+	@RequestMapping(value="/member_modifyform.do", method = RequestMethod.GET)
+	public ModelAndView membermodifyForm(HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String member_id = (String) request.getSession().getAttribute("sessionid");
+		MemberDTO dto = memberdao.getMemberById(member_id);
+		mav.addObject("dto", dto);
+		mav.setViewName("ayrin.member_updateform");
+		return mav;
+	}
+
+	@RequestMapping(value="/member_modify.do", method=RequestMethod.POST)
+	public String membermodify(@Validated(ValidGroupOrder.class) @ModelAttribute("dto") @Valid MemberDTO memberdto, BindingResult bindingResult) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("update �Ѵ�~ : " + memberdto.toString());
+		
+		//mav.setViewName("redirect:main.do");
+		//유효성 검사
+	    if (bindingResult.hasErrors()) { //검증에 실패한 빈은 BindingResult에 담겨 뷰에 전달된다.
+	    	return "ayrin.member_updateform";
+	    } else {
+	    	memberdao.updateMember(memberdto);
+			 return "main.mainPage";
+	    }
 	}
 	
 	 @RequestMapping("/chkDupId.do")

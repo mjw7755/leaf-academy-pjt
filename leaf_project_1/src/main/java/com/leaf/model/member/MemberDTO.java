@@ -34,7 +34,7 @@ public class MemberDTO {
 	private String member_tel;
 	
 	@NotEmpty(message="이메일을 입력해주세요.", groups={Group11.class})
-	@Pattern(message="이메일을 제대로 적어주세요.", regexp="^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}$",groups={Group12.class})
+	@Pattern(message="이메일을 양식에 맞게 적어주세요.(aaa@aaaa.com)", regexp="^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}$",groups={Group12.class})
 	private String member_email;
 	
 	private String member_level;

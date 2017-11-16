@@ -235,7 +235,7 @@ function insertChk(){
 
 			<tr>
 				<td>전화번호(휴대폰)</td>
-				<td><sf:input path="member_tel" placeholder="숫자만 입력"/>
+				<td><sf:input path="member_tel" placeholder="000-0000-0000"/>
 				<sf:errors path="member_tel" cssClass="error"/></td>
 			</tr>
 
@@ -251,7 +251,7 @@ function insertChk(){
 			</tr>
 			<tr>
 				<td>이메일 :</td>
-				<td><sf:input path="member_email"  placeholder="이메일 입력"/>
+				<td><sf:input path="member_email"  placeholder="이메일 입력(aaa@aaa.com)"/>
 				 <sf:errors path="member_email" cssClass="error" /></td>
 			</tr>
 
