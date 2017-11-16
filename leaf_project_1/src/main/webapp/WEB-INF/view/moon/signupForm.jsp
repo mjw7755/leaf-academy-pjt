@@ -146,13 +146,21 @@ function chkDupId(){
 	     url : 'chkDupId.do',
 	     success : function(data) {
 	      var chkRst = data;
-	    
+	      var idReg = /^[A-Za-z0-9]{4,12}$/g;
+
 	      if(chkRst == 0){
 	       /* alert("등록 가능 합니다.");
 	      */
 	       if(prmid.length >= 4 && prmid.length <= 12){
-	       document.getElementById('member_id2').style.color = "blue";
-	   	   document.getElementById('member_id2').innerHTML = "등록 가능 합니다.";
+	    	   if( idReg.test( prmid ) ) {
+	    		   document.getElementById('member_id2').style.color = "blue";
+	    	   	   document.getElementById('member_id2').innerHTML = "등록 가능 합니다.";
+	               return;
+	           }else{
+	        	   document.getElementById('member_id2').style.color = "red";
+			   	   document.getElementById('member_id2').innerHTML =  "사용할 수 없는 문자가 있습니다.(영 소, 대문자 숫자만 사용 가능)"; 
+	           }
+	       
 	       }else if(prmid.length > 13){
 	    	   document.getElementById('member_id2').style.color = "red";
 		   	   document.getElementById('member_id2').innerHTML =  "아이디는 4글자 이상 12글자 이하만 사용 가능 합니다."; 

@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,20 +19,22 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.leaf.model.service.NoticeDAO;
 import com.leaf.model.service.NoticeDTO;
-//import com.leaf.model.service.QnaDTO;
 
 @Controller
 public class NoticeController {
 
 	@Resource
 	private NoticeDAO noticeDAO;
-	
+
 	@RequestMapping("/notice_list.do")
 	public String list(Model model, HttpServletRequest request) {
 		String strPage = request.getParameter("page");
 		int page;
-		if (strPage == null) {page = 1;} 
-		else {page = Integer.parseInt(request.getParameter("page"));}
+		if (strPage == null) {
+			page = 1;
+		} else {
+			page = Integer.parseInt(request.getParameter("page"));
+		}
 		List<NoticeDTO> list = noticeDAO.noticeSelect(page);
 		int count = noticeDAO.getCount();
 		int countPage = (int) Math.ceil((float) count / 5);
@@ -42,29 +43,28 @@ public class NoticeController {
 		model.addAttribute("countPage", countPage);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("list", list);
-		
 		return "notice.list";
 	}
-	
+
 	@RequestMapping("/notice_writeform.do")
 	public String writeForm() {
 		return "notice.writeform";
 	}
-	
-	
+
 	@RequestMapping("/notice_write.do")
 	public ModelAndView write(NoticeDTO dto, HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		SimpleDateFormat df =new SimpleDateFormat("yyyy년 MM월 dd일 hh시mm분ss초");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy. MM. dd.");
+		// SimpleDateFormat df =new SimpleDateFormat("yyyy년 MM월 dd일 hh시mm분ss초");
 		Date date = new Date();
 		String notice_writedate = df.format(date);
 		dto.setNotice_writedate(notice_writedate);
-		dto.setMember_id((String)request.getSession().getAttribute("sessionid"));
+		dto.setMember_id((String) request.getSession().getAttribute("sessionid"));
 		noticeDAO.noticeInsert(dto);
 		mav.setViewName("redirect:notice_list.do");
 		return mav;
 	}
-	
+
 	@RequestMapping("/notice_delete.do")
 	public ModelAndView delete(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -74,7 +74,7 @@ public class NoticeController {
 		mav.setViewName("redirect:notice_list.do");
 		return mav;
 	}
-	
+
 	@RequestMapping("/notice_updateform.do")
 	public ModelAndView updateForm(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
@@ -84,13 +84,13 @@ public class NoticeController {
 		mav.setViewName("notice.updateform");
 		return mav;
 	}
-	
+
 	@RequestMapping("/notice_update.do")
 	public ModelAndView update(NoticeDTO dto) throws Exception {
 		System.out.println("dddd");
 		ModelAndView mav = new ModelAndView();
-		
-		SimpleDateFormat df =new SimpleDateFormat("yyyy년 MM월 dd일 hh시mm분ss초");
+		SimpleDateFormat df = new SimpleDateFormat("yyyy. MM. dd.");
+		// SimpleDateFormat df =new SimpleDateFormat("yyyy년 MM월 dd일 hh시mm분ss초");
 		Date date = new Date();
 		String notice_modifydate = df.format(date);
 		dto.setNotice_modifydate(notice_modifydate);
@@ -98,7 +98,7 @@ public class NoticeController {
 		mav.setViewName("redirect:notice_list.do");
 		return mav;
 	}
-	
+
 	@RequestMapping("/notice_detail.do")
 	public ModelAndView detail(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
@@ -108,31 +108,31 @@ public class NoticeController {
 		mav.setViewName("notice.detail");
 		return mav;
 	}
-	
+
 	@RequestMapping("/notice_multidelete.do")
 	public ModelAndView multidelete(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		List deleteTarget = new ArrayList();
-		for(String item : request.getParameter("notice_id").split(",")) {
+		List<String> deleteTarget = new ArrayList<String>();
+		for (String item : request.getParameter("notice_id").split(",")) {
 			deleteTarget.add(item);
 		}
-		int deleteNum = noticeDAO.multiqnaDelete(deleteTarget);
+		// int deleteNum = noticeDAO.multiqnaDelete(deleteTarget);
 		mav.setViewName("redirect:notice_list.do");
 		return mav;
 	}
-	
+
 	@RequestMapping("/notice_search.do")
-	public String search(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		//컬럼명
-	      String column =request.getParameter("column");
-	      String keyvalue = request.getParameter("keyvalue");
-	      System.out.println(column + " / " + keyvalue);
-	      
-	      Map<String, String> map = new HashMap<String, String>(); //collection
-	      map.put("column",column ); //column : name or email or home
-	      map.put("keyvalue", keyvalue); //keyvalue 
-		
+	public String search(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		// 컬럼명
+		String column = request.getParameter("column");
+		String keyvalue = request.getParameter("keyvalue");
+		System.out.println(column + " / " + keyvalue);
+
+		Map<String, String> map = new HashMap<String, String>(); // collection
+		map.put("column", column); // column : name or email or home
+		map.put("keyvalue", keyvalue); // keyvalue
+
 		List<NoticeDTO> list = noticeDAO.searchSelect(map);
 		model.addAttribute("list", list);
 		return "notice.list";
