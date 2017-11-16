@@ -24,7 +24,7 @@
     .swiper-slide {
         text-align: center;
         font-size: 18px;
-        background: #fff;
+        background: #e5d335;
         
         /* Center slide text vertically */
         display: -webkit-box;
@@ -191,8 +191,8 @@
 
 .swiper-button-prev, .swiper-container-rtl .swiper-button-next {
 	background-image:
-		url("resources/btn_left.png");
-	left: 10px;
+		url("resources/btn_left2.png");
+	left: 200px;
 	right: auto
 }
 
@@ -210,8 +210,8 @@
 
 .swiper-button-next, .swiper-container-rtl .swiper-button-prev {
 	background-image:
-		url("resources/btn_right.png");
-	right: 10px;
+		url("resources/btn_right2.png");
+	right: 200px;
 	left: auto
 }
 
@@ -694,29 +694,29 @@ keyframes swiper-preloader-spin { 100%{
     <div class="swiper-container">
         <div class="swiper-wrapper">
             <div class="swiper-slide">            
-  				<img src="resources/carousel_story1.png" alt="sample83" />
+  				<img src="resources/main_banner.png" alt="sample83" />
  					<a href="#"></a>
 					</div>
 					
             <div class="swiper-slide">
-  				<img src="resources/carousel_story2.png" alt="sample83" />
+  				<img src="resources/main_banner2.png" alt="sample83" />
  					<a href="#"></a>
 			</div>
             
             <div class="swiper-slide">
-  				<img src="resources/carousel_story3.png" alt="sample83" />
+  				<img src="resources/main_banner3.png" alt="sample83" />
  					<a href="#"></a>
             </div>
             
             <div class="swiper-slide">
-  				<img src="resources/carousel_story4.png" alt="sample83" />
+  				<img src="resources/main_banner4.png" alt="sample83" />
  					<a href="#"></a>
             </div>
-            
+        <!--     
             <div class="swiper-slide">
   				<img src="resources/carousel_story5.png" alt="sample83" />
  					<a href="#"></a>
-            </div>
+            </div> -->
 
         </div>
         <!-- Add Pagination -->
