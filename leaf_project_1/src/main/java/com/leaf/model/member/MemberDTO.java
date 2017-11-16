@@ -30,19 +30,20 @@ public class MemberDTO {
 	private String member_name;
 	
 	@NotEmpty(message="전화번호를 입력해주세요.", groups={Group9.class})
-	@Size(min=10, max=12, message="번호는 10~12자리어야 합니다.", groups= {Group10.class})
-	@Pattern(message="사용할 수 없는 문자가 있습니다.(숫자만 사용 가능)", regexp="^[0-9]{10,12}$", groups={Group11.class})
+	@Pattern(message="사용할 수 없는 문자가 있습니다.(숫자만 사용 가능)", regexp="^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$", groups={Group10.class})
 	private String member_tel;
 	
-	@NotEmpty(message="이메일을 입력해주세요.", groups={Group12.class})
+	@NotEmpty(message="이메일을 입력해주세요.", groups={Group11.class})
+	@Pattern(message="이메일을 제대로 적어주세요.", regexp="^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}$",groups={Group12.class})
 	private String member_email;
 	
 	private String member_level;
 	
 	@NotEmpty(message="우편번호를 입력해주세요.", groups={Group13.class})
+	@Pattern(message="우편번호를 입력해주세요", regexp="^[0-9]{4,6}$", groups={Group14.class})
 	private String member_addnum;
 	
-	@NotEmpty(message="주소를 입력해주세요.", groups={Group14.class})
+	@NotEmpty(message="주소를 입력해주세요.", groups={Group15.class})
 	private String member_address;
 	
 

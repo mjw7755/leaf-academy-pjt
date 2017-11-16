@@ -111,6 +111,7 @@ function checkPwd(){
 	  var pw1 = f1.member_pwd.value;
 	  var pw2 = f1.pwd_check.value;
 	  var prmpw = $('#member_pwd').val();
+	  var pwReg = /^((?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{4,16})$/g;
 	  
 	  if(pw1!=pw2){
 	   
@@ -124,8 +125,13 @@ function checkPwd(){
 		  }
 	  }else{
 		  if(prmpw.length >=4 && prmpw.length <=16){
+			  if(pwReg.test( prmpw )){
 	   document.getElementById('checkPwd').style.color = "blue";
 	   document.getElementById('checkPwd').innerHTML = "암호가 확인 되었습니다."; 
+			  }else{
+				  document.getElementById('checkPwd').style.color = "red";
+				   document.getElementById('checkPwd').innerHTML = "영문자 숫자 특수문자를 조합해주세요."; 
+			  }
 		  }else{
 			  document.getElementById('checkPwd').style.color = "red";
 			   document.getElementById('checkPwd').innerHTML = "비밀번호는 4글자 이상 16글자 이하만 사용 가능 합니다."; 
