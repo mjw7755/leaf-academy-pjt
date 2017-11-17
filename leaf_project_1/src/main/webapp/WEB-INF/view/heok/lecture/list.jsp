@@ -64,7 +64,7 @@
 	</datalist>
 	<hr>
 	<div>
-		<fieldset>
+		
 			
 				<span
 					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">개설강좌</span>
@@ -82,6 +82,7 @@
 					<th><b>수강인원</b></th>
 					<th><b>강사명</b></th>
 					<th><b>레벨</b></th>
+					<th><b>수강료</b></th> 
 					<th colspan="2"><b>수강시간</b></th>
 					<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1' }">
 						<th><b>삭제여부</b></th>
@@ -96,9 +97,12 @@
 						<td>${list.lect_person_num}</td>
 						<td>${list.member_id }</td>
 						<td>${list.curri_level }</td>
-						
+						<td>${list.lect_charge }</td> 
 						<td colspan="2">${list.lect_start_time}~ ${list.lect_end_time }</td>
-							<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1' }">
+						
+						<td><a href ="appli_list.do?lect_id=${list.lect_id}"></a>		
+							<button id="application">수강신청</button></td>
+				<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1' }">
 						<td><a href="delete_lect.do?lect_id=${list.lect_id}">
 							<button	id="delete">삭제</button></a>
 						</td>
@@ -110,7 +114,7 @@
 							<input type="checkbox" style="width: 30px;"
 							name="lect_id" value="${list.lect_id}">
 						</td>
-						</c:if>
+				</c:if>
 					</tr>
 				</c:forEach>
 
@@ -146,12 +150,8 @@
          
       </c:if>
    </div>
-
-
-
-		</fieldset>
+		
 	</div>
-	
 		<form action="search_lect.do" method="post">
 			<select name="column">	
 				<option value="lect_name">클래스명</option>

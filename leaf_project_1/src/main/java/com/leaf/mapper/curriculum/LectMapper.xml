@@ -32,7 +32,7 @@
 	
 	
 		<select id ="subjectcurri" parameterType="String" resultType="com.leaf.model.curriculum.LectDTO">
-		select curri_id, curri_subject from curriculum where member_id = '해피도연'
+		select curri_id, curri_subject from curriculum where member_id = #{member_id}
 	</select>
 	
 
@@ -44,10 +44,10 @@
 		
 		insert into
 		lecture(lect_id,lect_name,lect_person_num,lect_start_day,lect_end_day,
-				lect_start_time,lect_end_time,lect_write_time,curri_id)
+				lect_start_time,lect_end_time,lect_write_time,curri_id, lect_charge)
 		values(#{lect_id}, #{lect_name}, #{lect_person_num}, #{lect_start_day},
 				#{lect_end_day}, #{lect_start_time}, #{lect_end_time}, 
-				 #{lect_write_time},#{curri_id})
+				 #{lect_write_time},#{curri_id}, #{lect_charge})
 		
 	</insert>
 
@@ -59,7 +59,7 @@
 		update lecture set lect_name=#{lect_name}, lect_person_num=#{lect_person_num}, 
 		lect_start_day=#{lect_start_day}, lect_end_day=#{lect_end_day}, 
 		lect_start_time=#{lect_start_time}, lect_end_time=#{lect_end_time}, 
-		lect_modify_time=#{lect_modify_time} where lect_id=#{lect_id} 
+		lect_modify_time=#{lect_modify_time}, lect_charge=#{lect_charge} where lect_id=#{lect_id} 
 	</update>
 	
 	<select id="getCount" parameterType="Integer" resultType="Integer">

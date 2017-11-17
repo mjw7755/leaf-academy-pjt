@@ -18,20 +18,6 @@
 				</tr>
 
 				<tr>
-					<td>강좌레벨</td>
-					<td>:</td>
-					<td>
-						<select name="lect_name">
-							<option selected="selected">${dto.lect_name }</option>
-							<option value="160" > 160</option>
-							<option value="161" > 161 </option>
-							<option value="162" > 162 </option>
-							<option value="163" > 163 </option>
-						</select>
-					</td>
-				</tr>
-
-				<tr>
 					<td>강좌 시작일</td>
 					<td>:</td>
 					<td><input type="date" name="lect_start_day" value ="${dto.lect_start_day}"> 
@@ -65,6 +51,13 @@
 					<td><input type="text" name="lect_person_num" required="required"
 						value="${dto.lect_person_num }"></td>
 				</tr>
+				
+				 <tr>
+					<td>수강료</td>
+					<td>:</td>
+					<td><input type="text" name="lect_charge" required="required"
+						value="${dto.lect_charge }"></td>
+				</tr> 
 				
 
 				<tr>

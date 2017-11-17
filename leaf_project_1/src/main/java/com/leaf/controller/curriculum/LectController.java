@@ -37,8 +37,7 @@ public class LectController {
        int page;
        if (strPage == null) {page = 1;} 
        else {page = Integer.parseInt(request.getParameter("page"));}
-       //List<MemberDTO> list = memberdao.getMemberList(page);
-       List<LectDTO> list = lectDAO.listLect(page);
+      List<LectDTO> list = lectDAO.listLect(page);
        int count = lectDAO.getCount();
        int countPage = (int) Math.ceil((float) count / 5);
        int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
@@ -111,7 +110,7 @@ public class LectController {
 
 
 		   String flag = "search";
-		      //ÄÃ·³¸í
+		      //ï¿½Ã·ï¿½ï¿½ï¿½
 		         String column =request.getParameter("column");
 		         String keyvalue = request.getParameter("keyvalue");
 		         System.out.println(column + " / " + keyvalue);

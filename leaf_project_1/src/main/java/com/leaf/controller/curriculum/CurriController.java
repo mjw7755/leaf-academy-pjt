@@ -91,7 +91,6 @@ public class CurriController {
 
 		SimpleDateFormat sdf_t = new SimpleDateFormat("yy-MM-dd / kk:mm:ss");
 		Date date = new Date();
-		System.out.println(dto.getCurri_level());
 		System.out.println(dto.getCurri_id());
 		String curri_modify_time = sdf_t.format(date);
 		dto.setCurri_modify_time(curri_modify_time);
@@ -194,9 +193,9 @@ public class CurriController {
 		String keyvalue = request.getParameter("keyvalue");
 		System.out.println(column + " / " + keyvalue);
 
-		Map<String, Object> map = new HashMap<String, Object>(); // colcurriion
-		map.put("column", column); // column : name or email or home
-		map.put("keyvalue", keyvalue); // keyvalue
+		Map<String, Object> map = new HashMap<String, Object>(); 
+		map.put("column", column);
+		map.put("keyvalue", keyvalue); 
 
 		String strPage = request.getParameter("page");
 		int page;
@@ -205,7 +204,6 @@ public class CurriController {
 		} else {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
-		// List<MemberDTO> list = memberdao.getMemberList(page);
 		map.put("page", page);
 		int count = curriDAO.getSearchCount(map);
 		// count = page;
@@ -218,18 +216,18 @@ public class CurriController {
 		model.addAttribute("column", column);
 		model.addAttribute("keyvalue", keyvalue);
 
-		map.put("column", column); // column : name or email or home
-		map.put("keyvalue", keyvalue); // keyvalue
+		map.put("column", column);
+		map.put("keyvalue", keyvalue); 
 		map.put("page", String.valueOf(page));
 
 		List<CurriDTO> list = curriDAO.searchCurri(map);
-
 		model.addAttribute("list", list);
 		model.addAttribute("flag", flag);
+		model.addAttribute("map", map);
 		return "curriculum.list";
 	}
 
-	@RequestMapping(value="/monthlist_curri.do",produces = "application/text; charset=utf8")
+	@RequestMapping("/monthlist_curri.do")
 	public void monthlist(Model model, HttpServletResponse response, HttpServletRequest request, CurriDTO dto) throws IOException {
 		request.setCharacterEncoding("utf-8");
 	       response.setCharacterEncoding("utf-8");
@@ -248,13 +246,12 @@ public class CurriController {
 		} else {
 			lastday = 30;
 		}
-		System.out.println(y);
 
 		
 	Map<String,String> map = new HashMap();
 
-	start_day=yearvalue+monthvalue+"-01";
-	end_day=yearvalue+monthvalue+"-"+lastday;
+	start_day=yearvalue+"-"+monthvalue+"-01";
+	end_day=yearvalue+"-"+monthvalue+"-"+lastday;
 	System.out.println(start_day);
 	System.out.println(end_day);
 	map.put("start_day",start_day);
@@ -262,7 +259,8 @@ public class CurriController {
 
 	List<CurriDTO> list = curriDAO.monthlistCurri(map);
 
-	StringBuffer sb = new StringBuffer("");System.out.println(list.size());sb.append("{ \"result\" : [");for(
+	StringBuffer sb = new StringBuffer("");
+	sb.append("{ \"result\" : [");for(
 	int i = 0;i<list.size();i++)
 	{
 		sb.append("[{\"value\" : \"" + list.get(i).getCurri_id() + "\"},");
