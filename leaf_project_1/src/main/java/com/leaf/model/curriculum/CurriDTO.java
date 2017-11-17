@@ -1,11 +1,12 @@
 package com.leaf.model.curriculum;
 
+
 public class CurriDTO {
 	private int curri_id, curri_accept, enabled;
 	private String member_id, curri_level, curri_subject, curri_content,
 					curri_write_time, curri_modify_time;
 	
-	/*joinÀ»À§ÇÑ lectDTOÀÇ º¯¼ö °¡Á®¿È*/
+	/*joinï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ lectDTOï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½*/
 	
 	private String lect_start_day, lect_end_day, lect_person_num, lect_name;
 	private String lect_start_time, lect_end_time;
@@ -165,6 +166,9 @@ public class CurriDTO {
 				+ lect_start_time + ", lect_end_time=" + lect_end_time + "]";
 	}
 
+	
+	
+	
 	public CurriDTO(int curri_id, int curri_accept, int enabled, String member_id, String curri_level,
 			String curri_subject, String curri_content, String curri_write_time, String curri_modify_time) {
 		super();

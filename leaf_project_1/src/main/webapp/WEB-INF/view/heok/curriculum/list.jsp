@@ -106,7 +106,7 @@
 	});
 </script>
 <body>
-<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1' }">
+<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1'}">
 	<a href="writeform_curri.do" method="post"><button>추가하기</button></a>
 </c:if><br>
 	<input type="button" id="01" name="2017" class="monthBtn"
@@ -136,7 +136,7 @@
 		value="2017.12" />
 		
 	<!-- <input type="button" id="search" name="search" value="search"> -->
-	
+	<br/><br/>
 	<div id="searchdiv1" name="searchdiv1" class="searchdiv1">
 	<form action="search_curri.do" method="post">
 		<select name="column">
@@ -320,8 +320,7 @@
 
 			<table style="text-align: center;">
 				<thead>
-				<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1' }">
-				</c:if>
+				
 					<th>개강일</th>
 					<th><b>강좌명</b></th>
 					<th><b>강사</b></th>
@@ -496,7 +495,7 @@
 						<td>${list.lect_name}</td>
 						<td>${list.lect_person_num}</td>
 						
-						<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1' }">
+						<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1'}">
 							<td><a href="delete_curri.do?curri_id=${list.curri_id}"><button id="delete">삭제</button></a></td>
 							<td><a href="updateForm_curri.do?curri_id=${list.curri_id}"><button id="update">수정</button></a></td>
 						</c:if>

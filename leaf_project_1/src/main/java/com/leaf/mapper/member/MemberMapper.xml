@@ -125,4 +125,20 @@ resultType : 쿼리 수행 후 결과를 보내주기 위한 데이터 -->
   	WHERE member_id = #{member_id}
 	</select>
 	
+	<update id="memberbye" parameterType="com.leaf.model.member.MemberDTO">
+		update Member set enabled=0 where member_id = #{member_id}
+	</update>
+	
+	 <!-- 06. 비밀번호 체크 -->
+    <select id="checkPw" resultType="int">
+        SELECT 
+            COUNT(*) 
+        FROM Member
+        WHERE member_id = #{member_id} AND member_pwd = #{member_pwd}
+    </select>
+    
+    <update id="updateMember2" parameterType="com.leaf.model.member.MemberDTO">
+		update Member set member_id=#{member_id}, member_pwd=#{member_pwd} where member_id=#{member_id}
+	</update>
+	
 </mapper>

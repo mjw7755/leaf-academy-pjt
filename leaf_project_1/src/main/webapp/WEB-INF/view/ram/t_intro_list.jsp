@@ -50,7 +50,7 @@ $(document).ready(function(){
    font-size: 12px;
    width:100%;
 }
-#t_search p{
+#t_search div{
    float: right;
 }
 #t_search input{
@@ -73,7 +73,9 @@ $(document).ready(function(){
    text-align: center;
    
 }
-
+#search{
+	margin-left: 10px;
+}
 /* Icon set - http://ionicons.com/ */
 
 @import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
@@ -238,12 +240,15 @@ figure.snip1141.hover i {
 <div class="teacher_intro">
    <div id="t_search"><!-- 선생님 검색 -->
       <form action="t_intro_search.do" method="post">
-         <p>선생님 찾기 
+         <div>선생님 찾기 
             <input size="15" type="search" name="keyvalue"
             placeholder="선생님 이름 입력" list="list" > 
-            <input type="submit" value="검색">&nbsp; 
+            
+            <div id="search_icon">
+            <input type="image" src="resources/search.png" id="search">&nbsp;
+            </div> 
          <!--<a href="t_intro_list.do"><button id="delete">초기화</button></a> -->
-         </p>
+         </div>
       </form>
    </div>
    

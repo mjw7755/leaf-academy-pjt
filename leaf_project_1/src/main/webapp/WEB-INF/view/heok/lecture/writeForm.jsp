@@ -78,7 +78,12 @@
 					<td><input type="text" name="lect_person_num" required="required"
 						value="${lect_person_num }"></td>
 				</tr>
-				
+				<tr>
+					<td>수강료</td>
+					<td>:</td>
+					<td><input type="text" name="lect_charge" required="required"
+						value="${lect_charge}">
+					</tr>			
 
 				<tr>
 					<td colspan="3"><hr></td>

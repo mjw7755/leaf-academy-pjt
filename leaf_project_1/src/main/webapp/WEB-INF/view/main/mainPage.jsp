@@ -674,8 +674,9 @@ keyframes swiper-preloader-spin { 100%{
 	transform: rotate(360deg)
 }
 }
+/* swiper end*/
 
-#another_menu{
+/* #another_menu{
 	width:800px;
 	margin-top:30px;
 	text-align: center;
@@ -685,7 +686,55 @@ keyframes swiper-preloader-spin { 100%{
 	border-right: 1px solid;
 	border-right-color: gray;
 	width:100px;
+} */
+
+#width_wrap{
+	width:900px;
+	margin: auto;
 }
+
+#notice, #curri, #advice{
+	width:300px;
+	height:120px;
+	float:left;
+}
+#notice p, #curri p, #advice p{
+	text-align: left;
+	padding-left: 15px;
+	padding-top: 10px;
+	color: #fff;
+	font-weight: bold;
+}
+#box_img{
+	border-bottom: 1px solid;
+	border-bottom-color: #fff;
+	margin-top: 10px;
+	width: 200px;
+}
+#notice{
+	background-color: #8dcf4d;
+}
+#curri{
+	background-color: #68aa75;
+}
+#advice{
+	background-color: #439560;
+}
+/*  */
+#lecture, #play, #book, #QnA{
+	width:225px;
+	height: 150px;
+	float:left;
+	overflow:hidden;
+}
+#payment, #dontknow{
+	width:450px;
+	height: 80px;
+	border: 1px solid;
+	float:left;
+	margin-top: 30px;
+}
+
 </style>
 <body>
 
@@ -696,7 +745,7 @@ keyframes swiper-preloader-spin { 100%{
             <div class="swiper-slide">            
   				<img src="resources/main_banner.png" alt="sample83" />
  					<a href="#"></a>
-					</div>
+			</div>
 					
             <div class="swiper-slide">
   				<img src="resources/main_banner2.png" alt="sample83" />
@@ -748,8 +797,11 @@ keyframes swiper-preloader-spin { 100%{
     </script>
     <!-- swiper script end -->
     
+    
+    
+    
     <!-- another menu -->
-    <div>
+    <!-- <div>
     <table id="another_menu">
     	<tr>
     		<td><img src="resources/board3.png"/></td>
@@ -764,6 +816,83 @@ keyframes swiper-preloader-spin { 100%{
     		<td>온라인결제</td>
     	</tr>
     </table>
+    </div> -->
+    <!-- another menu end -->
+    
+    <!-- main center menu -->
+    <div id="main_box">
+    	<div id="width_wrap">
+    	
+    		<a href="#">
+    		<div id="notice">
+ 				<p>리프코딩 소식</p>
+ 				<div id="box_img">
+ 				<img src="resources/board3.png" />
+ 				</div>
+    		</div>
+    		</a>
+    		
+    		<a href="#">
+    		<div id="curri">
+    			<p>교육과정</p>
+    			<div id="box_img">
+ 					<img src="resources/curriculum3.png"/>
+ 				</div>
+    		</div>
+    		</a>
+    		
+    		<a href="#">
+    		<div id="advice">
+    			<p>입회상담</p>
+    			<div id="box_img">
+ 					<img src="resources/call2.png"/>
+ 				</div>
+    		</div>
+    		</a>
+    		
+    	</div>
     </div>
+    
+    <div id="main_box2">
+    	<div id="width_wrap">
+    	
+    		<a href="#">
+    		<div id="lecture">
+    			<img src="resources/main_lecture4.png"/>
+    		</div>
+    		</a>
+    		
+    		<a href="#">
+    		<div id="book">
+    			<img src="resources/main_book3.png"/>
+    		</div>
+			</a>
+			
+			<a href="#">
+    		<div id="play">
+    			<img src="resources/main_play4.png"/>
+    		</div>
+    		</a>
+    		
+    		<a href="#">
+    		<div id="QnA">
+    			<img src="resources/main_qna3.png"/>
+    		</div>
+    		</a>
+    	</div>
+    </div>
+    
+    <div id="main_box3">
+    	<div id="width_wrap">
+    		<div id="payment">
+    			온라인 결제
+    		</div>
+    		
+    		<div id="dontknow">
+    			?-?
+    		</div>
+    	</div>
+    </div>
+    <!-- main center menu end -->
 </body>
 </html>

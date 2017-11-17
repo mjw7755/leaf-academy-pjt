@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!-- parameterType : 조건과 같이 입력받아야 할 데이터
+resultType : 쿼리 수행 후 결과를 보내주기 위한 데이터 -->
+
+<mapper namespace="com.leaf.model.application.AppliDAO">
+
+	<select id="listAppli" parameterType="Integer" resultType="com.leaf.model.application.AppliDTO">
+   	select * from
+      (SELECT ROWNUM NUM, m.* FROM 
+                     ( SELECT * FROM Application ORDER BY appli_id ASC)   m)
+      where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
+    </select>
+	<select id="getAppliById" parameterType="String" resultType="com.leaf.model.application.AppliDTO">
+	select appli_id, member_id, lect_id, appli_reciever, appli_address, appli_addnum, appli_tel,
+			appli_write, appli_accept, enabled, appli_caution from application where appli_id=#{appli_id}
+	</select>
+
+
+	<insert id="insertAppli" parameterType="com.leaf.model.application.AppliDTO">
+	insert into application(appli_id, member_id, lect_id, appli_reciever, appli_address, appli_addnum, appli_tel,
+			appli_write, appli_accept, enabled, appli_caution) 
+	values(#{appli_id}, #{member_id}, #{lect_id}, #{appli_reciever}, #{appli_address}, 
+		#{appli_addnum}, #{appli_tel}, #{appli_write}, 1, 1, #{appli_caution})
+	</insert>
+	
+	<delete id="deleteAppli" parameterType="int">
+		delete from application where appli_id=#{appli_id}
+	</delete>
+	
+</mapper>
