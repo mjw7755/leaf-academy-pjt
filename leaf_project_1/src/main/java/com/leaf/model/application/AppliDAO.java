@@ -2,6 +2,10 @@ package com.leaf.model.application;
 
 import java.util.List;
 
+import com.leaf.model.curriculum.CurriDTO;
+import com.leaf.model.curriculum.LectDTO;
+import com.leaf.model.member.MemberDTO;
+
 public interface AppliDAO {
 
 	public List<AppliDTO> listAppli(); 
@@ -10,6 +14,11 @@ public interface AppliDAO {
 
 	public AppliDTO getAppliById(int appli_id); 
 	
-	public int deleteAppli(int appli_id); 
+	public int deleteAppli(int appli_id);
+
+	public LectDTO listformappli(int lect_id); 
 	
+	public List<CurriDTO> curri(int curri_id);
+	public List<LectDTO> lect(int lect_id);
+	public List<MemberDTO> member(String member_id);
 }

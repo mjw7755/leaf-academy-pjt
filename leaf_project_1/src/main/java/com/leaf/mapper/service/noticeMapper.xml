@@ -52,6 +52,21 @@
 	
 	<select id="searchSelect" parameterType="hashMap"
 		resultType="com.leaf.model.service.NoticeDTO">
-		select * from notice where ${column} like '%' || #{keyvalue} || '%'
+		<!-- select * from notice where ${column} like '%' || #{keyvalue} || '%' order by notice_id desc -->
+	
+<!-- 	where NUM between ((#{page}-1)*5)+1 and (#{page}*5) -->
+<!-- 		select * from (SELECT ROWNUM NUM, m.* FROM
+		( select notice_id, member_id , notice_title, notice_content, notice_writedate, notice_modifydate, 
+	 enabled, rownum r from notice where ${column} like '%' || #{keyvalue} || '%' order by notice_id desc) m)
+		where NUM between ((#{page}-1)*5)+1 and (#{page}*5)  -->
+		
+		select * from
+		(SELECT ROWNUM NUM, m.* FROM
+		( SELECT * FROM notice where ${column} like '%' || #{keyvalue} || '%' ORDER BY notice_id DESC) m)
+		where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
+	</select>
+	
+		<select id="getCount2" parameterType="hashMap" resultType="Integer">
+		select count(*) from notice where ${column} like '%' || #{keyvalue} || '%'
 	</select>
 </mapper>	

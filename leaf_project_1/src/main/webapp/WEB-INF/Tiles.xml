@@ -21,7 +21,17 @@
 		<put-attribute name="content" value="/WEB-INF/view/heok/lecture/{1}.jsp"/>
 		<put-attribute name="css" value="/WEB-INF/view/heok/lecture/css/{1}.css"/>
 		<put-attribute name="js" value="/WEB-INF/view/heok/lecture/js/{1}.js"/>
-	</definition>  
+	</definition> 
+	
+	<definition name="application.*" template="/WEB-INF/view/main/subViews/baseLayout.jsp">
+		<put-attribute name="title" value="/WEB-INF/view/heok/application/subViews/title.jsp"/>
+		<put-attribute name="header" value="/WEB-INF/view/main/subViews/header.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/view/main/subViews/footer.jsp"/>
+		<put-attribute name="aside" value="/WEB-INF/view/main/subViews/leftMenu.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/view/heok/application/{1}.jsp"/>
+		<put-attribute name="css" value="/WEB-INF/view/heok/application/css/{1}.css"/>
+		<put-attribute name="js" value="/WEB-INF/view/heok/application/js/{1}.js"/>
+	</definition>  	  
 	   
 	<definition name="curriculum.*" template="/WEB-INF/view/main/subViews/baseLayout.jsp">
 		<put-attribute name="title" value="/WEB-INF/view/heok/curriculum/subViews/title.jsp"/>

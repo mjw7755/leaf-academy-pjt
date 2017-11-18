@@ -51,7 +51,6 @@ public class LectController {
 	
 	@RequestMapping("/writeform_lect.do")
 	public String writeForm(Model model, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView();
 		String member_id=(String) request.getSession().getAttribute("sessionid");
 		List<CurriDTO> list = lectDAO.subjectcurri(member_id);
 		model.addAttribute("list",list);

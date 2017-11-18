@@ -20,5 +20,9 @@ public interface NoticeDAO {
 
 	public int multiqnaDelete(List deleteTargets); // 다중 삭제
 
-	public List<NoticeDTO> searchSelect(Map<String, String> map); // search
+	public List<NoticeDTO> searchSelect(Map<String, Object> map); // search
+	
+	public void insertQna_ref(int qna_id);
+	
+	public int getCount2(Map<String, Object> map);
 }

@@ -8,14 +8,24 @@ resultType : 쿼리 수행 후 결과를 보내주기 위한 데이터 -->
 
 <mapper namespace="com.leaf.model.application.AppliDAO">
 
-	<select id="listAppli" parameterType="Integer" resultType="com.leaf.model.application.AppliDTO">
-           SELECT a.*, l.lect_charge, c.curri_subject FROM application a,lecture l, curriculum c where a.lect_id=l.lect_id 
-      
+	<select id="listformappli"  parameterType="Integer" resultType="com.leaf.model.application.AppliDTO">
+           SELECT a.*, l.lect_charge FROM application a,lecture l where a.lect_id=l.lect_id 
     </select>
+<!--     SELECT a.*, l.lect_charge, c.curri_subject FROM application a,lecture l, curriculum c where a.lect_id=l.lect_id  -->
+    
 	<select id="getAppliById" parameterType="String" resultType="com.leaf.model.application.AppliDTO">
 	select appli_id, member_id, lect_id, appli_reciever, appli_address, appli_addnum, appli_tel,
 			appli_write_time, appli_accept, enabled, appli_caution from application where appli_id=#{appli_id}
 	</select>
+	<select id="curri" parameterType="int" resultType="com.leaf.model.application.AppliDTO">
+		select * from curriculum
+	</select>
+	<select id="lect" parameterType="int" resultType="com.leaf.model.application.AppliDTO">
+		select * from lecture
+	</select>
+<!-- 	<select id="member" parameterType="String" resultType="com.leaf.model.application.AppliDTO">
+		select * from member
+	</select> -->
 
 
 	<insert id="insertAppli" parameterType="com.leaf.model.application.AppliDTO">

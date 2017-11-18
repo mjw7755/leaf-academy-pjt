@@ -6,6 +6,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.leaf.model.curriculum.CurriDTO;
+import com.leaf.model.curriculum.LectDTO;
+import com.leaf.model.member.MemberDTO;
+
 @Component
 public class AppliDAOImpl implements AppliDAO {
 
@@ -17,7 +21,13 @@ public class AppliDAOImpl implements AppliDAO {
 		AppliDAO dao = sqlsession.getMapper(AppliDAO.class);
 		return dao.listAppli();
 	}
-
+	
+	@Override
+	public LectDTO listformappli(int lect_id) {
+		AppliDAO dao = sqlsession.getMapper(AppliDAO.class);
+		return dao.listformappli(lect_id);
+	}
+	
 	@Override
 	public void insertAppli(AppliDTO dto) {
 		AppliDAO dao = sqlsession.getMapper(AppliDAO.class);
@@ -34,6 +44,24 @@ public class AppliDAOImpl implements AppliDAO {
 	public int deleteAppli(int appli_id) {
 		AppliDAO dao = sqlsession.getMapper(AppliDAO.class);
 		return dao.deleteAppli(appli_id);
+	}
+
+	@Override
+	public List<CurriDTO> curri(int curri_id) {
+		AppliDAO dao = sqlsession.getMapper(AppliDAO.class);
+		return dao.curri(curri_id);
+	}
+
+	@Override
+	public List<LectDTO> lect(int lect_id) {
+		AppliDAO dao = sqlsession.getMapper(AppliDAO.class);
+		return dao.lect(lect_id);
+	}
+
+	@Override
+	public List<MemberDTO> member(String member_id) {
+		AppliDAO dao = sqlsession.getMapper(AppliDAO.class);
+		return dao.member(member_id);
 	}
 
 }
