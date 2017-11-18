@@ -34,5 +34,6 @@ public interface MemberDAO {
 	public void memberbye(MemberDTO dto);
 	public boolean checkPw(String member_id, String member_pwd);
 	public void updateMember2(MemberDTO dto);
+	public String member_check(String member_id);
 	
 }
