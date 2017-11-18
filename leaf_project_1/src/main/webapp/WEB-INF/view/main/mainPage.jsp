@@ -10,11 +10,16 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    <!--  <link rel="stylesheet" href="resources/swiper.min.css"> -->
 <style type="text/css">
-	
+	*, *:before, *:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 	/*swiper  */
     #swiper{
     	width:1500px;
     	height: 100%;
+    	z-index: 1;
     }
     .swiper-container {
         width: 1500px;
@@ -734,31 +739,79 @@ keyframes swiper-preloader-spin { 100%{
 	float:left;
 	margin-top: 30px;
 }
+/*  */
 
+	#quick_banner{
+		position: fixed;
+		top:20%;
+		right: 2%;
+		width:75px;
+		z-index: 2;
+	}
+	#quick{
+		background-color: #2b6728;
+		color:#fff;
+		height: 60px;
+		text-align: center;
+	}
+	#quick p{
+		padding-top: 10px;
+	}
+	#quick_myclass, #quick_mypage, #quick_book, #quick_curri{
+		border: 1px solid;
+		border-color: #9c9e9c;
+		height: 60px;
+		text-align: center;
+		font-size: 12px;
+		font-weight: bold;
+		background-color: #fff;
+	}
+	#quick_myclass p, #quick_mypage p, #quick_book p, #quick_curri p{
+		margin: auto;
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+	#quick_myclass img, #quick_mypage img, #quick_book img, #quick_curri img{
+		width:30px;
+		height: 30px;
+	}
+	#quick_top{
+		background-color: #2b6728;
+		color:#fff;
+		height: 45px;
+		text-align: center;
+	}
+	#quick_top p{
+		margin: auto;
+	}
+	#quick_top img{
+		width:20px;
+		height: 13px;
+	}
 </style>
 <body>
-
+    
     <!-- Swiper -->
     <div id="swiper">
     <div class="swiper-container">
         <div class="swiper-wrapper">
             <div class="swiper-slide">            
-  				<img src="resources/main_banner.png" alt="sample83" />
+  				<img src="resources/ram/main_banner.png" alt="sample83" />
  					<a href="#"></a>
 			</div>
 					
             <div class="swiper-slide">
-  				<img src="resources/main_banner2.png" alt="sample83" />
+  				<img src="resources/ram/main_banner2.png" alt="sample83" />
  					<a href="#"></a>
 			</div>
             
             <div class="swiper-slide">
-  				<img src="resources/main_banner3.png" alt="sample83" />
+  				<img src="resources/ram/main_banner3.png" alt="sample83" />
  					<a href="#"></a>
             </div>
             
             <div class="swiper-slide">
-  				<img src="resources/main_banner4.png" alt="sample83" />
+  				<img src="resources/ram/main_banner4.png" alt="sample83" />
  					<a href="#"></a>
             </div>
         <!--     
@@ -827,7 +880,7 @@ keyframes swiper-preloader-spin { 100%{
     		<div id="notice">
  				<p>리프코딩 소식</p>
  				<div id="box_img">
- 				<img src="resources/board3.png" />
+ 				<img src="resources/ram/board3.png" />
  				</div>
     		</div>
     		</a>
@@ -836,7 +889,7 @@ keyframes swiper-preloader-spin { 100%{
     		<div id="curri">
     			<p>교육과정</p>
     			<div id="box_img">
- 					<img src="resources/curriculum3.png"/>
+ 					<img src="resources/ram/curriculum3.png"/>
  				</div>
     		</div>
     		</a>
@@ -845,7 +898,7 @@ keyframes swiper-preloader-spin { 100%{
     		<div id="advice">
     			<p>입회상담</p>
     			<div id="box_img">
- 					<img src="resources/call2.png"/>
+ 					<img src="resources/ram/call2.png"/>
  				</div>
     		</div>
     		</a>
@@ -858,25 +911,25 @@ keyframes swiper-preloader-spin { 100%{
     	
     		<a href="#">
     		<div id="lecture">
-    			<img src="resources/main_lecture4.png"/>
+    			<img src="resources/ram/main_lecture4.png"/>
     		</div>
     		</a>
     		
     		<a href="#">
     		<div id="book">
-    			<img src="resources/main_book3.png"/>
+    			<img src="resources/ram/main_book3.png"/>
     		</div>
 			</a>
 			
 			<a href="#">
     		<div id="play">
-    			<img src="resources/main_play4.png"/>
+    			<img src="resources/ram/main_play4.png"/>
     		</div>
     		</a>
     		
     		<a href="#">
     		<div id="QnA">
-    			<img src="resources/main_qna3.png"/>
+    			<img src="resources/ram/main_qna3.png"/>
     		</div>
     		</a>
     	</div>
@@ -894,5 +947,45 @@ keyframes swiper-preloader-spin { 100%{
     	</div>
     </div>
     <!-- main center menu end -->
+    
+    <!-- quick menu -->
+    <div id="quick_banner">
+	<div id="quick">
+		<p>QUICK MENU</p>
+	</div>
+	<div id="quick_myclass">
+		<p>MY CLASS</p>
+		<img src="resources/ram/lecture2.png">
+	</div>
+	<div id="quick_mypage">
+		<p>MY PAGE</p>
+		<img src="resources/ram/mypage.png">
+	</div>
+	<div id="quick_book">
+		<p>BOOK</p>
+		<img src="resources/ram/book3.png">
+	</div>
+	<div id="quick_curri">
+		<p>CURRI</p>
+		<img src="resources/ram/curriculum3.png">
+	</div>
+	<div id="quick_top">
+		<img src="resources/ram/scroll.png">
+		<p>TOP</p>
+	</div>
+</div>
+<script src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
+<script src="resources/scroll.js"></script>
+<script>
+	$(function() {
+		$("#quick_top").click(function() {
+			$('html,body').animate({
+				scrollTop : 0
+			}, 400);
+			return false;
+		});
+	});
+</script>
+    <!-- quick menu end -->
 </body>
 </html>
