@@ -9,22 +9,20 @@ resultType : 쿼리 수행 후 결과를 보내주기 위한 데이터 -->
 <mapper namespace="com.leaf.model.application.AppliDAO">
 
 	<select id="listAppli" parameterType="Integer" resultType="com.leaf.model.application.AppliDTO">
-   	select * from
-      (SELECT ROWNUM NUM, m.* FROM 
-                     ( SELECT * FROM Application ORDER BY appli_id ASC)   m)
-      where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
+           SELECT a.*, l.lect_charge, c.curri_subject FROM application a,lecture l, curriculum c where a.lect_id=l.lect_id 
+      
     </select>
 	<select id="getAppliById" parameterType="String" resultType="com.leaf.model.application.AppliDTO">
 	select appli_id, member_id, lect_id, appli_reciever, appli_address, appli_addnum, appli_tel,
-			appli_write, appli_accept, enabled, appli_caution from application where appli_id=#{appli_id}
+			appli_write_time, appli_accept, enabled, appli_caution from application where appli_id=#{appli_id}
 	</select>
 
 
 	<insert id="insertAppli" parameterType="com.leaf.model.application.AppliDTO">
 	insert into application(appli_id, member_id, lect_id, appli_reciever, appli_address, appli_addnum, appli_tel,
-			appli_write, appli_accept, enabled, appli_caution) 
+			appli_write_time, appli_accept, enabled, appli_caution) 
 	values(#{appli_id}, #{member_id}, #{lect_id}, #{appli_reciever}, #{appli_address}, 
-		#{appli_addnum}, #{appli_tel}, #{appli_write}, 1, 1, #{appli_caution})
+		#{appli_addnum}, #{appli_tel}, #{appli_write_time}, 1, 1, #{appli_caution})
 	</insert>
 	
 	<delete id="deleteAppli" parameterType="int">

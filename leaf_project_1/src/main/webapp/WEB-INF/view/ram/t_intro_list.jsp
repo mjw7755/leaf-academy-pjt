@@ -245,7 +245,7 @@ figure.snip1141.hover i {
             placeholder="선생님 이름 입력" list="list" > 
             
             <div id="search_icon">
-            <input type="image" src="resources/search.png" id="search">&nbsp;
+            <input type="image" src="resources/ram/search.png" id="search">&nbsp;
             </div> 
          <!--<a href="t_intro_list.do"><button id="delete">초기화</button></a> -->
          </div>
@@ -283,7 +283,7 @@ figure.snip1141.hover i {
             <td id="multi" width="230px">
 
 						<figure class="snip1141">
-							<img src="resources/${list.teacher_image}" style="width: 240px; height: 240px">
+							<img src="resources/ram/${list.teacher_image}" style="width: 240px; height: 240px">
 							<figcaption>
 								<div class="circle">
 									<i class="ion-ios-plus-empty">+ </i>

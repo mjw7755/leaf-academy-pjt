@@ -7,19 +7,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class GameController {
 	@RequestMapping("/gamestart.do")
 	public String five_in_a_row() {
-		return "xo";
+		return "juju.xo";
 	}
 	@RequestMapping("/button.do")
 	public String button() {
-		return "button";
+		return "juju.button";
 	}
 	@RequestMapping("/blank.do")
 	public String blank() {
-		return "blank";
+		return "juju.blank";
 	}
 	@RequestMapping("/fiveinarow.do")
 	public String fiveinarow() {
-		return "fiveinarow";
+		return "juju.five_in_a_row";
 	}
 	/*@RequestMapping("/gameStart.do")
 	public String gameStart() {
