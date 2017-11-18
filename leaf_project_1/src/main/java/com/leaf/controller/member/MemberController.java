@@ -344,16 +344,6 @@ public class MemberController {
 		}
 	}
 
-	@RequestMapping(value = "/member_byeform.do", method = RequestMethod.GET)
-	public ModelAndView memberbyeForm(HttpServletRequest request) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		String member_id = (String) request.getSession().getAttribute("sessionid");
-		MemberDTO dto = memberdao.getMemberById(member_id);
-		mav.addObject("dto", dto);
-		mav.setViewName("ayrin.member_byeform");
-		return mav;
-	}
-
 	@RequestMapping(value = "/member_bye.do", method = RequestMethod.POST)
 	public ModelAndView memberbye(@ModelAttribute("dto") @Valid MemberDTO memberdto, BindingResult bindingResult,
 			HttpServletRequest request) throws Exception {
@@ -394,6 +384,38 @@ public class MemberController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			out.print("1");
+		}
+	}
+	
+	@RequestMapping("/member_byeform.do")
+	public ModelAndView memberbyeForm(HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String member_id = (String) request.getSession().getAttribute("sessionid");
+		MemberDTO dto = memberdao.getMemberById(member_id);
+		mav.addObject("dto", dto);
+		mav.setViewName("ayrin.member_byeform");
+		return mav;
+
+	}
+
+	@RequestMapping("/member_del.do")
+	public void member_del(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		String sessionid = (String) session.getAttribute("sessionid");
+		String passwd = request.getParameter("passwd");
+		String chkpwd = memberdao.member_check(sessionid);
+
+		MemberDTO dto = new MemberDTO();
+		dto.setMember_id(sessionid);
+		dto.setMember_pwd(passwd);
+		if (chkpwd.equals(passwd)) {
+			memberdao.memberbye(dto);
+			session.removeAttribute("sessionid");
+			response.getWriter().write("1");
+		} else {
+			response.getWriter().write("0");
+			// "" + reslut
+			// response.getWriter().write("0" + result);
 		}
 	}
 }
