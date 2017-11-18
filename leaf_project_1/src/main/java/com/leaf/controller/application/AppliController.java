@@ -1,17 +1,8 @@
 package com.leaf.controller.application;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,12 +19,12 @@ public class AppliController {
 	@Resource
 	private AppliDAO appliDAO;
 
-	@RequestMapping("/appli_list.do")
+	@RequestMapping("/list_appli.do")
 	public String list(Model model) {
 		List<AppliDTO> list = appliDAO.listAppli();
 		model.addAttribute("list", list);
 		
-		return "application.appli_list";
+		return "application.list_appli";
 	}
 
 	@RequestMapping("/delete_appli.do")
@@ -43,5 +34,7 @@ public class AppliController {
 		mav.setViewName("redirect:appli_list.do");
 		return mav;
 	}
-
+	
+/*	@RequestMapping("/write_appli.do")
+	public String write*/
 }

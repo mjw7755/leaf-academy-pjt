@@ -7,7 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.2.1.min.js">
+</script>
+
+
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
     //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
     function sample4_execDaumPostcode() {
@@ -60,15 +65,11 @@
         }).open();
     }
 </script>
+
 <script type ="text/javascript">
 	$(document).ready(fucntion(){
-		if("home"=="home"){
-		$('input:radio[name="serviceType"][value="home"]').prop('checked',true);
-		$("#newcategory").hide();
-		$("#homecategory").show();
 			
-	}		
-	$("input:radio[name=express]").change(fucntion(){
+	$("input:radio[name='express']").change(fucntion(){
 		var express=this.value;
 		if(express=="home"){
 			$("#newcategory").hide();
@@ -137,6 +138,11 @@
 		<tr>
 			<th>우편번호 </th>
 			<td>
+				<input type="text" id="sample4_postcode" placeholder="우편번호">
+				<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+				<input type="text" id="sample4_roadAddress" placeholder="도로명주소">
+				<input type="text" id="sample4_jibunAddress" placeholder="지번주소">
+				<span id="guide" style="color:#999"></span>
 				<input type="text" value="${dto.appli_addnum}" id="appli_addnum" />
 				<input type="text" value="${dto.appli_address}" id="appli.address"/>
 			</td>

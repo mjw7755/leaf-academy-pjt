@@ -135,7 +135,6 @@
 	<input type="button" id="12" name="2017" class="monthBtn"
 		value="2017.12" />
 		
-	<!-- <input type="button" id="search" name="search" value="search"> -->
 	<br/><br/>
 	<div id="searchdiv1" name="searchdiv1" class="searchdiv1">
 	<form action="search_curri.do" method="post">
