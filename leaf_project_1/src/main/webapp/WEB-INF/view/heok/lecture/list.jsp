@@ -100,8 +100,8 @@
 						<td>${list.lect_charge }</td> 
 						<td colspan="2">${list.lect_start_time}~ ${list.lect_end_time }</td>
 						
-						<td><a href ="appli_list.do?lect_id=${list.lect_id}"></a>		
-							<button id="application">수강신청</button></td>
+						<td><a href ="listform_appli.do?lect_id=${list.lect_id}&curri_id=${list.curri_id}">		
+							<button id="application">수강신청</button></a></td>
 				<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1' }">
 						<td><a href="delete_lect.do?lect_id=${list.lect_id}">
 							<button	id="delete">삭제</button></a>

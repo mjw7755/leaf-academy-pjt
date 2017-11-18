@@ -10,81 +10,67 @@
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.2.1.min.js">
 </script>
-
-
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
-    //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
-    function sample4_execDaumPostcode() {
+    function sample6_execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
                 // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-                // 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
                 // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-                var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+                var fullAddr = ''; // 최종 주소 변수
+                var extraAddr = ''; // 조합형 주소 변수
 
-                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                    extraRoadAddr += data.bname;
+                // 사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                    fullAddr = data.roadAddress;
+
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    fullAddr = data.jibunAddress;
                 }
-                // 건물명이 있고, 공동주택일 경우 추가한다.
-                if(data.buildingName !== '' && data.apartment === 'Y'){
-                   extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                }
-                // 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                if(extraRoadAddr !== ''){
-                    extraRoadAddr = ' (' + extraRoadAddr + ')';
-                }
-                // 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-                if(fullRoadAddr !== ''){
-                    fullRoadAddr += extraRoadAddr;
+
+                // 사용자가 선택한 주소가 도로명 타입일때 조합한다.
+                if(data.userSelectedType === 'R'){
+                    //법정동명이 있을 경우 추가한다.
+                    if(data.bname !== ''){
+                        extraAddr += data.bname;
+                    }
+                    // 건물명이 있을 경우 추가한다.
+                    if(data.buildingName !== ''){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample4_postcode').value = data.zonecode; //5자리 새우편번호 사용
-                document.getElementById('sample4_roadAddress').value = fullRoadAddr;
-                document.getElementById('sample4_jibunAddress').value = data.jibunAddress;
+                document.getElementById('appli_addnum').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('appli_address').value = fullAddr;
 
-                // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
-                if(data.autoRoadAddress) {
-                    //예상되는 도로명 주소에 조합형 주소를 추가한다.
-                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-                    document.getElementById('guide').innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-
-                } else if(data.autoJibunAddress) {
-                    var expJibunAddr = data.autoJibunAddress;
-                    document.getElementById('guide').innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-
-                } else {
-                    document.getElementById('guide').innerHTML = '';
-                }
+                // 커서를 상세주소 필드로 이동한다.
+                document.getElementById('appli_address2').focus();
             }
         }).open();
     }
 </script>
 
 <script type ="text/javascript">
-	$(document).ready(fucntion(){
-			
-	$("input:radio[name='express']").change(fucntion(){
-		var express=this.value;
-		if(express=="home"){
-			$("#newcategory").hide();
-			$("#homecategory").show();
-			
-		}else if(express =="new"){
-			$("#newcategory").show();
-			$("#homecategory").hide();
-		}		
-			
+	$(document).ready(function(){
+		$("input:radio[name='express']").change(function(){
+			var express=this.value;
+			if(express=="home"){
+				$("#newcategory").hide();
+				$("#homecategory").show();
+				
+			}else if(express =="new"){
+				$("#newcategory").show();
+				$("#homecategory").hide();
+			}		
 		});
 	});
 
 </script>
-
 <body>
 <h3>결제진행</h3>
 <span>
@@ -106,12 +92,12 @@
 			<th>가격</th>
 		</tr>
 		<tr>
-			<td>${curri_subject}</td>
+			<td>${clist.get(0).getCurri_subject()}</td>
 			<td>${member_id}</td>
-			<td>${lect_charge}</td>
+			<td>${llist.get(0).getLect_charge()}</td>
 		</tr>
 		<tr>
-			<td colspan="3" align="right">${dto.lect_charge}</td>
+			<td colspan="3" align="right">${llist.get(0).getLect_charge()}</td>
 		</tr>
 	</table>
 </span>
@@ -128,23 +114,20 @@
 		
 		<tr>
 			<th>받는사람</th>
-			<td><input type="text" id="reciever" value="${dto.appli_reciever}"/></td>
+			<td><input type="text" id="reciever" value="${dto.member_id}"/></td>
 		</tr>	
 		<tr>
 			<th>전화번호(휴대폰)</th>
-			<td><input type="text"value="${dto.appli_tel}"/>
+			<td><input type="text"value="${dto.member_tel}"/></td>
 			</tr>
 
 		<tr>
 			<th>우편번호 </th>
 			<td>
-				<input type="text" id="sample4_postcode" placeholder="우편번호">
-				<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-				<input type="text" id="sample4_roadAddress" placeholder="도로명주소">
-				<input type="text" id="sample4_jibunAddress" placeholder="지번주소">
-				<span id="guide" style="color:#999"></span>
-				<input type="text" value="${dto.appli_addnum}" id="appli_addnum" />
-				<input type="text" value="${dto.appli_address}" id="appli.address"/>
+				<input type="text" id="appli_addnum" value="${dto.member_addnum}">
+				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+				<input type="text" id="appli_address" value="${dto.member_address}" >
+				<input type="text" id="appli_address2" name="appli_address2" placeholder="상세주소">
 			</td>
 		</tr>
 		<tr>
@@ -164,20 +147,18 @@
 		</tr>	
 		<tr>
 			<th>전화번호(휴대폰)</th>
-			<td><form:input path="appli_tel" placeholder="000-0000-0000"/>
-			<form:errors path="appli_tel" cssClass="error"/></td>
+			<td><input id="appli_tel" name="appli_tel" placeholder="000-0000-0000"/>
 			</tr>
 
 		<tr>
 			<th>우편번호 </th>
 			<td>
-				<form:input path="appli_addnum" id="sample4_postcode" placeholder="우편번호" />
-				<form:errors path="appli_addnum" cssClass="error" /><br/>
-				<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-				<form:input path="appli_address" id="sample4_roadAddress" placeholder="도로명주소"/>
-				<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소">
-				<span id="guide" style="color: #999"></span>
-				<form:errors path="appli_address" cssClass="error" />
+				
+				<input type="text" id="appli_addnum" placeholder="우편번호">
+				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+				<input type="text" id="appli_address" placeholder="주소">
+				<input type="text" id="appli_address2" placeholder="상세주소">
+				
 			</td>
 		</tr>
 		<tr>
