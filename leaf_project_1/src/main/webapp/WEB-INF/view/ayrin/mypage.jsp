@@ -6,6 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title></title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script> 
@@ -58,6 +59,27 @@ function sample4_execDaumPostcode() {
         }
     }).open();
 }
+$(function(){
+	$("#passchk").click(function(){
+		var passwd = $("#member_pwd_1").val();
+			$.ajax({
+				url:"member_del.do",
+				type:"post",
+				data:{"passwd":passwd},
+				success:function(data){
+					//var res = JSON.parse(data);
+					if(data==0){
+						alert("암호가 틀렸습니다.");
+						//$("#member_bye").show();
+						history.go(0);
+					}else{
+						alert("회원탈퇴가 완료되었습니다.");
+						location.href = 'main.do';
+				}
+			}
+		});
+	});
+});
 </script>
 <style type="text/css">
 .error {
@@ -376,17 +398,17 @@ $(function() {
    <div id="member_bye"> 
 		<table>
 			<tr>
-				<td>ID : </td>
-				<td><input readonly="readonly" type="text" name="member_id" value="${dto.member_id}" style="width:300px"></td>
+			   <td>아이디</td>
+			   <td><input type="text" name="member_id" id="member_id" value="${dto.member_id}" readonly="readonly"/></td>
 			</tr>
 			<tr>
-				<td>PWD : </td>
-				<td><input readonly="readonly" name="member_name" value="${dto.member_name}" style="width:300px"></td>
-			</tr>
+			    <td><span>암호 </span></td>
+			    <td><input type="password" name="member_pwd" id="member_pwd_1" placeholder="영어 숫자 특수문자를 조합"/>
 			<tr>
-				<td>PWD 확인 : </td>
-				<td><input type="text" name="member_pwd" value="${dto.member_pwd}" style="width:300px"></td>
-			</tr>
+			<!-- <input type="submit" value="수정하기"> -->
+			<td><input type="button" value="탈퇴하기" id="passchk"></td>
+				<td><input type="reset" value="취소"></td>
+			</tr>         
 		</table>
 	</div>
 </div>

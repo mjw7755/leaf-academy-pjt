@@ -22,6 +22,10 @@ resultType : 쿼리 수행 후 결과를 보내주기 위한 데이터 -->
     select count(*) from Member
     </select>
    
+   	<select id="member_check" parameterType="com.leaf.model.member.MemberDTO" resultType="String">
+      select member_pwd from member where member_id = #{member_id}
+    </select>
+   
 	<select id="getMemberById" parameterType="String" resultType="com.leaf.model.member.MemberDTO">
 	select member_id, member_name, member_pwd, member_tel, member_email, member_address, member_addnum from Member where member_id=#{member_id}
 	</select>
