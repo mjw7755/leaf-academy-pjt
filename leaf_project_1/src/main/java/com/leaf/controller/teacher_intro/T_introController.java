@@ -77,7 +77,7 @@ public class T_introController {
 				// FileOutputStream output = new FileOutputStream("C:/images/" + book_image); //
 				// output.write(fileData);
 				// 2. File 사용
-				File file = new File("C://Users/LeeRam/git/leaf-academy-pjt/leaf_project_1/src/main/webapp/resources/"
+				File file = new File("C://Users/LeeRam/git/leaf-academy-pjt/leaf_project_1/src/main/webapp/resources/ram/"
 						+ teacher_image);
 				uploadfile.transferTo(file);
 				System.out.println(teacher_image);
@@ -114,7 +114,7 @@ public class T_introController {
 				// FileOutputStream output = new FileOutputStream("C:/images/" + book_image); //
 				// output.write(fileData);
 				// 2. File 사용
-				File file = new File("C://Users/LeeRam/git/leaf-academy-pjt/leaf_project_1/src/main/webapp/resources/"
+				File file = new File("C://Users/LeeRam/git/leaf-academy-pjt/leaf_project_1/src/main/webapp/resources/ram/"
 						+ teacher_image);
 				uploadfile.transferTo(file);
 			} catch (IOException e) {
@@ -382,4 +382,10 @@ public class T_introController {
 		writer.close();
 	}
 
+	
+	@RequestMapping("/academy.do")
+	public String acedemy() {
+		
+		return "ram.academy";
+	}
 }
