@@ -49,11 +49,9 @@ function sample4_execDaumPostcode() {
                 //예상되는 도로명 주소에 조합형 주소를 추가한다.
                 var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
                 document.getElementById('guide').innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-
             } else if(data.autoJibunAddress) {
                 var expJibunAddr = data.autoJibunAddress;
                 document.getElementById('guide').innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
-
             } else {
                 document.getElementById('guide').innerHTML = '';
             }
@@ -88,7 +86,7 @@ function checkfield(){
 	  var prmpw = $('#member_pwd').val();
 	if(pw1 != pw2){
 		alert("암호확인을 해주세요");
-		  return false;
+		history.back();
 	}
 	document.memberchk.submit();
 }
@@ -123,10 +121,8 @@ function checkPwd(){
 		  }
 	  }
 }
-function insertChk(){
-	  
+function insertChk(){	  
 	  var frm = document.companyForm; 
-	  
 	  if(!chkVal('member_id','아이디'))return false;
 	  if($("#idChk").val() == 'N'){
 		  alert('ID체크를 해주세요.'); 
@@ -261,6 +257,7 @@ $(function() {
    float: right;
    height: 100%;
 }
+#contents1 td, tr, span { font-size: 12px }
 </style>
 </head>
 <body>
@@ -276,47 +273,47 @@ $(function() {
       </c:if>
    </table>
    
-   <div id="member_info">
+   <div id="member_info"><br><br>
    		<sf:form method="post" action="member_modify.do" commandName="dto" name="memberchk">
-	<table>
+	<table id="contents1">
 		<tr>
-			<td>아이디</td>
+			<td>아이디 : </td>
 			<td><input type="text" name="member_id" id="member_id" value="${dto.member_id}" readonly="readonly"/></td>
 		</tr>
 		<tr>
-     	    <td><span>암호 </span></td>
-    		<td><sf:password path="member_pwd" id="member_pwd" placeholder="영어 숫자 특수문자를 조합" value="${dto.member_pwd}"/>
+     	    <td><span>암호 :  </span></td>
+    		<td><sf:password path="member_pwd" id="member_pwd" placeholder="영어 숫자 특수문자를 조합" />
      		    <sf:errors path="member_pwd" cssClass="error" /></td>
   	    </tr>
   	    <tr>
-    		<td><span>암호확인</span></td>
+    		<td><span>암호확인 : </span></td>
      	<td>
        		<input type="password" name="pwd_check" onkeyup="checkPwd()"  placeholder="암호 확인"></input>
        	 	<div id="checkPwd"></div>
      		</td>
  		 </tr>
 		<tr>
-			<td>이름(Full Name)</td>
+			<td>이름(Full Name) : </td>
 			<td><sf:input path="member_name" placeholder="이름 입력" value="${dto.member_name}"/>
 			<sf:errors path="member_name" cssClass="error"/></td>
 		</tr>
 		<tr>
-			<td>전화번호(휴대폰)</td>
+			<td>전화번호(휴대폰) : </td>
 			<td><sf:input path="member_tel" placeholder="000-0000-0000" value="${dto.member_tel}"/>
 			<sf:errors path="member_tel" cssClass="error"/></td>
 	    </tr>
 		<tr>
-			<td>우편번호 :</td>
-			<td><sf:input path="member_addnum" id="sample4_postcode" placeholder="우편번호" />
+			<td>우편번호 : </td>
+			<td><sf:input path="member_addnum" id="sample4_postcode" placeholder="우편번호" value="${dto.member_addnum}"/>
 			<sf:errors path="member_addnum" cssClass="error" /><br/>
 			<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-			<sf:input path="member_address" id="sample4_roadAddress" placeholder="도로명주소"/>
+			<sf:input path="member_address" id="sample4_roadAddress" placeholder="도로명주소" value="${dto.member_address}"/>
 			<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소">
 			<span id="guide" style="color: #999"></span>
 			<sf:errors path="member_address" cssClass="error" /></td>
 		</tr>
 		<tr>
-			<td>이메일 :</td>
+			<td>이메일 : </td>
 			<td><sf:input path="member_email"  placeholder="이메일 입력" value="${dto.member_email}"/>
 		    <sf:errors path="member_email" cssClass="error" /></td>
 		</tr>

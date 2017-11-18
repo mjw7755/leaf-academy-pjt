@@ -29,7 +29,6 @@ import com.leaf.model.member.MemberDTO;
 import com.leaf.model.member.ValidGroupOrder;
 import com.leaf.model.service.NoticeDAO;
 import com.leaf.model.service.NoticeDTO;
-import com.leaf.model.teacher_intro.ReviewDAO;
 
 @Controller
 public class MemberController {
@@ -38,7 +37,7 @@ public class MemberController {
 	private MemberDAO memberdao;
 	@Resource
 	private NoticeDAO noticeDAO;
-	
+
 	@RequestMapping("/member_list.do")
 	public String list(Model model, HttpServletRequest request) {
 		String strPage = request.getParameter("page");
@@ -75,19 +74,24 @@ public class MemberController {
 		return mav;
 	}
 
-	/*
-	 * @RequestMapping("/member_updateform.do") public ModelAndView
-	 * updateform(HttpServletRequest request) throws Exception { ModelAndView mav =
-	 * new ModelAndView(); String member_id = request.getParameter("member_id");
-	 * MemberDTO dto = memberdao.getMemberById(member_id); mav.addObject("dto",
-	 * dto); mav.setViewName("ayrin.member_updateform"); return mav; }
-	 * 
-	 * @RequestMapping("/member_update.do") public ModelAndView update(MemberDTO
-	 * dto) throws Exception { ModelAndView mav = new ModelAndView();
-	 * System.out.println("update �Ѵ�~ : " + dto.toString());
-	 * memberdao.updateMember(dto); mav.setViewName("redirect:member_list.do");
-	 * return mav; }
-	 */
+	@RequestMapping("/member_updateform.do")
+	public ModelAndView updateform(HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String member_id = request.getParameter("member_id");
+		MemberDTO dto = memberdao.getMemberById(member_id);
+		mav.addObject("dto", dto);
+		mav.setViewName("ayrin.member_updateform");
+		return mav;
+	}
+
+	@RequestMapping("/member_update.do")
+	public ModelAndView update(MemberDTO dto) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		System.out.println("member_update : " + dto.toString());
+		memberdao.updateMember(dto);
+		mav.setViewName("redirect:member_list.do");
+		return mav;
+	}
 
 	@RequestMapping("/member_delete.do")
 	public ModelAndView delete(MemberDTO dto) throws Exception {
@@ -279,6 +283,7 @@ public class MemberController {
 		model.addAttribute("count", count);
 		model.addAttribute("countPage", countPage);
 		model.addAttribute("startPage", startPage);
+		System.out.println(list.get(0).getNotice_content());
 		model.addAttribute("list", list);
 		return "ayrin.myclass";
 	}
@@ -332,10 +337,10 @@ public class MemberController {
 		// mav.setViewName("redirect:main.do");
 		// 유효성 검사
 		if (bindingResult.hasErrors()) { // 검증에 실패한 빈은 BindingResult에 담겨 뷰에 전달된다.
-			return "ayrin.member_updateform";
+			return "ayrin.mypage";
 		} else {
 			memberdao.updateMember(memberdto);
-			return "main.mainPage";
+			return "ayrin.mypage";
 		}
 	}
 

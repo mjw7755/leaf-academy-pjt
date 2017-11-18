@@ -240,9 +240,9 @@ clear:left;
 				</ul>
 				</li>
 				
-				<li id="a_tag"><a href="five_in_a_row.do">놀이</a>
+				<li id="a_tag"><a href="fiveinarow.do">놀이</a>
 					<ul>
-						<li><a href="five_in_a_row.do">오목</a></li>			
+						<li><a href="fiveinarow.do">오목</a></li>			
 					</ul>
 				</li>
 				<li id="a_tag"><a href="notice_list.do">고객센터</a>
