@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.leaf.model.service.NoticeDAO;
 import com.leaf.model.service.NoticeDTO;
+import com.leaf.model.service.QnaDTO;
 
 @Controller
 public class NoticeController {
@@ -28,6 +29,7 @@ public class NoticeController {
 
 	@RequestMapping("/notice_list.do")
 	public String list(Model model, HttpServletRequest request) {
+		String flag = "list";
 		String strPage = request.getParameter("page");
 		int page;
 		if (strPage == null) {
@@ -43,6 +45,7 @@ public class NoticeController {
 		model.addAttribute("countPage", countPage);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("list", list);
+		model.addAttribute("flag", flag);
 		return "notice.list";
 	}
 
@@ -124,17 +127,47 @@ public class NoticeController {
 	@RequestMapping("/notice_search.do")
 	public String search(Model model, HttpSession session, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
+		String flag = "search";
 		// 컬럼명
 		String column = request.getParameter("column");
 		String keyvalue = request.getParameter("keyvalue");
 		System.out.println(column + " / " + keyvalue);
 
-		Map<String, String> map = new HashMap<String, String>(); // collection
+		Map<String, Object> map = new HashMap<String, Object>(); // collection
 		map.put("column", column); // column : name or email or home
 		map.put("keyvalue", keyvalue); // keyvalue
 
-		List<NoticeDTO> list = noticeDAO.searchSelect(map);
+		String strPage = request.getParameter("page");
+		System.out.println(strPage);
+		
+		int page;
+		if (strPage == null) {
+			page = 1;
+		} else {
+			page = Integer.parseInt(request.getParameter("page"));
+		}
+		map.put("page", page);
+		int count = noticeDAO.getCount2(map);
+		List<NoticeDTO> list = noticeDAO.noticeSelect(page);
+		
+		// count = page;
+		int countPage = (int) Math.ceil((float) count / 5);
+		int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
+		
+		model.addAttribute("count", count);
+		model.addAttribute("countPage", countPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("column", column);
+		model.addAttribute("keyvalue", keyvalue);
+		
+		map.put("column", column); // column : name or email or home
+		map.put("keyvalue", keyvalue); // keyvalue
+		map.put("page", String.valueOf(page));
+		
+		list = noticeDAO.searchSelect(map);
+		
 		model.addAttribute("list", list);
+		model.addAttribute("flag", flag);
 		return "notice.list";
 	}
 }

@@ -56,8 +56,20 @@ public class NoticeImpl implements NoticeDAO{
 	}
 
 	@Override
-	public List<NoticeDTO> searchSelect(Map<String, String> map) {
+	public List<NoticeDTO> searchSelect(Map<String, Object> map) {
 		NoticeDAO dao = sqlSession.getMapper(NoticeDAO.class);
 		return dao.searchSelect(map);
+	}
+
+	@Override
+	public void insertQna_ref(int qna_id) {
+		NoticeDAO dao = sqlSession.getMapper(NoticeDAO.class);
+		dao.insertQna_ref(qna_id);
+	}
+
+	@Override
+	public int getCount2(Map<String, Object> map) {
+		NoticeDAO dao = sqlSession.getMapper(NoticeDAO.class);
+		return dao.getCount2(map);
 	}
 }
