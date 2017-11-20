@@ -23,6 +23,7 @@
 <br><br><br><br><br>
 	<form action="notice_update.do" >
 		<table id="noticeupdateTable">		
+			<input type="hidden" name="notice_id" style="width: 100%;" value="${dto.notice_id}">
 			<input type="hidden" name="member_id" style="width: 100%;" value="${dto.member_id}">
 			<tr>
 				<td id="whqrp">제목 : </td>
