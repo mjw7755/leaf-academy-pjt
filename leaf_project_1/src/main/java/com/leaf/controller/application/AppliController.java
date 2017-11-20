@@ -35,18 +35,18 @@ public class AppliController {
 		System.out.println(lect_id);
 		System.out.println(curri_id);
 		
-		List<CurriDTO> clist=appliDAO.curri(curri_id);
-		List<LectDTO> llist=appliDAO.lect(lect_id);
-//		List<MemberDTO> mlist=appliDAO.member(member_id);
+		CurriDTO cdto=appliDAO.curri(curri_id);
+		LectDTO ldto=appliDAO.lect(lect_id);
+		MemberDTO mdto=appliDAO.member(member_id);
 //		
 //		appliDAO.listformappli(lect_id);
 //		
-//		model.addAttribute("mlist", mlist);
-		model.addAttribute("llist", llist);
-		model.addAttribute("clist", clist);
-//		System.out.println(mlist);
-		System.out.println(llist);
-		System.out.println(clist);
+		model.addAttribute("mdto", mdto);
+		model.addAttribute("ldto", ldto);
+		model.addAttribute("cdto", cdto);
+		System.out.println(cdto);
+		System.out.println(ldto);
+		System.out.println(mdto);
 		mav.setViewName("application.appli_list");
 		return mav;
 		

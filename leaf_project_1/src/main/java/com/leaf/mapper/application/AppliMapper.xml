@@ -18,14 +18,14 @@ resultType : 쿼리 수행 후 결과를 보내주기 위한 데이터 -->
 			appli_write_time, appli_accept, enabled, appli_caution from application where appli_id=#{appli_id}
 	</select>
 	<select id="curri" parameterType="int" resultType="com.leaf.model.application.AppliDTO">
-		select * from curriculum
+		select curr_subject from curriculum where ${curri_id}
 	</select>
 	<select id="lect" parameterType="int" resultType="com.leaf.model.application.AppliDTO">
-		select * from lecture
+		select lect_charge from lecture where ${lect_id} 
 	</select>
-<!-- 	<select id="member" parameterType="String" resultType="com.leaf.model.application.AppliDTO">
-		select * from member
-	</select> -->
+	<select id="member" parameterType="String" resultType="com.leaf.model.application.AppliDTO">
+		select member_name, member_tel, member_address, member_addnum from member where ${member_id} 
+	</select> 
 
 
 	<insert id="insertAppli" parameterType="com.leaf.model.application.AppliDTO">

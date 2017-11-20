@@ -47,19 +47,19 @@ public class AppliDAOImpl implements AppliDAO {
 	}
 
 	@Override
-	public List<CurriDTO> curri(int curri_id) {
+	public CurriDTO curri(int curri_id) {
 		AppliDAO dao = sqlsession.getMapper(AppliDAO.class);
 		return dao.curri(curri_id);
 	}
 
 	@Override
-	public List<LectDTO> lect(int lect_id) {
+	public LectDTO lect(int lect_id) {
 		AppliDAO dao = sqlsession.getMapper(AppliDAO.class);
 		return dao.lect(lect_id);
 	}
 
 	@Override
-	public List<MemberDTO> member(String member_id) {
+	public MemberDTO member(String member_id) {
 		AppliDAO dao = sqlsession.getMapper(AppliDAO.class);
 		return dao.member(member_id);
 	}
