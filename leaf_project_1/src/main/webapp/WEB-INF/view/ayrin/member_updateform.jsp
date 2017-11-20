@@ -81,7 +81,42 @@ span{
   color : red;
   font-size: 15px;
 }
-
+.btn {
+       display: inline-block;
+    border: none;
+    border-radius: .3em;
+    -webkit-box-shadow: inset 0 0 0 1px #323232, inset 0 -0.25em 0 #9f9e9e, 0 0.25em 0.25em #666666;
+    /* box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 -0.25em 0 rgba(0, 0, 0, 0.25), 0 0.25em 0.25em rgba(0, 0, 0, 0.05); */
+    color: #000;
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    padding: .5em 1.5em .75em;
+    position: relative;
+    text-decoration: none;
+    text-shadow: 0 1px 1px #c4c4c4;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* margin-left: 10px; */
+}
+.btn:active {
+-webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), inset 0 2px 0 rgba(255, 255, 255, 0.1), inset 0 0.25em 0.5em rgba(0, 0, 0, 0.05);
+box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), inset 0 2px 0 rgba(255, 255, 255, 0.1), inset 0 0.25em 0.5em rgba(0, 0, 0, 0.05);
+margin-top: .25em;
+padding-bottom: .5em; }
+.btn:active, .btn:focus {
+outline: none; }
+.btn--green {
+    background-color: #fff; }
+.btn--green {
+font-size: 1em; }
+.btn--sm {
+font-size: 0.5em; }
 </style>
 <script type="text/javascript">
 function checkfield(){
@@ -175,7 +210,7 @@ function insertChk(){
 			<td>우편번호 :</td>
 			<td><sf:input path="member_addnum" id="sample4_postcode" placeholder="우편번호" />
 			<sf:errors path="member_addnum" cssClass="error" /><br/>
-			<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+			<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn--sm btn--green"><br>
 			<sf:input path="member_address" id="sample4_roadAddress" placeholder="도로명주소"/>
 			<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소">
 			<span id="guide" style="color: #999"></span>
@@ -188,8 +223,8 @@ function insertChk(){
 		</tr>
 	<tr>
 	<!-- <input type="submit" value="수정하기"> -->
-	<td><input type="submit" value="수정완료" onclick="checkfield();"></td>
-				<td><input type="reset" value="취소"></td>
+	<td><input type="submit" value="수정완료" onclick="checkfield();" class="btn btn--sm btn--green"></td>
+				<td><input type="reset" value="취소" class="btn btn--sm btn--green"></td>
 	</tr>			
 	</table>
 	
