@@ -180,7 +180,6 @@ public class MemberController {
 		}
 		System.out.println("member_multileveldown : " + upTarget.toString());
 		memberdao.multileveldownMember(upTarget);
-		// String deleteID = memberdao.multideleteMember(deleteTarget);
 		mav.setViewName("redirect:member_list.do");
 		return mav;
 	}
@@ -205,7 +204,6 @@ public class MemberController {
 		int count = memberdao.search_getCount(map);
 
 		List<MemberDTO> searchList = memberdao.searchMemberList(map);
-		// System.out.println("�˻��� ��� : " + searchList.toString());
 
 		int countPage = (int) Math.ceil((float) count / 5);
 		int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
@@ -292,9 +290,13 @@ public class MemberController {
 	public ModelAndView mypage(MemberDTO dto, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		String member_id = (String) request.getSession().getAttribute("sessionid");
-		dto = memberdao.getMemberById(member_id);
-		mav.addObject("dto", dto);
-		mav.setViewName("ayrin.mypage");
+		if(member_id==null) {
+			mav.setViewName("ayrin.member_loginform");
+		} else {
+			dto = memberdao.getMemberById(member_id);
+			mav.addObject("dto", dto);
+			mav.setViewName("ayrin.mypage");
+		}
 		return mav;
 	}
 

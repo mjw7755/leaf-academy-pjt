@@ -59,6 +59,7 @@ function sample4_execDaumPostcode() {
         }
     }).open();
 }
+
 $(function(){
 	$("#passchk").click(function(){
 		var passwd = $("#member_pwd_1").val();
@@ -70,8 +71,7 @@ $(function(){
 					//var res = JSON.parse(data);
 					if(data==0){
 						alert("암호가 틀렸습니다.");
-						//$("#member_bye").show();
-						history.go(0);
+						$("#member_pwd_1").val("");
 					}else{
 						alert("회원탈퇴가 완료되었습니다.");
 						location.href = 'main.do';

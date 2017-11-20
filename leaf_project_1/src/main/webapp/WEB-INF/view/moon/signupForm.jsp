@@ -142,64 +142,61 @@ function checkPwd(){
 </script>
 <script type="text/javascript">
 function chkDupId(){
-	  var prmid = $('#member_id').val();
-	  
-	
+	var prmid = $('#member_id').val();
+ 
+	$.ajax({
+		type : 'POST',  
+		data:{"prmid" : prmid},
+		url : 'chkDupId.do',
+		success : function(data) {
+			var chkRst = data;
+			var idReg = /^[A-Za-z0-9]{4,12}$/g;
 
-	  $.ajax({
-	     type : 'POST',  
-	     data:{"prmid" : prmid},
-	     url : 'chkDupId.do',
-	     success : function(data) {
-	      var chkRst = data;
-	      var idReg = /^[A-Za-z0-9]{4,12}$/g;
-
-	      if(chkRst == 0){
-	       /* alert("등록 가능 합니다.");
-	      */
-	       if(prmid.length >= 4 && prmid.length <= 12){
-	    	   if( idReg.test( prmid ) ) {
-	    		   document.getElementById('member_id2').style.color = "blue";
-	    	   	   document.getElementById('member_id2').innerHTML = "등록 가능 합니다.";
-	               return;
-	           }else{
-	        	   document.getElementById('member_id2').style.color = "red";
-			   	   document.getElementById('member_id2').innerHTML =  "사용할 수 없는 문자가 있습니다.(영 소, 대문자 숫자만 사용 가능)"; 
-	           }
-	       
-	       }else if(prmid.length > 13){
-	    	   document.getElementById('member_id2').style.color = "red";
-		   	   document.getElementById('member_id2').innerHTML =  "아이디는 4글자 이상 12글자 이하만 사용 가능 합니다."; 
-	       }
-	   	if(prmid == ""){
-			  $("#member_id2").empty();
-		  }
-	   	 $("#idChk").val('Y'); 
-	      }else{
-	       /* alert("중복 되어 있습니다.");*/
-	    	document.getElementById('member_id2').style.color = "red";
-	   	    document.getElementById('member_id2').innerHTML =  "중복 되어 있습니다."; 
-	      }
-	      $("#idChk").val('N');
-	      
-	     },
-	     error : function(xhr, status, e) {  
-	      //alert(e);
-	     }
-	  });  
-	 }
+		if(chkRst == 0) {
+		/* alert("등록 가능 합니다.");*/
+		if(prmid.length >= 4 && prmid.length <= 12) {
+			if( idReg.test( prmid ) ) {
+				document.getElementById('member_id2').style.color = "blue";
+				document.getElementById('member_id2').innerHTML = "등록 가능 합니다.";
+				return;
+         	} else {
+				document.getElementById('member_id2').style.color = "red";
+				document.getElementById('member_id2').innerHTML =  "사용할 수 없는 문자가 있습니다.(영 소, 대문자 숫자만 사용 가능)"; 
+          	}
+		} else if(prmid.length > 13) {
+			document.getElementById('member_id2').style.color = "red";
+			document.getElementById('member_id2').innerHTML =  "아이디는 4글자 이상 12글자 이하만 사용 가능 합니다."; 
+		}
+		
+		if(prmid == "") { $("#member_id2").empty(); }
+  	 	
+			$("#idChk").val('Y'); 
+			
+	    } else {
+		/* alert("중복 되어 있습니다.");*/
+			document.getElementById('member_id2').style.color = "red";
+			document.getElementById('member_id2').innerHTML =  "중복 되어 있습니다."; 
+		}
+		
+		    $("#idChk").val('N');
+		    
+	    },
+   		error : function(xhr, status, e) { //alert(e); 
+   		}
+ 	});  
+}
 </script>
-<script type="text/javascript"> 
+<!-- <script type="text/javascript"> 
 function insertChk(){
-	  
-	  var frm = document.companyForm; 
-	  
-	  if(!chkVal('member_id','아이디'))return false;
-	  if($("#idChk").val() == 'N'){alert('ID체크를 해주세요.'); return;}
-	  
-
-	  </script>	
-
+	var frm = document.companyForm; 
+	if(!chkVal('member_id','아이디'))
+		return false;
+	if($("#idChk").val() == 'N'){
+		alert('ID체크를 해주세요.'); 
+		return;
+	}
+}
+</script> -->	
 </head>
 <body>
 	<sf:form method="post" action="signup.do" commandName="dto" name="memberchk">
@@ -208,8 +205,8 @@ function insertChk(){
 				<td>아이디</td>
 				<td><input type="hidden" id="idChk" value="N" />
 				<sf:input path="member_id" id="member_id"  onkeyup="chkDupId()"  placeholder="아이디 입력"/>
-				<sf:errors path="member_id" cssClass="error" /><div id="member_id3" />
-				<div id="member_id2" />
+				<sf:errors path="member_id" cssClass="error" /><div id="member_id3"></div>
+				<div id="member_id2"></div>
 				</td>
 			</tr>
 
@@ -223,7 +220,7 @@ function insertChk(){
     </td>
      <td>
         <input type="password" name="pwd_check" onkeyup="checkPwd()"  placeholder="암호 확인"></input>
-        <div id="checkPwd" />
+        <div id="checkPwd"></div>
      </td>
   </tr>
 			

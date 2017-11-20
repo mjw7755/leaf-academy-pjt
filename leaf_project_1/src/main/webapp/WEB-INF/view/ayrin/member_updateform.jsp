@@ -158,7 +158,7 @@ function insertChk(){
     		<td><span>암호확인</span></td>
      	<td>
        		<input type="password" name="pwd_check" onkeyup="checkPwd()"  placeholder="암호 확인"></input>
-       	 	<div id="checkPwd" />
+       	 	<div id="checkPwd"></div>
      		</td>
  		 </tr>
 		<tr>
