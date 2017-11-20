@@ -45,11 +45,11 @@
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('appli_addnum').value = data.zonecode; //5자리 새우편번호 사용
-                document.getElementById('appli_address').value = fullAddr;
+                document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('sample6_address').value = fullAddr;
 
                 // 커서를 상세주소 필드로 이동한다.
-                document.getElementById('appli_address2').focus();
+                document.getElementById('sample6_address2').focus();
             }
         }).open();
     }
@@ -128,6 +128,7 @@
 				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 				<input type="text" id="appli_address" value="${mdto.getMember_address()}" >
 				<input type="text" id="appli_address2" name="appli_address2" placeholder="상세주소">
+				
 			</td>
 		</tr>
 		<tr>
@@ -154,10 +155,11 @@
 			<th>우편번호 </th>
 			<td>
 				
-				<input type="text" name="appli_addnum" id="appli_addnum" placeholder="우편번호">
+		
+				<input type="text"  name="appli_addnum"  id="sample6_postcode" placeholder="우편번호">
 				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-				<input type="text" name="appli_address" id="appli_address" placeholder="주소">
-				<input type="text" name="appli_address2" id="appli_address2" placeholder="상세주소">
+				<input type="text"  name="appli_address" id="sample6_address" placeholder="주소">
+				<input type="text"  name="appli_address2" id="sample6_address2" placeholder="상세주소">
 				
 			</td>
 		</tr>
