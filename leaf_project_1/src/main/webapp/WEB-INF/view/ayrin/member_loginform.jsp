@@ -7,25 +7,25 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <style type="text/css">
-	#top_banner{
-		width: 100%;
-		background-color: #e5d235;
-		margin: auto;
-	}
-	#banner{
-		width:800px;
-	}
-	#banner img{
-		/* float: right; */
-	}
-	label {
+#top_banner{
+	width: 100%;
+	background-color: #e5d235;
+	margin: auto;
+}
+#banner{
+	width:800px;
+}
+#banner img{
+	/* float: right; */
+}
+label {
 	display: inline-block;
 	max-width: 100%;
 	margin-bottom: 5px;
 	font-weight: 700;
 	float:left;
-	}
-	.form-control {
+}
+.form-control {
 	display: block;
 	margin-right: 15px;
 	/* width: 100%; */
@@ -89,7 +89,6 @@
 	padding-top: 50px;
 	width: 500px;
 	height:300px;
-
 }
 .form-group {
 	margin-bottom: 15px;
@@ -144,7 +143,7 @@ h1{
 		<tr>
 			<td rowspan="2">
      			<div class="form-group text-center">
-        		<button type="submit" class="btn btn-info" id="login">로그인</button>
+        			<button type="submit" class="btn btn-info" id="login">로그인</button>
 				</div>
         	</td>
 			<td colspan="3">

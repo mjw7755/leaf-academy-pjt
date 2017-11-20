@@ -15,6 +15,7 @@
 </style>
 </head>
 <body>
+<br><br><br><br>
 <table id="jageokdetailTable">
 	<tr> <td>자격증 : </td> <td>${dto.jageok_title}</td> </tr>
 	<tr> <td>시험일 : </td> <td>${dto.jageok_date}</td> </tr>
