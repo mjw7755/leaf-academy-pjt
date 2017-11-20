@@ -93,11 +93,11 @@
 		</tr>
 		<tr>
 			<td>${cdto.getCurri_subject()}</td>
-			<td>${mdto.getMember_name()}</td>
+			<td>${teachername.getMember_name()}</td>
 			<td>${ldto.getLect_charge()}</td>
 		</tr>
 		<tr>
-			<td colspan="3" align="right">${llist.get(0).getLect_charge()}</td>
+			<td colspan="3" align="right">${ldto.getLect_charge()}</td>
 		</tr>
 	</table>
 </span>
@@ -114,19 +114,19 @@
 		
 		<tr>
 			<th>받는사람</th>
-			<td><input type="text" id="reciever" value="${mlist.get(0).getMember_name()}"/></td>
+			<td><input type="text" id="reciever" value="${mdto.getMember_name()}"/></td>
 		</tr>	
 		<tr>
 			<th>전화번호(휴대폰)</th>
-			<td><input type="text"value="${mlist.get(0).getMember_tel()}"/></td>
+			<td><input type="text"value="${mdto.getMember_tel()}"/></td>
 			</tr>
 
 		<tr>
 			<th>우편번호 </th>
 			<td>
-				<input type="text" id="appli_addnum" value="${mlist.get(0).getMember_addnum()}">
+				<input type="text" id="appli_addnum" value="${mdto.getMember_addnum()}">
 				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-				<input type="text" id="appli_address" value="${mlist.get(0).getMember_address()}" >
+				<input type="text" id="appli_address" value="${mdto.getMember_address()}" >
 				<input type="text" id="appli_address2" name="appli_address2" placeholder="상세주소">
 			</td>
 		</tr>

@@ -19,6 +19,8 @@ public interface AppliDAO {
 	public LectDTO listformappli(int lect_id); 
 	
 	public CurriDTO curri(int curri_id);
+	public CurriDTO teachercurri(int curri_id);
+	public MemberDTO teachername(String memeber_id);
 	public LectDTO lect(int lect_id);
 	public MemberDTO member(String member_id);
 }

@@ -18,12 +18,12 @@ public class AppliDTO {
 	private String appli_address;
 	private String appli_address2;
 	private String member_id,appli_reciever, appli_tel, 
-					appli_write_time, appli_caution, member_name;
+					appli_write_time, appli_caution;
 	private int appli_id, lect_id,appli_accept, enabled;
 	private String curri_subject, lect_charge;
 	private int curri_id;
 	
-	private String member_tel, member_address, member_addnum;
+	private String member_tel, member_address, member_addnum, member_name;
 
 	public String getAppli_addnum() {
 		return appli_addnum;

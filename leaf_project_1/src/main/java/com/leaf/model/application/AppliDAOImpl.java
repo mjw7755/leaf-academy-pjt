@@ -64,4 +64,14 @@ public class AppliDAOImpl implements AppliDAO {
 		return dao.member(member_id);
 	}
 
+	public CurriDTO teachercurri(int curri_id) {
+		AppliDAO dao = sqlsession.getMapper(AppliDAO.class);
+		return dao.curri(curri_id);
+	}
+
+	@Override
+	public MemberDTO teachername(String memeber_id) {
+		AppliDAO dao = sqlsession.getMapper(AppliDAO.class);
+		return dao.member(memeber_id);
+	}
 }
