@@ -10,6 +10,7 @@
 #jageokupdateTable {
    width: 800px;
    text-align: center;
+   border-radius: 4px;
 }
 #jageokupdateTable td {
    border: 1px solid;

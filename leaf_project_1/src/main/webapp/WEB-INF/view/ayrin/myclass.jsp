@@ -150,7 +150,16 @@ function detail(ev) {
 		<table>
 			<tr>
 				<td>
-					<div id="notice">공지사항 게시판</div>
+					<div id="notice">
+						<table>
+						<c:forEach items="${list}" var="list">
+							<tr>
+								<td><a onclick="detail(event)" data-needpopup-show="#noticeDetail" name="content_${list.notice_id}">${list.notice_title}</a></td>
+								<td><input id="content_${list.notice_id}" type="hidden" value="${list.notice_content}"/></td>
+							</tr>
+						</c:forEach>
+						</table>
+					</div>
 				</td>
 				<td>
 					<div id="chulcheck">평균, 우수학생 1~3랭킹</div>
@@ -163,6 +172,7 @@ function detail(ev) {
 			</tr>		
 		</table>
 	</div>
+	<div id="noticeDetail" class="needpopup"></div>
 </c:if>	
 </body>
 </html>

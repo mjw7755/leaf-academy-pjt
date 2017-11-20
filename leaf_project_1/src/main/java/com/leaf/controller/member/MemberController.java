@@ -282,6 +282,10 @@ public class MemberController {
 		model.addAttribute("countPage", countPage);
 		model.addAttribute("startPage", startPage);
 		System.out.println(list.get(0).getNotice_content());
+		for(int i=0; i<list.size(); i++) {
+			list.get(i).setNotice_content(list.get(i).getNotice_content().replaceAll("\"", "'").replaceAll("\r\n", "<br>"));
+		}
+		
 		model.addAttribute("list", list);
 		return "ayrin.myclass";
 	}

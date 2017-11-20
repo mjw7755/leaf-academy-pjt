@@ -15,6 +15,7 @@
 #jageoklistTable td{
    border: 1px solid;
    height: 30px;
+   border-radius: 4px;
 }
 
 .btn {

@@ -100,29 +100,30 @@ $(document).ready(function(){
 	<br><hr><br>
    <table id="booklistTable">
       <c:forEach items="${ list }" var="list" varStatus="status">
-            <c:if test="${sessionScope.sessionid!='관리자' and sessionScope.sessionid!='강사1'}">
-         <tr>
-            <td rowspan="4" class="bookline" style="width:100px"><a href="book_detail.do?book_id=${ list.book_id }">
-            <img src="resources/${list.book_image}" style="width: 100px; height: 120px"></a></td>
-         </tr>
-          <tr>
-            <td id="booktd">
-            	<a href="book_detail.do?book_id=${ list.book_id }">${list.book_title }</a>
-            </td>
-          </tr>
-          <tr>
-            <td id="booktd">${list.book_writer}</td>
-          </tr>
-          <tr>
-            <td id="booktd" class="bookline">${list.book_cost}</td>
-          </tr>
-          </c:if>
+			<c:if test="${sessionScope.sessionid!='관리자'}">
+			<tr>
+				<td rowspan="4" class="bookline" style="width:100px"><a href="book_detail.do?book_id=${ list.book_id }">
+				<img src="resources/${list.book_image}" style="width: 100px; height: 120px"></a></td>
+			</tr>
+			<tr>
+				<td id="booktd">
+					<a href="book_detail.do?book_id=${ list.book_id }">${list.book_title }</a>
+				</td>
+				<td rowspan="3" class="bookline" style="width:80px"><input type="button" value="구매하기" class="btn btn--sm btn--green"></td>
+			</tr>
+			<tr>
+				<td id="booktd">${list.book_writer}</td>
+			</tr>
+			<tr>
+				<td id="booktd" class="bookline">${list.book_cost}</td>
+			</tr>
+			</c:if>
       </c:forEach>   
    </table>
    
    <table id="booklistTable">
       <c:forEach items="${ list }" var="list" varStatus="status">
-      <c:if test="${sessionScope.sessionid=='관리자' or sessionScope.sessionid=='강사1'}">
+      <c:if test="${sessionScope.sessionid=='관리자'}">
          <tr>
          	<td rowspan="4"><input id="multi" type="checkbox" style="width: 30px;" name="book_id" value="${ list.book_id }"></td>
             <td rowspan="4" class="bookline"><a href="book_detail.do?book_id=${ list.book_id }">
