@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.leaf.model.jageok.JageokDAO;
@@ -149,8 +147,6 @@ public class JageokController {
 	
 	@RequestMapping("/jageok_calendar.do")
 	public String calendar() {
-		//List<JageokDTO> list = jageokdao.getJageokList2();
-		//model.addAllAttributes(list);
 		return "ayrin.calendar";
 	}
 }

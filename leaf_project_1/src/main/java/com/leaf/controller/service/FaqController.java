@@ -96,7 +96,6 @@ public class FaqController {
 		for (String item : request.getParameter("faq_id").split(",")) {
 			deleteTarget.add(item);
 		}
-		// int deleteNum = faqDAO.multiqnaDelete(deleteTarget);
 		mav.setViewName("redirect:faq_list.do");
 		return mav;
 	}
@@ -107,7 +106,6 @@ public class FaqController {
 		// 컬럼명
 		String column = request.getParameter("column");
 		String keyvalue = request.getParameter("keyvalue");
-		System.out.println(column + " / " + keyvalue);
 
 		Map<String, String> map = new HashMap<String, String>(); // collection
 		map.put("column", column); // column : name or email or home

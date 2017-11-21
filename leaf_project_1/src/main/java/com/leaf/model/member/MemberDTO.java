@@ -1,16 +1,8 @@
 package com.leaf.model.member;
 
-import java.security.acl.Group;
-
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 public class MemberDTO {
@@ -45,10 +37,6 @@ public class MemberDTO {
 	
 	@NotEmpty(message="주소를 입력해주세요.", groups={Group15.class})
 	private String member_address;
-	
-
-
-	
 	private String sel_value;
 	private int enabled;
 	
@@ -67,39 +55,26 @@ public class MemberDTO {
 		this.member_addnum = member_addnum;
 		this.enabled = enabled;
 	}
-
-	
 	public String getMember_addnum() {
 		return member_addnum;
 	}
-
 	public void setMember_addnum(String member_addnum) {
 		this.member_addnum = member_addnum;
 	}
-
 	public String getSel_value() {
 		return sel_value;
 	}
-
 	public void setSel_value(String sel_value) {
 		this.sel_value = sel_value;
 	}
-
 	public String getMember_address() {
 		return member_address;
 	}
-
 	public void setMember_address(String member_address) {
 		this.member_address = member_address;
 	}
-
 	public String getMember_id() {
 		return member_id;
-	}
-	@Override
-	public String toString() {
-		return "MemberDTO [member_id=" + member_id + ", member_pwd=" + member_pwd + ", member_name=" + member_name
-				+ ", member_tel=" + member_tel + ", member_email=" + member_email + "]";
 	}
 	public void setMember_id(String member_id) {
 		this.member_id = member_id;
@@ -139,5 +114,11 @@ public class MemberDTO {
 	}
 	public void setEnabled(int enabled) {
 		this.enabled = enabled;
+	}
+
+	@Override
+	public String toString() {
+		return "MemberDTO [member_id=" + member_id + ", member_pwd=" + member_pwd + ", member_name=" + member_name
+				+ ", member_tel=" + member_tel + ", member_email=" + member_email + "]";
 	}
 }

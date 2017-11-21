@@ -64,21 +64,12 @@ public class BookController {
 			String book_image = uploadfile.getOriginalFilename(); 
 			dto.setBook_image(book_image);
 			try { 
-				// 1. FileOutputStream ��� 
-				// byte[] fileData = file.getBytes(); 
-				// FileOutputStream output = new FileOutputStream("C:/images/" + book_image); // output.write(fileData); 
-				
-				// 2. File ���
 				File file = new File("C:/Users/kimssung/git/leaf-academy-pjt/leaf_project_1/src/main/webapp/resources/" + book_image); 
 				uploadfile.transferTo(file); 
-				
 				} catch (IOException e) { 
 					e.printStackTrace(); 
-				} // try - catch 
-			} // if 
-		  // ������ ���̽� ó���� ���� ��ġ���� ó�� 
-		
-		System.out.println(dto.getBook_image());
+				} 
+			} 
 		bookdao.insertBook(dto);
 		mav.setViewName("redirect:book_list.do");
 		return mav;
@@ -103,20 +94,12 @@ public class BookController {
 			String book_image = uploadfile.getOriginalFilename(); 
 			dto.setBook_image(book_image);
 			try { 
-				// 1. FileOutputStream ��� 
-				// byte[] fileData = file.getBytes(); 
-				// FileOutputStream output = new FileOutputStream("C:/images/" + book_image); // output.write(fileData); 
-				
-				// 2. File ���
 				File file = new File("C:/Users/kimssung/git/leaf-academy-pjt/leaf_project_1/src/main/webapp/resources/" + book_image); 
 				uploadfile.transferTo(file); 
-				
 				} catch (IOException e) { 
 					e.printStackTrace(); 
-				} // try - catch 
-			} // if 
-		  // ������ ���̽� ó���� ���� ��ġ���� ó�� 
-		System.out.println(dto.getBook_image());
+				}
+			} 
 		bookdao.updateBook(dto);
 		mav.setViewName("redirect:book_list.do");
 		return mav;
@@ -138,7 +121,6 @@ public class BookController {
 			deleteTarget.add(item);
 		}
 		bookdao.multideleteBook(deleteTarget);
-		// String deleteID = bookdao.multideleteMember(deleteTarget);
 		mav.setViewName("redirect:book_list.do");
 		return mav;
 	}
@@ -159,7 +141,7 @@ public class BookController {
 		String flag = "search";
 		
 		Map<String, Object> map = new HashMap<String, Object>();
-        map.put("keyvalue", keyvalue); //keyvalue
+        map.put("keyvalue", keyvalue);
         
 		int page;
         if (strPage == null) {page = 1;} 
@@ -175,7 +157,6 @@ public class BookController {
         model.addAttribute("countPage", countPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("keyvalue", keyvalue);
-        
 		model.addAttribute("list", searchList);
 		model.addAttribute("flag",flag);
 		return "ayrin.book_list";

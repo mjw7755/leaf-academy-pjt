@@ -1,20 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>curriculumList Page</title>
 </head>
-<script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.2.1.min.js">
-	
-</script>
-
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 	function text(e) {
 		alert(e.target.id);
@@ -133,8 +126,7 @@
 	<input type="button" id="11" name="2017" class="monthBtn"
 		value="2017.11" />
 	<input type="button" id="12" name="2017" class="monthBtn"
-		value="2017.12" />
-		
+		value="2017.12" />		
 	<br/><br/>
 	<div id="searchdiv1" name="searchdiv1" class="searchdiv1">
 	<form action="search_curri.do" method="post">
@@ -145,44 +137,26 @@
 		</select> <input size="30" type="text" id="keyvalue" name="keyvalue"
 			placeholder="키워드 검색 가능합니다."> <input type="submit"
 			id="searchbtn" name="searchbtn"value="검색">&nbsp;
-
 	</form>	
 	</div>	
 	<div id="content01" class="content">
-		
-			
-				<span
-					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">1월</span>
-
-				
-			
-
+		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">1월</span>
 			<table style="text-align: center;">
 				<thead>
-				
 					<th>개강일</th>
 					<th><b>강좌명</b></th>
 					<th><b>강사</b></th>
 					<th><b>강좌레벨</b></th>
 					<th><b>클래스명</b></th>
 					<th><b>수강인원</b></th>
-
 				</thead>
 				<tbody id="ajaxDataBody01">
-
 				</tbody>
 			</table>
-		
 	</div>
-
 
 	<div id="content02" class="content">
-		
-			
-				<span
-					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">2월</span>
-				
-
+		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">2월</span>
 			<table style="text-align: center;">
 				<thead>
 					<th>개강일</th>
@@ -191,25 +165,14 @@
 					<th><b>강좌레벨</b></th>
 					<th><b>클래스명</b></th>
 					<th><b>수강인원</b></th>
-
 				</thead>
 				<tbody id="ajaxDataBody02">
-
 				</tbody>
-
-
 			</table>
-
-		
 	</div>
+	
 	<div id="content03" class="content">
-		
-			
-				<span
-					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">3월</span>
-				
-			
-
+		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">3월</span>
 			<table style="text-align: center;">
 				<thead>
 					<th>개강일</th>
@@ -218,25 +181,14 @@
 					<th><b>강좌레벨</b></th>
 					<th><b>클래스명</b></th>
 					<th><b>수강인원</b></th>
-
 				</thead>
 				<tbody id="ajaxDataBody03">
-
 				</tbody>
-
 			</table>
-
-		
 	</div>
 
 	<div id="content04" class="content">
-		
-			
-				<span
-					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">4월</span>
-				
-			
-
+		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">4월</span>
 			<table style="text-align: center;">
 				<thead>
 					<th>개강일</th>
@@ -245,25 +197,14 @@
 					<th><b>강좌레벨</b></th>
 					<th><b>클래스명</b></th>
 					<th><b>수강인원</b></th>
-
 				</thead>
 				<tbody id="ajaxDataBody04">
-
 				</tbody>
-
 			</table>
-
-		
 	</div>
 
 	<div id="content05" class="content">
-		
-			
-				<span
-					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">5월</span>
-				
-			
-
+		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">5월</span>
 			<table style="text-align: center;">
 				<thead>
 					<th>개강일</th>
@@ -272,25 +213,14 @@
 					<th><b>강좌레벨</b></th>
 					<th><b>클래스명</b></th>
 					<th><b>수강인원</b></th>
-
 				</thead>
 				<tbody id="ajaxDataBody05">
-
 				</tbody>
-
 			</table>
-
-		
 	</div>
 
 	<div id="content06" class="content">
-		
-			
-				<span
-					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">6월</span>
-				
-			
-
+		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">6월</span>
 			<table style="text-align: center;">
 				<thead>
 					<th>개강일</th>
@@ -299,51 +229,30 @@
 					<th><b>강좌레벨</b></th>
 					<th><b>클래스명</b></th>
 					<th><b>수강인원</b></th>
-
 				</thead>
 				<tbody id="ajaxDataBody06">
-
 				</tbody>
-
 			</table>
-
-		
 	</div>
+	
 	<div id="content07" class="content">
-		
-			
-				<span
-					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">7월</span>
-				
-			
-
+		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">7월</span>
 			<table style="text-align: center;">
 				<thead>
-				
 					<th>개강일</th>
 					<th><b>강좌명</b></th>
 					<th><b>강사</b></th>
 					<th><b>강좌레벨</b></th>
 					<th><b>클래스명</b></th>
 					<th><b>수강인원</b></th>
-
 				</thead>
 				<tbody id="ajaxDataBody07">
-
 				</tbody>
-
 			</table>
-		
 	</div>
 
 	<div id="content08" class="content">
-		
-			
-				<span
-					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">8월</span>
-				
-			
-
+		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">8월</span>
 			<table style="text-align: center;">
 				<thead>
 					<th>개강일</th>
@@ -352,25 +261,14 @@
 					<th><b>강좌레벨</b></th>
 					<th><b>클래스명</b></th>
 					<th><b>수강인원</b></th>
-
 				</thead>
 				<tbody id="ajaxDataBody08">
-
 				</tbody>
-
 			</table>
-
-		
 	</div>
 
 	<div id="content09" class="content">
-		
-			
-				<span
-					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">9월</span>
-				
-			
-
+		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">9월</span>
 			<table style="text-align: center;">
 				<thead>
 					<th>개강일</th>
@@ -379,25 +277,14 @@
 					<th><b>강좌레벨</b></th>
 					<th><b>클래스명</b></th>
 					<th><b>수강인원</b></th>
-
 				</thead>
 				<tbody id="ajaxDataBody09">
-
 				</tbody>
-
 			</table>
-
-		
 	</div>
 
 	<div id="content10" class="content">
-		
-			
-				<span
-					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">10월</span>
-				
-			
-
+		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">10월</span>
 			<table style="text-align: center;">
 				<thead>
 					<th>개강일</th>
@@ -406,24 +293,14 @@
 					<th><b>강좌레벨</b></th>
 					<th><b>클래스명</b></th>
 					<th><b>수강인원</b></th>
-
 				</thead>
 				<tbody id="ajaxDataBody10">
-
 				</tbody>
-
 			</table>
-
-		
 	</div>
 
 	<div id="content11" class="content">
-		
-			
-				<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">11월</span>
-				
-			
-
+		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">11월</span>
 			<table style="text-align: center;">
 				<thead>
 					<th>개강일</th>
@@ -432,24 +309,14 @@
 					<th><b>강좌레벨</b></th>
 					<th><b>클래스명</b></th>
 					<th><b>수강인원</b></th>
-
 				</thead>
 				<tbody id="ajaxDataBody11">
-
 				</tbody>
-
 			</table>
-
-		
 	</div>
 
 	<div id="content12" class="content">
-			
-				<span
-					style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">12월</span>
-				
-			
-
+		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">12월</span>
 			<table style="text-align: center;">
 				<thead>
 					<th>개강일</th>
@@ -458,35 +325,25 @@
 					<th><b>강좌레벨</b></th>
 					<th><b>클래스명</b></th>
 					<th><b>수강인원</b></th>
-
 				</thead>
 				<tbody id="ajaxDataBody12">
-
 				</tbody>
-
 			</table>
-
 	</div>
 	
-	 <div id="searchdiv" name="searchdiv" class="searchdiv">
-		
-			
-				<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">검색</span>
-				
-			
-			
+	<div id="searchdiv" name="searchdiv" class="searchdiv">
+		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">검색</span>
 			<table cellpadding="5" style="text-align: center;">
-					<th colspan="2">개강일</th>
+				<th colspan="2">개강일</th>
 					<th><b>강좌명</b></th>
 					<th><b>강사</b></th>
 					<th><b>강좌레벨</b></th>
 					<th><b>클래스명</b></th>
-					<th><b>수강인원</b></th>
-				
-				<th id = "multi"><b></b></th>
+					<th><b>수강인원</b></th>				
+				<th id="multi"><b></b></th>
 				
 				<c:forEach items="${list }" var="list" varStatus="status" >
-					<tr onclick="test(this)">
+					<tr>
 						<td colspan="2"> ${list.lect_start_day}</td>
 						<td><a href="detail_curri.do?curri_id=${list.curri_id}">${list.curri_subject}</a></td>
 						<td>${list.member_id}</td>
@@ -499,43 +356,38 @@
 							<td><a href="updateForm_curri.do?curri_id=${list.curri_id}"><button id="update">수정</button></a></td>
 						</c:if>
 					</tr>
-				</c:forEach>
-				
+				</c:forEach>				
 			</table>
-			
-		
-	 
-	 <div>
-      <c:if test="${param.page>5}">
-         <c:if test="${flag == 'list' }">
-         <a class="button btn-prev" href="list_curri.do?page=${startPage-1}">이전</a>
-         </c:if>
-         <c:if test="${flag == 'search' }">
-         <a class="button btn-prev" href="search_curri.do?page=${startPage-1}&column=${column}&keyvalue=${keyvalue}">이전</a>
-         </c:if>
-      </c:if>
-      <c:forEach var="i" begin="0" end="4" varStatus="status">
-      <c:if test="${countPage>=startPage+i}">
-      <c:if test="${flag == 'list' }">
-         <a class="strong" href="list_curri.do?page=${startPage+i}">${startPage+i}</a></li>
-         </c:if>
-         <c:if test="${flag == 'search' }">
-          <a class="strong" href="search_curri.do?page=${startPage+i}&column=${column}&keyvalue=${keyvalue}">${startPage+i}</a></li>
-         </c:if>
-        
-      </c:if>
-   </c:forEach>
-      <c:if test="${countPage>=startPage+5}">
-           <c:if test="${flag == 'list' }">
-         <a class="strong" href="list_curri.do?page=${startPage+5}">다음</a></li>
-         </c:if>
-         <c:if test="${flag == 'search' }">
-         <a class="strong" href="search_curri.do?page=${startPage+5}&column=${column}&keyvalue=${keyvalue}">다음</a></li>
-         </c:if>
-         
-      </c:if>
-   </div>
-</div>
+				 
+		<div>
+	      <c:if test="${param.page>5}">
+	         <c:if test="${flag == 'list' }">
+	         <a class="button btn-prev" href="list_curri.do?page=${startPage-1}">이전</a>
+	         </c:if>
+	         <c:if test="${flag == 'search' }">
+	         <a class="button btn-prev" href="search_curri.do?page=${startPage-1}&column=${column}&keyvalue=${keyvalue}">이전</a>
+	         </c:if>
+	      </c:if>
+	      <c:forEach var="i" begin="0" end="4" varStatus="status">
+		      <c:if test="${countPage>=startPage+i}">
+		      	 <c:if test="${flag == 'list' }">
+		         <a class="strong" href="list_curri.do?page=${startPage+i}">${startPage+i}</a>
+		         </c:if>
+		         <c:if test="${flag == 'search' }">
+		         <a class="strong" href="search_curri.do?page=${startPage+i}&column=${column}&keyvalue=${keyvalue}">${startPage+i}</a>
+		         </c:if>        
+		      </c:if>
+	   	  </c:forEach>
+	      	<c:if test="${countPage>=startPage+5}">
+	         <c:if test="${flag == 'list' }">
+	         <a class="strong" href="list_curri.do?page=${startPage+5}">다음</a>
+	         </c:if>
+	         <c:if test="${flag == 'search' }">
+	         <a class="strong" href="search_curri.do?page=${startPage+5}&column=${column}&keyvalue=${keyvalue}">다음</a>
+	         </c:if>         
+	        </c:if>
+		</div>
+	</div>
 	
 </body>
 </html>

@@ -135,14 +135,12 @@ public class QnaController {
 		// 컬럼명
 		String column = request.getParameter("column");
 		String keyvalue = request.getParameter("keyvalue");
-		System.out.println(column + " / " + keyvalue);
 
 		Map<String, Object> map = new HashMap<String, Object>(); // collection
 		map.put("column", column); // column : name or email or home
 		map.put("keyvalue", keyvalue); // keyvalue
 
 		String strPage = request.getParameter("page");
-		System.out.println(strPage);
 		int page;
 		if (strPage == null) {
 			page = 1;

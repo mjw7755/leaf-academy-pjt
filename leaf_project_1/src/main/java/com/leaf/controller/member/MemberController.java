@@ -45,18 +45,10 @@ public class MemberController {
 	
 	private Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 	 
-	/*    @Autowired
-	    private MailService mailService;*/
-	    
 	    @RequestMapping(value = "/checkMail.do", produces = "application/text; charset=utf8")
 	    @ResponseBody
 	    private String checkMail(@RequestParam String member_email) {
 	        int count = memberdao.findOneByEmail(member_email);
-	/*        if(count == member_email) {
-	        	
-	        }*/
-	        System.out.println("count" + count);
-	        System.out.println(member_email);
 	        
 	        return gson.toJson("{\"count\":\""+count+"\"}");
 	    }
@@ -105,7 +97,6 @@ public class MemberController {
 	@RequestMapping("/member_write.do")
 	public ModelAndView write(MemberDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("member_write : " + dto.toString());
 		memberdao.insertMember(dto);
 		mav.setViewName("redirect:member_list.do");
 		return mav;
@@ -124,7 +115,6 @@ public class MemberController {
 	@RequestMapping("/member_update.do")
 	public ModelAndView update(MemberDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("member_update : " + dto.toString());
 		memberdao.updateMember(dto);
 		mav.setViewName("redirect:member_list.do");
 		return mav;
@@ -133,7 +123,6 @@ public class MemberController {
 	@RequestMapping("/member_delete.do")
 	public ModelAndView delete(MemberDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("member_delete : " + dto.getMember_id());
 		memberdao.deleteMember(dto);
 		mav.setViewName("redirect:member_list.do");
 		return mav;
@@ -146,7 +135,6 @@ public class MemberController {
 		for (String item : request.getParameter("member_id").split(",")) {
 			deleteTarget.add(item);
 		}
-		System.out.println("member_multidelete : " + deleteTarget.toString());
 		memberdao.multideleteMember(deleteTarget);
 		// String deleteID = memberdao.multideleteMember(deleteTarget);
 		mav.setViewName("redirect:member_list.do");
@@ -156,7 +144,6 @@ public class MemberController {
 	@RequestMapping("/member_up.do")
 	public ModelAndView up(MemberDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("member_up : " + dto.getMember_id());
 		memberdao.upMember(dto);
 		mav.setViewName("redirect:member_list.do");
 		return mav;
@@ -169,9 +156,7 @@ public class MemberController {
 		for (String item : request.getParameter("member_id").split(",")) {
 			upTarget.add(item);
 		}
-		System.out.println("member_multiup : " + upTarget.toString());
 		memberdao.multiupMember(upTarget);
-		// String deleteID = memberdao.multideleteMember(deleteTarget);
 		mav.setViewName("redirect:member_list.do");
 		return mav;
 	}
@@ -179,7 +164,6 @@ public class MemberController {
 	@RequestMapping("/member_levelup.do")
 	public ModelAndView levelup(MemberDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("member_levelup : " + dto.getMember_id());
 		memberdao.levelupMember(dto);
 		mav.setViewName("redirect:member_list.do");
 		return mav;
@@ -192,7 +176,6 @@ public class MemberController {
 		for (String item : request.getParameter("member_id").split(",")) {
 			upTarget.add(item);
 		}
-		System.out.println("member_multilevelup : " + upTarget.toString());
 		memberdao.multilevelupMember(upTarget);
 		// String deleteID = memberdao.multideleteMember(deleteTarget);
 		mav.setViewName("redirect:member_list.do");
@@ -202,7 +185,6 @@ public class MemberController {
 	@RequestMapping("/member_leveldown.do")
 	public ModelAndView leveldown(MemberDTO dto) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("member_leveldown : " + dto.getMember_id());
 		memberdao.leveldownMember(dto);
 		mav.setViewName("redirect:member_list.do");
 		return mav;
@@ -215,7 +197,6 @@ public class MemberController {
 		for (String item : request.getParameter("member_id").split(",")) {
 			upTarget.add(item);
 		}
-		System.out.println("member_multileveldown : " + upTarget.toString());
 		memberdao.multileveldownMember(upTarget);
 		mav.setViewName("redirect:member_list.do");
 		return mav;
@@ -261,13 +242,11 @@ public class MemberController {
 
 	@RequestMapping("/loginDupl.do")
 	public void loginDupl(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("컨트롤러 세션 중복처리 시작");
 		HttpSession session = request.getSession();
 		session.removeAttribute("sessionid");
 		try {
 			response.getWriter().write("1");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -318,11 +297,9 @@ public class MemberController {
 		model.addAttribute("count", count);
 		model.addAttribute("countPage", countPage);
 		model.addAttribute("startPage", startPage);
-		System.out.println(list.get(0).getNotice_content());
 		for(int i=0; i<list.size(); i++) {
 			list.get(i).setNotice_content(list.get(i).getNotice_content().replaceAll("\"", "'").replaceAll("\r\n", "<br>"));
 		}
-		
 		model.addAttribute("list", list);
 		return "ayrin.myclass";
 	}
@@ -376,9 +353,6 @@ public class MemberController {
 	@RequestMapping(value = "/member_modify.do", method = RequestMethod.POST)
 	public String membermodify(@Validated(ValidGroupOrder.class) @ModelAttribute("dto") @Valid MemberDTO memberdto,
 			BindingResult bindingResult) throws Exception {
-		System.out.println("member_modify : " + memberdto.toString());
-		// mav.setViewName("redirect:main.do");
-		// 유효성 검사
 		if (bindingResult.hasErrors()) { // 검증에 실패한 빈은 BindingResult에 담겨 뷰에 전달된다.
 			return "ayrin.mypage";
 		} else {
@@ -417,7 +391,6 @@ public class MemberController {
 		try {
 			// 넘어온 ID를 받는다.
 			String paramid = (req.getParameter("prmid") == null) ? "" : String.valueOf(req.getParameter("prmid"));
-			System.out.println(paramid);
 			MemberDTO dto = new MemberDTO();
 			dto.setMember_id(paramid.trim());
 			int chkPoint = memberdao.chkDupId(dto);
@@ -438,7 +411,6 @@ public class MemberController {
 		mav.addObject("dto", dto);
 		mav.setViewName("ayrin.member_byeform");
 		return mav;
-
 	}
 
 	@RequestMapping("/member_del.do")
@@ -457,8 +429,6 @@ public class MemberController {
 			response.getWriter().write("1");
 		} else {
 			response.getWriter().write("0");
-			// "" + reslut
-			// response.getWriter().write("0" + result);
 		}
 	}
 }
