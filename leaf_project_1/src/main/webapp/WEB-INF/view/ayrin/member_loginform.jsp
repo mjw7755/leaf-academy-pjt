@@ -116,63 +116,6 @@ h1{
 	</div>
 </div>
 
-	<article class="container">
-        <div class="loginform">
-			<h1>로그인</h1>
-			<hr>
-			<table>
-			 <form role="form" action="login.do" method="post">
-				<tr>
-					<td>
-						<div class="form-group">
-							<label id="username">아이디</label>
-					</td>
-					<td><input type="text" class="form-control" name="member_id"
-						placeholder="ID를 입력해 주세요">
-						</div></td>
-					
-            </tr>
-
-				<tr>
-					<td>
-						<div class="form-group">
-							<label id="userpassword">비밀번호</label>
-					</td>
-					<td><input type="password" class="form-control"
-						name="member_pwd" placeholder="비밀번호">
-						</div></td>
-						
-				
-				</tr>
-			</table>
-
-		<table>
-				<!-- <form role="form" action="signupForm.do" method="post"> -->
-				<tr>
-
-						<td rowspan="2">
-         
-                   <div class="form-group text-center">
-             <button type="submit" class="btn btn-info" id="login">로그인</button>
-
-            </div>
-
-		</form>				
-            </td>
-					<td colspan="3">
-						<div class="form-group text-center">
-							<a href="signupForm.do">
-								<button class="btn btn-info" id="signup">회원가입</button>
-							</a>
-						</div>
-					</td>
-					
-					
-				</tr>
-				<!-- </form> -->
-		</table>		
-		</div>
-	</article>
 <article class="container">
 	<div class="loginform">
 	<h1>로그인</h1>
