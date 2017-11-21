@@ -19,7 +19,7 @@
 		onchange="listChange(this);">
 		<option value="curri">Curriculum </option>
 		<option value="lect"> Lecture </option>
-		<option value="member" selected="selected">Member</option>
+		<option value="member">Member</option>
 		<option value="book">Book</option>
 		<option value="faq">Faq</option>
 		<option value="ja">Jageok</option>
@@ -28,51 +28,42 @@
 		<option value="pay">Payment</option>
 		<option value="qna">QnA</option>
 		<option value="rev">Review</option>
-		<option value="stu">Student</option>
+		<option value="stu" selected="selected">Student</option>
 		<option value="t_i">Teacher_Intro</option>
 	</select>
-
-	<form action="search_backend_member.do" method="post">
+	
+	<form action="search_backend_stu.do" method="post">
 		<select name="column">
+			<option value="student_id">student_id</option>
 			<option value="member_id">Member-id</option>
-			<option value="member_pwd">Member-pwd</option>
-			<option value="member_name">Member-name</option>
-			<option value="member_tel">Member-tel</option>
-			<option value="member_email">Member-email</option>
-			<option value="member_level">Member-level</option>
-			<option value="member_address">Member-address</option>
-			<option value="member_addnum">Member-addnum</option>
-			<option value="enabled">Enable</option>
+			<option value="student_excel">student_excel</option>
+			<option value="lect_id">lect_id</option>
+			<option value="student_call">student_call</option>
+			<option value="student_conn">student_conn</option>
 		</select> 
 		<input size="30" type="text" id="keyvalue" name="keyvalue"
 			placeholder="키워드 검색 가능합니다."> <input type="submit"
 			id="searchbtn" value="검색">&nbsp;
 
 	</form>
-
+	
 	<table>
-		<th>ID</th>
-		<th>Password</th>
-		<th>Name</th>
-		<th>Tel</th>
-		<th>E-Mail</th>
-		<th>Level</th>
-		<th>Address</th>
-		<th>Addnum</th>
-		<th>Enabled</th>
-		<c:forEach items="${mlist }" var="list" varStatus="status">
-			<tr onclick="test(this)">
-				<td>${list.member_id}</td>
-				<td>${list.member_pwd}</td>
-				<td>${list.member_name}</td>
-				<td>${list.member_tel}</td>
-				<td>${list.member_email}</td>
-				<td>${list.member_level}</td>
-				<td>${list.member_address}</td>
-				<td>${list.member_addnum}</td>
-				<td>${list.enabled }</td>
-			</tr>
-		</c:forEach>
+	<th>student_id</th>
+	<th>Member_id</th>
+	<th>student_excel</th>
+	<th>lect_id</th>
+	<th>student_call</th>
+	<th>student_conn</th>
+	<c:forEach items="${stulist }" var="list" varStatus="status">
+		<tr onclick="test(this)">
+			<td>${list.student_id}</td>
+			<td>${list.member_id}</td>
+			<td>${list.student_excel}</td>
+			<td>${list.lect_id}</td>
+			<td>${list.student_call}</td>
+			<td>${list.student_conn}</td>
+		</tr>
+	</c:forEach>
 	</table>
 </body>
 </html>

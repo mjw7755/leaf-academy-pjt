@@ -19,29 +19,29 @@
 		onchange="listChange(this);">
 		<option value="curri">Curriculum </option>
 		<option value="lect"> Lecture </option>
-		<option value="member" selected="selected">Member</option>
+		<option value="member">Member</option>
 		<option value="book">Book</option>
 		<option value="faq">Faq</option>
 		<option value="ja">Jageok</option>
 		<option value="note">Note</option>
 		<option value="notice">Notice</option>
 		<option value="pay">Payment</option>
-		<option value="qna">QnA</option>
+		<option value="qna" selected="selected">QnA</option>
 		<option value="rev">Review</option>
 		<option value="stu">Student</option>
 		<option value="t_i">Teacher_Intro</option>
 	</select>
-
-	<form action="search_backend_member.do" method="post">
+	
+	<form action="search_backend_qna.do" method="post">
 		<select name="column">
+			<option value="qna_id">qna_id</option>
 			<option value="member_id">Member-id</option>
-			<option value="member_pwd">Member-pwd</option>
-			<option value="member_name">Member-name</option>
-			<option value="member_tel">Member-tel</option>
-			<option value="member_email">Member-email</option>
-			<option value="member_level">Member-level</option>
-			<option value="member_address">Member-address</option>
-			<option value="member_addnum">Member-addnum</option>
+			<option value="qna_title">qna_title</option>
+			<option value="qna_content">qna_content</option>
+			<option value="qna_writedate">qna_writedate</option>
+			<option value="qna_modifydate">qna_modifydate</option>
+			<option value="qna_ref">qna_ref</option>
+			<option value="qna_step">qna_step</option>
 			<option value="enabled">Enable</option>
 		</select> 
 		<input size="30" type="text" id="keyvalue" name="keyvalue"
@@ -49,30 +49,30 @@
 			id="searchbtn" value="검색">&nbsp;
 
 	</form>
-
+	
 	<table>
-		<th>ID</th>
-		<th>Password</th>
-		<th>Name</th>
-		<th>Tel</th>
-		<th>E-Mail</th>
-		<th>Level</th>
-		<th>Address</th>
-		<th>Addnum</th>
-		<th>Enabled</th>
-		<c:forEach items="${mlist }" var="list" varStatus="status">
-			<tr onclick="test(this)">
-				<td>${list.member_id}</td>
-				<td>${list.member_pwd}</td>
-				<td>${list.member_name}</td>
-				<td>${list.member_tel}</td>
-				<td>${list.member_email}</td>
-				<td>${list.member_level}</td>
-				<td>${list.member_address}</td>
-				<td>${list.member_addnum}</td>
-				<td>${list.enabled }</td>
-			</tr>
-		</c:forEach>
+	<th>qna_id</th>
+	<th>Member_id</th>
+	<th>qna_title</th>
+	<th>qna_content</th>
+	<th>qna_writedate</th>
+	<th>qna_modifydate</th>
+	<th>qna_ref</th>
+	<th>qna_step</th>
+	<th>Enabled</th>
+	<c:forEach items="${qlist }" var="list" varStatus="status">
+		<tr onclick="test(this)">
+			<td>${list.qna_id}</td>
+			<td>${list.member_id}</td>
+			<td>${list.qna_title}</td>
+			<td>${list.qna_content}</td>
+			<td>${list.qna_writedate}</td>
+			<td>${list.qna_modifydate}</td>
+			<td>${list.qna_ref}</td>
+			<td>${list.qna_step }</td>
+			<td>${list.enabled }</td>
+		</tr>
+	</c:forEach>
 	</table>
 </body>
 </html>

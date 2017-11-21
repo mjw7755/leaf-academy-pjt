@@ -20,17 +20,33 @@
 		<option value="curri">Curriculum </option>
 		<option value="lect" selected="selected"> Lecture </option>
 		<option value="member">Member</option>
+		<option value="book">Book</option>
+		<option value="faq">Faq</option>
+		<option value="ja">Jageok</option>
+		<option value="note">Note</option>
+		<option value="notice">Notice</option>
+		<option value="pay">Payment</option>
+		<option value="qna">QnA</option>
+		<option value="rev">Review</option>
+		<option value="stu">Student</option>
+		<option value="t_i">Teacher_Intro</option>
 	</select>
+	
 	<form action="search_backend_lect.do" method="post">
 		<select name="column">
+			<option value="lect_id">Lect-id</option>
+			<option value="curri_id">Curri_id</option>
 			<option value="lect_name">Lect-name</option>
 			<option value="lect_person_num">Person-num</option>
 			<option value="lect_start_day">Start-day</option>
 			<option value="lect_end_day">End-day</option>
 			<option value="lect_start_time">Start-time</option>
 			<option value="lect_end_time">End-time</option>
+			<option value="lect_write_time">Write-time</option>
+			<option value="lect_modify_time">Modify-time</option>
 			<option value="lect_charge">Charge</option>
 			<option value="lect_accept">Accept</option>
+			<option value="lect_open">open</option>
 			<option value="enabled">Enabled</option>
 		</select> 
 		<input size="30" type="text" id="keyvalue" name="keyvalue"
@@ -39,25 +55,35 @@
 
 	</form>
 	<table>
+		<th>Lect-id</th>
+		<th>Curri-id</th>
 		<th>Lect-name</th>
 		<th>Person-num</th>
 		<th>Start-day</th>
 		<th>End-day</th>
 		<th>Start-time</th>
 		<th>End-time</th>
+		<th>Write-time</th>
+		<th>Modify-time</th>
 		<th>Charge</th>
 		<th>Accept</th>
+		<th>lect_open</th>
 		<th>Enabled</th>
-		<c:forEach items="${list }" var="list" varStatus="status">
+		<c:forEach items="${llist }" var="list" varStatus="status">
 			<tr onclick="test(this)">
+				<td>${list.lect_id}</td>
+				<td>${list.curri_id}</td>
 				<td>${list.lect_name}</td>
 				<td>${list.lect_person_num}</td>
 				<td>${list.lect_start_day}</td>
 				<td>${list.lect_end_day}</td>
 				<td>${list.lect_start_time}</td>
 				<td>${list.lect_end_time}</td>
+				<td>${list.lect_write_time}</td>
+				<td>${list.lect_modify_time}</td>
 				<td>${list.lect_charge}</td>
 				<td>${list.lect_accept}</td>
+				<td>${list.lect_open}</td>
 				<td>${list.enabled }</td>
 			</tr>
 		</c:forEach>

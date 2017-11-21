@@ -20,19 +20,55 @@
 		<option value="curri" selected="selected">Curriculum </option>
 		<option value="lect"> Lecture </option>
 		<option value="member">Member</option>
+		<option value="book">Book</option>
+		<option value="faq">Faq</option>
+		<option value="ja">Jageok</option>
+		<option value="note">Note</option>
+		<option value="notice">Notice</option>
+		<option value="pay">Payment</option>
+		<option value="qna">QnA</option>
+		<option value="rev">Review</option>
+		<option value="stu">Student</option>
+		<option value="t_i">Teacher_Intro</option>
 	</select>
 	
+	<form action="search_backend_curri.do" method="post">
+		<select name="column">
+			<option value="curri_id">Curri-id</option>
+			<option value="member_id">Member-id</option>
+			<option value="curri_subject">Curri-subject</option>
+			<option value="curri_level">Curri-level</option>
+			<option value="curri_content">Curri-content</option>
+			<option value="curri_write_time">Curri-write_time</option>
+			<option value="curri_modify_time">Curri-modify_time</option>
+			<option value="curri_accept">Curri-accept</option>
+			<option value="enabled">Enable</option>
+		</select> 
+		<input size="30" type="text" id="keyvalue" name="keyvalue"
+			placeholder="키워드 검색 가능합니다."> <input type="submit"
+			id="searchbtn" value="검색">&nbsp;
+
+	</form>
+	
 	<table>
+	<th>Curri_id</th>
+	<th>Member_id</th>
 	<th>Subject</th>
 	<th>Level</th>
 	<th>Content</th>
+	<th>Write_time</th>
+	<th>Modify_time</th>
 	<th>Accept</th>
 	<th>Enabled</th>
-	<c:forEach items="${list }" var="list" varStatus="status">
+	<c:forEach items="${clist }" var="list" varStatus="status">
 		<tr onclick="test(this)">
+			<td>${list.curri_id}</td>
+			<td>${list.member_id}</td>
 			<td>${list.curri_subject}</td>
 			<td>${list.curri_level}</td>
 			<td>${list.curri_content}</td>
+			<td>${list.curri_write_time}</td>
+			<td>${list.curri_modify_time}</td>
 			<td>${list.curri_accept }</td>
 			<td>${list.enabled }</td>
 		</tr>

@@ -7,10 +7,10 @@ public class LectDTO {
 	lect_end_day, lect_start_time,
 	lect_end_time, lect_write_time,
 	lect_modify_time;
-private int lect_id, curri_id, enabled, lect_accept, lect_person_num, lect_charge;
+private int lect_id, curri_id, enabled, lect_accept, lect_person_num, lect_charge,lect_open;
 private String  member_id, curri_level, curri_subject, curri_content;
 
-
+public LectDTO() {}
 
 
 public String getLect_name() {
@@ -115,21 +115,31 @@ public String getCurri_content() {
 public void setCurri_content(String curri_content) {
 	this.curri_content = curri_content;
 }
+
+
+public int getLect_open() {
+	return lect_open;
+}
+public void setLect_open(int lect_open) {
+	this.lect_open = lect_open;
+}
+
+
 @Override
 public String toString() {
 	return "LectDTO [lect_name=" + lect_name + ", lect_start_day=" + lect_start_day + ", lect_end_day=" + lect_end_day
 			+ ", lect_start_time=" + lect_start_time + ", lect_end_time=" + lect_end_time + ", lect_write_time="
 			+ lect_write_time + ", lect_modify_time=" + lect_modify_time + ", lect_id=" + lect_id + ", curri_id="
 			+ curri_id + ", enabled=" + enabled + ", lect_accept=" + lect_accept + ", lect_person_num="
-			+ lect_person_num + ", lect_charge=" + lect_charge + ", member_id=" + member_id + ", curri_level="
-			+ curri_level + ", curri_subject=" + curri_subject + ", curri_content=" + curri_content + "]";
+			+ lect_person_num + ", lect_charge=" + lect_charge + ", lect_open=" + lect_open + ", member_id=" + member_id
+			+ ", curri_level=" + curri_level + ", curri_subject=" + curri_subject + ", curri_content=" + curri_content
+			+ "]";
 }
 
-public LectDTO() {}
 
 public LectDTO(String lect_name, String lect_start_day, String lect_end_day, String lect_start_time,
 		String lect_end_time, String lect_write_time, String lect_modify_time, int lect_id, int curri_id, int enabled,
-		int lect_accept, int lect_person_num, int lect_charge, String member_id, String curri_level,
+		int lect_accept, int lect_person_num, int lect_charge, int lect_open, String member_id, String curri_level,
 		String curri_subject, String curri_content) {
 	super();
 	this.lect_name = lect_name;
@@ -145,12 +155,12 @@ public LectDTO(String lect_name, String lect_start_day, String lect_end_day, Str
 	this.lect_accept = lect_accept;
 	this.lect_person_num = lect_person_num;
 	this.lect_charge = lect_charge;
+	this.lect_open = lect_open;
 	this.member_id = member_id;
 	this.curri_level = curri_level;
 	this.curri_subject = curri_subject;
 	this.curri_content = curri_content;
 }
-
 
 	
 }

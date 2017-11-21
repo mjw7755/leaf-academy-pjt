@@ -19,29 +19,27 @@
 		onchange="listChange(this);">
 		<option value="curri">Curriculum </option>
 		<option value="lect"> Lecture </option>
-		<option value="member" selected="selected">Member</option>
+		<option value="member">Member</option>
 		<option value="book">Book</option>
 		<option value="faq">Faq</option>
 		<option value="ja">Jageok</option>
 		<option value="note">Note</option>
-		<option value="notice">Notice</option>
+		<option value="notice" selected="selected">Notice</option>
 		<option value="pay">Payment</option>
 		<option value="qna">QnA</option>
 		<option value="rev">Review</option>
 		<option value="stu">Student</option>
 		<option value="t_i">Teacher_Intro</option>
 	</select>
-
-	<form action="search_backend_member.do" method="post">
+	
+	<form action="search_backend_notice.do" method="post">
 		<select name="column">
-			<option value="member_id">Member-id</option>
-			<option value="member_pwd">Member-pwd</option>
-			<option value="member_name">Member-name</option>
-			<option value="member_tel">Member-tel</option>
-			<option value="member_email">Member-email</option>
-			<option value="member_level">Member-level</option>
-			<option value="member_address">Member-address</option>
-			<option value="member_addnum">Member-addnum</option>
+			<option value="notice_id">notice_id</option>
+			<option value="member_id">member_id</option>
+			<option value="notice_title">notice_title</option>
+			<option value="notice_content">notice_content</option>
+			<option value="notice_writedate">notice_writedate</option>
+			<option value="notice_modifydate">notice_modifydate</option>
 			<option value="enabled">Enable</option>
 		</select> 
 		<input size="30" type="text" id="keyvalue" name="keyvalue"
@@ -49,30 +47,26 @@
 			id="searchbtn" value="검색">&nbsp;
 
 	</form>
-
+	
 	<table>
-		<th>ID</th>
-		<th>Password</th>
-		<th>Name</th>
-		<th>Tel</th>
-		<th>E-Mail</th>
-		<th>Level</th>
-		<th>Address</th>
-		<th>Addnum</th>
-		<th>Enabled</th>
-		<c:forEach items="${mlist }" var="list" varStatus="status">
-			<tr onclick="test(this)">
-				<td>${list.member_id}</td>
-				<td>${list.member_pwd}</td>
-				<td>${list.member_name}</td>
-				<td>${list.member_tel}</td>
-				<td>${list.member_email}</td>
-				<td>${list.member_level}</td>
-				<td>${list.member_address}</td>
-				<td>${list.member_addnum}</td>
-				<td>${list.enabled }</td>
-			</tr>
-		</c:forEach>
+	<th>notice_id</th>
+	<th>Member_id</th>
+	<th>notice_title</th>
+	<th>notice_content</th>
+	<th>notice_writedate</th>
+	<th>notice_modifydate</th>
+	<th>Enabled</th>
+	<c:forEach items="${noticelist }" var="list" varStatus="status">
+		<tr onclick="test(this)">
+			<td>${list.notice_id}</td>
+			<td>${list.member_id}</td>
+			<td>${list.notice_title}</td>
+			<td>${list.notice_content}</td>
+			<td>${list.notice_writedate}</td>
+			<td>${list.notice_modifydate}</td>
+			<td>${list.enabled }</td>
+		</tr>
+	</c:forEach>
 	</table>
 </body>
 </html>

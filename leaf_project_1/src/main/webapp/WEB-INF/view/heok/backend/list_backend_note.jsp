@@ -19,11 +19,11 @@
 		onchange="listChange(this);">
 		<option value="curri">Curriculum </option>
 		<option value="lect"> Lecture </option>
-		<option value="member" selected="selected">Member</option>
+		<option value="member">Member</option>
 		<option value="book">Book</option>
 		<option value="faq">Faq</option>
 		<option value="ja">Jageok</option>
-		<option value="note">Note</option>
+		<option value="note" selected="selected">Note</option>
 		<option value="notice">Notice</option>
 		<option value="pay">Payment</option>
 		<option value="qna">QnA</option>
@@ -31,48 +31,48 @@
 		<option value="stu">Student</option>
 		<option value="t_i">Teacher_Intro</option>
 	</select>
-
-	<form action="search_backend_member.do" method="post">
+	
+	<form action="search_backend_note.do" method="post">
 		<select name="column">
-			<option value="member_id">Member-id</option>
-			<option value="member_pwd">Member-pwd</option>
-			<option value="member_name">Member-name</option>
-			<option value="member_tel">Member-tel</option>
-			<option value="member_email">Member-email</option>
-			<option value="member_level">Member-level</option>
-			<option value="member_address">Member-address</option>
-			<option value="member_addnum">Member-addnum</option>
-			<option value="enabled">Enable</option>
+			<option value="n_id">n-id</option>
+			<option value="n_content">n_content</option>
+			<option value="n_title">n_title</option>
+			<option value="n_send_id">n_title</option>
+			<option value="n_recv_id">n_recv_id</option>
+			<option value="n_send_del_yn">n_send_del_yn</option>
+			<option value="n_recv_del_yn">n_recv_del_yn</option>
+			<option value="n_open_date">n_open_date</option>
+			<option value="n_write_date">n_write_date</option>
 		</select> 
 		<input size="30" type="text" id="keyvalue" name="keyvalue"
 			placeholder="키워드 검색 가능합니다."> <input type="submit"
 			id="searchbtn" value="검색">&nbsp;
 
 	</form>
-
+	
 	<table>
-		<th>ID</th>
-		<th>Password</th>
-		<th>Name</th>
-		<th>Tel</th>
-		<th>E-Mail</th>
-		<th>Level</th>
-		<th>Address</th>
-		<th>Addnum</th>
-		<th>Enabled</th>
-		<c:forEach items="${mlist }" var="list" varStatus="status">
-			<tr onclick="test(this)">
-				<td>${list.member_id}</td>
-				<td>${list.member_pwd}</td>
-				<td>${list.member_name}</td>
-				<td>${list.member_tel}</td>
-				<td>${list.member_email}</td>
-				<td>${list.member_level}</td>
-				<td>${list.member_address}</td>
-				<td>${list.member_addnum}</td>
-				<td>${list.enabled }</td>
-			</tr>
-		</c:forEach>
+	<th>n_id</th>
+	<th>n_content</th>
+	<th>n_title</th>
+	<th>n_send_id</th>
+	<th>n_recv_id</th>
+	<th>n_send_del_yn</th>
+	<th>n_recv_del_yn</th>
+	<th>n_open_date</th>
+	<th>n_write_date</th>
+	<c:forEach items="${nlist }" var="list" varStatus="status">
+		<tr onclick="test(this)">
+			<td>${list.n_id}</td>
+			<td>${list.n_content}</td>
+			<td>${list.n_title}</td>
+			<td>${list.n_send_id}</td>
+			<td>${list.n_recv_id}</td>
+			<td>${list.n_send_del_yn}</td>
+			<td>${list.n_recv_del_yn}</td>
+			<td>${list.n_open_date }</td>
+			<td>${list.n_write_date }</td>
+		</tr>
+	</c:forEach>
 	</table>
 </body>
 </html>

@@ -19,7 +19,7 @@
 		onchange="listChange(this);">
 		<option value="curri">Curriculum </option>
 		<option value="lect"> Lecture </option>
-		<option value="member" selected="selected">Member</option>
+		<option value="member">Member</option>
 		<option value="book">Book</option>
 		<option value="faq">Faq</option>
 		<option value="ja">Jageok</option>
@@ -27,21 +27,20 @@
 		<option value="notice">Notice</option>
 		<option value="pay">Payment</option>
 		<option value="qna">QnA</option>
-		<option value="rev">Review</option>
+		<option value="rev" selected="selected">Review</option>
 		<option value="stu">Student</option>
 		<option value="t_i">Teacher_Intro</option>
 	</select>
-
-	<form action="search_backend_member.do" method="post">
+	
+	<form action="search_backend_rev.do" method="post">
 		<select name="column">
+			<option value="review_id">"review_id"</option>
 			<option value="member_id">Member-id</option>
-			<option value="member_pwd">Member-pwd</option>
-			<option value="member_name">Member-name</option>
-			<option value="member_tel">Member-tel</option>
-			<option value="member_email">Member-email</option>
-			<option value="member_level">Member-level</option>
-			<option value="member_address">Member-address</option>
-			<option value="member_addnum">Member-addnum</option>
+			<option value="teacher_id">teacher_id</option>
+			<option value="r_headline">r_headline</option>
+			<option value="r_content">r_content</option>
+			<option value="r_write_time">r_write_time</option>
+			<option value="r_modify_time">r_modify_time</option>
 			<option value="enabled">Enable</option>
 		</select> 
 		<input size="30" type="text" id="keyvalue" name="keyvalue"
@@ -49,30 +48,28 @@
 			id="searchbtn" value="검색">&nbsp;
 
 	</form>
-
+	
 	<table>
-		<th>ID</th>
-		<th>Password</th>
-		<th>Name</th>
-		<th>Tel</th>
-		<th>E-Mail</th>
-		<th>Level</th>
-		<th>Address</th>
-		<th>Addnum</th>
-		<th>Enabled</th>
-		<c:forEach items="${mlist }" var="list" varStatus="status">
-			<tr onclick="test(this)">
-				<td>${list.member_id}</td>
-				<td>${list.member_pwd}</td>
-				<td>${list.member_name}</td>
-				<td>${list.member_tel}</td>
-				<td>${list.member_email}</td>
-				<td>${list.member_level}</td>
-				<td>${list.member_address}</td>
-				<td>${list.member_addnum}</td>
-				<td>${list.enabled }</td>
-			</tr>
-		</c:forEach>
+	<th>review_id</th>
+	<th>Member_id</th>
+	<th>teacher_id</th>
+	<th>r_headline</th>
+	<th>r_content</th>
+	<th>r_write_time</th>
+	<th>r_modify_time</th>
+	<th>Enabled</th>
+	<c:forEach items="${rlist }" var="list" varStatus="status">
+		<tr onclick="test(this)">
+			<td>${list.review_id}</td>
+			<td>${list.member_id}</td>
+			<td>${list.teacher_id}</td>
+			<td>${list.r_headline}</td>
+			<td>${list.r_content}</td>
+			<td>${list.r_write_time}</td>
+			<td>${list.r_modify_time}</td>
+			<td>${list.enabled }</td>
+		</tr>
+	</c:forEach>
 	</table>
 </body>
 </html>

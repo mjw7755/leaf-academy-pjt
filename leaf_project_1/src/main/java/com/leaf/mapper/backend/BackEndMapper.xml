@@ -5,12 +5,98 @@
 
 <mapper namespace="com.leaf.model.backend.BackEndDAO">
 
-	<select id="curri" parameterType="int" resultType="com.leaf.model.curriculum.CurriDTO">
-		select curri_subject, curri_id, member_id from curriculum where curri_id=#{curri_id}
-	</select>
-	<select id="lect" parameterType="int" resultType="com.leaf.model.curriculum.LectDTO">
-		select lect_charge from lecture where lect_id=#{lect_id} 
-	</select>
+	<select id="back_curri" resultType="com.leaf.model.curriculum.CurriDTO">
+		select*from curriculum
 
-
+	</select>
+	<select id="back_lect"  resultType="com.leaf.model.curriculum.LectDTO">
+		select*from lecture
+	</select>
+	<select id="back_member"  resultType="com.leaf.model.member.MemberDTO">
+		select*from member
+	</select>
+	<select id="back_book" resultType="com.leaf.model.book.BookDTO">
+		select*from book
+	</select>
+	<select id="back_faq" resultType="com.leaf.model.service.FaqDTO">
+		select*from faq
+	</select>
+	<select id="back_note" resultType="com.leaf.model.note.NoteDTO">
+		select*from note
+	</select>
+	<select id="back_notice" resultType="com.leaf.model.service.NoticeDTO">
+		select*from notice
+	</select>
+	<select id="back_pay" resultType="com.leaf.model.payment.PaymentDTO">
+		select*from payment
+	</select>
+	<select id="back_qna" resultType="com.leaf.model.service.QnaDTO">
+		select*from qna
+	</select>
+	<select id="back_rev" resultType="com.leaf.model.teacher_intro.ReviewDTO">
+		select*from review
+	</select>
+	<select id="back_t_i" resultType="com.leaf.model.teacher_intro.T_introDTO">
+		select*from teacher_intro
+	</select>
+	<select id="back_stu" resultType="com.leaf.model.stumgmt.StudentDTO">
+		select*from student
+	</select>
+	<select id="back_ja" resultType="com.leaf.model.jageok.JageokDTO">
+		select*from jageok
+	</select>
+	
+	
+	<select id="back_searchCurri" parameterType="hashMap"
+		resultType="com.leaf.model.curriculum.CurriDTO">
+      select *from curriculum where ${column} like '%' || #{keyvalue} || '%' 
+	</select>
+	<select id="back_searchLect" parameterType="hashMap"
+		resultType="com.leaf.model.curriculum.LectDTO">
+      select *from lecture where ${column} like '%' || #{keyvalue} || '%' 
+	</select>
+	<select id="back_searchMember" parameterType="hashMap"
+		resultType="com.leaf.model.member.MemberDTO">
+      select *from member where ${column} like '%' || #{keyvalue} || '%' 
+	</select>
+	<select id="back_searchBook" parameterType="hashMap"
+		resultType="com.leaf.model.book.BookDTO">
+      select *from book where ${column} like '%' || #{keyvalue} || '%' 
+	</select>
+	<select id="back_searchFaq" parameterType="hashMap"
+		resultType="com.leaf.model.service.FaqDTO">
+      select *from faq where ${column} like '%' || #{keyvalue} || '%' 
+	</select>
+	<select id="back_searchNote" parameterType="hashMap"
+		resultType="com.leaf.model.note.NoteDTO">
+      select *from note where ${column} like '%' || #{keyvalue} || '%' 
+	</select>
+	<select id="back_searchNotice" parameterType="hashMap"
+		resultType="com.leaf.model.service.NoticeDTO">
+      select *from notice where ${column} like '%' || #{keyvalue} || '%' 
+	</select>
+	<select id="back_searchPay" parameterType="hashMap"
+		resultType="com.leaf.model.payment.PaymentDTO">
+      select *from payment where ${column} like '%' || #{keyvalue} || '%' 
+	</select>
+	<select id="back_searchQna" parameterType="hashMap"
+		resultType="com.leaf.model.service.QnaDTO">
+      select *from qna where ${column} like '%' || #{keyvalue} || '%' 
+	</select>
+	<select id="back_searchRev" parameterType="hashMap"
+		resultType="com.leaf.model.teacher_intro.ReviewDTO">
+      select *from review where ${column} like '%' || #{keyvalue} || '%' 
+	</select>
+	<select id="back_searchT_i" parameterType="hashMap"
+		resultType="com.leaf.model.teacher_intro.T_introDTO">
+      select *from teacher_intro where ${column} like '%' || #{keyvalue} || '%' 
+	</select>
+	<select id="back_searchStu" parameterType="hashMap"
+		resultType="com.leaf.model.stumgmt.StudentDTO">
+      select *from student where ${column} like '%' || #{keyvalue} || '%' 
+	</select>
+	<select id="back_searchJa" parameterType="hashMap"
+		resultType="com.leaf.model.jageok.JageokDTO">
+      select *from jageok where ${column} like '%' || #{keyvalue} || '%' 
+	</select>
 </mapper>
