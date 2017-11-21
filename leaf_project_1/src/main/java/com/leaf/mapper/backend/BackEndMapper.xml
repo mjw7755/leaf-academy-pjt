@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.leaf.model.application.AppliDAO">
+<mapper namespace="com.leaf.model.backend.BackEndDAO">
 
 	<select id="curri" parameterType="int" resultType="com.leaf.model.curriculum.CurriDTO">
 		select curri_subject, curri_id, member_id from curriculum where curri_id=#{curri_id}
