@@ -85,7 +85,7 @@
 		<table>
 		<tr>
 				<td colspan="2"><hr></td>
-			</tr
+			</tr>
 			<tr>
 				<td colspan="2" id="file">
 					<div id="image_preview">
