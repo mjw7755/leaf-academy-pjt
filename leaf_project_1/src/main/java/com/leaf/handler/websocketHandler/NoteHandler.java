@@ -1,7 +1,7 @@
 package com.leaf.handler.websocketHandler;
 
 import java.util.ArrayList;
-
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -70,17 +70,59 @@ public class NoteHandler implements org.springframework.web.socket.WebSocketHand
 		
 		if(data.get("n_type").equals("message")) {
 			System.out.println("메세지일때");
-			NoteDTO dto = new NoteDTO();
-			dto.setN_content((String)data.get("n_content"));
-			dto.setN_title((String)data.get("n_title"));
-			dto.setN_recv_id((String)data.get("n_recvid"));
-			dto.setN_send_id((String)data.get("n_sendid"));
+			Map<String, Object> mul_recv_note = new HashMap<String, Object>();
+			ArrayList<String> n_recvids = new ArrayList<String>();
+			ArrayList<NoteDTO> n_recvids_arr = new ArrayList<NoteDTO>();
+			n_recvids = (ArrayList)data.get("chkvalues");
+			
+			for(int i=0; i<n_recvids.size(); i++) {
+				
+				System.out.println("id값 제대로 들어왔을까? "+n_recvids.get(i));
+			}
+			
+			
+			
+			
+			
+			if(n_recvids.size() > 1) {
+				/*다중 쪽지*/
+				for(int i=0;i<n_recvids.size(); i++) {
+					NoteDTO dto = new NoteDTO();
+					dto.setN_content((String)data.get("n_content"));
+					dto.setN_title((String)data.get("n_title"));
+					dto.setN_recv_id(n_recvids.get(i));
+					dto.setN_send_id((String)data.get("n_sendid"));
+					n_recvids_arr.add(dto);
+				}
+				System.out.println("다중쪽지 시작");
+				mul_recv_note.put("n_recvids_arr", n_recvids_arr);
+				noteDAO.writeMulNote(mul_recv_note);
+				System.out.println("다중쪽지 완료");
+				
+				
+				for(int i=0; i<n_recvids_arr.size(); i++) {
+					int recv_users = userList.indexOf(n_recvids_arr.get(i));
+					if(recv_users > -1) {
+						WebSocketSession recv_session = socketList.get(recv_users);
+						recv_session.sendMessage(new TextMessage(message));
+						System.out.println("해당유저에 메세지 전달 완료");
+					}else {
+						System.out.println("해당 유저 없음");
+					}
+				}
+			}else {
+				NoteDTO dto = new NoteDTO();
+
+				/*단일 쪽지*/
+				dto.setN_content((String)data.get("n_content"));
+				dto.setN_title((String)data.get("n_title"));
+				dto.setN_recv_id((String)data.get("n_recvid"));
+				dto.setN_send_id((String)data.get("n_sendid"));				
+				noteDAO.writeNote(dto);
+			}
 			int recv_user_num = userList.indexOf((String)data.get("n_recvid"));
 			System.out.println("받는사람 있을까?"+recv_user_num);
-			
-			/*noteDAO.writeNote(dto);*/
-			
-			
+
 			if(recv_user_num > -1) {
 				WebSocketSession recv_session = socketList.get(recv_user_num);
 				recv_session.sendMessage(new TextMessage(message));

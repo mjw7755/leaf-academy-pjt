@@ -2,12 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="service.faq.model.FaqDAO">
-	<select id="faqSelect" resultType="service.faq.model.FaqDTO">
+<mapper namespace="com.leaf.model.service.FaqDAO">
+	<select id="faqSelect" resultType="com.leaf.model.service.FaqDTO">
 	 select * from faq order by faq_id desc 
 	</select>
 	 
-	<insert id="faqInsert" parameterType="service.faq.model.FaqDTO">
+	<insert id="faqInsert" parameterType="com.leaf.model.service.FaqDTO">
 		<!-- <selectKey resultType="int" keyProperty="faq_id" order="BEFORE">
 			select NVL(max(faq_id),0)+1 from faq
 		</selectKey> -->
@@ -16,18 +16,18 @@
 		faq_seq.nextval, #{faq_title}, #{faq_content}, 1)
 	</insert>
 
-	<delete id="faqDelete" parameterType="service.faq.model.FaqDTO">
+	<delete id="faqDelete" parameterType="com.leaf.model.service.FaqDTO">
 		delete from faq where
 		faq_id=#{faq_id}
 	</delete>
 	
-	<update id="faqUpdate" parameterType="service.faq.model.FaqDTO">
+	<update id="faqUpdate" parameterType="com.leaf.model.service.FaqDTO">
 		update faq set faq_title = #{faq_title}, faq_content = #{faq_content}
 		 where faq_id = #{faq_id}
 	</update>
 	
 	<select id="faqSelectId" parameterType="int"
-		resultType="service.faq.model.FaqDTO">
+		resultType="com.leaf.model.service.FaqDTO">
 		select * from faq where faq_id = #{faq_id}
 	</select>
 	
@@ -40,7 +40,7 @@
 	</delete>
 
 	<select id="searchSelect" parameterType="hashMap"
-		resultType="service.faq.model.FaqDTO">
+		resultType="com.leaf.model.service.FaqDTO">
 		select * from faq where ${column} like '%' || #{keyvalue} || '%'
 	</select>
 </mapper>

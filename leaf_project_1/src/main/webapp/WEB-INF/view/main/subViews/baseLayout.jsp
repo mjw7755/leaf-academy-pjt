@@ -78,12 +78,38 @@ var conn;
 				//웹 소켓 연결 해제
 				websocket.close();
 			}); */
+			
+			
+			
 			$("#loginBtn").bind('click',function(){
 				var login_member_id = $("#login_member_id").val();
 				send({
 		               n_type: "login",
 		            });
 			});
+			
+			$("#mgmtNoteSend").bind('click',function(){
+				
+				var n_recv_id = $("#n_recv_id").val();
+				var recv_values = [];
+				recv_values = n_recv_id.split(",");
+				
+				var n_send_id = $("#n_send_id").val();
+				var n_title = $("#n_title").val();
+				var n_content = $("#n_content").val();
+				
+				
+				send({
+					n_type: "message",
+					chkvalues: recv_values,
+					n_content: n_content,
+					n_title: n_title,
+					n_sendid: n_send_id,
+				});
+				
+				
+			});
+			
 			//전송 버튼을 누를 때 이벤트 처리
 			$('#sendBtn').bind('click', function(){
 				

@@ -1,31 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- deptMapper.xml -->
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="project.leaf.model.curriculum.CurriDAO">
-	<select id="getCurriList" parameterType="Integer"
-		resultType="project.leaf.model.curriculum.CurriDTO">
-		
-		 select * from
+<mapper namespace="com.leaf.model.curriculum.CurriDAO">
+
+
+	<select id="listCurri" parameterType="Integer"
+		resultType="com.leaf.model.curriculum.CurriDTO">
+ 		
+	 	 select * from
       (SELECT ROWNUM NUM, m.* FROM 
-                     ( SELECT * FROM curriculum ORDER BY curri_id DESC)   m)
-      where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
+                    (select c.*, l.lect_start_day, l.lect_end_day, l.lect_name, l.lect_person_num from 
+			lecture l, curriculum c where l.curri_id = c.curri_id) m ) 
+      where NUM between ((#{page}-1)*5)+1 and (#{page}*5) 
+  
 	</select>
 	<select id="getCurriByCurri_id" parameterType="int"
-		resultType="project.leaf.model.curriculum.CurriDTO">
+		resultType="com.leaf.model.curriculum.CurriDTO">
 		select*from curriculum where curri_id = #{curri_id}
 	</select>
 
-	<insert id="insertCurri" parameterType="project.leaf.model.curriculum.CurriDTO">
+	<insert id="insertCurri" parameterType="com.leaf.model.curriculum.CurriDTO">
 		<selectKey resultType="int" keyProperty="curri_id" order="BEFORE">
 			select NVL(max(curri_id),0)+1 from curriculum
 		</selectKey>
 
 		insert into
-		curriculum(curri_id, curri_level, curri_subject,
+		curriculum(member_id, curri_id, curri_level, curri_subject,
 		curri_content, curri_write_time)
-		values(#{curri_id}, #{curri_level},
+		values(#{member_id}, #{curri_id}, #{curri_level},
 		#{curri_subject}, #{curri_content},
 		#{curri_write_time})
 
@@ -37,7 +40,7 @@
 		curri_id=#{curri_id}
 	</delete>
 
-	<update id="updateCurri" parameterType="project.leaf.model.curriculum.CurriDTO">
+	<update id="updateCurri" parameterType="com.leaf.model.curriculum.CurriDTO">
 		update curriculum set curri_level=#{curri_level},
 		curri_subject=#{curri_subject}, curri_content=#{curri_content},
 		curri_modify_time=#{curri_modify_time} where curri_id=#{curri_id}
@@ -46,6 +49,43 @@
 	<select id="getCount" parameterType="Integer" resultType="Integer">
 		select count(*) from curriculum
 	</select>
+	
+	<select id="searchCurri" parameterType="hashMap"
+		resultType="com.leaf.model.curriculum.CurriDTO">
+		
+      select * from (SELECT ROWNUM NUM, m.* FROM
+      (select c.*, l.lect_start_day, l.lect_end_day, l.lect_name, l.lect_person_num from 
+      lecture l, curriculum c where ${column} like '%' || #{keyvalue} || '%' ) m)
+      where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
+      
+	</select>
+	
+	 <select id="getSearchCount" parameterType="hashMap" resultType="Integer">
+      select count(*) from curriculum where ${column} like '%' || #{keyvalue} || '%'
+   </select>
+	
+
+	<select id="monthlistCurri" parameterType="HashMap"
+		resultType="com.leaf.model.curriculum.CurriDTO">
+ 		
+		select * from 
+			(select rownum rnum, m.* from 
+			(select c.*, l.lect_start_day, l.lect_end_day, l.lect_name, l.lect_person_num from 
+			lecture l, curriculum c where l.curri_id = c.curri_id) m ) 
+			where <![CDATA[ TO_DATE(lect_start_day,'YYYY-MM-DD') >= TO_DATE(#{start_day},'YYYY-MM-DD') ]]>
+			and <![CDATA[TO_DATE(lect_start_day,'YYYY-MM-DD') <= TO_DATE(#{end_day},'YYYY-MM-DD')]]>
+			
+	</select>
+	 <select id ="detailCurri" parameterType="int" resultType="com.leaf.model.curriculum.CurriDTO" >
+
+	select c.*, l.lect_start_day, l.lect_end_day, l.lect_name, l.lect_person_num,
+			l.lect_start_time, l.lect_end_time 
+		from 
+			lecture l, (select *from curriculum where curri_id=#{curri_id}) c 
+		where l.curri_id = c.curri_id 
+	</select>
+	
 </mapper>
 	
 	
+ 

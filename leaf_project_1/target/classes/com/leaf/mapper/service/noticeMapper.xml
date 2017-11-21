@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
-<mapper namespace="service.notice.model.NoticeDAO">
-	<select id="noticeSelect" parameterType="Integer" resultType="service.notice.model.NoticeDTO">
+<mapper namespace="com.leaf.model.service.NoticeDAO">
+	<select id="noticeSelect" parameterType="Integer" resultType="com.leaf.model.service.NoticeDTO">
 		select * from
 		(SELECT ROWNUM NUM, m.* FROM
 		( SELECT * FROM notice ORDER BY notice_id DESC) m)
@@ -15,7 +15,7 @@
 		select count(*) from notice
 	</select>
 	
-		<insert id="noticeInsert" parameterType="service.notice.model.NoticeDTO">
+		<insert id="noticeInsert" parameterType="com.leaf.model.service.NoticeDTO">
 		<selectKey resultType="int" keyProperty="notice_id" order="BEFORE">
 			select NVL(max(notice_id),0)+1 from notice
 		</selectKey>
@@ -26,19 +26,19 @@
 		#{notice_writedate}, 1)
 	</insert>
 	
-	<delete id="noticeDelete" parameterType="service.notice.model.NoticeDTO">
+	<delete id="noticeDelete" parameterType="com.leaf.model.service.NoticeDTO">
 		delete from notice where
 		notice_id=#{notice_id}
 	</delete>
 	
-	<update id="noticeUpdate" parameterType="service.notice.model.NoticeDTO">
+	<update id="noticeUpdate" parameterType="com.leaf.model.service.NoticeDTO">
 		update notice set member_id =
 		#{member_id}, notice_title = #{notice_title}, notice_content = #{notice_content},
 		notice_modifydate = #{notice_modifydate} where notice_id = #{notice_id}
 	</update>
 	
 	<select id="noticeSelectId" parameterType="int"
-		resultType="service.notice.model.NoticeDTO">
+		resultType="com.leaf.model.service.NoticeDTO">
 		select * from notice where notice_id = #{notice_id}
 	</select>
 	
@@ -51,7 +51,22 @@
 	</delete>
 	
 	<select id="searchSelect" parameterType="hashMap"
-		resultType="service.notice.model.NoticeDTO">
-		select * from notice where ${column} like '%' || #{keyvalue} || '%'
+		resultType="com.leaf.model.service.NoticeDTO">
+		<!-- select * from notice where ${column} like '%' || #{keyvalue} || '%' order by notice_id desc -->
+	
+<!-- 	where NUM between ((#{page}-1)*5)+1 and (#{page}*5) -->
+<!-- 		select * from (SELECT ROWNUM NUM, m.* FROM
+		( select notice_id, member_id , notice_title, notice_content, notice_writedate, notice_modifydate, 
+	 enabled, rownum r from notice where ${column} like '%' || #{keyvalue} || '%' order by notice_id desc) m)
+		where NUM between ((#{page}-1)*5)+1 and (#{page}*5)  -->
+		
+		select * from
+		(SELECT ROWNUM NUM, m.* FROM
+		( SELECT * FROM notice where ${column} like '%' || #{keyvalue} || '%' ORDER BY notice_id DESC) m)
+		where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
+	</select>
+	
+		<select id="getCount2" parameterType="hashMap" resultType="Integer">
+		select count(*) from notice where ${column} like '%' || #{keyvalue} || '%'
 	</select>
 </mapper>	

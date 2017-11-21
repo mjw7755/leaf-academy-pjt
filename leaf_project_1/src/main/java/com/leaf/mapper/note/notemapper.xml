@@ -11,4 +11,18 @@
 	<select id="getTeacherId" parameterType="String" resultType="String">
 		select member_id from curriculum where curri_id = (select curri_id from lecture where lect_id = (select lect_id from student where member_id = #{member_id}))
 	</select>
+	
+	<insert id="writeMulNote" parameterType="HashMap">
+		<foreach collection="n_recvids_arr" index="index" item="list" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL">
+			into note(n_id,n_content, n_title, n_send_id, n_recv_id,n_write_date) values	(N_ID_SEQ.nextval,#{list.n_content},#{list.n_title},#{list.n_send_id},#{list.n_recv_id},sysdate)
+		</foreach>
+	</insert>
+	
+	<select id="getNoteList" parameterType="HashMap" resultType="com.leaf.model.note.NoteDTO">
+		select * from (select rownum rn, n.* from (select * from note where n_recv_id = #{sessionid} order by n_id asc ) n ) where rn between #{start} and #{end}
+	</select>
+	
+	<select id="allNoteCount" parameterType="String" resultType="Integer">
+		select count(*) from note where n_recv_id = #{sessionid}
+	</select>
 </mapper>

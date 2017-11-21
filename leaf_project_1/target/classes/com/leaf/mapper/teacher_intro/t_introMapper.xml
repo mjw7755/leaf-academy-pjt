@@ -2,34 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.co.academy.model.T_introDAO">
+<mapper namespace="com.leaf.model.teacher_intro.T_introDAO">
 	<select id="getCount" parameterType="Integer" resultType="Integer">
       select count(*) from teacher_intro
    </select>
 
 	<!--게시글 출력  -->
-   <select id="getT_introList" resultType="kr.co.academy.model.T_introDTO">
+   <select id="getT_introList" resultType="com.leaf.model.teacher_intro.T_introDTO">
       select * from
       (SELECT ROWNUM NUM, t.* FROM 
                      (select * from teacher_intro order by teacher_id desc) t)
-      where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
+      where NUM between ((#{page}-1)*9)+1 and (#{page}*9)
    </select>
 
-	<select id="getT_introByteacher_id" parameterType="Integer" resultType="kr.co.academy.model.T_introDTO">
+	<select id="getT_introByteacher_id" parameterType="Integer" resultType="com.leaf.model.teacher_intro.T_introDTO">
 		select * from teacher_intro where teacher_id = #{teacher_id}
 	</select>
 
-<!-- 	<insert id="insertT_intro" parameterType="kr.co.academy.model.T_introDTO">
-		insert into teacher_intro( teacher_id, member_id,teacher_introduce, enabled )
-		values( #{teacher_id}, #{member_id}, #{teacher_introduce},1 )
-	</insert> -->
-
 <!-- 게시글 추가 -->
-<insert id="insertT_intro" parameterType="kr.co.academy.model.T_introDTO">
+<insert id="insertT_intro" parameterType="com.leaf.model.teacher_intro.T_introDTO">
     <!-- 게시글 번호를 서브쿼리로 생성 -->
     INSERT INTO teacher_intro (
-      teacher_id, member_id, teacher_introduce, enabled) 
-      VALUES ((SELECT NVL(MAX(teacher_id)+1, 1)FROM teacher_intro), #{member_id}, #{teacher_introduce}, 1)
+      teacher_id, member_id, teacher_introduce, enabled, teacher_image) 
+      VALUES ((SELECT NVL(MAX(teacher_id)+1, 1)FROM teacher_intro), #{member_id}, #{teacher_introduce}, 1, #{teacher_image})
 </insert>
 
 <!--    <insert id="insertT_intro" parameterType="kr.co.academy.model.T_introDTO">
@@ -41,13 +36,13 @@
    </insert> -->
 
 <!-- 게시글 수정 -->
-	<update id="updateT_intro" parameterType="kr.co.academy.model.T_introDTO">
-		update teacher_intro set member_id=#{member_id}, teacher_introduce=#{teacher_introduce}
+	<update id="updateT_intro" parameterType="com.leaf.model.teacher_intro.T_introDTO">
+		update teacher_intro set member_id=#{member_id}, teacher_introduce=#{teacher_introduce}, teacher_image=#{teacher_image}
 		where teacher_id = #{teacher_id}
 	</update>
 	
 	<!-- 게시글 삭제 -->
-	<delete id="deleteT_intro" parameterType="kr.co.academy.model.T_introDTO">
+	<delete id="deleteT_intro" parameterType="com.leaf.model.teacher_intro.T_introDTO">
 		delete from teacher_intro where teacher_id=#{teacher_id}
 	</delete>
 	<!-- 게시글 다중삭제 -->
@@ -59,7 +54,7 @@
    </delete>
    
    <!-- 게시글 검색 -->
-   	<select id="searchT_introList" parameterType="hashMap" resultType="kr.co.academy.model.T_introDTO">
+   	<select id="searchT_introList" parameterType="hashMap" resultType="com.leaf.model.teacher_intro.T_introDTO">
 		select * from teacher_intro
 		<where>
 			<if test="member_id != null">
@@ -70,7 +65,7 @@
 	</select>
 
 <!-- 게시글 조회 -->
-  <select id="content" resultType="kr.co.academy.model.T_introDTO">
+  <select id="content" resultType="com.leaf.model.teacher_intro.T_introDTO">
         SELECT * FROM teacher_intro WHERE teacher_id = #{teacher_id}
     </select>
 

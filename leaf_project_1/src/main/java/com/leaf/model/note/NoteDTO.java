@@ -1,10 +1,12 @@
 package com.leaf.model.note;
 
 import java.sql.Timestamp;
+import java.util.Map;
 
 public class NoteDTO {
 	int n_id;
 	String n_content, n_title, n_send_id, n_recv_id, n_send_del_yn, n_recv_del_yn;
+	Map<String,String> n_recv_id_mul;
 	Timestamp n_open_date, n_write_date;
 	
 	
@@ -23,6 +25,17 @@ public class NoteDTO {
 		this.n_open_date = n_open_date;
 		this.n_write_date = n_write_date;
 	}
+	
+	
+	
+	public Map<String, String> getN_recv_id_mul() {
+		return n_recv_id_mul;
+	}
+
+	public void setN_recv_id_mul(Map<String, String> n_recv_id_mul) {
+		this.n_recv_id_mul = n_recv_id_mul;
+	}
+
 	public int getN_id() {
 		return n_id;
 	}

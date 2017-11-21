@@ -29,7 +29,7 @@ public interface LectDAO {
 
 	public List<CurriDTO> subjectcurri(String member_id);
 
-	public LectDTO getCheckDate(String sessionid);
+	public List<LectDTO> getCheckDate(String sessionid);
 
 	
 }
