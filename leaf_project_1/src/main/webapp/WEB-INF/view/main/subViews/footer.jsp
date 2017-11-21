@@ -8,16 +8,16 @@
 </head>
 <style type="text/css">
 .footer{
-	width: 100%;
-	margin-top: 50px;
+   width: 100%;
+   margin-top: 50px;
 }
 #foot{
-	width:800px;
-	margin-left: 25%;
-	font-size: 9px;
-	font-weight: bold;
-	color: #ababab;
-	float: left;
+   width:800px;
+   margin-left: 25%;
+   font-size: 9px;
+   font-weight: bold;
+   color: #ababab;
+   float: left;
 }
 .alert_div{
 font-size: 13px;
@@ -26,11 +26,11 @@ display: none;
 
 /*  */
 
-*, *:before, *:after {
+/* *, *:before, *:after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
+} */
 /* body {
   background: #333;
   font-family: 'Open Sans', Helvetica, Arial, sans-serif;
@@ -134,30 +134,83 @@ display: none;
 @supports (filter: url('#goo')) {
   transform: translateZ(0) scale(1.4);
 }
+/*  */
+
+   #quick_banner{
+      position: fixed;
+      top:20%;
+      right: 2%;
+      width:75px;
+      z-index: 2;
+   }
+   #quick_banner a{
+      text-decoration: none;
+      color: #000;
+   }
+   #quick{
+      background-color: #2b6728;
+      color:#fff;
+      height: 60px;
+      text-align: center;
+   }
+   #quick p{
+      padding-top: 10px;
+   }
+   #quick_myclass, #quick_mypage, #quick_book, #quick_curri{
+      border: 1px solid;
+      border-color: #9c9e9c;
+      height: 60px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: bold;
+      background-color: #fff;
+   }
+   #quick_myclass p, #quick_mypage p, #quick_book p, #quick_curri p{
+      margin: auto;
+      padding-top: 5px;
+      padding-bottom: 5px;
+   }
+   #quick_myclass img, #quick_mypage img, #quick_book img, #quick_curri img{
+      width:30px;
+      height: 30px;
+   }
+   #quick_top{
+      background-color: #2b6728;
+      color:#fff;
+      height: 45px;
+      text-align: center;
+   }
+   #quick_top p{
+      margin: auto;
+   }
+   #quick_top img{
+      width:20px;
+      height: 13px;
+   }
 </style>
 <body>
-	<div class="footer">
-		<table id="foot">
-			<tr>
-			<td rowspan="5"><img src="resources/logo.png"></td>
-			</tr>
-			<tr>
-				<td>경기 성남시 분당구 대왕판교로 660  리프교육빌딩 (주)리프코딩아카데미</td>
-			</tr>
-			<tr>
-				<td>대표이사 : 박영태 개인정보보호책임자 : 문재웅 사업자등록번호 : 111-23-24321 통신판매업신고번호 : 제9394-성남분당-3426호</td>			
-			</tr>
-			<tr>
-				<td>E. parkyoung@daum.net    T. 02-7375-1436    F. 02-7253-1436
-			</tr>
-			<tr>
-				<td>ⓒ 2017 LeafCA Co.,Ltd All Rights Reserved.</td>
-			</tr>
-		</table>
-	
+   <div class="footer">
+      <table id="foot">
+         <tr>
+         <td rowspan="5"><img src="resources/ram/logo.png"></td>
+         </tr>
+         <tr>
+            <td>경기 성남시 분당구 대왕판교로 660  리프교육빌딩 (주)리프코딩아카데미</td>
+         </tr>
+         <tr>
+            <td>대표이사 : 박영태 개인정보보호책임자 : 문재웅 사업자등록번호 : 111-23-24321 통신판매업신고번호 : 제9394-성남분당-3426호</td>         
+         </tr>
+         <tr>
+            <td>E. parkyoung@daum.net    T. 02-7375-1436    F. 02-7253-1436
+         </tr>
+         <tr>
+            <td>ⓒ 2017 LeafCA Co.,Ltd All Rights Reserved.</td>
+         </tr>
+      </table>
+   
 
-	<div class="alert_div">
-	<div class="buttons">
+   <div class="alert_div">
+   <div class="buttons">
   <button class="blob-btn">
     쪽지가 도착했습니다
     <span class="blob-btn__inner">
@@ -181,8 +234,64 @@ display: none;
     </filter>
   </defs>
 </svg> -->
-	</div>
-	
-	</div>
+   </div>
+   
+   </div>
+   
+    <!-- quick menu -->
+    <div id="quick_banner">
+   <div id="quick">
+      <p>QUICK MENU</p>
+   </div>
+   
+   <a href="myclass.do">
+   <div id="quick_myclass">
+      <p>내 강의실</p>
+      <img src="resources/ram/lecture2.png">
+   </div>
+   </a>
+   
+   <a href="mypage.do">
+   <div id="quick_mypage">
+      <p>마이페이지</p>
+      <img src="resources/ram/mypage.png">
+   </div>
+   </a>
+   
+   <a href="book_list.do">
+   <div id="quick_book">
+      <p>도서</p>
+      <img src="resources/ram/book3.png">
+   </div>
+   </a>
+   
+   <a href="list_curri.do">
+   <div id="quick_curri">
+      <p>커리큘럼</p>
+      <img src="resources/ram/curriculum3.png">
+   </div>
+   </a>
+   
+   <a href="#">
+   <div id="quick_top">
+      <img src="resources/ram/scroll.png">
+      <p>TOP</p>
+   </div>
+   </a>
+   
+</div>
+<script src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
+<script src="resources/scroll.js"></script>
+<script>
+   $(function() {
+      $("#quick_top").click(function() {
+         $('html,body').animate({
+            scrollTop : 0
+         }, 400);
+         return false;
+      });
+   });
+</script>
+    <!-- quick menu end -->   
 </body>
 </html>

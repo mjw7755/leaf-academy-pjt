@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.leaf.model.application.AppliDAO">
+
+	<select id="curri" parameterType="int" resultType="com.leaf.model.curriculum.CurriDTO">
+		select curri_subject, curri_id, member_id from curriculum where curri_id=#{curri_id}
+	</select>
+	<select id="lect" parameterType="int" resultType="com.leaf.model.curriculum.LectDTO">
+		select lect_charge from lecture where lect_id=#{lect_id} 
+	</select>
+
+
+</mapper>

@@ -17,16 +17,21 @@ resultType : 쿼리 수행 후 결과를 보내주기 위한 데이터 -->
 	select appli_id, member_id, lect_id, appli_reciever, appli_address, appli_addnum, appli_tel,
 			appli_write_time, appli_accept, enabled, appli_caution from application where appli_id=#{appli_id}
 	</select>
-	<select id="curri" parameterType="int" resultType="com.leaf.model.application.AppliDTO">
-		select * from curriculum
+	<select id="curri" parameterType="int" resultType="com.leaf.model.curriculum.CurriDTO">
+		select curri_subject, curri_id, member_id from curriculum where curri_id=#{curri_id}
 	</select>
-	<select id="lect" parameterType="int" resultType="com.leaf.model.application.AppliDTO">
-		select * from lecture
+	<select id="lect" parameterType="int" resultType="com.leaf.model.curriculum.LectDTO">
+		select lect_charge from lecture where lect_id=#{lect_id} 
 	</select>
-<!-- 	<select id="member" parameterType="String" resultType="com.leaf.model.application.AppliDTO">
-		select * from member
-	</select> -->
-
+	<select id="member" parameterType="String" resultType="com.leaf.model.member.MemberDTO">
+		select member_id, member_name, member_tel, member_address, member_addnum from member where member_id=#{member_id} 
+	</select> 
+	<select id="teachercurri" parameterType="int" resultType="com.leaf.model.curriculum.CurriDTO">
+		select member_id from curriculum where curri_id=#{curri_id}
+	</select>
+	<select id="teachername" parameterType="String" resultType="com.leaf.model.member.MemberDTO">
+		select member_name from member where member_id=#{member_id}
+	</select>
 
 	<insert id="insertAppli" parameterType="com.leaf.model.application.AppliDTO">
 	insert into application(appli_id, member_id, lect_id, appli_reciever, appli_address, appli_addnum, appli_tel,

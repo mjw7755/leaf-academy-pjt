@@ -80,7 +80,60 @@ span{
   color : red;
   font-size: 15px;
 }
-
+#top_banner{
+	width: 100%;
+	background-color: #e5d235;
+	margin: auto;
+}
+#banner{
+	width:800px;
+}
+#banner img{
+	/* float: right; */
+}
+.btn-info {
+	color: #fff;
+	background-color: #5bc0de;
+	border-color: #46b8da;
+}
+.btn-info.focus, .btn-info:focus {
+	color: #fff;
+	background-color: #31b0d5;
+	border-color: #1b6d85;
+}
+.btn-info:hover {
+	color: #fff;
+	background-color: #31b0d5;
+	border-color: #269abc;
+}
+.btn {
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	margin-top:12px;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;	
+}
+h1{
+	margin-bottom: 10px;
+}
+#submit{
+	text-align: center;
+}
 </style>
 <script type="text/javascript">
 /* function checkfield(){
@@ -142,124 +195,128 @@ function checkPwd(){
 </script>
 <script type="text/javascript">
 function chkDupId(){
-	  var prmid = $('#member_id').val();
-	  
-	
+	var prmid = $('#member_id').val();
+ 
+	$.ajax({
+		type : 'POST',  
+		data:{"prmid" : prmid},
+		url : 'chkDupId.do',
+		success : function(data) {
+			var chkRst = data;
+			var idReg = /^[A-Za-z0-9]{4,12}$/g;
 
-	  $.ajax({
-	     type : 'POST',  
-	     data:{"prmid" : prmid},
-	     url : 'chkDupId.do',
-	     success : function(data) {
-	      var chkRst = data;
-	      var idReg = /^[A-Za-z0-9]{4,12}$/g;
-
-	      if(chkRst == 0){
-	       /* alert("등록 가능 합니다.");
-	      */
-	       if(prmid.length >= 4 && prmid.length <= 12){
-	    	   if( idReg.test( prmid ) ) {
-	    		   document.getElementById('member_id2').style.color = "blue";
-	    	   	   document.getElementById('member_id2').innerHTML = "등록 가능 합니다.";
-	               return;
-	           }else{
-	        	   document.getElementById('member_id2').style.color = "red";
-			   	   document.getElementById('member_id2').innerHTML =  "사용할 수 없는 문자가 있습니다.(영 소, 대문자 숫자만 사용 가능)"; 
-	           }
-	       
-	       }else if(prmid.length > 13){
-	    	   document.getElementById('member_id2').style.color = "red";
-		   	   document.getElementById('member_id2').innerHTML =  "아이디는 4글자 이상 12글자 이하만 사용 가능 합니다."; 
-	       }
-	   	if(prmid == ""){
-			  $("#member_id2").empty();
-		  }
-	   	 $("#idChk").val('Y'); 
-	      }else{
-	       /* alert("중복 되어 있습니다.");*/
-	    	document.getElementById('member_id2').style.color = "red";
-	   	    document.getElementById('member_id2').innerHTML =  "중복 되어 있습니다."; 
-	      }
-	      $("#idChk").val('N');
-	      
-	     },
-	     error : function(xhr, status, e) {  
-	      //alert(e);
-	     }
-	  });  
-	 }
+		if(chkRst == 0) {
+		/* alert("등록 가능 합니다.");*/
+		if(prmid.length >= 4 && prmid.length <= 12) {
+			if( idReg.test( prmid ) ) {
+				document.getElementById('member_id2').style.color = "blue";
+				document.getElementById('member_id2').innerHTML = "등록 가능 합니다.";
+				return;
+         	} else {
+				document.getElementById('member_id2').style.color = "red";
+				document.getElementById('member_id2').innerHTML =  "사용할 수 없는 문자가 있습니다.(영 소, 대문자 숫자만 사용 가능)"; 
+          	}
+		} else if(prmid.length > 13) {
+			document.getElementById('member_id2').style.color = "red";
+			document.getElementById('member_id2').innerHTML =  "아이디는 4글자 이상 12글자 이하만 사용 가능 합니다."; 
+		}
+		
+		if(prmid == "") { $("#member_id2").empty(); }
+  	 	
+			$("#idChk").val('Y'); 
+			
+	    } else {
+		/* alert("중복 되어 있습니다.");*/
+			document.getElementById('member_id2').style.color = "red";
+			document.getElementById('member_id2').innerHTML =  "중복 되어 있습니다."; 
+		}
+		
+		    $("#idChk").val('N');
+		    
+	    },
+   		error : function(xhr, status, e) { //alert(e); 
+   		}
+ 	});  
+}
 </script>
-<script type="text/javascript"> 
+<!-- <script type="text/javascript"> 
 function insertChk(){
-	  
-	  var frm = document.companyForm; 
-	  
-	  if(!chkVal('member_id','아이디'))return false;
-	  if($("#idChk").val() == 'N'){alert('ID체크를 해주세요.'); return;}
-	  
-
-	  </script>	
-
+	var frm = document.companyForm; 
+	if(!chkVal('member_id','아이디'))
+		return false;
+	if($("#idChk").val() == 'N'){
+		alert('ID체크를 해주세요.'); 
+		return;
+	}
+}
+</script> -->	
 </head>
 <body>
-	<sf:form method="post" action="signup.do" commandName="dto" name="memberchk">
-		<table>
-			<tr>
-				<td>아이디</td>
-				<td><input type="hidden" id="idChk" value="N" />
-				<sf:input path="member_id" id="member_id"  onkeyup="chkDupId()"  placeholder="아이디 입력"/>
-				<sf:errors path="member_id" cssClass="error" /><div id="member_id3" />
-				<div id="member_id2" />
-				</td>
-			</tr>
-
-		   <tr>
-     			<td><span>암호 </span></td>
-    		    <td><!-- <input type="password" name="member_pwd"></input> --><sf:password path="member_pwd" id="member_pwd" placeholder="영어 숫자 특수문자를 조합"/>
-     		    <sf:errors path="member_pwd" cssClass="error" /></td>
-  		   </tr>
-  <tr>
-    <td><span>암호확인</span>
-    </td>
-     <td>
-        <input type="password" name="pwd_check" onkeyup="checkPwd()"  placeholder="암호 확인"></input>
-        <div id="checkPwd" />
-     </td>
-  </tr>
-			
-			<tr>
-				<td>이름(Full Name)</td>
-				<td><sf:input path="member_name" placeholder="이름 입력"/>
-					<sf:errors path="member_name" cssClass="error"/></td>
-			</tr>
-
-			<tr>
-				<td>전화번호(휴대폰)</td>
-				<td><sf:input path="member_tel" placeholder="000-0000-0000"/>
-				<sf:errors path="member_tel" cssClass="error"/></td>
-			</tr>
-
-			<tr>
-				<td>우편번호 :</td>
-				<td><sf:input path="member_addnum" id="sample4_postcode" placeholder="우편번호" />
-				<sf:errors path="member_addnum" cssClass="error" /><br/>
-					<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-					<sf:input path="member_address" id="sample4_roadAddress" placeholder="도로명주소"/>
-					<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소">
-					<span id="guide" style="color: #999"></span>
-					<sf:errors path="member_address" cssClass="error" /></td>
-			</tr>
-			<tr>
-				<td>이메일 :</td>
-				<td><sf:input path="member_email"  placeholder="이메일 입력(aaa@aaa.com)"/>
-				 <sf:errors path="member_email" cssClass="error" /></td>
-			</tr>
-
-			<tr>
-				<td><input type="button" value="회원가입" onclick="checkfield();"></td>
-				<td><input type="button" value="취소"></td>
-			</tr>
-		</table>
-	</sf:form>
+<div id="top_banner">
+	<div id="banner">
+	<img src="resources/top_banner3.png">
+	</div>
+</div>
+<h1>회원가입</h1><hr><br>
+<sf:form method="post" action="signup.do" commandName="dto" name="memberchk" role="form">
+	<table>
+		<tr>
+			<td>아이디 : </td>
+			<td><input type="hidden" id="idChk" value="N" />
+			<sf:input path="member_id" id="member_id"  onkeyup="chkDupId()"  placeholder="아이디 입력" style="width:200px"/>
+			<sf:errors path="member_id" cssClass="error" /><div id="member_id3"></div>
+			<div id="member_id2"></div>
+			</td>
+		</tr>
+		<tr>
+    		<td><span>암호 : </span></td>
+   		    <td><sf:password path="member_pwd" id="member_pwd" placeholder="영어 숫자 특수문자를 조합" style="width:200px"/>
+    		    <sf:errors path="member_pwd" cssClass="error" /></td>
+    		</tr>
+		<tr>
+		    <td><span>암호확인 : </span></td>
+		    <td>
+		        <input type="password" name="pwd_check" onkeyup="checkPwd()"  placeholder="암호 확인" style="width:200px"></input>
+		        <div id="checkPwd"></div>
+		    </td>
+		</tr>			
+		<tr>
+			<td>이름(Full Name) : </td>
+			<td><sf:input path="member_name" placeholder="이름 입력" style="width:200px"/>
+				<sf:errors path="member_name" cssClass="error"/></td>
+		</tr>
+		<tr>
+			<td>전화번호(휴대폰) : </td>
+			<td><sf:input path="member_tel" placeholder="000-0000-0000" style="width:200px"/>
+			<sf:errors path="member_tel" cssClass="error"/></td>
+		</tr>
+		<tr>
+			<td>우편번호 :</td>
+			<td><sf:input path="member_addnum" id="sample4_postcode" placeholder="우편번호" style="width:200px"/>
+			<sf:errors path="member_addnum" cssClass="error" /><br/>
+				<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
+				<sf:input path="member_address" id="sample4_roadAddress" placeholder="도로명주소" style="width:200px"/>
+				<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소">
+				<span id="guide" style="color: #999"></span>
+				<sf:errors path="member_address" cssClass="error" /></td>
+		</tr>
+		<tr>
+			<td>이메일 :</td>
+			<td><sf:input path="member_email" placeholder="이메일 입력(aaa@aaa.com)" style="width:200px"/>
+				<input type="button" onclick="" value="인증번호전송"/>
+			 	<sf:errors path="member_email" cssClass="error" /></td>
+		</tr>
+		<tr>
+			<td>이메일인증 :</td>
+			<td><sf:input path="member_email" placeholder="인증번호 입력" style="width:200px"/>
+				<input type="button" onclick="" value="인증번호확인"/>
+			 	<sf:errors path="member_email" cssClass="error" /></td>
+		</tr>
+		<tr id="submit">
+			<td colspan="2"><input type="button" value="회원가입" onclick="checkfield();" class="btn btn-info">
+			<input type="reset" value="리셋" class="btn btn-info"></td>
+		</tr>
+	</table>
+</sf:form>
 </body>
 </html>

@@ -35,18 +35,24 @@ public class AppliController {
 		System.out.println(lect_id);
 		System.out.println(curri_id);
 		
-		List<CurriDTO> clist=appliDAO.curri(curri_id);
-		List<LectDTO> llist=appliDAO.lect(lect_id);
-//		List<MemberDTO> mlist=appliDAO.member(member_id);
-//		
-//		appliDAO.listformappli(lect_id);
-//		
-//		model.addAttribute("mlist", mlist);
-		model.addAttribute("llist", llist);
-		model.addAttribute("clist", clist);
-//		System.out.println(mlist);
-		System.out.println(llist);
-		System.out.println(clist);
+		CurriDTO cdto=appliDAO.curri(curri_id);
+		System.out.println(cdto.getCurri_id());
+		LectDTO ldto=appliDAO.lect(lect_id);
+		MemberDTO mdto=appliDAO.member(member_id);
+		CurriDTO teacherdto=appliDAO.teachercurri(curri_id);
+		System.out.println(teacherdto.getCurri_id());
+		System.out.println(teacherdto.getMember_id());
+		MemberDTO teachername=appliDAO.teachername(teacherdto.getMember_id());
+		
+		model.addAttribute("mdto", mdto);
+		model.addAttribute("ldto", ldto);
+		model.addAttribute("cdto", cdto);
+		model.addAttribute("teacherdto", teacherdto);
+		model.addAttribute("teachername", teachername);
+		
+		System.out.println(cdto);
+		System.out.println(ldto);
+		System.out.println(mdto);
 		mav.setViewName("application.appli_list");
 		return mav;
 		

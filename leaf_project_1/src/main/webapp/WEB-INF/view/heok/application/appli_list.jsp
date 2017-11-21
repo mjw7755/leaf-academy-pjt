@@ -45,11 +45,11 @@
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('appli_addnum').value = data.zonecode; //5자리 새우편번호 사용
-                document.getElementById('appli_address').value = fullAddr;
+                document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('sample6_address').value = fullAddr;
 
                 // 커서를 상세주소 필드로 이동한다.
-                document.getElementById('appli_address2').focus();
+                document.getElementById('sample6_address2').focus();
             }
         }).open();
     }
@@ -92,12 +92,12 @@
 			<th>가격</th>
 		</tr>
 		<tr>
-			<td>${clist.get(0).getCurri_subject()}</td>
-			<td>${member_id}</td>
-			<td>${llist.get(0).getLect_charge()}</td>
+			<td>${cdto.getCurri_subject()}</td>
+			<td>${teachername.getMember_name()}</td>
+			<td>${ldto.getLect_charge()}</td>
 		</tr>
 		<tr>
-			<td colspan="3" align="right">${llist.get(0).getLect_charge()}</td>
+			<td colspan="3" align="right">${ldto.getLect_charge()}</td>
 		</tr>
 	</table>
 </span>
@@ -114,25 +114,26 @@
 		
 		<tr>
 			<th>받는사람</th>
-			<td><input type="text" id="reciever" value="${dto.member_id}"/></td>
+			<td><input type="text" id="reciever" value="${mdto.getMember_name()}"/></td>
 		</tr>	
 		<tr>
 			<th>전화번호(휴대폰)</th>
-			<td><input type="text"value="${dto.member_tel}"/></td>
+			<td><input type="text"value="${mdto.getMember_tel()}"/></td>
 			</tr>
 
 		<tr>
 			<th>우편번호 </th>
 			<td>
-				<input type="text" id="appli_addnum" value="${dto.member_addnum}">
+				<input type="text" id="appli_addnum" value="${mdto.getMember_addnum()}">
 				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-				<input type="text" id="appli_address" value="${dto.member_address}" >
+				<input type="text" id="appli_address" value="${mdto.getMember_address()}" >
 				<input type="text" id="appli_address2" name="appli_address2" placeholder="상세주소">
+				
 			</td>
 		</tr>
 		<tr>
 			<th>배송시 유의사항</th>
-			<td><input type="text" id="caution"/></td>
+			<td><input type="text" id="appli_caution" name="appli_caution"/></td>
 		</tr>
 		</table>
 	</span>
@@ -143,7 +144,7 @@
 		
 		<tr>
 			<th>받는사람</th>
-			<td><input type="text" id="reciever" value="${appli_reciever }" /></td>
+			<td><input type="text" id="appli_reciever" name="appli_reciever" /></td>
 		</tr>	
 		<tr>
 			<th>전화번호(휴대폰)</th>
@@ -154,10 +155,11 @@
 			<th>우편번호 </th>
 			<td>
 				
-				<input type="text" id="appli_addnum" placeholder="우편번호">
+		
+				<input type="text"  name="appli_addnum"  id="sample6_postcode" placeholder="우편번호">
 				<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-				<input type="text" id="appli_address" placeholder="주소">
-				<input type="text" id="appli_address2" placeholder="상세주소">
+				<input type="text"  name="appli_address" id="sample6_address" placeholder="주소">
+				<input type="text"  name="appli_address2" id="sample6_address2" placeholder="상세주소">
 				
 			</td>
 		</tr>

@@ -22,26 +22,27 @@
 }
 
 .btn {
-display: inline-block;
-border: none;
-border-radius: .3em;
--webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 -0.25em 0 rgba(0, 0, 0, 0.25), 0 0.25em 0.25em rgba(0, 0, 0, 0.05);
-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 -0.25em 0 rgba(0, 0, 0, 0.25), 0 0.25em 0.25em rgba(0, 0, 0, 0.05);
-color: #fff;
-cursor: pointer;
-font-family: 'Raleway', sans-serif;
-font-weight: 300;
-line-height: 1.5;
-letter-spacing: 1px;
-padding: .5em 1.5em .75em;
-position: relative;
-text-decoration: none;
-text-shadow: 0 1px 1px rgba(255, 255, 255, 0.25);
-vertical-align: middle;
--webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none; 
+       display: inline-block;
+    border: none;
+    border-radius: .3em;
+    -webkit-box-shadow: inset 0 0 0 1px #323232, inset 0 -0.25em 0 #9f9e9e, 0 0.25em 0.25em #666666;
+    /* box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 -0.25em 0 rgba(0, 0, 0, 0.25), 0 0.25em 0.25em rgba(0, 0, 0, 0.05); */
+    color: #000;
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    padding: .5em 1.5em .75em;
+    position: relative;
+    text-decoration: none;
+    text-shadow: 0 1px 1px #c4c4c4;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* margin-left: 10px; */
 }
 .btn:active {
 -webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), inset 0 2px 0 rgba(255, 255, 255, 0.1), inset 0 0.25em 0.5em rgba(0, 0, 0, 0.05);
@@ -51,15 +52,11 @@ padding-bottom: .5em; }
 .btn:active, .btn:focus {
 outline: none; }
 .btn--green {
-background-color: #1abc9c; }
+    background-color: #fff; }
 .btn--green {
 font-size: 1em; }
 .btn--sm {
-font-size: 0.75em; }
-
-#dnawlrdu {
-	/* float: right; */
-}
+font-size: 0.5em; }
 </style>
 <script type="text/javascript">
 function multiDelete(){
@@ -103,29 +100,30 @@ $(document).ready(function(){
 	<br><hr><br>
    <table id="booklistTable">
       <c:forEach items="${ list }" var="list" varStatus="status">
-            <c:if test="${sessionScope.sessionid!='관리자' and sessionScope.sessionid!='강사1'}">
-         <tr>
-            <td rowspan="4" class="bookline" style="width:100px"><a href="book_detail.do?book_id=${ list.book_id }">
-            <img src="resources/${list.book_image}" style="width: 100px; height: 120px"></a></td>
-         </tr>
-          <tr>
-            <td id="booktd">
-            	<a href="book_detail.do?book_id=${ list.book_id }">${list.book_title }</a>
-            </td>
-          </tr>
-          <tr>
-            <td id="booktd">${list.book_writer}</td>
-          </tr>
-          <tr>
-            <td id="booktd" class="bookline">${list.book_cost}</td>
-          </tr>
-          </c:if>
+			<c:if test="${sessionScope.sessionid!='관리자'}">
+			<tr>
+				<td rowspan="4" class="bookline" style="width:100px"><a href="book_detail.do?book_id=${ list.book_id }">
+				<img src="resources/${list.book_image}" style="width: 100px; height: 120px"></a></td>
+			</tr>
+			<tr>
+				<td id="booktd">
+					<a href="book_detail.do?book_id=${ list.book_id }">${list.book_title }</a>
+				</td>
+				<td rowspan="3" class="bookline" style="width:80px"><input type="button" value="구매하기" class="btn btn--sm btn--green"></td>
+			</tr>
+			<tr>
+				<td id="booktd">${list.book_writer}</td>
+			</tr>
+			<tr>
+				<td id="booktd" class="bookline">${list.book_cost}</td>
+			</tr>
+			</c:if>
       </c:forEach>   
    </table>
    
    <table id="booklistTable">
       <c:forEach items="${ list }" var="list" varStatus="status">
-      <c:if test="${sessionScope.sessionid=='관리자' or sessionScope.sessionid=='강사1'}">
+      <c:if test="${sessionScope.sessionid=='관리자'}">
          <tr>
          	<td rowspan="4"><input id="multi" type="checkbox" style="width: 30px;" name="book_id" value="${ list.book_id }"></td>
             <td rowspan="4" class="bookline"><a href="book_detail.do?book_id=${ list.book_id }">
