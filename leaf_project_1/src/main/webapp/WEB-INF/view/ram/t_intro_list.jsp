@@ -43,12 +43,18 @@ $(document).ready(function(){
 }); 
 </script> -->
 <style type="text/css">
+#top_banner{
+	width: 100%;
+	background-color: #e5d235;
+	margin: auto;
+}
 .teacher_intro{
    width:800px;
 }
 #t_search{
    font-size: 12px;
    width:100%;
+   margin-top: 40px;
 }
 #t_search div{
    float: right;
@@ -59,7 +65,7 @@ $(document).ready(function(){
 #function{
    float:right;
    width:100%;
-   padding-bottom: 10px;
+   padding-bottom: 40px;
 }
 #t_intro{
    width:100%;
@@ -75,6 +81,7 @@ $(document).ready(function(){
 }
 #search{
 	margin-left: 10px;
+	
 }
 /* Icon set - http://ionicons.com/ */
 
@@ -234,9 +241,57 @@ figure.snip1141.hover i {
   -webkit-transition-delay: 0s;
   transition-delay: 0s;
 }
+
+/*  */
+
+.btn {
+       display: inline-block;
+    border: none;
+    border-radius: .3em;
+    -webkit-box-shadow: inset 0 0 0 1px #323232, inset 0 -0.25em 0 #9f9e9e, 0 0.25em 0.25em #666666;
+    /* box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 -0.25em 0 rgba(0, 0, 0, 0.25), 0 0.25em 0.25em rgba(0, 0, 0, 0.05); */
+    color: #000;
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    padding: .5em 1.5em .75em;
+    position: relative;
+    text-decoration: none;
+    /* text-shadow: 0 1px 1px #c4c4c4; */
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* margin-left: 10px; */
+}
+.btn:active {
+-webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), inset 0 2px 0 rgba(255, 255, 255, 0.1), inset 0 0.25em 0.5em rgba(0, 0, 0, 0.05);
+box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), inset 0 2px 0 rgba(255, 255, 255, 0.1), inset 0 0.25em 0.5em rgba(0, 0, 0, 0.05);
+margin-top: .25em;
+padding-bottom: .5em; }
+.btn:active, .btn:focus {
+outline: none; }
+.btn--green {
+    background-color: #fff; 
+    }
+.btn--green {
+font-size: 1em; }
+.btn--sm {
+font-size: 0.7em; }
 </style>
 </head>
 <body>
+   	<!-- top banner -->
+   	<div id="top_banner">
+   		<div id="banner">
+   		<img src="resources/ram/top_banner_intro.png">
+   		</div>
+   	</div>
+    <!-- top banner end -->
+
 <div class="teacher_intro">
    <div id="t_search"><!-- 선생님 검색 -->
       <form action="t_intro_search.do" method="post">
@@ -254,8 +309,8 @@ figure.snip1141.hover i {
    
       <div id="function"><!-- 추가,다중삭제 -->
          <c:if test="${sessionScope.sessionid == '관리자'}">
-            <a href="t_intro_writeform.do"><button>추가</button></a>
-            <a href="#"><button id="multi" onclick="multiDelete()">다중삭제</button></a>
+            <a href="t_intro_writeform.do"><button class="btn btn--sm btn--green">추가</button></a>
+            <a href="#"><button id="multi" onclick="multiDelete()" class="btn btn--sm btn--green">다중삭제</button></a>
          </c:if>
          
       </div>

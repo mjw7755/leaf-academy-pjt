@@ -8,10 +8,16 @@
 <title></title>
 
 <style type="text/css">
+#top_banner{
+	width: 100%;
+	background-color: #e5d235;
+	margin: auto;
+}
 #booklistTable {
    width: 700px;
    text-align: center;
 }
+
 .bookline {
 	border-bottom: 1px solid;
 } 
@@ -20,9 +26,13 @@
    height: 50px;
    text-align: left;
 }
-
+#booktd a{
+	text-decoration: none;
+	font-weight: bold;
+	color:#000;
+}
 .btn {
-       display: inline-block;
+        display: inline-block;
     border: none;
     border-radius: .3em;
     -webkit-box-shadow: inset 0 0 0 1px #323232, inset 0 -0.25em 0 #9f9e9e, 0 0.25em 0.25em #666666;
@@ -36,7 +46,7 @@
     padding: .5em 1.5em .75em;
     position: relative;
     text-decoration: none;
-    text-shadow: 0 1px 1px #c4c4c4;
+    /* text-shadow: 0 1px 1px #c4c4c4; */
     vertical-align: middle;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -56,7 +66,39 @@ outline: none; }
 .btn--green {
 font-size: 1em; }
 .btn--sm {
-font-size: 0.5em; }
+    font-size: 0.7em;
+    width: 100px; }
+
+#search{
+	width: 800px;
+	text-align: right;
+	margin-top:20px;
+	margin-bottom: 20px;
+}
+#search form{
+	font-size: 13px;
+}
+
+#search form input{
+	font-size: 13px;
+}
+#search_icon{
+	vertical-align: middle;
+}
+#page {
+	margin-top: 10px;
+}
+#page a{
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    color: #13b69d;
+    margin-right: 5px;
+}
+#booklistTable{
+	border-collapse: collapse;
+	border-spacing: 0px;
+}
 </style>
 <script type="text/javascript">
 function multiDelete(){
@@ -81,11 +123,20 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<br>
+   	<!-- top banner -->
+   	<div id="top_banner">
+   		<div id="banner">
+   		<img src="resources/ram/top_banner_book.png">
+   		</div>
+   	</div>
+    <!-- top banner end -->
+<div id="search">
 	<form action="book_search.do" method="post">
          검색어 입력 : <input size="30" type="search"  name="keyvalue" placeholder="제목, 저자 검색 가능합니다." list="booklist"> 
-             <button type="submit" class="btn btn--sm btn--green">검색</button>
+             <!-- <button type="submit" class="btn btn--sm btn--green">검색</button> -->
+             <input type="image" src="resources/ram/search.png" id="search_icon">
     </form>
+    </div>
     <c:if test="${sessionScope.sessionid=='관리자' or sessionScope.sessionid=='강사1'}">
 	    <div id="dnawlrdu">
 		    <a href="book_writeform.do"><button class="btn btn--sm btn--green">추가</button></a>
@@ -97,7 +148,6 @@ $(document).ready(function(){
 		</c:forEach>
 	</datalist>
 	</c:if>
-	<br><hr><br>
    <table id="booklistTable">
       <c:forEach items="${ list }" var="list" varStatus="status">
 			<c:if test="${sessionScope.sessionid!='관리자'}">
@@ -109,13 +159,13 @@ $(document).ready(function(){
 				<td id="booktd">
 					<a href="book_detail.do?book_id=${ list.book_id }">${list.book_title }</a>
 				</td>
-				<td rowspan="3" class="bookline" style="width:80px"><input type="button" value="구매하기" class="btn btn--sm btn--green"></td>
+				<td rowspan="4" style="width:80px"><input type="button" value="구매하기" class="btn btn--sm btn--green"></td>
 			</tr>
 			<tr>
-				<td id="booktd">${list.book_writer}</td>
+				<td id="booktd">저자(출판사) : ${list.book_writer}</td>
 			</tr>
 			<tr>
-				<td id="booktd" class="bookline">${list.book_cost}</td>
+				<td id="booktd" class="bookline">가격 : ${list.book_cost}</td>
 			</tr>
 			</c:if>
       </c:forEach>   
@@ -134,11 +184,11 @@ $(document).ready(function(){
             <td><a href="book_updateform.do?book_id=${ list.book_id }"><button id="edit" class="btn btn--sm btn--green">수 정</button></a></td>
          </tr>
          <tr>
-            <td id="booktd">${list.book_writer}</td>
+            <td id="booktd" >저자(출판사) : ${list.book_writer}</td>
             <td><a href="book_delete.do?book_id=${ list.book_id }"><button id="delete" class="btn btn--sm btn--green">삭 제</button></a></td>
          </tr>
          <tr>
-            <td id="booktd" class="bookline">${list.book_cost}</td>
+            <td id="booktd" class="bookline" >가격 : ${list.book_cost}</td>
             <td><a href="book_deletecancle.do?book_id=${ list.book_id }"><button id="deletecancle" class="btn btn--sm btn--green">삭제취소</button></a></td>
          </tr>
             <%-- <td>${list.enabled}</td> --%>
@@ -146,7 +196,7 @@ $(document).ready(function(){
       </c:forEach>
    </table>
    
-   <div align="center">
+   <div align="center" id="page">
       <c:if test="${param.page>5}">
       <c:if test="${flag == 'list' }">
          <a class="button btn-prev" href="book_list.do?page=${startPage-1}">이전</a>

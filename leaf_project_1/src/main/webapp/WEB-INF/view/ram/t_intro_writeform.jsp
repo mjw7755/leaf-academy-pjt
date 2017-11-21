@@ -6,7 +6,74 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title></title>
-
+<style type="text/css">
+/* button */
+.btn-info {
+	color: #fff;
+	background-color: #f16022;
+	border-color: #46b8da;
+}
+.btn-info.focus, .btn-info:focus {
+	color: #fff;
+	background-color: #b64413;
+	border-color: #1b6d85;
+}
+.btn-info:hover {
+	color: #fff;
+	background-color: #b64413;
+	border-color: #973911;
+}
+.btn {
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	margin-top:12px;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;	
+}
+/*  */
+.form-control {
+	display: block;
+	margin-right: 15px;
+	/* width: 100%; */
+	/* height: 34px; */
+	padding: 6px 12px;
+	font-size: 14px;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow
+		ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out
+		.15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	margin-left: 15px;
+}
+#submit{
+	text-align: center;
+}
+#file{
+	text-align: center;
+}
+</style>
 </head>
 <body>
 	<form action="t_intro_write.do" enctype="multipart/form-data" method="post">
@@ -14,50 +81,49 @@
         <input type="file" name="file">
         <input type="submit" value="업로드">    
     </form> --%>
+    <h1>강사 추가</h1>
 		<table>
-	<%-- 		<tr>
-				<td>teacher_id</td>
-				<td>:</td>
-				<td><input type="text" name="teacher_id" required="required"
-					value="${teacher_id}"></td>
-			</tr> --%>
+		<tr>
+				<td colspan="2"><hr></td>
+			</tr
+			<tr>
+				<td colspan="2" id="file">
+					<div id="image_preview">
+						<img src="resources/ram/people2.png"
+							style="width: 240px; height: 240px" /> <br /> <a href="#">Remove</a>
+					</div> <input type="file" name="uploadfile" id="image">
+				</td>
+			</tr>
 
 			<tr>
-				<td>강사 이름</td>
-				<td>:</td>
+				<td style="font-weight: bold">강사 이름</td>
 				<td><input type="text" name="member_id"
-					required="required"></td>
-			</tr>
-			
-			<tr>
-				<td><input type="file" name="uploadfile" id="image"></td>
-			</tr>
-
-			<tr>
-				<td>강사 연혁</td>
-				<td>:</td>
-				<td><input type="text" name="teacher_introduce"
-					required="required"></td>
+					required="required" class="form-control"></td>
 			</tr>
 			
 
 			<tr>
-				<td colspan="3"><hr></td>
+				<td style="font-weight: bold">강사 연혁</td>
+<!-- 				<td><input type="text" name="teacher_introduce"
+					required="required" class="form-control"></td> -->
+					<td><textarea rows="7" cols="40" name="teacher_introduce" class="form-control"></textarea></td>
+			</tr>
+			
+
+			<tr>
+				<td colspan="2"><hr></td>
 			</tr>
 
 			<tr>
-				<td><input type="button" value="취소" style="width: 100%;"
-					onclick="window.location.href='t_intro_list.do' "></td>
-				<td><input type="reset" value="초기화" style="width: 100%"></td>
-				<td><input type="submit" value="추가" style="width: 100%"></td>
+				<td id="submit" colspan="2"><input type="button" value="취소"
+					onclick="window.location.href='t_intro_list.do' "
+					class="btn btn-info"> <input type="submit" value="추가"
+					class="btn btn-info"> <input type="reset" value="초기화"
+					class="btn btn-info"> </td>
 			</tr>
 		</table>
 		
-		<div id="image_preview">
-        <img src="#" />
-        <br />
-        <a href="#">Remove</a>
-   </div>
+		
 
 
     <script type="text/javascript">

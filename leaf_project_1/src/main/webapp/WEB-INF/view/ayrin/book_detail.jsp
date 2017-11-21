@@ -5,15 +5,31 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+#top_banner{
+	width: 100%;
+	background-color: #e5d235;
+	margin: auto;
+}
 #bookdetailTable {
    width: 800px;
+   margin-top: 20px;
 }
-#bookdetailTable td{
+#bookdetailTable hr{
+	border: thin solid;
+	color: #999;
+}
+#content{
+	padding-left: 15px;
+	font-size: 13px;
+	color:#565656;
+	vertical-align: top;
+}
+/* #bookdetailTable td{
    border: 1px solid;
-}
+} */
 
 .btn {
-       display: inline-block;
+   display: inline-block;
     border: none;
     border-radius: .3em;
     -webkit-box-shadow: inset 0 0 0 1px #323232, inset 0 -0.25em 0 #9f9e9e, 0 0.25em 0.25em #666666;
@@ -27,7 +43,7 @@
     padding: .5em 1.5em .75em;
     position: relative;
     text-decoration: none;
-    text-shadow: 0 1px 1px #c4c4c4;
+    /* text-shadow: 0 1px 1px #c4c4c4; */
     vertical-align: middle;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -47,17 +63,30 @@ outline: none; }
 .btn--green {
 font-size: 1em; }
 .btn--sm {
-font-size: 0.5em; }
-
+font-size: 0.6em; }
+#title{
+	padding-left: 15px;
+	width: 50px;
+	font-weight: bold;
+}
 </style>
 </head>
 <body>
+   	<!-- top banner -->
+   	<div id="top_banner">
+   		<div id="banner">
+   		<img src="resources/ram/top_banner_book.png">
+   		</div>
+   	</div>
+    <!-- top banner end -->
 <table id="bookdetailTable">
-	<tr> <td>제목 :</td> <td>${dto.book_title}</td> </tr>
-    <tr> <td>이미지 :</td> <td><img src="resources/${dto.book_image}" style="width: 120px; height: 140px"></td> </tr>
-	<tr> <td>저자 :</td> <td>${dto.book_writer}</td> </tr>
-	<tr> <td>가격 :</td> <td>${dto.book_cost}</td> </tr>
-	<tr> <td style="height:300px;">소개 :</td> <td style="height:300px; width:700px">${dto.book_contents}</td></tr>
+    <tr> <td rowspan="7"><img src="resources/${dto.book_image}" style="width: 300px; height: 400px"></td> </tr>
+	<tr> <td id="title">제목 :</td> <td>${dto.book_title}</td> </tr>
+	<tr> <td id="title">저자 :</td> <td>${dto.book_writer}</td> </tr>
+	<tr> <td id="title">가격 :</td> <td>${dto.book_cost} <input type="button" value="구매하기" class="btn btn--sm btn--green"></td> </tr>
+	<tr> <td colspan="2" id="title"><hr></td></tr>
+	<tr> <td id="title" colspan="2">소개</td></tr>
+	<tr> <td colspan="2" id="content">${dto.book_contents}</td></tr>
 </table>
 	<a href="book_list.do"><button class="btn btn--sm btn--green">목록으로</button></a>
     <br><br>

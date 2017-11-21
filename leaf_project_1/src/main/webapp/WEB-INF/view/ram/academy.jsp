@@ -7,6 +7,11 @@
 	<title>academy introduce</title>
 
 <style type="text/css">
+#top_banner{
+	width: 100%;
+	background-color: #e5d235;
+	margin: auto;
+}
 #overview{
 	width: 800px;
 }
@@ -47,6 +52,14 @@
 </style>
 </head>
 <body>
+   	<!-- top banner -->
+   	<div id="top_banner">
+   		<div id="banner">
+   		<img src="resources/ram/top_banner_intro.png">
+   		</div>
+   	</div>
+    <!-- top banner end -->
+
 <div id="overview">
 	<div id="headline">
 		<h1>"꿈과 희망을 디자인 하는 곳, 리프 코딩 아카데미"</h1>

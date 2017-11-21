@@ -6,22 +6,119 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title></title>
+<style type="text/css">
+   textarea {
+   resize: none;
+}
+
+#submit{
+	text-align: center;
+}
+
+/* button */
+.btn-info {
+	color: #fff;
+	background-color: #f16022;
+	border-color: #46b8da;
+}
+.btn-info.focus, .btn-info:focus {
+	color: #fff;
+	background-color: #31b0d5;
+	border-color: #1b6d85;
+}
+.btn-info:hover {
+	color: #fff;
+	background-color: #f16022;
+	border-color: #973911;
+}
+.btn {
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	margin-top:12px;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;	
+}
+/*  */
+.form-control {
+	display: block;
+	margin-right: 15px;
+	/* width: 100%; */
+	/* height: 34px; */
+	padding: 6px 12px;
+	font-size: 14px;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow
+		ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out
+		.15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	margin-left: 15px;
+}
+</style>
 </head>
 <body>
+<h1>강사 수정</h1>
+<img src="resources/ram/${dto.teacher_image}" style="width: 120px; height: 140px">
 <form action="t_intro_update.do" enctype="multipart/form-data" method="post">
 			<input readonly="readonly" type="hidden" name="teacher_id" value="${dto.teacher_id}"><br>
-			강사명 : <input type="text" name="member_id" value="${dto.member_id}"><br>
-			약력 : <input type="text" name="teacher_introduce" value="${dto.teacher_introduce}"><br>
-			<input type="submit" value="수정하기">
-			<input type="file" name="uploadfile" id="image">
+			<table>
+			<tr>
+				<td colspan="2"><hr></td>
+			</tr>
+			
+			<tr>
+				<td style="font-weight: bold">강사명</td>  
+				<td><input type="text" name="member_id" value="${dto.member_id}" class="form-control"></td>
+			</tr>
+			
+			<tr>
+				<td style="font-weight: bold">약력</td> 
+				<td>
+					<textarea rows="7" cols="50" name="teacher_introduce" class="form-control">${dto.teacher_introduce}</textarea>
+				</td>
+			</tr>
+
+			<tr>
+				<td><input type="file" name="uploadfile" id="image"></td>
+				<td>
+					<div id="image_preview">
+						<img src="#" /> <a href="#">Remove</a>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><hr></td>
+			</tr>
+			<tr id="submit">
+				<td colspan="2">
+					<input type="submit" value="수정하기" class="btn btn-info">
+				</td>
+			</tr>
+			</table>
 			
 </form>
-<img src="resources/${dto.teacher_image}" style="width: 120px; height: 140px">
-<div id="image_preview">
-        <img src="#" />
-        <br />
-        <a href="#">Remove</a>
-   </div>
+
 
 
     <script type="text/javascript">
@@ -79,3 +176,4 @@
     </script>
 </body>
 </html>
+

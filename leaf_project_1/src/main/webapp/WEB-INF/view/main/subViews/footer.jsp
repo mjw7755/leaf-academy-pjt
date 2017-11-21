@@ -280,7 +280,7 @@ display: none;
    </a>
    
 </div>
-<script src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
+<!-- <script src="http://code.jquery.com/jquery-1.8.1.min.js"></script> -->
 <script src="resources/scroll.js"></script>
 <script>
    $(function() {
