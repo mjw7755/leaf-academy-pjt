@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -22,8 +23,12 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.leaf.model.member.MemberDAO;
 import com.leaf.model.member.MemberDTO;
 import com.leaf.model.member.ValidGroupOrder;
@@ -37,6 +42,38 @@ public class MemberController {
 	private MemberDAO memberdao;
 	@Resource
 	private NoticeDAO noticeDAO;
+	
+	private Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+	 
+	/*    @Autowired
+	    private MailService mailService;*/
+	    
+	    @RequestMapping(value = "/checkMail.do", produces = "application/text; charset=utf8")
+	    @ResponseBody
+	    private String checkMail(@RequestParam String member_email) {
+	        int count = memberdao.findOneByEmail(member_email);
+	/*        if(count == member_email) {
+	        	
+	        }*/
+	        System.out.println("count" + count);
+	        System.out.println(member_email);
+	        
+	        return gson.toJson("{\"count\":\""+count+"\"}");
+	    }
+	 
+	    @RequestMapping(value = "/sendMail.do", method = RequestMethod.POST, produces = "application/json")
+	    @ResponseBody
+	    private boolean sendMail(HttpSession session, @RequestParam String member_email, HttpServletRequest request, Model model) {
+	        int randomCode = new Random().nextInt(10000) + 1000;
+	        String joinCode = String.valueOf(randomCode);
+	        session.setAttribute("joinCode", joinCode);
+	        model.addAttribute("joinCode", joinCode);
+	        //String joinCode2 = request.getParameter("joinCode");
+	        String subject = "회원가입 승인 번호 입니다.";
+	        StringBuilder sb = new StringBuilder();
+	        sb.append("회원가입 승인번호는 ").append(joinCode).append(" 입니다.");
+	        return memberdao.send(subject, sb.toString(), "seirin8534@gmail.com", member_email);
+	        }
 
 	@RequestMapping("/member_list.do")
 	public String list(Model model, HttpServletRequest request) {

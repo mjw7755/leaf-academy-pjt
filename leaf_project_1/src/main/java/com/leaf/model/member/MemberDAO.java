@@ -36,4 +36,7 @@ public interface MemberDAO {
 	public void updateMember2(MemberDTO dto);
 	public String member_check(String member_id);
 	
+	public int findOneByEmail(String member_email);
+	
+	boolean send(String subject, String text, String from, String to);
 }
