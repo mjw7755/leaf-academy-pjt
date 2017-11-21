@@ -4,16 +4,38 @@ import java.sql.Timestamp;
 
 public class PaymentDTO {
 	
-	private int payment_id, payment_lect_id, payment_lect_charge, payment_fee;
-	private String payment_member_id, payment_addnum, payment_address, payment_address2, payment_caution, payment_lect_subject, payment_currency, payment,code, payment_payer_email, payment_custom_num, payment_status,payment_teacher_name,payment_member_name,payment_member_tel;
-	private Timestamp payment_buy_time;
+	private int payment_id, payment_lect_id, payment_lect_charge, payment_fee, payment_pay_chk;
+	private String payment_member_id, payment_addnum, payment_address, payment_address2, payment_caution, payment_lect_subject, payment_currency, payment_payer_email, payment_teacher_name,payment_member_name,payment_member_tel;
+	private Timestamp payment_write_date;
 	
 	public PaymentDTO() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	
-	
+	public int getPayment_pay_chk() {
+		return payment_pay_chk;
+	}
+
+
+	public void setPayment_pay_chk(int payment_pay_chk) {
+		this.payment_pay_chk = payment_pay_chk;
+	}
+
+
+
+	public Timestamp getPayment_write_date() {
+		return payment_write_date;
+	}
+
+
+
+	public void setPayment_write_date(Timestamp payment_write_date) {
+		this.payment_write_date = payment_write_date;
+	}
+
+
+
 	public String getPayment_member_tel() {
 		return payment_member_tel;
 	}
@@ -48,15 +70,6 @@ public class PaymentDTO {
 		this.payment_teacher_name = payment_teacher_name;
 	}
 
-
-
-	public Timestamp getPayment_buy_time() {
-		return payment_buy_time;
-	}
-
-	public void setPayment_buy_time(Timestamp payment_buy_time) {
-		this.payment_buy_time = payment_buy_time;
-	}
 
 	public int getPayment_id() {
 		return payment_id;
@@ -146,22 +159,6 @@ public class PaymentDTO {
 		this.payment_currency = payment_currency;
 	}
 
-	public String getPayment() {
-		return payment;
-	}
-
-	public void setPayment(String payment) {
-		this.payment = payment;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
 	public String getPayment_payer_email() {
 		return payment_payer_email;
 	}
@@ -170,21 +167,4 @@ public class PaymentDTO {
 		this.payment_payer_email = payment_payer_email;
 	}
 
-	public String getPayment_custom_num() {
-		return payment_custom_num;
-	}
-
-	public void setPayment_custom_num(String payment_custom_num) {
-		this.payment_custom_num = payment_custom_num;
-	}
-
-	public String getPayment_status() {
-		return payment_status;
-	}
-
-	public void setPayment_status(String payment_status) {
-		this.payment_status = payment_status;
-	}
-	
-	
 }
