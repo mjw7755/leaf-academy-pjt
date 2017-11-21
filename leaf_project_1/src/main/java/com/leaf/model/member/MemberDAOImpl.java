@@ -3,8 +3,13 @@ package com.leaf.model.member;
 import java.util.List;
 import java.util.Map;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -12,6 +17,32 @@ public class MemberDAOImpl implements MemberDAO {
 
 	@Autowired
 	private SqlSession sqlsession;
+	
+    private final JavaMailSender javaMailSender;
+    
+    @Autowired
+    public MemberDAOImpl(JavaMailSender javaMailSender) {
+        this.javaMailSender = javaMailSender;
+    }
+    
+	@Override
+    public boolean send(String subject, String text, String from, String to){
+        MimeMessage message = javaMailSender.createMimeMessage();
+ 
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(message,true,"UTF-8");
+            helper.setSubject(subject);
+            helper.setText(text);
+            helper.setFrom(from);
+            helper.setTo(to);
+ 
+            javaMailSender.send(message);
+            return true;
+        }catch (MessagingException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 	@Override
 	public List<MemberDTO> getMemberList(int page) {
@@ -148,6 +179,12 @@ public class MemberDAOImpl implements MemberDAO {
 	public String member_check(String member_id) {
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		return dao.member_check(member_id);
+	}
+	
+	@Override
+	public int findOneByEmail(String member_email) {
+		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
+		return dao.findOneByEmail(member_email);
 	}
 
 }

@@ -145,4 +145,8 @@ resultType : 쿼리 수행 후 결과를 보내주기 위한 데이터 -->
 		update Member set member_id=#{member_id}, member_pwd=#{member_pwd} where member_id=#{member_id}
 	</update>
 	
+		<select id="findOneByEmail" parameterType="String" resultType="int">
+		select count(*) from Member where member_email=#{member_email}
+	</select>
+	
 </mapper>
