@@ -1,7 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <html>
 <head>
-<title>ì¤ëª© ê²ì</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>오목게임</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
  <Style>
    A:Link{ Color: #000000; Text-decoration: underline}
    A:Visited{ Color: #000000; Text-decoration: underline}
@@ -17,7 +19,7 @@
 
  
  <h3><font face="sans-serif" color="#FF0000">
- ì¤ëª© ê²ì
+ 오목이당
  </font></h3>
  <font face="sans-serif" color="#000099">
  <hr size=2 color="#808000">
@@ -37,9 +39,8 @@
  <p>&nbsp;</p>
  
  <form>
- <a href="gamestart.do">go</a>
  <input type=button value="Start Game" 
- onClick=window.open("xo.jsp","game","width=610,height=350,menubar=0,scrollbars=0,resizable=0")><!-- ì¨í´ë¦­ì´ë²¤í¸ íì´ì§ë´ë¡ ì²ë¦¬ íê³ ì¶ì¼ë©´ ì¬ê¸°ë¶ë¶ ë°ê¾¸ë©´ ë¨ -->
+ onClick='window.open("xo.do","game","width=610,height=350,menubar=0,scrollbars=0,resizable=0")'><!-- A��A?A��A��A?A��A��A|A��A��A?A��A��A��A��A��A?A�� A��A?A?A��A?A��A��A��A�A��A?A��A��A��A? A��A��A?A��A|A�� A��A?A?A��A��A?A��A?A��A��A?A��A��A��A�� A��A?A��A��A��A��A��A��A�A��A��A? A��A��A?A��A��A��A��A��A�� A��A?A�� -->
  </form>
 
 </body>

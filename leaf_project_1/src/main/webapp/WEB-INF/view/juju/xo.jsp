@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>�삤紐⑷쾶�엫</title>
+<title>오목게임</title>
 
 <meta http-equiv="Content-Type" content="UTF-8">
 
@@ -40,7 +40,7 @@ jLastUserMove=0;
 
 function clk(iMove,jMove) {
  if (myTurn) return; 
- if (f[iMove][jMove]!=0) {alert('이미 놓은 자리입니다.'); return; }
+ if (f[iMove][jMove]!=0) {alert('ì´ë¯¸ ëì ìë¦¬ìëë¤.'); return; }
  f[iMove][jMove]=userSq;
  drawSquare(iMove,jMove,userSq);
  myTurn=true;
@@ -51,7 +51,7 @@ function clk(iMove,jMove) {
 
  if (winningPos(iMove,jMove,userSq)==winningMove) setTimeout("alert('YOU WIN!');",dly);
  else setTimeout("machineMove(iLastUserMove,jLastUserMove);",dly);
-} // 寃뚯엫�뿉�꽌 �씠湲몄떆�뿉 �꽌踰꾨줈 �꽆寃⑥＜寃� �릺�뒗 寃쎌슦 �씠遺�遺꾩뿉�꽌 泥섎━
+} // å¯ë¯ì«ï¿½ë¿ï¿½ê½ ï¿½ì æ¹²ëªëï¿½ë¿ ï¿½ê½è¸°ê¾¨ì¤ ï¿½ê½å¯â¥ï¼å¯ï¿½ ï¿½ë¦ºï¿½ë å¯ìì¦ ï¿½ì éºï¿½éºê¾©ë¿ï¿½ê½ ï§£ìâ
 
 function machineMove(iUser,jUser) {
  maxS=evaluatePos(s,userSq);
@@ -115,7 +115,7 @@ function hasNeighbors(i,j) {
 
 w=new Array(0, 100, 85, 77, 70, 50);
 //w= new Array(0,0,0,0,0);
-//w=new Array(0,5,4,3,2,1); // �씠�뼱吏� �룎�쓽 媛�以묒튂 1�닔 0 2�닔 5
+//w=new Array(0,5,4,3,2,1); // ï¿½ì ï¿½ë¼±ï§ï¿½ ï¿½ë£ï¿½ì½ åªï¿½ä»¥ë¬í 1ï¿½ë 0 2ï¿½ë 5
 
 //w=new Array(0,20,17,15.4,14,10);
 //w=new Array;
@@ -130,9 +130,9 @@ function winningPos(i,j,mySq) {
  m=1; 
  while (j+m<boardSize  && f[i][j+m]==mySq) 
  {L++; m++}
- m1=m; // 紐뉗닔�씤吏� �뙋�떒
+ m1=m; // ï§ëëï¿½ì¤ï§ï¿½ ï¿½ëï¿½ë
  m=1; while (j-m>=0 && f[i][j-m]==mySq) {L++; m++} m2=m;   
- if (L>4) { return winningMove; } // �깘�깋�썑 5�릺硫� �씠湲대떎 99999硫� �씠源�
+ if (L>4) { return winningMove; } // ï¿½ê¹ï¿½ê¹ï¿½ì 5ï¿½ë¦ºï§ï¿½ ï¿½ì æ¹²ëë 99999ï§ï¿½ ï¿½ì æºï¿½
  side1=(j+m1<boardSize && f[i][j+m1]==0); 
  side2=(j-m2>=0 && f[i][j-m2]==0);
 
@@ -202,7 +202,7 @@ function evaluatePos(a,mySq) {
    maxN=j+5; if (maxN>boardSize) maxN=boardSize;
 
    nPos[1]=1; A1=0;
-   m=1; while (j+m<maxN  && f[i][j+m]!=-mySq) {nPos[1]++; A1+=w[m]*f[i][j+m]; m++} //w �벐�씠�뒗怨�
+   m=1; while (j+m<maxN  && f[i][j+m]!=-mySq) {nPos[1]++; A1+=w[m]*f[i][j+m]; m++} //w ï¿½ë²ï¿½ì ï¿½ëæ¨ï¿½
    if (j+m>=boardSize || f[i][j+m]==-mySq) A1-=(f[i][j+m-1]==mySq)?(w[5]*mySq):0;
    m=1; while (j-m>=minN && f[i][j-m]!=-mySq) {nPos[1]++; A1+=w[m]*f[i][j-m]; m++}   
    if (j-m<0 || f[i][j-m]==-mySq) A1-=(f[i][j-m+1]==mySq)?(w[5]*mySq):0;

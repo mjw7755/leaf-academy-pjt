@@ -1,12 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="UTF-8">
-<a href="button.do">go</a>
 <script language="JavaScript">
 
 newSize=0;
 function init() {}
-function resetGame() {window.location="xo.html"}
+function resetGame() {window.location="xo.jsp"}
 
 </script>
 </head>

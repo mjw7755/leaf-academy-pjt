@@ -421,12 +421,10 @@ function changeState(layerRef, state){
 
 						<TD CLASS="bodytext" COLSPAN="4">
 							<DIV ALIGN="CENTER">
-								오목게임입니다. X가 사용자며 사용자 먼저 시작하는 게임 입니다. <br>
+								asdfasdfasdf. <br>
 								<br>
 								<form ID=Form1>
-									<input type=button value="Start Game" onClick=window.open(
-										"xo.html","game","width=610,height=350,menubar=0,scrollbars=0,resizable=0
-										") ID=Button1>
+									<input type=button value="Start Game" onClick='window.open("xo.do","game","width=610, height=350, menubar=0, scrollbars=0, resizable=0")' >
 								</form>
 							</DIV>
 						</TD>

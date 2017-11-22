@@ -9,9 +9,9 @@
 		<put-attribute name="header" value="/WEB-INF/view/main/subViews/header.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/view/main/subViews/footer.jsp"/>
 		<put-attribute name="aside" value="/WEB-INF/view/main/subViews/leftMenu.jsp"/>
-		<put-attribute name="content" value="/WEB-INF/view/juju/five_in_a_row/{1}.html"/>
+		<put-attribute name="content" value="/WEB-INF/view/juju/{1}.jsp"/>
 		<put-attribute name="css" value="/WEB-INF/view/juju/five_in_a_row/css/{1}.css"/>
-		<put-attribute name="js" value="/WEB-INF/view/heok/juju/five_in_a_row/{1}.js"/>
+		<put-attribute name="js" value="/WEB-INF/view/juju/five_in_a_row/{1}.js"/>
 	</definition>  
 	<definition name="lecture.*" template="/WEB-INF/view/main/subViews/baseLayout.jsp">
 		<put-attribute name="title" value="/WEB-INF/view/heok/lecture/subViews/title.jsp"/>

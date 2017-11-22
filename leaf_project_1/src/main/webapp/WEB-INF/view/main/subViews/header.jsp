@@ -211,8 +211,6 @@ clear:left;
                <li><a href="myclass.do">내 강의실</a></li>
                <li>|</li>
                <li><a href="logout.do">로그아웃</a></li>
-               <li>|</li>
-               <li><a href="list_backend_curri.do">관리자</a></li>
             </ul>
          </c:if>
       </div>
@@ -232,7 +230,7 @@ clear:left;
             <li id="a_tag"><a href="list_curri.do">교육과정</a>
             <ul>
                   <li><a href="list_curri.do">커리큘럼</a></li>
-                  <li><a href="list_lect.do">교육과정</a></li>
+                  <li><a href="list_lect.do">개설강좌</a></li>
             </ul>
             </li>
             <li id="a_tag"><a href="book_list.do">자료실</a>
@@ -242,9 +240,10 @@ clear:left;
             </ul>
             </li>
             
-            <li id="a_tag"><a href="fiveinarow.do">놀이</a>
+            <li id="a_tag"><a href="fir_index.do">놀이</a>
                <ul>
-                  <li><a href="fiveinarow.do">오목</a></li>         
+                  <li><a href="fir_index.do">오목</a></li>
+                  <li><a href="taja.do">산성비</a></li>         
                </ul>
             </li>
             <li id="a_tag"><a href="notice_list.do">고객센터</a>
