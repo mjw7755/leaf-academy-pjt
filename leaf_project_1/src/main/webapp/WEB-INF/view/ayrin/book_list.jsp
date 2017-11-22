@@ -13,6 +13,17 @@
 	background-color: #e5d235;
 	margin: auto;
 }
+#book_list{
+   width:800px;
+}
+#book_list a{
+   text-decoration: none;
+   color: #000;
+}
+#book_list hr{
+	border: thin solid;
+	border-color: #cccccc;
+}
 #booklistTable {
    width: 700px;
    text-align: center;
@@ -130,6 +141,9 @@ $(document).ready(function(){
    		</div>
    	</div>
     <!-- top banner end -->
+    <div id="book_list">
+    <a href="book_list.do"><h1>도서</h1></a>
+<hr>
 <div id="search">
 	<form action="book_search.do" method="post">
          검색어 입력 : <input size="30" type="search"  name="keyvalue" placeholder="제목, 저자 검색 가능합니다." list="booklist"> 
@@ -227,6 +241,6 @@ $(document).ready(function(){
       </c:if>
       </c:if>
    </div>
-   
+   </div>
 </body>
 </html>

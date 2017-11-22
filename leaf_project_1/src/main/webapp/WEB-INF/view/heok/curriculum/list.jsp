@@ -15,6 +15,10 @@
 	#curri{
 		width:800px;
 	}
+	#curri a{
+		text-decoration: none;
+		color:#000;
+	}
 	#curri hr{
 		border: thin solid;
 		border-color: #cccccc;
@@ -63,7 +67,7 @@
 #search{
 	text-align: right;
 	margin-bottom: 30px;
-	
+	margin-top: 30px;
 }
 #search form{
 	font-size: 13px;
@@ -172,6 +176,18 @@ outline: none; }
 font-size: 1em; }
 .btn--sm {
 font-size: 0.6em; }
+/*  */
+#page {
+	margin-top: 10px;
+}
+#page a{
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    color: #13b69d;
+    margin-right: 5px;
+}
+
 </style>
 </head>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -274,11 +290,9 @@ font-size: 0.6em; }
    	</div>
     <!-- top banner end -->
 <div id="curri">
-<h1>월별 강의 커리큘럼 안내</h1>
+<a href="list_curri.do"><h1>월별 강의 커리큘럼 안내</h1></a>
 <hr>
-<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1'}">
-	<a href="writeform_curri.do" method="post"><button  class="btn btn--sm btn--green">추가하기</button></a>
-</c:if><br>
+
 	<div id="search" name="searchdiv1" class="searchdiv1">
 	<form action="search_curri.do" method="post">
 		<select name="column">
@@ -290,6 +304,9 @@ font-size: 0.6em; }
 			<input type="image" src="resources/ram/search.png" id="search_icon">&nbsp;
 	</form>	
 	</div>
+	<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1'}">
+	<a href="writeform_curri.do" method="post"><button  class="btn btn--sm btn--green">추가하기</button></a>
+</c:if><br>
 	<div id="monthBtn">	
 	<input type="button" id="01" name="2017" class="btn2 btn-info"
 		value="2017.01" />
@@ -551,7 +568,7 @@ font-size: 0.6em; }
 				</c:forEach>				
 			</table>
 				 
-		<div>
+		<div id="page">
 	      <c:if test="${param.page>5}">
 	         <c:if test="${flag == 'list' }">
 	         <a class="button btn-prev" href="list_curri.do?page=${startPage-1}">이전</a>
