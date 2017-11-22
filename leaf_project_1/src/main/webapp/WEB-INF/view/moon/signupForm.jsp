@@ -127,11 +127,14 @@
     }
 </script>
 <style type="text/css">
+#signupform{
+	width:600px;
+}
+#signupform hr{
+	border: thin solid;
+}
 .error {
 	color: red;
-}
-span{
-  font-size: 15px;
 }
 #checkMsg{
 	
@@ -174,31 +177,65 @@ span{
 }
 .btn {
 	display: inline-block;
-	padding: 6px 12px;
-	margin-bottom: 0;
-	margin-top:12px;
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 1.42857143;
-	text-align: center;
-	white-space: nowrap;
-	vertical-align: middle;
-	-ms-touch-action: manipulation;
-	touch-action: manipulation;
-	cursor: pointer;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	background-image: none;
-	border: 1px solid transparent;
-	border-radius: 4px;	
+    padding: 4px 12px;
+    width:100px;
+    margin-bottom: 0;
+    /* margin-top: 12px; */
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
 }
-h1{
+#signupform h1{
 	margin-bottom: 10px;
 }
 #submit{
 	text-align: center;
+}
+#text{
+	padding-right: 30px;
+    font-size: 13px;
+    font-weight: bold;
+    width: 110px;
+}
+.form-control {
+	/* display: block; */
+    margin-right: 10px;
+    /* width: 100%; */
+    /* height: 34px; */
+    padding: 6px 12px;
+    /* font-size: 14px; */
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+#signup_table{
+	width:500px;
+}
+#signup_table td{
+	padding-bottom: 10px;
+}
+#member_id2, #checkPwd, .error{
+	font-size: 12px;
 }
 </style>
 <script type="text/javascript">
@@ -320,48 +357,50 @@ function insertChk(){
 <body>
 <div id="top_banner">
 	<div id="banner">
-	<img src="resources/top_banner3.png">
+	<img src="resources/ram/top_banner3.png">
 	</div>
 </div>
-<h1>회원가입</h1><hr><br>
+<div id="signupform">
+<h1>회원가입</h1>
+<hr>
 <sf:form method="post" action="signup.do" commandName="dto" name="memberchk" role="form">
-	<table>
+	<table id="signup_table">
 		<tr>
-			<td>아이디 : </td>
+			<td id="text">아이디</td>
 			<td><input type="hidden" id="idChk" value="N" />
-			<sf:input path="member_id" id="member_id"  onkeyup="chkDupId()"  placeholder="아이디 입력" style="width:200px"/>
-			<sf:errors path="member_id" cssClass="error" /><div id="member_id3"></div>
+			<sf:input path="member_id" id="member_id"  onkeyup="chkDupId()"  placeholder="아이디 입력" style="width:200px" class="form-control"/>
+			<sf:errors path="member_id" cssClass="error" ></sf:errors><div id="member_id3"></div>
 			<div id="member_id2"></div>
 			</td>
 		</tr>
 		<tr>
-    		<td><span>암호 : </span></td>
-   		    <td><sf:password path="member_pwd" id="member_pwd" placeholder="영어 숫자 특수문자를 조합" style="width:200px"/>
+    		<td id="text"><span>암호</span></td>
+   		    <td><sf:password path="member_pwd" id="member_pwd" placeholder="영어 숫자 특수문자를 조합" style="width:200px" class="form-control"/>
     		    <sf:errors path="member_pwd" cssClass="error" /></td>
     		</tr>
 		<tr>
-		    <td><span>암호확인 : </span></td>
+		    <td id="text"><span>암호확인</span></td>
 		    <td>
-		        <input type="password" name="pwd_check" onkeyup="checkPwd()"  placeholder="암호 확인" style="width:200px"></input>
+		        <input type="password" name="pwd_check" onkeyup="checkPwd()"  placeholder="암호 확인" style="width:200px" class="form-control"></input>
 		        <div id="checkPwd"></div>
 		    </td>
 		</tr>			
 		<tr>
-			<td>이름(Full Name) : </td>
-			<td><sf:input path="member_name" placeholder="이름 입력" style="width:200px"/>
+			<td id="text">이름(Full Name)</td>
+			<td><sf:input path="member_name" placeholder="이름 입력" style="width:200px" class="form-control"/>
 				<sf:errors path="member_name" cssClass="error"/></td>
 		</tr>
 		<tr>
-			<td>전화번호(휴대폰) : </td>
-			<td><sf:input path="member_tel" placeholder="000-0000-0000" style="width:200px"/>
+			<td id="text">전화번호(휴대폰)</td>
+			<td><sf:input path="member_tel" placeholder="000-0000-0000" style="width:200px" class="form-control"/>
 			<sf:errors path="member_tel" cssClass="error"/></td>
 		</tr>
-		<tr>
-			<td>우편번호 :</td>
-			<td><sf:input path="member_addnum" id="sample4_postcode" placeholder="우편번호" style="width:200px"/>
-			<sf:errors path="member_addnum" cssClass="error" /><br/>
-				<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-				<sf:input path="member_address" id="sample4_roadAddress" placeholder="도로명주소" style="width:200px"/>
+		<tr >
+			<td id="text">우편번호</td>
+			<td><sf:input path="member_addnum" id="sample4_postcode" placeholder="우편번호" style="width:200px" class="form-control"/>
+			<sf:errors path="member_addnum" cssClass="error" />
+				<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn-primary btn-sm">
+				<sf:input path="member_address" id="sample4_roadAddress" placeholder="도로명주소" style="width:200px" class="form-control"/>
 				<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소">
 				<span id="guide" style="color: #999"></span>
 				<sf:errors path="member_address" cssClass="error" /></td>
@@ -386,10 +425,10 @@ function insertChk(){
                 </tr> --%>
                 
                                 <tr>
-                    <th>이메일(아이디)</th>
+                    <td id="text">이메일(아이디)</td>
                     <td>
                         <sf:input path="member_email" id="member_email" class="form-control"
-                               style="margin-right: 10px; width: 300px"
+                               style="margin-right: 10px; width: 200px"
                                aria-describedby="emailHelp" placeholder="Enter email"/>
                                
                         <input type="button" value="인증" class="btn btn-primary btn-sm"
@@ -398,20 +437,21 @@ function insertChk(){
                     </td>
                 </tr>
                 <tr id="joincode">
-                    <th>인증번호</th>
+                    <td id="text">인증번호</td>
                     <td>
                         <input type='number' name="inputCode" id="inputCode" class="form-control"
-                               style="margin-right: 10px; width: 300px" placeholder="Enter code"/>
+                               style="margin-right: 10px; width: 200px" placeholder="Enter code"/>
                         <input type="button" value="확인" class="btn btn-primary btn-sm"
                                onclick="checkJoinCode()">
                     </td>
                 </tr>
 		<tr id="submit">
 			<td colspan="2"><input type="button" value="회원가입" onclick="checkfield();" class="btn btn-info">
-			<input type="reset" value="리셋" class="btn btn-info"></td>
+			<input type="reset" value="재입력" class="btn btn-info"></td>
 		</tr>
 	</table>
 </sf:form>
+</div>
 </body>
 </html>
 

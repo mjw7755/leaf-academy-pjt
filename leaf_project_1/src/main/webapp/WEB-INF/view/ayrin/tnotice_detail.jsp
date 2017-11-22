@@ -1,25 +1,35 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c"  uri="http://java.sun.com/jstl/core_rt"%>
 <!DOCTYPE html>
 <html><head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title> </title>
+<title>Insert title here</title>
 <style type="text/css">
 #top_banner{
 	width: 100%;
 	background-color: #e5d235;
 	margin: auto;
 }
-#jageokdetailTable {
+#tnoticedetailTable {
    width: 800px;
-   margin-top: 30px;
+   margin-top: 20px;
 }
-/* #jageokdetailTable td{
+#tnoticedetailTable hr{
+	border: thin solid;
+	color: #999;
+}
+#content{
+	padding-left: 15px;
+	font-size: 13px;
+	color:#565656;
+	vertical-align: top;
+}
+/* #tnoticedetailTable td{
    border: 1px solid;
 } */
+
 .btn {
-       display: inline-block;
+   display: inline-block;
     border: none;
     border-radius: .3em;
     -webkit-box-shadow: inset 0 0 0 1px #323232, inset 0 -0.25em 0 #9f9e9e, 0 0.25em 0.25em #666666;
@@ -33,7 +43,7 @@
     padding: .5em 1.5em .75em;
     position: relative;
     text-decoration: none;
-    text-shadow: 0 1px 1px #c4c4c4;
+    /* text-shadow: 0 1px 1px #c4c4c4; */
     vertical-align: middle;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -53,48 +63,31 @@ outline: none; }
 .btn--green {
 font-size: 1em; }
 .btn--sm {
-font-size: 0.5em; }
-#jageokdetailTable th{
-	background-color: #f4f3f1;
-	border-bottom: 1px solid;
-	border-bottom-color: #cccccc;
-	height: 50px;
-}
-#jageokdetailTable tr{
-	text-align: center;
-	border-bottom: 1px solid;
-	border-bottom-color: #cccccc;
-	height: 50px;
+font-size: 0.6em; }
+#title{
+	padding-left: 15px;
+	width: 50px;
+	font-weight: bold;
 }
 </style>
 </head>
 <body>
-  	<!-- top banner -->
+   	<!-- top banner -->
    	<div id="top_banner">
    		<div id="banner">
-   		<img src="resources/ram/top_banner_book.png">
+   		<img src="resources/ram/top_banner_tnotice.png">
    		</div>
    	</div>
     <!-- top banner end -->
-<table id="jageokdetailTable">
-<tr>
-	<th>자격증</th>
-	<th>시험일</th>
-	<th>비용</th>
-</tr>
-<tr>
-	<td>${dto.jageok_title}</td>
-	<td>${dto.jageok_date}</td>
-	<td>${dto.jageok_cost}</td>
-</tr>
-	<%-- <tr> <td>자격증 : </td> <td>${dto.jageok_title}</td> </tr>
-	<tr> <td>시험일 : </td> <td>${dto.jageok_date}</td> </tr>
-	<tr> <td>비용 : </td> <td>${dto.jageok_cost}</td> </tr> --%>
-</table>    
-	<br><br>   
-	<c:if test="${sessionScope.sessionid=='관리자' or sessionScope.sessionid=='강사1'}"> 
-	<a href="jageok_updateform.do?jageok_id=${ dto.jageok_id }"><button class="btn btn--sm btn--green">수정하기</button></a>
-	<a href="jageok_list.do"><button class="btn btn--sm btn--green">목록</button></a>
+<table id="tnoticedetailTable">
+	<tr> <td id="title">제목 : </td> <td>${dto.tnotice_title}</td> </tr>
+	<tr> <td id="title" colspan="2">내용 : </td></tr>
+	<tr> <td colspan="2" id="content">${dto.tnotice_content}</td></tr>
+</table>
+	<a href="tnotice_list.do"><button class="btn btn--sm btn--green">목록으로</button></a>
+    <c:if test="${sessionScope.sessionid=='관리자' or sessionScope.sessionid=='강사1'}">
+	<a href="tnotice_updateform.do?tnotice_id=${ dto.tnotice_id }"><button class="btn btn--sm btn--green">수정하기</button></a>
+	<a href="tnotice_list.do"><button class="btn btn--sm btn--green">목록</button></a>
 	</c:if>
 </body>
 </html>

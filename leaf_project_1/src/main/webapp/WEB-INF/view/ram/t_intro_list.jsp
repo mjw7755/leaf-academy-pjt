@@ -48,8 +48,17 @@ $(document).ready(function(){
 	background-color: #e5d235;
 	margin: auto;
 }
+
 .teacher_intro{
    width:800px;
+}
+.teacher_intro a{
+   text-decoration: none;
+   color: #000;
+}
+.teacher_intro hr{
+	border: thin solid;
+	border-color: #cccccc;
 }
 #t_search{
    font-size: 12px;
@@ -293,6 +302,8 @@ font-size: 0.7em; }
     <!-- top banner end -->
 
 <div class="teacher_intro">
+<a href="t_intro_list.do"><h1>강사 소개</h1></a>
+<hr>
    <div id="t_search"><!-- 선생님 검색 -->
       <form action="t_intro_search.do" method="post">
          <div>선생님 찾기 
