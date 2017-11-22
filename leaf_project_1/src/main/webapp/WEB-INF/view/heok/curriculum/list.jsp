@@ -199,39 +199,11 @@ font-size: 0.6em; }
 		var url = "list_" + params.value + ".do";
 		window.location.href = url;
 	}
-/* 	$(function(){
-		$(".searchdiv").hide;
-			
-		$("#search").click(function(){
-		
-				$("#searchdiv1").show();
-		});
-		$("#searchbtn").click(function(){
-			$("#searchdiv2").show();
-			
-		});
-	}); */
 		
 	$(function() {
 		$(".content").hide();
 		var flag = [ false, false, false, false, false, false, false, false,
 				false, false, false, false ];
-		/* $(".content").hide(); */
-		/* $(".month").click(function(){
-			var month = this.value.substring(6);
-			if(flag[month+1]) {
-				$("#content"+month).hide();
-				flag[month+1] = false;
-			} else {
-				$("#content"+month).show();
-				
-				flag[month+1] = true;
-			}
-		});
-		 */
-		/* 	 $("#01").click(function(){
-				var monthvalue = $("#01").attr("id");
-				alert(monthvalue); */
 
 		$(".btn2").click(
 				function() {

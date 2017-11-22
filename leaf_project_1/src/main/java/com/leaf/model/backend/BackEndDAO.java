@@ -20,6 +20,7 @@ import com.leaf.model.teacher_intro.T_introDTO;
 public interface BackEndDAO {
 	
 	public int deleteBackEnd();
+	
 	public List<CurriDTO> back_curri();
 	public List<MemberDTO> back_member();
 	public List<LectDTO> back_lect();
@@ -48,4 +49,7 @@ public interface BackEndDAO {
 	public List<StudentDTO> back_searchStu(Map<String, Object> map);
 	public List<JageokDTO> back_searchJa(Map<String, Object> map);
 	
+	public void back_updateCurri(CurriDTO dto);
+	public CurriDTO back_updateFormCurri(int curri_id);
+
 }
