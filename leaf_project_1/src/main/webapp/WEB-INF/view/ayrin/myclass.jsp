@@ -213,7 +213,7 @@ $(function() {
       <tr id="my_page_text"><td colspan="2">MY CLASS</td></tr>
       <tr><td id="lecture"><a href="#">강의듣기</a><div id="lecture_icon">></div></td></tr>
 	  <tr><td id="grade"><a href="#">성적조회</a><div id="grade_icon">></div></td></tr>
-	  <tr><td id="attendance"><a href="#">출결현황</a><div id="attendance_icon">></div></td></tr>
+	  <tr><td id="attendance"><a href="getChkAttend.do">출결현황</a><div id="attendance_icon">></div></td></tr>
 	  <tr><td id="t_notice"><a href="#">강사공지</a><div id="t_notice_icon">></div></td></tr>
 	  <c:if test="${sessionScope.sessionid=='관리자'}">
       <tr><td id="student_care"><a href="#" >학생조회</a><div id="student_care_icon">></div></td></tr>
