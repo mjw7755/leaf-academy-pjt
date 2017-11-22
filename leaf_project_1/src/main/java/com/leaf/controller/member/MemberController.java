@@ -32,8 +32,8 @@ import com.google.gson.GsonBuilder;
 import com.leaf.model.member.MemberDAO;
 import com.leaf.model.member.MemberDTO;
 import com.leaf.model.member.ValidGroupOrder;
-import com.leaf.model.service.NoticeDAO;
-import com.leaf.model.service.NoticeDTO;
+import com.leaf.model.tnotice.TnoticeDAO;
+import com.leaf.model.tnotice.TnoticeDTO;
 
 @Controller
 public class MemberController {
@@ -41,7 +41,7 @@ public class MemberController {
 	@Resource
 	private MemberDAO memberdao;
 	@Resource
-	private NoticeDAO noticeDAO;
+	private TnoticeDAO tnoticedao;
 	
 	private Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 	 
@@ -280,28 +280,55 @@ public class MemberController {
 	}
 
 	@RequestMapping("/myclass.do")
-	public String myclass(Model model, HttpServletRequest request) {
+	public String myclass(Model model,HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 		session.getAttribute("sessionid");
-		String strPage = request.getParameter("page");
-		int page;
-		if (strPage == null) {
-			page = 1;
+		String member_id = (String) request.getSession().getAttribute("sessionid");
+		MemberDTO dto = memberdao.getMemberById(member_id);
+		mav.addObject("dto", dto);
+		if(Integer.parseInt(dto.getMember_level()) == 1) {
+			String strPage = request.getParameter("page");
+			int page;
+			if (strPage == null) {
+				page = 1;
+			} else {
+				page = Integer.parseInt(request.getParameter("page"));
+			}
+			List<TnoticeDTO> list = tnoticedao.getTnoticeList(page);
+			int count = tnoticedao.getCount();
+			int countPage = (int) Math.ceil((float) count / 5);
+			int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
+			model.addAttribute("count", count);
+			model.addAttribute("countPage", countPage);
+			model.addAttribute("startPage", startPage);
+			for(int i=0; i<list.size(); i++) {
+				list.get(i).setTnotice_content(list.get(i).getTnotice_content().replaceAll("\"", "'").replaceAll("\r\n", "<br>"));
+			}
+			model.addAttribute("list", list);
+			return "ayrin.myclassST";
 		} else {
-			page = Integer.parseInt(request.getParameter("page"));
+			String strPage = request.getParameter("page");
+			int page;
+			if (strPage == null) {
+				page = 1;
+			} else {
+				page = Integer.parseInt(request.getParameter("page"));
+			}
+			List<TnoticeDTO> list = tnoticedao.getTnoticeList(page);
+			int count = tnoticedao.getCount();
+			int countPage = (int) Math.ceil((float) count / 5);
+			int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
+			model.addAttribute("count", count);
+			model.addAttribute("countPage", countPage);
+			model.addAttribute("startPage", startPage);
+			for(int i=0; i<list.size(); i++) {
+				list.get(i).setTnotice_content(list.get(i).getTnotice_content().replaceAll("\"", "'").replaceAll("\r\n", "<br>"));
+			}
+			model.addAttribute("list", list);
+			return "ayrin.myclassTC";
 		}
-		List<NoticeDTO> list = noticeDAO.noticeSelect(page);
-		int count = noticeDAO.getCount();
-		int countPage = (int) Math.ceil((float) count / 5);
-		int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
-		model.addAttribute("count", count);
-		model.addAttribute("countPage", countPage);
-		model.addAttribute("startPage", startPage);
-		for(int i=0; i<list.size(); i++) {
-			list.get(i).setNotice_content(list.get(i).getNotice_content().replaceAll("\"", "'").replaceAll("\r\n", "<br>"));
-		}
-		model.addAttribute("list", list);
-		return "ayrin.myclass";
+		
 	}
 
 	@RequestMapping("/mypage.do")
