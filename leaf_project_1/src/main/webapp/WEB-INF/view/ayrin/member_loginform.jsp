@@ -112,7 +112,7 @@ h1{
 <body>
 <div id="top_banner">
 	<div id="banner">
-	<img src="resources/top_banner3.png">
+	<img src="resources/ram/top_banner3.png">
 	</div>
 </div>
 

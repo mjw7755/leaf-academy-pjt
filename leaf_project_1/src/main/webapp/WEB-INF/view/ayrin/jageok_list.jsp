@@ -8,15 +8,32 @@
 <title></title>
 
 <style type="text/css">
+#top_banner{
+	width: 100%;
+	background-color: #e5d235;
+	margin: auto;
+}
 #jageoklistTable {
    width: 800px;
-   text-align: center;
+   border-collapse: collapse;
 }
-#jageoklistTable td{
+#jageoklistTable th{
+	background-color: #f4f3f1;
+	border-bottom: 1px solid;
+	border-bottom-color: #cccccc;
+	height: 50px;
+}
+#jageoklistTable tr{
+	border-bottom: 1px solid;
+	border-bottom-color: #cccccc;
+	height: 50px;
+}
+
+/* #jageoklistTable td{
    border: 1px solid;
    height: 30px;
    border-radius: 4px;
-}
+} */
 
 .btn {
        display: inline-block;
@@ -33,7 +50,7 @@
     padding: .5em 1.5em .75em;
     position: relative;
     text-decoration: none;
-    text-shadow: 0 1px 1px #c4c4c4;
+    /* text-shadow: 0 1px 1px #c4c4c4; */
     vertical-align: middle;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -54,7 +71,85 @@ outline: none; }
 font-size: 1em; }
 .btn--sm {
 font-size: 0.5em; }
+/*  */
+#text{
+	 width: 800px;
+	 margin-top: 20px;
+}
+#search{
+	text-align: right;
+	margin-bottom: 30px;
+	
+}
+#search form{
+	font-size: 13px;
+}
 
+#search form input{
+	font-size: 13px;
+}
+#search_icon{
+	vertical-align: middle;
+}
+#title{
+	padding-left: 7px;
+}
+#jageok_name a{
+	text-decoration: none;
+	color: #535252;
+}
+#center{
+	text-align: center;
+}
+#page {
+	margin-top: 10px;
+}
+#page a{
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    color: #13b69d;
+    margin-right: 5px;
+}
+/* button */
+.btn-info {
+	color: #fff;
+	background-color: #f16022;
+	border-color: #46b8da;
+}
+.btn-info.focus, .btn-info:focus {
+	color: #fff;
+	background-color: #b64413;
+	border-color: #1b6d85;
+}
+.btn-info:hover {
+	color: #fff;
+	background-color: #b64413;
+	border-color: #973911;
+}
+.btn2 {
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 12px;
+	margin-top:12px;
+	margin-left:5px;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;	
+}
 </style>
 
 <script type="text/javascript">
@@ -73,55 +168,64 @@ function multiDelete(){
 </script>
 </head>
 <body>
-<br><br><br><br><br>
-	<b>※ 모든 시험 접수일은 1~3개월 전부터 확인 해야합니다 ! ※</b><br>
-	
+   	<!-- top banner -->
+   	<div id="top_banner">
+   		<div id="banner">
+   		<img src="resources/ram/top_banner_book.png">
+   		</div>
+   	</div>
+    <!-- top banner end -->
+    <div id="text">
+	<b>※ 모든 시험 접수일은 1~3개월 전부터 확인 해야합니다 ! ※</b><br><br>
+	<div id="search">
 	<form action="jageok_search.do" method="post">
          검색어 입력 : <input size="30" type="search"  name="keyvalue" placeholder="키워드 검색 가능합니다." list="jageoklist"> 
-             <button type="submit" class="btn btn--sm btn--green">검색</button>
+             <input type="image" src="resources/ram/search.png" id="search_icon">
     </form>
-   
+    </div>
+   </div>
 	<datalist  id="jageoklist">
 		<c:forEach items="${ list }" var="list">
 			<option value="${ list.jageok_title }"> ${ list.jageok_title } | ${ list.jageok_date } | ${ list.jageok_cost }</option>
 		</c:forEach>
 	</datalist>
-	<br><hr><br>
    <table id="jageoklistTable">
       <tr>
          <!-- <th>NO.</th>
          <th>작성자</th> -->
-         <th>자격증</th>
-         <th>시험일</th>
-         <th>비용</th>
+         <th id="title">글번호</th>
+         <th id="title">자격증</th>
+         <th id="title">시험일</th>
+         <th id="title">비용</th>
          <!-- <th>ENABLED</th> -->
          <c:if test="${sessionScope.sessionid=='관리자' or sessionScope.sessionid=='강사1'}">
-         <th><a href="jageok_writeform.do"><button class="btn btn--sm btn--green">추가</button></a></th>
-      	 <th colspan="2"><a href="#"><button id="multi" onclick="multiDelete()" class="btn btn--sm btn--green">다중삭제</button></a></th>
+         <th><a href="jageok_writeform.do"><button class="btn2 btn-info">추가</button></a></th>
+      	 <th colspan="3"><a href="#"><button id="multi" onclick="multiDelete()" class="btn2 btn-info">다중삭제</button></a></th>
       	 </c:if>
       </tr>
       <c:forEach items="${ list }" var="list" varStatus="status">
          <tr onclick="test(this)">
             <%-- <td>${list.jageok_id}</td>
             <td>${list.member_id}</td> --%>
-            <td>
+            <td id="center">${list.jageok_id }</td>
+            <td id="jageok_name">
             	<a href="jageok_detail.do?jageok_id=${ list.jageok_id }">${list.jageok_title }</a>
             </td>
-            <td>${list.jageok_date}</td>
-            <td>${list.jageok_cost}</td>
+            <td id="center">${list.jageok_date}</td>
+            <td id="center">${list.jageok_cost}</td>
             <%-- <td>${list.enabled}</td> --%>
          	<c:if test="${sessionScope.sessionid=='관리자' or sessionScope.sessionid=='강사1'}">
             <td><a href="jageok_updateform.do?jageok_id=${ list.jageok_id }">
             <button id="edit" class="btn btn--sm btn--green">수정</button> </a></td>
-            <td id="multi"><input type="checkbox" style="width: 30px;" name="jageok_id" value="${ list.jageok_id }"></td>
             <td><a href="jageok_delete.do?jageok_id=${ list.jageok_id }"><button id="delete" class="btn btn--sm btn--green">삭 제</button> </a></td>
+            <td id="multi"><input type="checkbox" style="width: 30px;" name="jageok_id" value="${ list.jageok_id }"></td>
             <td><a href="jageok_deletecancle.do?jageok_id=${ list.jageok_id }"><button id="deletecancle" class="btn btn--sm btn--green">삭제취소</button> </a></td>
             </c:if>
          </tr>
       </c:forEach>
    </table>
    <br><br>
-   <div align="center">
+   <div align="center" id="page">
       <c:if test="${param.page>5}">
       <c:if test="${flag == 'list' }">
          <a class="button btn-prev" href="jageok_list.do?page=${startPage-1}">이전</a>

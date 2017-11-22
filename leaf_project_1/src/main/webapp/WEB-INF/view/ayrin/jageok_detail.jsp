@@ -6,12 +6,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title> </title>
 <style type="text/css">
+#top_banner{
+	width: 100%;
+	background-color: #e5d235;
+	margin: auto;
+}
 #jageokdetailTable {
    width: 800px;
+   margin-top: 30px;
 }
-#jageokdetailTable td{
+/* #jageokdetailTable td{
    border: 1px solid;
-}
+} */
 .btn {
        display: inline-block;
     border: none;
@@ -48,14 +54,42 @@ outline: none; }
 font-size: 1em; }
 .btn--sm {
 font-size: 0.5em; }
+#jageokdetailTable th{
+	background-color: #f4f3f1;
+	border-bottom: 1px solid;
+	border-bottom-color: #cccccc;
+	height: 50px;
+}
+#jageokdetailTable tr{
+	text-align: center;
+	border-bottom: 1px solid;
+	border-bottom-color: #cccccc;
+	height: 50px;
+}
 </style>
 </head>
 <body>
-<br><br><br><br>
+  	<!-- top banner -->
+   	<div id="top_banner">
+   		<div id="banner">
+   		<img src="resources/ram/top_banner_book.png">
+   		</div>
+   	</div>
+    <!-- top banner end -->
 <table id="jageokdetailTable">
-	<tr> <td>자격증 : </td> <td>${dto.jageok_title}</td> </tr>
+<tr>
+	<th>자격증</th>
+	<th>시험일</th>
+	<th>비용</th>
+</tr>
+<tr>
+	<td>${dto.jageok_title}</td>
+	<td>${dto.jageok_date}</td>
+	<td>${dto.jageok_cost}</td>
+</tr>
+	<%-- <tr> <td>자격증 : </td> <td>${dto.jageok_title}</td> </tr>
 	<tr> <td>시험일 : </td> <td>${dto.jageok_date}</td> </tr>
-	<tr> <td>비용 : </td> <td>${dto.jageok_cost}</td> </tr>
+	<tr> <td>비용 : </td> <td>${dto.jageok_cost}</td> </tr> --%>
 </table>    
 	<br><br>   
 	<c:if test="${sessionScope.sessionid=='관리자' or sessionScope.sessionid=='강사1'}"> 

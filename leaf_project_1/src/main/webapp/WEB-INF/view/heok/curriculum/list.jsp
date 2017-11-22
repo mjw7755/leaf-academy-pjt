@@ -6,6 +6,173 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>curriculumList Page</title>
+<style type="text/css">
+#top_banner{
+	width: 100%;
+	background-color: #e5d235;
+	margin: auto;
+}
+	#curri{
+		width:800px;
+	}
+	#curri hr{
+		border: thin solid;
+		border-color: #cccccc;
+	}
+
+	/* button */
+.btn-info {
+	color: #fff;
+	background-color: #f16022;
+	border-color: #f16022;
+}
+.btn-info.focus, .btn-info:focus {
+	color: #fff;
+	background-color: #b64413;
+	border-color: #f16022;
+}
+.btn-info:hover {
+	color: #fff;
+	background-color: #b64413;
+	border-color: #f16022;
+}
+.btn2 {
+	display: inline-block;
+    padding: 12px 18px;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    margin-left: 5px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    /* border-radius: 4px; */
+}
+/*  */
+#search{
+	text-align: right;
+	margin-bottom: 30px;
+	
+}
+#search form{
+	font-size: 13px;
+}
+
+#search form input{
+	font-size: 13px;
+}
+#search form select{
+	height: 22px;
+}
+#search_icon{
+	vertical-align: middle;
+}
+/*  */
+#monthBtn{
+	width: 600px;
+    margin-bottom: 20px;
+}
+.content {
+	width: 600px;
+}
+.content span{
+	width: 100%;
+    text-align: left;
+    float: left;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    
+}
+.bar{
+	width:30px;
+	height: 2px;
+	background-color: #000;
+	margin-bottom: 20px;
+	margin-left: 10px;
+    text-align: left;
+    float: left;
+}
+thead th{
+	width:100px;
+	border-top:1px solid;
+	border-bottom: 1px solid;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	background-color: #f4f3f1;
+}
+
+#content_table{
+	margin-bottom: 20px;
+	border-collapse: collapse;
+}
+#search_table{
+	margin-bottom: 20px;
+	border-collapse: collapse;
+}
+#search_table th{
+	width:100px;
+	border-top:1px solid;
+	border-bottom: 1px solid;
+	border-color:#dddede;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	background-color: #9fd2b9;
+}
+#search_table a, #content_table a{
+	text-decoration: none;
+	color:#000;
+}
+/*  */
+.btn {
+       display: inline-block;
+    border: none;
+    border-radius: .3em;
+    -webkit-box-shadow: inset 0 0 0 1px #323232, inset 0 -0.25em 0 #9f9e9e, 0 0.25em 0.25em #666666;
+    /* box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 -0.25em 0 rgba(0, 0, 0, 0.25), 0 0.25em 0.25em rgba(0, 0, 0, 0.05); */
+    color: #000;
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    padding: .5em 1.5em .75em;
+    position: relative;
+    text-decoration: none;
+   /*  text-shadow: 0 1px 1px #c4c4c4; */
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* margin-left: 10px; */
+}
+.btn:active {
+-webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), inset 0 2px 0 rgba(255, 255, 255, 0.1), inset 0 0.25em 0.5em rgba(0, 0, 0, 0.05);
+box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), inset 0 2px 0 rgba(255, 255, 255, 0.1), inset 0 0.25em 0.5em rgba(0, 0, 0, 0.05);
+margin-top: .25em;
+padding-bottom: .5em; }
+.btn:active, .btn:focus {
+outline: none; }
+.btn--green {
+    background-color: #fff; }
+.btn--green {
+font-size: 1em; }
+.btn--sm {
+font-size: 0.6em; }
+</style>
 </head>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
@@ -50,7 +217,7 @@
 				var monthvalue = $("#01").attr("id");
 				alert(monthvalue); */
 
-		$(".monthBtn").click(
+		$(".btn2").click(
 				function() {
 					var monthvalue = this.id;
 					var yearvalue = this.name;
@@ -99,56 +266,68 @@
 	});
 </script>
 <body>
+   	<!-- top banner -->
+   	<div id="top_banner">
+   		<div id="banner">
+   		<img src="resources/ram/top_banner_curri.png">
+   		</div>
+   	</div>
+    <!-- top banner end -->
+<div id="curri">
+<h1>월별 강의 커리큘럼 안내</h1>
+<hr>
 <c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1'}">
-	<a href="writeform_curri.do" method="post"><button>추가하기</button></a>
+	<a href="writeform_curri.do" method="post"><button  class="btn btn--sm btn--green">추가하기</button></a>
 </c:if><br>
-	<input type="button" id="01" name="2017" class="monthBtn"
-		value="2017.01" />
-	<input type="button" id="02" name="2017" class="monthBtn"
-		value="2017.02" />
-	<input type="button" id="03" name="2017" class="monthBtn"
-		value="2017.03" />
-	<input type="button" id="04" name="2017" class="monthBtn"
-		value="2017.04" />
-	<input type="button" id="05" name="2017" class="monthBtn"
-		value="2017.05" />
-	<input type="button" id="06" name="2017" class="monthBtn"
-		value="2017.06" />
-	<br>
-	<input type="button" id="07" name="2017" class="monthBtn"
-		value="2017.07" />
-	<input type="button" id="08" name="2017" class="monthBtn"
-		value="2017.08" />
-	<input type="button" id="09" name="2017" class="monthBtn"
-		value="2017.09" />
-	<input type="button" id="10" name="2017" class="monthBtn"
-		value="2017.10" />
-	<input type="button" id="11" name="2017" class="monthBtn"
-		value="2017.11" />
-	<input type="button" id="12" name="2017" class="monthBtn"
-		value="2017.12" />		
-	<br/><br/>
-	<div id="searchdiv1" name="searchdiv1" class="searchdiv1">
+	<div id="search" name="searchdiv1" class="searchdiv1">
 	<form action="search_curri.do" method="post">
 		<select name="column">
 			<option value="curri_subject">강좌명</option>
 			<option value="curri_level">강좌레벨</option>
 			<option value="member_id">강사명</option>
 		</select> <input size="30" type="text" id="keyvalue" name="keyvalue"
-			placeholder="키워드 검색 가능합니다."> <input type="submit"
-			id="searchbtn" name="searchbtn"value="검색">&nbsp;
+			placeholder="키워드 검색 가능합니다."> 
+			<input type="image" src="resources/ram/search.png" id="search_icon">&nbsp;
 	</form>	
-	</div>	
+	</div>
+	<div id="monthBtn">	
+	<input type="button" id="01" name="2017" class="btn2 btn-info"
+		value="2017.01" />
+	<input type="button" id="02" name="2017" class="btn2 btn-info"
+		value="2017.02" />
+	<input type="button" id="03" name="2017" class="btn2 btn-info"
+		value="2017.03" />
+	<input type="button" id="04" name="2017" class="btn2 btn-info"
+		value="2017.04" />
+	<input type="button" id="05" name="2017" class="btn2 btn-info"
+		value="2017.05" />
+	<input type="button" id="06" name="2017" class="btn2 btn-info"
+		value="2017.06" />
+	<input type="button" id="07" name="2017" class="btn2 btn-info"
+		value="2017.07" />
+	<input type="button" id="08" name="2017" class="btn2 btn-info"
+		value="2017.08" />
+	<input type="button" id="09" name="2017" class="btn2 btn-info"
+		value="2017.09" />
+	<input type="button" id="10" name="2017" class="btn2 btn-info"
+		value="2017.10" />
+	<input type="button" id="11" name="2017" class="btn2 btn-info"
+		value="2017.11" />
+	<input type="button" id="12" name="2017" class="btn2 btn-info"
+		value="2017.12" />		
+	</div>
+
 	<div id="content01" class="content">
-		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">1월</span>
-			<table style="text-align: center;">
+		<div class="bar"></div>
+		<span>2017년 1월</span>
+			<table style="text-align: center;" id="content_table">
 				<thead>
 					<th>개강일</th>
-					<th><b>강좌명</b></th>
-					<th><b>강사</b></th>
-					<th><b>강좌레벨</b></th>
-					<th><b>클래스명</b></th>
-					<th><b>수강인원</b></th>
+					<th>강좌명</th>
+					<th>강사</th>
+					<th>강좌레벨</th>
+					<th>클래스명</th>
+					<th>수강인원</th>
 				</thead>
 				<tbody id="ajaxDataBody01">
 				</tbody>
@@ -156,15 +335,16 @@
 	</div>
 
 	<div id="content02" class="content">
-		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">2월</span>
-			<table style="text-align: center;">
+	<div class="bar"></div>
+		<span>2017년 2월</span>
+			<table style="text-align: center;" id="content_table">
 				<thead>
 					<th>개강일</th>
-					<th><b>강좌명</b></th>
-					<th><b>강사</b></th>
-					<th><b>강좌레벨</b></th>
-					<th><b>클래스명</b></th>
-					<th><b>수강인원</b></th>
+					<th>강좌명</th>
+					<th>강사</th>
+					<th>강좌레벨</th>
+					<th>클래스명</th>
+					<th>수강인원</th>
 				</thead>
 				<tbody id="ajaxDataBody02">
 				</tbody>
@@ -172,15 +352,16 @@
 	</div>
 	
 	<div id="content03" class="content">
-		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">3월</span>
-			<table style="text-align: center;">
+	<div class="bar"></div>
+		<span>2017년 3월</span>
+			<table style="text-align: center;" id="content_table">
 				<thead>
 					<th>개강일</th>
-					<th><b>강좌명</b></th>
-					<th><b>강사</b></th>
-					<th><b>강좌레벨</b></th>
-					<th><b>클래스명</b></th>
-					<th><b>수강인원</b></th>
+					<th>강좌명</th>
+					<th>강사</th>
+					<th>강좌레벨</th>
+					<th>클래스명</th>
+					<th>수강인원</th>
 				</thead>
 				<tbody id="ajaxDataBody03">
 				</tbody>
@@ -188,15 +369,16 @@
 	</div>
 
 	<div id="content04" class="content">
-		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">4월</span>
-			<table style="text-align: center;">
+	<div class="bar"></div>
+		<span>2017년 4월</span>
+			<table style="text-align: center;" id="content_table">
 				<thead>
 					<th>개강일</th>
-					<th><b>강좌명</b></th>
-					<th><b>강사</b></th>
-					<th><b>강좌레벨</b></th>
-					<th><b>클래스명</b></th>
-					<th><b>수강인원</b></th>
+					<th>강좌명</th>
+					<th>강사</th>
+					<th>강좌레벨</th>
+					<th>클래스명</th>
+					<th>수강인원</th>
 				</thead>
 				<tbody id="ajaxDataBody04">
 				</tbody>
@@ -204,15 +386,16 @@
 	</div>
 
 	<div id="content05" class="content">
-		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">5월</span>
-			<table style="text-align: center;">
+	<div class="bar"></div>
+		<span>2017년 5월</span>
+			<table style="text-align: center;" id="content_table">
 				<thead>
 					<th>개강일</th>
-					<th><b>강좌명</b></th>
-					<th><b>강사</b></th>
-					<th><b>강좌레벨</b></th>
-					<th><b>클래스명</b></th>
-					<th><b>수강인원</b></th>
+					<th>강좌명</th>
+					<th>강사</th>
+					<th>강좌레벨</th>
+					<th>클래스명</th>
+					<th>수강인원</th>
 				</thead>
 				<tbody id="ajaxDataBody05">
 				</tbody>
@@ -220,15 +403,16 @@
 	</div>
 
 	<div id="content06" class="content">
-		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">6월</span>
-			<table style="text-align: center;">
+	<div class="bar"></div>
+		<span>2017년 6월</span>
+			<table style="text-align: center;" id="content_table">
 				<thead>
 					<th>개강일</th>
-					<th><b>강좌명</b></th>
-					<th><b>강사</b></th>
-					<th><b>강좌레벨</b></th>
-					<th><b>클래스명</b></th>
-					<th><b>수강인원</b></th>
+					<th>강좌명</th>
+					<th>강사</th>
+					<th>강좌레벨</th>
+					<th>클래스명</th>
+					<th>수강인원</th>
 				</thead>
 				<tbody id="ajaxDataBody06">
 				</tbody>
@@ -236,15 +420,16 @@
 	</div>
 	
 	<div id="content07" class="content">
-		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">7월</span>
-			<table style="text-align: center;">
+	<div class="bar"></div>
+		<span>2017년 7월</span>
+			<table style="text-align: center;" id="content_table">
 				<thead>
 					<th>개강일</th>
-					<th><b>강좌명</b></th>
-					<th><b>강사</b></th>
-					<th><b>강좌레벨</b></th>
-					<th><b>클래스명</b></th>
-					<th><b>수강인원</b></th>
+					<th>강좌명</th>
+					<th>강사</th>
+					<th>강좌레벨</th>
+					<th>클래스명</th>
+					<th>수강인원</th>
 				</thead>
 				<tbody id="ajaxDataBody07">
 				</tbody>
@@ -252,15 +437,16 @@
 	</div>
 
 	<div id="content08" class="content">
-		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">8월</span>
-			<table style="text-align: center;">
+	<div class="bar"></div>
+		<span>2017년 8월</span>
+			<table style="text-align: center;" id="content_table">
 				<thead>
 					<th>개강일</th>
-					<th><b>강좌명</b></th>
-					<th><b>강사</b></th>
-					<th><b>강좌레벨</b></th>
-					<th><b>클래스명</b></th>
-					<th><b>수강인원</b></th>
+					<th>강좌명</th>
+					<th>강사</th>
+					<th>강좌레벨</th>
+					<th>클래스명</th>
+					<th>수강인원</th>
 				</thead>
 				<tbody id="ajaxDataBody08">
 				</tbody>
@@ -268,15 +454,16 @@
 	</div>
 
 	<div id="content09" class="content">
-		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">9월</span>
-			<table style="text-align: center;">
+	<div class="bar"></div>
+		<span>2017년 9월</span>
+			<table style="text-align: center;" id="content_table">
 				<thead>
 					<th>개강일</th>
-					<th><b>강좌명</b></th>
-					<th><b>강사</b></th>
-					<th><b>강좌레벨</b></th>
-					<th><b>클래스명</b></th>
-					<th><b>수강인원</b></th>
+					<th>강좌명</th>
+					<th>강사</th>
+					<th>강좌레벨</th>
+					<th>클래스명</th>
+					<th>수강인원</th>
 				</thead>
 				<tbody id="ajaxDataBody09">
 				</tbody>
@@ -284,15 +471,16 @@
 	</div>
 
 	<div id="content10" class="content">
-		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">10월</span>
-			<table style="text-align: center;">
+	<div class="bar"></div>
+		<span >2017년 10월</span>
+			<table style="text-align: center;" id="content_table">
 				<thead>
 					<th>개강일</th>
-					<th><b>강좌명</b></th>
-					<th><b>강사</b></th>
-					<th><b>강좌레벨</b></th>
-					<th><b>클래스명</b></th>
-					<th><b>수강인원</b></th>
+					<th>강좌명</th>
+					<th>강사</th>
+					<th>강좌레벨</th>
+					<th>클래스명</th>
+					<th>수강인원</th>
 				</thead>
 				<tbody id="ajaxDataBody10">
 				</tbody>
@@ -300,15 +488,16 @@
 	</div>
 
 	<div id="content11" class="content">
-		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">11월</span>
-			<table style="text-align: center;">
+	<div class="bar"></div>
+		<span >2017년 11월</span>
+			<table style="text-align: center;" id="content_table">
 				<thead>
 					<th>개강일</th>
-					<th><b>강좌명</b></th>
-					<th><b>강사</b></th>
-					<th><b>강좌레벨</b></th>
-					<th><b>클래스명</b></th>
-					<th><b>수강인원</b></th>
+					<th>강좌명</th>
+					<th>강사</th>
+					<th>강좌레벨</th>
+					<th>클래스명</th>
+					<th>수강인원</th>
 				</thead>
 				<tbody id="ajaxDataBody11">
 				</tbody>
@@ -316,15 +505,16 @@
 	</div>
 
 	<div id="content12" class="content">
-		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">12월</span>
-			<table style="text-align: center;">
+	<div class="bar"></div>
+		<span>2017년 12월</span>
+			<table style="text-align: center;" id="content_table">
 				<thead>
 					<th>개강일</th>
-					<th><b>강좌명</b></th>
-					<th><b>강사</b></th>
-					<th><b>강좌레벨</b></th>
-					<th><b>클래스명</b></th>
-					<th><b>수강인원</b></th>
+					<th>강좌명</th>
+					<th>강사</th>
+					<th>강좌레벨</th>
+					<th>클래스명</th>
+					<th>수강인원</th>
 				</thead>
 				<tbody id="ajaxDataBody12">
 				</tbody>
@@ -332,19 +522,21 @@
 	</div>
 	
 	<div id="searchdiv" name="searchdiv" class="searchdiv">
+	
 		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">검색</span>
-			<table cellpadding="5" style="text-align: center;">
-				<th colspan="2">개강일</th>
-					<th><b>강좌명</b></th>
-					<th><b>강사</b></th>
-					<th><b>강좌레벨</b></th>
-					<th><b>클래스명</b></th>
-					<th><b>수강인원</b></th>				
-				<th id="multi"><b></b></th>
-				
+			<table cellpadding="5" style="text-align: center;" id="search_table">
+				<th >개강일</th>
+					<th>강좌명</th>
+					<th>강사</th>
+					<th>강좌레벨</th>
+					<th>클래스명</th>
+					<th>수강인원</th>
+					<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1'}">				
+				<th id="multi" colspan="2"></th>
+				</c:if>
 				<c:forEach items="${list }" var="list" varStatus="status" >
 					<tr>
-						<td colspan="2"> ${list.lect_start_day}</td>
+						<td > ${list.lect_start_day}</td>
 						<td><a href="detail_curri.do?curri_id=${list.curri_id}">${list.curri_subject}</a></td>
 						<td>${list.member_id}</td>
 						<td>${list.curri_level}</td>
@@ -352,8 +544,8 @@
 						<td>${list.lect_person_num}</td>
 						
 						<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1'}">
-							<td><a href="delete_curri.do?curri_id=${list.curri_id}"><button id="delete">삭제</button></a></td>
-							<td><a href="updateForm_curri.do?curri_id=${list.curri_id}"><button id="update">수정</button></a></td>
+							<td><a href="delete_curri.do?curri_id=${list.curri_id}"><button id="delete" class="btn btn--sm btn--green">삭제</button></a></td>
+							<td><a href="updateForm_curri.do?curri_id=${list.curri_id}"><button id="update" class="btn btn--sm btn--green">수정</button></a></td>
 						</c:if>
 					</tr>
 				</c:forEach>				
@@ -388,7 +580,7 @@
 	        </c:if>
 		</div>
 	</div>
-	
+</div>	
 </body>
 </html>
 
