@@ -211,6 +211,8 @@ clear:left;
                <li><a href="myclass.do">내 강의실</a></li>
                <li>|</li>
                <li><a href="logout.do">로그아웃</a></li>
+               <li>|</li>
+               <li><a href="list_backend_curri.do">관리자</a></li>
             </ul>
          </c:if>
       </div>
