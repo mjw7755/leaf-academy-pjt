@@ -47,13 +47,9 @@
       		(SELECT ROWNUM NUM, m.* FROM 
 				(select c.member_id, c.curri_subject, c.curri_level, l.lect_start_day, l.lect_end_day, l.lect_name, l.lect_person_num 
 				from lecture l, curriculum c 
-				where ${column} like '%' || #{keyvalue} || '%') m ) 
+				where ${column} like '%' || #{keyvalue} || '%' and l.curri_id=c.curri_id) m  ) 
      	where NUM between ((#{page}-1)*5)+1 and (#{page}*5) 
       
-      <!-- select * from (SELECT ROWNUM NUM, m.* FROM
-      (select c.*, l.lect_start_day, l.lect_end_day, l.lect_name, l.lect_person_num from 
-      lecture l, curriculum c where ${column} like '%' || #{keyvalue} || '%' ) m)
-      where NUM between ((#{page}-1)*5)+1 and (#{page}*5) -->
 	</select>
 	
 	<select id="getSearchCount" parameterType="hashMap" resultType="Integer">
