@@ -246,6 +246,7 @@ clear:left;
                <ul>
                   <li><a href="fir_index.do">오목</a></li>
                   <li><a href="taja.do">산성비</a></li>         
+                  <li><a href="tajaForm.do">타자연습</a></li>         
                </ul>
             </li>
             <li id="a_tag"><a href="notice_list.do">고객센터</a>

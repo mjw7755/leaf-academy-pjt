@@ -1,11 +1,13 @@
 package com.leaf.controller.note;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -97,4 +99,85 @@ public class NoteController {
 		return mav;
 	}
 	
+	@RequestMapping("noteDelete.do")
+	public void noteDelete(@RequestParam(value="note_chk_values[]") List<String> note_chk_values, HttpServletResponse response) {
+		System.out.println(note_chk_values);
+		int result = noteDAO.noteDelete(note_chk_values);
+		
+		NoteDTO dto = noteDAO.noteDelChk();
+		String n_send_del_yn = dto.getN_send_del_yn();
+		String n_recv_del_yn = dto.getN_recv_del_yn();
+		
+		if(n_send_del_yn.equals("y") && n_recv_del_yn.equals("y")) {
+			
+			
+		}
+		
+		StringBuffer sb = new StringBuffer("");
+		
+		sb.append(""+result);
+		
+		try {
+			response.getWriter().write(sb.toString());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	@RequestMapping("noteContent.do")
+	public ModelAndView noteContentForm(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		String n_id = request.getParameter("n_id");
+		
+		NoteDTO dto = noteDAO.noteContent(Integer.parseInt(n_id));
+		noteDAO.noteOpenUpdate();
+		
+		mav.addObject("dto", dto);
+		mav.setViewName("moon.noteContent");
+		return mav;
+	}
+	
+	@RequestMapping("noteSendContent.do")
+	public ModelAndView noteSendContentForm(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		String n_id = request.getParameter("n_id");
+		
+		NoteDTO dto = noteDAO.noteContent(Integer.parseInt(n_id));
+		
+		mav.addObject("dto", dto);
+		mav.setViewName("moon.noteContent");
+		return mav;
+	}
+	
+	@RequestMapping("sendNoteList.do")
+	public ModelAndView sendNoteList(HttpServletRequest request, @RequestParam(defaultValue="1") int curPage) {
+		ModelAndView mav = new ModelAndView();
+		String sessionid = (String) request.getSession().getAttribute("sessionid");
+		Map<String,Object> sendNoteListMap = new HashMap<String,Object>();
+		Map<String,Object> sendNoteData = new HashMap<String,Object>();
+		
+		int count = noteDAO.sendAllNoteCount(sessionid);
+		
+		BoardPager bp = new BoardPager(count, curPage);
+		int start = bp.getPageBegin();
+		int end = bp.getPageEnd();
+		
+		sendNoteListMap.put("start", start);
+		sendNoteListMap.put("end", end);
+		sendNoteListMap.put("sessionid", sessionid);
+		
+		
+		List<NoteDTO> list = noteDAO.sendNoteList(sendNoteListMap);
+		
+		sendNoteData.put("count", count);
+		sendNoteData.put("list", list);		
+		sendNoteData.put("BoardPager", bp);
+		
+		mav.addObject("map", sendNoteData);
+		mav.setViewName("moon.sendNoteList");
+		return mav;
+	}
 }

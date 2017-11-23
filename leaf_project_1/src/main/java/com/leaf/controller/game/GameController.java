@@ -57,4 +57,9 @@ public class GameController {
 	    response.setCharacterEncoding("utf-8");	
 		return "juju.taja";
 	}
+	
+	@RequestMapping("/tajaForm.do")
+	public String tajaGame() {
+		return "moon.tajaForm";
+	}
 }

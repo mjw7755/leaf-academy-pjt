@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -18,12 +19,16 @@ import com.google.gson.reflect.TypeToken;
 import com.leaf.model.note.NoteClientVO;
 import com.leaf.model.note.NoteDAO;
 import com.leaf.model.note.NoteDTO;
+import com.leaf.model.payment.PaymentDAO;
 
 @Component
 public class NoteHandler implements org.springframework.web.socket.WebSocketHandler {
 
 	@Resource
 	NoteDAO noteDAO;
+	
+	@Resource
+	PaymentDAO paymentDAO;
 	
 	Gson gson = new Gson();
 	NoteClientVO vo = new NoteClientVO();
@@ -48,9 +53,8 @@ public class NoteHandler implements org.springframework.web.socket.WebSocketHand
 	public void handleMessage(WebSocketSession arg0, WebSocketMessage<?> arg1) throws Exception {
 		// TODO Auto-generated method stub
 		String message = (String)arg1.getPayload();
-		System.out.println("접속자 어레이 번호"+arg0.getId());
-		System.out.println("json데이터 : "+(String)arg1.getPayload());
 		Map<String,Object> data = gson.fromJson((String)arg1.getPayload(), new TypeToken<Map<String,Object>>(){}.getType());
+		System.out.println("거래취소 아이디:"+(String)data.get("n_name"));
 		
 		if(data.get("n_type").equals("login")) {
 			if(userList.indexOf((String)data.get("n_name")) > -1) {
@@ -65,7 +69,6 @@ public class NoteHandler implements org.springframework.web.socket.WebSocketHand
 				userList.add((String)data.get("n_name"));
 				System.out.println("로그인 완료");	
 			}
-			
 		}
 		
 		if(data.get("n_type").equals("message")) {
@@ -117,7 +120,8 @@ public class NoteHandler implements org.springframework.web.socket.WebSocketHand
 				dto.setN_content((String)data.get("n_content"));
 				dto.setN_title((String)data.get("n_title"));
 				dto.setN_recv_id((String)data.get("n_recvid"));
-				dto.setN_send_id((String)data.get("n_sendid"));				
+				dto.setN_send_id((String)data.get("n_sendid"));	
+				System.out.println("받는사람 등장 : "+dto.getN_recv_id());
 				noteDAO.writeNote(dto);
 			}
 			int recv_user_num = userList.indexOf((String)data.get("n_recvid"));

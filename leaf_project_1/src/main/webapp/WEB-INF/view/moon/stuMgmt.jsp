@@ -34,7 +34,6 @@
 					<td><a href="stuMgmtExcel.do?student_id=${list.member_id }&chk_str=지각">지각</a></td>
 					<td><a href="stuMgmtExcel.do?student_id=${list.member_id }&chk_str=결석">결석</a></td>
 					<td><a href="stuMgmtExcel.do?student_id=${list.member_id }&chk_str=조퇴">조퇴</a></td>
-					<td><a href="stuMgmtExcel.do?student_id=${list.member_id }&chk_str=되돌리기">되돌리기</a></td>
 					<td align="center"><input type="checkbox" name="studentChk" id="studentChk" value="${list.member_id }"></td>
 				</tr>
 			</c:forEach>		

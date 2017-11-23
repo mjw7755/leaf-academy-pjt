@@ -42,4 +42,46 @@ public class NoteDAOImpl implements NoteDAO {
 		NoteDAO dao = sqlSession.getMapper(NoteDAO.class);
 		return dao.allNoteCount(sessionid);
 	}
+
+	@Override
+	public int noteDelete(List<String> note_chk_values) {
+		NoteDAO dao = sqlSession.getMapper(NoteDAO.class);
+		return dao.noteDelete(note_chk_values);
+	}
+
+	@Override
+	public NoteDTO noteContent(int n_id) {
+		NoteDAO dao = sqlSession.getMapper(NoteDAO.class);
+		return dao.noteContent(n_id);
+	}
+
+	@Override
+	public List<NoteDTO> sendNoteList(Map<String,Object> sendNoteListMap) {
+		NoteDAO dao = sqlSession.getMapper(NoteDAO.class);
+		return dao.sendNoteList(sendNoteListMap);
+	}
+
+	@Override
+	public int sendAllNoteCount(String sessionid) {
+		NoteDAO dao = sqlSession.getMapper(NoteDAO.class);
+		return dao.sendAllNoteCount(sessionid);
+	}
+
+	@Override
+	public void noteOpenUpdate() {
+		NoteDAO dao = sqlSession.getMapper(NoteDAO.class);
+		dao.noteOpenUpdate();
+	}
+
+	@Override
+	public NoteDTO noteDelChk() {
+		NoteDAO dao = sqlSession.getMapper(NoteDAO.class);
+		return dao.noteDelChk();
+	}
+
+	@Override
+	public void noteDeleteDB(List<String> note_chk_values) {
+		NoteDAO dao = sqlSession.getMapper(NoteDAO.class);
+		dao.noteDeleteDB(note_chk_values);
+	}
 }

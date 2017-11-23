@@ -108,6 +108,7 @@ var conn;
 				
 				send({
 					n_type: "message",
+					n_recvid: n_recv_id,
 					chkvalues: recv_values,
 					n_content: n_content,
 					n_title: n_title,

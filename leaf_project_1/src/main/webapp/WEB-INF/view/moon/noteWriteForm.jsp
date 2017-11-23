@@ -31,7 +31,7 @@
 		</tr>
 		
 		<tr>
-			<td><!-- <input type="submit" value="보내기"> --><button id="mgmtNoteSend">보내기</button></td>
+			<td><!-- <input type="submit" value="보내기"> --><button id="mgmtNoteSend">보내기</button></td><td><button onclick="javascript:history.go(-1)">취소</button></td>
 		</tr>
 	</table>
 	

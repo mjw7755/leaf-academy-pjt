@@ -19,10 +19,44 @@
 	</insert>
 	
 	<select id="getNoteList" parameterType="HashMap" resultType="com.leaf.model.note.NoteDTO">
-		select * from (select rownum rn, n.* from (select * from note where n_recv_id = #{sessionid} order by n_id asc ) n ) where rn between #{start} and #{end}
+		select * from (select rownum rn, n.* from (select * from note where n_recv_id = #{sessionid} order by n_id asc ) n ) where rn between #{start} and #{end} and n_recv_del_yn = 'n'
 	</select>
 	
 	<select id="allNoteCount" parameterType="String" resultType="Integer">
 		select count(*) from note where n_recv_id = #{sessionid}
 	</select>
+	
+	<update id="noteDelete">
+		update note set n_recv_del_yn = 'y' where 
+		<foreach collection="list" item="item" separator="and">
+			n_id = #{item}
+		</foreach>
+	</update>
+	
+	<select id="sendNoteList" parameterType="HashMap" resultType="com.leaf.model.note.NoteDTO">
+		select * from (select rownum rn, n.* from (select * from note where n_send_id = #{sessionid} order by n_id asc ) n ) where rn between #{start} and #{end}
+	</select>
+	
+	<select id="sendAllNoteCount" parameterType="String" resultType="Integer">
+		select count(*) from note where n_send_id = #{sessionid}
+	</select>
+	
+	<select id="noteContent" parameterType="Integer" resultType="com.leaf.model.note.NoteDTO">
+		select * from note where n_id = #{n_id}
+	</select>
+	
+	<update id="noteOpenUpdate">
+		update note set n_open_date = sysdate
+	</update>
+	
+	<select id="noteDelChk" resultType="com.leaf.model.note.NoteDTO">
+		select n_send_del_yn, n_recv_del_yn from note
+	</select>
+	
+	<update id="noteDeleteDB">
+		delete from note where
+		<foreach collection="list" item="item" separator="and">
+			n_id = #{item}
+		</foreach>
+	</update>
 </mapper>
