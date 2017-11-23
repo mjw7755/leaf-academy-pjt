@@ -31,6 +31,8 @@ import com.google.gson.GsonBuilder;
 import com.leaf.model.member.MemberDAO;
 import com.leaf.model.member.MemberDTO;
 import com.leaf.model.member.ValidGroupOrder;
+import com.leaf.model.payment.PaymentDAO;
+import com.leaf.model.payment.PaymentDTO;
 import com.leaf.model.tnotice.TnoticeDAO;
 import com.leaf.model.tnotice.TnoticeDTO;
 
@@ -41,6 +43,8 @@ public class MemberController {
 	private MemberDAO memberdao;
 	@Resource
 	private TnoticeDAO tnoticedao;
+	@Resource
+	private PaymentDAO paymentdao;
 	
 	private Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 	 
@@ -288,6 +292,7 @@ public class MemberController {
 		} else {
 			MemberDTO dto = memberdao.getMemberById(member_id);
 			mav.addObject("dto", dto);
+			
 			if(Integer.parseInt(dto.getMember_level()) == 1) {
 				String strPage = request.getParameter("page");
 				int page;
@@ -309,7 +314,12 @@ public class MemberController {
 				int chk = 1;
 				model.addAttribute("myclass", chk);
 				model.addAttribute("list", list);
+				
+				List<PaymentDTO> history = paymentdao.allPayment();
+				model.addAttribute("history", history);
+				
 				return "ayrin.myclassST";
+				
 			} else {
 				String strPage = request.getParameter("page");
 				int page;
@@ -331,6 +341,10 @@ public class MemberController {
 				int chk = 2;
 				model.addAttribute("myclass", chk);
 				model.addAttribute("list", list);
+				
+				List<PaymentDTO> history = paymentdao.allPayment();
+				model.addAttribute("history", history);
+				
 				return "ayrin.myclassTC";
 			}
 		}
