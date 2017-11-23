@@ -13,6 +13,7 @@
 		<put-attribute name="css" value="/WEB-INF/view/juju/five_in_a_row/css/{1}.css"/>
 		<put-attribute name="js" value="/WEB-INF/view/juju/five_in_a_row/{1}.js"/>
 	</definition>  
+	
 	<definition name="lecture.*" template="/WEB-INF/view/main/subViews/baseLayout.jsp">
 		<put-attribute name="title" value="/WEB-INF/view/heok/lecture/subViews/title.jsp"/>
 		<put-attribute name="header" value="/WEB-INF/view/main/subViews/header.jsp"/>
@@ -82,6 +83,7 @@
 		<put-attribute name="css" value="/WEB-INF/view/hansu/faq/css/{1}.css"/>
 		<put-attribute name="js" value="/WEB-INF/view/hansu/faq/js/{1}.js"/>
 	</definition>
+	
 	<definition name="*.*" template="/WEB-INF/view/main/subViews/baseLayout.jsp">
 		<put-attribute name="title" value="/WEB-INF/view/{1}/subViews/title.jsp"/>
 		<put-attribute name="header" value="/WEB-INF/view/main/subViews/header.jsp"/>

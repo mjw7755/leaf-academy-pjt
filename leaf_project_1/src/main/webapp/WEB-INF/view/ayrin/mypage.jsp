@@ -324,16 +324,7 @@ font-size: 0.5em; }
 <body>
 <br><br>
 <div class="my_page">
-   <table id="menu">
-      <tr id="my_page_text"><td colspan="2">MY PAGE</td></tr>
-      <tr><td id="attendance"><a href="#">개인정보</a><div id="attendance_icon">></div></td></tr>
-	  <tr><td id="lecture"><a href="#">내역조회</a><div id="lecture_icon">></div></td></tr>
-	  <tr><td id="grade"><a href="#">탈퇴</a><div id="grade_icon">></div></td></tr>
-	  <c:if test="${sessionScope.sessionid=='관리자'}">
-      <tr><td id="student_care"><a href="member_list.do" >회원관리</a><div id="student_care_icon">></div></td></tr>
-      </c:if>
-   </table>
-   
+     
    <div id="member_info"><br><br>
    		<sf:form method="post" action="member_modify.do" commandName="dto" name="memberchk">
 	<table id="contents1">

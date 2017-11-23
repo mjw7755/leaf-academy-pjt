@@ -78,7 +78,7 @@
 }
 			
 </style>
-<script type="text/javascript">
+<script>
 $(function() {
 	$("#tnoticeDetail").dialog({
         autoOpen : false,
@@ -149,16 +149,6 @@ $(function() {
 </script>
 </head>
 <body>
-<div id="my_class">
-	<table id="menu">
-	      <tr id="my_page_text"><td colspan="2">MY CLASS</td></tr>
-	      <tr><td id="lecture"><a href="#">강의듣기</a><div id="lecture_icon">></div></td></tr>
-		  <tr><td id="grade"><a href="#">성적조회</a><div id="grade_icon">></div></td></tr>
-		  <tr><td id="attendance"><a href="getChkAttend.do">출결현황</a><div id="attendance_icon">></div></td></tr>
-		  <tr><td id="t_notice"><a href="#">강사공지</a><div id="t_notice_icon">></div></td></tr>
-	</table>
-</div>
-
 	<div id="tnoticeDIV">
 		<table>
 		<c:forEach items="${list}" var="list">

@@ -35,62 +35,94 @@ public class TnoticeController {
 		String member_id = (String) request.getSession().getAttribute("sessionid");
 		MemberDTO dto = memberdao.getMemberById(member_id);
 		mav.addObject("dto", dto);
-		if(Integer.parseInt(dto.getMember_level()) != 1) {
-			String strPage = request.getParameter("page");
-			String flag = "list";
-			int page;
-			if (strPage == null) {page = 1;} 
-			else {page = Integer.parseInt(request.getParameter("page"));}
-			List<TnoticeDTO> list = tnoticedao.getTnoticeList(page);
-			int count = tnoticedao.getCount();
-			int countPage = (int) Math.ceil((float) count / 5);
-			int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
-			model.addAttribute("count", count);
-			model.addAttribute("countPage", countPage);
-			model.addAttribute("startPage", startPage);
-			model.addAttribute("list", list);
-			model.addAttribute("flag", flag);
-			return "ayrin.tnotice_list";
-		} else {
+		if(member_id==null) {
 			return "main.mainPage";
+		} else {
+			if(Integer.parseInt(dto.getMember_level()) == 1) {
+				String strPage = request.getParameter("page");
+				String flag = "list";
+				int page;
+				if (strPage == null) {page = 1;} 
+				else {page = Integer.parseInt(request.getParameter("page"));}
+				List<TnoticeDTO> list = tnoticedao.getTnoticeList(page);
+				int count = tnoticedao.getCount();
+				int countPage = (int) Math.ceil((float) count / 5);
+				int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
+				model.addAttribute("count", count);
+				model.addAttribute("countPage", countPage);
+				model.addAttribute("startPage", startPage);
+				model.addAttribute("list", list);
+				model.addAttribute("flag", flag);
+				int chk = 1;
+				model.addAttribute("myclass", chk);
+				return "ayrin.tnotice_list";
+			} else {
+				String strPage = request.getParameter("page");
+				String flag = "list";
+				int page;
+				if (strPage == null) {page = 1;} 
+				else {page = Integer.parseInt(request.getParameter("page"));}
+				List<TnoticeDTO> list = tnoticedao.getTnoticeList(page);
+				int count = tnoticedao.getCount();
+				int countPage = (int) Math.ceil((float) count / 5);
+				int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
+				model.addAttribute("count", count);
+				model.addAttribute("countPage", countPage);
+				model.addAttribute("startPage", startPage);
+				model.addAttribute("list", list);
+				model.addAttribute("flag", flag);
+				int chk = 2;
+				model.addAttribute("myclass", chk);
+				return "ayrin.tnotice_list";
+			}
 		}
 	}
 
 	@RequestMapping("/tnotice_writeform.do")
-	public String writeform() {
+	public String writeform(Model model) {
+		int chk = 2;
+		model.addAttribute("myclass", chk);
 		return "ayrin.tnotice_writeform";
 	}
 	
 	@RequestMapping("/tnotice_write.do")
-	public ModelAndView write(TnoticeDTO dto, HttpServletRequest request) throws Exception {
+	public ModelAndView write(TnoticeDTO dto, Model model, HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		dto.setMember_id((String)request.getSession().getAttribute("sessionid"));
 		tnoticedao.insertTnotice(dto);
 		mav.setViewName("redirect:tnotice_list.do");
+		int chk = 2;
+		model.addAttribute("myclass", chk);
 		return mav;
 	}
 	
 	@RequestMapping("/tnotice_updateform.do")
-	public ModelAndView updateform(HttpServletRequest request) throws Exception {
+	public ModelAndView updateform(Model model, HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		int tnotice_id = Integer.parseInt(request.getParameter("tnotice_id"));
 		TnoticeDTO dto = tnoticedao.getTnoticeById(tnotice_id);
+		int chk = 2;
+		model.addAttribute("myclass", chk);
 		mav.addObject("dto", dto);
 		mav.setViewName("ayrin.tnotice_updateform");
 		return mav;
 	}
 
 	@RequestMapping("/tnotice_update.do")
-	public ModelAndView update(TnoticeDTO dto) throws Exception {
+	public ModelAndView update(TnoticeDTO dto,Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		int chk = 2;
+		model.addAttribute("myclass", chk);
 		tnoticedao.updateTnotice(dto);
 		mav.setViewName("redirect:tnotice_list.do");
 		return mav;
 	}
 
 	@RequestMapping("/tnotice_delete.do")
-	public ModelAndView delete(TnoticeDTO dto) throws Exception {
+	public ModelAndView delete(TnoticeDTO dto, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		int chk = 2;
+		model.addAttribute("myclass", chk);
 		tnoticedao.deleteTnotice(dto);
 		mav.setViewName("redirect:tnotice_list.do");
 		return mav;
@@ -122,14 +154,18 @@ public class TnoticeController {
         model.addAttribute("keyvalue", keyvalue);
 		model.addAttribute("list", searchList);
 		model.addAttribute("flag",flag);
+		int chk = 2;
+		model.addAttribute("myclass", chk);
 		return "ayrin.tnotice_list";
 	}
 	
 	@RequestMapping("/tnotice_detail.do")
-	public ModelAndView detail(HttpServletRequest request) throws Exception {
+	public ModelAndView detail(Model model, HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		int tnotice_id = Integer.parseInt(request.getParameter("tnotice_id"));
 		TnoticeDTO dto = tnoticedao.getTnoticeById(tnotice_id);
+		int chk = 2;
+		model.addAttribute("myclass", chk);
 		mav.addObject("dto", dto);
 		mav.setViewName("ayrin.tnotice_detail");
 		return mav;
