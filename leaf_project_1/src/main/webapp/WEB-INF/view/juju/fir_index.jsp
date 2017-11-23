@@ -105,7 +105,7 @@ font-size: 1em; }
  
  <form>
  <input type=button class="btn btn--sm btn--green" value="Start Game" 
- onClick='window.open("xo.do","game","width=610,height=280,menubar=0,scrollbars=0,resizable=0,left=460,top=250")'><!-- A��A?A��A��A?A��A��A|A��A��A?A��A��A��A��A��A?A�� A��A?A?A��A?A��A��A��A�A��A?A��A��A��A? A��A��A?A��A|A�� A��A?A?A��A��A?A��A?A��A��A?A��A��A��A�� A��A?A��A��A��A��A��A��A�A��A��A? A��A��A?A��A��A��A��A��A�� A��A?A�� -->
+ onClick='window.open("xo.do","game","width=610,height=400,menubar=0,scrollbars=0,resizable=0,left=460,top=250")'><!-- A��A?A��A��A?A��A��A|A��A��A?A��A��A��A��A��A?A�� A��A?A?A��A?A��A��A��A�A��A?A��A��A��A? A��A��A?A��A|A�� A��A?A?A��A��A?A��A?A��A��A?A��A��A��A�� A��A?A��A��A��A��A��A��A�A��A��A? A��A��A?A��A��A��A��A��A�� A��A?A�� -->
  </form>
 
 </body>
