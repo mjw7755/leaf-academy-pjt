@@ -7,11 +7,65 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 	function listChange(params) {
 		var url = "list_backend_" + params.value + ".do";
 		window.location.href = url;
 	}
+	
+	function show1(str) {
+		
+		var s = str;
+		$('.la_'+s).css("display", "none");
+		$('.in_'+s).css("display", "block");
+		
+		$('#btn_update_by_display_yet_'+ s).css("display", "none");
+		$('#btn_update_by_display_now_' + s).css("display", "block");
+	}  
+	
+function show_update(str) {
+		var s = str;
+		
+		var member_pwd  = $('#in1_'+s).val();
+		var member_name  = $('#in2_'+s).val();
+		var member_tel  = $('#in3_'+s).val();
+		var member_email  = $('#in4_'+s).val();
+		var member_level  = $('#in5_'+s).val();
+		var member_address  = $('#in6_'+s).val();
+		var member_addnum  = $('#in7_'+s).val();
+		var enabled  = $('#in8_'+s).val();
+
+		$.ajax({
+            type:'POST',
+            url:'update_by_display_member.do',
+            data:{
+            	member_id: s,
+            	member_pwd: member_pwd,
+            	member_name: member_name,
+            	member_tel: member_tel,
+            	member_email: member_email,
+            	member_level: member_level,
+            	member_address: member_address,
+            	member_addnum: member_addnum,
+            	enabled: enabled,
+            	
+            },
+            success: function(result){
+               if(result == '0'){
+            	 
+            	$('.la_'+s).css("display", "block");
+               	$('.in_'+s).css("display", "none");
+              		
+            	$('#btn_update_by_display_yet_'+ s).css("display", "block");
+           		$('#btn_update_by_display_now_' + s).css("display", "none");
+           		window.location.href='list_backend_member.do';
+               }
+            }
+         });
+	}  
+
 </script>
 <body>
 	<select
@@ -30,6 +84,7 @@
 		<option value="rev">Review</option>
 		<option value="stu">Student</option>
 		<option value="t_i">Teacher_Intro</option>
+		<option value="tnotice">Teacher_Notice</option>
 	</select>
 
 	<form action="search_backend_member.do" method="post">
@@ -63,16 +118,25 @@
 		<c:forEach items="${mlist }" var="list" varStatus="status">
 			<tr onclick="test(this)">
 				<td>${list.member_id}</td>
-				<td>${list.member_pwd}</td>
-				<td>${list.member_name}</td>
-				<td>${list.member_tel}</td>
-				<td>${list.member_email}</td>
-				<td>${list.member_level}</td>
-				<td>${list.member_address}</td>
-				<td>${list.member_addnum}</td>
-				<td>${list.enabled }</td>
-			</tr>
-		</c:forEach>
+				
+			<td><label id="la1_${list.member_id}"  class="la_${list.member_id}"  style="display:show;">${list.member_pwd}</label>			 <input type="text" style="display: none;"  id="in1_${list.member_id}" class="in_${list.member_id }"  value="${list.member_pwd}"></td>
+			<td><label id="la2_${list.member_id}"  class="la_${list.member_id}"  style="display:show;">${list.member_name}</label> 	 <input type="text" style="display: none;"  id="in2_${list.member_id}" class="in_${list.member_id }"   value="${list.member_name}"></td>
+			<td><label id="la3_${list.member_id}"  class="la_${list.member_id}"  style="display:show;">${list.member_tel}</label> 		 <input type="text" style="display: none;"  id="in3_${list.member_id}" class="in_${list.member_id }"   value="${list.member_tel}"></td>
+			<td><label id="la4_${list.member_id}"  class="la_${list.member_id}"  style="display:show;">${list.member_email}</label>		 <input type="text" style="display: none;"  id="in4_${list.member_id}" class="in_${list.member_id }"   value="${list.member_email}"></td>
+			<td><label id="la5_${list.member_id}"  class="la_${list.member_id}"  style="display:show;">${list.member_level}</label>	 <input type="text" style="display: none;"  id="in5_${list.member_id}" class="in_${list.member_id }"   value="${list.member_level}"></td>
+			<td><label id="la6_${list.member_id}"  class="la_${list.member_id}"  style="display:show;">${list.member_address}</label>	 <input type="text" style="display: none;"  id="in6_${list.member_id}" class="in_${list.member_id }"   value="${list.member_address}"></td>
+			<td><label id="la7_${list.member_id}"  class="la_${list.member_id}"  style="display:show;">${list.member_addnum }</label>		 <input type="text" style="display: none;"  id="in7_${list.member_id}" class="in_${list.member_id }"   value="${list.member_addnum}"></td>
+			<td><label id="la8_${list.member_id}"  class="la_${list.member_id}"  style="display:show;">${list.enabled }</label> 			<input type="text" style="display: none;"  id="in8_${list.member_id}" class="in_${list.member_id }"   value="${list.enabled}"></td>
+			<td>
+			
+			<button type="button"  id="btn_update_by_display_yet_${list.member_id}"
+				onclick="show1('${list.member_id}')" style="display:show;">수 정</button> 
+				
+			<button type="button"  id="btn_update_by_display_now_${list.member_id}"
+				onclick="show_update('${list.member_id}')"  style="display:none;">완 료</button> 
+			</td>
+		</tr>
+	</c:forEach>	
 	</table>
 </body>
 </html>

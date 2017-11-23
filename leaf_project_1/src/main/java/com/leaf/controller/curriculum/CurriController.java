@@ -116,80 +116,19 @@ public class CurriController {
 
 	@RequestMapping("/detail_curri.do")
 
-	public ModelAndView detailCurri(@RequestParam int curri_id) throws Exception {
+	public ModelAndView detailCurri(@RequestParam int lect_id) throws Exception {
 		ModelAndView mav = new ModelAndView();
-
 		mav.setViewName("curriculum.detail");
-		mav.addObject("dto", curriDAO.detailCurri(curri_id));
+		mav.addObject("dto", curriDAO.detailCurri(lect_id));
 		return mav;
 
 	}
-
-	/*
-	 * //占쏙옙占쏙옙占쏙옙占싹억옙占싸듸옙
-	 * 
-	 * @RequestMapping("/photoUpload") public String photoUpload(HttpServletRequest
-	 * request, PhotoDTO dto){ String callback = dto.getCallback(); String
-	 * callback_func = dto.getCallback_func(); String file_result = ""; try {
-	 * if(dto.getFiledata() != null && dto.getFiledata().getOriginalFilename() !=
-	 * null && !dto.getFiledata().getOriginalFilename().equals("")){ //占쏙옙占쏙옙占쏙옙
-	 * 占쏙옙占쏙옙占싹몌옙 String original_name = dto.getFiledata().getOriginalFilename();
-	 * String ext = original_name.substring(original_name.lastIndexOf(".")+1);
-	 * //占쏙옙占쏙옙 占썩본占쏙옙占� String defaultPath =
-	 * request.getSession().getServletContext().getRealPath("/"); //占쏙옙占쏙옙 占썩본占쏙옙占�
-	 * _ 占쏢세곤옙占� String path = defaultPath + "resource" + File.separator +
-	 * "photo_upload" + File.separator; File file = new File(path);
-	 * System.out.println("path:"+path); //占쏙옙占썰리 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占� 占쏙옙占썰리
-	 * 占쏙옙占쏙옙 if(!file.exists()) { file.mkdirs(); } //占쏙옙占쏙옙占쏙옙 占쏙옙占싸듸옙 占쏙옙
-	 * 占쏙옙占싹몌옙(占싼글뱄옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占시몌옙占쏙옙 占십는곤옙占쏙옙 占쏙옙占쏙옙) String
-	 * realname = UUID.randomUUID().toString() + "." + ext; /////////////////
-	 * 占쏙옙占쏙옙占쏙옙 占쏙옙占싹억옙占쏙옙 ///////////////// dto.getFiledata().transferTo(new
-	 * File(path+realname)); file_result +=
-	 * "&bNewLine=true&sFileName="+original_name+"&sFileURL=/resource/photo_upload/"
-	 * +realname; } else { file_result += "&errstr=error"; } } catch (Exception e) {
-	 * e.printStackTrace(); } return "redirect:" + callback +
-	 * "?callback_func="+callback_func+file_result; }
-	 * 
-	 * @RequestMapping("/submit") public void submit(HttpServletRequest request){
-	 * System.out.println("占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙:"+request.getParameter("editor"));
-	 * }
-	 * 
-	 * //占쏙옙占쏙옙占쏙옙占싹억옙占싸듸옙
-	 * 
-	 * @RequestMapping("/multiplePhotoUpload") public void
-	 * multiplePhotoUpload(HttpServletRequest request, HttpServletResponse
-	 * response){ try { //占쏙옙占쏙옙占쏙옙占쏙옙 String sFileInfo = ""; //占쏙옙占싹몌옙占쏙옙 占쌨는댐옙 -
-	 * 占싹뱄옙 占쏙옙占쏙옙占쏙옙占싹몌옙 String filename = request.getHeader("file-name"); //占쏙옙占쏙옙
-	 * 확占쏙옙占쏙옙 String filename_ext =
-	 * filename.substring(filename.lastIndexOf(".")+1); //확占쏙옙占쌘몌옙占쌀뱄옙占쌘뤄옙 占쏙옙占쏙옙
-	 * filename_ext = filename_ext.toLowerCase(); //占쏙옙占쏙옙 占썩본占쏙옙占� String
-	 * dftFilePath = request.getSession().getServletContext().getRealPath("/");
-	 * //占쏙옙占쏙옙 占썩본占쏙옙占� _ 占쏢세곤옙占� String filePath = dftFilePath + "resource" +
-	 * File.separator + "photo_upload" + File.separator; File file = new
-	 * File(filePath); if(!file.exists()) { file.mkdirs(); } String realFileNm = "";
-	 * SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss"); String
-	 * today= formatter.format(new java.util.Date()); realFileNm =
-	 * today+UUID.randomUUID().toString() +
-	 * filename.substring(filename.lastIndexOf(".")); String rlFileNm = filePath +
-	 * realFileNm; ///////////////// 占쏙옙占쏙옙占쏙옙 占쏙옙占싹억옙占쏙옙 /////////////////
-	 * InputStream is = request.getInputStream(); OutputStream os=new
-	 * FileOutputStream(rlFileNm); int numRead; byte b[] = new
-	 * byte[Integer.parseInt(request.getHeader("file-size"))]; while((numRead =
-	 * is.read(b,0,b.length)) != -1){ os.write(b,0,numRead); } if(is != null) {
-	 * is.close(); } os.flush(); os.close(); ///////////////// 占쏙옙占쏙옙占쏙옙 占쏙옙占싹억옙占쏙옙
-	 * ///////////////// // 占쏙옙占쏙옙 占쏙옙占� sFileInfo += "&bNewLine=true"; // img
-	 * 占승깍옙占쏙옙 title 占쌈쇽옙占쏙옙 占쏙옙占쏙옙占쏙옙占싹몌옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙殮占� 占쏙옙占쏙옙 sFileInfo +=
-	 * "&sFileName="+ filename;; sFileInfo +=
-	 * "&sFileURL="+"/resource/photo_upload/"+realFileNm; PrintWriter print =
-	 * response.getWriter(); print.print(sFileInfo); print.flush(); print.close(); }
-	 * catch (Exception e) { e.printStackTrace(); } }
-	 */
 
 	@RequestMapping("/search_curri.do")
 	public String search(Model model, HttpServletRequest request) throws Exception {
 
 		String flag = "search";
-		// 占시뤄옙占쏙옙
+		// �뜝�떆琉꾩삕�뜝�룞�삕
 		String column = request.getParameter("column");
 		String keyvalue = request.getParameter("keyvalue");
 

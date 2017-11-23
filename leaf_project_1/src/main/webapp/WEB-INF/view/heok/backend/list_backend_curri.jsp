@@ -4,13 +4,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <!-- <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script> -->
 <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <script type="text/javascript">
 	function listChange(params) {
 		var url = "list_backend_" + params.value + ".do";
@@ -20,16 +19,8 @@
 	function show1(str) {
 		
 		var s = str;
-		
 		$('.la_'+s).css("display", "none");
-		$('.in1_'+s).css("display", "block");
-		$('.in2_'+s).css("display", "block");
-		$('.in3_'+s).css("display", "block");
-		$('.in4_'+s).css("display", "block");
-		$('.in5_'+s).css("display", "block");
-		$('.in6_'+s).css("display", "block");
-		$('.in7_'+s).css("display", "block");
-		$('.in8_'+s).css("display", "block");
+		$('.in_'+s).css("display", "block");
 		
 		$('#btn_update_by_display_yet_'+ s).css("display", "none");
 		$('#btn_update_by_display_now_' + s).css("display", "block");
@@ -38,14 +29,14 @@
 function show_update(str) {
 		var s = str;
 		
-		var member_id  = $('.in1_'+s).val();
-		var curri_subject  = $('.in2_'+s).val();
-		var curri_level  = $('.in3_'+s).val();
-		var curri_content  = $('.in4_'+s).val();
-		var curri_write_time  = $('.in5_'+s).val();
-		var curri_modify_time  = $('.in6_'+s).val();
-		var curri_accept  = $('.in7_'+s).val();
-		var enabled  = $('.in8_'+s).val();
+		var member_id  = $('#in1_'+s).val();
+		var curri_subject  = $('#in2_'+s).val();
+		var curri_level  = $('#in3_'+s).val();
+		var curri_content  = $('#in4_'+s).val();
+		var curri_write_time  = $('#in5_'+s).val();
+		var curri_modify_time  = $('#in6_'+s).val();
+		var curri_accept  = $('#in7_'+s).val();
+		var enabled  = $('#in8_'+s).val();
 
 		$.ajax({
             type:'POST',
@@ -96,6 +87,7 @@ function show_update(str) {
 		<option value="rev">Review</option>
 		<option value="stu">Student</option>
 		<option value="t_i">Teacher_Intro</option>
+		<option value="tnotice">Teacher_Notice</option>
 	</select>
 	
 	<form action="search_backend_curri.do" method="post">
@@ -125,19 +117,18 @@ function show_update(str) {
 	<th>Modify_time</th>
 	<th>Accept</th>
 	<th>Enabled</th>
-		<form action="update_curri.do" method="post">
 	<c:forEach items="${clist }" var="list" varStatus="status">
 		<tr onclick="test(this)">
 			<td>${list.curri_id}</td>
 			
-			<td><label class="la_${list.curri_id}"  style="display:show;">${list.member_id}</label>			 <input type="text" style="display: none;"  class="in1_${list.curri_id}"  value="${list.member_id}"></td>
-			<td><label class="la_${list.curri_id}"  style="display:show;">${list.curri_subject}</label> 	 <input type="text" style="display: none;"  class="in2_${list.curri_id}"  value="${list.curri_subject}"></td>
-			<td><label class="la_${list.curri_id}"  style="display:show;">${list.curri_level}</label> 		 <input type="text" style="display: none;"  class="in3_${list.curri_id}"  value="${list.curri_level}"></td>
-			<td><label class="la_${list.curri_id}"  style="display:show;">${list.curri_content}</label>		 <input type="text" style="display: none;"  class="in4_${list.curri_id}"  value="${list.curri_content}"></td>
-			<td><label class="la_${list.curri_id}"  style="display:show;">${list.curri_write_time}</label>	 <input type="text" style="display: none;"  class="in5_${list.curri_id}"  value="${list.curri_write_time}"></td>
-			<td><label class="la_${list.curri_id}"  style="display:show;">${list.curri_modify_time}</label>	 <input type="text" style="display: none;"  class="in6_${list.curri_id}"  value="${list.curri_modify_time}"></td>
-			<td><label class="la_${list.curri_id}"  style="display:show;">${list.curri_accept }</label>		 <input type="text" style="display: none;"  class="in7_${list.curri_id}"  value="${list.curri_accept}"></td>
-			<td><label class="la_${list.curri_id}"  style="display:show;">${list.enabled }</label> 			<input type="text" style="display: none;"  class="in8_${list.curri_id}"  value="${list.enabled}"></td>
+			<td><label id="la1_${list.curri_id}"  class="la_${list.curri_id}"  style="display:show;">${list.member_id}</label>			 <input type="text" style="display: none;"  id="in1_${list.curri_id}" class="in_${list.curri_id }"  value="${list.member_id}"></td>
+			<td><label id="la2_${list.curri_id}"  class="la_${list.curri_id}"  style="display:show;">${list.curri_subject}</label> 	 <input type="text" style="display: none;"  id="in2_${list.curri_id}" class="in_${list.curri_id }"   value="${list.curri_subject}"></td>
+			<td><label id="la3_${list.curri_id}"  class="la_${list.curri_id}"  style="display:show;">${list.curri_level}</label> 		 <input type="text" style="display: none;"  id="in3_${list.curri_id}" class="in_${list.curri_id }"   value="${list.curri_level}"></td>
+			<td><label id="la4_${list.curri_id}"  class="la_${list.curri_id}"  style="display:show;">${list.curri_content}</label>		 <input type="text" style="display: none;"  id="in4_${list.curri_id}" class="in_${list.curri_id }"   value="${list.curri_content}"></td>
+			<td><label id="la5_${list.curri_id}"  class="la_${list.curri_id}"  style="display:show;">${list.curri_write_time}</label>	 <input type="text" style="display: none;"  id="in5_${list.curri_id}" class="in_${list.curri_id }"   value="${list.curri_write_time}"></td>
+			<td><label id="la6_${list.curri_id}"  class="la_${list.curri_id}"  style="display:show;">${list.curri_modify_time}</label>	 <input type="text" style="display: none;"  id="in6_${list.curri_id}" class="in_${list.curri_id }"   value="${list.curri_modify_time}"></td>
+			<td><label id="la7_${list.curri_id}"  class="la_${list.curri_id}"  style="display:show;">${list.curri_accept }</label>		 <input type="text" style="display: none;"  id="in7_${list.curri_id}" class="in_${list.curri_id }"   value="${list.curri_accept}"></td>
+			<td><label id="la8_${list.curri_id}"  class="la_${list.curri_id}"  style="display:show;">${list.enabled }</label> 			<input type="text" style="display: none;"  id="in8_${list.curri_id}" class="in_${list.curri_id }"   value="${list.enabled}"></td>
 			<td>
 			
 			<button type="button"  id="btn_update_by_display_yet_${list.curri_id}"
@@ -148,7 +139,6 @@ function show_update(str) {
 			</td>
 		</tr>
 	</c:forEach>	
-</form>
 	</table>
 
 </body>

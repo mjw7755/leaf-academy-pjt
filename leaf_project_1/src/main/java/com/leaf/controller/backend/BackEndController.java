@@ -31,6 +31,7 @@ import com.leaf.model.service.QnaDTO;
 import com.leaf.model.stumgmt.StudentDTO;
 import com.leaf.model.teacher_intro.ReviewDTO;
 import com.leaf.model.teacher_intro.T_introDTO;
+import com.leaf.model.tnotice.TnoticeDTO;
 
 @Controller
 public class BackEndController {
@@ -58,17 +59,6 @@ public class BackEndController {
 		return mav;
 	
 	}
-	
-	@RequestMapping("update_by_display_curri.do")
-	public void update_by_display_curri(HttpServletRequest request, 
-			HttpServletResponse response , CurriDTO dto) throws Exception{
-		
-		backendDAO.back_updateCurri(dto);
-		
-		response.getWriter().write("0");
-		
-	}
-	
 	
 	
 	@RequestMapping("/search_backend_curri.do")
@@ -513,4 +503,152 @@ public class BackEndController {
 		      return "backend.list_backend_ja";
 		   }
 	
+	
+			@RequestMapping("/list_backend_tnotice.do")
+			public ModelAndView backend_tnotice(Model model, HttpServletRequest request) throws Exception{
+				ModelAndView mav = new ModelAndView();
+				
+				List<TnoticeDTO> tnolist=backendDAO.back_tnotice();
+		
+				model.addAttribute("tnolist", tnolist);
+				mav.setViewName("backend.list_backend_tnotice");
+				return mav;
+			
+			}
+			
+			@RequestMapping("/search_backend_tnotice.do")
+			public String searchtnotice(Model model, HttpServletRequest request) throws Exception{
+				   String flag = "search";
+				         String column =request.getParameter("column");
+				         String keyvalue = request.getParameter("keyvalue");
+				         System.out.println(column + " / " + keyvalue);
+				         Map<String, Object> map = new HashMap<String, Object>(); 
+				         map.put("column",column ); 
+				         map.put("keyvalue", keyvalue);
+				        
+				         model.addAttribute("column", column);
+				         model.addAttribute("keyvalue", keyvalue);
+		
+				         map.put("column",column );
+				         map.put("keyvalue", keyvalue);
+				      List<TnoticeDTO> list = backendDAO.back_searchTnotice(map);
+				      
+				      model.addAttribute("tnolist", list);
+				      model.addAttribute("flag",flag);
+				      return "backend.list_backend_tnotice";
+				   }
+	/**************************************update*****************************************/
+	@RequestMapping("update_by_display_curri.do")
+	public void update_by_display_curri(HttpServletRequest request, 
+			HttpServletResponse response , CurriDTO dto) throws Exception{
+		
+		backendDAO.back_updateCurri(dto);
+		
+		response.getWriter().write("0");
+		
+	}
+	@RequestMapping("update_by_display_lect.do")
+	public void update_by_display_lect(HttpServletRequest request, 
+			HttpServletResponse response , LectDTO dto) throws Exception{
+		
+		backendDAO.back_updateLecture(dto);
+		
+		response.getWriter().write("0");
+	}
+	@RequestMapping("update_by_display_member.do")
+	public void update_by_display_member(HttpServletRequest request, 
+			HttpServletResponse response , MemberDTO dto) throws Exception{
+		
+		backendDAO.back_updateMember(dto);
+		
+		response.getWriter().write("0");
+	}
+	@RequestMapping("update_by_display_book.do")
+	public void update_by_display_book(HttpServletRequest request, 
+			HttpServletResponse response , BookDTO dto) throws Exception{
+		
+		backendDAO.back_updateBook(dto);
+		
+		response.getWriter().write("0");
+	}
+	@RequestMapping("update_by_display_faq.do")
+	public void update_by_display_faq(HttpServletRequest request, 
+			HttpServletResponse response , FaqDTO dto) throws Exception{
+		
+		backendDAO.back_updateFaq(dto);
+		
+		response.getWriter().write("0");
+	}
+	@RequestMapping("update_by_display_note.do")
+	public void update_by_display_note(HttpServletRequest request, 
+			HttpServletResponse response , NoteDTO dto) throws Exception{
+		
+		backendDAO.back_updateNote(dto);
+		
+		response.getWriter().write("0");
+	}
+	@RequestMapping("update_by_display_notice.do")
+	public void update_by_display_notice(HttpServletRequest request, 
+			HttpServletResponse response , NoticeDTO dto) throws Exception{
+		
+		backendDAO.back_updateNotice(dto);
+		
+		response.getWriter().write("0");
+	}
+	@RequestMapping("update_by_display_payment.do")
+	public void update_by_display_payment(HttpServletRequest request, 
+			HttpServletResponse response , PaymentDTO dto) throws Exception{
+		
+		backendDAO.back_updatePayment(dto);
+		
+		response.getWriter().write("0");
+	}
+	@RequestMapping("update_by_display_qna.do")
+	public void update_by_display_qna(HttpServletRequest request, 
+			HttpServletResponse response , QnaDTO dto) throws Exception{
+		
+		backendDAO.back_updateQna(dto);
+		
+		response.getWriter().write("0");
+	}
+	@RequestMapping("update_by_display_review.do")
+	public void update_by_display(HttpServletRequest request, 
+			HttpServletResponse response , ReviewDTO dto) throws Exception{
+		
+		backendDAO.back_updateReview(dto);
+		
+		response.getWriter().write("0");
+	}
+	@RequestMapping("update_by_display_t_i.do")
+	public void update_by_display_t_i(HttpServletRequest request, 
+			HttpServletResponse response , T_introDTO dto) throws Exception{
+		
+		backendDAO.back_updateT_i(dto);
+		
+		response.getWriter().write("0");
+	}
+	@RequestMapping("update_by_display_student.do")
+	public void update_by_display_student(HttpServletRequest request, 
+			HttpServletResponse response , StudentDTO dto) throws Exception{
+		
+		backendDAO.back_updateStudent(dto);
+		
+		response.getWriter().write("0");
+	}
+	@RequestMapping("update_by_display_jageok.do")
+	public void update_by_display_jageok(HttpServletRequest request, 
+			HttpServletResponse response , JageokDTO dto) throws Exception{
+		
+		backendDAO.back_updateJageok(dto);
+		
+		response.getWriter().write("0");
+	}
+	@RequestMapping("update_by_display_tnotice.do")
+	public void update_by_display_tnotice(HttpServletRequest request, 
+			HttpServletResponse response , TnoticeDTO dto) throws Exception{
+		
+		backendDAO.back_updateTnotice(dto);
+		
+		response.getWriter().write("0");
+	}
 }

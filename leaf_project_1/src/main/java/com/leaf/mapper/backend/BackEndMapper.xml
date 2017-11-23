@@ -49,7 +49,9 @@
 	<select id="back_ja" resultType="com.leaf.model.jageok.JageokDTO">
 		select*from jageok
 	</select>
-	
+	<select id="back_tnotice" resultType="com.leaf.model.tnotice.TnoticeDTO">
+		select*from tnotice
+	</select>
 	
 	<select id="back_searchCurri" parameterType="hashMap"
 		resultType="com.leaf.model.curriculum.CurriDTO">
@@ -103,7 +105,10 @@
 		resultType="com.leaf.model.jageok.JageokDTO">
       select *from jageok where ${column} like '%' || #{keyvalue} || '%' 
 	</select>
-	
+	<select id="back_searchTnotice" parameterType="hashMap"
+		resultType="com.leaf.model.tnotice.TnoticeDTO">
+      select *from tnotice where ${column} like '%' || #{keyvalue} || '%' 
+	</select>
 	
 	<update id="back_updateCurri" parameterType="com.leaf.model.curriculum.CurriDTO">
 		update curriculum set curri_id=#{curri_id},member_id=#{member_id},
@@ -112,5 +117,101 @@
 		curri_modify_time=#{curri_modify_time}, curri_accept=#{curri_accept}, 
 		enabled=#{enabled} where curri_id=#{curri_id}
 	</update>
+	<update id="back_updateBook" parameterType="com.leaf.model.book.BookDTO">
+		update book set book_id=#{book_id},member_id=#{member_id},
+		book_title=#{book_title}, book_writer=#{book_writer},
+		book_cost=#{book_cost}, book_image=#{book_image},
+		book_contents=#{book_contents}, enabled=#{enabled} 
+		where book_id=#{book_id}
+	</update>
+	<update id="back_updateFaq" parameterType="com.leaf.model.service.FaqDTO">
+		update faq set faq_id=#{faq_id}, faq_title=#{faq_title}, 
+		faq_content=#{faq_content}, enabled=#{enabled} 
+		where faq_id=#{faq_id}
+	</update>
+	<update id="back_updateJageok" parameterType="com.leaf.model.jageok.JageokDTO">
+		update jageok set jageok_id=#{jageok_id},member_id=#{member_id},
+		jageok_title=#{jageok_title}, jageok_date=#{jageok_date}, 
+		jageok_cost=#{jageok_cost}, enabled=#{enabled} 
+		where jageok_id=#{jageok_id}
+	</update>
+	<update id="back_updateLect" parameterType="com.leaf.model.curriculum.LectDTO">
+		update lecture set lect_id=#{lect_id}, curri_id=#{curri_id},
+		lect_name=#{lect_name}, lect_person_num=#{lect_person_num},
+		lect_start_day=#{lect_start_day}, lect_end_day=#{lect_end_day},
+		lect_start_time=#{lect_start_time}, lect_end_time=#{lect_end_time},
+		lect_write_time=#{lect_write_time}, lect_modify_time=#{lect_modify_time},
+		lect_charge=#{lect_charge}, lect_open=#{lect_open},
+		lect_accept=#{lect_accept}, enabled=#{enabled} 
+		where lect_id=#{lect_id}
+	</update>
+	<update id="back_updateMember" parameterType="com.leaf.model.member.MemberDTO">
+		update member set member_id=#{member_id}, member_pwd=#{member_pwd},
+		member_name=#{member_name}, member_tel=#{member_tel},
+		member_email=#{member_email}, member_level=#{member_level},
+		member_address=#{member_address}, member_addnum=#{member_addnum},
+		enabled=#{enabled} 
+		where member_id=#{member_id}
+	</update>
+	<update id="back_updateNote" parameterType="com.leaf.model.note.NoteDTO">
+		update note set n_id=#{n_id}, n_content=#{n_content},
+		n_title=#{n_title}, n_send_id=#{n_send_id},
+		n_recv_id=#{n_recv_id}, n_send_del_yn=#{n_send_del_yn},
+		n_recv_yn=#{n_recv_yn}, n_open_date=#{n_open_date},
+		n_write_date=#{n_write_date} 
+		where n_id=#{n_id}
+	</update>
+	<update id="back_updateNotice" parameterType="com.leaf.model.service.NoticeDTO">
+		update notice set notice_id=#{notice_id}, member_id=#{member_id},
+		notice_title=#{notice_title}, notice_content=#{notice_content},
+		notice_writedate=#{notice_writedate}, notice_modifydate=#{notice_modifydate},
+		enabled=#{enabled} 
+		where notice_id=#{notice_id}
+	</update>
 	
+	<update id="back_updatePayment" parameterType="com.leaf.model.payment.PaymentDTO">
+		update payment set payment_id=#{payment_id}, payment_lect_id=#{payment_lect_id},
+		payment_member_id=#{payment_member_id}, payment_addnum=#{payment_addnum},
+		payment_address=#{payment_address}, payment_address2=#{payment_address2},
+		payment_caution=#{payment_caution}, payment_lect_subject=#{payment_lect_subject},
+		payment_lect_charge=#{payment_lect_charge}, payment_fee=#{payment_fee},
+		payment_currency=#{payment_currency}, payment_payer_email=#{payment_payer_email},
+		payment_member_name=#{payment_member_name}, payment_member_tel=#{payment_member_tel},
+		payment_teacher_name=#{payment_teacher_name}, payment_write_date=#{payment_write_date},
+		payment_pay_chk=#{payment_pay_chk}
+		where payment_id=#{payment_id}
+	</update>
+	<update id="back_updateQna" parameterType="com.leaf.model.service.QnaDTO">
+		update qna set qna_id=#{qna_id}, member_id=#{member_id},
+		qna_title=#{qna_title}, qna_content=#{qna_content},
+		qna_writedate=#{qna_writedate}, qna_modifydate=#{qna_modifydate},
+		qna_level=#{qna_level}, qna_ref=#{qna_ref},
+		qna_step=#{qna_step}, enabled=#{enabled} 
+		where qna_id=#{qna_id}
+	</update>	
+	<update id="back_updateReview" parameterType="com.leaf.model.teacher_intro.ReviewDTO">
+		update review set review_id=#{review_id}, member_id=#{member_id},
+		teacher_id=#{teacher_id}, r_headline=#{r_headline},
+		r_content=#{r_content}, r_write_time=#{r_write_time},
+		r_modify_time=#{r_modify_time}, enabled=#{enabled} 
+		where review_id=#{review_id}
+	</update>
+	<update id="back_updateStudent" parameterType="com.leaf.model.stumgmt.StudentDTO">
+		update student set student_id=#{student_id}, student_excel=#{student_excel},
+		lect_id=#{lect_id}, student_call=#{student_call},
+		student_conn=#{student_conn} 
+		where student_id=#{student_id}
+	</update>
+	<update id="back_updateT_i" parameterType="com.leaf.model.teacher_intro.T_introDTO">
+		update teacher_intro set teacher_id=#{teacher_id}, member_id=#{member_id},
+		teacher_introduce=#{teacher_introduce}, teacher_image=#{teacher_image},
+		enabled=#{enabled} 
+		where teacher_id=#{teacher_id}
+	</update>
+	<update id="back_updateTnotice" parameterType="com.leaf.model.tnotice.TnoticeDTO">
+		update tnotice set tnotice_id=#{tnotice_id}, member_id=#{member_id},
+		tnotice_title=#{tnotice_title}, tnotice_content=#{tnotice_content},
+		enabled=#{enabled} 
+		where tnotice_id=#{tnotice_id}
+	</update>
 </mapper>
