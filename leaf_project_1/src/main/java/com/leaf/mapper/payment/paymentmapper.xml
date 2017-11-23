@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.leaf.model.payment.PaymentDAO">
+	<insert id="insertPaymentData" parameterType="com.leaf.model.payment.PaymentDTO">
+		insert into payment(payment_id, payment_lect_subject, payment_teacher_name, payment_lect_charge,payment_member_name, payment_member_tel, payment_addnum, payment_address, payment_address2, payment_caution, payment_write_date, payment_pay_chk,payment_payer_email, payment_member_id ) values(payment_seq.nextval,#{payment_lect_subject}, #{payment_teacher_name}, #{payment_lect_charge},#{payment_member_name}, #{payment_member_tel}, #{payment_addnum}, #{payment_address}, #{payment_address2}, #{payment_caution}, sysdate,0,#{payment_payer_email},#{payment_member_id})
+	</insert>
+	
+	<select id="selectMaxRow" resultType="Integer">
+		select payment_id from payment where payment_id = (select max(payment_id) as payment_id from payment)
+	</select>
+	
+	<delete id="deletePayData" parameterType="Integer">
+		delete from payment where payment_member_id = (select payment_member_id from payment where payment_id = #{itemnumber}) and payment_pay_chk = 0		
+	</delete>
+	
+	<select id="selectEmailAddress" parameterType="Integer" resultType="String">
+		select payment_payer_email from payment where payment_id = #{payment_id}
+	</select>
+	
+	<update id="updatePayChk" parameterType="Integer">
+		update payment set payment_pay_chk = 1 where payment_id = #{itemnumber}
+	</update>
+	
+	<select id="selectMemberTel" parameterType="Integer" resultType="String">
+		select member_tel from member where member_id = (select payment_member_id from payment where payment_id = #{itemnumber})
+	</select>
+</mapper>
