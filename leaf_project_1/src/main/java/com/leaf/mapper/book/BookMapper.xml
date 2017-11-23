@@ -8,7 +8,7 @@
 	<select id="getBookList" parameterType="integer" resultType="com.leaf.model.book.BookDTO">
 	select * from
       (SELECT ROWNUM NUM, m.* FROM 
-                     ( SELECT * FROM book ORDER BY book_id DESC)   m)
+                     ( SELECT * FROM book where enabled=1 ORDER BY book_id DESC)   m)
       where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
 	</select>
 
