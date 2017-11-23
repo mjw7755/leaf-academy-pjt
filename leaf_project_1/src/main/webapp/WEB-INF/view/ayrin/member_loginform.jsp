@@ -90,6 +90,9 @@ label {
 	width: 500px;
 	height:300px;
 }
+.container hr{
+	border: thin solid;
+}
 .form-group {
 	margin-bottom: 15px;
 }
@@ -141,12 +144,12 @@ h1{
 			</td>			
 		</tr>
 		<tr>
-			<td rowspan="2">
+			<td>
      			<div class="form-group text-center">
         			<button type="submit" class="btn btn-info" id="login">로그인</button>
 				</div>
         	</td>
-			<td colspan="3">
+			<td>
 				<div class="form-group text-center">
 				<a href="signupForm.do">
 					<button type="button" class="btn btn-info" id="signup">회원가입</button>

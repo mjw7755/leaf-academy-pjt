@@ -13,6 +13,17 @@
 	background-color: #e5d235;
 	margin: auto;
 }
+#jageok_list{
+   width:800px;
+}
+#jageok_list a{
+   text-decoration: none;
+   color: #000;
+}
+#jageok_list hr{
+	border: thin solid;
+	border-color: #cccccc;
+}
 #jageoklistTable {
    width: 800px;
    border-collapse: collapse;
@@ -175,6 +186,9 @@ function multiDelete(){
    		</div>
    	</div>
     <!-- top banner end -->
+    <div id="jageok_list">
+      <a href="jageok_list.do"><h1>자격증 시험안내</h1></a>
+<hr>
     <div id="text">
 	<b>※ 모든 시험 접수일은 1~3개월 전부터 확인 해야합니다 ! ※</b><br><br>
 	<div id="search">
@@ -255,6 +269,6 @@ function multiDelete(){
       </c:if>
       </c:if>
    </div>
-<br><br><br><br>
+</div>
 </body>
 </html>

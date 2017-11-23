@@ -1,12 +1,18 @@
-<html>
-<head>
+<html >
+<head >
 <title>오목게임</title>
 
 <meta http-equiv="Content-Type" content="UTF-8">
-
+<style type="text/css">
+pre#s0_img {
+    width: 350px;
+    margin-top: 15px;
+    margin-left: 0px;
+}
+</style>
 <script language="JavaScript">
 
-boardSize=15;
+boardSize=20;
 userSq= 1;
 machSq=-1;
 blinkSq="b-1";
@@ -16,9 +22,9 @@ openFour   =8888888;
 twoThrees  =7777777;
 
 if (document.images) {
- uImg=new Image(16,16); uImg.src='resources/s1.gif';
- mImg=new Image(16,16); mImg.src='resources/s-1.gif';
- bImg=new Image(16,16); bImg.src='resources/s0.gif';
+ uImg=new Image(16,16); uImg.src='resources/ram/s1.gif';
+ mImg=new Image(16,16); mImg.src='resources/ram/s-1.gif';
+ bImg=new Image(16,16); bImg.src='resources/ram/s0.gif';
 }
 
 f=new Array();
@@ -255,7 +261,7 @@ function evaluatePos(a,mySq) {
 
 function drawSquare(par1,par2,par3) {
  if (document.images) {
-  eval('self.f1.document.s'+par1+'_'+par2+'.src="resources/s'+par3+'.gif"');
+  eval('self.f1.document.s'+par1+'_'+par2+'.src="resources/ram/s'+par3+'.gif"');
  }
  else setTimeout("writeBoard()",50);
 }
@@ -266,15 +272,15 @@ buf='';
 function writeBoard () {
  buf+='<html><head><title>Board</title>';
  if (navigator.appName=="Netscape") buf+='<base href="'+top.document.location+'">';
- buf+='</head><body bgcolor="#FFFFFF"><a name="s"></a><center><pre';
+ buf+='</head><body bgcolor="#FFFFFF"><a name="s"></a><center><pre id="s0_img"';
  for (i=0;i<boardSize;i++) {
   for (j=0;j<boardSize;j++) {
-   buf+='\n><a href="#s" onClick="top.clk('+i+','+j+');if(top.ie4)this.blur();return false;" ><img name="s'+i+'_'+j+'" src="s'+f[i][j]+'.gif" width=16 height=16 border=0></a'; 
+   buf+='\n><a href="#s"  onClick="top.clk('+i+','+j+');if(top.ie4)this.blur();return false;" ><img name="s'+i+'_'+j+'" src="s'+f[i][j]+'.gif" width=16 height=16 border=0></a'; 
   }
-  buf+='\n><img src="resources/g.gif" width=1 height=16><br';
+  buf+='\n><img src="resources/ram/s0.gif" width=1 height=16><br';
   if (buf.length>20000) {top.f1.document.writeln(buf); buf='';}
  }
- buf+='\n><img src="resources/g.gif" width='+(boardSize*16+1)+' height=1></pre></center></body></html>';
+ buf+='\n><img src="resources/ram/s0.gif" width='+(boardSize*16+1)+' height=1></pre></center></body></html>';
  top.f1.document.writeln(buf);
  top.f1.document.close();
  buf='';

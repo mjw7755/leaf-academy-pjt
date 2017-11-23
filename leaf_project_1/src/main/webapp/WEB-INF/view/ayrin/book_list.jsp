@@ -110,6 +110,8 @@ font-size: 1em; }
 	border-collapse: collapse;
 	border-spacing: 0px;
 }
+
+
 </style>
 <script type="text/javascript">
 function multiDelete(){
