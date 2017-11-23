@@ -122,7 +122,7 @@ public class QnaController {
 		for (String item : request.getParameter("qna_id").split(",")) {
 			deleteTarget.add(item);
 		}
-		// int deleteNum = qnaDAO.multiqnaDelete(deleteTarget);
+		int deleteNum = qnaDAO.multiqnaDelete(deleteTarget);
 		mav.setViewName("redirect:qna_list.do");
 		return mav;
 	}

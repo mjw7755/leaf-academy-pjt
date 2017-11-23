@@ -117,7 +117,7 @@ public class NoticeController {
 		for (String item : request.getParameter("notice_id").split(",")) {
 			deleteTarget.add(item);
 		}
-		// int deleteNum = noticeDAO.multiqnaDelete(deleteTarget);
+		int deleteNum = noticeDAO.multiqnaDelete(deleteTarget);
 		mav.setViewName("redirect:notice_list.do");
 		return mav;
 	}
