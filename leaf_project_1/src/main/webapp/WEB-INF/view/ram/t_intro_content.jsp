@@ -43,7 +43,7 @@
          $("#moreReview").dialog("open");
          e.preventDefault();
          
-         reviewList();
+         reviewList(1);
       });
    });
    function reviewWrite() {
@@ -67,7 +67,7 @@
             $("#reviewList").show();
             $("#r_headline").val("");
             $("#r_content").val("");
-            reviewList();
+            reviewList(1);
         }
       });
    }
@@ -97,7 +97,7 @@
                      $("#reviewList").show();
                      $("#update_r_headline").val("");
                      $("#update_r_content").val("");
-                     reviewList();
+                     reviewList(1);
             }
          });
       }
@@ -107,7 +107,7 @@
          $.ajax({
              url:"review_delete.do?teacher_id=${dto.teacher_id}&review_id="+review_id,
               success:function(){
-                 reviewList();
+                 reviewList(1);
               }
             });
       }
@@ -128,7 +128,7 @@
                          + "<br><div id=\"font\">내용</div> <br> <br>"+data.r_content+"<br>"
                          +"<hr>"
                          +"<input type=\"button\" value=\"목록보기\""
-                         + "onclick=\"reviewList() \" class=\"btn2 btn-info\">";
+                         + "onclick=\"reviewList(1) \" class=\"btn2 btn-info\">";
                          if(sessionid == data.member_id || sessionid == '관리자') {
                                 strTag = strTag 
                                 +"<input type=\"button\" id=\""+data.review_id+"\""
@@ -143,12 +143,13 @@
             }
          });
       }
-   function reviewList() {
+   function reviewList(page) {
       $("#reviewTable").remove();
        $("#contentDIV").remove();
        $("#reviewList").show();
+       alert(page);
       $.ajax({
-         url:"review_list.do?teacher_id=${dto.teacher_id}",
+         url:"review_list.do?teacher_id=${dto.teacher_id}&page="+page,
          dataType:"json",
          success:function(msg){
             var sessionid = "${sessionScope.sessionid}";
@@ -206,7 +207,7 @@
             if(msg.page>5) {
                if(msg.flag == 'list') {
                   strTag = strTag + "<a class=\"button btn-prev\""
-                  +"      href=\"review_list.do?page="+(msg.page-1)+"&teacher_id="+dto.teacher_id+"\">이전</a>";
+                  +"      onclick=\"reviewList("+(msg.page-1)+")\">이전</a>";
                } else if(msg.flag == 'search')  {
                   strTag = strTag + "   <a class=\"button btn-prev\""
                   +"      href=\"review_search.do?page="+(msg.page-1)+"&column=${column}&keyvalue=${keyvalue}&teacher_id="+dto.teacher_id+"\">이전</a>";
@@ -217,7 +218,7 @@
                if(msg.countPage>=msg.startPage+i) {
                   if(msg.flag == 'list') {
                      strTag = strTag + "<a class=\"strong\""
-                     +"   href=\"review_list.do?page="+(msg.startPage+i)+"&teacher_id="+dto.teacher_id+"\">"+(msg.startPage+i)+"</a>";
+                     +"      onclick=\"reviewList("+(msg.page+i)+")\">"+(msg.startPage+i)+"</a>";
                   } else if(msg.flag == 'search') {
                      strTag = strTag + "<a class=\"strong\""
                      +"   href=\"review_search.do?page="+(msg.startPage+i)+"&column=${column}&keyvalue=${keyvalue}&teacher_id="+dto.teacher_id+"\">"+(msg.startPage+i)+"</a>";
@@ -228,7 +229,7 @@
             if(msg.countPage>=msg.startPage+5) {
                if(msg.flag == 'list') {
                   strTag = strTag + "<a class=\"strong\""
-                  +"   href=\"review_list.do?page="+(msg.startPage+5)+"&teacher_id="+msg.dto.teacher_id+"\">다음</a>";
+                  +"      onclick=\"reviewList("+(msg.page+5)+")\">다음</a>";
                } else if(msg.flag == 'search') {
                   strTag = strTag + "<a class=\"strong\""
                   +"   href=\"review_search.do?page="+(msg.startPage+5)+"&column=${column}&keyvalue=${keyvalue}&teacher_id="+msg.dto.teacher_id+"\">다음</a>";
