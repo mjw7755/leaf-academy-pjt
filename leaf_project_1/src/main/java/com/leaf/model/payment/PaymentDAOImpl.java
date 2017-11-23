@@ -1,5 +1,6 @@
 package com.leaf.model.payment;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -46,6 +47,12 @@ public class PaymentDAOImpl implements PaymentDAO {
 	public String selectMemberTel(int itemnumber) {
 		PaymentDAO dao = sqlSession.getMapper(PaymentDAO.class);
 		return dao.selectMemberTel(itemnumber);
+	}
+
+	@Override
+	public List<PaymentDTO> allPayment() {
+		PaymentDAO dao = sqlSession.getMapper(PaymentDAO.class);
+		return dao.allPayment();
 	}
 	
 	

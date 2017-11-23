@@ -16,7 +16,6 @@
    height: 30px;
    border-radius: 4px;
 }
-
 .btn {
 	display: inline-block;
     border: none;
@@ -57,14 +56,13 @@ font-size: 0.5em; }
 </style>
 </head>
 <body>
-<br><br><br><br><br>
-	
+<c:if test="${session.ssessionlevel != 1 }">	
 	<form action="tnotice_search.do" method="post">
          검색어 입력 : <input size="30" type="search"  name="keyvalue" placeholder="키워드 검색 가능합니다." list="tnoticelist"> 
              <button type="submit" class="btn btn--sm btn--green">검색</button>
     </form>
    
-	<datalist  id="tnoticelist">
+	<datalist>
 		<c:forEach items="${ list }" var="list">
 			<option value="${ list.tnotice_title }"> ${ list.tnotice_title } </option>
 		</c:forEach>
@@ -119,6 +117,9 @@ font-size: 0.5em; }
       </c:if>
       </c:if>
    </div>
-<br><br><br><br>
+</c:if>
+
+
+
 </body>
 </html>

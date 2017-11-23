@@ -79,6 +79,51 @@
 			
 </style>
 <script>
+
+$(function() {
+	$("#lecture_icon").hide();
+	$("#grade_icon").hide();
+	$("#attendance_icon").hide();
+	$("#t_notice_icon").hide();
+	
+	$("#tnoticeDetail").hide();
+	
+	$("#lecture").hover(function() {
+	   $("#lecture_icon").show()
+	}, function() {
+	   $("#lecture_icon").hide();
+	});
+	$("#grade").hover(function() {
+	   $("#grade_icon").show()
+	}, function() {
+	   $("#grade_icon").hide();
+	});
+	$("#attendance").hover(function() {
+	   $("#attendance_icon").show()
+	}, function() {
+	   $("#attendance_icon").hide();
+	});
+	$("#t_notice").hover(function() {
+	   $("#t_notice_icon").show()
+	}, function() {
+	   $("#t_notice_icon").hide();
+	});
+   
+	/* $("#lecture").click(function() {
+		alert("연결해야함");
+	});
+	$("#grade").click(function() {
+		alert("연결해야함");
+	});
+	$("#attendance").click(function() {
+		alert("연결해야함");
+	}); 
+	$("#t_notice").click(function() {
+		$("tnoticeDIV").show();
+	}); */
+});
+
+
 $(function() {
 	$("#tnoticeDetail").dialog({
         autoOpen : false,
@@ -103,52 +148,18 @@ function detail(ev) {
 	document.getElementById("tnoticeDetail").innerHTML = "<p>"+document.getElementById(ev.target.name).value+"</p>";
 }
 
-$(function() {
-	$("#lecture_icon").hide();
-	$("#grade_icon").hide();
-	$("#attendance_icon").hide();
-	$("#t_notice_icon").hide();
-	
-	$("#tnoticeDIV").hide();
-	$("#tnoticeDetail").hide();
-	
-	$("#lecture").hover(function() {
-	   $("#lecture_icon").show()
-	}, function() {
-	   $("#lecture_icon").hide();
-	});
-	$("#grade").hover(function() {
-	   $("#grade_icon").show()
-	}, function() {
-	   $("#grade_icon").hide();
-	});
-	$("#attendance").hover(function() {
-	   $("#attendance_icon").show()
-	}, function() {
-	   $("#attendance_icon").hide();
-	});
-	$("#t_notice").hover(function() {
-	   $("#t_notice_icon").show()
-	}, function() {
-	   $("#t_notice_icon").hide();
-	});
-   
-	$("#lecture").click(function() {
-		alert("연결해야함");
-	});
-	$("#grade").click(function() {
-		alert("연결해야함");
-	});
-	$("#attendance").click(function() {
-		alert("연결해야함");
-	});
-	$("#t_notice").click(function() {
-		$("tnoticeDIV").show();
-	});
-});
+
 </script>
 </head>
 <body>
+	<select>
+		<option value="class1" selected="selected">JAVA 기초 (상)</option>
+		<option value="class2">JAVA 기초 (중)</option>
+		<option value="class3">JAVA 기초 (하)</option>
+	</select>
+	<button >쪽지</button>
+	<button onclick="window.location.href='listening.do'">강의하기</button><br>
+
 	<div id="tnoticeDIV">
 		<table>
 		<c:forEach items="${list}" var="list">
