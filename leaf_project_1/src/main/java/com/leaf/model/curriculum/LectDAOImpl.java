@@ -93,6 +93,18 @@ public class LectDAOImpl implements LectDAO {
 	         LectDAO dao = sqlSession.getMapper(LectDAO.class);
 	         return dao.getCheckDate(sessionid);
 	     }
+
+	@Override
+	public String getLectName(Map<String, Object> getlectMap) {
+		LectDAO dao = sqlSession.getMapper(LectDAO.class);
+		return dao.getLectName(getlectMap);
+	}
+
+	@Override
+	public int getLectId(String sessionid) {
+		LectDAO dao = sqlSession.getMapper(LectDAO.class);
+		return dao.getLectId(sessionid);
+	}
 }
 
 

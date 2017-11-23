@@ -31,5 +31,7 @@ public interface LectDAO {
 
 	public List<LectDTO> getCheckDate(String sessionid);
 
+	public String getLectName(Map<String,Object> getlectMap);
 	
+	public int getLectId(String sessionid);
 }
