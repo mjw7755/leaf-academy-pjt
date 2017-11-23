@@ -7,11 +7,63 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 	function listChange(params) {
 		var url = "list_backend_" + params.value + ".do";
 		window.location.href = url;
 	}
+	
+	function show1(str) {
+		
+		var s = str;
+		$('.la_'+s).css("display", "none");
+		$('.in_'+s).css("display", "block");
+		
+		$('#btn_update_by_display_yet_'+ s).css("display", "none");
+		$('#btn_update_by_display_now_' + s).css("display", "block");
+	}  
+	
+function show_update(str) {
+		var s = str;
+		
+		var member_id  = $('#in1_'+s).val();
+		var teacher_id  = $('#in2_'+s).val();
+		var r_headline  = $('#in3_'+s).val();
+		var r_content  = $('#in4_'+s).val();
+		var r_write_time  = $('#in5_'+s).val();
+		var r_modify_time  = $('#in6_'+s).val();
+		var enabled  = $('#in7_'+s).val();
+
+		$.ajax({
+            type:'POST',
+            url:'update_by_display_review.do',
+            data:{
+            	review_id: s,
+            	member_id: member_id,
+            	teacher_id: teacher_id,
+            	r_headline: r_headline,
+            	r_content: r_content,
+            	r_write_time: r_write_time,
+            	r_modify_time: r_modify_time,
+            	enabled: enabled,
+            	
+            },
+            success: function(result){
+               if(result == '0'){
+            	 
+            	$('.la_'+s).css("display", "block");
+               	$('.in_'+s).css("display", "none");
+              		
+            	$('#btn_update_by_display_yet_'+ s).css("display", "block");
+           		$('#btn_update_by_display_now_' + s).css("display", "none");
+           		window.location.href='list_backend_rev.do';
+               }
+            }
+         });
+	}  
+
 </script>
 <body>
 	<select
@@ -30,6 +82,7 @@
 		<option value="rev" selected="selected">Review</option>
 		<option value="stu">Student</option>
 		<option value="t_i">Teacher_Intro</option>
+		<option value="tnotice">Teacher_Notice</option>
 	</select>
 	
 	<form action="search_backend_rev.do" method="post">
@@ -61,15 +114,24 @@
 	<c:forEach items="${rlist }" var="list" varStatus="status">
 		<tr onclick="test(this)">
 			<td>${list.review_id}</td>
-			<td>${list.member_id}</td>
-			<td>${list.teacher_id}</td>
-			<td>${list.r_headline}</td>
-			<td>${list.r_content}</td>
-			<td>${list.r_write_time}</td>
-			<td>${list.r_modify_time}</td>
-			<td>${list.enabled }</td>
+			
+			<td><label id="la1_${list.review_id}"  class="la_${list.review_id}"  style="display:show;">${list.member_id}</label>			 <input type="text" style="display: none;"  id="in1_${list.review_id}" class="in_${list.review_id }"  value="${list.member_id}"></td>
+			<td><label id="la2_${list.review_id}"  class="la_${list.review_id}"  style="display:show;">${list.teacher_id}</label> 		 <input type="text" style="display: none;"  id="in2_${list.review_id}" class="in_${list.review_id }"   value="${list.teacher_id}"></td>
+			<td><label id="la3_${list.review_id}"  class="la_${list.review_id}"  style="display:show;">${list.r_headline}</label>		 <input type="text" style="display: none;"  id="in3_${list.review_id}" class="in_${list.review_id }"   value="${list.r_headline}"></td>
+			<td><label id="la4_${list.review_id}"  class="la_${list.review_id}"  style="display:show;">${list.r_content}</label>	 <input type="text" style="display: none;"  id="in4_${list.review_id}" class="in_${list.review_id }"   value="${list.r_content}"></td>
+			<td><label id="la5_${list.review_id}"  class="la_${list.review_id}"  style="display:show;">${list.r_write_time}</label>	 <input type="text" style="display: none;"  id="in5_${list.review_id}" class="in_${list.review_id }"   value="${list.r_write_time}"></td>
+			<td><label id="la6_${list.review_id}"  class="la_${list.review_id}"  style="display:show;">${list.r_modify_time }</label>		 <input type="text" style="display: none;"  id="in6_${list.review_id}" class="in_${list.review_id }"   value="${list.r_modify_time}"></td>
+			<td><label id="la7_${list.review_id}"  class="la_${list.review_id}"  style="display:show;">${list.enabled }</label> 			<input type="text" style="display: none;"  id="in7_${list.review_id}" class="in_${list.review_id }"   value="${list.enabled}"></td>
+			<td>
+			
+			<button type="button"  id="btn_update_by_display_yet_${list.review_id}"
+				onclick="show1('${list.review_id}')" style="display:show;">수 정</button> 
+				
+			<button type="button"  id="btn_update_by_display_now_${list.review_id}"
+				onclick="show_update('${list.review_id}')"  style="display:none;">완 료</button> 
+			</td>
 		</tr>
-	</c:forEach>
+	</c:forEach>	
 	</table>
 </body>
 </html>

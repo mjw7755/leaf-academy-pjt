@@ -12,6 +12,48 @@
 		var url = "list_backend_" + params.value + ".do";
 		window.location.href = url;
 	}
+	
+	function show1(str) {
+		
+		var s = str;
+		$('.la_'+s).css("display", "none");
+		$('.in_'+s).css("display", "block");
+		
+		$('#btn_update_by_display_yet_'+ s).css("display", "none");
+		$('#btn_update_by_display_now_' + s).css("display", "block");
+	}  
+	
+function show_update(str) {
+		var s = str;
+		
+		var faq_title  = $('#in1_'+s).val();
+		var faq_content  = $('#in2_'+s).val();
+		var enabled  = $('#in3_'+s).val();
+
+		$.ajax({
+            type:'POST',
+            url:'update_by_display_faq.do',
+            data:{
+            	faq_id: s,
+            	faq_title: faq_title,
+            	faq_content: faq_content,
+            	enabled: enabled,
+            	
+            },
+            success: function(result){
+               if(result == '0'){
+            	 
+            	$('.la_'+s).css("display", "block");
+               	$('.in_'+s).css("display", "none");
+              		
+            	$('#btn_update_by_display_yet_'+ s).css("display", "block");
+           		$('#btn_update_by_display_now_' + s).css("display", "none");
+           		window.location.href='list_backend_faq.do';
+               }
+            }
+         });
+	}  
+
 </script>
 <body>
 	<select
@@ -30,6 +72,7 @@
 		<option value="rev">Review</option>
 		<option value="stu">Student</option>
 		<option value="t_i">Teacher_Intro</option>
+		<option value="tnotice">Teacher_Notice</option>
 	</select>
 	
 	<form action="search_backend_faq.do" method="post">
@@ -50,14 +93,26 @@
 	<th>faq_title</th>
 	<th>faq_content</th>
 	<th>enabled</th>
+	
+		<form action="update_faq.do" method="post">
 	<c:forEach items="${flist }" var="list" varStatus="status">
 		<tr onclick="test(this)">
 			<td>${list.faq_id}</td>
-			<td>${list.faq_title}</td>
-			<td>${list.faq_content}</td>
-			<td>${list.enabled }</td>
+			
+			<td><label id="la1_${list.faq_id}"  class="la_${list.faq_id}"  style="display:show;">${list.faq_title}</label>			 <input type="text" style="display: none;"  id="in1_${list.faq_id}" class="in_${list.faq_id }"  value="${list.faq_title}"></td>
+			<td><label id="la2_${list.faq_id}"  class="la_${list.faq_id}"  style="display:show;">${list.faq_content}</label> 	 <input type="text" style="display: none;"  id="in2_${list.faq_id}" class="in_${list.faq_id }"   value="${list.faq_content}"></td>
+			<td><label id="la3_${list.faq_id}"  class="la_${list.faq_id}"  style="display:show;">${list.enabled}</label>		 <input type="text" style="display: none;"  id="in3_${list.faq_id}" class="in_${list.faq_id }"   value="${list.enabled}"></td>
+			<td>
+			
+			<button type="button"  id="btn_update_by_display_yet_${list.faq_id}"
+				onclick="show1('${list.faq_id}')" style="display:show;">수 정</button> 
+				
+			<button type="button"  id="btn_update_by_display_now_${list.faq_id}"
+				onclick="show_update('${list.faq_id}')"  style="display:none;">완 료</button> 
+			</td>
 		</tr>
-	</c:forEach>
+	</c:forEach>	
+	</form>
 	</table>
 </body>
 </html>

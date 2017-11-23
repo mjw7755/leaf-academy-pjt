@@ -23,7 +23,7 @@ public List<CurriDTO> listCurri();
 	public void insertCurri(CurriDTO dto);
 
 
-	public CurriDTO detailCurri(int curri_id) throws ClassNotFoundException, SQLException;
+	public CurriDTO detailCurri(int lect_id) throws ClassNotFoundException, SQLException;
 
 
 	public CurriDTO getCurriByCurri_id(int curri_id);

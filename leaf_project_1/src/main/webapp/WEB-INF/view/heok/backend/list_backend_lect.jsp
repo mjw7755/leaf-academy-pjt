@@ -7,12 +7,77 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 	function listChange(params) {
 		var url = "list_backend_" + params.value + ".do";
 		window.location.href = url;
 	}
+	
+	function show1(str) {
+		
+		var s = str;
+		$('.la_'+s).css("display", "none");
+		$('.in_'+s).css("display", "block");
+		
+		$('#btn_update_by_display_yet_'+ s).css("display", "none");
+		$('#btn_update_by_display_now_' + s).css("display", "block");
+	}  
+	
+function show_update(str) {
+		var s = str;
+		
+		var curri_id  = $('#in1_'+s).val();
+		var lect_name  = $('#in2_'+s).val();
+		var lect_person_num  = $('#in3_'+s).val();
+		var lect_start_day  = $('#in4_'+s).val();
+		var lect_end_day  = $('#in5_'+s).val();
+		var lect_start_time  = $('#in6_'+s).val();
+		var lect_end_time  = $('#in7_'+s).val();
+		var lect_write_time  = $('#in8_'+s).val();
+		var lect_modify_time  = $('#in9_'+s).val();
+		var lect_charge  = $('#in10_'+s).val();
+		var lect_accept  = $('#in11_'+s).val();
+		var lect_open  = $('#in12_'+s).val();
+		var enabled  = $('#in13_'+s).val();
+
+		$.ajax({
+            type:'POST',
+            url:'update_by_display_lect.do',
+            data:{
+            	lect_id: s,
+            	curri_id: curri_id,
+            	lect_name: lect_name,
+            	lect_person_num: lect_person_num,
+            	lect_start_day: lect_start_day,
+            	lect_end_day: lect_end_day,
+            	lect_start_time: lect_start_time,
+            	lect_end_time: lect_end_time,
+            	lect_write_time: lect_write_time,
+            	lect_modify_time: lect_modify_time,
+            	lect_charge: lect_charge,
+            	lect_accept: lect_accept,
+            	lect_open: lect_open,
+            	enabled: enabled,
+            	
+            },
+            success: function(result){
+               if(result == '0'){
+            	 
+            	$('.la_'+s).css("display", "block");
+               	$('.in_'+s).css("display", "none");
+              		
+            	$('#btn_update_by_display_yet_'+ s).css("display", "block");
+           		$('#btn_update_by_display_now_' + s).css("display", "none");
+           		window.location.href='list_backend_lect.do';
+               }
+            }
+         });
+	}  
+
 </script>
+
 <body>
 	<select
 		style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;"
@@ -30,6 +95,7 @@
 		<option value="rev">Review</option>
 		<option value="stu">Student</option>
 		<option value="t_i">Teacher_Intro</option>
+		<option value="tnotice">Teacher_Notice</option>
 	</select>
 	
 	<form action="search_backend_lect.do" method="post">
@@ -72,21 +138,30 @@
 		<c:forEach items="${llist }" var="list" varStatus="status">
 			<tr onclick="test(this)">
 				<td>${list.lect_id}</td>
-				<td>${list.curri_id}</td>
-				<td>${list.lect_name}</td>
-				<td>${list.lect_person_num}</td>
-				<td>${list.lect_start_day}</td>
-				<td>${list.lect_end_day}</td>
-				<td>${list.lect_start_time}</td>
-				<td>${list.lect_end_time}</td>
-				<td>${list.lect_write_time}</td>
-				<td>${list.lect_modify_time}</td>
-				<td>${list.lect_charge}</td>
-				<td>${list.lect_accept}</td>
-				<td>${list.lect_open}</td>
-				<td>${list.enabled }</td>
-			</tr>
-		</c:forEach>
+				
+			<td><label id="la1_${list.lect_id}"  class="la_${list.lect_id}"  style="display:show;">${list.curri_id}</label>			 <input type="text" style="display: none;"  id="in1_${list.lect_id}" class="in_${list.lect_id }"  value="${list.curri_id}"></td>
+			<td><label id="la2_${list.lect_id}"  class="la_${list.lect_id}"  style="display:show;">${list.lect_name}</label>			 <input type="text" style="display: none;"  id="in2_${list.lect_id}" class="in_${list.lect_id }"  value="${list.lect_name}"></td>
+			<td><label id="la3_${list.lect_id}"  class="la_${list.lect_id}"  style="display:show;">${list.lect_person_num}</label> 	 <input type="text" style="display: none;"  id="in3_${list.lect_id}" class="in_${list.lect_id }"   value="${list.lect_person_num}"></td>
+			<td><label id="la4_${list.lect_id}"  class="la_${list.lect_id}"  style="display:show;">${list.lect_start_day}</label> 		 <input type="text" style="display: none;"  id="in4_${list.lect_id}" class="in_${list.lect_id }"   value="${list.lect_start_day}"></td>
+			<td><label id="la5_${list.lect_id}"  class="la_${list.lect_id}"  style="display:show;">${list.lect_end_day}</label>		 <input type="text" style="display: none;"  id="in5_${list.lect_id}" class="in_${list.lect_id }"   value="${list.lect_end_day}"></td>
+			<td><label id="la6_${list.lect_id}"  class="la_${list.lect_id}"  style="display:show;">${list.lect_start_time}</label>	 <input type="text" style="display: none;"  id="in6_${list.lect_id}" class="in_${list.lect_id }"   value="${list.lect_start_time}"></td>
+			<td><label id="la7_${list.lect_id}"  class="la_${list.lect_id}"  style="display:show;">${list.lect_end_time}</label>	 <input type="text" style="display: none;"  id="in7_${list.lect_id}" class="in_${list.lect_id }"   value="${list.lect_end_time}"></td>
+			<td><label id="la8_${list.lect_id}"  class="la_${list.lect_id}"  style="display:show;">${list.lect_write_time }</label>		 <input type="text" style="display: none;"  id="in8_${list.lect_id}" class="in_${list.lect_id }"   value="${list.lect_write_time}"></td>
+			<td><label id="la9_${list.lect_id}"  class="la_${list.lect_id}"  style="display:show;">${list.lect_modify_time }</label>		 <input type="text" style="display: none;"  id="in9_${list.lect_id}" class="in_${list.lect_id }"   value="${list.lect_modify_time}"></td>
+			<td><label id="la10_${list.lect_id}"  class="la_${list.lect_id}"  style="display:show;">${list.lect_charge }</label>		 <input type="text" style="display: none;"  id="in10_${list.lect_id}" class="in_${list.lect_id }"   value="${list.lect_charge}"></td>
+			<td><label id="la11_${list.lect_id}"  class="la_${list.lect_id}"  style="display:show;">${list.lect_accept }</label>		 <input type="text" style="display: none;"  id="in11_${list.lect_id}" class="in_${list.lect_id }"   value="${list.lect_accept}"></td>
+			<td><label id="la12_${list.lect_id}"  class="la_${list.lect_id}"  style="display:show;">${list.lect_open }</label>		 <input type="text" style="display: none;"  id="in12_${list.lect_id}" class="in_${list.lect_id }"   value="${list.lect_open}"></td>
+			<td><label id="la13_${list.lect_id}"  class="la_${list.lect_id}"  style="display:show;">${list.enabled }</label> 			<input type="text" style="display: none;"  id="in13_${list.lect_id}" class="in_${list.lect_id }"   value="${list.enabled}"></td>
+			<td>
+			
+			<button type="button"  id="btn_update_by_display_yet_${list.lect_id}"
+				onclick="show1('${list.lect_id}')" style="display:show;">수 정</button> 
+				
+			<button type="button"  id="btn_update_by_display_now_${list.lect_id}"
+				onclick="show_update('${list.lect_id}')"  style="display:none;">완 료</button> 
+			</td>
+		</tr>
+	</c:forEach>	
 	</table>
 </body>
 </html>

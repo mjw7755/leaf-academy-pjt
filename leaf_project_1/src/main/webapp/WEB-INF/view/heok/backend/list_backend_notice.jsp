@@ -7,11 +7,61 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 	function listChange(params) {
 		var url = "list_backend_" + params.value + ".do";
 		window.location.href = url;
 	}
+	
+	function show1(str) {
+		
+		var s = str;
+		$('.la_'+s).css("display", "none");
+		$('.in_'+s).css("display", "block");
+		
+		$('#btn_update_by_display_yet_'+ s).css("display", "none");
+		$('#btn_update_by_display_now_' + s).css("display", "block");
+	}  
+	
+function show_update(str) {
+		var s = str;
+		
+		var member_id  = $('#in1_'+s).val();
+		var notice_title  = $('#in2_'+s).val();
+		var notice_content  = $('#in3_'+s).val();
+		var notice_writedate  = $('#in4_'+s).val();
+		var notice_modifydate  = $('#in5_'+s).val();
+		var enabled  = $('#in6_'+s).val();
+
+		$.ajax({
+            type:'POST',
+            url:'update_by_display_notice.do',
+            data:{
+            	notice_id: s,
+            	member_id: member_id,
+            	notice_title: notice_title,
+            	notice_content: notice_content,
+            	notice_writedate: notice_writedate,
+            	notice_modifydate: notice_modifydate,
+            	enabled: enabled,
+            	
+            },
+            success: function(result){
+               if(result == '0'){
+            	 
+            	$('.la_'+s).css("display", "block");
+               	$('.in_'+s).css("display", "none");
+              		
+            	$('#btn_update_by_display_yet_'+ s).css("display", "block");
+           		$('#btn_update_by_display_now_' + s).css("display", "none");
+           		window.location.href='list_backend_notice.do';
+               }
+            }
+         });
+	}  
+
 </script>
 <body>
 	<select
@@ -30,6 +80,7 @@
 		<option value="rev">Review</option>
 		<option value="stu">Student</option>
 		<option value="t_i">Teacher_Intro</option>
+		<option value="tnotice">Teacher_Notice</option>
 	</select>
 	
 	<form action="search_backend_notice.do" method="post">
@@ -59,14 +110,23 @@
 	<c:forEach items="${noticelist }" var="list" varStatus="status">
 		<tr onclick="test(this)">
 			<td>${list.notice_id}</td>
-			<td>${list.member_id}</td>
-			<td>${list.notice_title}</td>
-			<td>${list.notice_content}</td>
-			<td>${list.notice_writedate}</td>
-			<td>${list.notice_modifydate}</td>
-			<td>${list.enabled }</td>
+			
+	<td><label id="la1_${list.notice_id}"  class="la_${list.notice_id}"  style="display:show;">${list.member_id}</label>			 <input type="text" style="display: none;"  id="in1_${list.notice_id}" class="in_${list.notice_id }"  value="${list.member_id}"></td>
+	<td><label id="la2_${list.notice_id}"  class="la_${list.notice_id}"  style="display:show;">${list.notice_title}</label> 	 <input type="text" style="display: none;"  id="in2_${list.notice_id}" class="in_${list.notice_id }"   value="${list.notice_title}"></td>
+	<td><label id="la3_${list.notice_id}"  class="la_${list.notice_id}"  style="display:show;">${list.notice_content}</label> 		 <input type="text" style="display: none;"  id="in3_${list.notice_id}" class="in_${list.notice_id }"   value="${list.notice_content}"></td>
+	<td><label id="la4_${list.notice_id}"  class="la_${list.notice_id}"  style="display:show;">${list.notice_writedate}</label>		 <input type="text" style="display: none;"  id="in4_${list.notice_id}" class="in_${list.notice_id }"   value="${list.notice_writedate}"></td>
+	<td><label id="la5_${list.notice_id}"  class="la_${list.notice_id}"  style="display:show;">${list.notice_modifydate}</label>	 <input type="text" style="display: none;"  id="in5_${list.notice_id}" class="in_${list.notice_id }"   value="${list.notice_modifydate}"></td>
+	<td><label id="la6_${list.notice_id}"  class="la_${list.notice_id}"  style="display:show;">${list.enabled}</label>	 <input type="text" style="display: none;"  id="in6_${list.notice_id}" class="in_${list.notice_id }"   value="${list.enabled}"></td>
+			<td>
+			
+			<button type="button"  id="btn_update_by_display_yet_${list.notice_id}"
+				onclick="show1('${list.notice_id}')" style="display:show;">수 정</button> 
+				
+			<button type="button"  id="btn_update_by_display_now_${list.notice_id}"
+				onclick="show_update('${list.notice_id}')"  style="display:none;">완 료</button> 
+			</td>
 		</tr>
-	</c:forEach>
+	</c:forEach>	
 	</table>
 </body>
 </html>

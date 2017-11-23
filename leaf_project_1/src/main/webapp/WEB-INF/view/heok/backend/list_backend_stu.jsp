@@ -7,11 +7,59 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 	function listChange(params) {
 		var url = "list_backend_" + params.value + ".do";
 		window.location.href = url;
 	}
+	
+	function show1(str) {
+		
+		var s = str;
+		$('.la_'+s).css("display", "none");
+		$('.in_'+s).css("display", "block");
+		
+		$('#btn_update_by_display_yet_'+ s).css("display", "none");
+		$('#btn_update_by_display_now_' + s).css("display", "block");
+	}  
+	
+function show_update(str) {
+		var s = str;
+		
+		var member_id  = $('#in1_'+s).val();
+		var student_excel  = $('#in2_'+s).val();
+		var lect_id  = $('#in3_'+s).val();
+		var student_call  = $('#in4_'+s).val();
+		var student_conn  = $('#in5_'+s).val();
+
+		$.ajax({
+            type:'POST',
+            url:'update_by_display_student.do',
+            data:{
+            	student_id: s,
+            	member_id: member_id,
+            	student_excel: student_excel,
+            	lect_id: lect_id,
+            	student_call: student_call,
+            	student_conn: student_conn,
+            	
+            },
+            success: function(result){
+               if(result == '0'){
+            	 
+            	$('.la_'+s).css("display", "block");
+               	$('.in_'+s).css("display", "none");
+              		
+            	$('#btn_update_by_display_yet_'+ s).css("display", "block");
+           		$('#btn_update_by_display_now_' + s).css("display", "none");
+           		window.location.href='list_backend_stu.do';
+               }
+            }
+         });
+	}  
+
 </script>
 <body>
 	<select
@@ -30,6 +78,7 @@
 		<option value="rev">Review</option>
 		<option value="stu" selected="selected">Student</option>
 		<option value="t_i">Teacher_Intro</option>
+		<option value="tnotice">Teacher_Notice</option>
 	</select>
 	
 	<form action="search_backend_stu.do" method="post">
@@ -57,13 +106,22 @@
 	<c:forEach items="${stulist }" var="list" varStatus="status">
 		<tr onclick="test(this)">
 			<td>${list.student_id}</td>
-			<td>${list.member_id}</td>
-			<td>${list.student_excel}</td>
-			<td>${list.lect_id}</td>
-			<td>${list.student_call}</td>
-			<td>${list.student_conn}</td>
+			
+			<td><label id="la1_${list.student_id}"  class="la_${list.student_id}"  style="display:show;">${list.member_id}</label>			 <input type="text" style="display: none;"  id="in1_${list.student_id}" class="in_${list.student_id }"  value="${list.member_id}"></td>
+			<td><label id="la2_${list.student_id}"  class="la_${list.student_id}"  style="display:show;">${list.student_excel}</label> 	 <input type="text" style="display: none;"  id="in2_${list.student_id}" class="in_${list.student_id }"   value="${list.student_excel}"></td>
+			<td><label id="la3_${list.student_id}"  class="la_${list.student_id}"  style="display:show;">${list.lect_id}</label> 		 <input type="text" style="display: none;"  id="in3_${list.student_id}" class="in_${list.student_id }"   value="${list.lect_id}"></td>
+			<td><label id="la4_${list.student_id}"  class="la_${list.student_id}"  style="display:show;">${list.student_call}</label>		 <input type="text" style="display: none;"  id="in4_${list.student_id}" class="in_${list.student_id }"   value="${list.student_call}"></td>
+			<td><label id="la5_${list.student_id}"  class="la_${list.student_id}"  style="display:show;">${list.student_conn}</label>	 <input type="text" style="display: none;"  id="in5_${list.student_id}" class="in_${list.student_id }"   value="${list.student_conn}"></td>
+			<td>
+			
+			<button type="button"  id="btn_update_by_display_yet_${list.student_id}"
+				onclick="show1('${list.student_id}')" style="display:show;">수 정</button> 
+				
+			<button type="button"  id="btn_update_by_display_now_${list.student_id}"
+				onclick="show_update('${list.student_id}')"  style="display:none;">완 료</button> 
+			</td>
 		</tr>
-	</c:forEach>
+	</c:forEach>	
 	</table>
 </body>
 </html>

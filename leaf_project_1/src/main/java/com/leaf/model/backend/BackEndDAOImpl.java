@@ -20,6 +20,7 @@ import com.leaf.model.service.QnaDTO;
 import com.leaf.model.stumgmt.StudentDTO;
 import com.leaf.model.teacher_intro.ReviewDTO;
 import com.leaf.model.teacher_intro.T_introDTO;
+import com.leaf.model.tnotice.TnoticeDTO;
 @Component
 public class BackEndDAOImpl implements BackEndDAO {
 	@Autowired
@@ -171,8 +172,7 @@ public class BackEndDAOImpl implements BackEndDAO {
 		BackEndDAO dao= sqlsession.getMapper(BackEndDAO.class);
 		return dao.back_t_i();
 	}
-
-
+	
 	@Override
 	public List<T_introDTO> back_searchT_i(Map<String, Object> map) {
 		BackEndDAO dao= sqlsession.getMapper(BackEndDAO.class);
@@ -206,6 +206,16 @@ public class BackEndDAOImpl implements BackEndDAO {
 		BackEndDAO dao= sqlsession.getMapper(BackEndDAO.class);
 		return dao.back_searchJa(map);
 	}
+	@Override
+	public List<TnoticeDTO> back_tnotice() {
+		BackEndDAO dao= sqlsession.getMapper(BackEndDAO.class);
+		return dao.back_tnotice();
+	}
+	@Override
+	public List<TnoticeDTO> back_searchTnotice(Map<String, Object> map) {
+		BackEndDAO dao= sqlsession.getMapper(BackEndDAO.class);
+		return dao.back_searchTnotice(map);
+	}
 
 
 	@Override
@@ -214,11 +224,77 @@ public class BackEndDAOImpl implements BackEndDAO {
 		dao.back_updateCurri(dto);
 	}
 
-
 	@Override
-	public CurriDTO back_updateFormCurri(int curri_id) {
-		BackEndDAO dao= sqlsession.getMapper(BackEndDAO.class);
-		return dao.back_updateFormCurri(curri_id);
+	public void back_updateBook(BookDTO dto) {
+		BackEndDAO dao= sqlsession.getMapper(BackEndDAO.class);		
+		dao.back_updateBook(dto);
 	}
 
+	@Override
+	public void back_updateFaq(FaqDTO dto) {
+		BackEndDAO dao= sqlsession.getMapper(BackEndDAO.class);				
+		dao.back_updateFaq(dto);
+	}
+
+	@Override
+	public void back_updateJageok(JageokDTO dto) {
+		BackEndDAO dao= sqlsession.getMapper(BackEndDAO.class);	
+		dao.back_updateJageok(dto);
+	}
+	
+	@Override
+	public void back_updateLecture(LectDTO dto) {
+		BackEndDAO dao= sqlsession.getMapper(BackEndDAO.class);				
+		dao.back_updateLecture(dto);
+	}
+	
+	@Override
+	public void back_updateMember(MemberDTO dto) {
+		BackEndDAO dao= sqlsession.getMapper(BackEndDAO.class);				
+		dao.back_updateMember(dto);
+	}
+	@Override
+	public void back_updateNote(NoteDTO dto) {
+		BackEndDAO dao= sqlsession.getMapper(BackEndDAO.class);	
+		dao.back_updateNote(dto);
+	}
+
+	@Override
+	public void back_updateNotice(NoticeDTO dto) {
+		BackEndDAO dao= sqlsession.getMapper(BackEndDAO.class);				
+		dao.back_updateNotice(dto);
+	}
+	@Override
+	public void back_updatePayment(PaymentDTO dto) {
+		BackEndDAO dao= sqlsession.getMapper(BackEndDAO.class);				
+		dao.back_updatePayment(dto);
+	}
+	@Override
+	public void back_updateQna(QnaDTO dto) {
+		BackEndDAO dao= sqlsession.getMapper(BackEndDAO.class);		
+		dao.back_updateQna(dto);
+	}
+	@Override
+	public void back_updateReview(ReviewDTO dto) {
+		BackEndDAO dao= sqlsession.getMapper(BackEndDAO.class);				
+		dao.back_updateReview(dto);
+	}
+	@Override
+	public void back_updateStudent(StudentDTO dto) {
+		BackEndDAO dao= sqlsession.getMapper(BackEndDAO.class);				
+		dao.back_updateStudent(dto);
+	}
+	@Override
+	public void back_updateT_i(T_introDTO dto) {
+		BackEndDAO dao= sqlsession.getMapper(BackEndDAO.class);	
+		dao.back_updateT_i(dto);
+	}
+	@Override
+	public void back_updateTnotice(TnoticeDTO dto) {
+		BackEndDAO dao= sqlsession.getMapper(BackEndDAO.class);
+		dao.back_updateTnotice(dto);
+	}
+
+
+	
 }

@@ -16,6 +16,7 @@ import com.leaf.model.service.QnaDTO;
 import com.leaf.model.stumgmt.StudentDTO;
 import com.leaf.model.teacher_intro.ReviewDTO;
 import com.leaf.model.teacher_intro.T_introDTO;
+import com.leaf.model.tnotice.TnoticeDTO;
 
 public interface BackEndDAO {
 	
@@ -34,6 +35,7 @@ public interface BackEndDAO {
 	public List<T_introDTO> back_t_i();
 	public List<StudentDTO> back_stu();
 	public List<JageokDTO> back_ja();
+	public List<TnoticeDTO> back_tnotice();
 	
 	public List<CurriDTO> back_searchCurri(Map<String, Object> map);
 	public List<LectDTO> back_searchLect(Map<String, Object> map);
@@ -48,8 +50,20 @@ public interface BackEndDAO {
 	public List<T_introDTO> back_searchT_i(Map<String, Object> map);
 	public List<StudentDTO> back_searchStu(Map<String, Object> map);
 	public List<JageokDTO> back_searchJa(Map<String, Object> map);
+	public List<TnoticeDTO> back_searchTnotice(Map<String, Object> map);
 	
 	public void back_updateCurri(CurriDTO dto);
-	public CurriDTO back_updateFormCurri(int curri_id);
-
+	public void back_updateBook(BookDTO dto);
+	public void back_updateFaq(FaqDTO dto);
+	public void back_updateJageok(JageokDTO dto);
+	public void back_updateLecture(LectDTO dto);
+	public void back_updateMember(MemberDTO dto);
+	public void back_updateNote(NoteDTO dto);
+	public void back_updateNotice(NoticeDTO dto);
+	public void back_updatePayment(PaymentDTO dto);
+	public void back_updateQna(QnaDTO dto);
+	public void back_updateReview(ReviewDTO dto);
+	public void back_updateStudent(StudentDTO dto);
+	public void back_updateT_i(T_introDTO dto);
+	public void back_updateTnotice(TnoticeDTO dto);
 }
