@@ -9,9 +9,9 @@
 
 <style type="text/css">
 #top_banner{
-	width: 100%;
-	background-color: #e5d235;
-	margin: auto;
+   width: 100%;
+   background-color: #e5d235;
+   margin: auto;
 }
 #book_list{
    width:800px;
@@ -21,8 +21,8 @@
    color: #000;
 }
 #book_list hr{
-	border: thin solid;
-	border-color: #cccccc;
+   border: thin solid;
+   border-color: #cccccc;
 }
 #booklistTable {
    width: 700px;
@@ -30,7 +30,7 @@
 }
 
 .bookline {
-	border-bottom: 1px solid;
+   border-bottom: 1px solid;
 } 
 #booktd {
    width: 300px;
@@ -38,9 +38,9 @@
    text-align: left;
 }
 #booktd a{
-	text-decoration: none;
-	font-weight: bold;
-	color:#000;
+   text-decoration: none;
+   font-weight: bold;
+   color:#000;
 }
 .btn {
         display: inline-block;
@@ -81,23 +81,23 @@ font-size: 1em; }
     width: 100px; }
 
 #search{
-	width: 800px;
-	text-align: right;
-	margin-top:20px;
-	margin-bottom: 20px;
+   width: 800px;
+   text-align: right;
+   margin-top:20px;
+   margin-bottom: 20px;
 }
 #search form{
-	font-size: 13px;
+   font-size: 13px;
 }
 
 #search form input{
-	font-size: 13px;
+   font-size: 13px;
 }
 #search_icon{
-	vertical-align: middle;
+   vertical-align: middle;
 }
 #page {
-	margin-top: 10px;
+   margin-top: 10px;
 }
 #page a{
     text-decoration: none;
@@ -107,83 +107,83 @@ font-size: 1em; }
     margin-right: 5px;
 }
 #booklistTable{
-	border-collapse: collapse;
-	border-spacing: 0px;
+   border-collapse: collapse;
+   border-spacing: 0px;
 }
 
 
 </style>
 <script type="text/javascript">
 function multiDelete(){
-	var t= document.getElementsByName("book_id");
-	var sum = new Array();
-	var j=0;
-	for (var i =0 ; i<t.length; i++){
-		if(t[i].checked){
-			sum[j] = t[i].value;
-			j=j+1;
-		}
-	}
-	window.location.href="book_multidelete.do?book_id="+sum;
+   var t= document.getElementsByName("book_id");
+   var sum = new Array();
+   var j=0;
+   for (var i =0 ; i<t.length; i++){
+      if(t[i].checked){
+         sum[j] = t[i].value;
+         j=j+1;
+      }
+   }
+   window.location.href="book_multidelete.do?book_id="+sum;
 }
 </script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script type="text/javascript" src="http://www.blueb.co.kr/data/201010/IJ12882511794405/jquery.tablesorter.js"></script> 
 <script type="text/javascript">
 $(document).ready(function(){
-	$("#booklistTable").tablesorter(); 
+   $("#booklistTable").tablesorter(); 
 }); 
 </script>
 </head>
 <body>
-   	<!-- top banner -->
-   	<div id="top_banner">
-   		<div id="banner">
-   		<img src="resources/ram/top_banner_book.png">
-   		</div>
-   	</div>
+      <!-- top banner -->
+      <div id="top_banner">
+         <div id="banner">
+         <img src="resources/ram/top_banner_book.png">
+         </div>
+      </div>
     <!-- top banner end -->
     <div id="book_list">
     <a href="book_list.do"><h1>도서</h1></a>
 <hr>
 <div id="search">
-	<form action="book_search.do" method="post">
+   <form action="book_search.do" method="post">
          검색어 입력 : <input size="30" type="search"  name="keyvalue" placeholder="제목, 저자 검색 가능합니다." list="booklist"> 
              <!-- <button type="submit" class="btn btn--sm btn--green">검색</button> -->
              <input type="image" src="resources/ram/search.png" id="search_icon">
     </form>
     </div>
     <c:if test="${sessionScope.sessionid=='관리자' or sessionScope.sessionid=='강사1'}">
-	    <div id="dnawlrdu">
-		    <a href="book_writeform.do"><button class="btn btn--sm btn--green">추가</button></a>
-		    <button id="multi" onclick="multiDelete()" class="btn btn--sm btn--green">다중삭제</button>
-	    </div>
-	<datalist  id="booklist">
-		<c:forEach items="${ list }" var="list">
-			<option value="${ list.book_title }"> ${ list.book_title } | ${ list.book_writer } | ${ list.book_cost }</option>
-		</c:forEach>
-	</datalist>
-	</c:if>
+       <div id="dnawlrdu">
+          <a href="book_writeform.do"><button class="btn btn--sm btn--green">추가</button></a>
+          <button id="multi" onclick="multiDelete()" class="btn btn--sm btn--green">다중삭제</button>
+       </div>
+   <datalist  id="booklist">
+      <c:forEach items="${ list }" var="list">
+         <option value="${ list.book_title }"> ${ list.book_title } | ${ list.book_writer } | ${ list.book_cost }</option>
+      </c:forEach>
+   </datalist>
+   </c:if>
    <table id="booklistTable">
       <c:forEach items="${ list }" var="list" varStatus="status">
-			<c:if test="${sessionScope.sessionid!='관리자'}">
-			<tr>
-				<td rowspan="4" class="bookline" style="width:100px"><a href="book_detail.do?book_id=${ list.book_id }">
-				<img src="resources/${list.book_image}" style="width: 100px; height: 120px"></a></td>
-			</tr>
-			<tr>
-				<td id="booktd">
-					<a href="book_detail.do?book_id=${ list.book_id }">${list.book_title }</a>
-				</td>
-				<td rowspan="4" style="width:80px"><input type="button" value="구매하기" class="btn btn--sm btn--green"></td>
-			</tr>
-			<tr>
-				<td id="booktd">저자(출판사) : ${list.book_writer}</td>
-			</tr>
-			<tr>
-				<td id="booktd" class="bookline">가격 : ${list.book_cost}</td>
-			</tr>
-			</c:if>
+         <c:if test="${sessionScope.sessionid!='관리자'}">
+         <tr>
+            <td rowspan="4" class="bookline" style="width:100px"><a href="book_detail.do?book_id=${ list.book_id }">
+            <img src="resources/${list.book_image}" style="width: 100px; height: 120px"></a></td>
+         </tr>
+         <tr>
+            <td id="booktd">
+               <a href="book_detail.do?book_id=${ list.book_id }">${list.book_title }</a>
+            </td>
+            <td rowspan="4" style="width:80px"><input type="button" value="구매하기" class="btn btn--sm btn--green" <%-- id="${list.book_title }" --%>></td>
+         </tr>
+         <tr>
+            <td id="booktd">저자(출판사) : ${list.book_writer}</td>
+         </tr>
+         <tr>
+            <td id="booktd" class="bookline">가격 : ${list.book_cost}</td>
+         </tr>
+         </c:if>
       </c:forEach>   
    </table>
    
@@ -191,7 +191,7 @@ $(document).ready(function(){
       <c:forEach items="${ list }" var="list" varStatus="status">
       <c:if test="${sessionScope.sessionid=='관리자'}">
          <tr>
-         	<td rowspan="4"><input id="multi" type="checkbox" style="width: 30px;" name="book_id" value="${ list.book_id }"></td>
+            <td rowspan="4"><input id="multi" type="checkbox" style="width: 30px;" name="book_id" value="${ list.book_id }"></td>
             <td rowspan="4" class="bookline"><a href="book_detail.do?book_id=${ list.book_id }">
             <img src="resources/${list.book_image}" style="width: 120px; height: 140px"></a></td>
          </tr>
@@ -229,7 +229,7 @@ $(document).ready(function(){
          <a class="strong" href="book_list.do?page=${startPage+i}">${startPage+i}</a>
       </c:if>
       <c:if test="${flag == 'search' }">
-      	 <a class="strong" href="book_search.do?page=${startPage+i}&keyvalue=${keyvalue}">${startPage+i}</a>
+          <a class="strong" href="book_search.do?page=${startPage+i}&keyvalue=${keyvalue}">${startPage+i}</a>
       </c:if>
       </c:if>      
    </c:forEach>
