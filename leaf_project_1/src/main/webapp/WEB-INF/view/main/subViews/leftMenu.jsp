@@ -120,7 +120,7 @@
 					<td colspan="2">MY CLASS</td>
 				</tr>
 				<tr>
-					<td id="lecture"><a href="#">강의하기</a>
+					<td id="lecture"><a href="listen.do">강의하기</a>
 					<div id="lecture_icon">></div></td>
 				</tr>
 				<tr>
@@ -128,16 +128,12 @@
 					<div id="grade_icon">></div></td>
 				</tr>
 				<tr>
-					<td id="attendance"><a href="getChkAttend.do">출결현황</a>
+					<td id="attendance"><a href="stuMgmtForm.do">학생관리</a>
 					<div id="attendance_icon">></div></td>
 				</tr>
 				<tr>
 					<td id="t_notice"><a href="tnotice_list.do">강사공지</a>
 					<div id="t_notice_icon">></div></td>
-				</tr>
-				<tr>
-					<td id="student_care"><a href="#">학생조회</a>
-					<div id="student_care_icon">></div></td>
 				</tr>
 			</table>
 		</div>
