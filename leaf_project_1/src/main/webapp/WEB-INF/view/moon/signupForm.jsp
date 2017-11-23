@@ -10,6 +10,10 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.14/jquery-ui.min.js"></script> 
 <script src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
 <script>
+$(function () {
+	$("#joincode").hide();
+});
+
     function checkMail() {
         var member_email = document.getElementById("member_email").value;
  
@@ -25,10 +29,9 @@
                // alert(JSON.parse(data).count);
                  if (JSON.parse(data).count == 1) {
                     alert("이미 가입한 메일 입니다.");
-                    $("#joincode").css("display", "none");
                 } else if(JSON.parse(data).count == 0){
                     sendMail(member_email);
-                    $("#joincode").css("display", "").slideDown('fast');
+                    $("#authentication").hide();
                 } 
             }
         };
@@ -37,15 +40,18 @@
         xhttp.send('member_email=' + member_email);
         return false;
     }
-	 
+    
     function sendMail(member_email) {
         var xhttp = new XMLHttpRequest();
        //var joinCode = document.getElementById("joinCode").value;
-        xhttp.onreadystatechange = function () {
+       var randomCode = document.getElementById("randomCode").value = parseInt(Math.random()*10000+"");
+        xhttp.onreadystatechange = function (data) {
             if (xhttp.readyState == 4) {
-                if (xhttp.status == 200)
+                if (xhttp.status == 200) {
                     alert("메일을 정상적으로 보냇습니다.");
-                else
+                    
+                    $("#joincode").show();
+                } else
                     alert("올바른 메일 형식이 아닙니다.");
                // $("#joincode").css("display", "none");
             }
@@ -53,15 +59,14 @@
         
         xhttp.open("POST", 'sendMail.do', true);
         xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
-        xhttp.send('member_email=' + member_email);
+        xhttp.send('member_email=' + member_email+'&randomCode=' + randomCode);
         return false;
     }
     
     function checkJoinCode(){
     	var form = document.memberchk;
-    	var joinCode = '${joinCode}';
-	alert(joinCode);
-	alert(form.inputCode.value); 
+    	var joinCode = document.getElementById("randomCode").value; 
+	/* alert(joinCode);*/
 	if(!form.inputCode.value){
 		alert("인증번호를 입력하세요");
 		return false;
@@ -71,6 +76,7 @@
 	}
 	if(form.inputCode.value == joinCode){
 		alert("인증 완료");
+		$("#confirmation").hide();
 	}
     }
 </script>
@@ -255,9 +261,15 @@ function checkfield(){
 	  var pw1 = f1.member_pwd.value;
 	  var pw2 = f1.pwd_check.value;
 	  var prmpw = $('#member_pwd').val();
+	  var form = document.memberchk;
+  	var joinCode = document.getElementById("randomCode").value;
 	  
 	if(pw1 != pw2){
 		alert("암호확인을 해주세요");
+		  return false;
+	}
+	if(randomCode != joinCode){
+		alert("메일 인증을 해주세요");
 		  return false;
 	}
 	document.memberchk.submit();
@@ -363,6 +375,7 @@ function insertChk(){
 <div id="signupform">
 <h1>회원가입</h1>
 <hr>
+<input type="hidden" id="randomCode"/>
 <sf:form method="post" action="signup.do" commandName="dto" name="memberchk" role="form">
 	<table id="signup_table">
 		<tr>
@@ -431,7 +444,7 @@ function insertChk(){
                                style="margin-right: 10px; width: 200px"
                                aria-describedby="emailHelp" placeholder="Enter email"/>
                                
-                        <input type="button" value="인증" class="btn btn-primary btn-sm"
+                        <input id="authentication" type="button" value="인증" class="btn btn-primary btn-sm"
                                onclick="checkMail()">
                                <sf:errors path="member_email" cssClass="error" />
                     </td>
@@ -441,7 +454,7 @@ function insertChk(){
                     <td>
                         <input type='number' name="inputCode" id="inputCode" class="form-control"
                                style="margin-right: 10px; width: 200px" placeholder="Enter code"/>
-                        <input type="button" value="확인" class="btn btn-primary btn-sm"
+                        <input id="confirmation" type="button" value="확인" class="btn btn-primary btn-sm"
                                onclick="checkJoinCode()">
                     </td>
                 </tr>

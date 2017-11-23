@@ -55,8 +55,7 @@ public class MemberController {
 	 
 	    @RequestMapping(value = "/sendMail.do", method = RequestMethod.POST, produces = "application/json")
 	    @ResponseBody
-	    private boolean sendMail(HttpSession session, @RequestParam String member_email, HttpServletRequest request, Model model) {
-	        int randomCode = new Random().nextInt(10000) + 1000;
+	    private boolean sendMail(HttpSession session, @RequestParam String member_email, @RequestParam String randomCode, HttpServletRequest request, Model model) throws IOException {
 	        String joinCode = String.valueOf(randomCode);
 	        session.setAttribute("joinCode", joinCode);
 	        model.addAttribute("joinCode", joinCode);
