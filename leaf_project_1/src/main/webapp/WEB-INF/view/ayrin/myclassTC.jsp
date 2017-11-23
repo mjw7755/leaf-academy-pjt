@@ -194,7 +194,8 @@ $(function() {
 </head>
 <body>
  <div id="tnoticeList">
-	<select>
+	<label style="float: left;">강의 선택 : </label>
+	<select style="width:200px; float:left;">
 		<c:forEach items="${history}" var="history">
 		<c:if test="${history.payment_pay_chk eq 1}">
 		<c:if test="${sessionScope.sessionid == history.payment_teacher_name}">
@@ -203,9 +204,10 @@ $(function() {
 		</c:if>
 		</c:forEach>
 	</select>
-	<button >쪽지</button>
-	<button onclick="window.location.href='listening.do'">강의하기</button><br>
+	<!-- <button >쪽지</button>
+	<button onclick="window.location.href='listening.do'">강의하기</button><br -->>
 	
+	<br>
 	<form action="tnotice_search.do" method="post">
          검색어 입력 : <input size="30" type="search"  name="keyvalue" placeholder="키워드 검색 가능합니다." list="tnoticelist"> 
              <button type="submit" class="btn btn--sm btn--green">검색</button>

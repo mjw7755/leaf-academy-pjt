@@ -152,7 +152,8 @@ function detail(ev) {
 </script>
 </head>
 <body>
-	<select>
+	<label style="float:left;">강의 선택 : </label>
+	<select style="width:200px; float:left;">
 		<c:forEach items="${history}" var="history">
 		<c:if test="${history.payment_pay_chk eq 1}">
 		<c:if test="${sessionScope.sessionid == history.payment_member_id}">
@@ -161,10 +162,10 @@ function detail(ev) {
 		</c:if>
 		</c:forEach>
 	</select>
-	<button >쪽지</button>
-	<button onclick="window.location.href='listening.do'">강의하기</button><br>
+	<!-- <button >쪽지</button>
+	<button onclick="window.location.href='listening.do'">강의하기</button><br> -->
 
-	<div id="tnoticeDIV">
+	<br><div id="tnoticeDIV">
 		<table>
 		<c:forEach items="${list}" var="list">
 			<tr>

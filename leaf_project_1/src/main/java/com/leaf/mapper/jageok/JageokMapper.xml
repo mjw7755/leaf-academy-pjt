@@ -8,7 +8,7 @@
 	<select id="getJageokList" parameterType="integer" resultType="com.leaf.model.jageok.JageokDTO">
 	select * from 
 		(select rownum num, j.*from 
-			(select * from jageok order by jageok_id desc) j)
+			(select * from jageok where enabled=1 order by jageok_id desc) j)
 				where num between ((#{page}-1)*5) +1 and (#{page}*5)
 	</select>
 	
