@@ -27,4 +27,8 @@
 	<select id="selectMemberTel" parameterType="Integer" resultType="String">
 		select member_tel from member where member_id = (select payment_member_id from payment where payment_id = #{itemnumber})
 	</select>
+	
+	<select id="allPayment" resultType="com.leaf.model.payment.PaymentDTO">
+		select * from payment
+	</select>
 </mapper>

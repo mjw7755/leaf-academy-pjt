@@ -1,6 +1,6 @@
 package com.leaf.model.payment;
 
-import java.util.Map;
+import java.util.List;
 
 public interface PaymentDAO {
 	
@@ -10,4 +10,5 @@ public interface PaymentDAO {
 	public String selectEmailAddress(int payment_id);
 	public void updatePayChk(int paychkInt);
 	public String selectMemberTel(int itemnumber);
+	public List<PaymentDTO> allPayment();
 }
