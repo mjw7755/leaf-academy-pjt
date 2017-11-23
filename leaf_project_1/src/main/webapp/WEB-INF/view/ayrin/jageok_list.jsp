@@ -58,7 +58,7 @@
     font-weight: bold;
     line-height: 1.5;
     letter-spacing: 1px;
-    padding: .5em 1.5em .75em;
+    padding: .5em 1.5em .5em;
     position: relative;
     text-decoration: none;
     /* text-shadow: 0 1px 1px #c4c4c4; */
@@ -107,7 +107,9 @@ font-size: 0.5em; }
 }
 #jageok_name a{
 	text-decoration: none;
-	color: #535252;
+	color:#21307a;
+	font-weight: bold;
+	padding-left: 30px;
 }
 #center{
 	text-align: center;
@@ -140,13 +142,13 @@ font-size: 0.5em; }
 }
 .btn2 {
 	display: inline-block;
-	padding: 6px 12px;
+	padding: 1px 12px;
 	margin-bottom: 12px;
 	margin-top:12px;
 	margin-left:5px;
 	font-size: 14px;
 	font-weight: 400;
-	line-height: 1.42857143;
+	/* line-height: 1.42857143; */
 	text-align: center;
 	white-space: nowrap;
 	vertical-align: middle;

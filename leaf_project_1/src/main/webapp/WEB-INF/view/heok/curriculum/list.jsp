@@ -110,14 +110,17 @@
     float: left;
 }
 thead th{
-	width:100px;
-	border-top:1px solid;
-	border-bottom: 1px solid;
-	padding-top: 15px;
-	padding-bottom: 15px;
-	background-color: #f4f3f1;
+    width: 100px;
+    /* border-top: 1px solid; */
+    border-bottom: 1px solid #cccccc;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #f4f3f1;
 }
-
+tbody td{
+	border-bottom: 1px solid #cccccc;
+	height: 50px;
+}
 #content_table{
 	margin-bottom: 20px;
 	border-collapse: collapse;
@@ -137,7 +140,8 @@ thead th{
 }
 #search_table a, #content_table a{
 	text-decoration: none;
-	color:#000;
+	color:#21307a;
+	font-weight: bold;
 }
 /*  */
 .btn {

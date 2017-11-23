@@ -13,13 +13,48 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>detail</title>
 <style type="text/css">
+#top_banner{
+	width: 100%;
+	background-color: #e5d235;
+	margin: auto;
+}
+
 #qnadetailTable {
    width: 800px;
+   border-collapse: collapse;
+   margin-top: 20px;
+   margin-bottom: 20px;
 }
-#qnadetailTable td {
-   border: 1px solid;
-   border-radius: 4px;
+#qnadetailTable th{
+	border-bottom: 2px solid #cccccc;
+	border-top:2px solid #cccccc;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	background-color: #f4f3f1;
 }
+#qnadetailTable td{
+	padding-left: 15px;
+	border-left: 2px solid #cccccc;
+	border-right: 2px solid #cccccc;
+	border-bottom: 2px solid #cccccc;
+}
+#title{
+	border-left: 2px solid #cccccc;
+	text-align: left;
+	padding-left: 20px;
+}
+#writer{
+	text-align: right;
+	width: 100px;
+}
+#writer2{
+	border-right: 2px solid #cccccc;
+	width: 100px;
+}
+#write_d,#update_d{
+	height: 50px;
+}
+/*  */
 #whqrp {
 	width: 180px;
 }
@@ -58,40 +93,41 @@ outline: none; }
 .btn--green {
 font-size: 1em; }
 .btn--sm {
-font-size: 0.5em; }
+font-size: 0.7em; }
+/*  */
+#submit{
+	width: 100%;
+}
 </style>
 </head>
 <body>
-<br><br><br><br>
+ 	<!-- top banner -->
+   	<div id="top_banner">
+   		<div id="banner">
+   		<img src="resources/ram/top_banner_notice.png">
+   		</div>
+   	</div>
+    <!-- top banner end -->
+    
 	<table id="qnadetailTable">
 		<tr>
-			<td id="whqrp">글번호</td>
-			<td>${dto.qna_id}</td>
+			<th id="title">${dto.qna_title}</th>
+			<th id="writer">작성자</th>
+			<th id="writer2">${dto.member_id}</th>
 		</tr>
 		<tr>
-			<td>작성자</td>
-			<td>${dto.member_id}</td>
-		</tr>
-		<tr>
-			<td>제목</td>
-			<td>${dto.qna_title}</td>
-		</tr>
-		<tr>
-			<td>내용</td>
-			<td style="height:200px">${fn:replace(dto.qna_content,crlf,'</br>')}</td>
+			<td colspan="3" style="height:200px" id="content">${fn:replace(dto.qna_content,crlf,'</br>')}</td>
 		</tr>		
 		<tr>
-			<td>작성일</td>
-			<td>${dto.qna_writedate}</td>
+			<td id="write_d" colspan="3">작성일 | ${dto.qna_writedate}</td>
 		</tr>
 		<c:if test="${dto.qna_modifydate!=null}">
 		<tr>
-			<td>작성수정날</td>
-			<td>${dto.qna_modifydate}</td>
+			<td id="update_d" colspan="3">수정일 | ${dto.qna_modifydate}</td>
 		</tr>
 		</c:if>
-		<tr>
-			<td colspan="2" align="center">
+	</table>
+	<div id="submit">
 			<c:if test="${sessionScope.sessionid == dto.member_id or sessionScope.sessionid == '관리자'}">
 				<input type="button" value="수정하기" onClick="location.href='qna_updateform.do?qna_id=${ dto.qna_id }'" class="btn btn--sm btn--green"> 
 				<input type="button" value="삭제하기" onClick="location.href='qna_delete.do?qna_id=${ dto.qna_id }'" class="btn btn--sm btn--green"> 
@@ -100,9 +136,6 @@ font-size: 0.5em; }
 				<c:if test="${sessionScope.sessionid != null}">
 				<input type="button" value="답글" onClick="location.href='reply.do?qna_id=${ dto.qna_id }'" class="btn btn--sm btn--green">
 				</c:if>
-			</td>
-		</tr>
-	</table>
-<br><br><br><br>
+	</div>			
 </body>
 </html>

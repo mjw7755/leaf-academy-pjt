@@ -23,11 +23,16 @@
 	border-color: #cccccc;
 }
 #lecture_table th{
-	border-top:1px solid;
-	border-bottom: 1px solid;
+	border-bottom: 1px solid #cccccc;
 	padding-top: 15px;
 	padding-bottom: 15px;
 	background-color: #f4f3f1;
+}
+#lecture_table td{
+	border-bottom: 1px solid #cccccc;
+    height: 50px;
+    font-size: 13px;
+    font-weight: bold;
 }
 #lecture_table{
 	border-collapse: collapse;
@@ -139,6 +144,7 @@ font-size: 0.6em; }
 #search_icon{
 	vertical-align: middle;
 }
+
 </style>
 </head>
 <script type="text/javascript">
@@ -224,14 +230,14 @@ font-size: 0.6em; }
 
 		<table cellpadding="5" style="text-align: center;" id="lecture_table">
 			<tr>
-				<th colspan="2">날짜</th>
+				<th>날짜</th>
 				<th>강좌명</th>
 				<th>클래스명</th>
 				<th>수강인원</th>
 				<th>강사명</th>
 				<th>레벨</th>
 				<th>수강료</th>
-				<th colspan="2">수강시간</th>
+				<th>수강시간</th>
 				<th>수강신청</th>
 				<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1' }">
 					<th>삭제여부</th>
@@ -240,14 +246,14 @@ font-size: 0.6em; }
 			</tr>
 			<c:forEach items="${list }" var="list" varStatus="status">
 				<tr onclick="test(this)">
-					<td colspan="2">${list.lect_start_day}~ ${list.lect_end_day }</td>
+					<td>${list.lect_start_day}~ ${list.lect_end_day }</td>
 					<td>${list.curri_subject}</td>
 					<td>${list.lect_name}</td>
 					<td>${list.lect_person_num}</td>
 					<td>${list.member_id }</td>
 					<td>${list.curri_level }</td>
 					<td>${list.lect_charge }</td>
-					<td colspan="2">${list.lect_start_time}~${list.lect_end_time }</td>
+					<td>${list.lect_start_time} <br>~${list.lect_end_time }</td>
 
 					<td><a
 						href="listform_appli.do?lect_id=${list.lect_id}&curri_id=${list.curri_id}">
