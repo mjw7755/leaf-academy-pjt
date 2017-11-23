@@ -94,7 +94,7 @@
 				<td colspan="2">MY CLASS</td>
 			</tr>
 			<tr>
-				<td id="lecture"><a href="#">°­ÀÇµè±â</a>
+				<td id="lecture"><a href="listen.do">°­ÀÇµè±â</a>
 				<div id="lecture_icon">></div></td>
 			</tr>
 			<tr>

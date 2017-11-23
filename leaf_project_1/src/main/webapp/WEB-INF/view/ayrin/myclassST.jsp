@@ -153,9 +153,13 @@ function detail(ev) {
 </head>
 <body>
 	<select>
-		<option value="class1" selected="selected">JAVA 기초 (상)</option>
-		<option value="class2">JAVA 기초 (중)</option>
-		<option value="class3">JAVA 기초 (하)</option>
+		<c:forEach items="${history}" var="history">
+		<c:if test="${history.payment_pay_chk eq 1}">
+		<c:if test="${sessionScope.sessionid == history.payment_member_id}">
+			<option value="class1">${history.payment_lect_subject }</option>
+		</c:if>
+		</c:if>
+		</c:forEach>
 	</select>
 	<button >쪽지</button>
 	<button onclick="window.location.href='listening.do'">강의하기</button><br>
