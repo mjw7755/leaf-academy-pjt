@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,15 +30,20 @@ body{
 	
 		<tr height="10%">
 			<!-- header 영역 -->
-				<td><tiles:insertAttribute name="header" /></td>
-			
+				<td><tiles:insertAttribute name="header" /></td>			
 		</tr>
 		
 		<tr height="80%" align="center">
 			<!-- content 영역 -->
 			<div class="container-div">
-				<td><tiles:insertAttribute name="content" /></td>
+				<td>
+					<tiles:insertAttribute name="aside"/>
+					<tiles:insertAttribute name="content" />
+				</td>
 			</div>
+			<!-- <div>
+				<td width="30%" align="left"></td>
+			</div> -->
 		</tr>
 		
 		<tr height="10%">

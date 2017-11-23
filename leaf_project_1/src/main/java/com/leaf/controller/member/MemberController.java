@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -284,60 +283,69 @@ public class MemberController {
 		HttpSession session = request.getSession();
 		session.getAttribute("sessionid");
 		String member_id = (String) request.getSession().getAttribute("sessionid");
-		MemberDTO dto = memberdao.getMemberById(member_id);
-		mav.addObject("dto", dto);
-		if(Integer.parseInt(dto.getMember_level()) == 1) {
-			String strPage = request.getParameter("page");
-			int page;
-			if (strPage == null) {
-				page = 1;
-			} else {
-				page = Integer.parseInt(request.getParameter("page"));
-			}
-			List<TnoticeDTO> list = tnoticedao.getTnoticeList(page);
-			int count = tnoticedao.getCount();
-			int countPage = (int) Math.ceil((float) count / 5);
-			int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
-			model.addAttribute("count", count);
-			model.addAttribute("countPage", countPage);
-			model.addAttribute("startPage", startPage);
-			for(int i=0; i<list.size(); i++) {
-				list.get(i).setTnotice_content(list.get(i).getTnotice_content().replaceAll("\"", "'").replaceAll("\r\n", "<br>"));
-			}
-			model.addAttribute("list", list);
-			return "ayrin.myclassST";
+		if(member_id==null) {
+			return "ayrin.member_loginform";
 		} else {
-			String strPage = request.getParameter("page");
-			int page;
-			if (strPage == null) {
-				page = 1;
+			MemberDTO dto = memberdao.getMemberById(member_id);
+			mav.addObject("dto", dto);
+			if(Integer.parseInt(dto.getMember_level()) == 1) {
+				/*String strPage = request.getParameter("page");
+				int page;
+				if (strPage == null) {
+					page = 1;
+				} else {
+					page = Integer.parseInt(request.getParameter("page"));
+				}
+				List<TnoticeDTO> list = tnoticedao.getTnoticeList(page);
+				int count = tnoticedao.getCount();
+				int countPage = (int) Math.ceil((float) count / 5);
+				int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
+				model.addAttribute("count", count);
+				model.addAttribute("countPage", countPage);
+				model.addAttribute("startPage", startPage);
+				for(int i=0; i<list.size(); i++) {
+					list.get(i).setTnotice_content(list.get(i).getTnotice_content().replaceAll("\"", "'").replaceAll("\r\n", "<br>"));
+				}*/
+				int chk = 1;
+				model.addAttribute("myclass", chk);
+				//model.addAttribute("list", list);
+				return "ayrin.myclassST";
 			} else {
-				page = Integer.parseInt(request.getParameter("page"));
+				/*String strPage = request.getParameter("page");
+				int page;
+				if (strPage == null) {
+					page = 1;
+				} else {
+					page = Integer.parseInt(request.getParameter("page"));
+				}
+				List<TnoticeDTO> list = tnoticedao.getTnoticeList(page);
+				int count = tnoticedao.getCount();
+				int countPage = (int) Math.ceil((float) count / 5);
+				int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
+				model.addAttribute("count", count);
+				model.addAttribute("countPage", countPage);
+				model.addAttribute("startPage", startPage);
+				for(int i=0; i<list.size(); i++) {
+					list.get(i).setTnotice_content(list.get(i).getTnotice_content().replaceAll("\"", "'").replaceAll("\r\n", "<br>"));
+				}*/
+				int chk = 2;
+				model.addAttribute("myclass", chk);
+				//model.addAttribute("list", list);
+				return "ayrin.myclassTC";
 			}
-			List<TnoticeDTO> list = tnoticedao.getTnoticeList(page);
-			int count = tnoticedao.getCount();
-			int countPage = (int) Math.ceil((float) count / 5);
-			int startPage = (int) ((Math.ceil((float) page / 5) - 1) * 5) + 1;
-			model.addAttribute("count", count);
-			model.addAttribute("countPage", countPage);
-			model.addAttribute("startPage", startPage);
-			for(int i=0; i<list.size(); i++) {
-				list.get(i).setTnotice_content(list.get(i).getTnotice_content().replaceAll("\"", "'").replaceAll("\r\n", "<br>"));
-			}
-			model.addAttribute("list", list);
-			return "ayrin.myclassTC";
 		}
-		
 	}
 
 	@RequestMapping("/mypage.do")
-	public ModelAndView mypage(MemberDTO dto, HttpServletRequest request) {
+	public ModelAndView mypage(MemberDTO dto, Model model, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		String member_id = (String) request.getSession().getAttribute("sessionid");
 		if(member_id==null) {
 			mav.setViewName("ayrin.member_loginform");
 		} else {
 			dto = memberdao.getMemberById(member_id);
+			String chk = "OK";
+			model.addAttribute("mypage", chk);
 			mav.addObject("dto", dto);
 			mav.setViewName("ayrin.mypage");
 		}
@@ -354,7 +362,6 @@ public class MemberController {
 	@RequestMapping(value = "/signup.do", method = RequestMethod.POST)
 	public String signup(@Validated(ValidGroupOrder.class) @ModelAttribute("dto") @Valid MemberDTO memberdto,
 			BindingResult bindingResult) {
-
 		// 유효성 검사
 		if (bindingResult.hasErrors()) { // 검증에 실패한 빈은 BindingResult에 담겨 뷰에 전달된다.
 			return "moon.signupForm";
@@ -362,7 +369,6 @@ public class MemberController {
 			memberdao.insertMember(memberdto);
 			return "main.mainPage";
 		}
-
 		// return "main.mainPage";
 	}
 

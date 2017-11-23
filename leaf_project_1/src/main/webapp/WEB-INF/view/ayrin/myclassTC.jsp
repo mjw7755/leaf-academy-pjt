@@ -96,6 +96,7 @@ $(function() {
 	$("#student_care_icon").hide();
 	
 	$("#tnoticeList").hide();
+	
 	$("#lecture").hover(function() {
 	   $("#lecture_icon").show()
 	}, function() {
@@ -133,26 +134,43 @@ $(function() {
 	});
 	$("#t_notice").click(function() {
 		alert("람아~ 꾸며죠~");
+		$("#tnoticeList").show();
 	});
 	$("#studentcare").click(function() {
-/* 		$("#student_list").hide();
-		$("#member_history").hide(); */
-		$("#student_list").show();
+		alert("연결해야함");
 	});
 });
 </script>
+<script type="text/javascript">
+/* function tnoticeDetail(ev){
+    var sessionid = "${sessionScope.sessionid}";
+    var tnotice_id = ev.target.id;
+    $.ajax({
+          url:"tnotice_detail.do?tnotice_id="+tnotice,
+          dataType:"json",
+          success:function(msg){
+             var data = JSON.parse(msg.dto);
+             $("#tnoticeList").hide();
+             $("#detailDIV").remove();
+                   
+              var strTag = "<table id=\"tnoticedetailTable\">"
+              			+"<tr> <td id=\"title\">제목 : </td> <td>${dto.tnotice_title}</td> </tr>"
+              			+"<tr> <td id=\"title\" colspan=\"2\">내용 : </td></tr>"
+          				+"<tr> <td colspan=\"2\" id=\"content\">${dto.tnotice_content}</td></tr>"
+          				+"</table>"
+          				+"<a href=\"tnotice_list.do\"><button class=\"btn btn--sm btn--green\">목록으로</button></a>";
+          				//+"<a href="tnotice_updateform.do?tnotice_id=${ dto.tnotice_id }"><button class="btn btn--sm btn--green">수정하기</button></a>"
+          				//+"<a href="tnotice_list.do"><button class="btn btn--sm btn--green">목록</button></a>"
+          	
+          	
+              $("#detail").append(strTag);
+          }
+       });
+    } */
+</script>
 </head>
 <body>
-<div id="my_class">
-<table id="menu">
-      <tr id="my_page_text"><td colspan="2">MY CLASS</td></tr>
-      <tr><td id="lecture"><a href="#">강의하기</a><div id="lecture_icon">></div></td></tr>
-	  <tr><td id="grade"><a href="#">성적조회</a><div id="grade_icon">></div></td></tr>
-	  <tr><td id="attendance"><a href="getChkAttend.do">출결현황</a><div id="attendance_icon">></div></td></tr>
-	  <tr><td id="t_notice"><a href="tnotice_list.do">강사공지</a><div id="t_notice_icon">></div></td></tr>
-      <tr><td id="student_care"><a href="#" >학생조회</a><div id="student_care_icon">></div></td></tr>
-</table>
-</div>   
+ 
 	<!-- <select>
 		<option value="class1" selected="selected">JAVA 기초 (상)</option>
 		<option value="class2">JAVA 기초 (중)</option>
@@ -161,8 +179,85 @@ $(function() {
 	<button >쪽지</button>
 	<button onclick="window.location.href='listening.do'">강의하기</button><br> -->
 	
-	<div id="tnoticeList">asdf</div>
-
+	<div id="tnoticeList">
+		<form action="tnotice_search.do" method="post">
+		검색어 입력 : <input size="30" type="search"  name="keyvalue" placeholder="키워드 검색 가능합니다." list="tnoticelist"> 
+					<button type="submit" class="btn btn--sm btn--green">검색</button>
+		</form>
+	  
+		<datalist id="tnoticelist">
+			<c:forEach items="${ list }" var="list">
+			<option value="${ list.tnotice_title }"> ${ list.tnotice_title } </option>
+			</c:forEach>
+		</datalist>
+		<br><hr><br>
+	  	<table id="tnoticelistTable">
+			<tr>
+				<th>글번호</th>
+		        <th>제목</th>
+		        <th colspan="2"><a href="tnotice_writeform.do"><button class="btn btn--sm btn--green">추가</button></a></th>
+			</tr>
+			<c:forEach items="${ list }" var="list" varStatus="status">
+			<tr>
+				<td>${list.tnotice_id}</td>
+				<td>
+					<a href="tnotice_detail.do?tnotice_id=${ list.tnotice_id }">${list.tnotice_title }</a>
+					<%-- <a href="#" onclick="tnotice_detail(event)">${list.tnotice_title}</a> --%>
+				</td>
+				<td>
+					<a href="tnotice_updateform.do?tnotice_id=${list.tnotice_id}">
+					<!-- <a href="#" onclick="tnotice_update(event)"> -->
+					<button class="btn btn--sm btn--green">수정</button> </a>
+				</td>
+				<td>
+					<a href="tnotice_delete.do?tnotice_id=${list.tnotice_id}">
+					<!-- <a href="#" onclick="tnotice_delete(event)"> -->
+					<button id="delete" class="btn btn--sm btn--green">삭제</button> </a>
+				</td>
+			</tr>
+			</c:forEach>
+		</table>
+		<br><br>
+		<div align="center">
+			<c:if test="${param.page>5}">
+				<c:if test="${flag == 'list'}">
+				<a class="button btn-prev" href="tnotice_list.do?page=${startPage-1}">이전</a>
+				</c:if>
+				<c:if test="${flag == 'search'}">
+				<a class="button btn-prev" href="tnotice_search.do?page=${startPage-1}&keyvalue=${keyvalue}">이전</a>
+				</c:if>
+			</c:if>
+	
+			<c:forEach var="i" begin="0" end="4" varStatus="status">
+				<c:if test="${countPage>=startPage+i}">
+					<c:if test="${flag == 'list'}">
+					<a class="strong" href="tnotice_list.do?page=${startPage+i}">${startPage+i}</a>
+					</c:if>
+					<c:if test="${flag == 'search'}">
+					<a class="strong" href="tnotice_search.do?page=${startPage+i}&keyvalue=${keyvalue}">${startPage+i}</a>
+					</c:if>
+				</c:if>
+			</c:forEach>
+	
+			<c:if test="${countPage>=startPage+5}">
+				<c:if test="${flag == 'list'}">
+				<a class="strong" href="tnotice_list.do?page=${startPage+5}">다음</a>
+				</c:if>
+				<c:if test="${flag == 'search'}">
+				<a class="strong" href="tnotice_search.do?page=${startPage+5}&keyvalue=${keyvalue}">다음</a>
+				</c:if>
+			</c:if>
+		</div>
+	</div> 
+	
+	
+<!-- 	<div id="detail"></div>
+	
+	<div id="write"></div>
+	
+	<div id="update"></div> -->
+	
+	
 	
 <%-- 	<div style="width:1000px; margin:0 auto;">
 		<table>
