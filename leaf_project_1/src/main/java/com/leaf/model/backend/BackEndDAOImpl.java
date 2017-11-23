@@ -207,4 +207,18 @@ public class BackEndDAOImpl implements BackEndDAO {
 		return dao.back_searchJa(map);
 	}
 
+
+	@Override
+	public void back_updateCurri(CurriDTO dto) {
+		BackEndDAO dao= sqlsession.getMapper(BackEndDAO.class);
+		dao.back_updateCurri(dto);
+	}
+
+
+	@Override
+	public CurriDTO back_updateFormCurri(int curri_id) {
+		BackEndDAO dao= sqlsession.getMapper(BackEndDAO.class);
+		return dao.back_updateFormCurri(curri_id);
+	}
+
 }

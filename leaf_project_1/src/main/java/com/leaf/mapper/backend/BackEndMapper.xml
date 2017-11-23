@@ -9,6 +9,10 @@
 		select*from curriculum
 
 	</select>
+	<select id="back_curri_from_int" parameterType="int" resultType="com.leaf.model.curriculum.CurriDTO">
+		select * from curriculum where curri_id = #{curri_id}
+	</select>
+	
 	<select id="back_lect"  resultType="com.leaf.model.curriculum.LectDTO">
 		select*from lecture
 	</select>
@@ -99,4 +103,14 @@
 		resultType="com.leaf.model.jageok.JageokDTO">
       select *from jageok where ${column} like '%' || #{keyvalue} || '%' 
 	</select>
+	
+	
+	<update id="back_updateCurri" parameterType="com.leaf.model.curriculum.CurriDTO">
+		update curriculum set curri_id=#{curri_id},member_id=#{member_id},
+		curri_level=#{curri_level}, curri_subject=#{curri_subject}, 
+		curri_content=#{curri_content}, curri_write_time=#{curri_write_time}, 
+		curri_modify_time=#{curri_modify_time}, curri_accept=#{curri_accept}, 
+		enabled=#{enabled} where curri_id=#{curri_id}
+	</update>
+	
 </mapper>

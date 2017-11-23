@@ -1,14 +1,18 @@
 package com.leaf.controller.backend;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -47,13 +51,30 @@ public class BackEndController {
 		ModelAndView mav = new ModelAndView();
 		
 		List<CurriDTO> clist=backendDAO.back_curri();
-		System.out.println("dddddd"+clist);
+		
 
 		model.addAttribute("clist", clist);
 		mav.setViewName("backend.list_backend_curri");
 		return mav;
 	
 	}
+	
+	@RequestMapping("update_by_display.do")
+	public void update_by_display(HttpServletRequest request, 
+			HttpServletResponse response , CurriDTO dto) throws Exception{
+		System.out.println("fnffn");
+		
+		
+		backendDAO.back_updateCurri(dto);
+		
+		System.out.println("getCurri_id: " + dto.getCurri_id());
+		System.out.println("ÇÑ¹øº¾½Ã´Ù :" +dto.getMember_id() + "," + dto.getCurri_subject() + ", " + dto.getCurri_write_time());
+		
+		response.getWriter().write("0");
+		
+	}
+	
+	
 	
 	@RequestMapping("/search_backend_curri.do")
 	public String back_searchCurri(Model model, HttpServletRequest request) throws Exception{
@@ -496,4 +517,5 @@ public class BackEndController {
 		      model.addAttribute("flag",flag);
 		      return "backend.list_backend_ja";
 		   }
+	
 }
