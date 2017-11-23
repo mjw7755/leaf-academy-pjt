@@ -9,11 +9,12 @@
 <body>
 <form action="update_lect.do" >
 		<table style="text-align: center;">
+				<input type="hidden" name="lect_id" value="${dto.lect_id}">
 				<tr>
 					<td>강좌명</td>
 					<td>:</td>
-					<td><input type="text" name="lect_id" required="required"
-						value ="${dto.lect_id}">
+					<td><input type="text" name="lect_name" required="required"
+						value ="${dto.lect_name}">
 					</td>
 				</tr>
 
