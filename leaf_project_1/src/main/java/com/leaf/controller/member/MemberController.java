@@ -289,7 +289,7 @@ public class MemberController {
 			MemberDTO dto = memberdao.getMemberById(member_id);
 			mav.addObject("dto", dto);
 			if(Integer.parseInt(dto.getMember_level()) == 1) {
-				/*String strPage = request.getParameter("page");
+				String strPage = request.getParameter("page");
 				int page;
 				if (strPage == null) {
 					page = 1;
@@ -305,13 +305,13 @@ public class MemberController {
 				model.addAttribute("startPage", startPage);
 				for(int i=0; i<list.size(); i++) {
 					list.get(i).setTnotice_content(list.get(i).getTnotice_content().replaceAll("\"", "'").replaceAll("\r\n", "<br>"));
-				}*/
+				}
 				int chk = 1;
 				model.addAttribute("myclass", chk);
-				//model.addAttribute("list", list);
+				model.addAttribute("list", list);
 				return "ayrin.myclassST";
 			} else {
-				/*String strPage = request.getParameter("page");
+				String strPage = request.getParameter("page");
 				int page;
 				if (strPage == null) {
 					page = 1;
@@ -327,10 +327,10 @@ public class MemberController {
 				model.addAttribute("startPage", startPage);
 				for(int i=0; i<list.size(); i++) {
 					list.get(i).setTnotice_content(list.get(i).getTnotice_content().replaceAll("\"", "'").replaceAll("\r\n", "<br>"));
-				}*/
+				}
 				int chk = 2;
 				model.addAttribute("myclass", chk);
-				//model.addAttribute("list", list);
+				model.addAttribute("list", list);
 				return "ayrin.myclassTC";
 			}
 		}
