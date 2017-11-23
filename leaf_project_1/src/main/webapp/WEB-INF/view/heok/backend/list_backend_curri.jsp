@@ -16,40 +16,6 @@
 		var url = "list_backend_" + params.value + ".do";
 		window.location.href = url;
 	}
-
-	function show(str){
-		   
-		   var curri_id = str;
-		  alert(curri_id);
-		  
-		   $.ajax({
-	            type:'POST',
-	            url:'select_curri_byModal.do',
-	            data:{
-	            	curri_id: curri_id,
-	            
-	            },
-	            success: function(result){
-	            	alert("들어옴");
-	               if(result == '0'){
-	            	   alert("result == 0");
-	            	
-	            	   $('#curri_label').css("display","none");
-	            	   $('#curri_input').css("display","block");
-	            	  
-	                 /*  location.reload();  */
-	               }
-	            }
-	         });
-		   /* var sss = ${member_id}; 
-		   alert(sss); */
-		   /*  $("#modal_number").val(manager_number);
-		    $("#modal_name").val(manager_name);
-		    $("#modal_mmr").val(manager_mmr);
-		    $("#modal_group").val(manager_group);
-		    $("#vacationModal").modal('show'); */
-		}
-	 	
 	
 	function show1(str) {
 		
@@ -83,7 +49,7 @@ function show_update(str) {
 
 		$.ajax({
             type:'POST',
-            url:'update_by_display.do',
+            url:'update_by_display_curri.do',
             data:{
             	curri_id: s,
             	member_id: member_id,
@@ -99,9 +65,12 @@ function show_update(str) {
             success: function(result){
                if(result == '0'){
             	 
+            	$('.la_'+s).css("display", "block");
+               	$('.in_'+s).css("display", "none");
+              		
             	$('#btn_update_by_display_yet_'+ s).css("display", "block");
            		$('#btn_update_by_display_now_' + s).css("display", "none");
-            	  
+           		window.location.href='list_backend_curri.do';
                }
             }
          });

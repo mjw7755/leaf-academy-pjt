@@ -59,16 +59,11 @@ public class BackEndController {
 	
 	}
 	
-	@RequestMapping("update_by_display.do")
-	public void update_by_display(HttpServletRequest request, 
+	@RequestMapping("update_by_display_curri.do")
+	public void update_by_display_curri(HttpServletRequest request, 
 			HttpServletResponse response , CurriDTO dto) throws Exception{
-		System.out.println("fnffn");
-		
 		
 		backendDAO.back_updateCurri(dto);
-		
-		System.out.println("getCurri_id: " + dto.getCurri_id());
-		System.out.println("ÇÑ¹øº¾½Ã´Ù :" +dto.getMember_id() + "," + dto.getCurri_subject() + ", " + dto.getCurri_write_time());
 		
 		response.getWriter().write("0");
 		
