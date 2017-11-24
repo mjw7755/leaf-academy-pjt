@@ -60,6 +60,9 @@ div {
 		</dl>
 	
 	</div>
+	<a href="listform_appli.do?lect_id=${list.lect_id}&curri_id=${list.curri_id}">
+							<button id="application" class="btn2 btn-info">수강신청</button>
+					</a>
 	<hr>
 	<div>
 	<input type="button" value="목록"
