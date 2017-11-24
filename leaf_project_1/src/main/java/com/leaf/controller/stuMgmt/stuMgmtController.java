@@ -89,9 +89,10 @@ public class stuMgmtController {
 		ModelAndView mav = new ModelAndView();
 		String member_id = (String) request.getSession().getAttribute("sessionid");
 		
-		List<MemberDTO> list = stumgmtDAO.getStudents(member_id);
+		List<LectDTO> lect_list = stumgmtDAO.getMyLect(member_id);
+		/*List<MemberDTO> list = stumgmtDAO.getStudents(member_id);
 		
-		mav.addObject("list",list);
+		mav.addObject("list",list);*/
 		mav.setViewName("moon.stuMgmt");
 		return mav;
 	}
@@ -100,7 +101,7 @@ public class stuMgmtController {
 	public ModelAndView stuExcel(HttpServletRequest request,HttpServletResponse response) throws ParseException, UnsupportedEncodingException {
 		ModelAndView mav = new ModelAndView();
 		String sessionid = (String) request.getSession().getAttribute("sessionid");
-		List<MemberDTO> memberlist = stumgmtDAO.getStudents(sessionid);
+		/*List<MemberDTO> memberlist = stumgmtDAO.getStudents(sessionid);*/
 		String student_id = request.getParameter("student_id");
 		String chk_str = request.getParameter("chk_str");
 		int lect_id = lectDAO.getLectId(sessionid);
@@ -232,6 +233,8 @@ public class stuMgmtController {
 		List<String> lect_name_list = new ArrayList<String>();
 		List<String> excel_name_list = new ArrayList<String>();
 		
+		
+		
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
 		
@@ -276,10 +279,13 @@ public class stuMgmtController {
 			
 			ArrayList<String> dateList = (ArrayList<String>) resultData.get(ii).get("dateList");
 			ArrayList<String> chkList = (ArrayList<String>) resultData.get(ii).get("chkList");
+
+			
+			
 			/*가져온 엑셀데이터로 출결일 계산*/
 			int att = 0,abs = 0, late = 0, el = 0;
-			
-			int result = 0;
+			int late_count=0, el_count=0;
+			double result = 0;
 			for(int i=0; i<chkList.size();i++) {
 				if(chkList.get(i).equals("출석")) {
 					att++;
@@ -297,10 +303,15 @@ public class stuMgmtController {
 			attend_chk_date.put("late", late);
 			attend_chk_date.put("el", el);
 			
+			late_count = late/3;
+			el_count = el/3;
 			
+			result = late_count+el_count+att;
+			result = Math.round(result * 100) / 100.0;
 			int listSize = chkList.size();
 			double perAttd =(result/(double)listSize)*100.00;
 			
+
 			attend_chk_date.put("dateList", dateList);
 			attend_chk_date.put("listSize", listSize);
 			attend_chk_date.put("perAttd", perAttd);
