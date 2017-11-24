@@ -7,6 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 <style type="text/css">
+#backend_page{
+   width: 100%;
+}
+#backend_page hr{
+   border: thin solid #cccccc;
+}
 #listchange_select {
     width: 250px;
     height: 30px;
@@ -35,6 +41,62 @@
    vertical-align: middle;
 }
 /*  */
+#pay_table {
+   width: 1200px;
+   text-align: center;
+   border-collapse: collapse;
+   margin-top: 50px;
+}
+#pay_table td{
+   height: 50px;
+   border-bottom: 1px solid #cccccc;
+}
+#pay_table th{
+   border-bottom: 1px solid #cccccc;
+   background-color: #f4f3f1;
+   height: 50px;
+   padding-left: 10px;
+   padding-right: 10px;
+}
+/* button */
+.btn-info { 
+   color: #fff;
+   background-color: #f16022;
+   border-color: #46b8da;
+}
+.btn-info.focus, .btn-info:focus {
+   color: #fff;
+   background-color: #b64413;
+   border-color: #1b6d85;
+}
+.btn-info:hover {
+   color: #fff;
+   background-color: #b64413;
+   border-color: #973911;
+}
+.btn2 {
+   display: inline-block;
+   padding: 1px 12px;
+   margin-bottom: 12px;
+   margin-top:12px;
+   margin-left:5px;
+   font-size: 14px;
+   font-weight: 400;
+   /* line-height: 1.42857143; */
+   text-align: center;
+   white-space: nowrap;
+   vertical-align: middle;
+   -ms-touch-action: manipulation;
+   touch-action: manipulation;
+   cursor: pointer;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+   background-image: none;
+   border: 1px solid transparent;
+   border-radius: 4px;   
+}
 </style>
 </head>
 <script
@@ -160,7 +222,7 @@ function show_update(str) {
 			placeholder="키워드 검색 가능합니다.">  <input type="image" src="resources/ram/search.png" id="search_icon">&nbsp;
 	</form>
 </div>	
-	<table>
+	<table id="pay_table">
 	<th>payment_id</th>
 	<th>payment_lect_id</th>
 	<th>payment_member_id</th>
@@ -179,33 +241,34 @@ function show_update(str) {
 	<th>payment_lect_subject</th>
 	<th>payment_write_date</th>
 	<th>payment_pay_chk</th>
+	<th></th>
 	<c:forEach items="${plist }" var="list" varStatus="status">
 		<tr onclick="test(this)">
 			<td>${list.payment_id}</td>
 			
-			<td><label id="la1_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_lect_id}</label>			 <input type="text" style="display: none;"  id="in1_${list.payment_id}" class="in_${list.payment_id }"  value="${list.payment_lect_id}"></td>
-			<td><label id="la2_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_member_id}</label> 	 <input type="text" style="display: none;"  id="in2_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_member_id}"></td>
-			<td><label id="la3_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_addnum}</label> 		 <input type="text" style="display: none;"  id="in3_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_addnum}"></td>
-			<td><label id="la4_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_address}</label>		 <input type="text" style="display: none;"  id="in4_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_address}"></td>
-			<td><label id="la5_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_address2}</label>	 <input type="text" style="display: none;"  id="in5_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_address2}"></td>
-			<td><label id="la6_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_caution}</label>	 <input type="text" style="display: none;"  id="in6_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_caution}"></td>
-			<td><label id="la7_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_lect_subject }</label>		 <input type="text" style="display: none;"  id="in7_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_lect_subject}"></td>
-			<td><label id="la8_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_lect_charge }</label> 			<input type="text" style="display: none;"  id="in8_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_lect_charge}"></td>
-			<td><label id="la9_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_fee }</label> 			<input type="text" style="display: none;"  id="in9_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_fee}"></td>
-			<td><label id="la10_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_currency }</label> 			<input type="text" style="display: none;"  id="in10_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_currency}"></td>
-			<td><label id="la11_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_payer_email }</label> 			<input type="text" style="display: none;"  id="in11_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_payer_email}"></td>
-			<td><label id="la12_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_member_name }</label> 			<input type="text" style="display: none;"  id="in13_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_member_name}"></td>
-			<td><label id="la13_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_member_tel }</label> 			<input type="text" style="display: none;"  id="in14_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_member_tel}"></td>
-			<td><label id="la14_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_teacher_name }</label> 			<input type="text" style="display: none;"  id="in15_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_teacher_name}"></td>
-			<td><label id="la15_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_write_date }</label> 			<input type="text" style="display: none;"  id="in16_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_write_date}"></td>
-			<td><label id="la16_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_pay_chk }</label> 			<input type="text" style="display: none;"  id="in17_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_pay_chk}"></td>
+			<td><label id="la1_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_lect_id}</label>			 <input type="text" style="width: 100px;display: none;"  id="in1_${list.payment_id}" class="in_${list.payment_id }"  value="${list.payment_lect_id}"></td>
+			<td><label id="la2_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_member_id}</label> 	 <input type="text" style="width: 100px;display: none;"  id="in2_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_member_id}"></td>
+			<td><label id="la3_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_addnum}</label> 		 <input type="text" style="width: 100px;display: none;"  id="in3_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_addnum}"></td>
+			<td><label id="la4_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_address}</label>		 <input type="text" style="width: 300px;display: none;"  id="in4_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_address}"></td>
+			<td><label id="la5_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_address2}</label>	 <input type="text" style="width: 200px;display: none;"  id="in5_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_address2}"></td>
+			<td><label id="la6_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_caution}</label>	 <input type="text" style="width: 100px;display: none;"  id="in6_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_caution}"></td>
+			<td><label id="la7_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_lect_subject }</label>		 <input type="text" style="width: 200px;display: none;"  id="in7_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_lect_subject}"></td>
+			<td><label id="la8_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_lect_charge }</label> 			<input type="text" style="width: 100px;display: none;"  id="in8_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_lect_charge}"></td>
+			<td><label id="la9_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_fee }</label> 			<input type="text" style="width: 100px;display: none;"  id="in9_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_fee}"></td>
+			<td><label id="la10_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_currency }</label> 			<input type="text" style="width: 100px;display: none;"  id="in10_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_currency}"></td>
+			<td><label id="la11_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_payer_email }</label> 			<input type="text" style="width: 200px;display: none;"  id="in11_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_payer_email}"></td>
+			<td><label id="la12_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_member_name }</label> 			<input type="text" style="width: 100px;display: none;"  id="in13_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_member_name}"></td>
+			<td><label id="la13_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_member_tel }</label> 			<input type="text" style="width: 200px;display: none;"  id="in14_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_member_tel}"></td>
+			<td><label id="la14_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_teacher_name }</label> 			<input type="text" style="width: 100px;display: none;"  id="in15_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_teacher_name}"></td>
+			<td><label id="la15_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_write_date }</label> 			<input type="text" style="width: 150px;display: none;"  id="in16_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_write_date}"></td>
+			<td><label id="la16_${list.payment_id}"  class="la_${list.payment_id}"  style="display:show;">${list.payment_pay_chk }</label> 			<input type="text" style="width: 100px;display: none;"  id="in17_${list.payment_id}" class="in_${list.payment_id }"   value="${list.payment_pay_chk}"></td>
 			<td>
 			
 			<button type="button"  id="btn_update_by_display_yet_${list.payment_id}"
-				onclick="show1('${list.payment_id}')" style="display:show;">수 정</button> 
+				onclick="show1('${list.payment_id}')" style="display:show;" class="btn2 btn-info">수 정</button> 
 				
 			<button type="button"  id="btn_update_by_display_now_${list.payment_id}"
-				onclick="show_update('${list.payment_id}')"  style="display:none;">완 료</button> 
+				onclick="show_update('${list.payment_id}')"  style="display:none;" class="btn2 btn-info">완 료</button> 
 			</td>
 		</tr>
 	</c:forEach>	

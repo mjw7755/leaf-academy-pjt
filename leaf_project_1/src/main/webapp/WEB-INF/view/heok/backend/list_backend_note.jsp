@@ -7,6 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 <style type="text/css">
+#backend_page{
+	width: 100%;
+}
+#backend_page hr{
+	border: thin solid #cccccc;
+}
 #listchange_select {
     width: 250px;
     height: 30px;
@@ -35,6 +41,62 @@
    vertical-align: middle;
 }
 /*  */
+#note_table {
+	width: 1200px;
+	text-align: center;
+	border-collapse: collapse;
+	margin-top: 50px;
+}
+#note_table td{
+	height: 50px;
+	border-bottom: 1px solid #cccccc;
+}
+#note_table th{
+	border-bottom: 1px solid #cccccc;
+	background-color: #f4f3f1;
+	height: 50px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+/* button */
+.btn-info { 
+	color: #fff;
+	background-color: #f16022;
+	border-color: #46b8da;
+}
+.btn-info.focus, .btn-info:focus {
+	color: #fff;
+	background-color: #b64413;
+	border-color: #1b6d85;
+}
+.btn-info:hover {
+	color: #fff;
+	background-color: #b64413;
+	border-color: #973911;
+}
+.btn2 {
+	display: inline-block;
+	padding: 1px 12px;
+	margin-bottom: 12px;
+	margin-top:12px;
+	margin-left:5px;
+	font-size: 14px;
+	font-weight: 400;
+	/* line-height: 1.42857143; */
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;	
+}
 </style>
 </head>
 <script
@@ -136,7 +198,7 @@ function show_update(str) {
 			placeholder="키워드 검색 가능합니다.">  <input type="image" src="resources/ram/search.png" id="search_icon">&nbsp;
 	</form>
 </div>	
-	<table>
+	<table id="note_table">
 	<th>n_id</th>
 	<th>n_content</th>
 	<th>n_title</th>
@@ -146,25 +208,26 @@ function show_update(str) {
 	<th>n_recv_del_yn</th>
 	<th>n_open_date</th>
 	<th>n_write_date</th>
+	<th></th>
 	<c:forEach items="${nlist }" var="list" varStatus="status">
 		<tr onclick="test(this)">
 			<td>${list.n_id}</td>
 		
-			<td><label id="la1_${list.n_id}"  class="la_${list.n_id}"  style="display:show;">${list.n_content}</label>			 <input type="text" style="display: none;"  id="in1_${list.n_id}" class="in_${list.n_id }"  value="${list.n_content}"></td>
-			<td><label id="la2_${list.n_id}"  class="la_${list.n_id}"  style="display:show;">${list.n_title}</label> 	 <input type="text" style="display: none;"  id="in2_${list.n_id}" class="in_${list.n_id }"   value="${list.n_title}"></td>
-			<td><label id="la3_${list.n_id}"  class="la_${list.n_id}"  style="display:show;">${list.n_send_id}</label> 		 <input type="text" style="display: none;"  id="in3_${list.n_id}" class="in_${list.n_id }"   value="${list.n_send_id}"></td>
-			<td><label id="la4_${list.n_id}"  class="la_${list.n_id}"  style="display:show;">${list.n_recv_id}</label>		 <input type="text" style="display: none;"  id="in4_${list.n_id}" class="in_${list.n_id }"   value="${list.n_recv_id}"></td>
-			<td><label id="la5_${list.n_id}"  class="la_${list.n_id}"  style="display:show;">${list.n_send_del_yn}</label>	 <input type="text" style="display: none;"  id="in5_${list.n_id}" class="in_${list.n_id }"   value="${list.n_send_del_yn}"></td>
-			<td><label id="la6_${list.n_id}"  class="la_${list.n_id}"  style="display:show;">${list.n_recv_del_yn}</label>	 <input type="text" style="display: none;"  id="in6_${list.n_id}" class="in_${list.n_id }"   value="${list.n_recv_del_yn}"></td>
-			<td><label id="la7_${list.n_id}"  class="la_${list.n_id}"  style="display:show;">${list.n_open_date }</label>		 <input type="text" style="display: none;"  id="in7_${list.n_id}" class="in_${list.n_id }"   value="${list.n_open_date}"></td>
-			<td><label id="la8_${list.n_id}"  class="la_${list.n_id}"  style="display:show;">${list.n_write_date }</label> 			<input type="text" style="display: none;"  id="in8_${list.n_id}" class="in_${list.n_id }"   value="${list.n_write_date}"></td>
+			<td><label id="la1_${list.n_id}"  class="la_${list.n_id}"  style="display:show;">${list.n_content}</label>			 <input type="text" style="width: 200px;display: none;"  id="in1_${list.n_id}" class="in_${list.n_id }"  value="${list.n_content}"></td>
+			<td><label id="la2_${list.n_id}"  class="la_${list.n_id}"  style="display:show;">${list.n_title}</label> 	 <input type="text" style="width: 200px;display: none;"  id="in2_${list.n_id}" class="in_${list.n_id }"   value="${list.n_title}"></td>
+			<td><label id="la3_${list.n_id}"  class="la_${list.n_id}"  style="display:show;">${list.n_send_id}</label> 		 <input type="text" style="width: 80px;display: none;"  id="in3_${list.n_id}" class="in_${list.n_id }"   value="${list.n_send_id}"></td>
+			<td><label id="la4_${list.n_id}"  class="la_${list.n_id}"  style="display:show;">${list.n_recv_id}</label>		 <input type="text" style="width: 80px;display: none;"  id="in4_${list.n_id}" class="in_${list.n_id }"   value="${list.n_recv_id}"></td>
+			<td><label id="la5_${list.n_id}"  class="la_${list.n_id}"  style="display:show;">${list.n_send_del_yn}</label>	 <input type="text" style="width: 80px;display: none;"  id="in5_${list.n_id}" class="in_${list.n_id }"   value="${list.n_send_del_yn}"></td>
+			<td><label id="la6_${list.n_id}"  class="la_${list.n_id}"  style="display:show;">${list.n_recv_del_yn}</label>	 <input type="text" style="width: 80px;display: none;"  id="in6_${list.n_id}" class="in_${list.n_id }"   value="${list.n_recv_del_yn}"></td>
+			<td><label id="la7_${list.n_id}"  class="la_${list.n_id}"  style="display:show;">${list.n_open_date }</label>		 <input type="text" style="width: 80px;display: none;"  id="in7_${list.n_id}" class="in_${list.n_id }"   value="${list.n_open_date}"></td>
+			<td><label id="la8_${list.n_id}"  class="la_${list.n_id}"  style="display:show;">${list.n_write_date }</label> 			<input type="text" style="width: 150px;display: none;"  id="in8_${list.n_id}" class="in_${list.n_id }"   value="${list.n_write_date}"></td>
 			<td>
 			
 			<button type="button"  id="btn_update_by_display_yet_${list.n_id}"
-				onclick="show1('${list.n_id}')" style="display:show;">수 정</button> 
+				onclick="show1('${list.n_id}')" style="display:show;" class="btn2 btn-info">수 정</button> 
 				
 			<button type="button"  id="btn_update_by_display_now_${list.n_id}"
-				onclick="show_update('${list.n_id}')"  style="display:none;">완 료</button> 
+				onclick="show_update('${list.n_id}')"  style="display:none;" class="btn2 btn-info">완 료</button> 
 			</td>
 		</tr>
 	</c:forEach>	

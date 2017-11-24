@@ -22,7 +22,6 @@
     border: 2px solid #2b6728;
     border-radius: 3px;
 }
-
 /*  */
 #search{
    width: 800px;
@@ -43,9 +42,9 @@
 }
 /*  */
 #book_table {
-   width: 1200px;
-   text-align: center;
-   	border-collapse: collapse;
+	width: 1200px;
+	text-align: center;
+	border-collapse: collapse;
 	margin-top: 50px;
 }
 #book_table td{

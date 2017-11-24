@@ -60,7 +60,7 @@
 			( SELECT * FROM jageok 
 				where jageok_title like '%' || #{keyvalue} || '%'
 				or jageok_cost like '%' || #{keyvalue} || '%'
-		ORDER BY jageok_id DESC)   j)
+		where enabled=1 ORDER BY jageok_id DESC)   j)
 	where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
 	</select>
 	

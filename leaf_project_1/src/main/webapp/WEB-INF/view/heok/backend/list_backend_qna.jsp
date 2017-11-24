@@ -7,6 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 <style type="text/css">
+#backend_page{
+   width: 100%;
+}
+#backend_page hr{
+   border: thin solid #cccccc;
+}
 #listchange_select {
     width: 250px;
     height: 30px;
@@ -35,6 +41,62 @@
    vertical-align: middle;
 }
 /*  */
+#qna_table {
+   width: 1200px;
+   text-align: center;
+   border-collapse: collapse;
+   margin-top: 50px;
+}
+#qna_table td{
+   height: 50px;
+   border-bottom: 1px solid #cccccc;
+}
+#qna_table th{
+   border-bottom: 1px solid #cccccc;
+   background-color: #f4f3f1;
+   height: 50px;
+   padding-left: 10px;
+   padding-right: 10px;
+}
+/* button */
+.btn-info { 
+   color: #fff;
+   background-color: #f16022;
+   border-color: #46b8da;
+}
+.btn-info.focus, .btn-info:focus {
+   color: #fff;
+   background-color: #b64413;
+   border-color: #1b6d85;
+}
+.btn-info:hover {
+   color: #fff;
+   background-color: #b64413;
+   border-color: #973911;
+}
+.btn2 {
+   display: inline-block;
+   padding: 1px 12px;
+   margin-bottom: 12px;
+   margin-top:12px;
+   margin-left:5px;
+   font-size: 14px;
+   font-weight: 400;
+   /* line-height: 1.42857143; */
+   text-align: center;
+   white-space: nowrap;
+   vertical-align: middle;
+   -ms-touch-action: manipulation;
+   touch-action: manipulation;
+   cursor: pointer;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+   background-image: none;
+   border: 1px solid transparent;
+   border-radius: 4px;   
+}
 </style>
 </head>
 <script
@@ -138,7 +200,7 @@ function show_update(str) {
 			placeholder="키워드 검색 가능합니다."> <input type="image" src="resources/ram/search.png" id="search_icon">&nbsp;
 	</form>
 </div>	
-	<table>
+	<table id="qna_table">
 	<th>qna_id</th>
 	<th>Member_id</th>
 	<th>qna_title</th>
@@ -148,25 +210,26 @@ function show_update(str) {
 	<th>qna_ref</th>
 	<th>qna_step</th>
 	<th>Enabled</th>
+	<th></th>
 	<c:forEach items="${qlist }" var="list" varStatus="status">
 		<tr onclick="test(this)">
 			<td>${list.qna_id}</td>
 			
-			<td><label id="la1_${list.qna_id}"  class="la_${list.qna_id}"  style="display:show;">${list.member_id}</label>			 <input type="text" style="display: none;"  id="in1_${list.qna_id}" class="in_${list.qna_id }"  value="${list.member_id}"></td>
-			<td><label id="la2_${list.qna_id}"  class="la_${list.qna_id}"  style="display:show;">${list.qna_title}</label> 	 <input type="text" style="display: none;"  id="in2_${list.qna_id}" class="in_${list.qna_id }"   value="${list.qna_title}"></td>
-			<td><label id="la3_${list.qna_id}"  class="la_${list.qna_id}"  style="display:show;">${list.qna_content}</label> 		 <input type="text" style="display: none;"  id="in3_${list.qna_id}" class="in_${list.qna_id }"   value="${list.qna_content}"></td>
-			<td><label id="la4_${list.qna_id}"  class="la_${list.qna_id}"  style="display:show;">${list.qna_writedate}</label>		 <input type="text" style="display: none;"  id="in4_${list.qna_id}" class="in_${list.qna_id }"   value="${list.qna_writedate}"></td>
-			<td><label id="la5_${list.qna_id}"  class="la_${list.qna_id}"  style="display:show;">${list.qna_modifydate}</label>	 <input type="text" style="display: none;"  id="in5_${list.qna_id}" class="in_${list.qna_id }"   value="${list.qna_modifydate}"></td>
-			<td><label id="la6_${list.qna_id}"  class="la_${list.qna_id}"  style="display:show;">${list.qna_ref}</label>	 <input type="text" style="display: none;"  id="in6_${list.qna_id}" class="in_${list.qna_id }"   value="${list.qna_ref}"></td>
-			<td><label id="la7_${list.qna_id}"  class="la_${list.qna_id}"  style="display:show;">${list.qna_step }</label>		 <input type="text" style="display: none;"  id="in7_${list.qna_id}" class="in_${list.qna_id }"   value="${list.qna_step}"></td>
-			<td><label id="la8_${list.qna_id}"  class="la_${list.qna_id}"  style="display:show;">${list.enabled }</label> 			<input type="text" style="display: none;"  id="in8_${list.qna_id}" class="in_${list.qna_id }"   value="${list.enabled}"></td>
+			<td><label id="la1_${list.qna_id}"  class="la_${list.qna_id}"  style="display:show;">${list.member_id}</label>			 <input type="text" style="width: 80px;display: none;"  id="in1_${list.qna_id}" class="in_${list.qna_id }"  value="${list.member_id}"></td>
+			<td><label id="la2_${list.qna_id}"  class="la_${list.qna_id}"  style="display:show;">${list.qna_title}</label> 	 <input type="text" style="width: 100px;display: none;"  id="in2_${list.qna_id}" class="in_${list.qna_id }"   value="${list.qna_title}"></td>
+			<td><label id="la3_${list.qna_id}"  class="la_${list.qna_id}"  style="display:show;">${list.qna_content}</label> 		 <input type="text" style="width: 300px;display: none;"  id="in3_${list.qna_id}" class="in_${list.qna_id }"   value="${list.qna_content}"></td>
+			<td><label id="la4_${list.qna_id}"  class="la_${list.qna_id}"  style="display:show;">${list.qna_writedate}</label>		 <input type="text" style="width: 100px;display: none;"  id="in4_${list.qna_id}" class="in_${list.qna_id }"   value="${list.qna_writedate}"></td>
+			<td><label id="la5_${list.qna_id}"  class="la_${list.qna_id}"  style="display:show;">${list.qna_modifydate}</label>	 <input type="text" style="width: 100px;display: none;"  id="in5_${list.qna_id}" class="in_${list.qna_id }"   value="${list.qna_modifydate}"></td>
+			<td><label id="la6_${list.qna_id}"  class="la_${list.qna_id}"  style="display:show;">${list.qna_ref}</label>	 <input type="text" style="width: 80px;display: none;"  id="in6_${list.qna_id}" class="in_${list.qna_id }"   value="${list.qna_ref}"></td>
+			<td><label id="la7_${list.qna_id}"  class="la_${list.qna_id}"  style="display:show;">${list.qna_step }</label>		 <input type="text" style="width: 80px;display: none;"  id="in7_${list.qna_id}" class="in_${list.qna_id }"   value="${list.qna_step}"></td>
+			<td><label id="la8_${list.qna_id}"  class="la_${list.qna_id}"  style="display:show;">${list.enabled }</label> 			<input type="text" style="width: 50px;display: none;"  id="in8_${list.qna_id}" class="in_${list.qna_id }"   value="${list.enabled}"></td>
 			<td>
 			
 			<button type="button"  id="btn_update_by_display_yet_${list.qna_id}"
-				onclick="show1('${list.qna_id}')" style="display:show;">수 정</button> 
+				onclick="show1('${list.qna_id}')" style="display:show;" class="btn2 btn-info">수 정</button> 
 				
 			<button type="button"  id="btn_update_by_display_now_${list.qna_id}"
-				onclick="show_update('${list.qna_id}')"  style="display:none;">완 료</button> 
+				onclick="show_update('${list.qna_id}')"  style="display:none;" class="btn2 btn-info">완 료</button> 
 			</td>
 		</tr>
 	</c:forEach>	

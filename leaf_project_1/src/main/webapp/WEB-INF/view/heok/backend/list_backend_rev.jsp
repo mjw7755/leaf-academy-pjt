@@ -7,6 +7,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 <style type="text/css">
+#backend_page{
+   width: 100%;
+}
+#backend_page hr{
+   border: thin solid #cccccc;
+}
 #listchange_select {
     width: 250px;
     height: 30px;
@@ -35,6 +41,62 @@
    vertical-align: middle;
 }
 /*  */
+#rev_table {
+   width: 1200px;
+   text-align: center;
+   border-collapse: collapse;
+   margin-top: 50px;
+}
+#rev_table td{
+   height: 50px;
+   border-bottom: 1px solid #cccccc;
+}
+#rev_table th{
+   border-bottom: 1px solid #cccccc;
+   background-color: #f4f3f1;
+   height: 50px;
+   padding-left: 10px;
+   padding-right: 10px;
+}
+/* button */
+.btn-info { 
+   color: #fff;
+   background-color: #f16022;
+   border-color: #46b8da;
+}
+.btn-info.focus, .btn-info:focus {
+   color: #fff;
+   background-color: #b64413;
+   border-color: #1b6d85;
+}
+.btn-info:hover {
+   color: #fff;
+   background-color: #b64413;
+   border-color: #973911;
+}
+.btn2 {
+   display: inline-block;
+   padding: 1px 12px;
+   margin-bottom: 12px;
+   margin-top:12px;
+   margin-left:5px;
+   font-size: 14px;
+   font-weight: 400;
+   /* line-height: 1.42857143; */
+   text-align: center;
+   white-space: nowrap;
+   vertical-align: middle;
+   -ms-touch-action: manipulation;
+   touch-action: manipulation;
+   cursor: pointer;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+   background-image: none;
+   border: 1px solid transparent;
+   border-radius: 4px;   
+}
 </style>
 </head>
 <script
@@ -133,7 +195,7 @@ function show_update(str) {
 			placeholder="키워드 검색 가능합니다.">  <input type="image" src="resources/ram/search.png" id="search_icon">&nbsp;
 	</form>
 </div>	
-	<table>
+	<table id="rev_table">
 	<th>review_id</th>
 	<th>Member_id</th>
 	<th>teacher_id</th>
@@ -142,24 +204,25 @@ function show_update(str) {
 	<th>r_write_time</th>
 	<th>r_modify_time</th>
 	<th>Enabled</th>
+	<th></th>
 	<c:forEach items="${rlist }" var="list" varStatus="status">
 		<tr onclick="test(this)">
 			<td>${list.review_id}</td>
 			
-			<td><label id="la1_${list.review_id}"  class="la_${list.review_id}"  style="display:show;">${list.member_id}</label>			 <input type="text" style="display: none;"  id="in1_${list.review_id}" class="in_${list.review_id }"  value="${list.member_id}"></td>
-			<td><label id="la2_${list.review_id}"  class="la_${list.review_id}"  style="display:show;">${list.teacher_id}</label> 		 <input type="text" style="display: none;"  id="in2_${list.review_id}" class="in_${list.review_id }"   value="${list.teacher_id}"></td>
-			<td><label id="la3_${list.review_id}"  class="la_${list.review_id}"  style="display:show;">${list.r_headline}</label>		 <input type="text" style="display: none;"  id="in3_${list.review_id}" class="in_${list.review_id }"   value="${list.r_headline}"></td>
-			<td><label id="la4_${list.review_id}"  class="la_${list.review_id}"  style="display:show;">${list.r_content}</label>	 <input type="text" style="display: none;"  id="in4_${list.review_id}" class="in_${list.review_id }"   value="${list.r_content}"></td>
-			<td><label id="la5_${list.review_id}"  class="la_${list.review_id}"  style="display:show;">${list.r_write_time}</label>	 <input type="text" style="display: none;"  id="in5_${list.review_id}" class="in_${list.review_id }"   value="${list.r_write_time}"></td>
-			<td><label id="la6_${list.review_id}"  class="la_${list.review_id}"  style="display:show;">${list.r_modify_time }</label>		 <input type="text" style="display: none;"  id="in6_${list.review_id}" class="in_${list.review_id }"   value="${list.r_modify_time}"></td>
-			<td><label id="la7_${list.review_id}"  class="la_${list.review_id}"  style="display:show;">${list.enabled }</label> 			<input type="text" style="display: none;"  id="in7_${list.review_id}" class="in_${list.review_id }"   value="${list.enabled}"></td>
+			<td><label id="la1_${list.review_id}"  class="la_${list.review_id}"  style="display:show;">${list.member_id}</label>			 <input type="text" style="width: 80px;display: none;"  id="in1_${list.review_id}" class="in_${list.review_id }"  value="${list.member_id}"></td>
+			<td><label id="la2_${list.review_id}"  class="la_${list.review_id}"  style="display:show;">${list.teacher_id}</label> 		 <input type="text" style="width: 80px;display: none;"  id="in2_${list.review_id}" class="in_${list.review_id }"   value="${list.teacher_id}"></td>
+			<td><label id="la3_${list.review_id}"  class="la_${list.review_id}"  style="display:show;">${list.r_headline}</label>		 <input type="text" style="width: 150px;display: none;"  id="in3_${list.review_id}" class="in_${list.review_id }"   value="${list.r_headline}"></td>
+			<td><label id="la4_${list.review_id}"  class="la_${list.review_id}"  style="display:show;">${list.r_content}</label>	 <input type="text" style="width: 300px;display: none;"  id="in4_${list.review_id}" class="in_${list.review_id }"   value="${list.r_content}"></td>
+			<td><label id="la5_${list.review_id}"  class="la_${list.review_id}"  style="display:show;">${list.r_write_time}</label>	 <input type="text" style="width: 180px;display: none;"  id="in5_${list.review_id}" class="in_${list.review_id }"   value="${list.r_write_time}"></td>
+			<td><label id="la6_${list.review_id}"  class="la_${list.review_id}"  style="display:show;">${list.r_modify_time }</label>		 <input type="text" style="width: 80px;display: none;"  id="in6_${list.review_id}" class="in_${list.review_id }"   value="${list.r_modify_time}"></td>
+			<td><label id="la7_${list.review_id}"  class="la_${list.review_id}"  style="display:show;">${list.enabled }</label> 			<input type="text" style="width: 80px;display: none;"  id="in7_${list.review_id}" class="in_${list.review_id }"   value="${list.enabled}"></td>
 			<td>
 			
 			<button type="button"  id="btn_update_by_display_yet_${list.review_id}"
-				onclick="show1('${list.review_id}')" style="display:show;">수 정</button> 
+				onclick="show1('${list.review_id}')" style="display:show;" class="btn2 btn-info">수 정</button> 
 				
 			<button type="button"  id="btn_update_by_display_now_${list.review_id}"
-				onclick="show_update('${list.review_id}')"  style="display:none;">완 료</button> 
+				onclick="show_update('${list.review_id}')"  style="display:none;" class="btn2 btn-info">완 료</button> 
 			</td>
 		</tr>
 	</c:forEach>	
