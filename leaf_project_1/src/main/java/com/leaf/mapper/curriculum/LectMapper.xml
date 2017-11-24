@@ -78,7 +78,7 @@
 	</select>
 	
 	<select id="getLectId" parameterType="String" resultType="Integer">
-		select lect_id from lecture where curri_id = (select curri_id from curriculum where member_id=#{sessionid})
+		select lect_id from lecture where curri_id in (select curri_id from curriculum where member_id=#{sessionid})
 	</select>
 </mapper>
 	
