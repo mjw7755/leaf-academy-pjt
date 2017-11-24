@@ -81,13 +81,13 @@ $(function(){
 	});
 });
 </script>
-<style type="text/css">
+<!-- <style type="text/css">
 .error {
 	color: red;
 }
-span{
+/* span{
   font-size: 15px;
-}
+} */
 #checkMsg{	
   font-size: 15px;
 }
@@ -99,7 +99,7 @@ span{
   color : red;
   font-size: 15px;
 }
-</style>
+</style> -->
 <script type="text/javascript">
 function checkfield(){
 	var f1 = document.forms[0];
@@ -211,20 +211,6 @@ $(function() {
 .my_page {
    width: 100%;
 }
-/* table */
-#menu {
-   width: 200px;
-   margin-left: 25%;
-   float: left;
-}
-#menu tr {
-   width: 150px;
-}
-#menu a {
-   text-decoration: none;
-   font-size: 13px;
-   color: #5e5f5e;
-}
 /* 내용 div */
 #member_info {
    /* border: 1px solid; */
@@ -279,7 +265,12 @@ $(function() {
    float: right;
    height: 100%;
 }
-#contents1 td, tr, span { font-size: 12px }
+ #contents1 { 
+	margin-top: 20px;
+ } 
+ #contents1 td{ 
+	padding-bottom: 10px;
+ } 
 .btn {
        display: inline-block;
     border: none;
@@ -295,7 +286,7 @@ $(function() {
     padding: .5em 1.5em .75em;
     position: relative;
     text-decoration: none;
-    text-shadow: 0 1px 1px #c4c4c4;
+    /* text-shadow: 0 1px 1px #c4c4c4; */
     vertical-align: middle;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -315,58 +306,121 @@ outline: none; }
 .btn--green {
 font-size: 1em; }
 .btn--sm {
-font-size: 0.5em; }
+font-size: 0.6em; }
 #rkdnsep{
 	text-align: center;
+}
+#mypage_form hr{
+	border: thin solid;
+	border-color: #cccccc;
+}
+#text{
+	padding-right: 30px;
+    font-size: 13px;
+    font-weight: bold;
+    width: 110px;
+}
+/*  */
+.form-control {
+	/* display: block; */
+    margin-right: 10px;
+    /* width: 100%; */
+    /* height: 34px; */
+    padding: 6px 12px;
+    /* font-size: 14px; */
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+/*  */
+.btn3 {
+	display: inline-block;
+    padding: 4px 12px;
+    width:100px;
+    margin-bottom: 0;
+    /* margin-top: 12px; */
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+/*  */
+#member_bye_table {
+	margin-top: 20px;
+}
+#member_bye_table td{
+	padding-bottom: 10px;
 }
 </style>
 </head>
 <body>
-<br><br>
 <div class="my_page">
      
-   <div id="member_info"><br><br>
+   <div id="member_info">
    		<sf:form method="post" action="member_modify.do" commandName="dto" name="memberchk">
+   		<div id="mypage_form">
+    		<h1>개인정보 수정</h1>
+		<hr>
+		</div>
 	<table id="contents1">
 		<tr>
-			<td>아이디 : </td>
-			<td><input type="text" name="member_id" id="member_id" value="${dto.member_id}" readonly="readonly"/></td>
+			<td id="text">아이디 </td>
+			<td id="text">${dto.member_id}</td>
 		</tr>
 		<tr>
-     	    <td><span>암호 :  </span></td>
-    		<td><sf:password path="member_pwd" id="member_pwd" placeholder="영어 숫자 특수문자를 조합" />
+     	    <td id="text"><span>암호  </span></td>
+    		<td><sf:password path="member_pwd" id="member_pwd" placeholder="영어 숫자 특수문자를 조합" class="form-control"/>
      		    <sf:errors path="member_pwd" cssClass="error" /></td>
   	    </tr>
   	    <tr>
-    		<td><span>암호확인 : </span></td>
+    		<td id="text"><span>암호확인  </span></td>
      	<td>
-       		<input type="password" name="pwd_check" onkeyup="checkPwd()"  placeholder="암호 확인"></input>
+       		<input type="password" name="pwd_check" onkeyup="checkPwd()"  placeholder="암호 확인" class="form-control"></input>
        	 	<div id="checkPwd"></div>
      		</td>
  		 </tr>
 		<tr>
-			<td>이름(Full Name) : </td>
-			<td><sf:input path="member_name" placeholder="이름 입력" value="${dto.member_name}"/>
+			<td id="text">이름(Full Name) </td>
+			<td><sf:input path="member_name" placeholder="이름 입력" value="${dto.member_name}" class="form-control"/>
 			<sf:errors path="member_name" cssClass="error"/></td>
 		</tr>
 		<tr>
-			<td>전화번호(휴대폰) : </td>
-			<td><sf:input path="member_tel" placeholder="000-0000-0000" value="${dto.member_tel}"/>
+			<td id="text">전화번호(휴대폰)  </td>
+			<td><sf:input path="member_tel" placeholder="000-0000-0000" value="${dto.member_tel}" class="form-control"/>
 			<sf:errors path="member_tel" cssClass="error"/></td>
 	    </tr>
 		<tr>
-			<td>우편번호 : </td>
-			<td><sf:input path="member_addnum" id="sample4_postcode" placeholder="우편번호" value="${dto.member_addnum}"/>
+			<td id="text">우편번호  </td>
+			<td><sf:input path="member_addnum" id="sample4_postcode" placeholder="우편번호" value="${dto.member_addnum}" class="form-control"/>
 			<sf:errors path="member_addnum" cssClass="error" /><br/>
-			<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn btn--sm btn--green"><br>
-			<sf:input path="member_address" id="sample4_roadAddress" placeholder="도로명주소" value="${dto.member_address}"/>
+			<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn3 btn-primary btn-sm"<br>
+			<sf:input path="member_address" id="sample4_roadAddress" placeholder="도로명주소" value="${dto.member_address}" class="form-control"/>
 			<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소">
 			<span id="guide" style="color: #999"></span>
 			<sf:errors path="member_address" cssClass="error" /></td>
 		</tr>
 		<tr>
-			<td>이메일 : </td>
-			<td><sf:input path="member_email"  placeholder="이메일 입력" value="${dto.member_email}"/>
+			<td id="text">이메일  </td>
+			<td><sf:input path="member_email"  placeholder="이메일 입력" value="${dto.member_email}" class="form-control"/>
 		    <sf:errors path="member_email" cssClass="error" /></td>
 		</tr>
 	<tr id="rkdnsep">
@@ -380,30 +434,13 @@ font-size: 0.5em; }
 	
 				
 </sf:form>
-      <%-- <table>
-         <tr>
-            <td>ID : </td>
-            <td><input readonly="readonly" type="text" name="member_id" value="${dto.member_id}" style="width:300px"></td>
-         </tr>
-         <tr>
-            <td>NAME : </td>
-            <td><input readonly="readonly" name="member_name" value="${dto.member_name}" style="width:300px"></td>
-         </tr>
-         <tr>
-            <td>PWD : </td>
-            <td><input type="text" name="member_pwd" value="${dto.member_pwd}" style="width:300px"></td>
-         </tr>
-         <tr>
-            <td>TEL : </td>
-            <td><input type="text" name="member_tel" value="${dto.member_tel}" style="width:300px"></td>
-         </tr>
-         <tr>
-            <td>EMAIL : </td>
-            <td><input type="text" name="member_email" value="${dto.member_email}" style="width:300px"></td>
-         </tr>
-      </table> --%>
+    
    </div>
    <div id="member_history">
+   <div id="mypage_form">
+    		<h1>결제내역 조회</h1>
+		<hr>
+		</div>
       <table>
          <tr>
             <td>내역어케?? </td>
@@ -428,14 +465,18 @@ font-size: 0.5em; }
       </table>
    </div>
    <div id="member_bye"> 
-		<table>
+      	<div id="mypage_form">
+    		<h1>회원 탈퇴</h1>
+		<hr>
+		</div>
+		<table id="member_bye_table">
 			<tr>
-			   <td>아이디</td>
-			   <td><input type="text" name="member_id" id="member_id" value="${dto.member_id}" readonly="readonly"/></td>
+			   <td id="text">아이디</td>
+			   <td id="text">${dto.member_id}</td>
 			</tr>
 			<tr>
-			    <td><span>암호 </span></td>
-			    <td><input type="password" name="member_pwd" id="member_pwd_1" placeholder="영어 숫자 특수문자를 조합"/>
+			    <td id="text"><span>암호 </span></td>
+			    <td><input type="password" name="member_pwd" id="member_pwd_1" class="form-control"/>
 			<tr id="rkdnsep">
 				<!-- <input type="submit" value="수정하기"> -->
 				<td colspan="2">

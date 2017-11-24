@@ -10,6 +10,11 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <style type="text/css">
+#top_banner{
+	width: 100%;
+	background-color: #e5d235;
+	margin: auto;
+}
 #my_class{
 	margin-top: 35px;
 }
@@ -22,6 +27,7 @@
 /* table */
 #menu {
    width: 200px;
+   margin-top:30px;
    margin-left: 25%;
    float: left;
 }
@@ -88,6 +94,13 @@
 </head>
 <body>
 <c:if test="${myclass == 1 }">
+	   	<!-- top banner -->
+   	<div id="top_banner">
+   		<div id="banner">
+   		<img src="resources/ram/top_banner_mypage.png">
+   		</div>
+   	</div>
+    <!-- top banner end -->
 	<div id="my_class_student">
 		<table id="menu">
 			<tr id="my_page_text">
@@ -114,6 +127,13 @@
 </c:if>
 		
 <c:if test="${myclass >= 2 }">
+   	<!-- top banner -->
+   	<div id="top_banner">
+   		<div id="banner">
+   		<img src="resources/ram/top_banner_mypage.png">
+   		</div>
+   	</div>
+    <!-- top banner end -->
 		<div id="my_class_teacher">
 			<table id="menu">
 				<tr id="my_page_text">
@@ -140,15 +160,22 @@
 </c:if>
 
 <c:if test="${mypage == 'OK' }">
+   	<!-- top banner -->
+   	<div id="top_banner">
+   		<div id="banner">
+   		<img src="resources/ram/top_banner_mypage.png">
+   		</div>
+   	</div>
+    <!-- top banner end -->
 	<div id="my_page">
 		 <table id="menu">
 	      <tr id="my_page_text"><td colspan="2">MY PAGE</td></tr>
-	      <tr><td id="attendance"><a href="#">개인정보</a><div id="attendance_icon">></div></td></tr>
-		  <tr><td id="lecture"><a href="#">내역조회</a><div id="lecture_icon">></div></td></tr>
-		  <tr><td id="grade"><a href="#">탈퇴</a><div id="grade_icon">></div></td></tr>
-		  <c:if test="${sessionScope.sessionid=='관리자'}">
+	      <tr><td id="attendance"><a href="#">개인정보 수정</a><div id="attendance_icon">></div></td></tr>
+		  <tr><td id="lecture"><a href="#">결제내역 조회</a><div id="lecture_icon">></div></td></tr>
+		  <tr><td id="grade"><a href="#">회원탈퇴</a><div id="grade_icon">></div></td></tr>
+<%-- 		  <c:if test="${sessionScope.sessionid=='관리자'}">
 	      <tr><td id="student_care"><a href="member_list.do" >회원관리</a><div id="student_care_icon">></div></td></tr>
-	      </c:if>
+	      </c:if> --%>
 	   </table>
    </div>
 </c:if>

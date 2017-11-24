@@ -147,7 +147,6 @@
       $("#reviewTable").remove();
        $("#contentDIV").remove();
        $("#reviewList").show();
-       alert(page);
       $.ajax({
          url:"review_list.do?teacher_id=${dto.teacher_id}&page="+page,
          dataType:"json",
@@ -237,13 +236,7 @@
             }
             strTag = strTag + "</div><div id=\"review_input\">"
             +"<input type=\"button\" onclick=\"reviewWrite()\" value=\"후기작성\" class=\"btn2 btn-info\" /></div>"
-            +"<form action=\"review_search.do\" method=\"post\" class=\"re_search\">"
-            +"<select name=\"column\" class=\"form-control\">"
-            +"<option value=\"member_id\">작성자</option>"
-            +"<option value=\"r_headline\">제목</option>"
-            +"</select> <input type=\"text\" name=\"keyvalue\" class=\"form-control\">" 
-            +"<input type=\"image\" src=\"resources/ram/search.png\" id=\"search\">"
-            +"</form></div>";
+            +"</div>";
             
             $("#reviewList").append(strTag);
          }

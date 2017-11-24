@@ -924,7 +924,7 @@ keyframes swiper-preloader-spin { 100%{
           </div>
          </a>
          
-         <a href="fiveinarow.do">
+         <a href="fir_index.do">
           <div id="play">
              <img src="resources/ram/main_play4.png"/>
           </div>

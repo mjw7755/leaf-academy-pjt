@@ -3,16 +3,26 @@
 <head>
 <title>답변 달기</title>
 <style type="text/css">
+#replyform{
+   width:800px;
+}
+
+#replyform hr{
+	border: thin solid;
+	border-color: #cccccc;
+}
+/*  */
 #qnareplyTable {
    width: 800px;
    text-align: center;
 }
 #qnareplyTable td {
-   border: 1px solid;
-   border-radius: 4px;
+   padding-top: 10px;
+   padding-bottom: 10px;
 }
 #whqrp {
-	width: 200px;
+	width: 180px;
+	font-weight: bold;
 }
 .btn {
        display: inline-block;
@@ -49,20 +59,45 @@ outline: none; }
 .btn--green {
 font-size: 1em; }
 .btn--sm {
-font-size: 0.5em; }
+font-size: 0.6em; }
+/*  */
+.form-control {
+	display: block;
+	margin-right: 15px;
+	width: 100%;
+	/* height: 34px; */
+	padding: 6px 0px;
+	font-size: 14px;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow
+		ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out
+		.15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	/* margin-left: 15px; */
+}
 </style>
 </head>
 <body>
-<br><br><br><br><br>
+<div id="replyform">
+    <h1>Q&A 답글</h1>
+<hr>
+</div>
 	<form action="replyok.do" >
 	<table id="qnareplyTable">
 		<tr>
 			<td id="whqrp">제목 : </td><!-- qna_title -->
-			<td><input type="text" name="qna_title" value="re: ${dto.qna_title }" style="width: 100%;"></td>
+			<td><input type="text" name="qna_title" value="re: ${dto.qna_title }" style="width: 100%;" class="form-control"></td>
 		</tr>		
 		<tr>
 			<td>내용 : </td><!-- qna_content -->
-			<td><textarea style="width: 100%; height:300px" name="qna_content" ></textarea></td>
+			<td><textarea style="width: 100%; height:300px" name="qna_content" class="form-control"></textarea></td>
 		</tr>
   		<tr>
 	        <td colspan="2">
