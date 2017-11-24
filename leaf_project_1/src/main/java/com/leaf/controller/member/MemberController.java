@@ -293,7 +293,7 @@ public class MemberController {
 			MemberDTO dto = memberdao.getMemberById(member_id);
 			mav.addObject("dto", dto);
 			
-			if(Integer.parseInt(dto.getMember_level()) == 1) {
+			if(dto.getMember_level() == 1) {
 				String strPage = request.getParameter("page");
 				int page;
 				if (strPage == null) {
@@ -351,18 +351,30 @@ public class MemberController {
 	}
 
 	@RequestMapping("/mypage.do")
-	public ModelAndView mypage(MemberDTO dto, Model model, HttpServletRequest request) {
+	public ModelAndView mypage(PaymentDTO dto2, MemberDTO dto, Model model, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		String member_id = (String) request.getSession().getAttribute("sessionid");
+		String payment_member_id = (String) request.getSession().getAttribute("sessionid");
+		//dto2 = paymentdao.paySelectId(payment_member_id);
+		
 		if(member_id==null) {
 			mav.setViewName("ayrin.member_loginform");
 		} else {
+			dto2 = paymentdao.paySelectId(payment_member_id);
+			System.out.println("payment_member_id" + payment_member_id);
+			System.out.println("getMember_id" + dto2.getPayment_member_id());
+			
+			
+			
 			dto = memberdao.getMemberById(member_id);
+			
 			String chk = "OK";
 			model.addAttribute("mypage", chk);
+			mav.addObject("dto2", dto2);
 			mav.addObject("dto", dto);
 			mav.setViewName("ayrin.mypage");
 		}
+		
 		return mav;
 	}
 
