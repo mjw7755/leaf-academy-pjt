@@ -182,7 +182,7 @@ function show_update(str) {
 <div id="search">	
 	<form action="search_backend_rev.do" method="post">
 		<select name="column">
-			<option value="review_id">"review_id"</option>
+			<option value="review_id">review_id</option>
 			<option value="member_id">Member-id</option>
 			<option value="teacher_id">teacher_id</option>
 			<option value="r_headline">r_headline</option>
