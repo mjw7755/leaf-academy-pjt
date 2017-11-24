@@ -59,4 +59,16 @@
 			n_id = #{item}
 		</foreach>
 	</update>
+	
+	<select id="selectMemberLevel" parameterType="String" resultType="com.leaf.model.member.MemberDTO">
+		select member_level from member where member_id = #{sessionid}
+	</select>
+	
+	<select id="selectTeacher" parameterType="String" resultType="com.leaf.model.member.MemberDTO">
+		select member_name, member_id from member where member_id in (select member_id from curriculum where curri_id in (select curri_id from lecture where lect_id in (select lect_id from student where member_id = #{sessionid})))
+	</select>
+	
+	<select id="selectStudent" parameterType="String" resultType="com.leaf.model.member.MemberDTO">
+		select member_name, member_id from member where member_id in (select payment_member_id from payment where payment_lect_id in (select lect_id from lecture where curri_id in (select curri_id from curriculum where member_id = #{sessionid})) and payment_pay_chk = 1)
+	</select>
 </mapper>

@@ -3,6 +3,8 @@ package com.leaf.model.note;
 import java.util.List;
 import java.util.Map;
 
+import com.leaf.model.member.MemberDTO;
+
 public interface NoteDAO {
 	public int writeNote(NoteDTO dto);
 	public String getTeacherId(String studentId);
@@ -16,4 +18,7 @@ public interface NoteDAO {
 	public void noteOpenUpdate();
 	public NoteDTO noteDelChk();
 	public void noteDeleteDB(List<String> note_chk_values);
+	public MemberDTO selectMemberLevel(String sessionid);
+	public List<MemberDTO> selectTeacher(String sessionid);
+	public List<MemberDTO> selectStudent(String sessionid);
 	}

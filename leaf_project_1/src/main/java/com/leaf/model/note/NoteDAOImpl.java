@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.leaf.model.member.MemberDTO;
+
 @Component
 public class NoteDAOImpl implements NoteDAO {
 
@@ -83,5 +85,23 @@ public class NoteDAOImpl implements NoteDAO {
 	public void noteDeleteDB(List<String> note_chk_values) {
 		NoteDAO dao = sqlSession.getMapper(NoteDAO.class);
 		dao.noteDeleteDB(note_chk_values);
+	}
+
+	@Override
+	public MemberDTO selectMemberLevel(String sessionid) {
+		NoteDAO dao = sqlSession.getMapper(NoteDAO.class);
+		return dao.selectMemberLevel(sessionid);
+	}
+
+	@Override
+	public List<MemberDTO> selectTeacher(String sessionid) {
+		NoteDAO dao = sqlSession.getMapper(NoteDAO.class);
+		return dao.selectTeacher(sessionid);
+	}
+
+	@Override
+	public List<MemberDTO> selectStudent(String sessionid) {
+		NoteDAO dao = sqlSession.getMapper(NoteDAO.class);
+		return dao.selectStudent(sessionid);
 	}
 }
