@@ -13,7 +13,7 @@
 	</select>
 
 	<select id="getCount" parameterType="Integer" resultType="Integer">
-    select count(*) from book
+    select count(*) from book where enabled=1
     </select>
     
     <select id="getBookById" parameterType="Integer" resultType="com.leaf.model.book.BookDTO">
