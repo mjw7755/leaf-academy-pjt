@@ -31,7 +31,7 @@ $(function(){
       });   
 });
 function pasteHTML(filepath){
-     var sHTML = '<img src="src="${pageContext.request.contextPath }/resources/se/upload/'+filepath+'">'; 
+     var sHTML = '<img src="${pageContext.request.contextPath }/resources/se/upload/'+filepath+'">'; 
 /* var sHTML = '<img src="C:/Users/AHN/git/StudyHaja_1/StudyHaja/WebContent/ahn/se2/upload/'+filepath+'">'; */ 
        oEditors.getById["curri_content"].exec("PASTE_HTML", [sHTML]);
    }
