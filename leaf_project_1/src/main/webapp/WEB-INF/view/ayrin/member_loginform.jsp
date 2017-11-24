@@ -95,6 +95,7 @@ label {
 }
 .form-group {
 	margin-bottom: 15px;
+	margin-left:40px;
 }
 #username,#userpassword{
 	width: 100px;
@@ -144,13 +145,9 @@ h1{
 			</td>			
 		</tr>
 		<tr>
-			<td>
+			<td colspan="2">
      			<div class="form-group text-center">
         			<button type="submit" class="btn btn-info" id="login">로그인</button>
-				</div>
-        	</td>
-			<td>
-				<div class="form-group text-center">
 				<a href="signupForm.do">
 					<button type="button" class="btn btn-info" id="signup">회원가입</button>
 				</a>

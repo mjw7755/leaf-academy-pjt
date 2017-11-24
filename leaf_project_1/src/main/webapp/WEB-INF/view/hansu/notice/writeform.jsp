@@ -100,7 +100,7 @@ font-size: 0.6em; }
 			</tr>		
 			<tr>
 				<td id="whqrp">내용 : </td>
-				<td><textarea style="width: 100%; height:300px" name="notice_content" class="form-control"></textarea></td>
+				<td><textarea style="width: 100%; height:200px" name="notice_content" class="form-control"></textarea></td>
 			</tr>	
 			<tr>
 				<td colspan="2">
