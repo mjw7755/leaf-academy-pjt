@@ -91,7 +91,7 @@ function list(page){
 				</td>
 			</tr>
 			<tr>
-				<td><button id="noteDel">쪽지삭제</button></td><td><a href="sendNoteList.do">보낸쪽지함</a></td>
+				<td><button id="noteDel">쪽지삭제</button></td><td><a href="sendNoteList.do">보낸쪽지함</a><a href="noteSendForm.do">쪽지 보내기</a></td>
 			</tr>
 		</tbody>
 	</table>
