@@ -1,22 +1,22 @@
--- qna 寃뚯떆�뙋
+-- qna 野껊슣�뻻占쎈솇
 create table qna(
-qna_id number primary key, 			-- num qna_id 踰덊샇
-member_id varchar2(20) NOT NULL, 		-- member_id �븘�씠�뵒
-qna_title varchar2(50) NOT NULL, 	--  qna_title �젣紐�
-qna_content clob NOT NULL,			--  qna_content �궡�슜
-qna_writedate varchar2(50) not null,		-- qna_writedate 寃뚯떆�뙋 留뚮뱺 �궇吏�
-qna_modifydate varchar2(50),	-- qna_modifydate 寃뚯떆�뙋 �닔�젙 �궇吏�
-qna_level number  not null,	-- qna_level 洹몃９ �젅踰�
-qna_ref number  not null,		-- qna_ref 洹몃９( 湲��뿉 ���븳...)
-qna_step number  not null,  -- qna_step 洹몃９ �뒪�뀦
+qna_id number primary key, 			-- num qna_id 甕곕뜇�깈
+member_id varchar2(20) NOT NULL, 		-- member_id 占쎈툡占쎌뵠占쎈탵
+qna_title varchar2(50) NOT NULL, 	--  qna_title 占쎌젫筌륅옙
+qna_content clob NOT NULL,			--  qna_content 占쎄땀占쎌뒠
+qna_writedate varchar2(50) not null,		-- qna_writedate 野껊슣�뻻占쎈솇 筌띾슢諭� 占쎄텊筌욑옙
+qna_modifydate varchar2(50),	-- qna_modifydate 野껊슣�뻻占쎈솇 占쎈땾占쎌젟 占쎄텊筌욑옙
+qna_level number ,	-- qna_level 域밸챶竊� 占쎌쟿甕곤옙
+qna_ref number ,		-- qna_ref 域밸챶竊�( 疫뀐옙占쎈퓠 占쏙옙占쎈립...)
+qna_step number ,  -- qna_step 域밸챶竊� 占쎈뮞占쎈��
 enabled number(1),           -- enabled
 foreign Key (member_id) REFERENCES Member (member_id)
 );				
 
- create sequence qna_seq -- [�떆���뒪紐�]
-    start with 1 --�떆�옉 �닽�옄
-    increment by 1 --1�뵫 利앷�
-    maxvalue 10000 --理쒕�媛�
+ create sequence qna_seq -- [占쎈뻻占쏙옙占쎈뮞筌륅옙]
+    start with 1 --占쎈뻻占쎌삂 占쎈떭占쎌쁽
+    increment by 1 --1占쎈뎃 筌앹빓占�
+    maxvalue 10000 --筌ㅼ뮆占썲첎占�
  
  
 create sequence faq_seq
@@ -30,38 +30,38 @@ nocache;
 
 select * from qna;
 
--- faq �옄二� 臾삳뒗 吏덈Ц
+-- faq 占쎌쁽雅뚳옙 �눧�궠�뮉 筌욌뜄揆
 create table faq(
-faq_id number primary key, 			-- num faq_id 踰덊샇
-faq_title varchar2(50) NOT NULL, 	--  qna_title �젣紐�
-faq_content clob NOT NULL,			--  qna_content �궡�슜
+faq_id number primary key, 			-- num faq_id 甕곕뜇�깈
+faq_title varchar2(50) NOT NULL, 	--  qna_title 占쎌젫筌륅옙
+faq_content clob NOT NULL,			--  qna_content 占쎄땀占쎌뒠
 enabled number(1)           -- enabled
 );	
 
- create sequence faq_seq -- [�떆���뒪紐�]
-    start with 1 --�떆�옉 �닽�옄
-    increment by 1 --1�뵫 利앷�
-    maxvalue 10000 --理쒕�媛�
+ create sequence faq_seq -- [占쎈뻻占쏙옙占쎈뮞筌륅옙]
+    start with 1 --占쎈뻻占쎌삂 占쎈떭占쎌쁽
+    increment by 1 --1占쎈뎃 筌앹빓占�
+    maxvalue 10000 --筌ㅼ뮆占썲첎占�
 
 select * from faq;
 
 
--- notice 怨듭��궗�빆
+-- notice �⑤벊占쏙옙沅쀯옙鍮�
 create table notice(
-notice_id number primary key, 			-- num notice_id 踰덊샇
-member_id varchar2(20) NOT NULL, 		-- member_id �븘�씠�뵒
-notice_title varchar2(50) NOT NULL, 	--  notice_title �젣紐�
-notice_content clob NOT NULL,			--  notice_content �궡�슜
-notice_writedate varchar2(50) not null,		-- notice_writedate 寃뚯떆�뙋 留뚮뱺 �궇吏�
-notice_modifydate varchar2(50),	-- notice_modifydate 寃뚯떆�뙋 �닔�젙 �궇吏�
+notice_id number primary key, 			-- num notice_id 甕곕뜇�깈
+member_id varchar2(20) NOT NULL, 		-- member_id 占쎈툡占쎌뵠占쎈탵
+notice_title varchar2(50) NOT NULL, 	--  notice_title 占쎌젫筌륅옙
+notice_content clob NOT NULL,			--  notice_content 占쎄땀占쎌뒠
+notice_writedate varchar2(50) not null,		-- notice_writedate 野껊슣�뻻占쎈솇 筌띾슢諭� 占쎄텊筌욑옙
+notice_modifydate varchar2(50),	-- notice_modifydate 野껊슣�뻻占쎈솇 占쎈땾占쎌젟 占쎄텊筌욑옙
 enabled number(1),           -- enabled
 foreign Key (member_id) REFERENCES Member (member_id)
 );			
 
- create sequence notice_seq -- [�떆���뒪紐�]
-    start with 1 --�떆�옉 �닽�옄
-    increment by 1 --1�뵫 利앷�
-    maxvalue 10000 --理쒕�媛�
+ create sequence notice_seq -- [占쎈뻻占쏙옙占쎈뮞筌륅옙]
+    start with 1 --占쎈뻻占쎌삂 占쎈떭占쎌쁽
+    increment by 1 --1占쎈뎃 筌앹빓占�
+    maxvalue 10000 --筌ㅼ뮆占썲첎占�
     
 
 select * from notice;
