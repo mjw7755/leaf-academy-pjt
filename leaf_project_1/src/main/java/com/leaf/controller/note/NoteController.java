@@ -67,7 +67,7 @@ public class NoteController {
 		String[] chkValues = request.getParameterValues("studentChk");
 		String sessionid = (String) request.getSession().getAttribute("sessionid");
 		MemberDTO dto = noteDAO.selectMemberLevel(sessionid);
-		int member_level = Integer.parseInt(dto.getMember_level());
+		int member_level = dto.getMember_level();
 		
 		
 		//학생이면 듣고있는 강의의 강사아이디와 강사 이름 가져오기

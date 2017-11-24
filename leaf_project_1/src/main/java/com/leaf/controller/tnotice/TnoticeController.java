@@ -35,7 +35,7 @@ public class TnoticeController {
 		String member_id = (String) request.getSession().getAttribute("sessionid");
 		MemberDTO dto = memberdao.getMemberById(member_id);
 		mav.addObject("dto", dto);
-		if (Integer.parseInt(dto.getMember_level()) == 1) {
+		if (dto.getMember_level() == 1) {
 			String strPage = request.getParameter("page");
 			String flag = "list";
 			int page;
