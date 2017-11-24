@@ -24,11 +24,11 @@
 	<selectKey resultType="int" keyProperty="book_id" order="BEFORE">
          select NVL(max(book_id),0)+1 from book
     </selectKey>
-    insert into book(book_id, member_id, book_title, book_writer, book_cost, book_contents, book_image, enabled) values(#{book_id}, #{member_id}, #{book_title}, #{book_writer}, #{book_cost}, #{book_contents}, #{book_image}, 1)
+    insert into book(book_id, member_id, book_title, book_writer, book_cost, book_contents, book_image, book_url, enabled) values(#{book_id}, #{member_id}, #{book_title}, #{book_writer}, #{book_cost}, #{book_contents}, #{book_image}, #{book_url}, 1)
 	</insert>
 	
 	<update id="updateBook" parameterType="com.leaf.model.book.BookDTO">
-	update book set book_title=#{book_title}, book_writer=#{book_writer}, book_cost=#{book_cost}, book_contents=#{book_contents}, book_image=#{book_image} where book_id=#{book_id}
+	update book set book_title=#{book_title}, book_writer=#{book_writer}, book_cost=#{book_cost}, book_contents=#{book_contents}, book_image=#{book_image}, book_url=#{book_url} where book_id=#{book_id}
 	</update>
 	
 	<delete id="deleteBook" parameterType="com.leaf.model.book.BookDTO">

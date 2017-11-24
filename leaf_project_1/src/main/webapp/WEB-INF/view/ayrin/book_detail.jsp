@@ -83,7 +83,7 @@ font-size: 0.6em; }
     <tr> <td rowspan="7"><img src="resources/${dto.book_image}" style="width: 300px; height: 400px"></td> </tr>
 	<tr> <td id="title">제목 :</td> <td>${dto.book_title}</td> </tr>
 	<tr> <td id="title">저자 :</td> <td>${dto.book_writer}</td> </tr>
-	<tr> <td id="title">가격 :</td> <td>${dto.book_cost} <input type="button" value="구매하기" class="btn btn--sm btn--green"></td> </tr>
+	<tr> <td id="title">가격 :</td> <td>${dto.book_cost} <input type="button" value="구매하기" onclick="window.open('${dto.book_url}')" class="btn btn--sm btn--green"></td> </tr>
 	<tr> <td colspan="2" id="title"><hr></td></tr>
 	<tr> <td id="title" colspan="2">소개</td></tr>
 	<tr> <td colspan="2" id="content">${dto.book_contents}</td></tr>

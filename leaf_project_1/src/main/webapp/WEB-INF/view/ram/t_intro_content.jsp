@@ -218,7 +218,7 @@
                if(msg.countPage>=msg.startPage+i) {
                   if(msg.flag == 'list') {
                      strTag = strTag + "<a class=\"strong\""
-                     +"      onclick=\"reviewList("+(msg.page+i)+")\">"+(msg.startPage+i)+"</a>";
+                     +"      onclick=\"reviewList("+(msg.startPage+i)+")\">"+(msg.startPage+i)+"</a>";
                   } else if(msg.flag == 'search') {
                      strTag = strTag + "<a class=\"strong\""
                      +"   href=\"review_search.do?page="+(msg.startPage+i)+"&column=${column}&keyvalue=${keyvalue}&teacher_id="+dto.teacher_id+"\">"+(msg.startPage+i)+"</a>";
