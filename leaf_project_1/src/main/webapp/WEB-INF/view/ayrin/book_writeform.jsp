@@ -108,6 +108,10 @@ font-size: 0.7em; }
          <td id="whqrp">제목 : </td>
          <td><input type="text" name="book_title" style="width: 100%;" class="form-control"></td>
 	  </tr>
+	  	<tr>
+			<td id="whqrp">URL : </td>
+			<td><input type="text" name="book_url" style="width: 100%;" class="form-control"></td>
+		</tr>
 			<tr>
 				<td rowspan="3" id="image_preview"><div >
 						<img src="resources/ram/book_image.png"
