@@ -11,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.leaf.model.listening.ListeningDAO;
+import com.leaf.model.listening.ListeningDTO;
 import com.leaf.model.member.MemberDAO;
 import com.leaf.model.member.MemberDTO;
 import com.leaf.model.payment.PaymentDAO;
@@ -23,6 +25,8 @@ public class ListeningController {
 	private MemberDAO memberdao;
 	@Resource
 	private PaymentDAO paymentdao;
+	@Resource
+	private ListeningDAO listeningDAO;
 	
 /*	@RequestMapping("/listening.do")
 	public String myclass() {
@@ -41,7 +45,7 @@ public class ListeningController {
 			MemberDTO dto = memberdao.getMemberById(member_id);
 			mav.addObject("dto", dto);
 			
-			if(Integer.parseInt(dto.getMember_level()) == 1) {
+			if(dto.getMember_level() == 1) {
 				
 				int chk = 1;
 				model.addAttribute("myclass", chk);
@@ -56,8 +60,18 @@ public class ListeningController {
 				int chk = 2;
 				model.addAttribute("myclass", chk);
 				
-				List<PaymentDTO> history = paymentdao.allPayment();
-				model.addAttribute("history", history);
+				List<ListeningDTO> classList = listeningDAO.getClassList(member_id);
+				model.addAttribute("classList", classList);
+				model.addAttribute("memberLevel", dto.getMember_level());
+
+				String lect_id_str = request.getParameter("lect_id");
+				int lect_id = 0;
+				if(lect_id_str==null && classList!=null) lect_id = classList.get(0).getLect_id();
+				else lect_id = Integer.parseInt(lect_id_str);
+				
+				List<String> studentList = listeningDAO.getStudentList(lect_id);
+				model.addAttribute("studentList", studentList);
+				model.addAttribute("lect_id", lect_id);
 				
 				return "king.listen";
 			}

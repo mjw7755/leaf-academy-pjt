@@ -23,8 +23,9 @@ public class VideoChatWebSocketHandler implements WebSocketHandler {
 		public void afterConnectionClosed(WebSocketSession arg0, CloseStatus arg1) throws Exception {
 			System.out.println("연결끊음");
 			//리스트에서 제거 
-			names.remove(list.indexOf(arg0));
-			list.remove(arg0);
+			int index = list.indexOf(arg0);
+			names.remove(index);
+			list.remove(index);
 		}
 	    //클라이언트가 연결 되었을때 호출되는 메소드
 		@Override
