@@ -156,7 +156,7 @@ display: none;
    #quick p{
       padding-top: 10px;
    }
-   #quick_myclass, #quick_mypage, #quick_book, #quick_curri{
+   #quick_myclass, #quick_mypage, #quick_message, #quick_curri{
       border: 1px solid;
       border-color: #9c9e9c;
       height: 60px;
@@ -165,12 +165,12 @@ display: none;
       font-weight: bold;
       background-color: #fff;
    }
-   #quick_myclass p, #quick_mypage p, #quick_book p, #quick_curri p{
+   #quick_myclass p, #quick_mypage p, #quick_message p, #quick_curri p{
       margin: auto;
       padding-top: 5px;
       padding-bottom: 5px;
    }
-   #quick_myclass img, #quick_mypage img, #quick_book img, #quick_curri img{
+   #quick_myclass img, #quick_mypage img, #quick_message img, #quick_curri img{
       width:30px;
       height: 30px;
    }
@@ -258,10 +258,10 @@ display: none;
    </div>
    </a>
    
-   <a href="book_list.do">
-   <div id="quick_book">
-      <p>도서</p>
-      <img src="resources/ram/book3.png">
+   <a href="noteList.do">
+   <div id="quick_message">
+      <p>쪽지함</p>
+      <img src="resources/ram/message.png">
    </div>
    </a>
    

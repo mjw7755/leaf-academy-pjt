@@ -1,12 +1,13 @@
 create table company(
 com_id number primary key,--�쉶�궗 �냼媛� �븘�씠�뵒
 com_content varchar2(4000),--�쉶�궗 �냼媛� �궡�슜
-enabled number(1));
+enabled number(1));--사용안함
 
 create table teacher_intro(
 teacher_id number primary key, --媛뺤궗�냼媛� �븘�씠�뵒
 member_id varchar2(20), --�쉶�썝 �븘�씠�뵒
 teacher_introduce varchar2(500), -- 媛뺤궗�냼媛� �궡�슜
+teacher_image varchar2(500),
 enabled number(1),
 foreign Key (member_id) REFERENCES Member (member_id)
 );

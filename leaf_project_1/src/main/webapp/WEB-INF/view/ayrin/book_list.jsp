@@ -166,6 +166,26 @@ $(document).ready(function(){
    </c:if>
    <table id="booklistTable">
       <c:forEach items="${ list }" var="list" varStatus="status">
+<<<<<<< HEAD
+			<c:if test="${sessionScope.sessionid!='관리자'}">
+			<tr>
+				<td rowspan="4" class="bookline" style="width:100px"><a href="book_detail.do?book_id=${ list.book_id }">
+				<img src="resources/${list.book_image}" style="width: 100px; height: 120px"></a></td>
+			</tr>
+			<tr>
+				<td id="booktd">
+					<a href="book_detail.do?book_id=${ list.book_id }">${list.book_title }</a>
+				</td>
+				<td rowspan="4" style="width:80px"><input type="button" value="구매하기" class="btn btn--sm btn--green" <%-- id="${list.book_title }" --%>></td>
+			</tr>
+			<tr>
+				<td id="booktd">저자(출판사) : ${list.book_writer}</td>
+			</tr>
+			<tr>
+				<td id="booktd" class="bookline">가격 : ${list.book_cost}</td>
+			</tr>
+			</c:if>
+=======
          <c:if test="${sessionScope.sessionid!='관리자'}">
          <tr>
             <td rowspan="4" class="bookline" style="width:100px"><a href="book_detail.do?book_id=${ list.book_id }">
@@ -184,6 +204,7 @@ $(document).ready(function(){
             <td id="booktd" class="bookline">가격 : ${list.book_cost}</td>
          </tr>
          </c:if>
+>>>>>>> refs/remotes/origin/master
       </c:forEach>   
    </table>
    

@@ -11,12 +11,21 @@
    width: 800px;
    text-align: center;
 }
+
 #noticewriteTable td {
-   border: 1px solid;
-   border-radius: 4px;
+   padding-top: 10px;
+   padding-bottom: 10px;
+}
+#writeform{
+   width:800px;
+}
+#writeform hr{
+	border: thin solid;
+	border-color: #cccccc;
 }
 #whqrp {
-	width: 200px;
+	width: 180px;
+	font-weight: bold;
 }
 .btn {
        display: inline-block;
@@ -53,20 +62,45 @@ outline: none; }
 .btn--green {
 font-size: 1em; }
 .btn--sm {
-font-size: 0.5em; }
+font-size: 0.6em; }
+/*  */
+.form-control {
+	display: block;
+	margin-right: 15px;
+	width: 100%;
+	/* height: 34px; */
+	padding: 6px 0px;
+	font-size: 14px;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow
+		ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out
+		.15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	/* margin-left: 15px; */
+}
 </style>
 </head>
 <body>
-<br><br><br><br><br>
+<div id="writeform">
+    <h1>공지사항 추가</h1>
+<hr>
+</div>
 	<form action="notice_write.do" >
 		<table id="noticewriteTable">		
 			<tr>
 				<td id="whqrp">제목 : </td>
-				<td><input type="text" name="notice_title" style="width: 100%;"></td>
+				<td><input type="text" name="notice_title" style="width: 100%;" class="form-control"></td>
 			</tr>		
 			<tr>
 				<td id="whqrp">내용 : </td>
-				<td><textarea style="width: 100%; height:300px" name="notice_content" ></textarea></td>
+				<td><textarea style="width: 100%; height:300px" name="notice_content" class="form-control"></textarea></td>
 			</tr>	
 			<tr>
 				<td colspan="2">

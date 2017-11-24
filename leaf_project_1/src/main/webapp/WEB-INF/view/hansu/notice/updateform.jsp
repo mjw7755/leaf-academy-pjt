@@ -7,16 +7,24 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title></title>
 <style type="text/css">
+#updateform{
+   width:800px;
+}
+#updateform hr{
+	border: thin solid;
+	border-color: #cccccc;
+}
 #noticeupdateTable {
    width: 800px;
    text-align: center;
 }
 #noticeupdateTable td {
-   border: 1px solid;
-   border-radius: 4px;
+   padding-top: 10px;
+   padding-bottom: 10px;
 }
 #whqrp {
 	width: 180px;
+	font-weight: bold;
 }
 .btn {
        display: inline-block;
@@ -53,22 +61,47 @@ outline: none; }
 .btn--green {
 font-size: 1em; }
 .btn--sm {
-font-size: 0.5em; }
+font-size: 0.6em; }
+/*  */
+.form-control {
+	display: block;
+	margin-right: 15px;
+	width: 100%;
+	/* height: 34px; */
+	padding: 6px 0px;
+	font-size: 14px;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow
+		ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out
+		.15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	/* margin-left: 15px; */
+}
 </style>
 </head>
 <body>
-<br><br><br><br><br>
+<div id="updateform">
+    <h1>공지사항 수정</h1>
+<hr>
+</div>
 	<form action="notice_update.do" >
 		<table id="noticeupdateTable">		
 			<input type="hidden" name="notice_id" style="width: 100%;" value="${dto.notice_id}">
 			<input type="hidden" name="member_id" style="width: 100%;" value="${dto.member_id}">
 			<tr>
 				<td id="whqrp">제목 : </td>
-				<td><input type="text" name="notice_title" style="width: 100%;" value="${dto.notice_title}"></td>
+				<td><input type="text" name="notice_title" style="width: 100%;" value="${dto.notice_title}" class="form-control"></td>
 			</tr>		
 			<tr>
 				<td id="whqrp">내용 : </td>
-				<td><textarea style="width: 100%; height:300px" name="notice_content" >${dto.notice_content}</textarea></td>
+				<td><textarea style="width: 100%; height:300px" name="notice_content" class="form-control">${dto.notice_content}</textarea></td>
 			</tr>	
 			<tr>
 				<td colspan="2">
@@ -81,3 +114,4 @@ font-size: 0.5em; }
 <br><br><br><br><br>
 </body>
 </html>
+

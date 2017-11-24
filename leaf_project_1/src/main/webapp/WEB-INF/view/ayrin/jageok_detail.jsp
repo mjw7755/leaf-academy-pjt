@@ -98,4 +98,3 @@ font-size: 0.5em; }
 	</c:if>
 </body>
 </html>
-

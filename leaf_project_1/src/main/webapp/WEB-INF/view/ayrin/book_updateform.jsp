@@ -10,12 +10,23 @@
 #bookupdateTable {
    width: 800px;
    text-align: center;
+   margin-bottom: 20px;
 }
-#bookupdateTable td {
-   border: 1px solid;
+#updateform{
+   width:800px;
 }
+
+#updateform hr{
+	border: thin solid;
+	border-color: #cccccc;
+}
+/*  */
 #whqrp {
-	width: 200px;
+	padding-left:30px;
+	padding-right:10px;
+	width: 60px;
+	font-weight: bold;
+	text-align: left;
 }
 .btn {
        display: inline-block;
@@ -52,50 +63,77 @@ outline: none; }
 .btn--green {
 font-size: 1em; }
 .btn--sm {
-font-size: 0.5em; }
+font-size: 0.6em; }
+/*  */
+#book_image{
+	width: 300px;
+}
+/*  */
+.form-control {
+	display: block;
+	margin-right: 15px;
+	width: 100%;
+	/* height: 34px; */
+	padding: 6px 0px;
+	font-size: 14px;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow
+		ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out
+		.15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	/* margin-left: 15px; */
+}
 </style>
 </head>
 <body>
+<div id="updateform">
+    <h1>도서 수정</h1>
+<hr>
+</div>
 <form action="book_update.do" enctype="multipart/form-data" method="post">
 	<table id="bookupdateTable">
+			<input type="hidden" name="book_id" value="${dto.book_id}" >
 		<tr>
-			<td id="whqrp">NO. : </td>
-			<td><input readonly="readonly" type="text" name="book_id" value="${dto.book_id}" style="width: 100%;"></td>
+			<td><input type="file" name="uploadfile"  id="image"></td>
+			<td id="whqrp">작성자 : </td>
+			<td>${dto.member_id}</td>
 		</tr>
 		<tr>
-			<td>member_id : </td>
-			<td><input readonly="readonly" name="member_id" value="${dto.member_id}" style="width: 100%;"></td>
+				<td rowspan="4" id="book_image">
+					<div id="image_preview">
+						<img src="resources/ram/book_image.png"
+							style="width: 300px; height: 400px" />  <br /> <a href="#">Remove</a>
+					</div></td>
+				<td id="whqrp">제목 : </td>
+			<td><input type="text" name="book_title" value="${dto.book_title}" class="form-control"></td>
 		</tr>
 		<tr>
-			<td>제목 : </td>
-			<td><input type="text" name="book_title" value="${dto.book_title}" style="width: 100%;"></td>
+			<td id="whqrp">저자 : </td>
+			<td><input type="text" name="book_writer" value="${dto.book_writer}" class="form-control"></td>
 		</tr>
 		<tr>
-			<td>이미지 : </td>
-			<td><img src="resources/${dto.book_image}" style="width: 120px; height: 140px" style="width: 100%;"></td>
+			<td id="whqrp">가격 : </td>
+			<td><input type="text" name="book_cost" value="${dto.book_cost}" class="form-control" ></td>
 		</tr>
 		<tr>
-			<td>저자 : </td>
-			<td><input type="text" name="book_writer" value="${dto.book_writer}" style="width: 100%;"></td>
+			<td id="whqrp">소개 : </td>
+			<td><textarea rows="" cols="" name="book_contents" style="width: 100%; height:300px" class="form-control">${dto.book_contents}</textarea></td>
 		</tr>
-		<tr>
-			<td>가격 : </td>
-			<td><input type="text" name="book_cost" value="${dto.book_cost}" style="width: 100%;"></td>
-		</tr>
-		<tr>
-			<td>소개 : </td>
-			<td><textarea rows="" cols="" name="book_contents" style="width: 100%; height:300px">${dto.book_contents}</textarea></td>
-		</tr>
-		<tr>
-			<td colspan="2"><input type="file" name="uploadfile"  id="image" class="btn btn--sm btn--green"><input type="submit" class="btn btn--sm btn--green" value="수정완료"><input class="btn btn--sm btn--green" type="reset" value="초기화" ></td>
-		</tr>
+
 	</table>
+	<div id="submit">
+	<input type="submit" class="btn btn--sm btn--green" value="수정완료">
+	<input class="btn btn--sm btn--green" type="reset" value="초기화" >
+	</div>
 </form>
-	<div id="image_preview">
-        <img src="#" />
-        <br />
-        <a href="#">Remove</a>
-    </div>
+	
 
 
     <script type="text/javascript">

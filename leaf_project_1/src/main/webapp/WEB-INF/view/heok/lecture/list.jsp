@@ -308,8 +308,3 @@ font-size: 0.6em; }
 </div>
 </body>
 </html>
-
-
-
-
-

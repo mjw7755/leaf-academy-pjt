@@ -109,7 +109,7 @@
     text-align: left;
     float: left;
 }
-thead th{
+#content_table thead tr th, #search_table thead tr th{
     width: 100px;
     /* border-top: 1px solid; */
     border-bottom: 1px solid #cccccc;
@@ -117,7 +117,7 @@ thead th{
     padding-bottom: 15px;
     background-color: #f4f3f1;
 }
-tbody td{
+#content_table tbody td, #search_table tbody td{
 	border-bottom: 1px solid #cccccc;
 	height: 50px;
 }
@@ -576,8 +576,3 @@ font-size: 0.6em; }
 </div>	
 </body>
 </html>
-
-
-
-
-

@@ -12,10 +12,24 @@
    text-align: center;
 }
 #jageokwriteTable td {
-   border: 1px solid;
+   padding-top: 10px;
+   padding-bottom: 10px;
 }
+#writeform{
+   width:800px;
+}
+
+#writeform hr{
+	border: thin solid;
+	border-color: #cccccc;
+}
+
 #whqrp {
-	width: 200px;
+	padding-left:30px;
+	padding-right:10px;
+	width: 60px;
+	font-weight: bold;
+	text-align: left;
 }
 .btn {
        display: inline-block;
@@ -52,10 +66,36 @@ outline: none; }
 .btn--green {
 font-size: 1em; }
 .btn--sm {
-font-size: 0.5em; }
+font-size: 0.6em; }
+/*  */
+.form-control {
+	display: block;
+	margin-right: 15px;
+	width: 100%;
+	/* height: 34px; */
+	padding: 6px 0px;
+	font-size: 14px;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow
+		ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out
+		.15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	/* margin-left: 15px; */
+}
 </style>
 </head>
 <body>
+<div id="writeform">
+    <h1>자격증 추가</h1>
+<hr>
+</div>
    <form action="jageok_write.do" >
    <table id="jageokwriteTable">
       <%-- <tr>
@@ -72,17 +112,17 @@ font-size: 0.5em; }
       
       <tr>
          <td id="whqrp">자격증 : </td>
-         <td><input type="text" name="jageok_title" style="width: 100%;"></td>
+         <td><input type="text" name="jageok_title" style="width: 100%;" class="form-control"></td>
       </tr>
       
       <tr>
          <td id="whqrp">시험일 : </td>
-         <td><input type="text" name="jageok_date" style="width: 100%;"></td>
+         <td><input type="text" name="jageok_date" style="width: 100%;" class="form-control"></td>
       </tr>
       
       <tr>
          <td id="whqrp">비용 : </td>
-         <td><input type="text" name="jageok_cost" style="width: 100%;"></td>
+         <td><input type="text" name="jageok_cost" style="width: 100%;" class="form-control"></td>
       </tr>
       <tr>
 		 <td colspan="2">

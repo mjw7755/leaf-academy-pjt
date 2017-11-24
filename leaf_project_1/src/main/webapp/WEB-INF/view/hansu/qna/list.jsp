@@ -127,7 +127,7 @@
 }
 
 .btn--sm {
-	font-size: 0.5em;
+	font-size: 0.6em;
 }
 /*  */
 /* button */
@@ -261,8 +261,10 @@
             <td><a href="qna_updateform.do?qna_id=${ list.qna_id }"><button id="edit" class="btn btn--sm btn--green">수정</button> </a></td>
             <td><a href="qna_delete.do?qna_id=${ list.qna_id }"><button id="delete" class="btn btn--sm btn--green">삭제</button></a></td>
             
-             <td id="multi"><input type="checkbox" style="width: 30px;" name="qna_id" value="${ list.qna_id }"></td>
 			</c:if>         
+			 <c:if test="${sessionScope.sessionid == '관리자'}">
+             <td id="multi"><input type="checkbox" style="width: 30px;" name="qna_id" value="${ list.qna_id }"></td>
+             </c:if>
          </tr>
       </c:forEach>
 

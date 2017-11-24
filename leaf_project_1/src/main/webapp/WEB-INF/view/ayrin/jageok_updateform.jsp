@@ -7,16 +7,26 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title></title>
 <style type="text/css">
+#updateform{
+   width:800px;
+}
+
+#updateform hr{
+	border: thin solid;
+	border-color: #cccccc;
+}
 #jageokupdateTable {
    width: 800px;
-   text-align: center;
+   text-align: left;
    border-radius: 4px;
 }
 #jageokupdateTable td {
-   border: 1px solid;
+   padding-top: 10px;
+   padding-bottom: 10px;
 }
 #whqrp {
 	width: 200px;
+	font-weight: bold;
 }
 .btn {
        display: inline-block;
@@ -53,36 +63,62 @@ outline: none; }
 .btn--green {
 font-size: 1em; }
 .btn--sm {
-font-size: 0.5em; }
+font-size: 0.7em; }
+/*  */
+.form-control {
+	display: block;
+	margin-right: 15px;
+	width: 100%;
+	/* height: 34px; */
+	padding: 6px 0px;
+	font-size: 14px;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow
+		ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out
+		.15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	/* margin-left: 15px; */
+}
+/*  */
+#submit{
+	width: 100%;
+}
 </style>
 </head>
 <body>
+<div id="updateform">
+    <h1>자격증 수정</h1>
+<hr>
+</div>
 <form action="jageok_update.do">
 	<table id="jageokupdateTable">
+			<input type="hidden" name="jageok_id" value="${dto.jageok_id}" style="width: 100%;">
 		<tr>
-			<td id="whqrp">NO. : </td>
-			<td><input readonly="readonly" type="text" name="jageok_id" value="${dto.jageok_id}" style="width: 100%;"></td>
+			<td id="whqrp">member_id : </td>
+			<td>${dto.member_id}</td>
 		</tr>
 		<tr>
-			<td>member_id : </td>
-			<td><input readonly="readonly" name="member_id" value="${dto.member_id}" style="width: 100%;"></td>
+			<td id="whqrp">TITLE : </td>
+			<td><input type="text" name="jageok_title" value="${dto.jageok_title}" class="form-control"></td>
 		</tr>
 		<tr>
-			<td>TITLE : </td>
-			<td><input type="text" name="jageok_title" value="${dto.jageok_title}" style="width: 100%;"></td>
+			<td id="whqrp">DATE : </td>
+			<td><input type="text" name="jageok_date" value="${dto.jageok_date}" class="form-control"></td>
 		</tr>
 		<tr>
-			<td>DATE : </td>
-			<td><input type="text" name="jageok_date" value="${dto.jageok_date}" style="width: 100%;"></td>
+			<td id="whqrp">COST : </td>
+			<td><input type="text" name="jageok_cost" value="${dto.jageok_cost}" class="form-control"></td>
 		</tr>
-		<tr>
-			<td>COST : </td>
-			<td><input type="text" name="jageok_cost" value="${dto.jageok_cost}" style="width: 100%;"></td>
-		</tr>
-	    <tr>
-	    	<td colspan="2"> <input type="submit" value="수정완료" class="btn btn--sm btn--green"> <input type="reset" value="초기화" class="btn btn--sm btn--green"> </td>
-	    </tr>   
 	</table>
+	    	<div id="submit"> <input type="submit" value="수정완료" class="btn btn--sm btn--green"> 
+	    	<input type="reset" value="초기화" class="btn btn--sm btn--green"> </div>
 </form>
 	
 </body>
