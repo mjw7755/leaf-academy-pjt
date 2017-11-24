@@ -3,27 +3,15 @@ create table curriculum (
     member_id varchar2(20) ,
     curri_level varchar2(50) not null,
     curri_subject varchar2(50) not null,
-    curri_content varchar2(50) not null,
+    curri_content clob not null,
     curri_write_time varchar2(30),
     curri_modify_time varchar2(30),
     
     curri_accept number(1),
-    enabled number(1) ,
-    foreign Key (member_id) REFERENCES Member (member_id)
+    enabled number(1) 
 );
-
-
-create sequence curri_seq
-start with 1
-maxvalue 9999
-minvalue 1
-increment by 1
-cycle
-nocache;
-
-
+create sequence curri_seq;
 drop table curriculum;
-
 insert into curriculum(curri_id, member_id, curri_level, curri_subject, curri_content, 
                         curri_write_time, curri_modify_time, curri_accept, enabled) 
       values (1,'1', '»ó', '¾Æ¾Ó', '±â¸ð¶ç','12','12',1,1);
@@ -38,30 +26,40 @@ create table lecture(
     lect_end_day varchar2(30) not null,
     lect_start_time varchar2(30) ,
     lect_end_time varchar2(30),
-    
+    lect_charge number,
     lect_write_time varchar2(30),
     lect_modify_time varchar2(30),
     
     lect_accept number(1),
-    enabled number(1),
-    foreign Key (curri_id) REFERENCES curriculum (curri_id)
+    enabled number(1)
 );
-
-
-create sequence lect_seq
-start with 1
-maxvalue 9999
-minvalue 1
-increment by 1
-cycle
-nocache;
-
-
+create sequence lect_seq;
 
 drop table lecture;
-
 insert into lecture( lect_id, curri_id, lect_name, lect_person_num, lect_start_day,
 			lect_end_day, lect_start_time,
 			lect_end_time, lect_write_time,
 			lect_modify_time, lect_accept, enabled) 
       values (6, 6, '»ó±Þ', 33, '2016-11-30', '2016-11-31', '11:04', '12:04','17-10-26 / 12:24:06','17-10-26 / 12:44:06', 1, 1);
+
+-------------------------------------------------------------------------   -------------------------------------------------------------------------   
+create table application(
+    appli_id varchar2(20) not null primary key,
+    member_id varchar2(20) not null,
+    lect_id varchar2(20) not null,
+    appli_reciever varchar(30) not null,
+    appli_address varchar(300) not null,
+    appli_address2 varchar(300) not null,
+    appli_addnum varchar(300) not null,
+    appli_tel varchar(20) not null,
+    appli_wtite_time varchar2(20) not null,
+    appli_caution varchar2(300),
+    appli_lect_subject varchar2(300),
+    appli_accept number(1),
+    enabled number(1)
+);
+create sequence appli_seq;
+drop table application;
+insert into application(  lect_accept, enabled) 
+      values (1,1);
+      
