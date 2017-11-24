@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,12 +21,15 @@ import org.apache.poi.EncryptedDocumentException;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.leaf.model.curriculum.LectDAO;
 import com.leaf.model.curriculum.LectDTO;
+import com.leaf.model.listening.ListeningDAO;
+import com.leaf.model.listening.ListeningDTO;
 import com.leaf.model.member.MemberDTO;
 import com.leaf.model.note.NoteDAO;
 import com.leaf.model.note.NoteDTO;
@@ -43,6 +47,9 @@ public class stuMgmtController {
 	
 	@Autowired
 	private StumgmtDAO stumgmtDAO;
+	
+	@Resource
+	private ListeningDAO listeningDAO;
 	
 	/*@RequestMapping("/attendForm.do")
 	public ModelAndView excel(HttpServletRequest request,HttpServletResponse response) throws ParseException {
@@ -85,14 +92,22 @@ public class stuMgmtController {
 	}*/
 	
 	@RequestMapping("stuMgmtForm.do")
-	public ModelAndView mgmtForm(HttpServletRequest request) {
+	public ModelAndView mgmtForm(Model model, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		String member_id = (String) request.getSession().getAttribute("sessionid");
 		
-		List<LectDTO> lect_list = stumgmtDAO.getMyLect(member_id);
-		/*List<MemberDTO> list = stumgmtDAO.getStudents(member_id);
+		List<ListeningDTO> classList = listeningDAO.getTeacherClassList(member_id);
+		model.addAttribute("classList", classList);
+
+		String lect_id_str = request.getParameter("lect_id");
+		int lect_id = 0;
+		if(lect_id_str==null && classList!=null) lect_id = classList.get(0).getLect_id();
+		else lect_id = Integer.parseInt(lect_id_str);
 		
-		mav.addObject("list",list);*/
+		List<String> studentList = listeningDAO.getStudentList(lect_id);
+		model.addAttribute("studentList", studentList);
+		model.addAttribute("lect_id", lect_id);
+		
 		mav.setViewName("moon.stuMgmt");
 		return mav;
 	}
@@ -221,10 +236,27 @@ public class stuMgmtController {
 	}
 	
 	@RequestMapping("getChkAttend.do")
-	public ModelAndView getChkAttend(HttpServletRequest request) throws EncryptedDocumentException, InvalidFormatException, FileNotFoundException, IOException, ParseException {
+	public ModelAndView getChkAttend(Model model, HttpServletRequest request) throws EncryptedDocumentException, InvalidFormatException, FileNotFoundException, IOException, ParseException {
 		ModelAndView mav = new ModelAndView();
 		String sessionid = (String) request.getSession().getAttribute("sessionid");
 		GetExcelFileData gefd = new GetExcelFileData();
+		
+		
+		///////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////
+		List<ListeningDTO> classList = listeningDAO.getStudentClassList(sessionid);
+		model.addAttribute("classList", classList);
+		
+		String lect_id_str = request.getParameter("lect_id");
+		int lect_id = 0;
+		if(lect_id_str==null && classList!=null) lect_id = classList.get(0).getLect_id();
+		else lect_id = Integer.parseInt(lect_id_str);
+		
+		model.addAttribute("lect_id", lect_id);
+		///////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////
 		
 		
 		/*여러개의 강의를 듣는 학생의 각 강의및  날짜 수 list 그리고 엑셀파일이름 리스트*/

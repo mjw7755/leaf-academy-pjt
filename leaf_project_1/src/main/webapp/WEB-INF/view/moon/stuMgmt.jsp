@@ -17,7 +17,25 @@
 
 	<h1>학생 관리</h1>
 	<hr>
+		<select id="teacherSelect" onchange="teachertSecletChange()" style="width:200px; float:left;">
+			<c:forEach items="${classList}" var="classList">
+					<option value="${classList.lect_id}">${classList.lect_name}</option>
+			</c:forEach>
+		</select>
+		<br>
+		<table>
+			<tr>
+				<td width="120px">학생아이디</td>
+			</tr>
+			<c:forEach items="${studentList}" var="studentList">
+			<tr>
+				<td>${studentList}</td>
+			</tr>
+			</c:forEach>
+		</table>
+	<hr>
 	<table>
+	
 		<thead>
 			<th>학생이름</th>
 			<th>아이디</th>
@@ -43,6 +61,23 @@
 		</form>
 		</tbody>
 	</table>
+	<script type="text/javascript">
+		function teachertSecletChange() {
+			var lect_id = $("#teacherSelect").val();
+			window.location.href='stuMgmtForm.do?lect_id='+lect_id;
+		}
+		
+		$(function() {
+			$("#txtTable").hide();
+			var optionObj = document.getElementById("teacherSelect");
+			var optionLength = optionObj.options.length;
+			for(var i=0; i<optionLength; i++) {
+				if (optionObj.options[i].value == "${lect_id}") {
+					optionObj.options[i].selected = "selected";
+				}
+			}
+		});
+	</script>
 	
 </div>
 </body>
