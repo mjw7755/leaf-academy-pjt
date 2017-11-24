@@ -66,7 +66,7 @@
 			if (express == "home") {
 				$("#newcategory").hide();
 				$("#homecategory").show();
-
+			
 			} else if (express == "new") {
 				$("#newcategory").show();
 				$("#homecategory").hide();
@@ -88,10 +88,14 @@
 		<li>불법으로 구매한 교재 혹은 무단 복제한 교재를 사용할 때는 저작권법에 따라 법적 처벌을 받을 수 있습니다.</li>
 	</span>
 	<br>
+	
+	${ldto.lect_id }
 	<form action="payment.do" method="post">
+	 <input type="hidden" name="payment_lect_id" value="${ldto.getLect_id()}" />
 		<input type="hidden" name="payment_member_id"
 			value="${sessionScope.sessionid }">
 		<h3>주문확인</h3>
+		
 		<span>
 			<table>
 				<tr>

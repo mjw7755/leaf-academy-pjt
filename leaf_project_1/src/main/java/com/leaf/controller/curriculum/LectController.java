@@ -68,7 +68,7 @@ public class LectController {
 		Date date = new Date();
 		String lect_write_time = sdf_t.format(date);
 		dto.setLect_write_time(lect_write_time);
-
+		
 		lectDAO.insertLect(dto);
 		mav.setViewName("redirect:list_lect.do");
 		return mav;
