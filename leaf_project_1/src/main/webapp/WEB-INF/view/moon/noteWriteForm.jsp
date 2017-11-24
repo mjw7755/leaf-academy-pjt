@@ -15,7 +15,12 @@
 		</tr>
 		
 		<tr>
-			<td>(받는사람 ID) : <input type="text" name="n_recv_id" id="n_recv_id" value="<c:forEach items="${chkValues }" var="value" varStatus="status"><c:if test="${status.index < fn:length(chkValues)-1}">${value },</c:if><c:if test="${status.index == fn:length(chkValues)-1 }">${value }</c:if></c:forEach>"></td>
+			<td>(받는사람 ID) : <input type="text" name="n_recv_id" id="n_recv_id" list="recvid" value="<c:forEach items="${chkValues }" var="value" varStatus="status"><c:if test="${status.index < fn:length(chkValues)-1}">${value },</c:if><c:if test="${status.index == fn:length(chkValues)-1 }">${value }</c:if></c:forEach>"></td>
+			<datalist  id="recvid">
+				<c:forEach items="${ list }" var="list">
+					<option value="${ list.member_id }"> ${ list.member_id } | ${ list.member_name }</option>
+				</c:forEach>
+			</datalist>
 		</tr>
 		
 		<tr>
@@ -31,7 +36,7 @@
 		</tr>
 		
 		<tr>
-			<td><!-- <input type="submit" value="보내기"> --><button id="mgmtNoteSend">보내기</button></td><td><button onclick="javascript:history.go(-1)">취소</button></td>
+			<td><!-- <input type="submit" value="보내기"> --><button id="mgmtNoteSend"><a href="javascript:history.go(-1)">보내기</a></button></td><td><button onclick="javascript:history.go(-1)">취소</button></td>
 		</tr>
 	</table>
 	

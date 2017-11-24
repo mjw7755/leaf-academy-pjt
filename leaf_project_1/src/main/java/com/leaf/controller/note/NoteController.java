@@ -8,13 +8,13 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.leaf.model.member.MemberDTO;
 import com.leaf.model.note.NoteDAO;
 import com.leaf.model.note.NoteDTO;
 import com.leaf.service.BoardPager;
@@ -65,6 +65,23 @@ public class NoteController {
 	public ModelAndView noteSendForm(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		String[] chkValues = request.getParameterValues("studentChk");
+		String sessionid = (String) request.getSession().getAttribute("sessionid");
+		MemberDTO dto = noteDAO.selectMemberLevel(sessionid);
+		int member_level = Integer.parseInt(dto.getMember_level());
+		
+		
+		//학생이면 듣고있는 강의의 강사아이디와 강사 이름 가져오기
+		if(member_level == 1) {
+			List<MemberDTO> list = noteDAO.selectTeacher(sessionid);
+			mav.addObject("list",list);
+		}
+		
+		
+		//강사면 하고있는 강의의 학생아이디와 학생 이름 가져오기
+		if(member_level == 2) {
+			List<MemberDTO> list = noteDAO.selectStudent(sessionid);
+			mav.addObject("list", list);
+		}
 		
 		
 		mav.addObject("chkValues", chkValues);
