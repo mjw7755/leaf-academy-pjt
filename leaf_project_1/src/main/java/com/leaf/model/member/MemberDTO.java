@@ -29,7 +29,7 @@ public class MemberDTO {
 	@Pattern(message="이메일을 양식에 맞게 적어주세요.(aaa@aaaa.com)", regexp="^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}$",groups={Group12.class})
 	private String member_email;
 	
-	private String member_level;
+	private int member_level;
 	
 	@NotEmpty(message="우편번호를 입력해주세요.", groups={Group13.class})
 	@Pattern(message="우편번호를 입력해주세요", regexp="^[0-9]{4,6}$", groups={Group14.class})
@@ -43,7 +43,7 @@ public class MemberDTO {
 	public MemberDTO() {	}
 	
 	public MemberDTO(String member_id, String member_pwd, String member_name, String member_tel, String member_email,
-			String member_level,String member_address, String member_addnum, int enabled) {
+			int member_level,String member_address, String member_addnum, int enabled) {
 		super();
 		this.member_id = member_id;
 		this.member_pwd = member_pwd;
@@ -103,10 +103,10 @@ public class MemberDTO {
 	public void setMember_email(String member_email) {
 		this.member_email = member_email;
 	}
-	public String getMember_level() {
+	public int getMember_level() {
 		return member_level;
 	}
-	public void setMember_level(String member_level) {
+	public void setMember_level(int member_level) {
 		this.member_level = member_level;
 	}
 	public int getEnabled() {
