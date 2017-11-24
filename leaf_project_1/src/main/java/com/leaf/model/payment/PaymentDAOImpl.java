@@ -54,6 +54,12 @@ public class PaymentDAOImpl implements PaymentDAO {
 		PaymentDAO dao = sqlSession.getMapper(PaymentDAO.class);
 		return dao.allPayment();
 	}
+
+	@Override
+	public List<PaymentDTO> paySelectId(String payment_member_id) {
+		PaymentDAO dao = sqlSession.getMapper(PaymentDAO.class);
+		return dao.paySelectId(payment_member_id);
+	}
 	
 	
 	

@@ -31,4 +31,15 @@
 	<select id="allPayment" resultType="com.leaf.model.payment.PaymentDTO">
 		select * from payment
 	</select>
+	
+	<select id="paySelectId" parameterType="String" resultType="com.leaf.model.payment.PaymentDTO">
+		<!-- select * from payment where payment_member_id = #{payment_member_id} -->
+		 select * from payment where payment_member_id = #{sessionid} order by payment_member_id desc 
+	</select>
+	
+	<select id="getPayment" parameterType="String" resultType="com.leaf.model.payment.PaymentDTO">
+   	<!-- select payment_member_id, payment_lect_charge, payment_lect_subject from payment where payment_member_id = #{sessionid} order by payment_member_id desc -->
+    </select>
+    
+    
 </mapper>

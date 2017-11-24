@@ -11,4 +11,6 @@ public interface PaymentDAO {
 	public void updatePayChk(int paychkInt);
 	public String selectMemberTel(int itemnumber);
 	public List<PaymentDTO> allPayment();
-}
+	public  List<PaymentDTO> paySelectId(String payment_member_id);
+	//public List<PaymentDTO> getPayment(String );
+}	

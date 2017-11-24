@@ -442,26 +442,17 @@ font-size: 0.6em; }
 		<hr>
 		</div>
       <table>
-         <tr>
-            <td>내역어케?? </td>
-            <td><input readonly="readonly" type="text" name="member_id" value="${dto.member_id}" style="width:300px"></td>
+      <tr>
+      	<th>강사</th><th>강좌명</th><th>결제액</th><th>결제일</th>
+      </tr>
+      <c:forEach items="${list}" var="list">
+         <tr> 	   
+           <td>${list.payment_teacher_name}</td>
+           <td>${list.payment_lect_subject}</td>
+           <td>${list.payment_lect_charge}</td>
+           <td>${list.payment_write_date}</td>
          </tr>
-         <tr>
-            <td>내역어케?? </td>
-            <td><input readonly="readonly" name="member_name" value="${dto.member_name}" style="width:300px"></td>
-         </tr>
-         <tr>
-            <td>내역어케?? </td>
-            <td><input type="text" name="member_pwd" value="${dto.member_pwd}" style="width:300px"></td>
-         </tr>
-         <tr>
-            <td>내역어케?? </td>
-            <td><input type="text" name="member_tel" value="${dto.member_tel}" style="width:300px"></td>
-         </tr>
-         <tr>
-            <td>내역어케?? </td>
-            <td><input type="text" name="member_email" value="${dto.member_email}" style="width:300px"></td>
-         </tr>
+         </c:forEach>
       </table>
    </div>
    <div id="member_bye"> 
