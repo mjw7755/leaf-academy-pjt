@@ -61,34 +61,34 @@ function sample4_execDaumPostcode() {
 }
 
 $(function(){
-	$("#passchk").click(function(){
-		var passwd = $("#member_pwd_1").val();
-			$.ajax({
-				url:"member_del.do",
-				type:"post",
-				data:{"passwd":passwd},
-				success:function(data){
-					//var res = JSON.parse(data);
-					if(data==0){
-						alert("암호가 틀렸습니다.");
-						$("#member_pwd_1").val("");
-					}else{
-						alert("회원탈퇴가 완료되었습니다.");
-						location.href = 'main.do';
-				}
-			}
-		});
-	});
+   $("#passchk").click(function(){
+      var passwd = $("#member_pwd_1").val();
+         $.ajax({
+            url:"member_del.do",
+            type:"post",
+            data:{"passwd":passwd},
+            success:function(data){
+               //var res = JSON.parse(data);
+               if(data==0){
+                  alert("암호가 틀렸습니다.");
+                  $("#member_pwd_1").val("");
+               }else{
+                  alert("회원탈퇴가 완료되었습니다.");
+                  location.href = 'main.do';
+            }
+         }
+      });
+   });
 });
 </script>
 <!-- <style type="text/css">
 .error {
-	color: red;
+   color: red;
 }
 /* span{
   font-size: 15px;
 } */
-#checkMsg{	
+#checkMsg{   
   font-size: 15px;
 }
 #checkPwd{
@@ -102,54 +102,54 @@ $(function(){
 </style> -->
 <script type="text/javascript">
 function checkfield(){
-	var f1 = document.forms[0];
-	  var pw1 = f1.member_pwd.value;
-	  var pw2 = f1.pwd_check.value;
-	  var prmpw = $('#member_pwd').val();
-	if(pw1 != pw2){
-		alert("암호확인을 해주세요");
-		history.back();
-	}
-	document.memberchk.submit();
+   var f1 = document.forms[0];
+     var pw1 = f1.member_pwd.value;
+     var pw2 = f1.pwd_check.value;
+     var prmpw = $('#member_pwd').val();
+   if(pw1 != pw2){
+      alert("암호확인을 해주세요");
+      history.back();
+   }
+   document.memberchk.submit();
 }
 function checkPwd(){
-	  var f1 = document.forms[0];
-	  var pw1 = f1.member_pwd.value;
-	  var pw2 = f1.pwd_check.value;
-	  var prmpw = $('#member_pwd').val();
-	  var pwReg = /^((?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{4,16})$/g;
-	  
-	  if(pw1!=pw2){
-	   document.getElementById('checkPwd').style.color = "red";
-	   document.getElementById('checkPwd').innerHTML = "동일한 암호를 입력하세요."; 
-	   if(pw2 == ""){
-			  $("#checkPwd").empty();
-		  }
-	   if(prmpw == ""){
-			  $("#checkPwd").empty();
-		  }
-	  }else{
-		  if(prmpw.length >=4 && prmpw.length <=16){
-			  if(pwReg.test( prmpw )){
-	   document.getElementById('checkPwd').style.color = "blue";
-	   document.getElementById('checkPwd').innerHTML = "암호가 확인 되었습니다."; 
-			  }else{
-				  document.getElementById('checkPwd').style.color = "red";
-				   document.getElementById('checkPwd').innerHTML = "영문자 숫자 특수문자를 조합해주세요."; 
-			  }
-		  }else{
-			  document.getElementById('checkPwd').style.color = "red";
-			   document.getElementById('checkPwd').innerHTML = "비밀번호는 4글자 이상 16글자 이하만 사용 가능 합니다."; 
-		  }
-	  }
+     var f1 = document.forms[0];
+     var pw1 = f1.member_pwd.value;
+     var pw2 = f1.pwd_check.value;
+     var prmpw = $('#member_pwd').val();
+     var pwReg = /^((?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{4,16})$/g;
+     
+     if(pw1!=pw2){
+      document.getElementById('checkPwd').style.color = "red";
+      document.getElementById('checkPwd').innerHTML = "동일한 암호를 입력하세요."; 
+      if(pw2 == ""){
+           $("#checkPwd").empty();
+        }
+      if(prmpw == ""){
+           $("#checkPwd").empty();
+        }
+     }else{
+        if(prmpw.length >=4 && prmpw.length <=16){
+           if(pwReg.test( prmpw )){
+      document.getElementById('checkPwd').style.color = "blue";
+      document.getElementById('checkPwd').innerHTML = "암호가 확인 되었습니다."; 
+           }else{
+              document.getElementById('checkPwd').style.color = "red";
+               document.getElementById('checkPwd').innerHTML = "영문자 숫자 특수문자를 조합해주세요."; 
+           }
+        }else{
+           document.getElementById('checkPwd').style.color = "red";
+            document.getElementById('checkPwd').innerHTML = "비밀번호는 4글자 이상 16글자 이하만 사용 가능 합니다."; 
+        }
+     }
 }
-function insertChk(){	  
-	  var frm = document.companyForm; 
-	  if(!chkVal('member_id','아이디'))return false;
-	  if($("#idChk").val() == 'N'){
-		  alert('ID체크를 해주세요.'); 
-		  return;
-	  }
+function insertChk(){     
+     var frm = document.companyForm; 
+     if(!chkVal('member_id','아이디'))return false;
+     if($("#idChk").val() == 'N'){
+        alert('ID체크를 해주세요.'); 
+        return;
+     }
 }
 </script>
 <script>
@@ -191,20 +191,20 @@ $(function() {
    });
    
    $("#attendance").click(function() {
-		$("#member_history").hide();
-		$("#member_bye").hide();
-		$("#member_info").show();
-	});
-	$("#lecture").click(function() {
-		$("#member_info").hide();
-		$("#member_bye").hide();
-		$("#member_history").show();
-	});
-	$("#grade").click(function() {
-		$("#member_info").hide();
-		$("#member_history").hide();
-		$("#member_bye").show();
-	});
+      $("#member_history").hide();
+      $("#member_bye").hide();
+      $("#member_info").show();
+   });
+   $("#lecture").click(function() {
+      $("#member_info").hide();
+      $("#member_bye").hide();
+      $("#member_history").show();
+   });
+   $("#grade").click(function() {
+      $("#member_info").hide();
+      $("#member_history").hide();
+      $("#member_bye").show();
+   });
 });
 </script>
 <style type="text/css">
@@ -225,14 +225,17 @@ $(function() {
    height: 500px;
    margin-left: 30px;
    float: left;
+}
+#pay_div{
    overflow: auto;
+	height: 300px;
 }
 #member_bye {
-	/* border: 1px solid; */
-	width: 600px;
-	height: 500px;
-	margin-left: 30px;
-	float: left;
+   /* border: 1px solid; */
+   width: 600px;
+   height: 500px;
+   margin-left: 30px;
+   float: left;
 }
 /* mypage text */
 #my_page_text {
@@ -267,10 +270,10 @@ $(function() {
    height: 100%;
 }
  #contents1 { 
-	margin-top: 20px;
+   margin-top: 20px;
  } 
  #contents1 td{ 
-	padding-bottom: 10px;
+   padding-bottom: 10px;
  } 
 .btn {
        display: inline-block;
@@ -309,21 +312,21 @@ font-size: 1em; }
 .btn--sm {
 font-size: 0.6em; }
 #rkdnsep{
-	text-align: center;
+   text-align: center;
 }
 #mypage_form hr{
-	border: thin solid;
-	border-color: #cccccc;
+   border: thin solid;
+   border-color: #cccccc;
 }
 #text{
-	padding-right: 30px;
+   padding-right: 30px;
     font-size: 13px;
     font-weight: bold;
     width: 110px;
 }
 /*  */
 .form-control {
-	/* display: block; */
+   /* display: block; */
     margin-right: 10px;
     /* width: 100%; */
     /* height: 34px; */
@@ -342,7 +345,7 @@ font-size: 0.6em; }
 }
 /*  */
 .btn3 {
-	display: inline-block;
+   display: inline-block;
     padding: 4px 12px;
     width:100px;
     margin-bottom: 0;
@@ -366,14 +369,28 @@ font-size: 0.6em; }
 }
 /*  */
 #member_bye_table {
-	margin-top: 20px;
+   margin-top: 20px;
 }
 #member_bye_table td{
-	padding-bottom: 10px;
+   padding-bottom: 10px;
 }
 #pay_table{
-	height: 500px;
-	
+	width:550px;
+	margin-bottom: 20px;
+	border-collapse: collapse;
+	text-align: center;
+}
+#pay_table th{
+    width: 100px;
+    /* border-top: 1px solid; */
+    border-bottom: 1px solid #cccccc;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #f4f3f1;
+}
+#pay_table td{
+	border-bottom: 1px solid #cccccc;
+	height: 50px;
 }
 </style>
 </head>
@@ -381,78 +398,78 @@ font-size: 0.6em; }
 <div class="my_page">
      
    <div id="member_info">
-   		<sf:form method="post" action="member_modify.do" commandName="dto" name="memberchk">
-   		<div id="mypage_form">
-    		<h1>개인정보 수정</h1>
-		<hr>
-		</div>
-	<table id="contents1">
-		<tr>
-			<td id="text">아이디 </td>
-			<td id="text">${dto.member_id}</td>
-		</tr>
-		<tr>
-     	    <td id="text"><span>암호  </span></td>
-    		<td><sf:password path="member_pwd" id="member_pwd" placeholder="영어 숫자 특수문자를 조합" class="form-control"/>
-     		    <sf:errors path="member_pwd" cssClass="error" /></td>
-  	    </tr>
-  	    <tr>
-    		<td id="text"><span>암호확인  </span></td>
-     	<td>
-       		<input type="password" name="pwd_check" onkeyup="checkPwd()"  placeholder="암호 확인" class="form-control"></input>
-       	 	<div id="checkPwd"></div>
-     		</td>
- 		 </tr>
-		<tr>
-			<td id="text">이름(Full Name) </td>
-			<td><sf:input path="member_name" placeholder="이름 입력" value="${dto.member_name}" class="form-control"/>
-			<sf:errors path="member_name" cssClass="error"/></td>
-		</tr>
-		<tr>
-			<td id="text">전화번호(휴대폰)  </td>
-			<td><sf:input path="member_tel" placeholder="000-0000-0000" value="${dto.member_tel}" class="form-control"/>
-			<sf:errors path="member_tel" cssClass="error"/></td>
-	    </tr>
-		<tr>
-			<td id="text">우편번호  </td>
-			<td><sf:input path="member_addnum" id="sample4_postcode" placeholder="우편번호" value="${dto.member_addnum}" class="form-control"/>
-			<sf:errors path="member_addnum" cssClass="error" /><br/>
-			<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn3 btn-primary btn-sm"><br>
-			<sf:input path="member_address" id="sample4_roadAddress" placeholder="도로명주소" value="${dto.member_address}" class="form-control"/>
-			<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소">
-			<span id="guide" style="color: #999"></span>
-			<sf:errors path="member_address" cssClass="error" /></td>
-		</tr>
-		<tr>
-			<td id="text">이메일  </td>
-			<td><sf:input path="member_email"  placeholder="이메일 입력" value="${dto.member_email}" class="form-control"/>
-		    <sf:errors path="member_email" cssClass="error" /></td>
-		</tr>
-	<tr id="rkdnsep">
-		<!-- <input type="submit" value="수정하기"> -->
-		<td colspan="2">
-			<input type="submit" value="수정완료" onclick="checkfield();" class="btn btn--sm btn--green">
-			<input type="reset" value="취소" class="btn btn--sm btn--green">
-		</td>
-	</tr>			
-	</table>
-	
-				
+         <sf:form method="post" action="member_modify.do" commandName="dto" name="memberchk">
+         <div id="mypage_form">
+          <h1>개인정보 수정</h1>
+      <hr>
+      </div>
+   <table id="contents1">
+      <tr>
+         <td id="text">아이디 </td>
+         <td id="text">${dto.member_id}</td>
+      </tr>
+      <tr>
+            <td id="text"><span>암호  </span></td>
+          <td><sf:password path="member_pwd" id="member_pwd" placeholder="영어 숫자 특수문자를 조합" class="form-control"/>
+               <sf:errors path="member_pwd" cssClass="error" /></td>
+         </tr>
+         <tr>
+          <td id="text"><span>암호확인  </span></td>
+        <td>
+             <input type="password" name="pwd_check" onkeyup="checkPwd()"  placeholder="암호 확인" class="form-control"></input>
+              <div id="checkPwd"></div>
+           </td>
+        </tr>
+      <tr>
+         <td id="text">이름(Full Name) </td>
+         <td><sf:input path="member_name" placeholder="이름 입력" value="${dto.member_name}" class="form-control"/>
+         <sf:errors path="member_name" cssClass="error"/></td>
+      </tr>
+      <tr>
+         <td id="text">전화번호(휴대폰)  </td>
+         <td><sf:input path="member_tel" placeholder="000-0000-0000" value="${dto.member_tel}" class="form-control"/>
+         <sf:errors path="member_tel" cssClass="error"/></td>
+       </tr>
+      <tr>
+         <td id="text">우편번호  </td>
+         <td><sf:input path="member_addnum" id="sample4_postcode" placeholder="우편번호" value="${dto.member_addnum}" class="form-control"/>
+         <sf:errors path="member_addnum" cssClass="error" /><br/>
+         <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn3 btn-primary btn-sm"><br>
+         <sf:input path="member_address" id="sample4_roadAddress" placeholder="도로명주소" value="${dto.member_address}" class="form-control"/>
+         <input type="hidden" id="sample4_jibunAddress" placeholder="지번주소">
+         <span id="guide" style="color: #999"></span>
+         <sf:errors path="member_address" cssClass="error" /></td>
+      </tr>
+      <tr>
+         <td id="text">이메일  </td>
+         <td><sf:input path="member_email"  placeholder="이메일 입력" value="${dto.member_email}" class="form-control"/>
+          <sf:errors path="member_email" cssClass="error" /></td>
+      </tr>
+   <tr id="rkdnsep">
+      <!-- <input type="submit" value="수정하기"> -->
+      <td colspan="2">
+         <input type="submit" value="수정완료" onclick="checkfield();" class="btn btn--sm btn--green">
+         <input type="reset" value="취소" class="btn btn--sm btn--green">
+      </td>
+   </tr>         
+   </table>
+   
+            
 </sf:form>
     
    </div>
    <div id="member_history">
    <div id="mypage_form">
-    		<h1>결제내역 조회</h1>
-		<hr>
-		</div>
-      <!-- <div style="height: 200px"> -->
+          <h1>결제내역 조회</h1>
+      <hr>
+      </div>
+      <div id="pay_div">
       <table id="pay_table">
       <tr>
-      	<th>강사</th><th>강좌명</th><th>결제액</th><th>결제일</th>
+         <th>강사</th><th>강좌명</th><th>결제액</th><th>결제일</th>
       </tr>
       <c:forEach items="${list}" var="list">
-         <tr> <td>	
+         <tr> <td>   
         ${list.payment_teacher_name} </td>
 <td>         ${list.payment_lect_subject}</td>
          <td>${list.payment_lect_charge}</td>
@@ -460,30 +477,30 @@ font-size: 0.6em; }
          </tr>   
          </c:forEach>
       </table>
-         <!-- </div> -->
+         </div>
    </div>
    <div id="member_bye"> 
-      	<div id="mypage_form">
-    		<h1>회원 탈퇴</h1>
-		<hr>
-		</div>
-		<table id="member_bye_table">
-			<tr>
-			   <td id="text">아이디</td>
-			   <td id="text">${dto.member_id}</td>
-			</tr>
-			<tr>
-			    <td id="text"><span>암호 </span></td>
-			    <td><input type="password" name="member_pwd" id="member_pwd_1" class="form-control"/>
-			<tr id="rkdnsep">
-				<!-- <input type="submit" value="수정하기"> -->
-				<td colspan="2">
-					<input type="button" value="탈퇴하기" id="passchk" class="btn btn--sm btn--green">
-					<input type="reset" value="취소" class="btn btn--sm btn--green">
-				</td>
-			</tr>         
-		</table>
-	</div>
+         <div id="mypage_form">
+          <h1>회원 탈퇴</h1>
+      <hr>
+      </div>
+      <table id="member_bye_table">
+         <tr>
+            <td id="text">아이디</td>
+            <td id="text">${dto.member_id}</td>
+         </tr>
+         <tr>
+             <td id="text"><span>암호 </span></td>
+             <td><input type="password" name="member_pwd" id="member_pwd_1" class="form-control"/>
+         <tr id="rkdnsep">
+            <!-- <input type="submit" value="수정하기"> -->
+            <td colspan="2">
+               <input type="button" value="탈퇴하기" id="passchk" class="btn btn--sm btn--green">
+               <input type="reset" value="취소" class="btn btn--sm btn--green">
+            </td>
+         </tr>         
+      </table>
+   </div>
 </div>
 </body>
 </html>
