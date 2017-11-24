@@ -8,6 +8,8 @@
 </head>
 <body>
 <table>
+<form action="answerForm.do">
+	<input type="hidden" name="n_send_id" value="${dto.n_send_id }">
 	<tr>
 		<td>보낸사람 : ${dto.n_send_id }</td>
 	</tr>
@@ -24,8 +26,9 @@
 	</tr>
 	
 	<tr>
-		<td><a href="noteList.do">목록으로</a></td>
+		<td><a href="noteList.do">목록으로</a></td><td><input type="submit" value="답장하기"></td>
 	</tr>
+</form>
 </table>
 </body>
 </html>

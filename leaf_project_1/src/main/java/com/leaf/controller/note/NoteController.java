@@ -180,4 +180,14 @@ public class NoteController {
 		mav.setViewName("moon.sendNoteList");
 		return mav;
 	}
+	
+	@RequestMapping("answerForm.do")
+	public ModelAndView answerForm(NoteDTO dto, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		System.out.println(dto.getN_send_id());
+		
+		mav.addObject("dto", dto);
+		mav.setViewName("moon.answerForm");
+		return mav;
+	}
 }
