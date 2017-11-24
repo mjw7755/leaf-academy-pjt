@@ -11,15 +11,34 @@
 <body>
 	<label style="float: left;">강의 선택 : </label>
 	<c:if test="${memberLevel==1}">
-	<select style="width:200px; float:left;">
-		<c:forEach items="${history}" var="history">
-		<c:if test="${history.payment_pay_chk eq 1}">
-		<c:if test="${sessionScope.sessionid == history.payment_member_id}">
-			<option value="class1">${history.payment_lect_subject }</option>
-		</c:if>
-		</c:if>
-		</c:forEach>
-	</select>
+	<select id="studentSelect" onchange="studentSecletChange()" style="width:200px; float:left;">
+			<c:forEach items="${classList}" var="classList">
+					<option value="${classList.lect_id}">${classList.lect_name}</option>
+			</c:forEach>
+		</select>
+		<div style="width:1000px; margin:0 auto;">
+			<table>
+				<tr>
+					<td colspan="2">
+						<table border="1" width="100%">
+						<tr id="txtTable">
+						<td><h1>Source Code</h1>
+							<div id="txtDiv" name="txtDiv"
+								style="width: 600px; height: 300px; border:solid;
+								font-family: monaco; background-color:#212121;
+								padding:10px; "></div>
+						</td>
+						</tr>
+						<c:if test="${sessionScope.sessid != teacherid }">
+						<tr>
+							<td><button onclick="teacherCall()">도움요청</button></td>
+						</tr>
+						</c:if>
+						</table>
+					</td>
+				</tr>		
+			</table>
+		</div>
 	</c:if>
 	<c:if test="${memberLevel==2}">
 		<select id="teacherSelect" onchange="teachertSecletChange()" style="width:200px; float:left;">

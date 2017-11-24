@@ -50,8 +50,24 @@ public class ListeningController {
 				int chk = 1;
 				model.addAttribute("myclass", chk);
 				
-				List<PaymentDTO> history = paymentdao.allPayment();
-				model.addAttribute("history", history);
+				model.addAttribute("memberLevel", dto.getMember_level());
+				
+				List<ListeningDTO> classList = listeningDAO.getStudentClassList(member_id);
+				model.addAttribute("classList", classList);
+				
+				String lect_id_str = request.getParameter("lect_id");
+				int lect_id = 0;
+				if(lect_id_str==null && classList!=null) lect_id = classList.get(0).getLect_id();
+				else lect_id = Integer.parseInt(lect_id_str);
+				
+//				String studentSelect = request.getParameter("studentSelect");
+//				String teacherSelect = request.getParameter("teacherSelect");
+//				String studentid = request.getParameter("studentid");
+//				String teacherid = request.getParameter("teacherid");
+//				
+//				model.addAttribute("classid", studentSelect!=null?studentSelect:teacherSelect);
+//				model.addAttribute("teacherid", teacherid);
+//				model.addAttribute("targetid", studentid!=null?studentid:teacherid);
 				
 				return "king.listen";
 				
@@ -60,7 +76,7 @@ public class ListeningController {
 				int chk = 2;
 				model.addAttribute("myclass", chk);
 				
-				List<ListeningDTO> classList = listeningDAO.getClassList(member_id);
+				List<ListeningDTO> classList = listeningDAO.getTeacherClassList(member_id);
 				model.addAttribute("classList", classList);
 				model.addAttribute("memberLevel", dto.getMember_level());
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.leaf.model.listening.ListeningDAO">
+
+	<select id="getTeacherClassList" parameterType="String" resultType="com.leaf.model.listening.ListeningDTO">
+	select l.lect_id, l.lect_name 
+	from lecture l, (select *from curriculum where member_id=#{member_id} and ENABLED = 1) c 
+		where l.curri_id = c.curri_id and l.ENABLED = 1
+	</select>
+	
+	<select id="getStudentList" parameterType="int" resultType="String">
+		select PAYMENT_MEMBER_ID from payment where PAYMENT_LECT_ID=#{lect_id} and PAYMENT_PAY_CHK = 1
+	</select>
+	
+	<select id="getStudentClassList" parameterType="String" resultType="com.leaf.model.listening.ListeningDTO">
+		select PAYMENT_LECT_ID as lect_id, PAYMENT_LECT_SUBJECT as lect_name from payment where PAYMENT_MEMBER_ID=#{member_id} and PAYMENT_PAY_CHK = 1
+	</select>
+</mapper>

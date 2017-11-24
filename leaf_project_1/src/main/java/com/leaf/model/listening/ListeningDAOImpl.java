@@ -13,9 +13,14 @@ public class ListeningDAOImpl implements ListeningDAO {
 	private SqlSession sqlSession;
 	
 	@Override
-	public List<ListeningDTO> getClassList(String member_id) {
+	public List<ListeningDTO> getTeacherClassList(String member_id) {
 		ListeningDAO dao =sqlSession.getMapper(ListeningDAO.class);
-		return dao.getClassList(member_id);
+		return dao.getTeacherClassList(member_id);
+	}
+	@Override
+	public List<ListeningDTO> getStudentClassList(String member_id) {
+		ListeningDAO dao =sqlSession.getMapper(ListeningDAO.class);
+		return dao.getStudentClassList(member_id);
 	}
 	@Override
 	public List<String> getStudentList(int lect_id) {
