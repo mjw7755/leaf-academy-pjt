@@ -201,7 +201,7 @@ font-size: 0.6em; }
     <!-- top banner end -->
 <div id="lecture_open">
 
-	<input type="hidden" name="lect_id" value="${dto.lect_id }">
+ <input type="hidden" name="lect_id" value="${dto.lect_id }">
 
 	<datalist id="lectlist">
 		<c:forEach items="${ list }" var="item">
