@@ -7,7 +7,7 @@ import com.leaf.model.curriculum.CurriDTO;
 
 public interface LectDAO {
 
-	public List<LectDTO> listLect(int page);
+public List<LectDTO> listLect(int page);
 	
 	public void insertLect(LectDTO dto);
 

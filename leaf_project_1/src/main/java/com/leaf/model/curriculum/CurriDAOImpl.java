@@ -62,18 +62,12 @@ public class CurriDAOImpl implements CurriDAO {
 	}
 
 	
-	 /*@Override
-	 public CurriDTO detailCurri(int lect_id ) throws ClassNotFoundException, SQLException{
-		CurriDAO dao =  sqlSession.getMapper(CurriDAO.class);
-		 return dao.detailCurri(lect_id);
-	 }*/
-
 	 @Override
-	 public List<CurriDTO> detailCurri(int lect_id ) throws ClassNotFoundException, SQLException{
+	 public CurriDTO detailCurri(int curri_id ) throws ClassNotFoundException, SQLException{
 		CurriDAO dao =  sqlSession.getMapper(CurriDAO.class);
-		 return dao.detailCurri(lect_id);
+		 return dao.detailCurri(curri_id);
 	 }
-	 
+
 	@Override
 	public int getCount() {
 		CurriDAO dao =  sqlSession.getMapper(CurriDAO.class);

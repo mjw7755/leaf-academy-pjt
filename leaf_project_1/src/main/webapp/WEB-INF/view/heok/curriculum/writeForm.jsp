@@ -1,61 +1,60 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
-​ 
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>​
+​ <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
+<%-- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> --%>​
 
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>this is writeform</title>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript" src="./resources/editor/js/HuskyEZCreator.js" charset="utf-8"></script>
- 
+<script src="${pageContext.request.contextPath }/resources/se/js/HuskyEZCreator.js" charset="utf-8"></script> 
+<!-- <script src='../se/js/HuskyEZCreator.js'>
+</script> -->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>this is write_form</title>
+
+<script type="text/javascript">
+var oEditors = [];
+$(function(){
+      nhn.husky.EZCreator.createInIFrame({
+          oAppRef: oEditors,
+          elPlaceHolder: "curri_content", //textarea에서 지정한 id와 일치해야 합니다. 
+          //SmartEditor2Skin.html 파일이 존재하는 경로
+          sSkinURI: "${pageContext.request.contextPath}/resources/se/SmartEditor2Skin.html",  
+          fCreator: "createSEditor2"
+      });
+      //저장버튼 클릭시 form 전송
+      $("#savebutton").click(function(){
+          oEditors.getById["curri_content"].exec("UPDATE_CONTENTS_FIELD", []);
+          $("#writeForm").submit();
+      });   
+});
+function pasteHTML(filepath){
+     var sHTML = '<img src="src="${pageContext.request.contextPath }/resources/se/upload/'+filepath+'">'; 
+/* var sHTML = '<img src="C:/Users/AHN/git/StudyHaja_1/StudyHaja/WebContent/ahn/se2/upload/'+filepath+'">'; */ 
+       oEditors.getById["curri_content"].exec("PASTE_HTML", [sHTML]);
+   }
+</script>
+
 </head>
 <style type="text/css">
-   textarea { 
+/*    textarea { 
    resize: none; 
    overflow: visible;
-   }
+   } */
    
-   table {
+   #curri_table {
 	text-align: center;
 	font-size: 20px;
     margin-left: auto;
     margin-right: auto;
+    width: 800px;
 	}
 	legend {
 	align-content: center;
 }
 </style>
-<script type="text/javascript">
-    $(function(){
-        //전역변수
-        var obj = [];              
-        //스마트에디터 프레임생성
-        nhn.husky.EZCreator.createInIFrame({
-            oAppRef: obj,
-            elPlaceHolder: "editor",
-            sSkinURI: "./resources/editor/SmartEditor2Skin.html",
-            htParams : {
-                // 툴바 사용 여부
-                bUseToolbar : true,            
-                // 입력창 크기 조절바 사용 여부
-                bUseVerticalResizer : true,    
-                // 모드 탭(Editor | HTML | TEXT) 사용 여부
-                bUseModeChanger : true,
-            }
-        });
-        //전송버튼
-        $("#savebutton").click(function(){
-            //id가 smarteditor인 textarea에 에디터에서 대입
-            obj.getById["editor"].exec("UPDATE_CONTENTS_FIELD", []);
-            //폼 submit
-            $("#writeForm").submit();
-        });
-    });
-</script>
 
 <body>
 	<fieldset>
@@ -63,7 +62,7 @@
 			<h3>강좌추가</h3>
 		</legend>
 		<form action="write_curri.do" method="post" id="writeForm" enctype = "multipart/form-data">
-			<table style="text-align: center;">
+			<table id="curri_table">
 				<tr>
 				
 				<td>강사명</td>
@@ -98,10 +97,7 @@
 					<td>강좌내용</td>
 					<td>:</td>
 					<td colspan ='4'>
-							<textarea  rows=30 cols=50 id="curri_content" name="curri_content" class="curri_content" 
-								required="required"	></textarea>
-							
-					
+							<textarea   id="curri_content" name="curri_content" required="required"	></textarea>
 						<%--  <textarea name="editor" id="editor" style="width: 700px; height: 400px;" value="${curri_content }"></textarea> --%>
 					</td>
 				</tr>
