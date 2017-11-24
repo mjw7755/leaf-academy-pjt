@@ -113,7 +113,7 @@
 	<update id="back_updateCurri" parameterType="com.leaf.model.curriculum.CurriDTO">
 		update curriculum set curri_id=#{curri_id},member_id=#{member_id},
 		curri_level=#{curri_level}, curri_subject=#{curri_subject}, 
-		curri_content=#{curri_content}, curri_write_time=#{curri_write_time}, 
+		 curri_write_time=#{curri_write_time}, 
 		curri_modify_time=#{curri_modify_time}, curri_accept=#{curri_accept}, 
 		enabled=#{enabled} where curri_id=#{curri_id}
 	</update>

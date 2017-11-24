@@ -19,7 +19,7 @@
 			<table style="text-align: center;">
 				<tr>
 					<td>강좌명</td>
-					<td>:</td>
+					<td></td>
 					<td>
 					
 					<select name="curri_id">
@@ -33,7 +33,7 @@
 
 				<tr>
 					<td>클래스명</td>
-					<td>:</td>
+					<td></td>
 					<td>
 					<input type="text"
 						name="lect_name" required="required"
@@ -43,7 +43,7 @@
 
 				<tr>
 					<td>강좌 시작일</td>
-					<td>:</td>
+					<td></td>
 					<td>
 						<input type="date" name="lect_start_day" value="${lect_start_day}"> 
 					</td>
@@ -51,21 +51,21 @@
 
 				<tr>
 					<td>강좌 종료일</td>
-					<td>:</td>
+					<td></td>
 					<td><input type="date" name="lect_end_day" value="${lect_end_day}"> 
 					</td>
 				</tr>
 				
 				<tr>
 					<td>강좌 시작 시간</td>
-					<td>:</td>
+					<td></td>
 					<td><input type="time" name="lect_start_time" value="${lect_start_time}" > 
 					</td>
 				</tr>
 
 				<tr>
 					<td>강좌 종료 시간</td>
-					<td>:</td>
+					<td></td>
 					<td><input type="time" name="lect_end_time" value="${lect_end_time}"> 
 					</td>
 				</tr>
@@ -73,13 +73,13 @@
 				
 				<tr>
 					<td>수강인원</td>
-					<td>:</td>
+					<td></td>
 					<td><input type="text" name="lect_person_num" required="required"
 						value="${lect_person_num }"></td>
 				</tr>
 				<tr>
 					<td>수강료</td>
-					<td>:</td>
+					<td></td>
 					<td><input type="text" name="lect_charge" required="required"
 						value="${lect_charge}">
 					</tr>			

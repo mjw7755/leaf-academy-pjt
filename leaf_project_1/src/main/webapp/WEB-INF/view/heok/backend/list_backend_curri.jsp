@@ -124,7 +124,7 @@ function show_update(str) {
       var member_id  = $('#in1_'+s).val();
       var curri_subject  = $('#in2_'+s).val();
       var curri_level  = $('#in3_'+s).val();
-      var curri_content  = $('#in4_'+s).val();
+      /* var curri_content  = $('#in4_'+s).val(); */
       var curri_write_time  = $('#in5_'+s).val();
       var curri_modify_time  = $('#in6_'+s).val();
       var curri_accept  = $('#in7_'+s).val();
@@ -138,7 +138,7 @@ function show_update(str) {
                member_id: member_id,
                curri_subject: curri_subject,
                curri_level: curri_level,
-               curri_content: curri_content,
+               /* curri_content: curri_content, */
                curri_write_time: curri_write_time,
                curri_modify_time: curri_modify_time,
                curri_accept: curri_accept,
@@ -218,7 +218,7 @@ function show_update(str) {
          <td><label id="la1_${list.curri_id}"  class="la_${list.curri_id}"  style="display:show;">${list.member_id}</label>          <input type="text" style="width: 55px;display: none;"   id="in1_${list.curri_id}" class="in_${list.curri_id }"  value="${list.member_id}"></td>
          <td><label id="la2_${list.curri_id}"  class="la_${list.curri_id}"  style="display:show;">${list.curri_subject}</label>     <input type="text" style="width: 55px;display: none;"   id="in2_${list.curri_id}" class="in_${list.curri_id }"   value="${list.curri_subject}"></td>
          <td><label id="la3_${list.curri_id}"  class="la_${list.curri_id}"  style="display:show;">${list.curri_level}</label>        <input type="text" style="width: 55px;display: none;"   id="in3_${list.curri_id}" class="in_${list.curri_id }"   value="${list.curri_level}"></td>
-         <td><label id="la4_${list.curri_id}"  class="la_${list.curri_id}"  style="display:show;">${list.curri_content}</label>       <input type="text" style="width: 55px;display: none;"   id="in4_${list.curri_id}" class="in_${list.curri_id }"   value="${list.curri_content}"></td>
+         <td><label id="la4_${list.curri_id}"  class="la_${list.curri_id}"  style="display:show;">${list.curri_content}</label>       <%-- <input type="text" style="width: 55px;display: none;"   id="in4_${list.curri_id}" class="in_${list.curri_id }"   value="${list.curri_content}"> --%></td>
          <td><label id="la5_${list.curri_id}"  class="la_${list.curri_id}"  style="display:show;">${list.curri_write_time}</label>    <input type="text" style="width: 55px;display: none;"   id="in5_${list.curri_id}" class="in_${list.curri_id }"   value="${list.curri_write_time}"></td>
          <td><label id="la6_${list.curri_id}"  class="la_${list.curri_id}"  style="display:show;">${list.curri_modify_time}</label>    <input type="text" style="width: 55px;display: none;"   id="in6_${list.curri_id}" class="in_${list.curri_id }"   value="${list.curri_modify_time}"></td>
          <td><label id="la7_${list.curri_id}"  class="la_${list.curri_id}"  style="display:show;">${list.curri_accept }</label>       <input type="text" style="width: 55px;display: none;"   id="in7_${list.curri_id}" class="in_${list.curri_id }"   value="${list.curri_accept}"></td>
