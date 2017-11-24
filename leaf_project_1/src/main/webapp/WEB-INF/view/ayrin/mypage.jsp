@@ -225,6 +225,7 @@ $(function() {
    height: 500px;
    margin-left: 30px;
    float: left;
+   overflow: auto;
 }
 #member_bye {
 	/* border: 1px solid; */
@@ -370,6 +371,10 @@ font-size: 0.6em; }
 #member_bye_table td{
 	padding-bottom: 10px;
 }
+#pay_table{
+	height: 500px;
+	
+}
 </style>
 </head>
 <body>
@@ -441,19 +446,21 @@ font-size: 0.6em; }
     		<h1>결제내역 조회</h1>
 		<hr>
 		</div>
-      <table>
+      <!-- <div style="height: 200px"> -->
+      <table id="pay_table">
       <tr>
       	<th>강사</th><th>강좌명</th><th>결제액</th><th>결제일</th>
       </tr>
       <c:forEach items="${list}" var="list">
-         <tr> 	   
-           <td>${list.payment_teacher_name}</td>
-           <td>${list.payment_lect_subject}</td>
-           <td>${list.payment_lect_charge}</td>
-           <td>${list.payment_write_date}</td>
-         </tr>
+         <tr> <td>	
+        ${list.payment_teacher_name} </td>
+<td>         ${list.payment_lect_subject}</td>
+         <td>${list.payment_lect_charge}</td>
+         <td>${list.payment_write_date}</td>  
+         </tr>   
          </c:forEach>
       </table>
+         <!-- </div> -->
    </div>
    <div id="member_bye"> 
       	<div id="mypage_form">
