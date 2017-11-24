@@ -6,7 +6,7 @@
 <head>
    <title>main</title>
 </head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"> -->
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    <!--  <link rel="stylesheet" href="resources/swiper.min.css"> -->
 <style type="text/css">
@@ -726,7 +726,7 @@ keyframes swiper-preloader-spin { 100%{
    background-color: #439560;
 }
 /*  */
-#lecture, #play, #book, #QnA{
+#lecture2, #play, #book, #QnA{
    width:225px;
    height: 150px;
    float:left;
@@ -913,7 +913,7 @@ keyframes swiper-preloader-spin { 100%{
        <div id="width_wrap">
        
           <a href="listening.do"><!-- 강의 듣기 페이지로 이동 -->
-          <div id="lecture">
+          <div id="lecture2">
              <img src="resources/ram/main_lecture4.png"/>
           </div>
           </a>

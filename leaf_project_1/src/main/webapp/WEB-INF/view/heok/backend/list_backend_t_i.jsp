@@ -6,6 +6,36 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<style type="text/css">
+#listchange_select {
+    width: 250px;
+    height: 30px;
+    padding-left: 10px;
+    font-size: 18px;
+    color: #1b7817;
+    border: 2px solid #2b6728;
+    border-radius: 3px;
+}
+/*  */
+#search{
+   width: 800px;
+   margin-top:20px;
+   margin-bottom: 20px;
+}
+#search select{
+   height: 21.2px;
+}
+#search form{
+   font-size: 13px;
+}
+#search form input{
+   font-size: 13px;
+}
+#search_icon{
+   vertical-align: middle;
+}
+/*  */
+</style>
 </head>
 <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -60,9 +90,12 @@ function show_update(str) {
 
 </script>
 <body>
+<div id="backend_page">
+<h1>BACKEND PAGE</h1>
+<hr>
+</div>
 	<select
-		style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;"
-		onchange="listChange(this);">
+		onchange="listChange(this);" id="listchange_select">
 		<option value="curri">Curriculum </option>
 		<option value="lect"> Lecture </option>
 		<option value="member">Member</option>
@@ -78,7 +111,7 @@ function show_update(str) {
 		<option value="t_i" selected="selected">Teacher_Intro</option>
 		<option value="tnotice">Teacher_Notice</option>
 	</select>
-	
+<div id="search">	
 	<form action="search_backend_t_i.do" method="post">
 		<select name="column">
 			<option value="teacher_id">teacher_id</option>
@@ -88,11 +121,9 @@ function show_update(str) {
 			<option value="enabled">Enable</option>
 		</select> 
 		<input size="30" type="text" id="keyvalue" name="keyvalue"
-			placeholder="키워드 검색 가능합니다."> <input type="submit"
-			id="searchbtn" value="검색">&nbsp;
-
+			placeholder="키워드 검색 가능합니다.">  <input type="image" src="resources/ram/search.png" id="search_icon">&nbsp;
 	</form>
-	
+</div>	
 	<table>
 	<th>teacher_id</th>
 	<th>Member_id</th>
