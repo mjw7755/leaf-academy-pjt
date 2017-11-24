@@ -115,6 +115,10 @@ font-size: 0.6em; }
 			<td><input type="text" name="book_title" value="${dto.book_title}" class="form-control"></td>
 		</tr>
 		<tr>
+			<td id="whqrp">URL : </td>
+			<td><input type="text" name="book_url" value="${dto.book_url}" class="form-control"></td>
+		</tr>
+		<tr>
 			<td id="whqrp">저자 : </td>
 			<td><input type="text" name="book_writer" value="${dto.book_writer}" class="form-control"></td>
 		</tr>

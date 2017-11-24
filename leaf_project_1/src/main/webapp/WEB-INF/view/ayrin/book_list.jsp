@@ -126,6 +126,7 @@ function multiDelete(){
    }
    window.location.href="book_multidelete.do?book_id="+sum;
 }
+
 </script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 <script type="text/javascript" src="http://www.blueb.co.kr/data/201010/IJ12882511794405/jquery.tablesorter.js"></script> 
@@ -147,7 +148,7 @@ $(document).ready(function(){
     <a href="book_list.do"><h1>도서</h1></a>
 <hr>
 <div id="search">
-   <form action="book_search.do" method="post">
+   <form action="book_search.do" method="post" name="bookname">
          검색어 입력 : <input size="30" type="search"  name="keyvalue" placeholder="제목, 저자 검색 가능합니다." list="booklist"> 
              <!-- <button type="submit" class="btn btn--sm btn--green">검색</button> -->
              <input type="image" src="resources/ram/search.png" id="search_icon">
@@ -166,7 +167,7 @@ $(document).ready(function(){
    </c:if>
    <table id="booklistTable">
       <c:forEach items="${ list }" var="list" varStatus="status">
-<<<<<<< HEAD
+
 			<c:if test="${sessionScope.sessionid!='관리자'}">
 			<tr>
 				<td rowspan="4" class="bookline" style="width:100px"><a href="book_detail.do?book_id=${ list.book_id }">
@@ -176,7 +177,7 @@ $(document).ready(function(){
 				<td id="booktd">
 					<a href="book_detail.do?book_id=${ list.book_id }">${list.book_title }</a>
 				</td>
-				<td rowspan="4" style="width:80px"><input type="button" value="구매하기" class="btn btn--sm btn--green" <%-- id="${list.book_title }" --%>></td>
+				<td rowspan="4" style="width:80px"><input type="button" value="구매하기" class="btn btn--sm btn--green" onclick="window.open('${list.book_url}')"<%-- id="${list.book_title }" --%>></td>
 			</tr>
 			<tr>
 				<td id="booktd">저자(출판사) : ${list.book_writer}</td>
@@ -185,8 +186,8 @@ $(document).ready(function(){
 				<td id="booktd" class="bookline">가격 : ${list.book_cost}</td>
 			</tr>
 			</c:if>
-=======
-         <c:if test="${sessionScope.sessionid!='관리자'}">
+
+<%--          <c:if test="${sessionScope.sessionid!='관리자'}">
          <tr>
             <td rowspan="4" class="bookline" style="width:100px"><a href="book_detail.do?book_id=${ list.book_id }">
             <img src="resources/${list.book_image}" style="width: 100px; height: 120px"></a></td>
@@ -195,7 +196,7 @@ $(document).ready(function(){
             <td id="booktd">
                <a href="book_detail.do?book_id=${ list.book_id }">${list.book_title }</a>
             </td>
-            <td rowspan="4" style="width:80px"><input type="button" value="구매하기" class="btn btn--sm btn--green" <%-- id="${list.book_title }" --%>></td>
+            <td rowspan="4" style="width:80px"><input type="button" value="구매하기" class="btn btn--sm btn--green" id="${list.book_title }"></td>
          </tr>
          <tr>
             <td id="booktd">저자(출판사) : ${list.book_writer}</td>
@@ -203,8 +204,8 @@ $(document).ready(function(){
          <tr>
             <td id="booktd" class="bookline">가격 : ${list.book_cost}</td>
          </tr>
-         </c:if>
->>>>>>> refs/remotes/origin/master
+         </c:if> --%>
+
       </c:forEach>   
    </table>
    
