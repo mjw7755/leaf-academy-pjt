@@ -132,7 +132,7 @@ function show_update(str) {
 
       $.ajax({
             type:'POST',
-            url:'update_by_display_curri.do',
+            url:'update_by_display_curriculum.do',
             data:{
                curri_id: s,
                member_id: member_id,

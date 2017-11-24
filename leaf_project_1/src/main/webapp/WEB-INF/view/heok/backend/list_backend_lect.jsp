@@ -136,7 +136,7 @@ function show_update(str) {
 
       $.ajax({
             type:'POST',
-            url:'update_by_display_lect.do',
+            url:'update_by_display_lecture.do',
             data:{
                lect_id: s,
                curri_id: curri_id,
