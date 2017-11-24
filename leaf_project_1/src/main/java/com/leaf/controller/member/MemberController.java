@@ -410,10 +410,14 @@ public class MemberController {
 
 	@RequestMapping(value = "/member_modify.do", method = RequestMethod.POST)
 	public String membermodify(@Validated(ValidGroupOrder.class) @ModelAttribute("dto") @Valid MemberDTO memberdto,
-			BindingResult bindingResult) throws Exception {
+			BindingResult bindingResult, Model model) throws Exception {
 		if (bindingResult.hasErrors()) { // 검증에 실패한 빈은 BindingResult에 담겨 뷰에 전달된다.
+			String chk = "OK";
+			model.addAttribute("mypage", chk);
 			return "ayrin.mypage";
 		} else {
+			String chk = "OK";
+			model.addAttribute("mypage", chk);
 			memberdao.updateMember(memberdto);
 			return "ayrin.mypage";
 		}
