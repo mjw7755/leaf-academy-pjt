@@ -43,12 +43,6 @@ public class BackEndDAOImpl implements BackEndDAO {
 		BackEndDAO dao= sqlsession.getMapper(BackEndDAO.class);
 		return dao.back_searchCurri(map);
 	}
-	/*@Override
-	public List<CurriDTO> searchcurri(Map<String, Object> map) {
-		BackEndDAO dao= sqlsession.getMapper(BackEndDAO.class);
-		return dao.searchcurri(map);
-	}*/
-	
 	@Override
 	public List<MemberDTO> back_member() {
 		BackEndDAO dao= sqlsession.getMapper(BackEndDAO.class);

@@ -538,7 +538,7 @@ public class BackEndController {
 				      return "backend.list_backend_tnotice";
 				   }
 	/**************************************update*****************************************/
-	@RequestMapping("update_by_display_curri.do")
+	@RequestMapping("update_by_display_curriculum.do")
 	public void update_by_display_curri(HttpServletRequest request, 
 			HttpServletResponse response , CurriDTO dto) throws Exception{
 		
@@ -547,7 +547,7 @@ public class BackEndController {
 		response.getWriter().write("0");
 		
 	}
-	@RequestMapping("update_by_display_lect.do")
+	@RequestMapping("update_by_display_lecture.do")
 	public void update_by_display_lect(HttpServletRequest request, 
 			HttpServletResponse response , LectDTO dto) throws Exception{
 		

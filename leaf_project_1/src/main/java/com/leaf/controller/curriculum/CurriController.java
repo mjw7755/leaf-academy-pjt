@@ -115,9 +115,11 @@ public class CurriController {
 	 */
 
 	@RequestMapping("/detail_curri.do")
-
-	public ModelAndView detailCurri(@RequestParam int lect_id) throws Exception {
+	
+	public ModelAndView detailCurri(@RequestParam(value="lect_id", required=false)int lect_id) throws Exception {
+		
 		ModelAndView mav = new ModelAndView();
+
 		mav.setViewName("curriculum.detail");
 		mav.addObject("dto", curriDAO.detailCurri(lect_id));
 		return mav;

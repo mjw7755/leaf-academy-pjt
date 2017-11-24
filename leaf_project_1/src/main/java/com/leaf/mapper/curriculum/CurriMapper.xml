@@ -8,7 +8,7 @@
 		select * from
 			(SELECT ROWNUM NUM, m.* FROM 
 				(select c.*, l.lect_start_day, l.lect_end_day, l.lect_name, l.lect_person_num from 
-				 lecture l, curriculum c where l.curri_id = c.curri_id) m ) 
+				 lecture l, curriculum c where l.curri_id = c.curri_id  ) m where enabled=1) 
 		where NUM between ((#{page}-1)*5)+1 and (#{page}*5) 
 	</select>
 	

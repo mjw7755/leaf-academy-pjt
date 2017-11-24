@@ -135,7 +135,7 @@
 		jageok_cost=#{jageok_cost}, enabled=#{enabled} 
 		where jageok_id=#{jageok_id}
 	</update>
-	<update id="back_updateLect" parameterType="com.leaf.model.curriculum.LectDTO">
+	<update id="back_updateLecture" parameterType="com.leaf.model.curriculum.LectDTO">
 		update lecture set lect_id=#{lect_id}, curri_id=#{curri_id},
 		lect_name=#{lect_name}, lect_person_num=#{lect_person_num},
 		lect_start_day=#{lect_start_day}, lect_end_day=#{lect_end_day},
@@ -157,7 +157,7 @@
 		update note set n_id=#{n_id}, n_content=#{n_content},
 		n_title=#{n_title}, n_send_id=#{n_send_id},
 		n_recv_id=#{n_recv_id}, n_send_del_yn=#{n_send_del_yn},
-		n_recv_yn=#{n_recv_yn}, n_open_date=#{n_open_date},
+		n_recv_del_yn=#{n_recv_del_yn}, n_open_date=#{n_open_date},
 		n_write_date=#{n_write_date} 
 		where n_id=#{n_id}
 	</update>

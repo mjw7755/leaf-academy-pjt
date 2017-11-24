@@ -10,7 +10,7 @@
       		(SELECT ROWNUM NUM, m.* FROM 
 				( SELECT l.*, c.curri_subject, c.curri_level, c.curri_content, 
         		  c.member_id FROM lecture l,curriculum c where l.curri_id=c.curri_id
-			ORDER BY lect_id DESC)   m)
+			ORDER BY lect_id DESC)   m where enabled=1)
 		where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
 	</select>
 
