@@ -1,21 +1,15 @@
 package com.leaf.controller.payment;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
-import java.net.InetAddress;
-import java.net.Socket;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.security.MessageDigest;
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Random;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.leaf.model.member.MemberDAO;
-import com.leaf.model.member.MemberDTO;
 import com.leaf.model.payment.PaymentDAO;
 import com.leaf.model.payment.PaymentDTO;
 
@@ -105,6 +98,7 @@ public class PayController {
 			String paramValue = request.getParameter(paramName);
 			str = str + "&" + paramName + "=" + URLEncoder.encode(paramValue, "UTF-8");
 		}
+		
 		str = str + "&" + PARAM_AT + "=" + PARAM_AT_VALUE;
 		logger.info("Sending PDT to PayPal : " + str);
 
@@ -162,7 +156,7 @@ public class PayController {
 					+ "\n 결제 여부 : " + paychkStr;
 			String send_email = paymentDAO.selectEmailAddress(Integer.parseInt(itemnumber));
 			/* 결제확인 이메일 전송 */
-			memberDAO.send(paySubject, text, "seirin8534@gmail.com", send_email);
+			memberDAO.send(paySubject, text, "seilrin8534@gmail.com", send_email);
 			/* 결제확인 문자 전송 */
 			
 			/* 구매 완료 체크 */
@@ -193,7 +187,7 @@ public class PayController {
 		}
 		return ReturnDefault;
 	}
-
+	
 	public static String base64Encode(String str) throws java.io.IOException {
 		BASE64Encoder encoder = new BASE64Encoder();
 		byte[] strByte = str.getBytes();
