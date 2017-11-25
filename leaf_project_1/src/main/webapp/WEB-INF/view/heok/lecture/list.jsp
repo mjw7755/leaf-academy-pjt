@@ -224,10 +224,8 @@ font-size: 0.6em; }
 			<input type="image" src="resources/ram/search.png" id="search_icon">&nbsp;
 		</form>
 		</div>
-		<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1' }">
 			<a href="writeform_lect.do"><button class="btn btn--sm btn--green">추가하기</button></a>&nbsp;&nbsp;&nbsp;
 				<a href="delete_lect.do" id="multi" onclick="multiDelete"><button class="btn btn--sm btn--green">다중삭제</button></a>
-		</c:if>
 
 		<table cellpadding="5" style="text-align: center;" id="lecture_table">
 			<tr>

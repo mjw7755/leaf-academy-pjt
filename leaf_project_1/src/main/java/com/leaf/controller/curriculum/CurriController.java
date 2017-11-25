@@ -120,16 +120,6 @@ public class CurriController {
 		return mav;
 	}
 
-/*	@RequestMapping("/detail_curri.do")
-
-	public String detailCurri(Model model,@RequestParam int curri_id) throws Exception {
-		CurriDAO curriDAO = sqlSession.getMapper(CurriDAO.class);
-		
-		 curri_id = curriDAO.detailCurri(curri_id);
-		 model.addAttribute("curri_id", curri_id);
-		return  "curriculum/detail";
-
-	}*/
 
 	@RequestMapping("/detail_curri.do")
 	public ModelAndView detailCurri(@RequestParam int curri_id) throws Exception {
