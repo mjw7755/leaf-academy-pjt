@@ -119,21 +119,7 @@ $(function() {
 	}, function() {
 	   $("#t_notice_icon").hide();
 	});
-   
-	/* $("#lecture").click(function() {
-		alert("연결해야함");
-	});
-	$("#grade").click(function() {
-		alert("연결해야함");
-	});
-	$("#attendance").click(function() {
-		alert("연결해야함");
-	}); 
-	$("#t_notice").click(function() {
-		$("tnoticeDIV").show();
-	}); */
 });
-
 
 $(function() {
 	$("#tnoticeDetail").dialog({
@@ -158,7 +144,6 @@ needPopup.config.custom = {
 function detail(ev) {
 	document.getElementById("tnoticeDetail").innerHTML = "<p>"+document.getElementById(ev.target.name).value+"</p>";
 }
-
 
 </script>
 </head>

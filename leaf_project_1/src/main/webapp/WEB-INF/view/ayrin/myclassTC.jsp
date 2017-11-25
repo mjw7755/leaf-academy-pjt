@@ -158,7 +158,6 @@ font-size: 0.6em; }
 }
 </style>
 
-
 <script>
 $(function() {
 	$("#lecture_icon").hide();
@@ -192,24 +191,6 @@ $(function() {
 	}, function() {
 	   $("#student_care_icon").hide();
 	});
-	
-	/* $("#lecture").click(function() {
-		alert("연결해야함");
-	});
-	$("#grade").click(function() {
-		alert("연결해야함");
-	});
-	$("#attendance").click(function() {
-		alert("연결해야함");
-	});
-	$("#t_notice").click(function() {
-		alert("람아~ 꾸며죠~");
-		$("#tnoticeList").show();
-		$("#tnoticeList").show();		
-	});
- 	$("#studentcare").click(function() {
-		alert("연결해야함");
-	}); */
 });
 </script>
 </head>

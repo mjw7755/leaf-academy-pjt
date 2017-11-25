@@ -110,7 +110,37 @@ h1{
 	margin-bottom: 10px;
 }
 </style>
-
+<script>
+function check() {
+  var id = document.getElementById("member_id");
+  var pwd = document.getElementById("member_pwd");
+  
+  if(id.value == "") {
+	  alert("아이디를 입력해주세요");
+	  return false;
+  }else if(pwd.value == ""){
+	  alert("비밀번호를 입력해주세요");
+	  return false;
+  }else {
+	  $.ajax({
+			url:"login.do",
+			data:{
+				"idvalue" : id.value,
+				"pwdvalue" : pwd.value
+				},
+			success:function(data){
+				if(data == 1){
+					alert("로그인에 성공하였습니다.");
+					location.href="main.do";
+				}else{
+					alert("아이디나 비밀번호가 틀렸습니다.");
+					location.href="loginForm.do";					
+				}
+			}
+		});
+	  }
+}
+</script>
 
 </head>
 <body>
@@ -124,7 +154,6 @@ h1{
 	<div class="loginform">
 	<h1>로그인</h1>
 	<hr>
-	<form role="form" action="login.do" method="post">
 	<table>
 		<tr>
 			<td>
@@ -132,7 +161,7 @@ h1{
 				<label id="username">아이디</label>
 			</td>
 			<td>
-				<input type="text" class="form-control" name="member_id" placeholder="ID를 입력해 주세요">			
+				<input type="text" class="form-control" id="member_id" name="member_id" placeholder="ID를 입력해 주세요">			
 			</td>					
         </tr>
 		<tr>
@@ -141,21 +170,18 @@ h1{
 				<label id="userpassword">비밀번호</label>
 			</td>
 			<td>
-				<input type="password" class="form-control" name="member_pwd" placeholder="비밀번호">
+				<input type="password" class="form-control" id="member_pwd" name="member_pwd" placeholder="비밀번호">
 			</td>			
 		</tr>
 		<tr>
 			<td colspan="2">
      			<div class="form-group text-center">
-        			<button type="submit" class="btn btn-info" id="login">로그인</button>
-				<a href="signupForm.do">
-					<button type="button" class="btn btn-info" id="signup">회원가입</button>
-				</a>
+     			<a class="btn btn-info" id="login" onclick="check()">로그인</a>
+				<a class="btn btn-info" id="signup" href="signupForm.do">회원가입</a>
 				</div>
 			</td>	
 		</tr>
 	</table>
-	</form>
 	</div>
 </article>
 </body>

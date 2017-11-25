@@ -27,7 +27,7 @@ public interface MemberDAO {
 	public List<MemberDTO> searchMemberList(Map<String, Object> map); 
 	public int getCount(); 
 	
-	public String getSessionCheck(MemberDTO dto); 
+	public int getSessionCheck(MemberDTO dto); 
 	boolean supports(Class<?> clazz);
 	
 	public int chkDupId(MemberDTO dto);

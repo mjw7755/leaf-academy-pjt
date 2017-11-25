@@ -135,7 +135,7 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public String getSessionCheck(MemberDTO dto) {
+	public int getSessionCheck(MemberDTO dto) {
 		MemberDAO dao = sqlsession.getMapper(MemberDAO.class);
 		return dao.getSessionCheck(dto);
 	}

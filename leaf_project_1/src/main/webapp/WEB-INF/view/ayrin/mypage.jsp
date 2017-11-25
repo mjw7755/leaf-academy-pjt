@@ -85,21 +85,6 @@ $(function(){
 .error {
    color: red;
 }
-/* span{
-  font-size: 15px;
-} */
-/* #checkMsg{   
-  font-size: 15px;
-}
-#checkPwd{
-  color : red;
-  font-size: 15px;
-}
-#member_id2{
-  color : red;
-  font-size: 15px;
-}
- */
 </style> 
 <script type="text/javascript">
 function checkfield(){
@@ -398,110 +383,110 @@ font-size: 0.6em; }
 <body>
 <div class="my_page">
      
-   <div id="member_info">
-         <sf:form method="post" action="member_modify.do" commandName="dto" name="memberchk">
-         <div id="mypage_form">
-          <h1>개인정보 수정</h1>
-      <hr>
-      </div>
-   <table id="contents1">
-      <tr>
-         <td id="text">아이디 </td>
-         <td><input type="text" name="member_id" id="member_id" value="${dto.member_id}" readonly="readonly" class="form-control"/></td>
-      </tr>
-      <tr>
-            <td id="text"><span>암호  </span></td>
-          <td><sf:password path="member_pwd" id="member_pwd" placeholder="영어 숫자 특수문자를 조합" class="form-control"/>
-               <sf:errors path="member_pwd" cssClass="error" /></td>
-         </tr>
-         <tr>
-          <td id="text"><span>암호확인  </span></td>
-        <td>
-             <input type="password" name="pwd_check" onkeyup="checkPwd()"  placeholder="암호 확인" class="form-control"></input>
-              <div id="checkPwd"></div>
-           </td>
-        </tr>
-      <tr>
-         <td id="text">이름(Full Name) </td>
-         <td><sf:input path="member_name" placeholder="이름 입력" value="${dto.member_name}" class="form-control"/>
-         <sf:errors path="member_name" cssClass="error"/></td>
-      </tr>
-      <tr>
-         <td id="text">전화번호(휴대폰)  </td>
-         <td><sf:input path="member_tel" placeholder="000-0000-0000" value="${dto.member_tel}" class="form-control"/>
-         <sf:errors path="member_tel" cssClass="error"/></td>
-       </tr>
-      <tr>
-         <td id="text">우편번호  </td>
-         <td><sf:input path="member_addnum" id="sample4_postcode" placeholder="우편번호" value="${dto.member_addnum}" class="form-control"/>
-         <sf:errors path="member_addnum" cssClass="error" /><br/>
-         <input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn3 btn-primary btn-sm"><br>
-         <sf:input path="member_address" id="sample4_roadAddress" placeholder="도로명주소" value="${dto.member_address}" class="form-control"/>
-         <input type="hidden" id="sample4_jibunAddress" placeholder="지번주소">
-         <span id="guide" style="color: #999"></span>
-         <sf:errors path="member_address" cssClass="error" /></td>
-      </tr>
-      <tr>
-         <td id="text">이메일  </td>
-         <td><sf:input path="member_email"  placeholder="이메일 입력" value="${dto.member_email}" class="form-control"/>
-          <sf:errors path="member_email" cssClass="error" /></td>
-      </tr>
-   <tr id="rkdnsep">
-      <!-- <input type="submit" value="수정하기"> -->
-      <td colspan="2">
-         <input type="submit" value="수정완료" onclick="checkfield()" class="btn btn--sm btn--green">
-         <input type="reset" value="취소" class="btn btn--sm btn--green">
-      </td>
-   </tr>         
-   </table>
+	<div id="member_info">
+		<sf:form method="post" action="member_modify.do" commandName="dto" name="memberchk">
+		<div id="mypage_form">
+			<h1>개인정보 수정</h1>
+			<hr>
+		</div>
+		<table id="contents1">
+			<tr>
+				<td id="text">아이디 </td>
+				<td><input type="text" name="member_id" id="member_id" value="${dto.member_id}" readonly="readonly" class="form-control"/></td>
+			</tr>
+			<tr>
+				<td id="text"><span>암호  </span></td>
+				<td><sf:password path="member_pwd" id="member_pwd" placeholder="영어 숫자 특수문자를 조합" class="form-control"/>
+				<sf:errors path="member_pwd" cssClass="error" /></td>
+			</tr>
+			<tr>
+				<td id="text"><span>암호확인  </span></td>
+				<td>
+				<input type="password" name="pwd_check" onkeyup="checkPwd()"  placeholder="암호 확인" class="form-control"></input>
+				<div id="checkPwd"></div>
+				</td>
+			</tr>
+			<tr>
+				<td id="text">이름(Full Name) </td>
+				<td><sf:input path="member_name" placeholder="이름 입력" value="${dto.member_name}" class="form-control"/>
+				<sf:errors path="member_name" cssClass="error"/></td>
+			</tr>
+			<tr>
+				<td id="text">전화번호(휴대폰)  </td>
+				<td><sf:input path="member_tel" placeholder="000-0000-0000" value="${dto.member_tel}" class="form-control"/>
+				<sf:errors path="member_tel" cssClass="error"/></td>
+			</tr>
+			<tr>
+				<td id="text">우편번호  </td>
+				<td><sf:input path="member_addnum" id="sample4_postcode" placeholder="우편번호" value="${dto.member_addnum}" class="form-control"/>
+				<sf:errors path="member_addnum" cssClass="error" /><br/>
+				<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn3 btn-primary btn-sm"><br>
+				<sf:input path="member_address" id="sample4_roadAddress" placeholder="도로명주소" value="${dto.member_address}" class="form-control"/>
+				<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소">
+				<span id="guide" style="color: #999"></span>
+				<sf:errors path="member_address" cssClass="error" /></td>
+			</tr>
+			<tr>
+				<td id="text">이메일  </td>
+				<td><sf:input path="member_email"  placeholder="이메일 입력" value="${dto.member_email}" class="form-control"/>
+				<sf:errors path="member_email" cssClass="error" /></td>
+			</tr>
+			<tr id="rkdnsep">
+				<td colspan="2">
+				<input type="submit" value="수정완료" onclick="checkfield()" class="btn btn--sm btn--green">
+				<input type="reset" value="취소" class="btn btn--sm btn--green">
+				</td>
+			</tr>         
+		</table>
+		</sf:form>
+	</div>
    
-            
-</sf:form>
-    
-   </div>
-   <div id="member_history">
-   <div id="mypage_form">
-          <h1>결제내역 조회</h1>
-      <hr>
-      </div>
-      <div id="pay_div">
-      <table id="pay_table">
-      <tr>
-         <th>강사</th><th>강좌명</th><th>결제액</th><th>결제일</th>
-      </tr>
-      <c:forEach items="${list}" var="list">
-         <tr> <td>   
-        ${list.payment_teacher_name} </td>
-<td>         ${list.payment_lect_subject}</td>
-         <td>${list.payment_lect_charge}</td>
-         <td>${list.payment_write_date}</td>  
-         </tr>   
-         </c:forEach>
-      </table>
-         </div>
-   </div>
-   <div id="member_bye"> 
-         <div id="mypage_form">
-          <h1>회원 탈퇴</h1>
-      <hr>
-      </div>
-      <table id="member_bye_table">
-         <tr>
-            <td id="text">아이디</td>
-            <td id="text">${dto.member_id}</td>
-         </tr>
-         <tr>
-             <td id="text"><span>암호 </span></td>
-             <td><input type="password" name="member_pwd" id="member_pwd_1" class="form-control"/>
-         <tr id="rkdnsep">
-            <!-- <input type="submit" value="수정하기"> -->
-            <td colspan="2">
-               <input type="button" value="탈퇴하기" id="passchk" class="btn btn--sm btn--green">
-               <input type="reset" value="취소" class="btn btn--sm btn--green">
-            </td>
-         </tr>         
-      </table>
-   </div>
-</div>
+   
+	<div id="member_history">
+		<div id="mypage_form">
+			<h1>결제내역 조회</h1>
+			<hr>
+		</div>
+		<div id="pay_div">
+			<table id="pay_table">
+				<tr>
+				<th>강사</th><th>강좌명</th><th>결제액</th><th>결제일</th>
+				</tr>
+			<c:forEach items="${list}" var="list">
+				<tr> 
+					<td>${list.payment_teacher_name} </td>
+					<td>${list.payment_lect_subject}</td>
+					<td>${list.payment_lect_charge}</td>
+					<td>${list.payment_write_date}</td>  
+				</tr>   
+			</c:forEach>
+		</table>
+		</div>
+	</div>
+   
+   
+	<div id="member_bye"> 
+		<div id="mypage_form">
+			<h1>회원 탈퇴</h1>
+			<hr>
+		</div>
+		<table id="member_bye_table">
+			<tr>
+            	<td id="text">아이디</td>
+            	<td id="text">${dto.member_id}</td>
+			</tr>
+			<tr>
+				<td id="text"><span>암호 </span></td>
+				<td><input type="password" name="member_pwd" id="member_pwd_1" class="form-control"/>
+			<tr id="rkdnsep">
+            	<td colspan="2">
+				<input type="button" value="탈퇴하기" id="passchk" class="btn btn--sm btn--green">
+				<input type="reset" value="취소" class="btn btn--sm btn--green">
+				</td>
+			</tr>         
+		</table>
+		</div>
+	</div>
+	
 </body>
 </html>

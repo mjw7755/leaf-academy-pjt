@@ -7,8 +7,8 @@
 resultType : 쿼리 수행 후 결과를 보내주기 위한 데이터 -->
 
 <mapper namespace="com.leaf.model.member.MemberDAO">
-	<select id="getSessionCheck" parameterType="com.leaf.model.member.MemberDTO" resultType="String">
-		select member_pwd from member where member_id=#{member_id}
+	<select id="getSessionCheck" parameterType="com.leaf.model.member.MemberDTO" resultType="Integer">
+		select count(*) from member where member_id=#{member_id} and member_pwd = #{member_pwd} and enabled = 1
 	</select>
 
 	<select id="getMemberList" parameterType="Integer" resultType="com.leaf.model.member.MemberDTO">
@@ -107,26 +107,12 @@ resultType : 쿼리 수행 후 결과를 보내주기 위한 데이터 -->
 				or member_level like '%' || #{keyvalue} || '%'
 		ORDER BY member_id DESC)   j)
 	where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
-	
-	<!-- select * from Member
-	<where>
-		<if test="member_id != null">
-		or member_id like '%' || #{keyvalue} || '%'
-		</if>
-		<if test="member_name != null">
-		or member_name like '%' || #{keyvalue} || '%'
-		</if>
-		<if test="member_level != null">
-		or member_level like '%' || #{keyvalue} || '%'
-		</if>
-	</where>
-	order by member_id desc -->
 	</select>
 	
 	<select id="chkDupId" parameterType="com.leaf.model.member.MemberDTO" resultType="int">
 		SELECT COUNT(*) AS cnt
-  	FROM Member 
-  	WHERE member_id = #{member_id}
+  			FROM Member 
+  		WHERE member_id = #{member_id}
 	</select>
 	
 	<update id="memberbye" parameterType="com.leaf.model.member.MemberDTO">
@@ -136,8 +122,7 @@ resultType : 쿼리 수행 후 결과를 보내주기 위한 데이터 -->
 	 <!-- 06. 비밀번호 체크 -->
     <select id="checkPw" resultType="int">
         SELECT 
-            COUNT(*) 
-        FROM Member
+            COUNT(*) FROM Member
         WHERE member_id = #{member_id} AND member_pwd = #{member_pwd}
     </select>
     
@@ -145,7 +130,7 @@ resultType : 쿼리 수행 후 결과를 보내주기 위한 데이터 -->
 		update Member set member_id=#{member_id}, member_pwd=#{member_pwd} where member_id=#{member_id}
 	</update>
 	
-		<select id="findOneByEmail" parameterType="String" resultType="int">
+	<select id="findOneByEmail" parameterType="String" resultType="int">
 		select count(*) from Member where member_email=#{member_email}
 	</select>
 	
