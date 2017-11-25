@@ -24,9 +24,8 @@
 		select student_excel from student where member_id = #{student_id} and lect_id = #{lect_id}
 	</select>
 	
-	<select id="getMyLect" parameterType="String" resultType="com.leaf.model.curriculum.LectDTO">
+	<select id="getMyLect" parameterType="Integer" resultType="com.leaf.model.curriculum.LectDTO">
 		select lect_name,lect_start_day, lect_end_day from lecture where lect_id in (select lect_id from student where member_id = #{sessionid})
 	</select>
-	
 	
 </mapper>
