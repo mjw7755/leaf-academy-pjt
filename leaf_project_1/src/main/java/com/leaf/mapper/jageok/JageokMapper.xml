@@ -59,7 +59,7 @@
 	select * from
 		(SELECT ROWNUM NUM, j.* FROM 
 			( SELECT * FROM jageok 
-				where jageok_title like '%' || #{keyvalue} || '%'
+				where upper(jageok_title) like '%' || upper(#{keyvalue}) || '%'
 				or jageok_cost like '%' || #{keyvalue} || '%'
 		ORDER BY jageok_id DESC)   j)
 	where NUM between ((#{page}-1)*5)+1 and (#{page}*5)

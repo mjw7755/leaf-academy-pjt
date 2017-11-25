@@ -59,7 +59,7 @@
 	select * from
 		(SELECT ROWNUM NUM, b.* FROM 
 			( SELECT * FROM book
-				where book_title like '%' || #{keyvalue} || '%'
+				where upper(book_title) like '%' || upper(#{keyvalue}) || '%'
 				or book_writer like '%' || #{keyvalue} || '%'
 		ORDER BY book_id DESC)   b) 
 	where NUM between ((#{page}-1)*5)+1 and (#{page}*5)

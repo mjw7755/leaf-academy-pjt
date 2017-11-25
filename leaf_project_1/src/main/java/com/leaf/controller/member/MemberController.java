@@ -479,7 +479,7 @@ public class MemberController {
 		return mav;
 	}
 
-	@RequestMapping("/member_del.do")
+	/*@RequestMapping("/member_del.do")
 	public void member_del(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		String sessionid = (String) session.getAttribute("sessionid");
@@ -498,6 +498,22 @@ public class MemberController {
 		}
 	}
 	
+	@RequestMapping("/member_check.do")
+	public void member_check(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		String sessionid = (String) session.getAttribute("sessionid");
+		String passwd = request.getParameter("passwd");
+		String chkpwd = memberdao.member_check(sessionid);
+		MemberDTO dto = new MemberDTO();
+		dto.setMember_id(sessionid);
+		dto.setMember_pwd(passwd);
+		if (chkpwd.equals(passwd)) {
+			response.getWriter().write("1");
+		} else {
+			response.getWriter().write("0");
+		}
+	}
+	
 	@RequestMapping("/member_checkform.do")
 	public ModelAndView checkForm(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -507,5 +523,5 @@ public class MemberController {
 		mav.setViewName("ayrin.member_checkform");
 
 		return mav;
-	}
+	}*/
 }

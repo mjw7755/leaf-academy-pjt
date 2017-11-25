@@ -449,7 +449,7 @@ font-size: 0.6em; }
    <tr id="rkdnsep">
       <!-- <input type="submit" value="수정하기"> -->
       <td colspan="2">
-         <input type="submit" value="수정완료" onclick="checkfield();" class="btn btn--sm btn--green">
+         <input type="submit" value="수정완료" onclick="checkfield()" class="btn btn--sm btn--green">
          <input type="reset" value="취소" class="btn btn--sm btn--green">
       </td>
    </tr>         
