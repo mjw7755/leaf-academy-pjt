@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -62,7 +63,7 @@ public class NoteController {
 	
 	
 	@RequestMapping("noteSendForm.do")
-	public ModelAndView noteSendForm(HttpServletRequest request) {
+	public ModelAndView noteSendForm(Model model, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		String[] chkValues = request.getParameterValues("studentChk");
 		String sessionid = (String) request.getSession().getAttribute("sessionid");
@@ -86,6 +87,9 @@ public class NoteController {
 		
 		mav.addObject("chkValues", chkValues);
 		mav.setViewName("moon.noteWriteForm");
+		
+		int chk = 2;
+		model.addAttribute("myclass", chk);
 		
 		return mav;
 	}

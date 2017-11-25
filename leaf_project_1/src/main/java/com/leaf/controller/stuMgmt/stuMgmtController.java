@@ -108,6 +108,10 @@ public class stuMgmtController {
 		model.addAttribute("studentList", studentList);
 		model.addAttribute("lect_id", lect_id);
 		mav.setViewName("moon.stuMgmt");
+		
+		int chk = 2;
+		model.addAttribute("myclass", chk);
+		
 		return mav;
 	}
 	
