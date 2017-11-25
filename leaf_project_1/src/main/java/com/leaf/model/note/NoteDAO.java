@@ -16,8 +16,8 @@ public interface NoteDAO {
 	public List<NoteDTO> sendNoteList(Map<String,Object> sendNoteListMap);
 	public int sendAllNoteCount(String sessionid);
 	public void noteOpenUpdate();
-	public NoteDTO noteDelChk();
-	public void noteDeleteDB(List<String> note_chk_values);
+	public List<NoteDTO> noteDelChk();
+	public void noteDeleteDB(int n_id);
 	public MemberDTO selectMemberLevel(String sessionid);
 	public List<MemberDTO> selectTeacher(String sessionid);
 	public List<MemberDTO> selectStudent(String sessionid);

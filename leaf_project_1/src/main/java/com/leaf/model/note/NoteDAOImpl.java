@@ -76,15 +76,15 @@ public class NoteDAOImpl implements NoteDAO {
 	}
 
 	@Override
-	public NoteDTO noteDelChk() {
+	public List<NoteDTO> noteDelChk() {
 		NoteDAO dao = sqlSession.getMapper(NoteDAO.class);
 		return dao.noteDelChk();
 	}
 
 	@Override
-	public void noteDeleteDB(List<String> note_chk_values) {
+	public void noteDeleteDB(int n_id) {
 		NoteDAO dao = sqlSession.getMapper(NoteDAO.class);
-		dao.noteDeleteDB(note_chk_values);
+		dao.noteDeleteDB(n_id);
 	}
 
 	@Override

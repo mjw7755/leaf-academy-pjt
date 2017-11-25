@@ -16,9 +16,9 @@ public class StumgmtDAOImpl implements StumgmtDAO {
 	SqlSession sqlSession;
 	
 	@Override
-	public List<MemberDTO> getStudents(String member_id) {
+	public List<MemberDTO> getStudents(int lect_id) {
 		StumgmtDAO dao = sqlSession.getMapper(StumgmtDAO.class);
-		return dao.getStudents(member_id);
+		return dao.getStudents(lect_id);
 	}
 
 	@Override
