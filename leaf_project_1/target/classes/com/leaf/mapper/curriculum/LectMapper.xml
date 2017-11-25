@@ -4,51 +4,43 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.leaf.model.curriculum.LectDAO">
+
 	<select id="listLect" resultType="com.leaf.model.curriculum.LectDTO">
-		 select * from
-      (SELECT ROWNUM NUM, m.* FROM 
-          ( SELECT l.*, c.curri_subject, c.curri_level, c.curri_content, 
-          c.member_id FROM lecture l,curriculum c where l.curri_id=c.curri_id
-           ORDER BY lect_id DESC)   m)
-      where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
-      
+		select * from
+      		(SELECT ROWNUM NUM, m.* FROM 
+				( SELECT l.*, c.curri_subject, c.curri_level, c.curri_content, 
+        		  c.member_id FROM lecture l,curriculum c where l.curri_id=c.curri_id
+			ORDER BY lect_id DESC)   m where enabled=1)
+		where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
 	</select>
 
-	<select id="getLectByLect_id" parameterType="int"
-		resultType="com.leaf.model.curriculum.LectDTO">
+	<select id="getLectByLect_id" parameterType="int" resultType="com.leaf.model.curriculum.LectDTO">
 		select*from lecture where lect_id = #{lect_id}
 	</select>
 
-	<select id="searchLect" parameterType="hashMap"
-		resultType="com.leaf.model.curriculum.LectDTO">
-		
-      select * from (SELECT ROWNUM NUM, m.* FROM
-      ( SELECT l.*, c.curri_subject, c.curri_level, c.curri_content, 
-          c.member_id FROM lecture l,curriculum c  where ${column} like '%' || #{keyvalue} || '%') m)
-      where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
-      
- 
+	<select id="searchLect" parameterType="hashMap"	resultType="com.leaf.model.curriculum.LectDTO">
+		select * from 
+			(SELECT ROWNUM NUM, m.* FROM
+				(SELECT l.*, c.curri_subject, c.curri_level, c.curri_content, 
+				c.member_id FROM lecture l,curriculum c  
+				where ${column} like '%' || #{keyvalue} || '%' and l.curri_id=c.curri_id) m)
+		where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
 	</select>
 	
-	
-		<select id ="subjectcurri" parameterType="String" resultType="com.leaf.model.curriculum.LectDTO">
+	<select id ="subjectcurri" parameterType="String" resultType="com.leaf.model.curriculum.LectDTO">
 		select curri_id, curri_subject from curriculum where member_id = #{member_id}
 	</select>
-	
-
 
 	<insert id="insertLect" parameterType="com.leaf.model.curriculum.LectDTO">
-		 <selectKey resultType="int" keyProperty="lect_id" order="BEFORE">
+		<selectKey resultType="int" keyProperty="lect_id" order="BEFORE">
 			select NVL(max(lect_id),0)+1 from lecture
 		</selectKey> 
-		
 		insert into
 		lecture(lect_id,lect_name,lect_person_num,lect_start_day,lect_end_day,
 				lect_start_time,lect_end_time,lect_write_time,curri_id, lect_charge)
 		values(#{lect_id}, #{lect_name}, #{lect_person_num}, #{lect_start_day},
 				#{lect_end_day}, #{lect_start_time}, #{lect_end_time}, 
 				 #{lect_write_time},#{curri_id}, #{lect_charge})
-		
 	</insert>
 
 	<delete id="deleteLect" parameterType="int">
@@ -66,17 +58,28 @@
 		select count(*) from lecture ORDER BY lect_id DESC
 	</select>
 	
-	  <select id="getSearchCount" parameterType="hashMap" resultType="Integer">
+	<select id="getSearchCount" parameterType="hashMap" resultType="Integer">
       select count(*) from lecture where ${column} like '%' || #{keyvalue} || '%'
-   </select>
-	
+	</select>
 	
 	<delete id = "multiDeleteLect">
-		delete from lecture where lect_id in <foreach item = "item" 
-		index="index" collection="list"  open="(" separator = "," close=")">
+		delete from lecture where lect_id in 
+		<foreach item = "item" index="index" collection="list"  open="(" separator = "," close=")">
 		#{item}
 		</foreach>
 	</delete>
+	
+	<select id="getCheckDate" parameterType="Integer" resultType="com.leaf.model.curriculum.LectDTO">
+		select lect_start_day, lect_end_day from lecture where lect_id = #{lect_id}
+	</select>
+	
+	<select id="getLectName" parameterType="Integer" resultType="String">
+		select lect_name from lecture where lect_id = #{lect_id}
+	</select>
+	
+	<select id="getLectId" parameterType="String" resultType="Integer">
+		select lect_id from lecture where curri_id in (select curri_id from curriculum where member_id=#{sessionid})
+	</select>
 </mapper>
 	
 	
