@@ -50,14 +50,11 @@
 	</update>
 	
 	<select id="noteDelChk" resultType="com.leaf.model.note.NoteDTO">
-		select n_send_del_yn, n_recv_del_yn from note
+		select n_send_del_yn, n_recv_del_yn,n_id from note
 	</select>
 	
 	<update id="noteDeleteDB">
-		delete from note where
-		<foreach collection="list" item="item" separator="and">
-			n_id = #{item}
-		</foreach>
+		delete from note where n_id = #{n_id}
 	</update>
 	
 	<select id="selectMemberLevel" parameterType="String" resultType="com.leaf.model.member.MemberDTO">

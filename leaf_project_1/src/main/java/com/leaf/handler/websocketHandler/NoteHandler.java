@@ -54,25 +54,26 @@ public class NoteHandler implements org.springframework.web.socket.WebSocketHand
 		// TODO Auto-generated method stub
 		String message = (String)arg1.getPayload();
 		Map<String,Object> data = gson.fromJson((String)arg1.getPayload(), new TypeToken<Map<String,Object>>(){}.getType());
-		System.out.println("거래취소 아이디:"+(String)data.get("n_name"));
 		
+		
+		
+		//로그인 요청
 		if(data.get("n_type").equals("login")) {
 			if(userList.indexOf((String)data.get("n_name")) > -1) {
 				int jungbok = userList.indexOf((String)data.get("n_name"));
 				WebSocketSession dupl = socketList.get(jungbok);
-				System.out.println("중복처리 시작");
 				dupl.sendMessage(new TextMessage("dupl"));
 				userList.remove((String)data.get("n_name"));
 				socketList.remove(dupl);				
-				System.out.println("중복처리 완료");
 			}else {
 				userList.add((String)data.get("n_name"));
 				System.out.println("로그인 완료");	
 			}
 		}
 		
+		
+		//메세지 요청
 		if(data.get("n_type").equals("message")) {
-			System.out.println("메세지일때");
 			Map<String, Object> mul_recv_note = new HashMap<String, Object>();
 			ArrayList<String> n_recvids = new ArrayList<String>();
 			ArrayList<NoteDTO> n_recvids_arr = new ArrayList<NoteDTO>();
@@ -86,6 +87,7 @@ public class NoteHandler implements org.springframework.web.socket.WebSocketHand
 			
 			
 			
+			System.out.println("받는사람 몇명?"+n_recvids.size());
 			
 			if(n_recvids.size() > 1) {
 				/*다중 쪽지*/
@@ -115,7 +117,6 @@ public class NoteHandler implements org.springframework.web.socket.WebSocketHand
 				}
 			}else {
 				NoteDTO dto = new NoteDTO();
-
 				/*단일 쪽지*/
 				dto.setN_content((String)data.get("n_content"));
 				dto.setN_title((String)data.get("n_title"));
@@ -124,6 +125,7 @@ public class NoteHandler implements org.springframework.web.socket.WebSocketHand
 				System.out.println("받는사람 등장 : "+dto.getN_recv_id());
 				noteDAO.writeNote(dto);
 			}
+			System.out.println("받는사람 아이디 : "+(String)data.get("n_recvid"));
 			int recv_user_num = userList.indexOf((String)data.get("n_recvid"));
 			System.out.println("받는사람 있을까?"+recv_user_num);
 
@@ -137,16 +139,13 @@ public class NoteHandler implements org.springframework.web.socket.WebSocketHand
 			
 		}
 		
+		
+		//로그아웃 요청
 		if(data.get("n_type").equals("logout")) {
 			socketList.remove(arg0);
 			userList.remove((String)data.get("n_name"));
-			System.out.println("소켓은 지워졌니?"+socketList.remove(arg0));
-			System.out.println("유저는 지워졌니?"+userList.remove((String)data.get("n_name")));
-			System.out.println("클라이언트가 지워졌어요(로그아웃함)");
 		}
 		
-		System.out.println("셋팅 완료");
-		System.out.println("첫번쨰 유저 지워졌는가? "+userList.get(0).toString());
 	}
 
 	@Override
