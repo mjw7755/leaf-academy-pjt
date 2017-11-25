@@ -81,14 +81,14 @@ $(function(){
    });
 });
 </script>
-<!-- <style type="text/css">
+<style type="text/css">
 .error {
    color: red;
 }
 /* span{
   font-size: 15px;
 } */
-#checkMsg{   
+/* #checkMsg{   
   font-size: 15px;
 }
 #checkPwd{
@@ -99,7 +99,8 @@ $(function(){
   color : red;
   font-size: 15px;
 }
-</style> -->
+ */
+</style> 
 <script type="text/javascript">
 function checkfield(){
    var f1 = document.forms[0];
@@ -406,7 +407,7 @@ font-size: 0.6em; }
    <table id="contents1">
       <tr>
          <td id="text">아이디 </td>
-         <td id="text">${dto.member_id}</td>
+         <td><input type="text" name="member_id" id="member_id" value="${dto.member_id}" readonly="readonly" class="form-control"/></td>
       </tr>
       <tr>
             <td id="text"><span>암호  </span></td>
