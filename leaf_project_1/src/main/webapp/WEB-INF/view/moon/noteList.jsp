@@ -135,9 +135,11 @@ $(function(){
 			success:function(data){
 				if(data == '1'){
 					alert("쪽지를 삭제하였습니다.");
+					location.reload();
 				}else{
 					alert("쪽지삭제를 실패했습니다.")
 				}
+				win
 				
 			},
 			

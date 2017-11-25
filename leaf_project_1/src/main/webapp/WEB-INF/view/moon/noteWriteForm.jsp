@@ -7,6 +7,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>쪽지보내기</title>
+<script type="text/javascript">
+	function sendNote(){
+		alert("쪽지를 보냈습니다.");
+		history.go(-1);
+	}
+</script>
 <style type="text/css">
 #top_banner{
 	width: 100%;
@@ -113,6 +119,7 @@
 }
 </style>
 </head>
+
 <body>
  	<!-- top banner -->
    	<div id="top_banner">
@@ -159,7 +166,7 @@
 		</tr>
 				
 		<tr>
-			<td colspan="2"><!-- <input type="submit" value="보내기"> --><button id="mgmtNoteSend" class="btn2 btn-info" onclick="javascript:history.go(-1)">보내기</button>
+			<td colspan="2"><!-- <input type="submit" value="보내기"> --><button id="mgmtNoteSend" class="btn2 btn-info" onclick="sendNote()">보내기</button>
 			<button onclick="javascript:history.go(-1)" class="btn2 btn-info">취소</button></td>
 		</tr>
 	</table>

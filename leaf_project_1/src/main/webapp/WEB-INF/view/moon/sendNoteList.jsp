@@ -6,6 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+function list(page){
+    location.href="sendNoteList.do?curPage="+page;
+}
+</script>
 <style type="text/css">
 #top_banner{
 	width: 100%;
