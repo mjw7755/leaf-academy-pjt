@@ -121,15 +121,19 @@ public class NoteController {
 		System.out.println(note_chk_values);
 		int result = noteDAO.noteDelete(note_chk_values);
 		
-		NoteDTO dto = noteDAO.noteDelChk();
-		String n_send_del_yn = dto.getN_send_del_yn();
-		String n_recv_del_yn = dto.getN_recv_del_yn();
+		List<NoteDTO> list = noteDAO.noteDelChk();
 		
-		if(n_send_del_yn.equals("y") && n_recv_del_yn.equals("y")) {
+		for(int i=0;i<list.size();i++) {
+			String n_send_del_yn = list.get(i).getN_send_del_yn();
+			String n_recv_del_yn = list.get(i).getN_recv_del_yn();
 			
-			
+			if(n_send_del_yn.equals("y") && n_recv_del_yn.equals("y")) {
+				noteDAO.noteDeleteDB(list.get(i).getN_id());
+			}
 		}
 		
+		
+		System.out.println(result);
 		StringBuffer sb = new StringBuffer("");
 		
 		sb.append(""+result);
@@ -177,7 +181,7 @@ public class NoteController {
 		Map<String,Object> sendNoteData = new HashMap<String,Object>();
 		
 		int count = noteDAO.sendAllNoteCount(sessionid);
-		
+		System.out.println(count);
 		BoardPager bp = new BoardPager(count, curPage);
 		int start = bp.getPageBegin();
 		int end = bp.getPageEnd();
