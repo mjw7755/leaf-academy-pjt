@@ -29,9 +29,9 @@ public List<LectDTO> listLect(int page);
 
 	public List<CurriDTO> subjectcurri(String member_id);
 
-	public List<LectDTO> getCheckDate(String sessionid);
+	public LectDTO getCheckDate(int lect_id);
 
-	public String getLectName(Map<String,Object> getlectMap);
+	public String getLectName(int lect_id);
 	
 	public int getLectId(String sessionid);
 }

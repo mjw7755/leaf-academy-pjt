@@ -69,12 +69,12 @@
 		</foreach>
 	</delete>
 	
-	<select id="getCheckDate" parameterType="String" resultType="com.leaf.model.curriculum.LectDTO">
-		select lect_start_day, lect_end_day from lecture where curri_id = (select curri_id from curriculum where member_id = #{member_id})
+	<select id="getCheckDate" parameterType="Integer" resultType="com.leaf.model.curriculum.LectDTO">
+		select lect_start_day, lect_end_day from lecture where lect_id = #{lect_id}
 	</select>
 	
-	<select id="getLectName" parameterType="HashMap" resultType="String">
-		select lect_name from lecture where lect_id = (select aa.lect_id from (select * from student where lect_id = (select lect_id from lecture where lect_id = (select lect_id from curriculum, lecture where curriculum.curri_id = lecture.curri_id and member_id = #{teacher_id}))) aa where member_id = #{student_id})
+	<select id="getLectName" parameterType="Integer" resultType="String">
+		select lect_name from lecture where lect_id = #{lect_id}
 	</select>
 	
 	<select id="getLectId" parameterType="String" resultType="Integer">

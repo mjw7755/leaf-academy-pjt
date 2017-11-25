@@ -89,15 +89,15 @@ public class LectDAOImpl implements LectDAO {
 		return dao.subjectcurri(member_id);
 	}
 	
-	  public List<LectDTO> getCheckDate(String sessionid) {
+	  public LectDTO getCheckDate(int lect_id) {
 	         LectDAO dao = sqlSession.getMapper(LectDAO.class);
-	         return dao.getCheckDate(sessionid);
+	         return dao.getCheckDate(lect_id);
 	     }
 
 	@Override
-	public String getLectName(Map<String, Object> getlectMap) {
+	public String getLectName(int lect_id) {
 		LectDAO dao = sqlSession.getMapper(LectDAO.class);
-		return dao.getLectName(getlectMap);
+		return dao.getLectName(lect_id);
 	}
 
 	@Override
