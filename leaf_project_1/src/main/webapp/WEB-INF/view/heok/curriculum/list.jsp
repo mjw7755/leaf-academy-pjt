@@ -42,7 +42,7 @@
 }
 .btn2 {
 	display: inline-block;
-    padding: 12px 18px;
+    padding: 20px 25px;
     margin-bottom: 12px;
     margin-top: 12px;
     margin-left: 5px;
@@ -84,11 +84,11 @@
 }
 /*  */
 #monthBtn{
-	width: 600px;
+	width: 700px;
     margin-bottom: 20px;
 }
 .content {
-	width: 600px;
+	width: 700px;
 }
 .content span{
 	width: 100%;
@@ -124,10 +124,12 @@
 #content_table{
 	margin-bottom: 20px;
 	border-collapse: collapse;
+	width:700px;
 }
 #search_table{
 	margin-bottom: 20px;
 	border-collapse: collapse;
+	width:800px;
 }
 #search_table th{
 	width:100px;

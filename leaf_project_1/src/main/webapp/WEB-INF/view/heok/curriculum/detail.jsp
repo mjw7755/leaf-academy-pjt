@@ -14,59 +14,129 @@
 </head>
 
 <style type="text/css">
-div {
-	text-align: center;
-	font-size: 20px;
+#top_banner{
+	width: 100%;
+	background-color: #e5d235;
+	margin: auto;
 }
-
+#detail{
+	width: 800px;
+}
+#detail hr{
+	border: thin solid #cccccc;
+}
+/*  */
+/*  */
+.btn-info {
+	color: #fff;
+	background-color: #f16022;
+	border-color: #46b8da;
+}
+.btn-info.focus, .btn-info:focus {
+	color: #fff;
+	background-color: #b64413;
+	border-color: #1b6d85;
+}
+.btn-info:hover {
+	color: #fff;
+	background-color: #b64413;
+	border-color: #973911;
+}
+.btn2 {
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 12px;
+	margin-top:12px;
+	margin-left:5px;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;	
+}
+/*  */
+#detail_table th{
+    /* border-top: 1px solid; */
+    border-bottom: 1px solid #cccccc;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background-color: #f4f3f1;
+}
+#detail_table td{
+	border-bottom: 1px solid #cccccc;
+	height: 50px;
+	text-align: center;
+}
+#detail_table{
+	margin-bottom: 20px;
+	border-collapse: collapse;
+	width:800px;
+}
 </style>
 
 <body>
-<fieldset>
-		<legend>
-			<h3>강좌</h3>
-		</legend>
+  	<!-- top banner -->
+   	<div id="top_banner">
+   		<div id="banner">
+   		<img src="resources/ram/top_banner_curri.png">
+   		</div>
+   	</div>
+   	    <div id="detail">
+	<h1>
+	<div>${dto.curri_subject}</div>
+	</h1>
+<hr>
+</div>
 		
 	<input type="hidden" name="curri_id" value="${dto.curri_id }">
-	<h1>
-		<div style="font-style: italic;color :gold; font-size: 80px;">${dto.curri_subject}</div>
-	</h1>
-	<table style="border: thin;text-align: center; margin: auto;">
+	<table id="detail_table">
 		<tr>
-			<th colspan="2">수강기간</th>
-				<td colspan="2">${dto.lect_start_day } ~ ${dto.lect_end_day}</td>
+			<th>수강기간</th>
 			<th>클래스명</th>
-				<td>${dto.lect_name }</td>
-			<th colspan="2">수강시간</th>
-				<td colspan="2">${dto.lect_start_time } ~ ${dto.lect_end_time}</td>
-				<td></td>
+			<th>강사명</th>
+			<th>수강시간</th>
+			<th>강의레벨</th>
+			<th>수강인원</th>
 		</tr>
 		<tr>
-			<th>강사명<th>
+				<td>${dto.lect_start_day } ~ ${dto.lect_end_day}</td>
+				<td>${dto.lect_name }</td>
 				<td>${dto.member_id }</td>
-				<td></td>
-			<th>강의레벨</th>
+				<td>${dto.lect_start_time } ~ ${dto.lect_end_time}</td>
 				<td>${dto.curri_level}</td>
-				<td></td>
-			<th>수강인원</th>
 				<td>${dto.lect_person_num }</td>
-				<td></td>
 		</tr>
 	</table>
+   	    <div id="detail">
+	<h1>커리큘럼</h1>
+<hr>
+</div>
+
 	<div id="curri_detail" class="curri_detail margin-large">
-		
 		<dl class="curri_detail_row">
 			<dd class="curri_detail_data">${fn:replace(dto.curri_content,crlf,'</br>')}</dd>
 		</dl>
 	
 	</div>
+
 	
-	<hr>
 	<div>
-	<a href="list_lect.do"><button>개설강좌</button></a>
+	<button onclick="window.location.href='list_lect.do' " class="btn2 btn-info">수강신청 하기</button>
 	<input type="button" value="목록"
-						onclick="window.location.href='list_curri.do' ">
+						onclick="window.location.href='list_curri.do' " class="btn2 btn-info">
 	</div>
-</fieldset>
+	
+	
 </body>
 </html>

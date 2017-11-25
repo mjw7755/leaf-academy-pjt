@@ -37,6 +37,7 @@
 #lecture_table{
 	border-collapse: collapse;
 	margin-top: 50px;
+	width: 800px;
 }
 /*  */
 .btn-info {
@@ -255,19 +256,15 @@ font-size: 0.6em; }
 					<td>${list.lect_charge }</td>
 					<td>${list.lect_start_time} <br>~${list.lect_end_time }</td>
 
-					<td>
-						<a href="listform_appli.do?lect_id=${list.lect_id}&curri_id=${list.curri_id}">
-								<button id="application" class="btn2 btn-info">수강신청</button>
-						</a>
-					</td>
+					<td><a
+						href="listform_appli.do?lect_id=${list.lect_id}&curri_id=${list.curri_id}">
+							<button id="application" class="btn2 btn-info">수강신청</button>
+					</a></td>
 					<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1' }">
-						<td>
-							<a href="delete_lect.do?lect_id=${list.lect_id}">
-									<button id="delete" class="btn2 btn-info">삭제</button>	
-							</a>
+						<td><a href="delete_lect.do?lect_id=${list.lect_id}">
+								<button id="delete" class="btn2 btn-info">삭제</button>	</a>
 						</td>
-						<td>
-							<a href="updateForm_lect.do?lect_id=${list.lect_id}">
+						<td><a href="updateForm_lect.do?lect_id=${list.lect_id}">
 								<button id="update" class="btn2 btn-info">수정</button>	</a>
 						</td>
 						<td id="multi">
