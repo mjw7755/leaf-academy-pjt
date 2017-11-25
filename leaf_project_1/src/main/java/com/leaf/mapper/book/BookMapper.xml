@@ -5,7 +5,7 @@
   
 <mapper namespace="com.leaf.model.book.BookDAO">
 
-	<select id="getBookList" parameterType="integer" resultType="com.leaf.model.book.BookDTO">
+	<select id="getBookList" parameterType="Integer" resultType="com.leaf.model.book.BookDTO">
 	select * from
       (SELECT ROWNUM NUM, m.* FROM 
                      ( SELECT * FROM book where enabled=1 ORDER BY book_id DESC)   m)
@@ -44,8 +44,8 @@
 	</delete>
 	
 	<delete id="deletecancleBook" parameterType="com.leaf.model.book.BookDTO">
-	update book set enabled=1 where book_id=#{book_id}
-	<!-- delete from Member where member_id=#{member_id} -->
+	delete from book where book_id=#{book_id}
+	<!-- update book set enabled=1 where book_id=#{book_id} -->
 	</delete>
     
     <select id="search_getCount" parameterType="hashMap" resultType="Integer">
@@ -61,7 +61,7 @@
 			( SELECT * FROM book
 				where book_title like '%' || #{keyvalue} || '%'
 				or book_writer like '%' || #{keyvalue} || '%'
-		where enabled=1 ORDER BY book_id DESC)   b)
+		ORDER BY book_id DESC)   b) 
 	where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
 	</select>
 	

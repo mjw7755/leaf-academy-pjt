@@ -295,6 +295,7 @@ public class MemberController {
 			
 			if(dto.getMember_level() == 1) {
 				String strPage = request.getParameter("page");
+				String flag = "list";
 				int page;
 				if (strPage == null) {
 					page = 1;
@@ -308,12 +309,13 @@ public class MemberController {
 				model.addAttribute("count", count);
 				model.addAttribute("countPage", countPage);
 				model.addAttribute("startPage", startPage);
+				model.addAttribute("list", list);
+				model.addAttribute("flag", flag);
 				for(int i=0; i<list.size(); i++) {
 					list.get(i).setTnotice_content(list.get(i).getTnotice_content().replaceAll("\"", "'").replaceAll("\r\n", "<br>"));
 				}
 				int chk = 1;
 				model.addAttribute("myclass", chk);
-				model.addAttribute("list", list);
 				
 				List<PaymentDTO> history = paymentdao.allPayment();
 				model.addAttribute("history", history);
@@ -322,6 +324,7 @@ public class MemberController {
 				
 			} else {
 				String strPage = request.getParameter("page");
+				String flag = "list";
 				int page;
 				if (strPage == null) {
 					page = 1;
@@ -335,12 +338,13 @@ public class MemberController {
 				model.addAttribute("count", count);
 				model.addAttribute("countPage", countPage);
 				model.addAttribute("startPage", startPage);
+				model.addAttribute("list", list);
+				model.addAttribute("flag", flag);
 				for(int i=0; i<list.size(); i++) {
 					list.get(i).setTnotice_content(list.get(i).getTnotice_content().replaceAll("\"", "'").replaceAll("\r\n", "<br>"));
 				}
 				int chk = 2;
 				model.addAttribute("myclass", chk);
-				model.addAttribute("list", list);
 				
 				List<PaymentDTO> history = paymentdao.allPayment();
 				model.addAttribute("history", history);

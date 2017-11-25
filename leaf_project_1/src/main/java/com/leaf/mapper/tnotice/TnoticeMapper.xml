@@ -8,7 +8,7 @@
 	<select id="getTnoticeList" parameterType="Integer" resultType="com.leaf.model.tnotice.TnoticeDTO">
 	select * from
       (SELECT ROWNUM NUM, m.* FROM 
-                     ( SELECT * FROM tnotice ORDER BY tnotice_id asc)   m)
+                     ( SELECT * FROM tnotice ORDER BY tnotice_id desc)   m)
       where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
 	</select>
 
@@ -32,7 +32,8 @@
 	</update>
 	
 	<delete id="deleteTnotice" parameterType="com.leaf.model.tnotice.TnoticeDTO">
-	update tnotice set enabled=0 where tnotice_id=#{tnotice_id}
+	delete from tnotice where tnotice_id=#{tnotice_id}
+	<!-- update tnotice set enabled=0 where tnotice_id=#{tnotice_id} -->
 	</delete>
 	
     <select id="search_getCount" parameterType="hashMap" resultType="Integer">

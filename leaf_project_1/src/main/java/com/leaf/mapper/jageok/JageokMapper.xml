@@ -5,7 +5,7 @@
   
 <mapper namespace="com.leaf.model.jageok.JageokDAO">
 
-	<select id="getJageokList" parameterType="integer" resultType="com.leaf.model.jageok.JageokDTO">
+	<select id="getJageokList" parameterType="Integer" resultType="com.leaf.model.jageok.JageokDTO">
 	select * from 
 		(select rownum num, j.*from 
 			(select * from jageok where enabled=1 order by jageok_id desc) j)
@@ -44,7 +44,8 @@
 	</delete>
 	
 	<delete id="deletecancle" parameterType="com.leaf.model.jageok.JageokDTO">
-	update jageok set enabled=1 where jageok_id=#{jageok_id}
+	delete from jageok where jageok_id=#{jageok_id}
+	<!-- update jageok set enabled=1 where jageok_id=#{jageok_id} -->
 	</delete>
 	
 	<select id="search_getCount" parameterType="hashMap" resultType="Integer">
@@ -60,7 +61,7 @@
 			( SELECT * FROM jageok 
 				where jageok_title like '%' || #{keyvalue} || '%'
 				or jageok_cost like '%' || #{keyvalue} || '%'
-		where enabled=1 ORDER BY jageok_id DESC)   j)
+		ORDER BY jageok_id DESC)   j)
 	where NUM between ((#{page}-1)*5)+1 and (#{page}*5)
 	</select>
 	
