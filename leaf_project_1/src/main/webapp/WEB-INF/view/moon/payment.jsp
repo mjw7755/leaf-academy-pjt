@@ -72,7 +72,7 @@
 </tr>
 <tr>
 <th>가격</th> 
-<td><input type="text" name="amount" value="${dto.payment_lect_charge } $" class="form-control"></td>
+<td><input type="text" name="amount" value="${dto.payment_lect_charge }" class="form-control"></td>
 </table>
  <input type="hidden" name="currency_code" value="USD">
  <input type="hidden" name="item_number" value="${payNum }">
