@@ -497,4 +497,15 @@ public class MemberController {
 			response.getWriter().write("0");
 		}
 	}
+	
+	@RequestMapping("/member_checkform.do")
+	public ModelAndView checkForm(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		String member_id = (String) request.getSession().getAttribute("sessionid");
+		MemberDTO dto = memberdao.getMemberById(member_id);
+		mav.addObject("dto", dto);
+		mav.setViewName("ayrin.member_checkform");
+
+		return mav;
+	}
 }
