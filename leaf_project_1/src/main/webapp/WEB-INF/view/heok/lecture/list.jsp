@@ -239,7 +239,6 @@ font-size: 0.6em; }
 				<th>레벨</th>
 				<th>수강료</th>
 				<th>수강시간</th>
-				<th>수강신청</th>
 				<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1' }">
 					<th>삭제여부</th>
 					<th>수정여부</th>
@@ -255,11 +254,6 @@ font-size: 0.6em; }
 					<td>${list.curri_level }</td>
 					<td>${list.lect_charge }</td>
 					<td>${list.lect_start_time} <br>~${list.lect_end_time }</td>
-
-					<td><a
-						href="listform_appli.do?lect_id=${list.lect_id}&curri_id=${list.curri_id}">
-							<button id="application" class="btn2 btn-info">수강신청</button>
-					</a></td>
 					<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1' }">
 						<td><a href="delete_lect.do?lect_id=${list.lect_id}">
 								<button id="delete" class="btn2 btn-info">삭제</button>	</a>

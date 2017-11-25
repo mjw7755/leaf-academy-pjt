@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
      <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:scriptlet>
     pageContext.setAttribute("cr", "\r");
@@ -94,29 +95,49 @@
    	</div>
    	    <div id="detail">
 	<h1>
-	<div>${dto.curri_subject}</div>
+	<div>${curri_subject}</div>
 	</h1>
 <hr>
 </div>
 		
-	<input type="hidden" name="curri_id" value="${dto.curri_id }">
+	<input type="hidden" name="curri_id" value="${curri_id }">
 	<table id="detail_table">
 		<tr>
-			<th>수강기간</th>
 			<th>클래스명</th>
+			<th>수강기간</th>
+			<th>강의레벨</th>
 			<th>강사명</th>
 			<th>수강시간</th>
-			<th>강의레벨</th>
 			<th>수강인원</th>
+			<th>수강료</th>
+			<th>수강신청</th>
 		</tr>
+		<c:forEach items="${list }" var="list" varStatus="status">
+				<tr onclick="test(this)">
+					<td>${list.lect_name}</td>
+					<td>${list.lect_start_day}~ ${list.lect_end_day }</td>
+					<td>${list.curri_level }</td>
+					<td>${list.member_id }</td>
+					<td>${list.lect_start_time} <br>~${list.lect_end_time }</td>
+					<td>${list.lect_person_num}</td>
+					<td>${list.lect_charge }</td>
+					<td><a
+						href="listform_appli.do?lect_id=${list.lect_id}&curri_id=${list.curri_id}">
+							<button id="application" class="btn2 btn-info">수강신청</button>
+					</a></td>
+				</tr>
+			</c:forEach>
+		
+		<%-- <c:forEach items="${dto }" var="dto" >
 		<tr>
-				<td>${dto.lect_start_day } ~ ${dto.lect_end_day}</td>
-				<td>${dto.lect_name }</td>
-				<td>${dto.member_id }</td>
-				<td>${dto.lect_start_time } ~ ${dto.lect_end_time}</td>
-				<td>${dto.curri_level}</td>
-				<td>${dto.lect_person_num }</td>
+			<td>${dto.lect_start_day } ~ ${dto.lect_end_day}</td>
+			<td>${dto.lect_name }</td>
+			<td>${dto.member_id }</td>
+			<td>${dto.lect_start_time } ~ ${dto.lect_end_time}</td>
+			<td>${dto.curri_level}</td>
+			<td>${dto.lect_person_num }</td>
 		</tr>
+		</c:forEach> --%>
 	</table>
    	    <div id="detail">
 	<h1>커리큘럼</h1>
@@ -125,7 +146,7 @@
 
 	<div id="curri_detail" class="curri_detail margin-large">
 		<dl class="curri_detail_row">
-			<dd class="curri_detail_data">${fn:replace(dto.curri_content,crlf,'</br>')}</dd>
+			<dd class="curri_detail_data">${fn:replace(curri_content,crlf,'</br>')}</dd>
 		</dl>
 	
 	</div>

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,6 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.leaf.model.curriculum.CurriDAO;
 import com.leaf.model.curriculum.CurriDTO;
+import com.leaf.model.member.MemberDAO;
+import com.leaf.model.member.MemberDTO;
 
 @Controller
 public class CurriController {
@@ -32,9 +35,18 @@ public class CurriController {
 	 @Autowired
 	 private SqlSession sqlSession;
 	 
+	 @Resource
+	private MemberDAO memberdao;
+	 
 	@RequestMapping("/list_curri.do")
 	public String list(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String flag = "list";
+		
+		String member_id = (String)request.getSession().getAttribute("sessionid");
+		if(member_id!=null) {
+			MemberDTO dto = memberdao.getMemberById(member_id);
+			model.addAttribute("memberLevel", dto.getMember_level());
+		}
 
 		String strPage = request.getParameter("page");
 		int page;
@@ -120,12 +132,14 @@ public class CurriController {
 	}*/
 
 	@RequestMapping("/detail_curri.do")
-
 	public ModelAndView detailCurri(@RequestParam int curri_id) throws Exception {
 		ModelAndView mav = new ModelAndView();
-
+		CurriDTO dto = curriDAO.curri_info(curri_id);
 		mav.setViewName("curriculum.detail");
-		mav.addObject("dto", curriDAO.detailCurri(curri_id));
+		mav.addObject("list", curriDAO.detailCurri(curri_id));
+		mav.addObject("curri_subject", dto.getCurri_subject());
+		mav.addObject("curri_id", curri_id);
+		mav.addObject("curri_content", dto.getCurri_content());
 		return mav;
 
 	}
@@ -135,6 +149,10 @@ public class CurriController {
 	public String search(Model model, HttpServletRequest request) throws Exception {
 
 		String flag = "search";
+		
+		String member_id = (String) request.getSession().getAttribute("sessionid");
+		MemberDTO dto = memberdao.getMemberById(member_id);
+		model.addAttribute("memberLevel", dto.getMember_level());
 		// �÷���
 		String column = request.getParameter("column");
 		String keyvalue = request.getParameter("keyvalue");

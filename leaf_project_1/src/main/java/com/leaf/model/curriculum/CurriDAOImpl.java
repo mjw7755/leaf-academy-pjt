@@ -1,14 +1,11 @@
 package com.leaf.model.curriculum;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.leaf.model.curriculum.LectDAO;
 
 
 
@@ -63,11 +60,17 @@ public class CurriDAOImpl implements CurriDAO {
 
 	
 	 @Override
-	 public CurriDTO detailCurri(int curri_id ) throws ClassNotFoundException, SQLException{
+	 public List<LectDAO> detailCurri(int curri_id ){
 		CurriDAO dao =  sqlSession.getMapper(CurriDAO.class);
 		 return dao.detailCurri(curri_id);
 	 }
 
+	 @Override
+	 public CurriDTO curri_info(int curri_id ){
+		 CurriDAO dao =  sqlSession.getMapper(CurriDAO.class);
+		 return dao.curri_info(curri_id);
+	 }
+	 
 	@Override
 	public int getCount() {
 		CurriDAO dao =  sqlSession.getMapper(CurriDAO.class);

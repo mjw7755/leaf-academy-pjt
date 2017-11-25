@@ -120,6 +120,7 @@
 #content_table tbody td, #search_table tbody td{
 	border-bottom: 1px solid #cccccc;
 	height: 50px;
+	width: 50px;
 }
 #content_table{
 	margin-bottom: 20px;
@@ -249,7 +250,7 @@ font-size: 0.6em; }
 								$("#content" + monthvalue).show();
 							},
 							error : function(data) {
-
+								
 							}
 						});
 					} else {
@@ -267,25 +268,10 @@ font-size: 0.6em; }
    		</div>
    	</div>
     <!-- top banner end -->
-<div id="curri">
-<a href="list_curri.do"><h1>월별 강의 커리큘럼 안내</h1></a>
+    
+    <a href="list_curri.do"><h1>월별 강의 커리큘럼 안내</h1></a>
 <hr>
-
-	<div id="search" name="searchdiv1" class="searchdiv1">
-	<form action="search_curri.do" method="post">
-		<select name="column">
-			<option value="curri_subject">강좌명</option>
-			<option value="curri_level">강좌레벨</option>
-			<option value="member_id">강사명</option>
-		</select> <input size="30" type="text" id="keyvalue" name="keyvalue"
-			placeholder="키워드 검색 가능합니다."> 
-			<input type="image" src="resources/ram/search.png" id="search_icon">&nbsp;
-	</form>	
-	</div>
-	<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1'}">
-	<a href="writeform_curri.do" method="post"><button  class="btn btn--sm btn--green">추가하기</button></a>
-</c:if><br>
-	<div id="monthBtn">	
+<div id="monthBtn">	
 	<input type="button" id="01" name="2017" class="btn2 btn-info"
 		value="2017.01" />
 	<input type="button" id="02" name="2017" class="btn2 btn-info"
@@ -516,29 +502,38 @@ font-size: 0.6em; }
 			</table>
 	</div>
 	
+</div>	
+
+	<c:if test="${memberLevel==2}">
+	<a href="writeform_curri.do" method="post"><button  class="btn btn--sm btn--green">추가하기</button></a>
+</c:if><br>
 	<div id="searchdiv" name="searchdiv" class="searchdiv">
 	
-		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">검색</span>
+		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">커리큘럼 검색</span>
 			<table cellpadding="5" style="text-align: center;" id="search_table">
-				<th >개강일</th>
+			<tr><td colspan="3">
+				<div id="search" name="searchdiv1" class="searchdiv1">
+					<form action="search_curri.do" method="post">
+						<select name="column">
+							<option value="curri_subject">강좌명</option>
+							<option value="curri_level">강좌레벨</option>
+							<option value="member_id">강사명</option>
+						</select> <input size="30" type="text" id="keyvalue" name="keyvalue"
+							placeholder="키워드 검색 가능합니다."> 
+							<input type="image" src="resources/ram/search.png" id="search_icon">&nbsp;
+					</form>	
+				</div>
+			</td></tr>
 					<th>강좌명</th>
 					<th>강사</th>
 					<th>강좌레벨</th>
-					<th>클래스명</th>
-					<th>수강인원</th>
-					<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1'}">				
-				<th id="multi" colspan="2"></th>
-				</c:if>
 				<c:forEach items="${list }" var="list" varStatus="status" >
 					<tr>
-						<td > ${list.lect_start_day}</td>
 						<td><a href="detail_curri.do?curri_id=${list.curri_id}">${list.curri_subject}</a></td>
 						<td>${list.member_id}</td>
 						<td>${list.curri_level}</td>
-						<td>${list.lect_name}</td>
-						<td>${list.lect_person_num}</td>
 						
-						<c:if test="${ sessionScope.sessionid == '해피도연' ||'관리자1'}">
+						<c:if test="${memberLevel==2 and list.member_id==sessionScope.sessionid}">
 							<td><a href="delete_curri.do?curri_id=${list.curri_id}"><button id="delete" class="btn btn--sm btn--green">삭제</button></a></td>
 							<td><a href="updateForm_curri.do?curri_id=${list.curri_id}"><button id="update" class="btn btn--sm btn--green">수정</button></a></td>
 						</c:if>
@@ -575,6 +570,6 @@ font-size: 0.6em; }
 	        </c:if>
 		</div>
 	</div>
-</div>	
+	<div id="curri">
 </body>
 </html>

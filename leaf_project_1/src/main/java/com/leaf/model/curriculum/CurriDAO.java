@@ -1,10 +1,7 @@
 package com.leaf.model.curriculum;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
-
-import com.leaf.model.curriculum.LectDTO;
 
 
 
@@ -19,20 +16,17 @@ public List<CurriDTO> listCurri();
 
 	public CurriDTO updateFormCurri(int curri_id);
 
-
 	public void insertCurri(CurriDTO dto);
 
-
-	public CurriDTO detailCurri(int curri_id) throws ClassNotFoundException, SQLException;
-
+	public List<LectDAO> detailCurri(int curri_id);
+	
+	public CurriDTO curri_info(int curri_id);
 
 	public CurriDTO getCurriByCurri_id(int curri_id);
-
 
 	public int getCount();
 	
 	public List<CurriDTO> searchCurri(Map<String, Object> map);
-
 
 	public int getSearchCount(Map<String, Object> map);
 

@@ -6,9 +6,7 @@
 
 	<select id="listCurri" parameterType="Integer" resultType="com.leaf.model.curriculum.CurriDTO">
 		select * from
-			(SELECT ROWNUM NUM, m.* FROM 
-				(select c.*, l.lect_start_day, l.lect_end_day, l.lect_name, l.lect_person_num from 
-				 lecture l, curriculum c where l.curri_id = c.curri_id  ) m where enabled=1) 
+			(SELECT ROWNUM NUM, c.* FROM curriculum c where enabled=1) 
 		where NUM between ((#{page}-1)*5)+1 and (#{page}*5) 
 	</select>
 	
@@ -42,13 +40,10 @@
 		select count(*) from curriculum
 	</select>
 	
-	<select id="searchCurri" parameterType="hashMap" resultType="com.leaf.model.curriculum.CurriDTO">
-		select * from
-      		(SELECT ROWNUM NUM, m.* FROM 
-				(select c.member_id, c.curri_subject, c.curri_level, l.lect_start_day, l.lect_end_day, l.lect_name, l.lect_person_num 
-				from lecture l, curriculum c 
-				where ${column} like '%' || #{keyvalue} || '%' and l.curri_id=c.curri_id) m  ) 
-     	where NUM between ((#{page}-1)*5)+1 and (#{page}*5) 
+	<select id="searchCurri" parameterType="hashMap" resultType="com.leaf.model.curriculum.LectDTO">
+     	select * from
+			(SELECT ROWNUM NUM, c.* FROM curriculum c where enabled=1 and ${column} like '%' || #{keyvalue} || '%') 
+		where NUM between ((#{page}-1)*5)+1 and (#{page}*5) 
       
 	</select>
 	
@@ -65,10 +60,13 @@
 			and <![CDATA[TO_DATE(lect_start_day,'YYYY-MM-DD') <= TO_DATE(#{end_day},'YYYY-MM-DD')]]>
 	</select>
 
-	<select id ="detailCurri" parameterType="int" resultType="com.leaf.model.curriculum.CurriDTO" >
-		select c.*, l.lect_start_day, l.lect_end_day, l.lect_name, l.lect_person_num,
-			l.lect_start_time, l.lect_end_time from lecture l, (select *from curriculum where curri_id=#{curri_id}) c 
-		where l.curri_id = c.curri_id 
+	<select id ="detailCurri" parameterType="int" resultType="com.leaf.model.curriculum.LectDTO" >
+		select * from lecture l, (select *from curriculum where curri_id=#{curri_id}) c 
+		where l.curri_id = c.curri_id and l.enabled=1
+	</select>
+	
+	<select id ="curri_info" parameterType="int" resultType="com.leaf.model.curriculum.CurriDTO" >
+		select curri_subject, curri_content from curriculum where curri_id=#{curri_id} and enabled=1
 	</select>
 	
 </mapper>
