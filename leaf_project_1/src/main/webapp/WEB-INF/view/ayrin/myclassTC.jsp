@@ -11,38 +11,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>myclassTC</title>
 <style type="text/css">
-#my_class{
-	margin-top: 35px;
-}
-#tnotice {
-	height: 300px;
-	width: 450px;
-	border: 1px solid;
-}
-/* #chulcheck {
-	height: 300px;
-	width: 450px;
-	border: 1px solid;
-}
-#grade_check {
-	height: 300px;
-	width: 100%;
-	border: 1px solid;
-} */
-/* table */
-#menu {
-   width: 200px;
-   margin-left: 25%;
-   float: left;
-}
-#menu tr {
-   width: 150px;
-}
-#menu a {
-   text-decoration: none;
-   font-size: 13px;
-   color: #5e5f5e;
-}
+	#t_notice_div{
+		width:600px;
+		float:left;
+		margin-left: 30px;
+	}
+	#t_notice_div a{
+		text-decoration: none;
+		color:#000;
+	}
+	#t_notice_div hr{
+		border: thin solid;
+		border-color: #cccccc;
+	}
+
 /* mypage text */
 #my_page_text {
    width: 100%;
@@ -85,19 +67,29 @@
 .needpopup p + p {
 	margin-top: 10px;
 }
-			
-</style>
 
-<style type="text/css">
-#tnoticelistTable {
-   width: 800px;
-   text-align: center;
+#tnoticelistTable th{
+	border-bottom: 1px solid #cccccc;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	background-color: #f4f3f1;
 }
 #tnoticelistTable td{
-   border: 1px solid;
-   height: 30px;
-   border-radius: 4px;
+	border-bottom: 1px solid #cccccc;
+    height: 50px;
+    /* font-size: 13px; */
+    font-weight: bold;
+    text-align: center;
 }
+#tnoticelistTable td a{
+	color:#21307a;
+}
+#tnoticelistTable{
+	border-collapse: collapse;
+	margin-top: 50px;
+	width: 600px;
+}
+
 .btn {
 	display: inline-block;
     border: none;
@@ -133,8 +125,37 @@ background-color: #fff; }
 .btn--green {
 font-size: 1em; }
 .btn--sm {
-font-size: 0.5em; }
+font-size: 0.6em; }
+/*  */
+#search{
+	text-align: right;
+	margin-bottom: 30px;
+	margin-top: 30px;
+}
+#search form{
+	font-size: 13px;
+}
 
+#search form input{
+	font-size: 13px;
+}
+#search form select{
+	height: 22px;
+}
+#search_icon{
+	vertical-align: middle;
+}
+/*  */
+#page {
+	margin-top: 10px;
+}
+#page a{
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    color: #13b69d;
+    margin-right: 5px;
+}
 </style>
 
 
@@ -193,32 +214,23 @@ $(function() {
 </script>
 </head>
 <body>
+<div id="t_notice_div">
+<a href="tnotice_list.do"><h1>강사님 공지사항</h1></a>
+<hr>
  <div id="tnoticeList">
-	<label style="float: left;">강의 선택 : </label>
-	<select style="width:200px; float:left;">
-		<c:forEach items="${history}" var="history">
-		<c:if test="${history.payment_pay_chk eq 1}">
-		<c:if test="${sessionScope.sessionid == history.payment_teacher_name}">
-			<option value="class1">${history.payment_lect_subject }</option>
-		</c:if>
-		</c:if>
-		</c:forEach>
-	</select>
-	<!-- <button >쪽지</button>
-	<button onclick="window.location.href='listening.do'">강의하기</button><br -->>
 	
-	<br>
+	<div id="search">
 	<form action="tnotice_search.do" method="post">
          검색어 입력 : <input size="30" type="search"  name="keyvalue" placeholder="키워드 검색 가능합니다." list="tnoticelist"> 
-             <button type="submit" class="btn btn--sm btn--green">검색</button>
+             <input type="image" src="resources/ram/search.png" id="search_icon">
     </form>
-   
+   </div>
 	<datalist>
 		<c:forEach items="${ list }" var="list">
 			<option value="${ list.tnotice_title }"> ${ list.tnotice_title } </option>
 		</c:forEach>
 	</datalist>
-	<br><hr><br>
+
    <table id="tnoticelistTable">
       <tr>
          <th>글번호</th>
@@ -237,8 +249,7 @@ $(function() {
          </tr>
       </c:forEach>
    </table>
-   <br><br>
-   <div align="center">
+   <div align="center" id="page">
       <c:if test="${param.page>5}">
       <c:if test="${flag == 'list'}">
          <a class="button btn-prev" href="tnotice_list.do?page=${startPage-1}">이전</a>
@@ -251,7 +262,7 @@ $(function() {
    <c:forEach var="i" begin="0" end="4" varStatus="status">
       <c:if test="${countPage>=startPage+i}">
       <c:if test="${flag == 'list'}">
-         <a class="strong" href="tnotice_list.do?page=${startPage+i}">${startPage+i}</a>
+         <a class="strong" href="tnotice_list.do?page=${startPage+i}" >${startPage+i}</a>
       </c:if>
       <c:if test="${flag == 'search'}">
          <a class="strong" href="tnotice_search.do?page=${startPage+i}&keyvalue=${keyvalue}">${startPage+i}</a>
@@ -270,40 +281,6 @@ $(function() {
    </div>
 </div>	
 	
-<!-- 	<div id="detail"></div>
-	
-	<div id="write"></div>
-	
-	<div id="update"></div> -->
-	
-	
-	
-<%-- 	<div style="width:1000px; margin:0 auto;">
-		<table>
-			<tr>
-				<td>
-					<div id="notice">
-						<table>
-						<c:forEach items="${list}" var="list">
-							<tr>
-								<td><a onclick="detail(event)" data-needpopup-show="#noticeDetail" name="content_${list.notice_id}">${list.notice_title}</a></td>
-								<td><input id="content_${list.notice_id}" type="hidden" value="${list.notice_content}"/></td>
-							</tr>
-						</c:forEach>
-						</table>
-					</div>
-				</td>
-				<td>
-					<div id="chulcheck">평균, 우수학생 1~3랭킹</div>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2">
-					<div id="student_list">학생List 및 체크박스 쪽지보내기</div>
-				</td>
-			</tr>		
-		</table>
-	</div> --%>
-	<!-- <div id="noticeDetail" class="needpopup"></div> -->
+</div>	
 </body>
 </html>

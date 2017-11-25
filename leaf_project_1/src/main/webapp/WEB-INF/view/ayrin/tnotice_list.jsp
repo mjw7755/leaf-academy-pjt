@@ -7,14 +7,40 @@
 <title></title>
 
 <style type="text/css">
-#tnoticelistTable {
-   width: 800px;
-   text-align: center;
+	#t_notice_div{
+		width:600px;
+		float:left;
+		margin-left: 30px;
+	}
+	#t_notice_div a{
+		text-decoration: none;
+		color:#000;
+	}
+	#t_notice_div hr{
+		border: thin solid;
+		border-color: #cccccc;
+	}
+
+#tnoticelistTable th{
+	border-bottom: 1px solid #cccccc;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	background-color: #f4f3f1;
 }
 #tnoticelistTable td{
-   border: 1px solid;
-   height: 30px;
-   border-radius: 4px;
+	border-bottom: 1px solid #cccccc;
+    height: 50px;
+    /* font-size: 13px; */
+    font-weight: bold;
+    text-align: center;
+}
+#tnoticelistTable td a{
+	color:#21307a;
+}
+#tnoticelistTable{
+	border-collapse: collapse;
+	margin-top: 50px;
+	width: 600px;
 }
 .btn {
 	display: inline-block;
@@ -51,23 +77,55 @@ background-color: #fff; }
 .btn--green {
 font-size: 1em; }
 .btn--sm {
-font-size: 0.5em; }
+font-size: 0.6em; }
+/*  */
+#search{
+	text-align: right;
+	margin-bottom: 30px;
+	margin-top: 30px;
+}
+#search form{
+	font-size: 13px;
+}
 
+#search form input{
+	font-size: 13px;
+}
+#search form select{
+	height: 22px;
+}
+#search_icon{
+	vertical-align: middle;
+}
+/*  */
+#page {
+	margin-top: 10px;
+}
+#page a{
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    color: #13b69d;
+    margin-right: 5px;
+}
 </style>
 </head>
 <body>
+<div id="t_notice_div">
+<a href="tnotice_list.do"><h1>강사님 공지사항</h1></a>
+<hr>
 <c:if test="${session.ssessionlevel != 1 }">	
+	<div id="search">
 	<form action="tnotice_search.do" method="post">
          검색어 입력 : <input size="30" type="search"  name="keyvalue" placeholder="키워드 검색 가능합니다." list="tnoticelist"> 
-             <button type="submit" class="btn btn--sm btn--green">검색</button>
+             <input type="image" src="resources/ram/search.png" id="search_icon">
     </form>
-   
+    </div>
 	<datalist>
 		<c:forEach items="${ list }" var="list">
 			<option value="${ list.tnotice_title }"> ${ list.tnotice_title } </option>
 		</c:forEach>
 	</datalist>
-	<br><hr><br>
    <table id="tnoticelistTable">
       <tr>
          <th>글번호</th>
@@ -86,8 +144,7 @@ font-size: 0.5em; }
          </tr>
       </c:forEach>
    </table>
-   <br><br>
-   <div align="center">
+   <div align="center" id="page">
       <c:if test="${param.page>5}">
       <c:if test="${flag == 'list'}">
          <a class="button btn-prev" href="tnotice_list.do?page=${startPage-1}">이전</a>
@@ -118,8 +175,6 @@ font-size: 0.5em; }
       </c:if>
    </div>
 </c:if>
-
-
-
+</div>
 </body>
 </html>

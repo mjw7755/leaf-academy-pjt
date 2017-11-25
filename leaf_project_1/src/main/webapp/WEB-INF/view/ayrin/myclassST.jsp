@@ -11,30 +11,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>myclassST</title>
 <style type="text/css">
-#my_class{
-	margin-top: 35px;
-}
-#tnoticeDIV {
-	height: 320px;
-	width: 550px;
-	border: 1px solid;
-	float:left;
-}
+	#t_notice_div{
+		width:600px;
+		float:left;
+		margin-left: 30px;
+	}
+	#t_notice_div a{
+		text-decoration: none;
+		color:#000;
+	}
+	#t_notice_div hr{
+		border: thin solid;
+		border-color: #cccccc;
+	}
 /* table */
-#menu {
-   width: 200px;
-   margin-left: 25%;
-   float: left;
-}
-#menu tr {
-   width: 150px;
-}
-#menu a {
-   text-decoration: none;
-   font-size: 13px;
-   color: #5e5f5e;
-}
-/* mypage text */
+
 #my_page_text {
    width: 100%;
    height: 150px;
@@ -76,7 +67,27 @@
 .needpopup p + p {
 	margin-top: 10px;
 }
-			
+/*  */
+#tnoticeDIV {
+    height: 320px;
+    width: 600px;
+    float: left;
+    overflow: auto;
+}
+#tnotice_table{
+	border-collapse: collapse;
+}
+#tnotice_table td{
+	width: 100%;
+	padding-left: 20px;
+	padding-top: 20px;
+	padding-bottom: 10px;
+	font-weight: bold;
+	border-bottom: 1px solid #cccccc;
+}
+#tnotice_table td a{
+	color:#21307a;
+}	
 </style>
 <script>
 
@@ -152,30 +163,21 @@ function detail(ev) {
 </script>
 </head>
 <body>
-	<label style="float:left;">강의 선택 : </label>
-	<select style="width:200px; float:left;">
-		<c:forEach items="${history}" var="history">
-		<c:if test="${history.payment_pay_chk eq 1}">
-		<c:if test="${sessionScope.sessionid == history.payment_member_id}">
-			<option value="class1">${history.payment_lect_subject }</option>
-		</c:if>
-		</c:if>
-		</c:forEach>
-	</select>
-	<!-- <button >쪽지</button>
-	<button onclick="window.location.href='listening.do'">강의하기</button><br> -->
+<div id="t_notice_div">
+<a href="tnotice_list.do"><h1>강사님 공지사항</h1></a>
+<hr>
 
 	<br><div id="tnoticeDIV">
-		<table>
+		<table id="tnotice_table">
 		<c:forEach items="${list}" var="list">
 			<tr>
-				<td><a onclick="detail(event)" data-needpopup-show="#tnoticeDetail" name="content_${list.tnotice_id}">${list.tnotice_title}</a></td>
+				<td><a href="#" onclick="detail(event)" data-needpopup-show="#tnoticeDetail" name="content_${list.tnotice_id}">＊ ${list.tnotice_title}</a></td>
 				<td><input id="content_${list.tnotice_id}" type="hidden" value="${list.tnotice_content}"/></td>
 			</tr>
 		</c:forEach>
 		</table>
 	</div>
 	<div id="tnoticeDetail" class="needpopup"></div>
-	
+</div>	
 </body>
 </html>

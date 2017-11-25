@@ -18,16 +18,16 @@
 #my_class{
 	margin-top: 35px;
 }
-#tnoticeDIV {
+/* #tnoticeDIV {
 	height: 320px;
 	width: 550px;
 	border: 1px solid;
 	float:left;
-}
+} */
 /* table */
 #menu {
    width: 200px;
-   margin-top:30px;
+   margin-top:85px;
    margin-left: 25%;
    float: left;
 }
@@ -103,8 +103,13 @@
     <!-- top banner end -->
 	<div id="my_class_student">
 		<table id="menu">
+			
 			<tr id="my_page_text">
 				<td colspan="2">MY CLASS</td>
+			</tr>
+			<tr>
+				<td id="t_notice"><a href="tnotice_list.do">강사공지</a>
+				<div id="t_notice_icon">></div></td>
 			</tr>
 			<tr>
 				<td id="lecture"><a href="listen.do">강의듣기</a>
@@ -118,10 +123,7 @@
 				<td id="attendance"><a href="getChkAttend.do">출결현황</a>
 				<div id="attendance_icon">></div></td>
 			</tr>
-			<tr>
-				<td id="t_notice"><a href="tnotice_list.do">강사공지</a>
-				<div id="t_notice_icon">></div></td>
-			</tr>
+
 		</table>
 		</div>
 </c:if>
@@ -140,6 +142,10 @@
 					<td colspan="2">MY CLASS</td>
 				</tr>
 				<tr>
+					<td id="t_notice"><a href="tnotice_list.do">강사공지</a>
+					<div id="t_notice_icon">></div></td>
+				</tr>
+				<tr>
 					<td id="lecture"><a href="listen.do">강의하기</a>
 					<div id="lecture_icon">></div></td>
 				</tr>
@@ -151,10 +157,7 @@
 					<td id="attendance"><a href="stuMgmtForm.do">학생관리</a>
 					<div id="attendance_icon">></div></td>
 				</tr>
-				<tr>
-					<td id="t_notice"><a href="tnotice_list.do">강사공지</a>
-					<div id="t_notice_icon">></div></td>
-				</tr>
+	
 			</table>
 		</div>
 </c:if>

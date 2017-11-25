@@ -7,26 +7,142 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	#listen{
+		width:700px;
+		float:left;
+		margin-left: 30px;
+	}
+	#listen a{
+		text-decoration: none;
+		color:#000;
+	}
+	#listen hr{
+		border: thin solid;
+		border-color: #cccccc;
+	}
+	label{
+		float:left;
+		margin-right: 30px;
+		font-weight: bold;
+		font-size: 20px;
+	}
+	select {
+    width: 250px;
+    height: 30px;
+    padding-left: 10px;
+    font-size: 18px;
+    color: #1b7817;
+    border: 2px solid #2b6728;
+    border-radius: 3px;
+}
+/*  */
+#txtDiv{
+width: 600px; 
+height: 350px; 
+border:solid;
+font-family: monaco; 
+background-color:#212121;
+padding:10px; 
+overflow-x:auto;
+overflow-y:auto;
+margin-bottom: 20px;
+}
+/*  */
+#send{
+	margin-top: 20px;
+	text-align: right;
+	margin-bottom: 20px;
+}
+#send button{
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    color: #21307a;
+    margin-right: 5px;
+    /* margin-top: 15px; */
+    padding: 5px;
+    border: 2px solid;
+    border-radius: 4px;
+    background-color: #fff;
+}
+#teacher_table{
+	width: 700px;
+}
+#teacher_table th{
+	background-color: #f4f3f1;
+	border-top: 1px solid #cccccc;
+	border-bottom: 1px solid;
+	border-bottom-color: #cccccc;
+	height: 50px;
+}
+#teacher_table td{
+	text-align: center;
+}
+.txt{
+	width: 500px;
+}
+/*  */
+.btn {
+        display: inline-block;
+    border: none;
+    border-radius: .3em;
+    -webkit-box-shadow: inset 0 0 0 1px #323232, inset 0 -0.25em 0 #9f9e9e, 0 0.25em 0.25em #666666;
+    /* box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 -0.25em 0 rgba(0, 0, 0, 0.25), 0 0.25em 0.25em rgba(0, 0, 0, 0.05); */
+    color: #000;
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    padding: .5em 1.5em .75em;
+    position: relative;
+    text-decoration: none;
+    /* text-shadow: 0 1px 1px #c4c4c4; */
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* margin-left: 10px; */
+}
+.btn:active {
+-webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), inset 0 2px 0 rgba(255, 255, 255, 0.1), inset 0 0.25em 0.5em rgba(0, 0, 0, 0.05);
+box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), inset 0 2px 0 rgba(255, 255, 255, 0.1), inset 0 0.25em 0.5em rgba(0, 0, 0, 0.05);
+margin-top: .25em;
+padding-bottom: .5em; }
+.btn:active, .btn:focus {
+outline: none; }
+.btn--green {
+    background-color: #fff; }
+.btn--green {
+font-size: 1em; }
+.btn--sm {
+    font-size: 0.7em;
+}
+
+</style>
 </head>
 <body>
-	<label style="float: left;">강의 선택 : </label>
+<div id="listen">
+<a href="listen.do"><h1>강의 듣기</h1></a>
+<hr>
+	<div id="first_line">
+	<label>강의 선택 : </label>
 	<c:if test="${memberLevel==1}">
 	<select id="studentSelect" onchange="studentSecletChange()" style="width:200px; float:left;">
 			<c:forEach items="${classList}" var="classList">
 					<option value="${classList.lect_id}">${classList.lect_name}</option>
 			</c:forEach>
 		</select>
-		<div style="width:1000px; margin:0 auto;">
+		<div>
 			<table>
 				<tr>
 					<td colspan="2">
-						<table border="1" width="100%">
+						<table>
 						<tr id="txtTable">
 						<td><h1>Source Code</h1>
-							<div id="txtDiv" name="txtDiv"
-								style="width: 600px; height: 300px; border:solid;
-								font-family: monaco; background-color:#212121;
-								padding:10px; "></div>
+							<div id="txtDiv" name="txtDiv"></div>
 						</td>
 						</tr>
 						<c:if test="${sessionScope.sessid != teacherid }">
@@ -46,33 +162,36 @@
 					<option value="${classList.lect_id}">${classList.lect_name}</option>
 			</c:forEach>
 		</select>
-		<button >쪽지</button>
+		
+		<div id="send">
+		<button >쪽지보내기</button>
 		<button id="openButton" onclick="openClick()">강의실 열기</button>
-		<table border="1">
+		</div>
+		</div>
+		
+		<table id="teacher_table">
 			<tr id="txtTable">
-			<td></td>
-			<td><h1>Base Code</h1>
-				<div id="txtDiv" name="txtDiv"
-					style="width: 600px; height: 300px; border:solid;
-					font-family: monaco; background-color:#212121;
-					padding:10px;overflow-x:scroll;overflow-y:scroll;"></div>
+			<td colspan="2"><h1>Base Code</h1>
+				<div id="txtDiv" name="txtDiv"></div>
 			</td>
 			<td>
+			<div id="send">
 				<button onclick="closeClass()">강의실 닫기</button>
+			</div>	
 			</td>
 			</tr>
 			<tr>
-				<td width="120px">학생아이디</td>
-				<td>Source Code</td>
-				<td width="100px">도움요청</td>
+				<th width="500px">Source Code</th>
+				<th width="95px">학생아이디</th>
+				<th>도움요청</th>
 			</tr>
 		<c:forEach items="${studentList}" var="studentList">
 			<tr>
-				<td><button id="${studentList}" onclick="studentRoom(event)">${studentList}</button></td>
-				<td><div id="txtDiv_${studentList}" name="txtDiv_${studentList}"
-				style="width: 600px; height: 300px; border:solid;
+				<td><div id="txtDiv_${studentList}" name="txtDiv_${studentList}" class="txt"
+				style="height: 300px; border:solid;
 				font-family: monaco; background-color:#212121;
-				padding:10px;overflow-x:scroll;overflow-y:scroll;"></div></td>
+				padding:10px;overflow-x:auto;overflow-y:auto;"></div></td>
+				<td><button id="${studentList}" onclick="studentRoom(event)" class="btn btn--sm btn--green" >${studentList}</button></td>
 				<td><img id="call_${studentList}" src="resources/king/callCancle.png"></td>
 			</tr>
 		</c:forEach>
@@ -88,7 +207,6 @@
 	}
 
 	$(function() {
-		$("#txtTable").hide();
 		var optionObj = document.getElementById("teacherSelect");
 		var optionLength = optionObj.options.length;
 		for(var i=0; i<optionLength; i++) {
@@ -600,5 +718,6 @@
 	}
 </script>
 	</c:if>
+	</div>
 </body>
 </html>

@@ -42,12 +42,15 @@
 	/* margin-left: 15px; */
 }
 /*  */
+#pay_info_table{
+	margin-top:20px;
+	margin-bottom: 20px;
+}
 #pay_info_table th{
 	text-align: left;
+	padding-right: 20px;
 }
-#pay_info_table td{
-	padding-bottom: 10px;
-}
+
 </style>
 </head>
 <body>
@@ -64,15 +67,15 @@
 <hr>
 </div>
  <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
- <input type="hidden" name="cmd" value="_xclick">
+ <input type="hidden" name="cmd" value="_xclick" >
  <input type="hidden" name="business" value="mjw7755-facilitator@naver.com">
 <table id="pay_info_table"> 
  <tr><th>상품명</th>
-<td><input type="text" name="item_name" value="${dto.payment_lect_subject }" class="form-control"></td>
+<td><input type="text" name="item_name" value="${dto.payment_lect_subject }" class="form-control" readonly="readonly"></td>
 </tr>
 <tr>
 <th>가격</th> 
-<td><input type="text" name="amount" value="${dto.payment_lect_charge }" class="form-control"></td>
+<td><input type="text" name="amount" value="${dto.payment_lect_charge } $" class="form-control" readonly="readonly"></td>
 </table>
  <input type="hidden" name="currency_code" value="USD">
  <input type="hidden" name="item_number" value="${payNum }">

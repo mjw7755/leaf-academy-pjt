@@ -7,16 +7,34 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title></title>
 <style type="text/css">
+	#t_notice_div{
+		width:600px;
+		float:left;
+		margin-left: 30px;
+	}
+	#t_notice_div a{
+		text-decoration: none;
+		color:#000;
+	}
+	#t_notice_div hr{
+		border: thin solid;
+		border-color: #cccccc;
+	}
+
 #tnoticewriteTable {
-   width: 800px;
+   width: 600px;
    text-align: center;
 }
 #tnoticewriteTable td {
-   border: 1px solid;
+   padding-top: 10px;
+   padding-bottom: 10px;
 }
 #whqrp {
-	width: 200px;
+	width:100px;
+	font-weight: bold;
+	text-align: left;
 }
+
 .btn {
        display: inline-block;
     border: none;
@@ -32,7 +50,7 @@
     padding: .5em 1.5em .75em;
     position: relative;
     text-decoration: none;
-    text-shadow: 0 1px 1px #c4c4c4;
+ /*    text-shadow: 0 1px 1px #c4c4c4; */
     vertical-align: middle;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -52,19 +70,44 @@ outline: none; }
 .btn--green {
 font-size: 1em; }
 .btn--sm {
-font-size: 0.5em; }
+font-size: 0.6em; }
+/*  */
+.form-control {
+	display: block;
+	margin-right: 15px;
+	width: 100%;
+	/* height: 34px; */
+	padding: 6px 0px;
+	font-size: 14px;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow
+		ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out
+		.15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	/* margin-left: 15px; */
+}
 </style>
 </head>
 <body>
+<div id="t_notice_div">
+<h1>공지사항 작성</h1>
+<hr>
    <form action="tnotice_write.do" enctype="multipart/form-data" method="post">
    <table id="tnoticewriteTable">
       <tr>
          <td id="whqrp">제목 : </td>
-         <td><input type="text" name="tnotice_title" style="width: 100%;"></td>
+         <td><input type="text" name="tnotice_title" style="width: 100%;" class="form-control"></td>
       </tr>      
       <tr>
          <td id="whqrp">내용 : </td>
-         <td><textarea rows="" cols="" name="tnotice_content" style="width: 100%; height:300px"></textarea></td>
+         <td><textarea rows="" cols="" name="tnotice_content" style="width: 100%; height:300px" class="form-control"></textarea></td>
       </tr>     
       <tr>
          <td colspan="2"> 
@@ -75,5 +118,6 @@ font-size: 0.5em; }
       </tr>
    </table>
    </form>
+  </div> 
 </body>
 </html>
