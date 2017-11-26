@@ -46,7 +46,12 @@
          reviewList(1);
       });
    });
+   
    function reviewWrite() {
+   if("$(sessionScope.sessionid == null)"){
+      alert("로그인 후 이용가능합니다.");
+      window.location.href="loginForm.do";
+   }
       $("#reviewList").hide();
       $("#writeDIV").show();
    }
@@ -206,7 +211,7 @@
             if(msg.page>5) {
                if(msg.flag == 'list') {
                   strTag = strTag + "<a class=\"button btn-prev\""
-                  +"      onclick=\"reviewList("+(msg.page-1)+")\">이전</a>";
+                  +"      onclick=\"reviewList("+(msg.page-1)+")\ href=\"#\">이전</a>";
                } else if(msg.flag == 'search')  {
                   strTag = strTag + "   <a class=\"button btn-prev\""
                   +"      href=\"review_search.do?page="+(msg.page-1)+"&column=${column}&keyvalue=${keyvalue}&teacher_id="+dto.teacher_id+"\">이전</a>";
@@ -217,7 +222,7 @@
                if(msg.countPage>=msg.startPage+i) {
                   if(msg.flag == 'list') {
                      strTag = strTag + "<a class=\"strong\""
-                     +"      onclick=\"reviewList("+(msg.startPage+i)+")\">"+(msg.startPage+i)+"</a>";
+                     +"      onclick=\"reviewList("+(msg.startPage+i)+")\" href=\"#\">"+(msg.startPage+i)+"</a>";
                   } else if(msg.flag == 'search') {
                      strTag = strTag + "<a class=\"strong\""
                      +"   href=\"review_search.do?page="+(msg.startPage+i)+"&column=${column}&keyvalue=${keyvalue}&teacher_id="+dto.teacher_id+"\">"+(msg.startPage+i)+"</a>";
@@ -234,6 +239,7 @@
                   +"   href=\"review_search.do?page="+(msg.startPage+5)+"&column=${column}&keyvalue=${keyvalue}&teacher_id="+msg.dto.teacher_id+"\">다음</a>";
                }
             }
+            
             strTag = strTag + "</div><div id=\"review_input\">"
             +"<input type=\"button\" onclick=\"reviewWrite()\" value=\"후기작성\" class=\"btn2 btn-info\" /></div>"
             +"</div>";
@@ -247,87 +253,87 @@
 </script>
 <style type="text/css">
 #font{
-	font-weight: bold;
-	float: left;
+   font-weight: bold;
+   float: left;
 }
 .re_search{
-	margin: auto;
+   margin: auto;
 }
 .form-control {
-	/* display: block; */
-	/* margin-right: 15px; */
-	/*margin-left: 15px; */
-	/* width: 40%;  */
-	/* height: 34px; */
-	padding: 6px 12px;
-	font-size: 14px;
-	color: #555;
-	background-color: #fff;
-	background-image: none;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow
-		ease-in-out .15s;
-	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out
-		.15s;
-	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+   /* display: block; */
+   /* margin-right: 15px; */
+   /*margin-left: 15px; */
+   /* width: 40%;  */
+   /* height: 34px; */
+   padding: 6px 12px;
+   font-size: 14px;
+   color: #555;
+   background-color: #fff;
+   background-image: none;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+   box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+   -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow
+      ease-in-out .15s;
+   -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out
+      .15s;
+   transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 /*  */
 #search{
-	margin-left: 10px;	
-	 vertical-align:middle;
+   margin-left: 10px;   
+    vertical-align:middle;
 }
 #page{
-	text-align: center;
-	margin-top: 10px;
+   text-align: center;
+   margin-top: 10px;
 }
 #page a{
-	text-decoration: none;
-	font-weight: bold;
-	font-size: 15px;
-	color: #13b69d;
-	margin-right: 5px;
+   text-decoration: none;
+   font-weight: bold;
+   font-size: 15px;
+   color: #13b69d;
+   margin-right: 5px;
 }
 #review{
-	font-weight: bold;
+   font-weight: bold;
 }
 hr{
-	border: thin solid;
+   border: thin solid;
 }
 #review_table{
-	width:100%;
-	border-collapse: collapse;
-	border-spacing: 0px;
+   width:100%;
+   border-collapse: collapse;
+   border-spacing: 0px;
 }
 #review_table th{
-	border-bottom: 2px solid;
-	padding-bottom: 5px;
+   border-bottom: 2px solid;
+   padding-bottom: 5px;
 }
 /*  #review_table td{
-	width: 100%;
+   width: 100%;
 }  */
 #num{
-	width:10%;
-	text-align: center;
+   width:10%;
+   text-align: center;
 }
 #head{
-	width:80%;
-	text-align: center;
+   width:80%;
+   text-align: center;
 }
 #member{
-	width:10%;
-	text-align: center;
+   width:10%;
+   text-align: center;
 }
 
 .content {
    width: 100%;
 }
 #top_banner{
-	width: 100%;
-	background-color: #e5d235;
-	margin: auto;
+   width: 100%;
+   background-color: #e5d235;
+   margin: auto;
 }
 .content_t {
    width: 600px;
@@ -343,10 +349,10 @@ hr{
    font-weight: bold;
 }
 #teacher_name td{
-	width: auto;
+   width: auto;
 }
 #teacher_name a{
-	text-decoration: none;
+   text-decoration: none;
 }
 #reviewTable{
    width: 100%;
@@ -356,11 +362,11 @@ hr{
    font-weight: bold;
 }
 #profile td{
-	padding-top: 20px;
+   padding-top: 20px;
 }
 #introduce{
-	font-size: 13px;
-	color:#676767;
+   font-size: 13px;
+   color:#676767;
 }
 /*  */
 
@@ -405,60 +411,60 @@ font-size: 0.5em; }
 /* 글쓰기 */
 /* button */
 .btn-info {
-	color: #fff;
-	background-color: #f16022;
-	border-color: #46b8da;
+   color: #fff;
+   background-color: #f16022;
+   border-color: #46b8da;
 }
 .btn-info.focus, .btn-info:focus {
-	color: #fff;
-	background-color: #b64413;
-	border-color: #1b6d85;
+   color: #fff;
+   background-color: #b64413;
+   border-color: #1b6d85;
 }
 .btn-info:hover {
-	color: #fff;
-	background-color: #b64413;
-	border-color: #973911;
+   color: #fff;
+   background-color: #b64413;
+   border-color: #973911;
 }
 .btn2 {
-	display: inline-block;
-	padding: 6px 12px;
-	margin-bottom: 12px;
-	margin-top:12px;
-	margin-left:5px;
-	font-size: 14px;
-	font-weight: 400;
-	line-height: 1.42857143;
-	text-align: center;
-	white-space: nowrap;
-	vertical-align: middle;
-	-ms-touch-action: manipulation;
-	touch-action: manipulation;
-	cursor: pointer;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	background-image: none;
-	border: 1px solid transparent;
-	border-radius: 4px;	
+   display: inline-block;
+   padding: 6px 12px;
+   margin-bottom: 12px;
+   margin-top:12px;
+   margin-left:5px;
+   font-size: 14px;
+   font-weight: 400;
+   line-height: 1.42857143;
+   text-align: center;
+   white-space: nowrap;
+   vertical-align: middle;
+   -ms-touch-action: manipulation;
+   touch-action: manipulation;
+   cursor: pointer;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+   background-image: none;
+   border: 1px solid transparent;
+   border-radius: 4px;   
 }
 #submit{
-	text-align: center;
+   text-align: center;
 }
 #review_input{
-	width: 100%;
-	text-align: center;
+   width: 100%;
+   text-align: center;
 }
 </style>
 </head>
 <body>
    <div class="content">
-   	<!-- top banner -->
-   	<div id="top_banner">
-   		<div id="banner">
-   		<img src="resources/ram/top_banner_intro.png">
-   		</div>
-   	</div>
+      <!-- top banner -->
+      <div id="top_banner">
+         <div id="banner">
+         <img src="resources/ram/top_banner_intro.png">
+         </div>
+      </div>
     <!-- top banner end -->
       <input type="hidden" value="${dto.teacher_id}"> <br>
       <table class="content_t">
@@ -474,12 +480,12 @@ font-size: 0.5em; }
             <button id="edit" class="btn btn--sm btn--green">수 정</button>
             <!-- <button class="btn btn--sm btn--green">추가</button> -->
          </a>
-			
+         
          <a href="t_intro_delete.do?teacher_id=${ dto.teacher_id }">
             <button id="delete" onclick="hide()" class="btn btn--sm btn--green">삭 제</button>
          </a>
          </td>
-     	 </c:if>
+         </c:if>
          </tr>
          <tr id="profile">
             <td colspan="3">＜약력＞</td>
@@ -488,7 +494,7 @@ font-size: 0.5em; }
             <td colspan="3">${dto.teacher_introduce}</td>
          </tr>
          <tr>
-         	<td><a id="modalButton">강사후기</a></td>
+            <td><a id="modalButton">강사후기</a></td>
          </tr>
       </table>
       <!-- <input type="button" value="목록보기" onclick="window.location.href='t_intro_list.do' "> -->
@@ -505,7 +511,7 @@ font-size: 0.5em; }
 
       <div id="moreReview">
          <div id="review">
-         	수강후기
+            수강후기
          <hr>
          </div>
          <div id="reviewList"></div>
@@ -540,31 +546,31 @@ font-size: 0.5em; }
          <!-- update -->
          <div id="updateDIV">
             <form action="review_update.do">
-						<input type="hidden" readonly="readonly" name="teacher_id"
-							id="update_teacher_id">
-						<input readonly="readonly" type="hidden" name="review_id"
-							id="update_review_id">
+                  <input type="hidden" readonly="readonly" name="teacher_id"
+                     id="update_teacher_id">
+                  <input readonly="readonly" type="hidden" name="review_id"
+                     id="update_review_id">
             <table>
-						<tr>
-							<td style="font-weight: bold">제목</td>
-							<td><input type="text" name="r_headline"
-								id="update_r_headline"></td>
-						</tr>
-						<tr>
-							<td style="font-weight: bold">내용</td>
-							<!-- <td><input type="text" name="r_content"
-								id="update_r_content"></td> -->
-							<td><textarea rows="7" cols="50" name="r_content"
-								id="update_r_content" class="form-control"></textarea></td>	
-						</tr>
-						<tr>
-							<td colspan="2"><hr></td>
-						</tr>
-						<tr>
-							<td colspan="2"><input onclick="reviewChange()"
-								type="button" value="수정" class="btn2 btn-info"/></td>
-						</tr>
-					</table>
+                  <tr>
+                     <td style="font-weight: bold">제목</td>
+                     <td><input type="text" name="r_headline"
+                        id="update_r_headline"></td>
+                  </tr>
+                  <tr>
+                     <td style="font-weight: bold">내용</td>
+                     <!-- <td><input type="text" name="r_content"
+                        id="update_r_content"></td> -->
+                     <td><textarea rows="7" cols="50" name="r_content"
+                        id="update_r_content" class="form-control"></textarea></td>   
+                  </tr>
+                  <tr>
+                     <td colspan="2"><hr></td>
+                  </tr>
+                  <tr>
+                     <td colspan="2"><input onclick="reviewChange()"
+                        type="button" value="수정" class="btn2 btn-info"/></td>
+                  </tr>
+               </table>
             </form>
          </div>
          <!-- update end -->
