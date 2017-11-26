@@ -14,9 +14,9 @@ $(function () {
 	$("#joincode").hide();
 });
 
-    function checkMail() {
+    function checkMail(obj) {
         var member_email = document.getElementById("member_email").value;
- 
+        
         if (member_email == "") {
             alert("메일을 입력해 주세요.")
             return false;
@@ -31,7 +31,7 @@ $(function () {
                     alert("이미 가입한 메일 입니다.");
                 } else if(JSON.parse(data).count == 0){
                     sendMail(member_email);
-                    $("#authentication").hide();
+                    //$("#authentication").hide();
                 } 
             }
         };
@@ -77,6 +77,10 @@ $(function () {
 	if(form.inputCode.value == joinCode){
 		alert("인증 완료");
 		$("#confirmation").hide();
+		$("#authentication").hide();
+		form.inputCode.readOnly = true;
+		form.member_email.readOnly = true;
+		
 	}
     }
 </script>
@@ -268,7 +272,9 @@ function checkfield(){
 		alert("암호확인을 해주세요");
 		  return false;
 	}
-	if(randomCode != joinCode){
+	alert(joinCode);
+	alert(form.inputCode.value);
+	if(form.inputCode.value != joinCode){
 		alert("메일 인증을 해주세요");
 		  return false;
 	}
@@ -375,7 +381,7 @@ function insertChk(){
 <div id="signupform">
 <h1>회원가입</h1>
 <hr>
-<input type="hidden" id="randomCode"/>
+<input type="hidden" id="randomCode" name="randomCode"/>
 <sf:form method="post" action="signup.do" commandName="dto" name="memberchk" role="form">
 	<table id="signup_table">
 		<tr>
@@ -452,7 +458,7 @@ function insertChk(){
                 <tr id="joincode">
                     <td id="text">인증번호</td>
                     <td>
-                        <input type='number' name="inputCode" id="inputCode" class="form-control"
+                        <input type='text' name="inputCode" id="inputCode" class="form-control"
                                style="margin-right: 10px; width: 200px" placeholder="Enter code"/>
                         <input id="confirmation" type="button" value="확인" class="btn btn-primary btn-sm"
                                onclick="checkJoinCode()">
