@@ -140,6 +140,14 @@ function check() {
 		});
 	  }
 }
+
+function runScript(e) {
+    if(e.keyCode == 13) { // enter는 13이다!
+    	check();
+    } else {
+        return true;
+    }
+}
 </script>
 
 </head>
@@ -170,7 +178,7 @@ function check() {
 				<label id="userpassword">비밀번호</label>
 			</td>
 			<td>
-				<input type="password" class="form-control" id="member_pwd" name="member_pwd" placeholder="비밀번호">
+				<input type="password" class="form-control" id="member_pwd" name="member_pwd" placeholder="비밀번호" onkeypress="return runScript(event)">
 			</td>			
 		</tr>
 		<tr>
