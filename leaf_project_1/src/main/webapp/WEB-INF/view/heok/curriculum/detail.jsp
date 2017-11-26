@@ -153,7 +153,6 @@
 
 	
 	<div>
-	<button onclick="window.location.href='list_lect.do' " class="btn2 btn-info">수강신청 하기</button>
 	<input type="button" value="목록"
 						onclick="window.location.href='list_curri.do' " class="btn2 btn-info">
 	</div>
