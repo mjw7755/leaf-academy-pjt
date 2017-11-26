@@ -194,7 +194,9 @@ font-size: 0.6em; }
     color: #13b69d;
     margin-right: 5px;
 }
-
+#searchdiv{
+	margin-top: 15px;
+}
 </style>
 </head>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -268,9 +270,10 @@ font-size: 0.6em; }
    		</div>
    	</div>
     <!-- top banner end -->
-    
+    <div id="curri">
     <a href="list_curri.do"><h1>월별 강의 커리큘럼 안내</h1></a>
-<hr>
+	<hr>
+    </div>
 <div id="monthBtn">	
 	<input type="button" id="01" name="2017" class="btn2 btn-info"
 		value="2017.01" />
@@ -527,6 +530,7 @@ font-size: 0.6em; }
 					<th>강좌명</th>
 					<th>강사</th>
 					<th>강좌레벨</th>
+					<th colspan="2"></th>
 				<c:forEach items="${list }" var="list" varStatus="status" >
 					<tr>
 						<td><a href="detail_curri.do?curri_id=${list.curri_id}">${list.curri_subject}</a></td>
