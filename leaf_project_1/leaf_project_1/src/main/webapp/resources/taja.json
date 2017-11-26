@@ -1,0 +1,13 @@
+{
+"taja" : [
+  {
+    "value"  : "public void static main(String args[])"
+  },
+  {
+    "value"  : "implements WebSocketHandler"
+  },
+  {
+    "value"  : "int i = 0; result i;"
+  }
+]
+}
