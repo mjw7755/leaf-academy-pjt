@@ -1,7 +1,5 @@
 package com.leaf.controller.backend;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -67,7 +64,6 @@ public class BackEndController {
 		   String flag = "search";
 		         String column =request.getParameter("column");
 		         String keyvalue = request.getParameter("keyvalue");
-		         System.out.println(column + " / " + keyvalue);
 		         
 		         Map<String, Object> map = new HashMap<String, Object>(); 
 		         map.put("column",column ); 
@@ -105,7 +101,6 @@ public class BackEndController {
 		   String flag = "search";
 		         String column =request.getParameter("column");
 		         String keyvalue = request.getParameter("keyvalue");
-		         System.out.println(column + " / " + keyvalue);
 		         
 		         Map<String, Object> map = new HashMap<String, Object>(); 
 		         map.put("column",column ); 
@@ -143,7 +138,6 @@ public class BackEndController {
 		   String flag = "search";
 		         String column =request.getParameter("column");
 		         String keyvalue = request.getParameter("keyvalue");
-		         System.out.println(column + " / " + keyvalue);
 		         
 		         Map<String, Object> map = new HashMap<String, Object>(); 
 		         map.put("column",column ); 
@@ -180,7 +174,6 @@ public class BackEndController {
 		   String flag = "search";
 		         String column =request.getParameter("column");
 		         String keyvalue = request.getParameter("keyvalue");
-		         System.out.println(column + " / " + keyvalue);
 		         Map<String, Object> map = new HashMap<String, Object>(); 
 		         map.put("column",column ); 
 		         map.put("keyvalue", keyvalue);
@@ -214,7 +207,6 @@ public class BackEndController {
 		   String flag = "search";
 		         String column =request.getParameter("column");
 		         String keyvalue = request.getParameter("keyvalue");
-		         System.out.println(column + " / " + keyvalue);
 		         Map<String, Object> map = new HashMap<String, Object>(); 
 		         map.put("column",column ); 
 		         map.put("keyvalue", keyvalue);
@@ -248,7 +240,6 @@ public class BackEndController {
 		   String flag = "search";
 		         String column =request.getParameter("column");
 		         String keyvalue = request.getParameter("keyvalue");
-		         System.out.println(column + " / " + keyvalue);
 		         Map<String, Object> map = new HashMap<String, Object>(); 
 		         map.put("column",column ); 
 		         map.put("keyvalue", keyvalue);
@@ -282,7 +273,6 @@ public class BackEndController {
 		   String flag = "search";
 		         String column =request.getParameter("column");
 		         String keyvalue = request.getParameter("keyvalue");
-		         System.out.println(column + " / " + keyvalue);
 		         Map<String, Object> map = new HashMap<String, Object>(); 
 		         map.put("column",column ); 
 		         map.put("keyvalue", keyvalue);
@@ -316,7 +306,6 @@ public class BackEndController {
 		   String flag = "search";
 		         String column =request.getParameter("column");
 		         String keyvalue = request.getParameter("keyvalue");
-		         System.out.println(column + " / " + keyvalue);
 		         Map<String, Object> map = new HashMap<String, Object>(); 
 		         map.put("column",column ); 
 		         map.put("keyvalue", keyvalue);
@@ -350,7 +339,6 @@ public class BackEndController {
 		   String flag = "search";
 		         String column =request.getParameter("column");
 		         String keyvalue = request.getParameter("keyvalue");
-		         System.out.println(column + " / " + keyvalue);
 		         Map<String, Object> map = new HashMap<String, Object>(); 
 		         map.put("column",column ); 
 		         map.put("keyvalue", keyvalue);
@@ -384,7 +372,6 @@ public class BackEndController {
 		   String flag = "search";
 		         String column =request.getParameter("column");
 		         String keyvalue = request.getParameter("keyvalue");
-		         System.out.println(column + " / " + keyvalue);
 		         Map<String, Object> map = new HashMap<String, Object>(); 
 		         map.put("column",column ); 
 		         map.put("keyvalue", keyvalue);
@@ -418,7 +405,6 @@ public class BackEndController {
 		   String flag = "search";
 		         String column =request.getParameter("column");
 		         String keyvalue = request.getParameter("keyvalue");
-		         System.out.println(column + " / " + keyvalue);
 		         Map<String, Object> map = new HashMap<String, Object>(); 
 		         map.put("column",column ); 
 		         map.put("keyvalue", keyvalue);
@@ -452,7 +438,6 @@ public class BackEndController {
 		   String flag = "search";
 		         String column =request.getParameter("column");
 		         String keyvalue = request.getParameter("keyvalue");
-		         System.out.println(column + " / " + keyvalue);
 		         Map<String, Object> map = new HashMap<String, Object>(); 
 		         map.put("column",column ); 
 		         map.put("keyvalue", keyvalue);
@@ -486,7 +471,6 @@ public class BackEndController {
 		   String flag = "search";
 		         String column =request.getParameter("column");
 		         String keyvalue = request.getParameter("keyvalue");
-		         System.out.println(column + " / " + keyvalue);
 		         Map<String, Object> map = new HashMap<String, Object>(); 
 		         map.put("column",column ); 
 		         map.put("keyvalue", keyvalue);
@@ -521,7 +505,6 @@ public class BackEndController {
 				   String flag = "search";
 				         String column =request.getParameter("column");
 				         String keyvalue = request.getParameter("keyvalue");
-				         System.out.println(column + " / " + keyvalue);
 				         Map<String, Object> map = new HashMap<String, Object>(); 
 				         map.put("column",column ); 
 				         map.put("keyvalue", keyvalue);

@@ -1,8 +1,5 @@
 package com.leaf.controller.application;
 
-import java.lang.ProcessBuilder.Redirect;
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,17 +28,10 @@ public class AppliController {
 		int lect_id = Integer.parseInt(request.getParameter("lect_id"));
 		int curri_id =Integer.parseInt(request.getParameter("curri_id"));
 		
-		System.out.println(member_id);
-		System.out.println(lect_id);
-		System.out.println(curri_id);
-		
 		CurriDTO cdto=appliDAO.curri(curri_id);
-		System.out.println(cdto.getCurri_id());
 		LectDTO ldto=appliDAO.lect(lect_id);
 		MemberDTO mdto=appliDAO.member(member_id);
 		CurriDTO teacherdto=appliDAO.teachercurri(curri_id);
-		System.out.println(teacherdto.getCurri_id());
-		System.out.println(teacherdto.getMember_id());
 		MemberDTO teachername=appliDAO.teachername(teacherdto.getMember_id());
 		
 		model.addAttribute("mdto", mdto);
@@ -50,19 +40,13 @@ public class AppliController {
 		model.addAttribute("teacherdto", teacherdto);
 		model.addAttribute("teachername", teachername);
 		
-		System.out.println(cdto);
-		System.out.println(ldto);
-		System.out.println(mdto);
 		mav.setViewName("application.appli_list");
 		return mav;
-		
-		
 	}
+	
 	@RequestMapping("/write_appli.do")
 	public ModelAndView insertAppli(@ModelAttribute AppliDTO dto) {
 		ModelAndView mav = new ModelAndView();
-
-		
 		mav.setViewName("redirect:list_curri.do");
 		return mav;
 	}
@@ -74,7 +58,4 @@ public class AppliController {
 		mav.setViewName("redirect:appli_list.do");
 		return mav;
 	}
-	
-/*	@RequestMapping("/write_appli.do")
-	public String write*/
 }

@@ -164,7 +164,7 @@
 		</div>
 </c:if>
 
-<c:if test="${mypage == 'OK' }">
+<c:if test="${mypage == 'OK1' }">
    	<!-- top banner -->
    	<div id="top_banner">
    		<div id="banner">
@@ -178,9 +178,23 @@
 	      <tr><td id="attendance"><a href="#">개인정보 수정</a><div id="attendance_icon">></div></td></tr>
 		  <tr><td id="lecture"><a href="#">결제내역 조회</a><div id="lecture_icon">></div></td></tr>
 		  <tr><td id="grade"><a href="#">회원탈퇴</a><div id="grade_icon">></div></td></tr>
-<%-- 		  <c:if test="${sessionScope.sessionid=='관리자'}">
-	      <tr><td id="student_care"><a href="member_list.do" >회원관리</a><div id="student_care_icon">></div></td></tr>
-	      </c:if> --%>
+	   </table>
+   </div>
+</c:if>
+
+<c:if test="${mypage == 'OK2' }">
+   	<!-- top banner -->
+   	<div id="top_banner">
+   		<div id="banner">
+   		<img src="resources/ram/top_banner_mypage.png">
+   		</div>
+   	</div>
+    <!-- top banner end -->
+	<div id="my_page">
+		 <table id="menu">
+	      <tr id="my_page_text"><td colspan="2">MY PAGE</td></tr>
+	      <tr><td id="attendance"><a href="#">개인정보 수정</a><div id="attendance_icon">></div></td></tr>
+		  <tr><td id="grade"><a href="#">회원탈퇴</a><div id="grade_icon">></div></td></tr>
 	   </table>
    </div>
 </c:if>

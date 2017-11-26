@@ -366,14 +366,28 @@ public class MemberController {
 		if(member_id==null) {
 			mav.setViewName("ayrin.member_loginform");
 		} else {
-			List<PaymentDTO> list = paymentdao.paySelectId(payment_member_id);
 			dto = memberdao.getMemberById(member_id);
-			String chk = "OK";
-			model.addAttribute("mypage", chk);
-			mav.addObject("list", list);
 			mav.addObject("dto", dto);
-			mav.setViewName("ayrin.mypage");
-		}
+			
+			if(dto.getMember_level() == 1) {
+				List<PaymentDTO> list = paymentdao.paySelectId(payment_member_id);
+				dto = memberdao.getMemberById(member_id);
+				String chk = "OK1";
+				model.addAttribute("mypage", chk);
+				mav.addObject("list", list);
+				mav.addObject("dto", dto);
+				mav.setViewName("ayrin.mypage");
+			}
+			else {
+				List<PaymentDTO> list = paymentdao.paySelectId(payment_member_id);
+				dto = memberdao.getMemberById(member_id);
+				String chk = "OK2";
+				model.addAttribute("mypage", chk);
+				mav.addObject("list", list);
+				mav.addObject("dto", dto);
+				mav.setViewName("ayrin.mypage");
+				}
+			}
 		return mav;
 	}
 

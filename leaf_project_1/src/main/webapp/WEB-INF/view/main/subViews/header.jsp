@@ -181,7 +181,7 @@ $(function(){
             <li id="a_tag"><a href="list_curri.do">교육과정</a>
             <ul>
                   <li><a href="list_curri.do">커리큘럼</a></li>
-                  <li><a href="myclass.do">내 강의실</a></li>
+                  <li><a href="list_lect.do">강좌개설</a></li>
             </ul>
             </li>
             <li id="a_tag"><a href="book_list.do">자료실</a>
@@ -203,7 +203,6 @@ $(function(){
                   <li><a href="notice_list.do">공지사항</a></li>
                   <li><a href="faq_list.do">FAQ</a></li>
                   <li><a href="qna_list.do">QNA</a></li>
-                  <li><a href="#" id="note">쪽지</a></li>            
                </ul>   
             </li>   
          </ul>
