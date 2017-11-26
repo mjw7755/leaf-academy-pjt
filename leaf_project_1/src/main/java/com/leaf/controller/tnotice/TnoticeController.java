@@ -53,6 +53,9 @@ public class TnoticeController {
 			model.addAttribute("startPage", startPage);
 			model.addAttribute("list", list);
 			model.addAttribute("flag", flag);
+			for(int i=0; i<list.size(); i++) {
+				list.get(i).setTnotice_content(list.get(i).getTnotice_content().replaceAll("\"", "'").replaceAll("\r\n", "<br>"));
+			}
 			int chk = 1;
 			model.addAttribute("myclass", chk);
 			return "ayrin.myclassST";
@@ -74,6 +77,9 @@ public class TnoticeController {
 			model.addAttribute("startPage", startPage);
 			model.addAttribute("list", list);
 			model.addAttribute("flag", flag);
+			for(int i=0; i<list.size(); i++) {
+				list.get(i).setTnotice_content(list.get(i).getTnotice_content().replaceAll("\"", "'").replaceAll("\r\n", "<br>"));
+			}
 			int chk = 2;
 			model.addAttribute("myclass", chk);
 			return "ayrin.myclassTC";

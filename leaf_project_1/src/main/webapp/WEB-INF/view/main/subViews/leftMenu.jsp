@@ -153,10 +153,13 @@
 					<div id="grade_icon">></div></td>
 				</tr>
 				<tr>
-					<td id="attendance"><a href="stuMgmtForm.do">切积包府</a>
+					<td id=student_care><a href="stuMgmtForm.do">切积包府</a>
+					<div id="student_care_icon">></div></td>
+				</tr>
+				<tr>
+					<td id="attendance"><a href="list_lect.do">碍谅俺汲</a>
 					<div id="attendance_icon">></div></td>
 				</tr>
-	
 			</table>
 		</div>
 </c:if>

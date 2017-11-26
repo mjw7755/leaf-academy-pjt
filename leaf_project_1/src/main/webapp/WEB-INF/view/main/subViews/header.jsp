@@ -122,7 +122,20 @@ text-decoration:none;
 clear:left;
 }
 </style>
-
+<script type="text/javascript">
+$(function(){
+	$("#note").click(function(){
+		var sessionid = "${sessionScope.sessionid}";
+		
+		if(sessionid == ""){
+			alert("로그인이 필요한 서비스 입니다.");
+			location.href="loginForm.do";
+		}else{
+			location.href="noteList.do";
+		}
+	});
+});
+</script>
 </head>
 <body>
    <div class="header">
@@ -168,7 +181,7 @@ clear:left;
             <li id="a_tag"><a href="list_curri.do">교육과정</a>
             <ul>
                   <li><a href="list_curri.do">커리큘럼</a></li>
-                  <li><a href="list_lect.do">강좌개설</a></li>
+                  <li><a href="myclass.do">내 강의실</a></li>
             </ul>
             </li>
             <li id="a_tag"><a href="book_list.do">자료실</a>
@@ -190,7 +203,7 @@ clear:left;
                   <li><a href="notice_list.do">공지사항</a></li>
                   <li><a href="faq_list.do">FAQ</a></li>
                   <li><a href="qna_list.do">QNA</a></li>
-                  <li><a href="#">쪽지</a></li>            
+                  <li><a href="#" id="note">쪽지</a></li>            
                </ul>   
             </li>   
          </ul>
