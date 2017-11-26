@@ -45,9 +45,12 @@ public class ListeningController {
 			MemberDTO dto = memberdao.getMemberById(member_id);
 			mav.addObject("dto", dto);
 			
-			if(dto.getMember_level() == 1) {
+			String studentid = request.getParameter("studentid");
+			
+			if(dto.getMember_level() == 1 || studentid!=null) {
 				
 				int chk = 1;
+				if( studentid!=null) chk=2;
 				model.addAttribute("myclass", chk);
 				
 				model.addAttribute("memberLevel", dto.getMember_level());
@@ -56,20 +59,17 @@ public class ListeningController {
 				model.addAttribute("classList", classList);
 				
 				String lect_id_str = request.getParameter("lect_id");
-				int lect_id = 0;
-				if(lect_id_str==null && classList!=null) lect_id = classList.get(0).getLect_id();
+				int lect_id = -1;
+				if(lect_id_str==null && classList!=null && classList!=null) lect_id = classList.get(0).getLect_id();
 				else lect_id = Integer.parseInt(lect_id_str);
 				
-//				String studentSelect = request.getParameter("studentSelect");
-//				String teacherSelect = request.getParameter("teacherSelect");
-//				String studentid = request.getParameter("studentid");
-//				String teacherid = request.getParameter("teacherid");
-//				
-//				model.addAttribute("classid", studentSelect!=null?studentSelect:teacherSelect);
-//				model.addAttribute("teacherid", teacherid);
-//				model.addAttribute("targetid", studentid!=null?studentid:teacherid);
+				String teacherid = listeningDAO.getTeacherid(lect_id);
 				
-				return "king.listen";
+				model.addAttribute("lect_id", lect_id);
+				model.addAttribute("teacherid", teacherid);
+				model.addAttribute("targetid", studentid!=null?studentid:teacherid);
+				
+				return "king.listen2";
 				
 			} else {
 				
@@ -81,15 +81,15 @@ public class ListeningController {
 				model.addAttribute("memberLevel", dto.getMember_level());
 
 				String lect_id_str = request.getParameter("lect_id");
-				int lect_id = 0;
-				if(lect_id_str==null && classList!=null) lect_id = classList.get(0).getLect_id();
+				int lect_id = -1;
+				if(lect_id_str==null && classList!=null && classList!=null) lect_id = classList.get(0).getLect_id();
 				else lect_id = Integer.parseInt(lect_id_str);
 				
 				List<String> studentList = listeningDAO.getStudentList(lect_id);
 				model.addAttribute("studentList", studentList);
 				model.addAttribute("lect_id", lect_id);
 				
-				return "king.listen";
+				return "king.listen2";
 			}
 		}
 	}

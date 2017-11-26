@@ -14,8 +14,10 @@
 	<select id="getStudentList" parameterType="int" resultType="String">
 		select PAYMENT_MEMBER_ID from payment where PAYMENT_LECT_ID=#{lect_id} and PAYMENT_PAY_CHK = 1
 	</select>
-	
 	<select id="getStudentClassList" parameterType="String" resultType="com.leaf.model.listening.ListeningDTO">
 		select PAYMENT_LECT_ID as lect_id, PAYMENT_LECT_SUBJECT as lect_name from payment where PAYMENT_MEMBER_ID=#{member_id} and PAYMENT_PAY_CHK = 1
+	</select>
+	<select id="getTeacherid" parameterType="int" resultType="String">
+		SELECT c.member_id FROM curriculum c,(select curri_id from lecture where lect_id=#{lect_id}) l where c.curri_id=l.curri_id 
 	</select>
 </mapper>

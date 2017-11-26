@@ -28,7 +28,7 @@
 #menu {
    width: 200px;
    margin-top:85px;
-   margin-left: 25%;
+   margin-left: 15%;
    float: left;
 }
 #menu tr {

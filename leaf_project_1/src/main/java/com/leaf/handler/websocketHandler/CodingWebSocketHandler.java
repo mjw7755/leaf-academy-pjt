@@ -12,6 +12,8 @@ import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 public class CodingWebSocketHandler implements WebSocketHandler {
@@ -52,7 +54,6 @@ public class CodingWebSocketHandler implements WebSocketHandler {
 		String name = (String)data.get("name");
 		String targetid = (String)data.get("targetid");
 		String teacherid = (String) data.get("teacherid");
-		
 		if(data.get("type").equals("teacherLogin")) {
 			if(codes.get(name)==null) {
 				names.add(name);
@@ -67,22 +68,26 @@ public class CodingWebSocketHandler implements WebSocketHandler {
 				arg0.sendMessage(new TextMessage("{\"type\": \"connFalse\"}"));
 			}
 		} else if(data.get("type").equals("login")) {
-			names.add(name);
-			list.add(arg0);
-			
 			if(name.equals(teacherid)) {
+				names.add(name);
+				list.add(arg0);
 				teacherPlace.put(name, targetid);
-			}
+			} 
 			
 			if(codes.get(name)==null) {
-				try {
-					codes.put(name, new ArrayList<String>());
-					codes.get(teacherid).get(0);
-					codes.get(name).addAll(codes.get(teacherid));
-					arg0.sendMessage(new TextMessage("{\"type\": \"coding\""
-							+ ",\"codes\": \""+codes.get(name)+"\"}"));
-				} catch (Exception e) {
-					
+				if(openClass.get(teacherid).equals(data.get("lect_id"))) {
+					arg0.sendMessage(new TextMessage("{\"type\": \"openTrue\"}"));
+					names.add(name);
+					list.add(arg0);
+					try {
+						codes.put(name, new ArrayList<String>());
+						codes.get(teacherid).get(0);
+						codes.get(name).addAll(codes.get(teacherid));
+						arg0.sendMessage(new TextMessage("{\"type\": \"coding\""
+								+ ",\"codes\": \""+codes.get(name)+"\"}"));
+					} catch (Exception e) {
+						
+					}
 				}
 			} else {
 				if(teacherid.equals(name)) {
@@ -90,13 +95,12 @@ public class CodingWebSocketHandler implements WebSocketHandler {
 							+ ",\"codes\": \""+codes.get(targetid)+"\"}"));
 				} else {
 					arg0.sendMessage(new TextMessage("{\"type\": \"coding\""
-							+ ",\"codes\": \""+codes.get(name)+"\"}"));
+						+ ",\"codes\": \""+codes.get(name)+"\"}"));
 				}
 			}
 		} else if(data.get("type").equals("coding")) {
 			String str = (String)data.get("str");
 			int index = (int)Float.parseFloat(data.get("codingIndex")+"");
-			System.out.println(codes.get(name));
 			if(str==null) {
 					
 			} else if(str.equals("back")) {
@@ -148,23 +152,28 @@ public class CodingWebSocketHandler implements WebSocketHandler {
 						+ ",\"changeIndex\" : \""+index+"\""
 						+ ",\"codes\": \""+codes.get(name)+"\"}"));
 			} else {
-				if(teacherid.equals(name)) {
-					list.get(names.indexOf(targetid)).sendMessage(new TextMessage("{\"type\": \"coding\""
-							+ ",\"codingType\" : \""+str+"\""
-							+ ",\"changeIndex\" : \""+index+"\""
-							+ ",\"codes\": \""+codes.get(tempName)+"\"}"));
-				} else {
-					if(teacherPlace.get(teacherid)!=null && teacherPlace.get(teacherid).equals(tempName)) {
+				if(names.indexOf(targetid)!=-1) {
+					if(teacherid.equals(name)) {
 						list.get(names.indexOf(targetid)).sendMessage(new TextMessage("{\"type\": \"coding\""
 								+ ",\"codingType\" : \""+str+"\""
 								+ ",\"changeIndex\" : \""+index+"\""
 								+ ",\"codes\": \""+codes.get(tempName)+"\"}"));
 					} else {
-						list.get(names.indexOf(targetid)).sendMessage(new TextMessage("{\"type\": \"coding\""
-								+ ",\"studentid\" : \""+tempName+"\""
-								+ ",\"codes\": \""+codes.get(tempName)+"\"}"));
+						if(teacherPlace.get(teacherid)!=null) {
+							if(teacherPlace.get(teacherid).equals(tempName)) {
+								list.get(names.indexOf(targetid)).sendMessage(new TextMessage("{\"type\": \"coding\""
+										+ ",\"codingType\" : \""+str+"\""
+										+ ",\"changeIndex\" : \""+index+"\""
+										+ ",\"codes\": \""+codes.get(tempName)+"\"}"));
+							} else {
+							}
+						} else {
+							list.get(names.indexOf(targetid)).sendMessage(new TextMessage("{\"type\": \"coding\""
+									+ ",\"studentid\" : \""+tempName+"\""
+									+ ",\"codes\": \""+codes.get(tempName)+"\"}"));
+						}
+						
 					}
-					
 				}
 				arg0.sendMessage(new TextMessage("{\"type\": \"coding\""
 						+ ",\"codingType\" : \""+str+"\""
@@ -175,8 +184,10 @@ public class CodingWebSocketHandler implements WebSocketHandler {
 		} else if(data.get("type").equals("call")) {
 			if(call.get(teacherid).indexOf(name)==-1) {
 				call.get(teacherid).add(name);
-				list.get(names.indexOf(teacherid)).sendMessage(new TextMessage("{\"type\": \"call\""
-						+ ",\"studentid\": \""+name+"\"}"));
+				if(names.indexOf(teacherid)!=-1) {
+					list.get(names.indexOf(teacherid)).sendMessage(new TextMessage("{\"type\": \"call\""
+							+ ",\"studentid\": \""+name+"\"}"));
+				}
 			}
 		} else if(data.get("type").equals("callCancle")) {
 			call.get(name).remove(targetid);
@@ -187,12 +198,11 @@ public class CodingWebSocketHandler implements WebSocketHandler {
 			int studentLength = studentList.length;
 			for(int i=0; i<studentLength; i++) {
 				int index = names.indexOf(studentList[i]);
-				//list.get(names.indexOf(studentList[i])).sendMessage(new TextMessage("{\"type\": \"opening\"}"));
+				list.get(names.indexOf(studentList[i])).sendMessage(new TextMessage("{\"type\": \"classClose\"}"));
 				codes.remove(studentList[i]);
 				names.remove(index);
 		    	list.remove(index);
 			}
-			//arg0.sendMessage(new TextMessage("{\"type\": \"opening\"}"));
 			call.remove(name);
 			codes.remove(name);
 			names.remove(name);
@@ -200,14 +210,29 @@ public class CodingWebSocketHandler implements WebSocketHandler {
 	    	list.remove(arg0);
 		} else if(data.get("type").equals("conn")) {
 			if(openClass.get(name)!=null) {
+				names.add(name);
+				list.add(arg0);
+				String studentListStr = (String)data.get("studentList");
+				String[] studentList = studentListStr.substring(1, studentListStr.length()-1).split(", ");
+				String studentsCode = "";
+				if(!studentList[0].equals("")) {
+					int studentListLength = studentList.length;
+					studentsCode += ",\"studentsCode\":\"";
+					for(int i=0; i<studentListLength; i++) {
+						studentsCode += "`+!_@)#(" ;
+						if(codes.get(studentList[i])!=null) {
+							studentsCode += codes.get(studentList[i]);
+						}
+						
+					}
+					studentsCode += "\"";
+				}
 				arg0.sendMessage(new TextMessage("{\"type\": \"opening\""
 						+ ",\"openClass\":\""+openClass.get(name)+"\""
+						+ studentsCode
 						+ ",\"callStudents\":\""+call.get(name)+"\"}"));
 			} 
-			
-			
 		} 
-
 	}
     //메시지 전송에 실패했을때 호출되는 메소드
 	@Override
