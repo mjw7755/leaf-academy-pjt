@@ -1,11 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#note_btn").click(function(){
+		var sessionid = "${sessionScope.sessionid}";
+		
+		if(sessionid == ""){
+			alert("로그인이 필요한 서비스입니다.");
+			location.href="loginForm.do";
+		}else if(sessionid != "") {
+			location.href="noteList.do"
+		}
+	});
+	
+});
+</script>
+
 <style type="text/css">
 .footer{
    width: 100%;
@@ -258,7 +277,7 @@ display: none;
    </div>
    </a>
    
-   <a href="noteList.do">
+   <a href="#" id="note_btn">
    <div id="quick_message">
       <p>쪽지함</p>
       <img src="resources/ram/message.png">
