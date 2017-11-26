@@ -233,6 +233,7 @@ font-size: 0.6em; }
 							success : function(data) {
 								var res = eval("(" + data + ")");
 								var resData = res.result;
+								document.getElementById("ajaxDataBody" + monthvalue).innerHTML = "";
 								for (var i = 0; i < resData.length; i++) {
 									$("#ajaxDataBody" + monthvalue).append(
 											"<tr id=\"tr"+monthvalue+"\"><td >"
