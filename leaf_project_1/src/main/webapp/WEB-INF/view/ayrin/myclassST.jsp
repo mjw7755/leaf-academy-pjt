@@ -163,6 +163,36 @@ function detail(ev) {
 		</table>
 	</div>
 	<div id="tnoticeDetail" class="needpopup"></div>
+	<div align="center" id="page">
+      <c:if test="${param.page>5}">
+      <c:if test="${flag == 'list'}">
+         <a class="button btn-prev" href="tnotice_list.do?page=${startPage-1}">이전</a>
+      </c:if>
+      <c:if test="${flag == 'search'}">
+         <a class="button btn-prev" href="tnotice_search.do?page=${startPage-1}&keyvalue=${keyvalue}">이전</a>
+      </c:if>
+      </c:if>
+      
+   <c:forEach var="i" begin="0" end="4" varStatus="status">
+      <c:if test="${countPage>=startPage+i}">
+      <c:if test="${flag == 'list'}">
+         <a class="strong" href="tnotice_list.do?page=${startPage+i}" >${startPage+i}</a>
+      </c:if>
+      <c:if test="${flag == 'search'}">
+         <a class="strong" href="tnotice_search.do?page=${startPage+i}&keyvalue=${keyvalue}">${startPage+i}</a>
+      </c:if>
+      </c:if>
+   </c:forEach>
+   
+      <c:if test="${countPage>=startPage+5}">
+      <c:if test="${flag == 'list'}">
+         <a class="strong" href="tnotice_list.do?page=${startPage+5}">다음</a>
+      </c:if>
+      <c:if test="${flag == 'search'}">
+         <a class="strong" href="tnotice_search.do?page=${startPage+5}&keyvalue=${keyvalue}">다음</a>
+      </c:if>
+      </c:if>
+   </div>
 </div>	
 </body>
 </html>
