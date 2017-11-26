@@ -24,6 +24,7 @@
 	label{
 		float:left;
 		margin-right: 30px;
+		margin-left:35px;
 		font-weight: bold;
 		font-size: 20px;
 	}
@@ -47,6 +48,7 @@ padding:10px;
 overflow-x:auto;
 overflow-y:auto;
 margin-bottom: 20px;
+text-align: left;
 }
 /*  */
 #send{
@@ -120,36 +122,85 @@ font-size: 1em; }
 .btn--sm {
     font-size: 0.7em;
 }
-
+/*  */
+.btn-info {
+	color: #fff;
+	background-color: #f16022;
+	border-color: #46b8da;
+}
+.btn-info.focus, .btn-info:focus {
+	color: #fff;
+	background-color: #b64413;
+	border-color: #1b6d85;
+}
+.btn-info:hover {
+	color: #fff;
+	background-color: #b64413;
+	border-color: #973911;
+}
+.btn2 {
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 12px;
+	margin-top:12px;
+	margin-left:5px;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.42857143;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	-ms-touch-action: manipulation;
+	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;	
+	margin-top: 30px;
+}
+/*  */
+#source_code{
+	float:left;
+}
+#help{
+	text-align: right;
+}
+#codeDiv table{
+	margin-left: 0px;
+}
 </style>
 </head>
 <body>
-${lect_id }, ${teacherid }, ${targetid }
-<br>
+<%-- ${lect_id }, ${teacherid }, ${targetid } --%>
+<div id="listen">
+<a href="listen.do"><h1>강의 듣기</h1></a>
+<hr>
 	<c:if test="${memberLevel==1 or teacherid!=null}">
 		<c:if test="${memberLevel==1}">
-		<label style="float: left;">강의 선택 : </label>
+		<label>강의 선택 : </label>
 		<select id="studentSelect" onchange="studentSecletChange()" style="width:200px; float:left;">
 			<c:forEach items="${classList}" var="classList">
 					<option value="${classList.lect_id}">${classList.lect_name}</option>
 			</c:forEach>
 		</select>
 		</c:if>
-		<div id="codeDiv" style="width:1000px; margin:0 auto;">
+		<div id="codeDiv" style="margin:0 auto;">
 			<table>
 				<tr>
 					<td colspan="2">
 						<table>
 						<tr id="txtTable">
-						<td><h1>Source Code</h1>
+						<td><div id="source_code"><h1>Source Code</h1></div>
+						<c:if test="${memberLevel==1}">
+						<div id="help"><button onclick="teacherCall()"class="btn2 btn-info">도움요청</button></div>
+						</c:if>
 							<div id="txtDiv" name="txtDiv" class="txt"></div>
 						</td>
 						</tr>
-						<c:if test="${memberLevel==1}">
-						<tr>
-							<td><button onclick="teacherCall()">도움요청</button></td>
-						</tr>
-						</c:if>
 						</table>
 					</td>
 				</tr>		
@@ -643,6 +694,7 @@ ${lect_id }, ${teacherid }, ${targetid }
 		</script>
 	</c:if>
 	<c:if test="${memberLevel==2 and teacherid==null}">
+	<label>강의 선택 : </label>
 		<select id="teacherSelect" onchange="teachertSecletChange()" style="width:200px; float:left;">
 			<c:forEach items="${classList}" var="classList">
 					<option value="${classList.lect_id}">${classList.lect_name}</option>
@@ -672,7 +724,7 @@ ${lect_id }, ${teacherid }, ${targetid }
 				<td><div id="txtDiv_${studentList}" name="txtDiv_${studentList}" class="txt"
 				style=" height: 300px; border:solid;
 				font-family: monaco; background-color:#212121;
-				padding:10px;overflow-x:auto;overflow-y:auto;"></div></td>
+				padding:10px;overflow-x:auto;overflow-y:auto; text-align: left"></div></td>
 				<td><button id="${studentList}" onclick="studentRoom(event)" class="btn btn--sm btn--green" >${studentList}</button></td>
 				<td><img id="call_${studentList}" src="resources/king/callCancle.png"></td>
 			</tr>
@@ -1237,5 +1289,6 @@ ${lect_id }, ${teacherid }, ${targetid }
 	}
 </script>
 	</c:if>
+	</div>
 </body>
 </html>
