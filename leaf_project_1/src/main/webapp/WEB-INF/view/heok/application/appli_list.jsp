@@ -263,7 +263,7 @@
             </tr>
             <tr>
                <td><input type="text" name="payment_lect_subject"
-                  value="${cdto.getCurri_subject()}" class="form-control2"></td>
+                  value="${ldto.getLect_name()}" class="form-control2"></td>
                <td><input type="text" name="payment_teacher_name"
                   value="${teachername.getMember_name()}" class="form-control2"></td>
                <td><input type="text" name="payment_lect_charge"

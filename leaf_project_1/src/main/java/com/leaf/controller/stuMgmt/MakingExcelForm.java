@@ -15,6 +15,7 @@ import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
 import org.springframework.web.servlet.view.document.AbstractExcelView;
 
 public class MakingExcelForm extends AbstractExcelView {
@@ -37,12 +38,13 @@ public class MakingExcelForm extends AbstractExcelView {
 		String Lect_name = (String) map.get("Lect_name");
 		
 		HSSFSheet sheet = workbook.createSheet(student_name);
-		
 		int currentRow = 1;
 		int currentColumn = 1;
 		
 		//title Style
 		HSSFCellStyle titleStyle = workbook.createCellStyle(); 
+		titleStyle.setFillForegroundColor(HSSFColor.GREY_25_PERCENT.index);  
+		titleStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
 		HSSFFont titleFont = workbook.createFont();
 		titleFont.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
 		titleStyle.setFont(titleFont);

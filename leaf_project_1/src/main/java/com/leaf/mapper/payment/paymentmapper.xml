@@ -5,7 +5,7 @@
   
 <mapper namespace="com.leaf.model.payment.PaymentDAO">
 	<insert id="insertPaymentData" parameterType="com.leaf.model.payment.PaymentDTO">
-		insert into payment(payment_id, payment_lect_subject, payment_teacher_name, payment_lect_charge,payment_member_name, payment_member_tel, payment_addnum, payment_address, payment_address2, payment_caution, payment_write_date, payment_pay_chk,payment_payer_email, payment_member_id ) values(payment_seq.nextval,#{payment_lect_subject}, #{payment_teacher_name}, #{payment_lect_charge},#{payment_member_name}, #{payment_member_tel}, #{payment_addnum}, #{payment_address}, #{payment_address2}, #{payment_caution}, sysdate,0,#{payment_payer_email},#{payment_member_id})
+		insert into payment(payment_id, payment_lect_subject, payment_teacher_name, payment_lect_charge,payment_member_name, payment_member_tel, payment_addnum, payment_address, payment_address2, payment_caution, payment_write_date, payment_pay_chk,payment_payer_email, payment_member_id,payment_lect_id ) values(payment_seq.nextval,#{payment_lect_subject}, #{payment_teacher_name}, #{payment_lect_charge},#{payment_member_name}, #{payment_member_tel}, #{payment_addnum}, #{payment_address}, #{payment_address2}, #{payment_caution}, sysdate,0,#{payment_payer_email},#{payment_member_id},#{payment_lect_id})
 	</insert>
 	
 	<select id="selectMaxRow" resultType="Integer">
@@ -41,5 +41,6 @@
    	<!-- select payment_member_id, payment_lect_charge, payment_lect_subject from payment where payment_member_id = #{sessionid} order by payment_member_id desc -->
     </select>
     
+   
     
 </mapper>

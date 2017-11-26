@@ -12,4 +12,5 @@ public interface StumgmtDAO {
 	public void insertStuExcel(Map<String,Object> makeExcelName);
 	public String getStuExcel(Map<String,Object> getExcelMap);
 	public List<LectDTO> getMyLect(String sessionid);
+	public void payStudentInsert(Map<String,Integer> payment_id_map);
 }

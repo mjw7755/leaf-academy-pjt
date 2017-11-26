@@ -21,7 +21,7 @@ resultType : 쿼리 수행 후 결과를 보내주기 위한 데이터 -->
 		select curri_subject, curri_id, member_id from curriculum where curri_id=#{curri_id}
 	</select>
 	<select id="lect" parameterType="int" resultType="com.leaf.model.curriculum.LectDTO">
-		select lect_charge, lect_id from lecture where lect_id=#{lect_id} 
+		select lect_charge, lect_id,lect_name from lecture where lect_id=#{lect_id} 
 	</select>
 	<select id="member" parameterType="String" resultType="com.leaf.model.member.MemberDTO">
 		select member_id, member_name, member_tel, member_address, member_addnum from member where member_id=#{member_id} 

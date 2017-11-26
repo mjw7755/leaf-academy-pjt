@@ -4,6 +4,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script
+  src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
 #five{
@@ -226,7 +231,7 @@ font-size: 1em; }
     font-size: 0.7em;
     width: 120px; }
 /*  */
-#inputText0, #inputText1, #inputText2,  #inputText3, #inputText4{
+input{
 	padding: 6px 12px;
 	font-size: 14px;
 	color: #555;
@@ -261,6 +266,9 @@ font-size: 1em; }
 	float:left;
 	padding-right: 5px;
 }
+#tajaDialog {
+	display:none;
+}
 </style>
 
 
@@ -279,7 +287,7 @@ font-size: 1em; }
 </div>
 </div>
 
-<button class="btn btn--sm btn--green" onclick="startTaja()">start</button>
+<button id="tajaStartBtn" class="btn btn--sm btn--green" onclick="startTaja()">start</button>
 
 <div class="tajaStartDIV">
 	<table id="taja_table">
@@ -321,12 +329,17 @@ font-size: 1em; }
 	<div id="file">
 				<input type="file" id="files" multiple />
 	</div> -->
-
+	<div id="tajaDialog">
+		<span>타자연습이 종료되었습니다</span>
+	</div>
 
 	<script type="text/javascript">
-		var token = [ 'public void static main(String args[])',
+			
+		/* var token = [ 'public void static main(String args[])',
 				'implements WebSocketHandler', 'int i = 0; result i;',
-				'sysout.out.println();', 'document.getElementById' ];
+				'sysout.out.println();', 'document.getElementById' ]; */
+
+		
 		var countS = 0;
 		var countR = 0;
 		var tokenLength = 0;
@@ -336,69 +349,96 @@ font-size: 1em; }
 		var timeCount = 0;
 		var minCount = 0;
 		var minText = document.getElementById("minText");
-		var startInterval = setInterval(timer, 1000);
-
+		var startInterval;
+		var result;
+		var plusLength = 0;
+		var enterTokenLength = 0;
+		var enterCountR = 0;
+		var data;
+		var sec;
+		var min;
+		
+		
 		function list(page) {
 			location.href = "list.do?curPage=" + page
 		}
 
+		
+		
+		
+		
 		function startTaja() {
 			printTime();
 			$(".tajaStartDIV").show();
-			$(".btn").hide();
+			$(".tajaStartBtn").hide();
+			$("#game_explain").hide();
+			$("#tajaStartBtn").hide();
 			var tajaDIV = document.getElementById("tajaDIV");
 			var str = '';
 			var input = '';
-			var plusLength = 0;
 
-			for (var i = 0; i < token.length; i++) {
-
-				for (var j = 0; j < token[i].length; j++) {
-					if (0 < i) {
-						str += '<span id="text' + (j + plusLength) + '">'
-								+ token[i].charAt(j) + '</span>';
-					} else {
-						str += '<span id="text'+j+'">' + token[i].charAt(j)
-								+ '</span>';
-					}
-				}
-				plusLength = token[i].length + plusLength;
-				if (i == token.length - 1) {
-					str += '<br><input type="text" id="inputText' + i
-							+ '" name="inputText' + i
-							+ '" onkeyup="keyPress(this)" class="' + i
-							+ '" onkeypress="onKeyDown(null,inputText' + i
-							+ ')" style="width:400px"><br>';
-				} else {
-					str += '<br><input type="text" id="inputText' + i
-							+ '" name="inputText' + i
-							+ '" onkeyup="keyPress(this)" class="' + i
-							+ '" onkeypress="onKeyDown(inputText' + (i + 1)
-							+ ',inputText' + i + ')" style="width:400px"><br>';
-				}
-				tajaDIV.innerHTML = str;
+			
+			function readTextFile(file, callback) {
+			    var rawFile = new XMLHttpRequest();
+			    rawFile.overrideMimeType("application/json");
+			    rawFile.open("GET", file, true);
+			    rawFile.onreadystatechange = function() {
+			        if (rawFile.readyState === 4 && rawFile.status == "200") {
+			            callback(rawFile.responseText);
+			        }
+			    }
+			    rawFile.send(null);
 			}
 
-			$("#inputText0").focus();
+			//usage:
+			readTextFile("resources/taja.json", function(text){
+			    data = JSON.parse(text);
+			    
+			    for (var i = 0; i < data.taja.length; i++) {
+					for (var j = 0; j < data.taja[i].value.length; j++) {
+						if (0 < i) {
+							str += '<span id="text' + (j + plusLength) + '">'
+									+ data.taja[i].value.charAt(j) + '</span>';
+						} else {
+							str += '<span id="text'+j+'">' + data.taja[i].value.charAt(j)
+									+ '</span>';
+						}
+					}
+					plusLength = data.taja[i].value.length + plusLength;
+					if (i == data.taja.length - 1) {
+						str += '<br><input class="'+i+'" type="text" id="inputText' + i
+								+ '" name="inputText' + i
+								+ '" onkeyup="keyPress(this)" class="' + i
+								+ '" onkeypress="onKeyDown(null,inputText' + i
+								+ ')" style="width:400px"><br>';
+					} else {
+						str += '<br><input class="'+i+'" type="text" id="inputText' + i
+								+ '" name="inputText' + i
+								+ '" onkeyup="keyPress(this)" class="' + i
+								+ '" onkeypress="onKeyDown(inputText' + (i + 1)
+								+ ',inputText' + i + ')" style="width:400px"><br>';
+					}
+					tajaDIV.innerHTML = str;
+				}
+
+				$("#inputText0").focus();
+ 
+			});
 		}
 
 		function keyPress(e) {
-			var maxNum = e.className;
-			/* alert(e.value.length-1); */
+			var maxNum = parseInt(e.className);
+			
+			
 			keyDownCount++;
 			var plusLength = 0;
 			if (keyDownCount == 1) {
 				startTime = new Date();
 			}
-			//정확도
-			/* for(var j=0;j<token[maxNum].length;j++){
-			   	if(token[maxNum].charAt(j) == document.getElementById("inputText"+maxNum).value.charAt(j)){
-					countR++;
-				}
+			if(maxNum == 0){
+				tokenLength = data.taja[0].value.length;
 			}
 			
-			tokenLength += token[maxNum].length;
-			result = (countR/tokenLength)*100; */
 
 			//타자속도
 			var curSec = $("#sec").text();
@@ -412,7 +452,7 @@ font-size: 1em; }
 				curMin = 0;
 			}
 
-			if (token[maxNum].charAt(e.value.length - 1) == e.value
+			if (data.taja[maxNum].value.charAt(e.value.length - 1) == e.value
 					.charAt(e.value.length - 1)) {
 				countS++;
 				if (event.keyCode == 8) {
@@ -421,8 +461,7 @@ font-size: 1em; }
 			}
 
 			var typingSpeed;
-			typingSpeed = countS / ((curMin * 60) + (curSec) * 60);
-			console.log(typingSpeed);
+			typingSpeed = (countS*60) / ((curMin * 60) + (curSec));
 			typingSpeed = Math.floor(typingSpeed);
 
 			function dinamic_animated_contents() {
@@ -445,11 +484,11 @@ font-size: 1em; }
 				dinamic_animated_contents();
 			}
 
-			for (var i = 0; i < token.length; i++) {
+			for (var i = 0; i < data.taja.length; i++) {
 
-				for (var j = 0; j < token[i].length; j++) {
+				for (var j = 0; j < data.taja[i].value.length; j++) {
 					if (document.getElementById("inputText" + i).value
-							.charAt(j) != token[i].charAt(j)
+							.charAt(j) != data.taja[i].value.charAt(j)
 							&& document.getElementById("inputText" + i).value
 									.charAt(j) != '') {
 						document.getElementById("text" + (j + plusLength)).style.color = "red";
@@ -458,59 +497,122 @@ font-size: 1em; }
 						document.getElementById("text" + (j + plusLength)).style.color = "black";
 					}
 				}
-				plusLength = token[i].length + plusLength;
+				plusLength = data.taja[i].value.length + plusLength;
 			}
 
-			for (var i = 0; i < token.length; i++) {
-				if (document.getElementById("inputText" + i).value.length > token[i].length) {
-					if (maxNum == token.length - 1
-							&& document.getElementById("inputText" + maxNum).value.length > token[maxNum].length) {
-						alert("타자게임이 종료되었습니다");
-						document.getElementById("inputText" + maxNum).readOnly = true;
-						countS = 0;
-						countR = 0;
-						tokenLength = 0;
-						timeCount = 0;
-						minCount = 0;
+			for (var i = 0; i < data.taja.length; i++) {
+				if (document.getElementById("inputText" + i).value.length > data.taja[i].value.length) {
+					if (maxNum == data.taja.length - 1
+							&& document.getElementById("inputText" + maxNum).value.length > data.taja[maxNum].value.length) {
 						clearInterval(startInterval);
+						document.getElementById("inputText" + maxNum).readOnly = true;
+						$("#tajaDialog").dialog({
+							autoOpen: true, 
+							width: 400, 
+							modal: true, 
+							buttons: [ 
+								{
+									text: "돌아가기", 
+									click: function() { 
+										$( this ).dialog( "close" );
+										location.reload();
+										} 
+								}
+								] });
+						$("#tajaDialog").append("<table><tr><td> 타수 : </td><td>"+typingSpeed+" 타 </td></tr><tr><td> 정확도 : </td><td>"+result.toFixed(2)+" %</td></tr><tr><td>"+min+"분 "+sec+"초</td></tr></table>");
+						
+						tokenLength = 0;
 						return;
-					} else {
-						document.getElementById("inputText" + i).readOnly = true;
-						document.getElementById("inputText" + (i + 1)).focus();
+					} else if(document.getElementById("inputText" + maxNum).value.length > data.taja[maxNum].value.length){
+						if(i == maxNum){
+							function animated_contents() {
+								
+								result = 0;
+								var voidText = data.taja[maxNum].value.length - e.value.length;
+								/* 그래프 */
+								for (var i = 0; i < voidText; i++) {
+									e.value += ' ';
+								}
 
-						/* $(this).css({'width' : result + '%'});
-						$(".per1").text(result.toFixed(2)+'%'); */
+								$(".zt-skill-bar1 > div ")
+										.each(
+												function(i) {
 
+													for (var j = 0; j < data.taja[maxNum].value.length; j++) {
+														if (data.taja[maxNum].value.charAt(j) == document
+																.getElementById("inputText"
+																		+ maxNum).value
+																.charAt(j)) {
+															countR++;
+														}
+													}
+													
+													result = (countR / tokenLength) * 100;
+
+													$(this).css({
+														'width' : result + '%'
+													});
+													$(".per1")
+															.text(result.toFixed(2) + '%');
+													alert(maxNum+1);
+													tokenLength += data.taja[maxNum+1].value.length;
+
+												});
+								
+
+							}
+							if (jQuery().appear) {
+								$('.zt-skill-bar').appear().on('appear', function() {
+									animated_contents();
+								});
+							} else {
+								animated_contents();
+							}
+							
+							document.getElementById("inputText" + i).readOnly = true;
+							document.getElementById("inputText" + (i + 1)).focus();
+						
+					}
 					}
 				}
 			}
-			/* var inputText = document.getElementById("inputText"); 
-			var tajaDIV = document.getElementById("tajaDIV");
-			var innerText = document.createElement('p');
-			innerText.text = "안녕하세요";
-			innerText.id = "innertext";
-			
-			tajaDIV.appendChild(innerText);
-			 */
 
 		}
 
 		function onKeyDown(next, thisobj) {
-			var num = thisobj.className;
+			var num = parseInt(thisobj.className);
 
 			if (event.keyCode == 13) {
 				endTime = new Date();
 				keyDownCount = 0;
-				var resultTime = (endTime - startTime) / 1000;
+				
+				//타자속도
+				var curSec = $("#sec").text();
+				var curMin = $("#min").text();
+
+				if (curSec == "") {
+					curSec = 0;
+				}
+
+				if (curMin == "") {
+					curMin = 0;
+				}
+
+				if (data.taja[num].value.charAt(thisobj.value.length - 1) == thisobj.value
+						.charAt(thisobj.value.length - 1)) {
+					countS++;
+					if (event.keyCode == 8) {
+						countS--;
+					}
+				}
+
 				var typingSpeed;
-				typingSpeed = (document.getElementById("inputText" + num).value.length * 60)
-						/ resultTime;
+				typingSpeed = (countS*60) / ((curMin * 60) + (curSec));
 				typingSpeed = Math.floor(typingSpeed);
-				var plusLength = 0;
 
 				function animated_contents() {
-					var result = 0;
-					var voidText = token[num].length - thisobj.value.length;
+					result = 0;
+					var voidText = data.taja[num].value.length - thisobj.value.length;
 					/* 그래프 */
 					for (var i = 0; i < voidText; i++) {
 						thisobj.value += ' ';
@@ -519,11 +621,9 @@ font-size: 1em; }
 					$(".zt-skill-bar1 > div ")
 							.each(
 									function(i) {
-										/* var $this  = $(this),
-										    skills = $this.data('width'); */
 
-										for (var j = 0; j < token[num].length; j++) {
-											if (token[num].charAt(j) == document
+										for (var j = 0; j < data.taja[num].value.length; j++) {
+											if (data.taja[num].value.charAt(j) == document
 													.getElementById("inputText"
 															+ num).value
 													.charAt(j)) {
@@ -531,17 +631,17 @@ font-size: 1em; }
 											}
 										}
 
-										tokenLength += token[num].length;
 										result = (countR / tokenLength) * 100;
-
+										
 										$(this).css({
 											'width' : result + '%'
 										});
 										$(".per1")
 												.text(result.toFixed(2) + '%');
-
-									});
-
+										});
+										if(num < data.taja.length-1){
+										tokenLength += data.taja[num+1].value.length;
+										}
 				}
 
 				if (jQuery().appear) {
@@ -552,33 +652,42 @@ font-size: 1em; }
 					animated_contents();
 				}
 
-				/*  */
 
-				if (num == token.length - 1) {
-					alert("타자게임이 종료되었습니다");
-					document.getElementById("inputText" + num).readOnly = true;
-					countS = 0;
-					countR = 0;
-					tokenLength = 0;
-					timeCount = 0;
-					minCount = 0;
+				if (num == data.taja.length - 1) {
 					clearInterval(startInterval);
+					document.getElementById("inputText" + num).readOnly = true;
+					
+					$("#tajaDialog").dialog({
+						autoOpen: true, 
+						width: 400, 
+						modal: true, 
+						buttons: [ 
+							{
+								text: "돌아가기", 
+								click: function() { 
+									$( this ).dialog( "close" );
+									location.reload();
+									} 
+							}
+							] });
+					$("#tajaDialog").append("<table><tr><td> 타수 : </td><td>"+typingSpeed+" 타 </td></tr><tr><td> 정확도 : </td><td>"+result.toFixed(2)+" %</td></tr></table>");
+					
+					tokenLength = 0;
 				} else {
 					next.focus();
 				}
 
 				thisobj.readOnly = true;
 
-				/* if(thisobj.className-1 == token.length)  */
 
 				if (thisobj.readOnly == true) {
-					for (var j = 0; j < token[num].length; j++) {
-						if (token[num][j] != thisobj.value.substr(j, 1)) {
+					for (var j = 0; j < data.taja[num].value.length; j++) {
+						if (data.taja[num].value[j] != thisobj.value.substr(j, 1)) {
 							document.getElementById("text" + (j + (5 * num))).style.color = "red";
 						} else {
 							document.getElementById("text" + (j + (5 * num))).style.color = "black";
 						}
-						plusLength = token[i].length + plusLength;
+						plusLength = data.taja[num].value[j].length + plusLength;
 					}
 
 				}
@@ -587,6 +696,7 @@ font-size: 1em; }
 		}
 
 		function printTime() {
+			startInterval = setInterval(timer, 1000);
 			var clock = document.getElementById("clock");
 			var now = new Date();
 			startInterval;
@@ -594,36 +704,23 @@ font-size: 1em; }
 		
 		function timer() {
 			timeCount++;
-			var sec = document.getElementById("sec");
-			var min = document.getElementById("min");
+			sec = document.getElementById("sec");
+			min = document.getElementById("min");
 
 			sec.innerHTML = timeCount;
-			if (timeCount == 59) {
+			if (timeCount == 60) {
+				timeCount = 0;	
+				sec.innerHTML = timeCount;
 				minText.style.display = "block";
 				minCount++;
 				min.innerHTML = minCount;
-				timeCount = 0;
 			}
 		}
 
 		/* -------------------타자게임 관련 소스 종료----------- */
 
-		/* 파일 업로드 소스 */
+		
 
-		function handleFileSelect(evt) {
-			var files = evt.target.files;
-
-			for (var i = 0, f; f = files[i]; i++) {
-
-				var reader = new FileReader();
-
-				reader.onload = (function(theFile) {
-					return function(e) {
-
-					}
-				})
-			}
-		}
 	</script>
 </body>
 </html>

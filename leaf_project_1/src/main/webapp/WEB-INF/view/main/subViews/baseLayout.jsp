@@ -68,7 +68,7 @@ var conn;
 				
 				//웹 소켓 연결
 				conn = new WebSocket(
-					"ws://localhost:8080/controller/note.do");
+					"ws://192.168.0.125:8080/controller/note.do");
 				
 				//웹 소켓 이벤트 처리	
 				
