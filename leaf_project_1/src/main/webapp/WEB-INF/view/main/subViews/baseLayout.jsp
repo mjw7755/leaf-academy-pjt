@@ -13,8 +13,6 @@
 <link href='<tiles:getAsString name="css"/>' type="text/css" rel="stylesheet">
 
 <!-- js 영역 -->
-<script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link href='<tiles:getAsString name="js"/>' type="text/css"	rel="stylesheet">
 <style type="text/css">
 body{
@@ -179,7 +177,6 @@ var conn;
 			//메시지를 출력
 			if(data != null){
 				if(data == "dupl"){
-					alert(data);
 					$.ajax({
 						url:"loginDupl.do",
 						success: function(data){

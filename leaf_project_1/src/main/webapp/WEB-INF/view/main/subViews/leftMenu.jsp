@@ -8,7 +8,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <style type="text/css">
 #top_banner{
 	width: 100%;

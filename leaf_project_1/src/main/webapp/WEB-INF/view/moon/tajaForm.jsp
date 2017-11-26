@@ -5,10 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script
-  src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <title>Insert title here</title>
 <style type="text/css">
 #five{
@@ -333,12 +331,13 @@ input{
 		<span>타자연습이 종료되었습니다</span>
 	</div>
 
-	<script type="text/javascript">
+<script type="text/javascript">
 			
 		/* var token = [ 'public void static main(String args[])',
 				'implements WebSocketHandler', 'int i = 0; result i;',
 				'sysout.out.println();', 'document.getElementById' ]; */
 
+				
 		
 		var countS = 0;
 		var countR = 0;
@@ -363,7 +362,6 @@ input{
 			location.href = "list.do?curPage=" + page
 		}
 
-		
 		
 		
 		
@@ -506,6 +504,7 @@ input{
 							&& document.getElementById("inputText" + maxNum).value.length > data.taja[maxNum].value.length) {
 						clearInterval(startInterval);
 						document.getElementById("inputText" + maxNum).readOnly = true;
+						
 						$("#tajaDialog").dialog({
 							autoOpen: true, 
 							width: 400, 
@@ -671,7 +670,7 @@ input{
 							}
 							] });
 					$("#tajaDialog").append("<table><tr><td> 타수 : </td><td>"+typingSpeed+" 타 </td></tr><tr><td> 정확도 : </td><td>"+result.toFixed(2)+" %</td></tr></table>");
-					
+					$("#tajaDialog").dialog('open');
 					tokenLength = 0;
 				} else {
 					next.focus();
