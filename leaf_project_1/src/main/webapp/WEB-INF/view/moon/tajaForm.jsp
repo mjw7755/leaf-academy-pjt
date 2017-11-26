@@ -6,12 +6,47 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+#five{
+   width:800px;
+}
+#five a{
+   text-decoration: none;
+   color: #000;
+}
+#five hr{
+	border: thin solid;
+	border-color: #cccccc;
+}
+#game_explain{
+    width: 350px;
+    /* height: 300px; */
+    /* float: left; */
+    border: 2px solid #1f8727;
+    border-radius: 4px;
+    /* margin-left: 30px; */
+    /* margin-right: 25px; */
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+#game_explain hr{
+	border: thin solid;
+	border-color: #cccccc;
+}
+#game_explain div{
+    font-size: 14px;
+    font-weight: bold;
+    color: #16688e;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+}
+/*  */
 .zt-skill-bar1 {
 	color: #fff;
 	font-size: 11px;
 	line-height: 25px;
 	height: 25px;
-	width: 300px;
+	width: 250px;
 	margin-bottom: 5px;
 	background-color: rgba(0, 0, 0, 0.1);
 	-webkit-border-radius: 2px;
@@ -74,7 +109,7 @@
 	font-size: 11px;
 	line-height: 25px;
 	height: 25px;
-	width: 300px;
+	width: 250px;
 	margin-bottom: 5px;
 	background-color: rgba(0, 0, 0, 0.1);
 	-webkit-border-radius: 2px;
@@ -133,25 +168,123 @@
 
 
 .tajaStartDIV {
-	height:300px;
-	position:relative;
-	left:300px;
+	height:350px;
+	width:800px;
+	/* position:relative; */
 	background:url("resources/타자연습 배경화면1.PNG") no-repeat;
 	display:none;
-	
+	text-align: left;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-right: 10px;
+}
+#tajaDIV{
+	float:left;
+	width: 500px;
+	font-weight: bold;
+}
+.zt-span6{
+	width:300px;
+	float:left;
+}
+/*  */
+.btn {
+    display: inline-block;
+    border: none;
+    border-radius: .3em;
+    -webkit-box-shadow: inset 0 0 0 1px #0b6d1e, inset 0 -0.25em 0 #1eb13b, 0 0.25em 0.25em #307e3d;
+    /* box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1), inset 0 -0.25em 0 rgba(0, 0, 0, 0.25), 0 0.25em 0.25em rgba(0, 0, 0, 0.05); */
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    line-height: 1.5;
+    letter-spacing: 1px;
+    padding: .5em 1.5em .75em;
+    position: relative;
+    text-decoration: none;
+    /* text-shadow: 0 1px 1px #c4c4c4; */
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* margin-left: 10px; */
+}
+.btn:active {
+-webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), inset 0 2px 0 rgba(255, 255, 255, 0.1), inset 0 0.25em 0.5em rgba(0, 0, 0, 0.05);
+box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2), inset 0 2px 0 rgba(255, 255, 255, 0.1), inset 0 0.25em 0.5em rgba(0, 0, 0, 0.05);
+margin-top: .25em;
+padding-bottom: .5em; }
+.btn:active, .btn:focus {
+outline: none; }
+.btn--green {
+    background-color: #28b71c;}
+.btn--green {
+font-size: 1em; }
+.btn--sm {
+    font-size: 0.7em;
+    width: 120px; }
+/*  */
+#inputText0, #inputText1, #inputText2,  #inputText3, #inputText4{
+	padding: 6px 12px;
+	font-size: 14px;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow
+		ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out
+		.15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	margin-bottom: 5px;
+	margin-top: 5px; 
+}
+/*  */
+/* #file{
+	width: 800px;
+	margin-top: 40px;
+} */
+/*  */
+#taja_table{
+	width: 150px;
+}
+#time{
+	float: left;
+	padding-right: 5px;
+}
+#minText{
+	float:left;
+	padding-right: 5px;
 }
 </style>
 
 
 </head>
 <body>
+<div id="five"><a href="fir_index.do"><h1>타자연습</h1></a><hr></div>
 
-<button class="tajaStartBtn" onclick="startTaja()">타자연습 시작</button>
+<div id="game_explain">
+<h3>게임 안내</h3>
+<div>타자연습입니다. 타자속도를 향상시키고, <br>코딩 기본구문을 익힐 수 있습니다.</div>
+<hr>
+<h3>게임방법</h3>
+<div>1. 시작버튼을 누릅니다.<br>
+2. 화면에 있는 구문을 따라 입력합니다.<br>
+※ 단어가 틀릴 시 빨간색으로 표시됩니다.<br>
+</div>
+</div>
+
+<button class="btn btn--sm btn--green" onclick="startTaja()">start</button>
 
 <div class="tajaStartDIV">
-	<table>
+	<table id="taja_table">
 		<tr>
-			<td>
+			<td><div id="time">TIME :</div> 
 				<div style="display: none;" id="minText">
 					<sapn id="min"></sapn>
 					<span>분</span>
@@ -166,7 +299,7 @@
 			<div>
 				<div class="zt-span6 last">
 					<h3>
-						<strong>진행율 바</strong>
+						<strong>진행률</strong>
 					</h3>
 					정확도
 					<div class="zt-skill-bar1">
@@ -184,20 +317,10 @@
 		</tr>
 	</table>
 		</div>
-
-
-
-
-
-
-
-	<div>
-		<table>
-			<tr>
-				<td><input type="file" id="files" multiple /></td>
-			</tr>
-		</table>
-	</div>
+<!-- 
+	<div id="file">
+				<input type="file" id="files" multiple />
+	</div> -->
 
 
 	<script type="text/javascript">
@@ -222,7 +345,7 @@
 		function startTaja() {
 			printTime();
 			$(".tajaStartDIV").show();
-			$(".tajaStartBtn").hide();
+			$(".btn").hide();
 			var tajaDIV = document.getElementById("tajaDIV");
 			var str = '';
 			var input = '';
@@ -245,13 +368,13 @@
 							+ '" name="inputText' + i
 							+ '" onkeyup="keyPress(this)" class="' + i
 							+ '" onkeypress="onKeyDown(null,inputText' + i
-							+ ')" style="width:500px"><br>';
+							+ ')" style="width:400px"><br>';
 				} else {
 					str += '<br><input type="text" id="inputText' + i
 							+ '" name="inputText' + i
 							+ '" onkeyup="keyPress(this)" class="' + i
 							+ '" onkeypress="onKeyDown(inputText' + (i + 1)
-							+ ',inputText' + i + ')" style="width:500px"><br>';
+							+ ',inputText' + i + ')" style="width:400px"><br>';
 				}
 				tajaDIV.innerHTML = str;
 			}

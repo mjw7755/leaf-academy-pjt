@@ -48,7 +48,7 @@
    });
    
    function reviewWrite() {
-   if("$(sessionScope.sessionid == null)"){
+   if(${sessionScope.sessionid == null}){
       alert("로그인 후 이용가능합니다.");
       window.location.href="loginForm.do";
    }
