@@ -897,7 +897,7 @@ keyframes swiper-preloader-spin { 100%{
           </div>
           </a>
           
-          <a href="#"><!-- 쪽지보내기 페이지로 이동 -->
+          <a href="noteList.do"><!-- 쪽지보내기 페이지로 이동 -->
           <div id="advice">
              <p>입회상담</p>
              <div id="box_img">

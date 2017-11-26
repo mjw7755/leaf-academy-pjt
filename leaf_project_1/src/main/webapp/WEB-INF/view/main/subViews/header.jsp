@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -35,7 +34,6 @@
 color:#fff;
 display:block;
 font-weight:normal;
-/* margin:0px; */
 padding:0px 15px;
 text-align:center;
 text-decoration:none;
@@ -67,32 +65,23 @@ display:block;
 font-weight:bold;
 line-height:50px;
 margin-top:10px;
-/* padding:15px 0px 0px 0px;*/
 text-align:center;
 text-decoration:none;
 width:130px;
 }
 .menu li a:hover {
-/* background: rgb(71,71,71); */
 color:#1b7817;
 text-decoration:none;
 font-weight:bold;
 }
-/* .menu ul li:hover a{
-color:#fff;
-} */
 .menu li ul{
-/* background: rgb(109,109,109); */
 display:none; /* 평상시에는 드랍메뉴가 안보이게 하기 */
 height:auto;
 padding:0px;
 margin:0px;
 border:0px;
 position:absolute;
-/* width:200px; */
 z-index:200;
-/*top:1em;
-/*left:0;*/
 }
 .menu li:hover ul{
 display:block; /* 마우스 커서 올리면 드랍메뉴 보이게 하기 */
@@ -132,66 +121,10 @@ text-decoration:none;
 .menu p{
 clear:left;
 }
-/*  */
-
-/*    #quick_banner{
-      position: fixed;
-      top:20%;
-      right: 2%;
-      width:75px;
-      z-index: 2;
-   }
-   #quick{
-      background-color: #2b6728;
-      color:#fff;
-      height: 60px;
-      text-align: center;
-   }
-   #quick p{
-      padding-top: 10px;
-   }
-   #quick_myclass, #quick_mypage, #quick_book, #quick_curri{
-      border: 1px solid;
-      border-color: #9c9e9c;
-      height: 60px;
-      text-align: center;
-      font-size: 12px;
-      font-weight: bold;
-      background-color: #fff;
-   }
-   #quick_myclass p, #quick_mypage p, #quick_book p, #quick_curri p{
-      margin: auto;
-      padding-top: 5px;
-      padding-bottom: 5px;
-   }
-   #quick_myclass img, #quick_mypage img, #quick_book img, #quick_curri img{
-      width:30px;
-      height: 30px;
-   }
-   #quick_top{
-      background-color: #2b6728;
-      color:#fff;
-      height: 45px;
-      text-align: center;
-   }
-   #quick_top p{
-      margin: auto;
-   }
-   #quick_top img{
-      width:20px;
-      height: 13px;
-   } */
 </style>
 
 </head>
 <body>
-<!--       <tr>
-         <td>소개</td>
-         <td>강의</td>
-         <td>자료실</td>
-         <td>놀이</td>
-         <td>고객센터</td>
-      </tr> -->
    <div class="header">
       <div class="login_bar">
       <div class="login" >
@@ -200,21 +133,22 @@ clear:left;
                <li><a href="loginForm.do">로그인</a></li>
                <li>|</li>
                <li><a href="signupForm.do">회원가입</a></li>
-               <!-- <button onclick="javascript:window.location.href='loginForm.do'">로그인</button>
-                   <button onclick="javascript:window.location.href='signinForm.do'">회원가입</button> -->
             </ul>
          </c:if>
-         <c:if test="${sessionScope.sessionid != null}">
+         <c:if test="${sessionScope.sessionid != '관리자' and sessionScope.sessionid != null}">
             <ul>
                <li><a href="mypage.do">마이페이지</a></li>
                <li>|</li>
                <li><a href="myclass.do">내 강의실</a></li>
                <li>|</li>
                <li><a href="logout.do">로그아웃</a></li>
-               <c:if test="${sessionScope.sessionid =='관리자' }">
+            </ul>
+         </c:if>
+         <c:if test="${sessionScope.sessionid == '관리자'}">
+            <ul>
+               <li><a href="logout.do">로그아웃</a></li>
                <li>|</li>
                <li><a href="list_backend_curri.do">관리자</a></li>
-               </c:if>
             </ul>
          </c:if>
       </div>
