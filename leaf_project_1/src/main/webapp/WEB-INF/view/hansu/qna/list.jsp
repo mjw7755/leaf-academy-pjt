@@ -231,7 +231,9 @@
 	</form>
 </div>
 <div id="write">
+ <c:if test="${sessionScope.sessionid != null}">
   		 <a href="qna_writeform.do"><button class="btn2 btn-info">글쓰기</button></a>
+</c:if>
 </div>  		 
    <table id="qnalistTable">
       <tr>
