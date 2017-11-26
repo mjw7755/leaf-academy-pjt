@@ -75,7 +75,10 @@
 </tr>
 <tr>
 <th>가격</th> 
-<td><input type="text" name="amount" value="${dto.payment_lect_charge } $" class="form-control" readonly="readonly"></td>
+<td><input type="text" name="amount" value="${dto.payment_lect_charge }" class="form-control" readonly="readonly"></td>
+<tr>
+<td colspan="2"><span style="color:red;">가격은 달러로 환산된 가격입니다.</span></td>
+</tr>
 </table>
  <input type="hidden" name="currency_code" value="USD">
  <input type="hidden" name="item_number" value="${payNum }">

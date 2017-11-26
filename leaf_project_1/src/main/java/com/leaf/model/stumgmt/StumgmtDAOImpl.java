@@ -44,5 +44,11 @@ public class StumgmtDAOImpl implements StumgmtDAO {
 		StumgmtDAO dao = sqlSession.getMapper(StumgmtDAO.class);
 		return dao.getMyLect(sessionid);
 	}
+
+	@Override
+	public void payStudentInsert(Map<String,Integer> payment_id_map) {
+		StumgmtDAO dao = sqlSession.getMapper(StumgmtDAO.class);
+		dao.payStudentInsert(payment_id_map);
+	}
 	
 }

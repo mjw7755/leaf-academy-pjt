@@ -15,7 +15,7 @@ import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +31,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.leaf.model.member.MemberDAO;
 import com.leaf.model.payment.PaymentDAO;
 import com.leaf.model.payment.PaymentDTO;
+import com.leaf.model.stumgmt.StumgmtDAO;
 
 import sun.misc.BASE64Encoder;
 
@@ -43,6 +44,9 @@ public class PayController {
 	@Autowired
 	MemberDAO memberDAO;
 
+	@Autowired
+	StumgmtDAO stumgmtDAO;
+	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	private static String URL_PAYPAL_VALIDATE;// PDT데이터를 페이팔로 보낼 주소
@@ -78,6 +82,13 @@ public class PayController {
 		paymentDAO.insertPaymentData(dto);
 		int payNum = paymentDAO.selectMaxRow();
 		ModelAndView mav = new ModelAndView();
+		System.out.println(dto.getPayment_lect_charge());
+		
+		/*달러 환산*/
+		int charge = dto.getPayment_lect_charge();
+		int charge_result =charge/1000;
+		dto.setPayment_lect_charge(charge_result);
+		
 		mav.addObject("dto", dto);
 		mav.addObject("payNum", payNum);
 		mav.setViewName("moon.payment");
@@ -303,8 +314,15 @@ public class PayController {
 			/* 구매 완료 체크 */
 			paymentDAO.updatePayChk(Integer.parseInt(itemnumber));
 			
+			/*학생 등록*/
+			Map<String,Integer> payment_id_map = new HashMap<String,Integer>();
+			payment_id_map.put("payment_one_id", Integer.parseInt(itemnumber));
+			payment_id_map.put("payment_two_id", Integer.parseInt(itemnumber));
+			stumgmtDAO.payStudentInsert(payment_id_map);
+			
+			
 			/*미구매 체크*/
-			paymentDAO.deletePayData(Integer.parseInt(itemnumber));
+			/*paymentDAO.deletePayData(Integer.parseInt(itemnumber));*/
 			
 			/*완료후 페이지*/
 			response.sendRedirect("main.do");

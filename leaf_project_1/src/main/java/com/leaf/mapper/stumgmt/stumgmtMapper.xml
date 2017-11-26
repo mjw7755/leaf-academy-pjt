@@ -28,4 +28,7 @@
 		select lect_name,lect_start_day, lect_end_day from lecture where lect_id in (select lect_id from student where member_id = #{sessionid})
 	</select>
 	
+	 <insert id="payStudentInsert" parameterType="HashMap">
+    	insert into student(lect_id,member_id,student_id) values((select payment_lect_id from payment where payment_id = #{payment_one_id}),(select payment_member_id from payment where payment_id = #{payment_two_id}),student_id_seq.nextval)
+    </insert>
 </mapper>

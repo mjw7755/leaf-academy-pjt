@@ -123,8 +123,6 @@ public class stuMgmtController {
 		String student_id = request.getParameter("student_id");
 		String chk_str = request.getParameter("chk_str");
 		String lect_id = request.getParameter("lect_id");
-		System.out.println(chk_str);
-		System.out.println(student_id);
 		
 		/*lect_name 가져오기*/
 		String Lect_name = lectDAO.getLectName(Integer.parseInt(lect_id));
@@ -152,7 +150,6 @@ public class stuMgmtController {
 		long result_time = end_date.getTime() - start_date.getTime();
 		long diff_date = result_time/(60*60*24*1000);
 			
-		System.out.println(diff_date);
 		for(int i=0; i<=(int)diff_date; i++) {
 			cal.setTime(start_date);
 			cal.add(Calendar.DATE, i);	
@@ -202,10 +199,7 @@ public class stuMgmtController {
 	    makeExcelName.put("student_id", student_id);
 	    makeExcelName.put("lect_id", lect_id);
 	    
-	    System.out.println("디비에 엑셀파일 이름 있지? "+getExcelName);
 	    if(getExcelName != null) {
-	    	System.out.println("엑셀 파일 업데이트 시작");
-	    	System.out.println(getExcelName);
 	    	try {
 				UpdateExcelForm updateExcelForm = new UpdateExcelForm(updatelistMap,request,response);
 				mav.setViewName("main.mainPage");
@@ -225,11 +219,9 @@ public class stuMgmtController {
 			}	 
 	    }else {
 	    	chk_arr.removeAll(chk_arr);
-	    	System.out.println("엑셀이름"+student_id);
 	    	response.setContentType( "application/ms-excel" );
 	    	response.setHeader( "Content-disposition", "attachment; filename="+new String(setExcelName.getBytes("KSC5601"),"8859_1")+".xls" );
 	    	stumgmtDAO.insertStuExcel(makeExcelName);
-	    	System.out.println("엑셀파일 들어감");
 	    	return new ModelAndView(new MakingExcelForm(),makelistMap);	 
 	    }
 		return mav;
@@ -262,7 +254,6 @@ public class stuMgmtController {
 		
 		
 		/*여러개의 강의를 듣는 학생의 각 강의및  날짜 수 list 그리고 엑셀파일이름 리스트*/
-		System.out.println(sessionid);
 		List<LectDTO> list = stumgmtDAO.getMyLect(sessionid);
 		List<Integer> res_diff_date_list = new ArrayList<Integer>();
 		List<String> lect_name_list = new ArrayList<String>();
@@ -286,12 +277,10 @@ public class stuMgmtController {
 				long result_time = end_date.getTime() - start_date.getTime();
 				long diff_date = result_time/(60*60*24*1000);
 				int res_diff_date = (int)diff_date;
-				System.out.println("날짜 차이 : "+res_diff_date);
 				res_diff_date_list.add(res_diff_date);
 				lect_name_list.add(lect_name);
 			}
 			
-			System.out.println("날짜 잘들어갔나?"+res_diff_date_list.get(0)+"과연 "+res_diff_date_list.get(1));
 			/*엑셀파일이름*/
 				for(int i=0; i<list.size();i++) {
 					excel_name_list.add(lect_name_list.get(i)+"_"+sessionid);

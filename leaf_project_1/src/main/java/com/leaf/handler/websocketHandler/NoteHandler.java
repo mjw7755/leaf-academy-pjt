@@ -67,7 +67,6 @@ public class NoteHandler implements org.springframework.web.socket.WebSocketHand
 				socketList.remove(dupl);				
 			}else {
 				userList.add((String)data.get("n_name"));
-				System.out.println("로그인 완료");	
 			}
 		}
 		
@@ -79,16 +78,6 @@ public class NoteHandler implements org.springframework.web.socket.WebSocketHand
 			ArrayList<NoteDTO> n_recvids_arr = new ArrayList<NoteDTO>();
 			n_recvids = (ArrayList)data.get("chkvalues");
 			
-			for(int i=0; i<n_recvids.size(); i++) {
-				
-				System.out.println("id값 제대로 들어왔을까? "+n_recvids.get(i));
-			}
-			
-			
-			
-			
-			System.out.println("받는사람 몇명?"+n_recvids.size());
-			
 			if(n_recvids.size() > 1) {
 				/*다중 쪽지*/
 				for(int i=0;i<n_recvids.size(); i++) {
@@ -99,18 +88,14 @@ public class NoteHandler implements org.springframework.web.socket.WebSocketHand
 					dto.setN_send_id((String)data.get("n_sendid"));
 					n_recvids_arr.add(dto);
 				}
-				System.out.println("다중쪽지 시작");
 				mul_recv_note.put("n_recvids_arr", n_recvids_arr);
 				noteDAO.writeMulNote(mul_recv_note);
-				System.out.println("다중쪽지 완료");
-				
 				
 				for(int i=0; i<n_recvids_arr.size(); i++) {
 					int recv_users = userList.indexOf(n_recvids_arr.get(i));
 					if(recv_users > -1) {
 						WebSocketSession recv_session = socketList.get(recv_users);
 						recv_session.sendMessage(new TextMessage(message));
-						System.out.println("해당유저에 메세지 전달 완료");
 					}else {
 						System.out.println("해당 유저 없음");
 					}
@@ -122,17 +107,13 @@ public class NoteHandler implements org.springframework.web.socket.WebSocketHand
 				dto.setN_title((String)data.get("n_title"));
 				dto.setN_recv_id((String)data.get("n_recvid"));
 				dto.setN_send_id((String)data.get("n_sendid"));	
-				System.out.println("받는사람 등장 : "+dto.getN_recv_id());
 				noteDAO.writeNote(dto);
 			}
-			System.out.println("받는사람 아이디 : "+(String)data.get("n_recvid"));
 			int recv_user_num = userList.indexOf((String)data.get("n_recvid"));
-			System.out.println("받는사람 있을까?"+recv_user_num);
 
 			if(recv_user_num > -1) {
 				WebSocketSession recv_session = socketList.get(recv_user_num);
 				recv_session.sendMessage(new TextMessage(message));
-				System.out.println("해당유저에 메세지 전달 완료");
 			}else {
 				System.out.println("해당 유저 없음");
 			}
