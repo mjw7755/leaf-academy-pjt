@@ -211,7 +211,7 @@ font-size: 0.6em; }
 		</c:forEach>
 	</datalist>
 	<div>
-		<a href="list_lect.do"><h1>개설강좌</h1></a>
+		<a href="list_lect.do"><h1>강좌개설</h1></a>
 		<hr>
 		<div id="search">
 		<form action="search_lect.do" method="post">
