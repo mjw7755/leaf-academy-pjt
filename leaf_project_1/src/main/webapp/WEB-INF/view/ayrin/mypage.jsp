@@ -418,10 +418,9 @@ font-size: 0.6em; }
 			</tr>
 			<tr>
 				<td id="text">우편번호  </td>
-				<td>
-				<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn3 btn-primary btn-sm"><br>
-				<sf:input path="member_addnum" id="sample4_postcode" placeholder="우편번호" value="${dto.member_addnum}" class="form-control"/>
+				<td><sf:input path="member_addnum" id="sample4_postcode" placeholder="우편번호" value="${dto.member_addnum}" class="form-control"/>
 				<sf:errors path="member_addnum" cssClass="error" /><br/>
+				<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기" class="btn3 btn-primary btn-sm"><br>
 				<sf:input path="member_address" id="sample4_roadAddress" placeholder="도로명주소" value="${dto.member_address}" class="form-control"/>
 				<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소">
 				<span id="guide" style="color: #999"></span>
