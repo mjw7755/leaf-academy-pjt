@@ -267,7 +267,7 @@
                <td><input type="text" name="payment_teacher_name"
                   value="${teachername.getMember_name()}" class="form-control2"></td>
                <td><input type="text" name="payment_lect_charge"
-                  value="${ldto.getLect_charge()}$" class="form-control2"></td>
+                  value="${ldto.getLect_charge()}" class="form-control2"></td>
             </tr>
 <%--             <tr>
                <td colspan="3" align="right">${ldto.getLect_charge()}</td>
