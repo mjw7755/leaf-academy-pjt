@@ -65,6 +65,7 @@ public class CurriController {
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("list", list);
 		model.addAttribute("flag", flag);
+		System.out.println("dd");
 
 		return "curriculum.list";
 	}

@@ -506,10 +506,9 @@ font-size: 0.6em; }
 	</div>
 	
 </div>	
-
 	<c:if test="${memberLevel==2}">
 	<a href="writeform_curri.do" method="post"><button  class="btn btn--sm btn--green">추가하기</button></a>
-</c:if><br>
+	</c:if><br>
 	<div id="searchdiv" name="searchdiv" class="searchdiv">
 	
 		<span style="width: 350px; height: 50px; font-size: 30px; font-weight: bold;">커리큘럼 검색</span>
@@ -530,14 +529,16 @@ font-size: 0.6em; }
 					<th>강좌명</th>
 					<th>강사</th>
 					<th>강좌레벨</th>
-					<th colspan="2"></th>
+					<c:if test="${memberLevel==2}">
+							<th>삭제</th>
+							<th>수정</th>
+						</c:if>
 				<c:forEach items="${list }" var="list" varStatus="status" >
 					<tr>
 						<td><a href="detail_curri.do?curri_id=${list.curri_id}">${list.curri_subject}</a></td>
 						<td>${list.member_id}</td>
 						<td>${list.curri_level}</td>
-						
-						<c:if test="${memberLevel==2 and list.member_id==sessionScope.sessionid}">
+						<c:if test="${memberLevel==2 and list.member_id == sessionScope.sessionid}">
 							<td><a href="delete_curri.do?curri_id=${list.curri_id}"><button id="delete" class="btn btn--sm btn--green">삭제</button></a></td>
 							<td><a href="updateForm_curri.do?curri_id=${list.curri_id}"><button id="update" class="btn btn--sm btn--green">수정</button></a></td>
 						</c:if>
