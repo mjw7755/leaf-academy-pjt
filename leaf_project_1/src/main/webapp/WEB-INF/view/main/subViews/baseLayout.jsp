@@ -97,7 +97,6 @@ var conn;
 				var n_recv_id = $("#n_recv_id").val();
 				var recv_values = [];
 				recv_values = n_recv_id.split(",");
-				alert(recv_values);
 				var n_send_id = $("#n_send_id").val();
 				var n_title = $("#n_title").val();
 				var n_content = $("#n_content").val();
