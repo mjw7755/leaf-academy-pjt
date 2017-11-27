@@ -19,7 +19,7 @@
 	</insert>
 	
 	<select id="getNoteList" parameterType="HashMap" resultType="com.leaf.model.note.NoteDTO">
-		select * from (select rownum rn, n.* from (select * from note where n_recv_id = #{sessionid} order by n_id asc ) n ) where rn between #{start} and #{end} and n_recv_del_yn = 'n'
+		select * from (select rownum rn, n.* from (select * from note where n_recv_id = #{sessionid} order by n_id desc ) n ) where rn between #{start} and #{end} and n_recv_del_yn = 'n'
 	</select>
 	
 	<select id="allNoteCount" parameterType="String" resultType="Integer">
@@ -34,7 +34,7 @@
 	</update>
 	
 	<select id="sendNoteList" parameterType="HashMap" resultType="com.leaf.model.note.NoteDTO">
-		select * from (select rownum rn, n.* from (select * from note where n_send_id = #{sessionid} order by n_id asc ) n ) where rn between #{start} and #{end}
+		select * from (select rownum rn, n.* from (select * from note where n_send_id = #{sessionid} order by n_id desc ) n ) where rn between #{start} and #{end}
 	</select>
 	
 	<select id="sendAllNoteCount" parameterType="String" resultType="Integer">
