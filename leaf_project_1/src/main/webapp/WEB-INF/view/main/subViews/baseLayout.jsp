@@ -13,8 +13,6 @@
 <link href='<tiles:getAsString name="css"/>' type="text/css" rel="stylesheet">
 
 <!-- js 영역 -->
-<script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link href='<tiles:getAsString name="js"/>' type="text/css"	rel="stylesheet">
 <style type="text/css">
 body{
@@ -96,11 +94,10 @@ var conn;
 			});
 			
 			$("#mgmtNoteSend").bind('click',function(){
-				
 				var n_recv_id = $("#n_recv_id").val();
 				var recv_values = [];
 				recv_values = n_recv_id.split(",");
-				
+				alert(recv_values);
 				var n_send_id = $("#n_send_id").val();
 				var n_title = $("#n_title").val();
 				var n_content = $("#n_content").val();
@@ -179,12 +176,11 @@ var conn;
 			//메시지를 출력
 			if(data != null){
 				if(data == "dupl"){
-					alert(data);
 					$.ajax({
 						url:"loginDupl.do",
 						success: function(data){
 							alert("다른곳에서 로그인되었습니다. 접속을 종료합니다.");
-							window.location.reload(true);
+							window.location.href="main.do";
 						},
 						error:function(e){
 							alert(e);
