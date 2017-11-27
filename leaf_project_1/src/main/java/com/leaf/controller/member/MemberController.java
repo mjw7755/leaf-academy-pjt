@@ -45,28 +45,29 @@ public class MemberController {
 	private TnoticeDAO tnoticedao;
 	@Resource
 	private PaymentDAO paymentdao;
-	
+
 	private Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-	 
-	    @RequestMapping(value = "/checkMail.do", produces = "application/text; charset=utf8")
-	    @ResponseBody
-	    private String checkMail(@RequestParam String member_email) {
-	        int count = memberdao.findOneByEmail(member_email);
-	        
-	        return gson.toJson("{\"count\":\""+count+"\"}");
-	    }
-	 
-	    @RequestMapping(value = "/sendMail.do", method = RequestMethod.POST, produces = "application/json")
-	    @ResponseBody
-	    private boolean sendMail(HttpSession session, @RequestParam String member_email, @RequestParam String randomCode, HttpServletRequest request, Model model) throws IOException {
-	        String joinCode = String.valueOf(randomCode);
-	        session.setAttribute("joinCode", joinCode);
-	        model.addAttribute("joinCode", joinCode);
-	        String subject = "회원가입 승인 번호 입니다.";
-	        StringBuilder sb = new StringBuilder();
-	        sb.append("회원가입 승인번호는 ").append(joinCode).append(" 입니다.");
-	        return memberdao.send(subject, sb.toString(), "seirin8534@gmail.com", member_email);
-	        }
+
+	@RequestMapping(value = "/checkMail.do", produces = "application/text; charset=utf8")
+	@ResponseBody
+	private String checkMail(@RequestParam String member_email) {
+		int count = memberdao.findOneByEmail(member_email);
+
+		return gson.toJson("{\"count\":\"" + count + "\"}");
+	}
+
+	@RequestMapping(value = "/sendMail.do", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	private boolean sendMail(HttpSession session, @RequestParam String member_email, @RequestParam String randomCode,
+			HttpServletRequest request, Model model) throws IOException {
+		String joinCode = String.valueOf(randomCode);
+		session.setAttribute("joinCode", joinCode);
+		model.addAttribute("joinCode", joinCode);
+		String subject = "회원가입 승인 번호 입니다.";
+		StringBuilder sb = new StringBuilder();
+		sb.append("회원가입 승인번호는 ").append(joinCode).append(" 입니다.");
+		return memberdao.send(subject, sb.toString(), "seirin8534@gmail.com", member_email);
+	}
 
 	@RequestMapping("/member_list.do")
 	public String list(Model model, HttpServletRequest request) {
@@ -259,18 +260,18 @@ public class MemberController {
 		dto.setMember_pwd(recv_pwd);
 		HttpSession session = request.getSession();
 		String sessionid = dto.getMember_id();
-		
+
 		int result = memberdao.getSessionCheck(dto);
 		if (result > 0) {
 			try {
-				response.getWriter().write(""+result);
+				response.getWriter().write("" + result);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			session.setAttribute("sessionid", sessionid);
 		} else {
 			try {
-				response.getWriter().write(""+result);
+				response.getWriter().write("" + result);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -285,18 +286,18 @@ public class MemberController {
 	}
 
 	@RequestMapping("/myclass.do")
-	public String myclass(Model model,HttpServletRequest request) {
+	public String myclass(Model model, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
 		session.getAttribute("sessionid");
 		String member_id = (String) request.getSession().getAttribute("sessionid");
-		if(member_id==null) {
+		if (member_id == null) {
 			return "ayrin.member_loginform";
 		} else {
 			MemberDTO dto = memberdao.getMemberById(member_id);
 			mav.addObject("dto", dto);
-			
-			if(dto.getMember_level() == 1) {
+
+			if (dto.getMember_level() == 1) {
 				String strPage = request.getParameter("page");
 				String flag = "list";
 				int page;
@@ -314,17 +315,18 @@ public class MemberController {
 				model.addAttribute("startPage", startPage);
 				model.addAttribute("list", list);
 				model.addAttribute("flag", flag);
-				for(int i=0; i<list.size(); i++) {
-					list.get(i).setTnotice_content(list.get(i).getTnotice_content().replaceAll("\"", "'").replaceAll("\r\n", "<br>"));
+				for (int i = 0; i < list.size(); i++) {
+					list.get(i).setTnotice_content(
+							list.get(i).getTnotice_content().replaceAll("\"", "'").replaceAll("\r\n", "<br>"));
 				}
 				int chk = 1;
 				model.addAttribute("myclass", chk);
-				
+
 				List<PaymentDTO> history = paymentdao.allPayment();
 				model.addAttribute("history", history);
-				
+
 				return "ayrin.myclassST";
-				
+
 			} else {
 				String strPage = request.getParameter("page");
 				String flag = "list";
@@ -343,15 +345,16 @@ public class MemberController {
 				model.addAttribute("startPage", startPage);
 				model.addAttribute("list", list);
 				model.addAttribute("flag", flag);
-				for(int i=0; i<list.size(); i++) {
-					list.get(i).setTnotice_content(list.get(i).getTnotice_content().replaceAll("\"", "'").replaceAll("\r\n", "<br>"));
+				for (int i = 0; i < list.size(); i++) {
+					list.get(i).setTnotice_content(
+							list.get(i).getTnotice_content().replaceAll("\"", "'").replaceAll("\r\n", "<br>"));
 				}
 				int chk = 2;
 				model.addAttribute("myclass", chk);
-				
+
 				List<PaymentDTO> history = paymentdao.allPayment();
 				model.addAttribute("history", history);
-				
+
 				return "ayrin.myclassTC";
 			}
 		}
@@ -362,14 +365,14 @@ public class MemberController {
 		ModelAndView mav = new ModelAndView();
 		String member_id = (String) request.getSession().getAttribute("sessionid");
 		String payment_member_id = (String) request.getSession().getAttribute("sessionid");
-		
-		if(member_id==null) {
+
+		if (member_id == null) {
 			mav.setViewName("ayrin.member_loginform");
 		} else {
 			dto = memberdao.getMemberById(member_id);
 			mav.addObject("dto", dto);
-			
-			if(dto.getMember_level() == 1) {
+
+			if (dto.getMember_level() == 1) {
 				List<PaymentDTO> list = paymentdao.paySelectId(payment_member_id);
 				dto = memberdao.getMemberById(member_id);
 				String chk = "OK1";
@@ -377,8 +380,7 @@ public class MemberController {
 				mav.addObject("list", list);
 				mav.addObject("dto", dto);
 				mav.setViewName("ayrin.mypage");
-			}
-			else {
+			} else {
 				List<PaymentDTO> list = paymentdao.paySelectId(payment_member_id);
 				dto = memberdao.getMemberById(member_id);
 				String chk = "OK2";
@@ -386,8 +388,8 @@ public class MemberController {
 				mav.addObject("list", list);
 				mav.addObject("dto", dto);
 				mav.setViewName("ayrin.mypage");
-				}
 			}
+		}
 		return mav;
 	}
 
@@ -435,27 +437,22 @@ public class MemberController {
 		}
 	}
 
-	/*@RequestMapping(value = "/member_bye.do", method = RequestMethod.POST)
-	public ModelAndView memberbye(@ModelAttribute("dto") @Valid MemberDTO memberdto, BindingResult bindingResult,
-			HttpServletRequest request) throws Exception {
-		ModelAndView mav = new ModelAndView();
-
-		HttpSession session = request.getSession();
-		String sessionid = memberdto.getMember_id();
-		int result = memberdao.getSessionCheck(memberdto);
-		
-		if (result > 0) {
-			memberdao.memberbye(memberdto);
-			session.removeAttribute(sessionid);
-			mav.setViewName("main.mainPage");
-			return mav;
-		} else {
-			mav.addObject("result", result);
-			mav.setViewName("ayrin.member_byeform");
-			return mav;
-		}
-		
-	}*/
+	/*
+	 * @RequestMapping(value = "/member_bye.do", method = RequestMethod.POST) public
+	 * ModelAndView memberbye(@ModelAttribute("dto") @Valid MemberDTO memberdto,
+	 * BindingResult bindingResult, HttpServletRequest request) throws Exception {
+	 * ModelAndView mav = new ModelAndView();
+	 * 
+	 * HttpSession session = request.getSession(); String sessionid =
+	 * memberdto.getMember_id(); int result = memberdao.getSessionCheck(memberdto);
+	 * 
+	 * if (result > 0) { memberdao.memberbye(memberdto);
+	 * session.removeAttribute(sessionid); mav.setViewName("main.mainPage"); return
+	 * mav; } else { mav.addObject("result", result);
+	 * mav.setViewName("ayrin.member_byeform"); return mav; }
+	 * 
+	 * }
+	 */
 
 	@RequestMapping("/chkDupId.do")
 	public void checkId(HttpServletRequest req, HttpServletResponse res, ModelMap model) throws Exception {
@@ -474,17 +471,15 @@ public class MemberController {
 			out.print("1");
 		}
 	}
-	
-	/*@RequestMapping("/member_byeform.do")
-	public ModelAndView memberbyeForm(HttpServletRequest request) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		String member_id = (String) request.getSession().getAttribute("sessionid");
-		MemberDTO dto = memberdao.getMemberById(member_id);
-		mav.addObject("dto", dto);
-		mav.setViewName("ayrin.member_byeform");
-		return mav;
-	}
-*/
+
+	/*
+	 * @RequestMapping("/member_byeform.do") public ModelAndView
+	 * memberbyeForm(HttpServletRequest request) throws Exception { ModelAndView mav
+	 * = new ModelAndView(); String member_id = (String)
+	 * request.getSession().getAttribute("sessionid"); MemberDTO dto =
+	 * memberdao.getMemberById(member_id); mav.addObject("dto", dto);
+	 * mav.setViewName("ayrin.member_byeform"); return mav; }
+	 */
 	@RequestMapping("/member_del.do")
 	public void member_del(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
@@ -503,31 +498,25 @@ public class MemberController {
 			response.getWriter().write("0");
 		}
 	}
-	
-	/*@RequestMapping("/member_check.do")
-	public void member_check(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		HttpSession session = request.getSession();
-		String sessionid = (String) session.getAttribute("sessionid");
-		String passwd = request.getParameter("passwd");
-		String chkpwd = memberdao.member_check(sessionid);
-		MemberDTO dto = new MemberDTO();
-		dto.setMember_id(sessionid);
-		dto.setMember_pwd(passwd);
-		if (chkpwd.equals(passwd)) {
-			response.getWriter().write("1");
-		} else {
-			response.getWriter().write("0");
-		}
-	}
-	
-	@RequestMapping("/member_checkform.do")
-	public ModelAndView checkForm(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		String member_id = (String) request.getSession().getAttribute("sessionid");
-		MemberDTO dto = memberdao.getMemberById(member_id);
-		mav.addObject("dto", dto);
-		mav.setViewName("ayrin.member_checkform");
 
-		return mav;
-	}*/
+	/*
+	 * @RequestMapping("/member_check.do") public void
+	 * member_check(HttpServletRequest request, HttpServletResponse response) throws
+	 * Exception { HttpSession session = request.getSession(); String sessionid =
+	 * (String) session.getAttribute("sessionid"); String passwd =
+	 * request.getParameter("passwd"); String chkpwd =
+	 * memberdao.member_check(sessionid); MemberDTO dto = new MemberDTO();
+	 * dto.setMember_id(sessionid); dto.setMember_pwd(passwd); if
+	 * (chkpwd.equals(passwd)) { response.getWriter().write("1"); } else {
+	 * response.getWriter().write("0"); } }
+	 * 
+	 * @RequestMapping("/member_checkform.do") public ModelAndView
+	 * checkForm(HttpServletRequest request, HttpServletResponse response, Model
+	 * model) throws Exception { ModelAndView mav = new ModelAndView(); String
+	 * member_id = (String) request.getSession().getAttribute("sessionid");
+	 * MemberDTO dto = memberdao.getMemberById(member_id); mav.addObject("dto",
+	 * dto); mav.setViewName("ayrin.member_checkform");
+	 * 
+	 * return mav; }
+	 */
 }
