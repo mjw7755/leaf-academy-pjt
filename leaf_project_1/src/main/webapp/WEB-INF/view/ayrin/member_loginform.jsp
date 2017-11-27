@@ -18,6 +18,9 @@
 #banner img{
 	/* float: right; */
 }
+a#signup {
+    text-decoration: none;
+}
 label {
 	display: inline-block;
 	max-width: 100%;

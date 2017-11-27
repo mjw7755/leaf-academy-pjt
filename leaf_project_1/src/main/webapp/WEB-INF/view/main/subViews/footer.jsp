@@ -41,7 +41,7 @@ $(function(){
     top: 75%;
     right: 2%;
     font-size: 13px;
-	display: none; 
+/* 	display: none;  */
 }
 
 /*  */
@@ -230,6 +230,7 @@ $(function(){
    
 
    <div class="alert_div">
+   <a href="noteList.do">
    <div class="buttons">
   <button class="blob-btn">
     쪽지가 도착했습니다
@@ -244,7 +245,7 @@ $(function(){
   </button>
   <br/>
 </div>
-
+</a>
 <!-- <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
   <defs>
     <filter id="goo">
