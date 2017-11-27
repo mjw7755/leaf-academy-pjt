@@ -6,6 +6,32 @@
 <head>
    <title>main</title>
 </head>
+<script type="text/javascript">
+	$(function(){
+		$("#iphuae").click(function(){
+			var sessionid = "${sessionScope.sessionid}";
+			
+			if(sessionid == ""){
+				alert("로그인이 필요한 서비스 입니다.");
+				location.href="loginForm.do";
+			}else{
+				location.href="noteList.do";
+			}
+		});
+	});
+	$(function(){
+		$("#listen").click(function(){
+			var sessionid = "${sessionScope.sessionid}";
+			
+			if(sessionid == ""){
+				alert("로그인이 필요한 서비스 입니다.");
+				location.href="loginForm.do";
+			}else{
+				location.href="listening.do";
+			}
+		});
+	});
+</script>
     <!-- <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"> -->
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    <!--  <link rel="stylesheet" href="resources/swiper.min.css"> -->
@@ -897,7 +923,7 @@ keyframes swiper-preloader-spin { 100%{
           </div>
           </a>
           
-          <a href="noteList.do"><!-- 쪽지보내기 페이지로 이동 -->
+          <a href="#" id="iphuae"><!-- 쪽지보내기 페이지로 이동 -->
           <div id="advice">
              <p>입회상담</p>
              <div id="box_img">
@@ -912,7 +938,7 @@ keyframes swiper-preloader-spin { 100%{
     <div id="main_box2">
        <div id="width_wrap">
        
-          <a href="listening.do"><!-- 강의 듣기 페이지로 이동 -->
+          <a href="#" id="listen"><!-- 강의 듣기 페이지로 이동 -->
           <div id="lecture2">
              <img src="resources/ram/main_lecture4.png"/>
           </div>

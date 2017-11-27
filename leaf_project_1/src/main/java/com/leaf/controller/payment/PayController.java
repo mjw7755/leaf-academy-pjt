@@ -82,7 +82,6 @@ public class PayController {
 		paymentDAO.insertPaymentData(dto);
 		int payNum = paymentDAO.selectMaxRow();
 		ModelAndView mav = new ModelAndView();
-		System.out.println(dto.getPayment_lect_charge());
 		
 		/*달러 환산*/
 		int charge = dto.getPayment_lect_charge();
@@ -190,11 +189,9 @@ public class PayController {
 			String msg = base64Encode(nullcheck(text, ""));
 
 			String rphone = base64Encode(member_tel);
-			System.out.println("msg" + msg + "rphone" + rphone);
 			String sphone1 = base64Encode("010");
 			String sphone2 = base64Encode("5055");
 			String sphone3 = base64Encode("0240");
-			System.out.println("sphone" + sphone1 + sphone2 + sphone3);
 			String rdate = base64Encode(nullcheck(request.getParameter("rdate"), ""));
 			String rtime = base64Encode(nullcheck(request.getParameter("rtime"), ""));
 			String mode = base64Encode("1");

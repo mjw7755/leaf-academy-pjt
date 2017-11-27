@@ -107,6 +107,7 @@ public class NoteHandler implements org.springframework.web.socket.WebSocketHand
 				dto.setN_title((String)data.get("n_title"));
 				dto.setN_recv_id((String)data.get("n_recvid"));
 				dto.setN_send_id((String)data.get("n_sendid"));	
+				System.out.println("단일쪽지"+dto);
 				noteDAO.writeNote(dto);
 			}
 			int recv_user_num = userList.indexOf((String)data.get("n_recvid"));

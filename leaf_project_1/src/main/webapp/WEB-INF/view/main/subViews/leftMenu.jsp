@@ -8,7 +8,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <style type="text/css">
 #top_banner{
 	width: 100%;
@@ -115,10 +114,10 @@
 				<td id="lecture"><a href="listen.do">강의듣기</a>
 				<div id="lecture_icon">></div></td>
 			</tr>
-			<tr>
+<!-- 			<tr>
 				<td id="grade"><a href="#">성적조회</a>
 				<div id="grade_icon">></div></td>
-			</tr>
+			</tr> -->
 			<tr>
 				<td id="attendance"><a href="getChkAttend.do">출결현황</a>
 				<div id="attendance_icon">></div></td>
@@ -149,20 +148,23 @@
 					<td id="lecture"><a href="listen.do">강의하기</a>
 					<div id="lecture_icon">></div></td>
 				</tr>
-				<tr>
+<!-- 				<tr>
 					<td id="grade"><a href="#">성적조회</a>
 					<div id="grade_icon">></div></td>
+				</tr> -->
+				<tr>
+					<td id=student_care><a href="stuMgmtForm.do">학생관리</a>
+					<div id="student_care_icon">></div></td>
 				</tr>
 				<tr>
-					<td id="attendance"><a href="stuMgmtForm.do">학생관리</a>
+					<td id="attendance"><a href="list_lect.do">강좌개설</a>
 					<div id="attendance_icon">></div></td>
 				</tr>
-	
 			</table>
 		</div>
 </c:if>
 
-<c:if test="${mypage == 'OK' }">
+<c:if test="${mypage == 'OK1' }">
    	<!-- top banner -->
    	<div id="top_banner">
    		<div id="banner">
@@ -176,9 +178,23 @@
 	      <tr><td id="attendance"><a href="#">개인정보 수정</a><div id="attendance_icon">></div></td></tr>
 		  <tr><td id="lecture"><a href="#">결제내역 조회</a><div id="lecture_icon">></div></td></tr>
 		  <tr><td id="grade"><a href="#">회원탈퇴</a><div id="grade_icon">></div></td></tr>
-<%-- 		  <c:if test="${sessionScope.sessionid=='관리자'}">
-	      <tr><td id="student_care"><a href="member_list.do" >회원관리</a><div id="student_care_icon">></div></td></tr>
-	      </c:if> --%>
+	   </table>
+   </div>
+</c:if>
+
+<c:if test="${mypage == 'OK2' }">
+   	<!-- top banner -->
+   	<div id="top_banner">
+   		<div id="banner">
+   		<img src="resources/ram/top_banner_mypage.png">
+   		</div>
+   	</div>
+    <!-- top banner end -->
+	<div id="my_page">
+		 <table id="menu">
+	      <tr id="my_page_text"><td colspan="2">MY PAGE</td></tr>
+	      <tr><td id="attendance"><a href="#">개인정보 수정</a><div id="attendance_icon">></div></td></tr>
+		  <tr><td id="grade"><a href="#">회원탈퇴</a><div id="grade_icon">></div></td></tr>
 	   </table>
    </div>
 </c:if>

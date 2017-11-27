@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.leaf.model.stumgmt.StumgmtDAO">
+
+	<select id="getStudents" parameterType="String" resultType="com.leaf.model.member.MemberDTO">
+		select distinct member.member_name, member.member_id from member, student 
+		where member.member_id in 
+		(select member_id from student where lect_id in 
+		(select lect_id from lecture where curri_id in 
+		(select curriculum.curri_id from curriculum, lecture  
+		where curriculum.curri_id in lecture.curri_id and member_id = #{member_id})))
+	</select>
+	
+	<select id="getStudentName" parameterType="String" resultType="String">
+		select member_name from member where member_id = #{member_id}
+	</select>
+	
+	<insert id="insertStuExcel" parameterType="String">
+		update student set student_excel = #{setExcelName} where member_id = #{student_id} and lect_id = #{lect_id}
+	</insert>
+	
+	<select id="getStuExcel" resultType="String" parameterType="HashMap">
+		select student_excel from student where member_id = #{student_id} and lect_id = #{lect_id}
+	</select>
+	
+	<select id="getMyLect" parameterType="Integer" resultType="com.leaf.model.curriculum.LectDTO">
+		select lect_name,lect_start_day, lect_end_day from lecture where lect_id in (select lect_id from student where member_id = #{sessionid})
+	</select>
+	
+	 <insert id="payStudentInsert" parameterType="HashMap">
+    	insert into student(lect_id,member_id,student_id) values((select payment_lect_id from payment where payment_id = #{payment_one_id}),(select payment_member_id from payment where payment_id = #{payment_two_id}),student_id_seq.nextval)
+    </insert>
+</mapper>

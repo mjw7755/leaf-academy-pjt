@@ -7,8 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	$("#note_btn").click(function(){
@@ -39,8 +37,11 @@ $(function(){
    float: left;
 }
 .alert_div{
-font-size: 13px;
-display: none;
+	position: fixed;
+    top: 75%;
+    right: 2%;
+    font-size: 13px;
+	display: none; 
 }
 
 /*  */

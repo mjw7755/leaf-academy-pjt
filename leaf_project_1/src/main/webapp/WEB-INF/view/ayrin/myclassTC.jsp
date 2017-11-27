@@ -215,12 +215,14 @@ $(function() {
    <table id="tnoticelistTable">
       <tr>
          <th>글번호</th>
+         <th>작성자</th>
          <th>제목</th>
          <th colspan="2"><a href="tnotice_writeform.do"><button class="btn btn--sm btn--green">추가</button></a></th>
       </tr>
       <c:forEach items="${ list }" var="list" varStatus="status">
          <tr>
             <td>${list.tnotice_id}</td>
+            <td>${list.member_id}</td>
             <td>
             	<a href="tnotice_detail.do?tnotice_id=${ list.tnotice_id }">${list.tnotice_title }</a>
             </td>
