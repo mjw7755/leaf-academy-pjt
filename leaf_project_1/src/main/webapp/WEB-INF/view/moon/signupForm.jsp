@@ -272,8 +272,6 @@ function checkfield(){
 		alert("암호확인을 해주세요");
 		  return false;
 	}
-	alert(joinCode);
-	alert(form.inputCode.value);
 	if(form.inputCode.value != joinCode){
 		alert("메일 인증을 해주세요");
 		  return false;
