@@ -8,6 +8,33 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+video { 
+         background: black; 
+         border: 1px solid gray; 
+      }
+      
+      .call-page { 
+         position: relative; 
+         display: block; 
+         margin: 0 auto; 
+         width: 500px; 
+         height: 500px; 
+      } 
+      
+      #localVideo { 
+         width: 150px; 
+         height: 150px; 
+         position: absolute; 
+         top: 15px; 
+         right: 15px; 
+      }
+      
+      #remoteVideo { 
+         width: 500px; 
+         height: 500px; 
+      }
+      
+      
 	#listen{
 		width:700px;
 		float:left;
@@ -200,13 +227,221 @@ font-size: 1em; }
 						</c:if>
 							<div id="txtDiv" name="txtDiv" class="txt"></div>
 						</td>
+						<td>
+			  <div id = "callPage" class = "call-page"> 
+			     <video id = "localVideo" autoplay></video> 
+			     <video id = "remoteVideo" autoplay></video>
+			     
+			     <div class = "row text-center"> 
+			        <div class = "col-md-12"> 
+			           <input id = "callToUsernameInput" type = "text"
+			              placeholder = "username to call" /> 
+			           <button id = "callBtn" class = "btn-success btn">Call</button> 
+			           <button id = "hangUpBtn" class = "btn-danger btn">Hang Up</button> 
+			        </div>   
+			     </div> 
+			  </div>
+						   </td>
 						</tr>
 						</table>
 					</td>
-				</tr>		
+				</tr>	
 			</table>
 		</div>
 		<script>
+		
+		//our username
+		   var name;
+		   var connectedUser;
+
+		   //connecting to our signaling server
+		   var videoConn = new WebSocket('wss://www.leaf-academy.com:8443/leaf_project_1/videoChat-ws.do');
+
+		   videoConn.onopen = function () {
+		      console.log("Connected to the signaling server");
+		   };
+
+		   //when we got a message from a signaling server
+		   videoConn.onmessage = function (msg) {
+		      console.log("Got message", msg.data);
+		      var data = JSON.parse(msg.data);
+		      
+		      switch(data.type) {
+		      	case "enter":
+		      		if(${sessionScope.sessionid==teacherid}) {
+		      			videoSend({
+				            type: "login",
+				            name: "${sessionScope.sessionid}"
+				         });
+		      		}
+		            break;
+		         case "login":
+		            handleLogin(data.success);
+		            break;
+		         //when somebody wants to call us
+		         case "offer":
+		            handleOffer(data.offer, data.name);
+		            break;
+		         case "answer":
+		            handleAnswer(data.answer);
+		            break;
+		         //when a remote peer sends an ice candidate to us
+		         case "candidate":
+		            handleCandidate(data.candidate);
+		            break;
+		         case "leave":
+		            handleLeave();
+		            break;
+		         default:
+		            break;
+		      }
+		   };
+
+		   videoConn.onerror = function (err) {
+		      console.log("Got error", err);
+		   };
+
+		   //alias for sending JSON encoded messages
+		   function videoSend(message) {
+		      //attach the other peer username to our messages
+		      if (connectedUser) {
+		         message.name = connectedUser;
+		      }
+		      videoConn.send(JSON.stringify(message));
+		   };
+
+		   //******
+		   //UI selectors block
+		   //******
+		   var localVideo = document.querySelector('#localVideo');
+		   var remoteVideo = document.querySelector('#remoteVideo');
+
+		   var yourConn;
+		   var stream;
+		   var loginBtn = document.querySelector('#loginBtn');
+
+		   var callPage = document.querySelector('#callPage');
+		   var callToUsernameInput = document.querySelector('#callToUsernameInput');
+		   var callBtn = document.querySelector('#callBtn');
+
+		   var hangUpBtn = document.querySelector('#hangUpBtn');
+
+		   function handleLogin(success) {
+
+		      if (success === false) {
+		         alert("Ooops...try a different username");
+		      } else {
+		         callPage.style.display = "block";
+
+		         //**********************
+		         //Starting a peer connection
+		         //**********************
+
+		         //getting local video stream
+		         navigator.webkitGetUserMedia({ video: true, audio: true }, function (myStream) {
+		            stream = myStream;
+
+		            //displaying local video stream on the page
+		            localVideo.src = window.URL.createObjectURL(stream);
+
+		            //using Google public stun server
+		            var configuration = {
+		               "iceServers": [{ "url": "stun:stun2.1.google.com:19302" }]
+		            };
+
+		            yourConn = new webkitRTCPeerConnection(configuration);
+
+		            // setup stream listening
+		            yourConn.addStream(stream);
+
+		            //when a remote user adds stream to the peer connection, we display it
+		            yourConn.onaddstream = function (e) {
+		               remoteVideo.src = window.URL.createObjectURL(e.stream);
+		            };
+
+		            // Setup ice handling
+		            yourConn.onicecandidate = function (event) {
+		               if (event.candidate) {
+		            	   videoSend({
+		                     type: "candidate",
+		                     candidate: event.candidate
+		                  });
+		               }
+
+		            };
+
+		         }, function (error) {
+		            console.log(error);
+		         });
+		      }
+		   };
+
+		   //initiating a call
+		   callBtn.addEventListener("click", function () {
+			   callToUsernameInput.value = "${targetid}";
+		      var callToUsername = callToUsernameInput.value;
+		      	connectedUser = callToUsername;
+		         // create an offer
+		         yourConn.createOffer(function (offer) {
+		        	 videoSend({
+		               type: "offer",
+		               offer: offer
+		            });
+
+		            yourConn.setLocalDescription(offer);
+
+		         }, function (error) {
+		            alert("Error when creating an offer");
+		         });
+		   });
+
+		   //when somebody sends us an offer
+		   function handleOffer(offer, name) {
+		      connectedUser = name;
+		      yourConn.setRemoteDescription(new RTCSessionDescription(offer));
+
+		      //create an answer to an offer
+		      yourConn.createAnswer(function (answer) {
+		         yourConn.setLocalDescription(answer);
+
+		         videoSend({
+		            type: "answer",
+		            answer: answer
+		         });
+
+		      }, function (error) {
+		         alert("Error when creating an answer");
+		      });
+		   };
+
+		   //when we got an answer from a remote user
+		   function handleAnswer(answer) {
+		      yourConn.setRemoteDescription(new RTCSessionDescription(answer));
+		   };
+
+		   //when we got an ice candidate from a remote user
+		   function handleCandidate(candidate) {
+		      yourConn.addIceCandidate(new RTCIceCandidate(candidate));
+		   };
+
+		   //hang up
+		   hangUpBtn.addEventListener("click", function () {
+
+			   videoSend({
+		         type: "leave"
+		      });
+
+		      handleLeave();
+		   });
+
+		   function handleLeave() {
+		      connectedUser = null;
+		      remoteVideo.src = null;
+
+		      yourConn.close();
+		      yourConn.onicecandidate = null;
+		      yourConn.onaddstream = null;
+		   };
 			function studentSecletChange() {
 				var lect_id = $("#studentSelect").val();
 				window.location.href='listen.do?lect_id='+lect_id;
@@ -228,10 +463,12 @@ font-size: 1em; }
 				});
 			}
 			$(function () {
+				$('#callToUsernameInput').hide();
 				if(${lect_id==-1}) {
 					alert("수강중인 강좌가 없습니다");
 					history.back();
-				} else if(${teacherid == sessionScope.sessionid}) {
+				} 
+				if(${teacherid == sessionScope.sessionid}) {
 					codingStart();
 				}
 				$("#codeDiv").hide();
@@ -259,7 +496,7 @@ font-size: 1em; }
 			var sessionid = "${sessionScope.sessionid}";
 			//웹 소켓 객체를 저장할 변수를 선언
 			var codingConn = new WebSocket(
-					"ws://192.168.43.23:8080/controller/coding-ws.do");
+					"wss://www.leaf-academy.com:8443/leaf_project_1/coding-ws.do");
 			
 			function codingSend(message) {
 				//attach the other peer username to our messages
@@ -276,6 +513,7 @@ font-size: 1em; }
 						teacherid : "${teacherid}",
 						targetid : "${targetid}"
 					});
+					if(${teacherid==sessionScope.sessionid}) codingStart();
 					break;
 				case "coding":
 					$("#codeDiv").show();
@@ -289,7 +527,7 @@ font-size: 1em; }
 					row_length_count = 0;
 					
 					for(var i=0; i<codeTextLength; i++) {
-						tempTags = tempTags + "<span id='coding_"+i+"' class='codingColor'"
+						tempTags = tempTags + "<span width='10px' id='coding_"+i+"' class='codingColor'"
 								+" onclick='indexChange(event)' style='color:white;'>"
 								+tempCodeText[i].replace("qq","\\").replace("aa","\"").replace("tt", "&nbsp;&nbsp;&nbsp;&nbsp;")
 								+"<img width='2px' height='15px' style='margin-left: 1px;' src='resources/king/cursor_white.gif' id='cursor_"+i+"' class='cursorCancle'/></span>";
@@ -353,6 +591,10 @@ font-size: 1em; }
 			}
 			
 			function codingStart() {
+				videoSend({
+		            type: "login",
+		            name: "${sessionScope.sessionid}"
+		         });
 				$(document).keydown(function(event) {
 					var keyCode = event.keyCode;
 					var key = event.key;
@@ -731,6 +973,7 @@ font-size: 1em; }
 		</c:forEach>
 		</table>
 		<script>
+		
 	function studentRoom(ev) {
 		codingSend({
 			type : "callCancle",
@@ -740,12 +983,11 @@ font-size: 1em; }
 	}
 
 	$(function() {
-		$("#quick_banner").hide();
+		$("#teacher_table").hide();
 		if(${lect_id==-1}) {
 			alert("개설 된 강좌가 없습니다");
 			history.back();
 		}
-		$("#txtTable").hide();
 		var optionObj = document.getElementById("teacherSelect");
 		var optionLength = optionObj.options.length;
 		for(var i=0; i<optionLength; i++) {
@@ -769,7 +1011,7 @@ font-size: 1em; }
 	
 	function openClass() {
 		$("#openButton").hide();
-		$("#txtTable").show();
+		$("#teacher_table").show();
 		
 		$(document).keydown(function(event) {
 			var keyCode = event.keyCode;
@@ -907,7 +1149,7 @@ font-size: 1em; }
 	var sessionid = "${sessionScope.sessionid}";
 	//웹 소켓 객체를 저장할 변수를 선언
 	var codingConn = new WebSocket(
-			"ws://192.168.43.23:8080/controller/coding-ws.do");
+			"wss://www.leaf-academy.com:8443/leaf_project_1/coding-ws.do");
 	
 	function codingSend(message) {
 		//attach the other peer username to our messages
@@ -919,7 +1161,11 @@ font-size: 1em; }
 		switch (data.type) {
 		case "opening":	
 			if(data.openClass==$("#teacherSelect").val()) {
-			openClass();
+				openClass();
+				videoSend({
+		            type: "login",
+		            name: "${sessionScope.sessionid}"
+		         });
 				var callStudents = data.callStudents.substring(1,data.callStudents.length-1).split(", ");
 				var callStudentsLength = callStudents.length;
 				if(callStudents[0]!="") {
@@ -943,9 +1189,8 @@ font-size: 1em; }
 					tampLength = tempCodeText.length;
 					tempTags = "";
 					codeText = "";
-					
 					for(var j=0; j<tampLength; j++) {
-						tempTags = tempTags + "<span style='color:white;'>"
+						tempTags = tempTags + "<span width='10px' id='coding_"+tempstudentid+j+"' style='color:white;'>"
 								+tempCodeText[j].replace("qq","\\").replace("aa","\"").replace("tt", "&nbsp;&nbsp;&nbsp;&nbsp;")
 								+"</span>";
 						codeText = codeText + tempCodeText[j].replace("qq","\\").replace("aa","\"").replace("tt", " ").replace("<br>"," ");
@@ -978,7 +1223,7 @@ font-size: 1em; }
 				row_length_count = 0;
 				
 				for(var i=0; i<codeTextLength; i++) {
-					tempTags = tempTags + "<span class='codingColor'"
+					tempTags = tempTags + "<span width='10px' id='coding_"+i+" class='codingColor'"
 							+" onclick='indexChange(event)' style='color:white;'>"
 							+tempCodeText[i].replace("qq","\\").replace("aa","\"").replace("tt", "&nbsp;&nbsp;&nbsp;&nbsp;")
 							+"<img width='2px' height='15px' style='margin-left: 1px;' src='resources/king/cursor_white.gif' id='cursor_"+i+"' class='cursorCancle'/></span>";
@@ -1005,7 +1250,8 @@ font-size: 1em; }
 					codingIndex = codingIndex+1;
 				}
 				
-				txtDiv.innerHTML = tempTags;
+				var tempDiv = document.getElementById("txtDiv");
+				tempDiv.innerHTML = tempTags;
 				
 				$(".cursorCancle").hide();
 				codingColorCheck("");
@@ -1018,13 +1264,13 @@ font-size: 1em; }
 				var studentid = data.studentid;
 				
 				for(var i=0; i<tampLength; i++) {
-					tempTags = tempTags + "<span style='color:white;'>"
+					tempTags = tempTags + "<span width='10px' id='coding_"+studentid+i+"' style='color:white;'>"
 							+tempCodeText[i].replace("qq","\\").replace("aa","\"").replace("tt", "&nbsp;&nbsp;&nbsp;&nbsp;")
 							+"</span>";
 					codeText = codeText + tempCodeText[i].replace("qq","\\").replace("aa","\"").replace("tt", " ").replace("<br>"," ");
 				}
 				
-				var tempDiv = document.getElementById("txtDiv_"+data.studentid);
+				var tempDiv = document.getElementById("txtDiv_"+studentid);
 				tempDiv.innerHTML = tempTags;
 				
 				codingColorCheck(studentid);
@@ -1067,6 +1313,7 @@ font-size: 1em; }
 			ppp = codeText.indexOf("public ",ppp+1);
 			if(ppp == -1) break;
 			for(var i=0; i<6; i++) {
+				alert(ppp+i);
 				$("#coding_"+name+(ppp+i)).css("color","orange");
 			}
 		}

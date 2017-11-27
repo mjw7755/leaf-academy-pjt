@@ -18,6 +18,7 @@ public class VideoChatWebSocketHandler implements WebSocketHandler {
 		public static List<WebSocketSession> list=
 			new ArrayList<WebSocketSession>();
 		public static ArrayList<String> names = new ArrayList<String>();
+		int a = 0;
 		
 		@Override
 		public void afterConnectionClosed(WebSocketSession arg0, CloseStatus arg1) throws Exception {
@@ -31,6 +32,7 @@ public class VideoChatWebSocketHandler implements WebSocketHandler {
 		@Override
 		public void afterConnectionEstablished(WebSocketSession arg0) throws Exception {
 			System.out.println("연결성공");
+			arg0.sendMessage(new TextMessage("{\"type\": \"enter\"}"));
 			//리스트에 추가
 		}
 	    //클라이언트가 메시지를 보냈을때 호출되는 메소드
@@ -52,9 +54,13 @@ public class VideoChatWebSocketHandler implements WebSocketHandler {
 	            	arg0.sendMessage(new TextMessage("{\"type\": \"login\",\"success\": true}"));
 	            }
 			} else if(data.get("type").equals("offer")) {
-				list.get(names.indexOf(name)).sendMessage(new TextMessage("{\"type\": \"offer\",\"offer\": "+temp+",\"name\": \""+name+"\"}"));
+				if(names.indexOf(name)!=-1) {
+					list.get(names.indexOf(name)).sendMessage(new TextMessage("{\"type\": \"offer\",\"offer\": "+temp+",\"name\": \""+name+"\"}"));
+				}
 			} else if(data.get("type").equals("answer")) {
-				list.get(names.indexOf(name)==1?0:1).sendMessage(new TextMessage("{\"type\": \"answer\",\"answer\": "+temp+"}"));
+				if(names.indexOf(name)!=-1) {
+					list.get(names.indexOf(name)==1?0:1).sendMessage(new TextMessage("{\"type\": \"answer\",\"answer\": "+temp+"}"));
+				}
 			} else if(data.get("type").equals("candidate")) {
 				arg0.sendMessage(new TextMessage("{\"type\": \"candidate\",\"candidate\": "+temp+"}"));
 			} else if(data.get("type").equals("leave")) {

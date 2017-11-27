@@ -223,7 +223,6 @@ public class CodingWebSocketHandler implements WebSocketHandler {
 						if(codes.get(studentList[i])!=null) {
 							studentsCode += codes.get(studentList[i]);
 						}
-						
 					}
 					studentsCode += "\"";
 				}
