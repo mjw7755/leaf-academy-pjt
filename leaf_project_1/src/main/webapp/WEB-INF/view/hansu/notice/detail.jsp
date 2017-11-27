@@ -31,7 +31,7 @@
 	padding-bottom: 15px;
 	background-color: #f4f3f1;
 }
-#noticedetailTable td{
+#table_content{
 	padding-top: 15px;
 	padding-left: 15px;
 	padding-bottom: 30px;
@@ -53,12 +53,15 @@
 
 }
 #update_d{
-	width:100px;
-	color:#4e4e4e;
-	font-weight: bold;
+    width: 100px;
+    color: #4e4e4e;
+    font-weight: bold;
+    padding-left: 15px;
+    padding-top: 15px;
 }
 #update_d2{
 	text-align: left;
+	 padding-top: 15px;
 }
 #whqrp {
 	width: 180px;
@@ -120,7 +123,7 @@ font-size: 0.7em; }
 			<th id="write_d2">${dto.notice_writedate}</th>
 		</tr>
 		<tr>
-			<td style="height:200px" colspan="4">${fn:replace(dto.notice_content,crlf,'</br>')}</td>
+			<td style="height:200px" colspan="4" id="table_content">${fn:replace(dto.notice_content,crlf,'</br>')}</td>
 			
 		</tr>		
 

@@ -114,10 +114,10 @@
 				<td id="lecture"><a href="listen.do">강의듣기</a>
 				<div id="lecture_icon">></div></td>
 			</tr>
-			<tr>
+<!-- 			<tr>
 				<td id="grade"><a href="#">성적조회</a>
 				<div id="grade_icon">></div></td>
-			</tr>
+			</tr> -->
 			<tr>
 				<td id="attendance"><a href="getChkAttend.do">출결현황</a>
 				<div id="attendance_icon">></div></td>
@@ -148,10 +148,10 @@
 					<td id="lecture"><a href="listen.do">강의하기</a>
 					<div id="lecture_icon">></div></td>
 				</tr>
-				<tr>
+<!-- 				<tr>
 					<td id="grade"><a href="#">성적조회</a>
 					<div id="grade_icon">></div></td>
-				</tr>
+				</tr> -->
 				<tr>
 					<td id=student_care><a href="stuMgmtForm.do">학생관리</a>
 					<div id="student_care_icon">></div></td>

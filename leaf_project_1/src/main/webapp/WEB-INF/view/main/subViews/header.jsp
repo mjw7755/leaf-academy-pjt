@@ -181,7 +181,7 @@ $(function(){
             <li id="a_tag"><a href="list_curri.do">교육과정</a>
             <ul>
                   <li><a href="list_curri.do">커리큘럼</a></li>
-                  <li><a href="list_lect.do">강좌개설</a></li>
+                 <!--  <li><a href="list_lect.do">강좌개설</a></li> -->
             </ul>
             </li>
             <li id="a_tag"><a href="book_list.do">자료실</a>
