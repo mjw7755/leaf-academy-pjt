@@ -180,7 +180,7 @@ var conn;
 						url:"loginDupl.do",
 						success: function(data){
 							alert("다른곳에서 로그인되었습니다. 접속을 종료합니다.");
-							window.location.reload(true);
+							window.location.href="main.do";
 						},
 						error:function(e){
 							alert(e);
