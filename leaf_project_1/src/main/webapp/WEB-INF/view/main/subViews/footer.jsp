@@ -41,7 +41,7 @@ $(function(){
     top: 75%;
     right: 2%;
     font-size: 13px;
-/* 	display: none;  */
+ 	display: none; 
 }
 
 /*  */
