@@ -8,6 +8,7 @@ create table Member (
     member_level number(5),
     member_addnum varchar2(30),
     member_address varchar2(50),
+    member_address2 varchar2(50),
     enabled number(5),
     PRIMARY KEY(member_id)
 );
