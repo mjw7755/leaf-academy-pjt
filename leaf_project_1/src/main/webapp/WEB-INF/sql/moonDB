@@ -1,0 +1,44 @@
+create table student (
+	student_id number,
+    lect_id number,
+    student_call number,
+    student_conn number,
+    member_id varchar2(20) NOT NULL,
+    student_excel VARCHAR2(50),
+    PRIMARY KEY(student_id),
+    foreign Key (member_id) REFERENCES Member (member_id)
+);
+
+create table note (
+	n_id number,
+    n_content varchar2(500),
+    n_title varchar2(20) NOT NULL,
+    n_send_id VARCHAR2(50),
+    n_recv_id VARCHAR2(50),
+    n_send_del_yn VARCHAR2(50),
+    n_recv_del_yn VARCHAR2(50),
+    n_open_date date,
+    n_write_date date,
+    PRIMARY KEY(n_id),
+);
+
+create table payment (
+	payment_id number,
+    payment_lect_id number,
+    payment_lect_charge number,
+    payment_fee number,
+    payment_pay_chk number,
+    payment_member_id varchar2(20),
+    payment_addnum varchar2(20),
+    payment_address varchar2(20),
+    payment_address2 varchar2(20),
+    payment_caution varchar2(20),
+    payment_lect_subject varchar2(20),
+    payment_currency varchar2(20),
+    payment_payer_email varchar2(20),
+    payment_teacher_name varchar2(20),
+    payment_member_name varchar2(20),
+    payment_member_tel varchar2(20),
+    payment_write_date date,
+    PRIMARY KEY(payment_id)
+);
