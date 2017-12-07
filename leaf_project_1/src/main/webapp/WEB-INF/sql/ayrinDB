@@ -48,4 +48,15 @@ create sequence Book_seq;
 select * from Book;
 insert into Book values(1, 'member_id1', 'book_title1', 'book_writer1', 'book_cost1', 1); 
 insert into Book values(2, 'member_id2', 'book_title2', 'book_writer2', 'book_cost2', 1); 
-insert into Book values(3, 'member_id3', 'book_title3', 'book_writer3', 'book_cost3', 1); 
+insert into Book values(3, 'member_id3', 'book_title3', 'book_writer3', 'book_cost3', 1);
+
+create table tnotice (
+    member_id varchar2(20) NOT NULL,
+    tnotice_title VARCHAR2(50),
+    tnotice_content VARCHAR2(500),
+    tnotice_id number,
+    enabled number(1),
+    PRIMARY KEY(tnotice_id),
+    foreign Key (member_id) REFERENCES Member (member_id)
+);
+create sequence tnotice_seq;
