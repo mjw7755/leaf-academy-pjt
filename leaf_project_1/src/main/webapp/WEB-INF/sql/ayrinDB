@@ -6,6 +6,8 @@ create table Member (
     member_tel VARCHAR2(20),
     member_email VARCHAR2(30),
     member_level number(5),
+    member_addnum varchar2(30),
+    member_address varchar2(50),
     enabled number(5),
     PRIMARY KEY(member_id)
 );
