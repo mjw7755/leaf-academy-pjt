@@ -42,3 +42,6 @@ create table payment (
     payment_write_date date,
     PRIMARY KEY(payment_id)
 );
+create sequence student_id_seq;
+create sequence n_id_seq;
+create sequence payment_seq;
