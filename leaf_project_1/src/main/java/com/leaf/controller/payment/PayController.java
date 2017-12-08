@@ -26,6 +26,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.leaf.model.member.MemberDAO;
@@ -49,7 +50,7 @@ public class PayController {
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
-	private static String URL_PAYPAL_VALIDATE;// PDT데이터를 페이팔로 보낼 주소
+	private static String URL_PAYPAL_VALIDATE;// PDT�뜲�씠�꽣瑜� �럹�씠�뙏濡� 蹂대궪 二쇱냼
 
 	private static final String PARAM_TX = "tx";
 	private static final String PARAM_CMD = "cmd";
@@ -65,25 +66,28 @@ public class PayController {
 		PARAM_AT_VALUE = "jfH36DSoPq7eOOt0zLok0pmHKxLO1A4uGwl0iddeiWFFKBISxsgCRJyVbva";
 	}
 
-	private static final String PARAM_ITEM_NAME = "item_name"; // 상품이름
-	private static final String PARAM_ITEM_NUMBER = "item_number"; // 상품번호
+	private static final String PARAM_ITEM_NAME = "item_name"; // �긽�뭹�씠由�
+	private static final String PARAM_ITEM_NUMBER = "item_number"; // �긽�뭹踰덊샇
 	private static final String PARAM_ADDRESS_STREET = "address_street";
-	private static final String PARAM_PAYMENT_STATUS = "payment_status"; // 결제 상태
-	private static final String PARAM_MC_GROSS = "mc_gross"; // 페이팔 결제금액
-	private static final String PARAM_MC_FEE = "mc_fee"; // 페이팔 수수료금액
-	private static final String PARAM_MC_CURRENCY = "mc_currency"; // 화폐
-	private static final String PARAM_TXN_ID = "txn_id"; // 거래번호
-	private static final String PARAM_RECEIVER_EMAIL = "receiver_email"; // 페이팔 판매자계정 이메일
-	private static final String PARAM_PAYER_EMAIL = "payer_email"; // 페이팔 구매자계정 이메일
-	private static final String PARAM_CUSTOM = "custom"; // 상점회원번호
+	private static final String PARAM_PAYMENT_STATUS = "payment_status"; // 寃곗젣 �긽�깭
+	private static final String PARAM_MC_GROSS = "mc_gross"; // �럹�씠�뙏 寃곗젣湲덉븸
+	private static final String PARAM_MC_FEE = "mc_fee"; // �럹�씠�뙏 �닔�닔猷뚭툑�븸
+	private static final String PARAM_MC_CURRENCY = "mc_currency"; // �솕�룓
+	private static final String PARAM_TXN_ID = "txn_id"; // 嫄곕옒踰덊샇
+	private static final String PARAM_RECEIVER_EMAIL = "receiver_email"; // �럹�씠�뙏 �뙋留ㅼ옄怨꾩젙 �씠硫붿씪
+	private static final String PARAM_PAYER_EMAIL = "payer_email"; // �럹�씠�뙏 援щℓ�옄怨꾩젙 �씠硫붿씪
+	private static final String PARAM_CUSTOM = "custom"; // �긽�젏�쉶�썝踰덊샇
 
-	@RequestMapping("payment.do")
+	@RequestMapping(value = "/payment.do", method = RequestMethod.POST)
 	public ModelAndView payMent(PaymentDTO dto) {
+		System.out.println(dto.getPayment_lect_subject()+"////////////////");
+		System.out.println(dto.getPayment_lect_charge()+"////////////////");
+		System.out.println(dto.getPayment_teacher_name()+"////////////////");
 		paymentDAO.insertPaymentData(dto);
 		int payNum = paymentDAO.selectMaxRow();
 		ModelAndView mav = new ModelAndView();
 		
-		/*달러 환산*/
+		/*�떖�윭 �솚�궛*/
 		int charge = dto.getPayment_lect_charge();
 		int charge_result =charge/1000;
 		dto.setPayment_lect_charge(charge_result);
@@ -94,10 +98,10 @@ public class PayController {
 		return mav;
 	}
 
-	/* 페이팔 결제 PDT정보 핸들링 */
+	/* �럹�씠�뙏 寃곗젣 PDT�젙蹂� �빖�뱾留� */
 	@RequestMapping("payDataReceive.do")
 	public void handleRequestPDT(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// 페이팔로부터 온 파라미터를 표시한다.
+		// �럹�씠�뙏濡쒕��꽣 �삩 �뙆�씪誘명꽣瑜� �몴�떆�븳�떎.
 		Enumeration en = request.getParameterNames();
 		String readString = "";
 		while (en.hasMoreElements()) {
@@ -107,7 +111,7 @@ public class PayController {
 		}
 		logger.info("Received PDT from PayPal : " + readString);
 
-		// 다시 PayPal로 게시하기 위해 파라미터를 구성한다.
+		// �떎�떆 PayPal濡� 寃뚯떆�븯湲� �쐞�빐 �뙆�씪誘명꽣瑜� 援ъ꽦�븳�떎.
 		String str = PARAM_CMD + "=" + PARAM_CMD_VALUE;
 		en = request.getParameterNames();
 		while (en.hasMoreElements()) {
@@ -119,7 +123,7 @@ public class PayController {
 		str = str + "&" + PARAM_AT + "=" + PARAM_AT_VALUE;
 		logger.info("Sending PDT to PayPal : " + str);
 
-		// 유효성 검사를 하기위해 PayPal로 다시 전송시작.
+		// �쑀�슚�꽦 寃��궗瑜� �븯湲곗쐞�빐 PayPal濡� �떎�떆 �쟾�넚�떆�옉.
 		URL u = new URL(URL_PAYPAL_VALIDATE);
 		HttpURLConnection uc = (HttpURLConnection) u.openConnection();
 		uc.setDoOutput(true);
@@ -133,7 +137,7 @@ public class PayController {
 
 		if (res.equals(RESPONSE_SUCCESS)) {
 
-			logger.info("페이팔 서버로부터 PDT유효성 요청이 성공했습니다.");
+			logger.info("�럹�씠�뙏 �꽌踰꾨줈遺��꽣 PDT�쑀�슚�꽦 �슂泥��씠 �꽦怨듯뻽�뒿�땲�떎.");
 			String[] temp;
 			HashMap vars = new HashMap();
 			while ((res = in.readLine()) != null) {
@@ -155,27 +159,27 @@ public class PayController {
 			String receiverEmail = (String) vars.get(PARAM_RECEIVER_EMAIL);
 			String payerEmail = (String) vars.get(PARAM_PAYER_EMAIL);
 
-			/* DB작업 및 응답페이지 호출 의 작업을 하는곳 */
+			/* DB�옉�뾽 諛� �쓳�떟�럹�씠吏� �샇異� �쓽 �옉�뾽�쓣 �븯�뒗怨� */
 			String paychkStr = "";
 			int paychkInt;
 			String itemname = request.getParameter("item_name");
 			String price = request.getParameter("amt");
 			String itemnumber = request.getParameter("item_number");
 			if (request.getParameter("st").equals("Completed")) {
-				paychkStr = "결제완료";
+				paychkStr = "寃곗젣�셿猷�";
 				paychkInt = 1;
 			} else {
-				paychkStr = "결제 실패 - 관리자에게 문의하세요";
+				paychkStr = "寃곗젣 �떎�뙣 - 愿�由ъ옄�뿉寃� 臾몄쓽�븯�꽭�슂";
 				paychkInt = 0;
 			}
-			String paySubject = "Leaf-Academy 결제 내역입니다.";
-			String text = "결제하신 내역은 > \n" + "상품 이름 : " + itemname + "\n 상품가격 : " + request.getParameter("amt")
-					+ "\n 결제 여부 : " + paychkStr;
+			String paySubject = "Leaf-Academy 寃곗젣 �궡�뿭�엯�땲�떎.";
+			String text = "寃곗젣�븯�떊 �궡�뿭�� > \n" + "�긽�뭹 �씠由� : " + itemname + "\n �긽�뭹媛�寃� : " + request.getParameter("amt")
+					+ "\n 寃곗젣 �뿬遺� : " + paychkStr;
 			String send_email = paymentDAO.selectEmailAddress(Integer.parseInt(itemnumber));
-			/* 결제확인 이메일 전송 */
+			/* 寃곗젣�솗�씤 �씠硫붿씪 �쟾�넚 */
 			memberDAO.send(paySubject, text, "seilrin8534@gmail.com", send_email);
-			/* 결제확인 문자 전송 */
-			String charsetType = "UTF-8"; // EUC-KR �삉�뒗 UTF-8
+			/* 寃곗젣�솗�씤 臾몄옄 �쟾�넚 */
+			String charsetType = "UTF-8"; // EUC-KR 占쎌굢占쎈뮉 UTF-8
 
 			request.setCharacterEncoding(charsetType);
 			response.setCharacterEncoding(charsetType);
@@ -183,9 +187,9 @@ public class PayController {
 			String member_tel = paymentDAO.selectMemberTel(Integer.parseInt(itemnumber));
 
 			String sms_url = "";
-			sms_url = "https://sslsms.cafe24.com/sms_sender.php"; // SMS �쟾�넚�슂泥� URL
-			String user_id = base64Encode("wangi0304"); // SMS�븘�씠�뵒
-			String secure = base64Encode("76cbbe87090606943f1c49cf98588d5d");// �씤利앺궎
+			sms_url = "https://sslsms.cafe24.com/sms_sender.php"; // SMS 占쎌읈占쎈꽊占쎌뒄筌ｏ옙 URL
+			String user_id = base64Encode("wangi0304"); // SMS占쎈툡占쎌뵠占쎈탵
+			String secure = base64Encode("76cbbe87090606943f1c49cf98588d5d");// 占쎌뵥筌앹빜沅�
 			String msg = base64Encode(nullcheck(text, ""));
 
 			String rphone = base64Encode(member_tel);
@@ -213,7 +217,7 @@ public class PayController {
 			String path = "/" + host_info[3];
 			int port = 80;
 
-			// �뜲�씠�꽣 留듯븨 蹂��닔 �젙�쓽
+			// 占쎈쑓占쎌뵠占쎄숲 筌띾벏釉� 癰귨옙占쎈땾 占쎌젟占쎌벥
 			String arrKey[] = new String[] { "user_id", "secure", "msg", "rphone", "sphone1", "sphone2", "sphone3",
 					"rdate", "rtime", "mode", "testflag", "destination", "repeatFlag", "repeatNum", "repeatTime",
 					"smsType", "subject" };
@@ -248,7 +252,7 @@ public class PayController {
 			}
 			boundary = "---------------------" + boundary.substring(0, 11);
 
-			// 蹂몃Ц �깮�꽦
+			// 癰귣챶揆 占쎄문占쎄쉐
 			String data = "";
 			String index = "";
 			String value = "";
@@ -265,18 +269,18 @@ public class PayController {
 
 			InetAddress addr = InetAddress.getByName(host);
 			Socket socket = new Socket(host, port);
-			// �뿤�뜑 �쟾�넚
+			// 占쎈엘占쎈쐭 占쎌읈占쎈꽊
 			BufferedWriter wr = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream(), charsetType));
 			wr.write("POST " + path + " HTTP/1.0\r\n");
 			wr.write("Content-Length: " + data.length() + "\r\n");
 			wr.write("Content-type: multipart/form-data, boundary=" + boundary + "\r\n");
 			wr.write("\r\n");
 
-			// �뜲�씠�꽣 �쟾�넚
+			// 占쎈쑓占쎌뵠占쎄숲 占쎌읈占쎈꽊
 			wr.write(data);
 			wr.flush();
 
-			// 寃곌낵媛� �뼸湲�
+			// 野껉퀗�궢揶쏉옙 占쎈섯疫뀐옙
 			BufferedReader rd = new BufferedReader(new InputStreamReader(socket.getInputStream(), charsetType));
 			String line;
 			String alert = "";
@@ -289,45 +293,45 @@ public class PayController {
 
 			String tmpMsg = (String) tmpArr.get(tmpArr.size() - 1);
 			String[] rMsg = tmpMsg.split(",");
-			String Result = rMsg[0]; // 발송결과
-			String Count = ""; // 잔여건수
+			String Result = rMsg[0]; // 諛쒖넚寃곌낵
+			String Count = ""; // �옍�뿬嫄댁닔
 			if (rMsg.length > 1) {
 				Count = rMsg[1];
 			}
 
-			// 발송결과 알림
+			// 諛쒖넚寃곌낵 �븣由�
 			if (Result.equals("success")) {
-				alert = "성공적으로 발송하였습니다.";
-				alert += " 잔여건수는 " + Count + "건 입니다.";
+				alert = "�꽦怨듭쟻�쑝濡� 諛쒖넚�븯���뒿�땲�떎.";
+				alert += " �옍�뿬嫄댁닔�뒗 " + Count + "嫄� �엯�땲�떎.";
 			} else if (Result.equals("reserved")) {
-				alert = "성공적으로 예약되었습니다";
-				alert += " 잔여건수는 " + Count + "건 입니다.";
+				alert = "�꽦怨듭쟻�쑝濡� �삁�빟�릺�뿀�뒿�땲�떎";
+				alert += " �옍�뿬嫄댁닔�뒗 " + Count + "嫄� �엯�땲�떎.";
 			} else if (Result.equals("3205")) {
-				alert = "잘못된 번호형식입니다.";
+				alert = "�옒紐삳맂 踰덊샇�삎�떇�엯�땲�떎.";
 			} else {
 				alert = "[Error]" + Result;
 			}
 
-			/* 구매 완료 체크 */
+			/* 援щℓ �셿猷� 泥댄겕 */
 			paymentDAO.updatePayChk(Integer.parseInt(itemnumber));
 			
-			/*학생 등록*/
+			/*�븰�깮 �벑濡�*/
 			Map<String,Integer> payment_id_map = new HashMap<String,Integer>();
 			payment_id_map.put("payment_one_id", Integer.parseInt(itemnumber));
 			payment_id_map.put("payment_two_id", Integer.parseInt(itemnumber));
 			stumgmtDAO.payStudentInsert(payment_id_map);
 			
 			
-			/*미구매 체크*/
+			/*誘멸뎄留� 泥댄겕*/
 			/*paymentDAO.deletePayData(Integer.parseInt(itemnumber));*/
 			
-			/*완료후 페이지*/
+			/*�셿猷뚰썑 �럹�씠吏�*/
 			response.sendRedirect("main.do");
 
 		} else if (res.equals(RESPONSE_FAIL)) {
-			logger.warn("페이팔서버로 부터 PDT유효성 요청이 실패했습니다. 상태 : " + res);
+			logger.warn("�럹�씠�뙏�꽌踰꾨줈 遺��꽣 PDT�쑀�슚�꽦 �슂泥��씠 �떎�뙣�뻽�뒿�땲�떎. �긽�깭 : " + res);
 		} else {
-			logger.error("페이팔서버로 부터 PDT유효성 요청이 실패했습니다. 상태 : " + res);
+			logger.error("�럹�씠�뙏�꽌踰꾨줈 遺��꽣 PDT�쑀�슚�꽦 �슂泥��씠 �떎�뙣�뻽�뒿�땲�떎. �긽�깭 : " + res);
 		}
 
 	}

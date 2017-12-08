@@ -253,7 +253,6 @@
       <input type="hidden" name="payment_member_id"
          value="${sessionScope.sessionid }">
       <h3>주문확인</h3>
-      
       <span>
          <table>
             <tr>
@@ -324,6 +323,9 @@
    </form>
 
    <form action="payment.do" method="post">
+   <input type="hidden" name="payment_lect_subject" value="${ldto.getLect_name()}">
+   <input type="hidden" name="payment_teacher_name" value="${teachername.getMember_name()}">
+   <input type="hidden" name="payment_lect_charge" value="${ldto.getLect_charge()}">
       <input type="hidden" name="payment_member_id"
          value="${sessionScope.sessionid }"> <span id="newcategory"
          style="display: none">

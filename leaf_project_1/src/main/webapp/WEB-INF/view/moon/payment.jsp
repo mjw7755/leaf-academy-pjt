@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,6 +54,11 @@
 
 </style>
 </head>
+<c:if test="${dto.payment_lect_subject == 0}">
+	<script type="text/javascript">
+		history.go(-1);
+	</script>
+</c:if>
 <body>
    	<!-- top banner -->
    	<div id="top_banner">
