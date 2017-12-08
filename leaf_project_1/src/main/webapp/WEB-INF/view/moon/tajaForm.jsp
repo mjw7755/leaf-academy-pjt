@@ -518,7 +518,7 @@ input{
 										} 
 								}
 								] });
-						$("#tajaDialog").append("<table><tr><td> 타수 : </td><td>"+typingSpeed+" 타 </td></tr><tr><td> 정확도 : </td><td>"+result.toFixed(2)+" %</td></tr><tr><td>"+min+"분 "+sec+"초</td></tr></table>");
+						$("#tajaDialog").append("<table><tr><td> 타수 : </td><td>"+typingSpeed+" 타 </td></tr><tr><td> 정확도 : </td><td>"+result.toFixed(2)+" %</td></tr><tr><td>"+curMin+"분 "+curSec+"초</td></tr></table>");
 						
 						tokenLength = 0;
 						return;
@@ -669,8 +669,7 @@ input{
 									} 
 							}
 							] });
-					$("#tajaDialog").append("<table><tr><td> 타수 : </td><td>"+typingSpeed+" 타 </td></tr><tr><td> 정확도 : </td><td>"+result.toFixed(2)+" %</td></tr></table>");
-					$("#tajaDialog").dialog('open');
+					$("#tajaDialog").append("<table><tr><td> 타수 : </td><td>"+typingSpeed+" 타 </td></tr><tr><td> 정확도 : </td><td>"+result.toFixed(2)+" %</td></tr><tr><td>"+curMin+"분 "+curSec+"초</td></tr></table>");
 					tokenLength = 0;
 				} else {
 					next.focus();

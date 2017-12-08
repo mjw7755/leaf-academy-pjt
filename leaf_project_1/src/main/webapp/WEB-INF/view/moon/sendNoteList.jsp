@@ -7,6 +7,33 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
+$(function(){
+	$("#noteDel").bind('click', function(){
+		var note_chk_values = [];
+		
+		$("input[name=n_note]:checked").each(function() {
+			  note_chk_values.push($(this).val());
+			});
+		
+		$.ajax({
+			url:"sendNoteDelete.do",
+			data:{"send_note_chk_values" : note_chk_values},
+			
+			success:function(data){
+				if(data == '1'){
+					alert("쪽지를 삭제하였습니다.");
+					location.reload();
+				}else{
+					alert("쪽지삭제를 실패했습니다.")
+				}
+				
+			},
+			
+		});
+		
+	});
+	
+});
 function list(page){
     location.href="sendNoteList.do?curPage="+page;
 }

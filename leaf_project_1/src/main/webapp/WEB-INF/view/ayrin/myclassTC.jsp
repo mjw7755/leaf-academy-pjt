@@ -6,6 +6,7 @@
 <html>
 <head>
 <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="css/ayrin/needpopup.min.css">
 <script src="js/ayrin/needpopup.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

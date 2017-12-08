@@ -116,6 +116,7 @@
 
       <div>
    <table id="stu_table">
+      <form action="noteSendForm.do">
       
       <thead>
          <th>학생 아이디</th>
@@ -123,7 +124,6 @@
          <th><div id="send"><input type="submit" value="쪽지 보내기"></div></th>
       </thead>
       <tbody>
-      <form action="noteSendForm.do">
          <c:forEach items="${studentList}" var="studentList">
             <tr>
                <td>${studentList}</td>
@@ -134,8 +134,8 @@
                <td align="center"><input type="checkbox" name="studentChk" id="studentChk" value="${studentList}"></td>
             </tr>
          </c:forEach>      
-      </form>
       </tbody>
+      </form>
    </table>
    </div>
    <script type="text/javascript">

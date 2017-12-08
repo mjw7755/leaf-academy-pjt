@@ -16,6 +16,12 @@
 <link rel="stylesheet" href="css/moon/Nwagon.css" type="text/css">
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+ <style type="text/css">
+ .chk-inner-div{
+ 	width:300px;
+ 	margin-top:200px;
+ }
+ </style>
 <!-- <script type="text/javascript">
 	$(function(){
 		var maxSize = '${fn:length(dataMapList)}';
@@ -39,7 +45,8 @@
 	});
 </script> -->
 </head>
-
+<!-- top banner -->
+<div class="chk-inner-div">
 <c:if test="${lect_chk != null }">
 	<body>
 		듣고있는 강의가 없습니다.
@@ -102,6 +109,6 @@
     </script>
 </c:forEach>
 </c:if>
-
+</div>
 
 </html>

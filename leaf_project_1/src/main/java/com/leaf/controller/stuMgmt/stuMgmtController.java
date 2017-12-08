@@ -240,6 +240,13 @@ public class stuMgmtController {
 		///////////////////////////////////////////////////////
 		///////////////////////////////////////////////////////
 		List<ListeningDTO> classList = listeningDAO.getStudentClassList(sessionid);
+		if(classList == null || classList.size() == 0) {
+			mav.addObject("lect_chk","듣고있는 강의가 없습니다.");
+			mav.addObject("myclass", 1);
+			mav.setViewName("moon.chkAttendForm");
+			return mav;
+		}
+		
 		model.addAttribute("classList", classList);
 		
 		String lect_id_str = request.getParameter("lect_id");

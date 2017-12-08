@@ -159,7 +159,7 @@
 			<td><input type="submit" value="보내기"><button id="mgmtNoteSend">보내기</button></td><td><button onclick="javascript:history.go(-1)">취소</button></td>
 		</tr> -->
 				<tr>
-			<td colspan="2"><!-- <input type="submit" value="보내기"> --><button id="mgmtNoteSend" class="btn2 btn-info">보내기</button>
+			<td colspan="2"><!-- <input type="submit" value="보내기"> --><button id="mgmtNoteSend" class="btn2 btn-info" name="answerBtn">보내기</button>
 			<button onclick="javascript:history.go(-1)" class="btn2 btn-info">취소</button></td>
 		</tr>
 	</table>
