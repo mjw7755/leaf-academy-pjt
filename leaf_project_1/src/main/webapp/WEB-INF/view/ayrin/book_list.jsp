@@ -154,7 +154,7 @@ $(document).ready(function(){
              <input type="image" src="resources/ram/search.png" id="search_icon">
     </form>
     </div>
-    <c:if test="${sessionScope.sessionid=='관리자' or sessionScope.sessionid=='강사1'}">
+    <c:if test="${sessionScope.sessionlevel !=1}">
        <div id="dnawlrdu">
           <a href="book_writeform.do"><button class="btn btn--sm btn--green">추가</button></a>
           <button id="multi" onclick="multiDelete()" class="btn btn--sm btn--green">다중삭제</button>
@@ -167,8 +167,7 @@ $(document).ready(function(){
    </c:if>
    <table id="booklistTable">
       <c:forEach items="${ list }" var="list" varStatus="status">
-
-			<c:if test="${sessionScope.sessionid!='관리자'}">
+	  <c:if test="${sessionScope.sessionlevel ==1}">
 			<tr>
 				<td rowspan="4" class="bookline" style="width:100px"><a href="book_detail.do?book_id=${ list.book_id }">
 				<img src="resources/${list.book_image}" style="width: 100px; height: 120px"></a></td>
@@ -185,33 +184,13 @@ $(document).ready(function(){
 			<tr>
 				<td id="booktd" class="bookline">가격 : ${list.book_cost}</td>
 			</tr>
-			</c:if>
-
-<%--          <c:if test="${sessionScope.sessionid!='관리자'}">
-         <tr>
-            <td rowspan="4" class="bookline" style="width:100px"><a href="book_detail.do?book_id=${ list.book_id }">
-            <img src="resources/${list.book_image}" style="width: 100px; height: 120px"></a></td>
-         </tr>
-         <tr>
-            <td id="booktd">
-               <a href="book_detail.do?book_id=${ list.book_id }">${list.book_title }</a>
-            </td>
-            <td rowspan="4" style="width:80px"><input type="button" value="구매하기" class="btn btn--sm btn--green" id="${list.book_title }"></td>
-         </tr>
-         <tr>
-            <td id="booktd">저자(출판사) : ${list.book_writer}</td>
-         </tr>
-         <tr>
-            <td id="booktd" class="bookline">가격 : ${list.book_cost}</td>
-         </tr>
-         </c:if> --%>
-
+	  </c:if>
       </c:forEach>   
    </table>
    
    <table id="booklistTable">
       <c:forEach items="${ list }" var="list" varStatus="status">
-      <c:if test="${sessionScope.sessionid=='관리자'}">
+      <c:if test="${sessionScope.sessionlevel !=1}">
          <tr>
             <td rowspan="4"><input id="multi" type="checkbox" style="width: 30px;" name="book_id" value="${ list.book_id }"></td>
             <td rowspan="4" class="bookline"><a href="book_detail.do?book_id=${ list.book_id }">

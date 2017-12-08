@@ -260,7 +260,7 @@ public class MemberController {
 		dto.setMember_pwd(recv_pwd);
 		HttpSession session = request.getSession();
 		String sessionid = dto.getMember_id();
-
+		int sessionlevel = memberdao.getMemberById(sessionid).getMember_level();
 		int result = memberdao.getSessionCheck(dto);
 		if (result > 0) {
 			try {
@@ -269,6 +269,9 @@ public class MemberController {
 				e.printStackTrace();
 			}
 			session.setAttribute("sessionid", sessionid);
+			session.setAttribute("sessionlevel", sessionlevel);
+			System.out.println(sessionid);
+			System.out.println(sessionlevel);
 		} else {
 			try {
 				response.getWriter().write("" + result);
